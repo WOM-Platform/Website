@@ -4,7 +4,7 @@ networks:
     external: true
 
 services:
-  web:
+  frontend:
     image: nginx:1.15-alpine
     volumes:
     - ./src/:/usr/share/nginx/html/:ro
