@@ -1,6 +1,6 @@
 SHELL := /bin/bash
 
-DC := docker-compose -f docker/docker-compose.yml --project-name wom-front
+DC := docker-compose -f docker-compose.yml -f docker-compose.custom.yml
 DC_RUN := ${DC} run --rm
 
 .PHONY: up

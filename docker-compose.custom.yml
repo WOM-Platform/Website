@@ -1,17 +1,8 @@
+# Custom deployment info
 version: '3'
-networks:
-  web:
-    external: true
 
 services:
   web:
-    image: nginx:1.15-alpine
-    volumes:
-    - ../src/:/usr/share/nginx/html/:ro
-    networks:
-    - web
-    expose:
-      - "80"
     labels:
     - "traefik.enable=true"
     - "traefik.docker.network=web"
