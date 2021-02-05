@@ -2,7 +2,7 @@
 version: '3'
 
 services:
-  frontend:
+  website:
     labels:
     - "traefik.enable=true"
     - "traefik.docker.network=web"
