@@ -1,0 +1,30 @@
+{
+  "name": "Brendan",
+  "surname": "Paolini",
+  "email": "b_paolini@yahoo.com",
+  "merchants": [
+    {
+      "id": "5fafaedc6fa67600019d84cb",
+      "name": "Brendan",
+      "fiscalCode": "PLNBND89C20Z401Z",
+      "address": "VIA E 4",
+      "zipCode": "61032",
+      "city": "FANO",
+      "url": "http://www.digit.srl",
+      "pos": [
+        {
+          "id": "5fafaedc6fa67600019d84cc",
+          "name": "POS ONE",
+          "privateKey": "-----BEGIN RSA PRIVATE KEY-----\nMIIEpQIBAAKCAQEA11lyXLPqMIhImYy4p8cjLci359LqgwYX92SfXaThYOnuwq+Q\nRTj1qOYgXJU69vSalXQd8FVx4YaDhcbAnGK7e1znbSDWMu/sr2SKeQqR4QsPvTgK\nD1w6ptZu/BZEy4Iesll6gxvDU+9wOQ95wTPF8BVdbiT3wOOXW7dgrYjOIz8BoUoy\ns9Z/sfUkRlwoPrXtmWhxhNGEVgKMyek3bX0VJoouXZ9Vk7EAexXd0ohR59PtTZwE\nB6QsQSHj8j/nSuWgOFNMbrtB8Nd3E+JTwuJ4RjnUJIAJ4m7QW8b+udPQma376Pay\nf339uMNNpg//Av95EtcgoXgPGiYwkusp+b3Q2QIDAQABAoIBAQCMhOVG8G9EM+mL\nqHNlp1+hJHQ8ZTh5PqSs3Y/P/yLBpmQRzZWKVdyW1XMQdp//PSURmK9gf6DL1IZF\n6KcOZK6JlNm+L8sVedErsaNZ0DfYbOtcQRDvbPMooovRGobRdJqrLg/vNVKDlp3X\n3e1I0Iu8WXSZxq2Tw+6j/kirc7Vu8R8FVoqTTPfUOXrOhcMHclARYviuRBQfApH6\nTINT238elezyxT/nBtk7RgbB9Pt/YU+nAgMtv5zdu1VKLzH4o5enEnWgaJcjChGo\nW2fGG0Eg3G0gjlbubtjbHrMOQeaJsMwzFAia9X8ZB1vO4sGXZ7e7qtgUNdM6Pg19\ntjHYVV3BAoGBAPpd7zvsn5vI9ePowpPK3LZGcyrTLY1A/Gj50pt71sBNm71mL8Sn\npMg6KJtI65iwGKhj3oP+DQi424GXYeb+WouAH/hEta442PZjIVtiIRaT0IcpXezB\nuIgli7nXan64tNabDwiAekJCH1AJz3CTrZIIIzjypPAb9fiHnfbLJjONAoGBANwx\n0WX4L3jwY2u07OBmaDiF62wW1D+qf7Rjytw2C3V487xqDJV4U8RYZdAOCBwcJEBi\nrai++9yAllf6PqTOAa49x3NfKtCXD+IDjO+nHNuHwVwh7Y6HSItwTT0xNbybFKXL\nwqubRP68HYhJ3V8tfHuH3629oq7VFyZTc2td3Xl9AoGBANbuLwMthnORWG3YEroX\ni9Q6tIGOGuvJXyarWL672EbsGQfGIrnbBR4St2tfdUl12yUr3wlG3l+femlM0PIh\nZw+c5VUXfzRafv89aJRvsGIWcQynWYd3YngWa1YV9MlmvXACWyx8Rvh8lS77zQYi\n8P2NWNd5jljGWCmMGvKTwW69AoGBANS1d0/m0Y0lwxUP4OfhZXp8u/BdmUmrXdQX\ntqbFuooPfnybgW5+n4UD086JT4JAGTDtYk6pt8nJmfKA9jTkILF+Uob7/vMjip9N\nyL7Vk0XqvXpP+BkATK8OnD6po/x/XxHOZU67HopplKnMmQHRgfgfSI+gql/zz3oh\nkVS9hy5NAoGAMJ9TReQ279+Q4JaeLHTAH8ic+HosHMoRR+BJ9vjor5oaPvjVCfh+\nFUIFOtbKsrg9+ehqZ/IT+2Gmv1BB8n34/jHBdTtgFQqsiuHSHsxit0VTDRcpndiw\nOKlWwc/fFjuewiaJshcSJ6OVkj08bUlcZjIpAEj0tppVdpozzJrz/J4=\n-----END RSA PRIVATE KEY-----\n",
+          "publicKey": "-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA11lyXLPqMIhImYy4p8cj\nLci359LqgwYX92SfXaThYOnuwq+QRTj1qOYgXJU69vSalXQd8FVx4YaDhcbAnGK7\ne1znbSDWMu/sr2SKeQqR4QsPvTgKD1w6ptZu/BZEy4Iesll6gxvDU+9wOQ95wTPF\n8BVdbiT3wOOXW7dgrYjOIz8BoUoys9Z/sfUkRlwoPrXtmWhxhNGEVgKMyek3bX0V\nJoouXZ9Vk7EAexXd0ohR59PtTZwEB6QsQSHj8j/nSuWgOFNMbrtB8Nd3E+JTwuJ4\nRjnUJIAJ4m7QW8b+udPQma376Payf339uMNNpg//Av95EtcgoXgPGiYwkusp+b3Q\n2QIDAQAB\n-----END PUBLIC KEY-----\n"
+        },
+        {
+          "id": "5fafb03d6fa67600019d84cd",
+          "name": "POS TWO",
+          "privateKey": "-----BEGIN RSA PRIVATE KEY-----\nMIIEpQIBAAKCAQEAvVu0zPge6MM+3OWbQHDNJWgOrn3B4CM4UAOKd59MfTspwxba\nuyqCtSwBLNNUqFtgBb8JRl4oUkSK7dDp0TQ1VA9ZUgfZxz7BEXqhLD5i1qB/M1gY\naDrcunwvh5IqHDVcMDnq/IE31Uyzwp2R45rf77VnRDpT5uXNuiFTOpZ2cDG0wis0\nsLTr74n2/kM2EJdxF8Tb/ZrfBDxlBqaMUWzU5dirwCfBxyaHuEZ0CXzxbLIxq4xr\nLXbvw9QLF9yBOkNyWIgmr9wdUYAmGuwQT2hlBMjuoSLhvtVXy2JuUq64qNGepgrs\nBDJp0Glhcmjd+bXZL16mYxcTnf6PCrqE91gwfQIDAQABAoIBAQCs9VfmpHfvGW+Q\n6zRsntvy3+IRJZLxvJnSE/nlG58M//48UOLHdKPhAems3PcFtDi35u9808I2qp7P\nbDQ1v186ga6PS9ZytHI7GeyfcfhrnDuzVTMt+R3mREpRpYNLMr4a2rw1mX27GY1U\nJQK9h5gl5mcFndVHIP5RleDkscxK2rdauQsBWSeP0WKBONj0AluN3X0gaQALWOBN\nAwbGZ6YZCBZkkG9/9omBsTtUTGUiQQwEzTh+93/CIAK9iQAEhFifgv5g3YFZvGQS\nrmsle8USalw/HYRo0a2BJt5ZvYEnkPjvHqxiHO4olhLFLhT20xoAkGioynkbAbWU\nVsvsj6QhAoGBAPXfQ8jTOoa3pmcSDEY2clVpaTGlcCa+CFhpEMmEbQYUtQ3ox2Aj\nQjOjeL21cGU/goFwoCR24XXh67A8XMQwltRBlbOgj1lRD7HCWCRLJEJmQDd5MNEM\nrrgKACjaXzf26YA4y8uZ5WcI4x4Z5+/gmGVR2IVn1QVJQe6Wzl847MUVAoGBAMUo\nf89G1uGGjoVpno2kJuFoVDhNKr9wtnpNNsVFUrhOcjw7+Z6Mu+4O7tWNuERr3xy/\ntr2k2VVsB3WBtqJrDfo4cV2lxqFFR8fiYTg4qtj9G89GHRBde56cKcrzupR8k8l1\nmbTizx7EccBHzMqmZUqOF+dJDXi/Sdhk/K8PDmfJAoGBANzPowezs+cS/e2pBr7z\n3OCaJ2//vOX+Wm5UBVCFjogchrG0MYJEiArqL+BoF0XGsMTgyeGVpkwBFnMS8tj7\nLin3sKM+eh7jru2ctR37IdhEDj4Dp/TGqA7+ZEBMRaF0LSYLW/NBBgXvtFDvQR5s\nHVE5HPRKWMRDk2PbqgFYlUM1AoGBAIrz4ShH5/goqlfSuaFgGNryebD4ifFE0gbe\nVoSwN/2XpCFZr7MTwvuj4KX37O+kCyoq3/NGtLnkmlkx43MS+lXo49U5mgVdW5q/\nrP8/yQGHWcs6wg8fo5mEvFvCbTRrnIj27i6zT4CCuRzoPahxn5/tB2HFdc4tGzF8\n8y258dApAoGANeL5LxCWKC+YDtBEtdc83t21zlkuXpNddBKRsCVwquxk3Aslt0mu\nbHUIJY9hKBc6mGT/4ZL4vx7zZLgi7VHNl/Ye7nNwrS69SbMo2ZvEYCmWm+txjrLX\n5IHxuoyOu1tQJsMJYFOV13nc/9jsq3ebOegsb18JhC8Czi5B7xJXRMs=\n-----END RSA PRIVATE KEY-----\n",
+          "publicKey": "-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAvVu0zPge6MM+3OWbQHDN\nJWgOrn3B4CM4UAOKd59MfTspwxbauyqCtSwBLNNUqFtgBb8JRl4oUkSK7dDp0TQ1\nVA9ZUgfZxz7BEXqhLD5i1qB/M1gYaDrcunwvh5IqHDVcMDnq/IE31Uyzwp2R45rf\n77VnRDpT5uXNuiFTOpZ2cDG0wis0sLTr74n2/kM2EJdxF8Tb/ZrfBDxlBqaMUWzU\n5dirwCfBxyaHuEZ0CXzxbLIxq4xrLXbvw9QLF9yBOkNyWIgmr9wdUYAmGuwQT2hl\nBMjuoSLhvtVXy2JuUq64qNGepgrsBDJp0Glhcmjd+bXZL16mYxcTnf6PCrqE91gw\nfQIDAQAB\n-----END PUBLIC KEY-----\n"
+        }
+      ]
+    }
+  ]
+}

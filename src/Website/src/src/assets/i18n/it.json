@@ -1,0 +1,109 @@
+{
+  "FLAG_YES": "Si",
+  "FLAG_NO": "No",
+  "NAV": {
+    "HOME": "Home",
+    "MERCHANT": "Merchant",
+    "SIGN_OUT": "Log out"
+  },
+  "HOME": {
+
+  },
+  "SIGN_IN": {
+    "TITLE": "Accedi alla piattaforma WOM",
+    "EMAIL": "Email",
+    "PASSWORD": "Password",
+    "BTN_SIGN_IN": "Login",
+    "BTN_FORGOT_PASSWORD": "Hai dimenticato la password?",
+    "BTN_SIGN_UP": "Registrati",
+    "ERR": {
+      "LOGIN": "Il nome utente e/o la password non sono validi",
+      "EMAIL": "Inserisci un indirizzo e-mail valido",
+      "PASSWORD": "Il campo password non può essere vuoto"
+    }
+  },
+  "SIGN_UP": {
+    "TITLE": "Registrati alla piattaforma WOM",
+    "SUBTITLE": "Compila il form sottostante per registrarti alla Piattaforma <b>WOM&nbsp;</b> come <i>Merchant</i>, in modo da iniziare a ricevere pagamenti.",
+    "BTN_ALREADY_REGISTERED": "Già registrato?",
+    "REPRESENTATIVE": {
+      "TITLE": "Rappresentante",
+      "EMAIL": "Indirizzo E-mail",
+      "PASSWORD": "Password",
+      "REPEAT_PASSWORD": "Ripeti la password",
+      "NAME": "Nome",
+      "SURNAME": "Cognome"
+    },
+    "MERCHANT": {
+      "TITLE": "MERCHANT",
+      "NAME": "Nome Merchant/Attività",
+      "CF": "Codice fiscale",
+      "OPTIONAL_TEXT": "<i>Opzionale.</i>\nIndirizzo principale della propria attività.",
+      "ADDRESS": "Indirizzo",
+      "CAP": "CAP",
+      "CITY": "Città",
+      "SELECT_COUNTRY": "Seleziona il paese",
+      "BUSINESS": "Seleziona l'attività principale",
+      "WEBSITE": "Sito web",
+      "OPTIONAL_WEBSITE_TEXT": "<i>Opzionale.</i>\nSito web della propria attività.",
+      "DESCRIPTION": "Descrizione",
+      "DESCRIPTION_TEXT": "Una breve descrizione della propria attività e come intendi monetizzare i Voucher WOM (beni o servizi)."
+    },
+    "POS": {
+      "TITLE": "Il tuo primo <i>Point of Service</i>",
+      "SUBTITLE_A": "Compila questa parte del form per creare una istanza di un <b>Point of Service</b>&nbsp;(POS) per il tuo account da Merchant. Potrai ricevere pagamenti in WOM&nbsp; fin da subito utilizzando il tuo POS.",
+      "SUBTITLE_B": "Potrai creare altri Point of Service dopo la registrazione.",
+      "NAME": "Nome",
+      "NAME_TEXT": "Nome del POS, sarà visualizzato dagli utenti durante un pagamento.",
+      "MAP_TITLE": "",
+      "LAT": "Latitudine",
+      "LON": "Longitudine",
+      "URL": "URL",
+      "URL_OPTIONAL_TEXT": "<i>Opzionale.</i>\nVerrà mostrato agli utenti quando viene confermato il pagamento. Può essere utilizzato per visualizzare ulteriori informazioni riguardo il POS del Merchant."
+    },
+    "TERMS_CONDITIONS": "Accetta i termini e le condizioni di utilizzo",
+    "BTN_SIGN_UP": "Registrati",
+    "ERR": {
+      "FORM": "Ricontrolla il form per gli errori",
+      "REPRESENTATIVE": {
+        "EMAIL": "Inserisci un indirizzo e-mail valido",
+        "PASSWORD": "Inserisci una password valida",
+        "REPEAT_PASSWORD": "Inserisci una password valida",
+        "NAME": "Nome",
+        "SURNAME": "Cognome"
+      },
+      "MERCHANT": {
+        "TITLE": "MERCHANT",
+        "NAME": "Nome Merchant/Attività",
+        "CF": "Codice fiscale",
+        "OPTIONAL_TEXT": "<i>Opzionale.</i>\nIndirizzo principale della propria attività.",
+        "ADDRESS": "Indirizzo",
+        "CAP": "CAP",
+        "CITY": "Città",
+        "SELECT_COUNTRY": "Seleziona il paese",
+        "BUSINESS": "Seleziona l'attività principale",
+        "WEBSITE": "Sito web",
+        "OPTIONAL_WEBSITE_TEXT": "<i>Opzionale.</i>\nSito web della propria attività.",
+        "DESCRIPTION": "Descrizione",
+        "DESCRIPTION_TEXT": "Una breve descrizione della propria attività e come intendi monetizzare i Voucher WOM (beni o servizi)."
+      },
+      "POS": {
+        "TITLE": "Il tuo primo <i>Point of Service</i>",
+        "SUBTITLE_A": "Compila questa parte del form per creare una istanza di un <b>Point of Service</b>&nbsp;(POS) per il tuo account da Merchant. Potrai ricevere pagamenti in WOM&nbsp; fin da subito utilizzando il tuo POS.",
+        "SUBTITLE_B": "Potrai creare altri Point of Service dopo la registrazione.",
+        "NAME": "Nome",
+        "NAME_TEXT": "Nome del POS, sarà visualizzato dagli utenti durante un pagamento.",
+        "MAP_TITLE": "",
+        "LAT": "Latitudine",
+        "LON": "Longitudine",
+        "URL": "URL",
+        "URL_OPTIONAL_TEXT": "<i>Opzionale.</i>\nVerrà mostrato agli utenti quando viene confermato il pagamento. Può essere utilizzato per visualizzare ulteriori informazioni riguardo il POS del Merchant."
+      },
+      "TERMS_CONDITIONS": "Accetta i termini e le condizioni di utilizzo",
+      "BTN_SIGN_UP": "Registrati"
+    }
+  },
+  "MERCHANT": {
+
+  }
+}

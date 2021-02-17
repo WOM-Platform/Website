@@ -1,0 +1,31 @@
+<mat-card>
+  <mat-card-content>
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <h2>{{ 'SIGN_IN.TITLE' | translate }}</h2>
+      <mat-error *ngIf="loginInvalid">
+        {{ 'SIGN_IN.ERR.LOGIN' | translate }}
+      </mat-error>
+      <mat-form-field class="full-width-input">
+        <label>
+          <input matInput placeholder="{{ 'SIGN_IN.EMAIL' | translate }}" formControlName="username" required>
+        </label>
+        <mat-error>
+          {{ 'SIGN_IN.ERR.EMAIL' | translate }}
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="full-width-input">
+        <label>
+          <input matInput type="password" placeholder="{{ 'SIGN_IN.PASSWORD' | translate }}" formControlName="password" required>
+        </label>
+        <mat-error>
+          {{ 'SIGN_IN.ERR.PASSWORD' | translate }}
+        </mat-error>
+      </mat-form-field>
+      <button mat-raised-button color="primary">{{ 'SIGN_IN.BTN_SIGN_IN' | translate }}</button>
+    </form>
+      <div class="bottom-buttons">
+        <a class="nav-link text-spacing" [routerLink]="['/home']">{{ 'SIGN_IN.BTN_FORGOT_PASSWORD' | translate }}</a>
+        <a class="nav-link text-spacing" [routerLink]="['/user/signup']">{{ 'SIGN_IN.BTN_SIGN_UP' | translate }}</a>
+      </div>
+  </mat-card-content>
+</mat-card>

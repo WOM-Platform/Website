@@ -12,7 +12,7 @@ COPY package.json /app/package.json
 RUN npm install
 RUN npm install -g @angular/cli@11.1.3
 
-COPY . /app
+COPY ../.. /app
 
 # Build
 RUN ng build --output-path=dist

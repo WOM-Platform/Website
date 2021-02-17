@@ -1,0 +1,70 @@
+{
+  "FLAG_YES": "Yes",
+  "FLAG_NO": "No",
+  "NAV": {
+    "HOME": "Home",
+    "MERCHANT": "Merchant",
+    "SIGN_OUT": "Log out"
+  },
+  "HOME": {
+
+  },
+  "SIGN_IN": {
+    "TITLE": "Sign in to the WOM platform",
+    "EMAIL": "Email",
+    "PASSWORD": "Password",
+    "BTN_SIGN_IN": "Login",
+    "BTN_FORGOT_PASSWORD": "Forgot your password?",
+    "BTN_SIGN_UP": "Sign up",
+    "ERR": {
+      "LOGIN": "The username and password were not recognised",
+      "EMAIL": "Please provide a valid email address",
+      "PASSWORD": "Please provide a valid password"
+    }
+  },
+  "SIGN_UP": {
+    "TITLE": "Sign up to the WOM Platform",
+    "SUBTITLE": "Fill in the form below to sign up to the <b>WOM&nbsp;Platform</b> as a <i>Merchant</i>, in order to start receiving payments.",
+    "BTN_ALREADY_REGISTERED": "Already registered?",
+    "REPRESENTATIVE": {
+      "TITLE": "Representative",
+      "EMAIL": "Email Address",
+      "PASSWORD": "Password",
+      "REPEAT_PASSWORD": "Repeat password",
+      "NAME": "First Name",
+      "SURNAME": "Last Name"
+    },
+    "MERCHANT": {
+      "TITLE": "MERCHANT",
+      "NAME": "Merchant/Business Name",
+      "CF": "Italian fiscal code",
+      "OPTIONAL_TEXT": "<i>Optional.</i>\nMain address of your business.",
+      "ADDRESS": "Address",
+      "CAP": "CAP",
+      "CITY": "City",
+      "SELECT_COUNTRY": "Select country",
+      "BUSINESS": "Select primary business",
+      "WEBSITE": "Website",
+      "OPTIONAL_WEBSITE_TEXT": "<i>Optional.</i>\nWeb site of your business.",
+      "DESCRIPTION": "Description",
+      "DESCRIPTION_TEXT": "Short description of your business and how you intend to monetize WOM&nbsp;Vouchers (goods or services)."
+    },
+    "POS": {
+      "TITLE": "Your first Point of Service",
+      "SUBTITLE_A": "Fill out this part of the form in order to create a <b>Point of Service</b>&nbsp;(POS) instance for your Merchant account. You will be able to receive WOM&nbsp;payments straight away using your POS.",
+      "SUBTITLE_B": "You will be able to create additional Points of Service after sign up.",
+      "NAME": "Name",
+      "NAME_TEXT": "POS name, will be shown to users while performing a payment.",
+      "MAP_TITLE": "",
+      "LAT": "Latitude",
+      "LON": "Longitude",
+      "URL": "URL",
+      "URL_OPTIONAL_TEXT": "<i>Optional.</i>\nWill be shown to users when the payment is confirmed. Can be used to show more information about the POS of the Merchant."
+    },
+    "TERMS_CONDITIONS": "Accept terms and conditions",
+    "BTN_SIGN_UP": "Sign Up"
+  },
+  "MERCHANT": {
+
+  }
+}

@@ -1,0 +1,53 @@
+<mat-toolbar class="app-toolbar" >
+  <img src="assets/images/wom-logo.png">
+  <span class="example-spacer"></span>
+  <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon" [matMenuTriggerFor]="menu">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item (click)="navigate('home')">
+      <mat-icon>home</mat-icon>
+      <span>{{ "NAV.HOME" | translate }}</span>
+    </button>
+    <button mat-menu-item (click)="navigate('merchant')">
+      <mat-icon>storefront</mat-icon>
+      <span>{{ "NAV.MERCHANT" | translate }}</span>
+    </button>
+    <button mat-menu-item *ngIf="isLogged" (click)="logout()">
+      <mat-icon>close</mat-icon>
+      <span>{{ "NAV.SIGN_OUT" | translate }}</span>
+    </button>
+  </mat-menu>
+</mat-toolbar>
+<!--
+<header>
+  <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-white border-bottom box-shadow mb-3">
+    <div class="container-fluid">
+      <<img class="navbar-brand" src="assets/img/schnell_logo_bianco.png" alt="Schnell"/>
+      <button class="navbar-toggler"
+              type="button"
+              data-toggle="collapse"
+              data-target=".navbar-collapse"
+              aria-label="Toggle navigation"
+              [attr.aria-expanded]="isExpanded"
+              (click)="toggle()">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse"
+           [ngClass]="{ show: isExpanded }">
+        <ul class="navbar-nav flex-grow">
+          <li class="nav-item" [routerLinkActive]="['link-active']">
+            <a class="nav-link" [routerLink]="['/']">Home</a>
+          </li>
+          <li class="nav-item" [routerLinkActive]="['link-active']">
+            <a class="nav-link" [routerLink]="['/merchant']">Merchant</a>
+          </li>
+          <li class="nav-item" [routerLinkActive]="['link-active']">
+            <a class="nav-link" (click)="logout()" *ngIf="isLogged">Logout</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
+-->
