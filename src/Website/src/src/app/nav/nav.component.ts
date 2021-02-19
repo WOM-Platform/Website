@@ -1,9 +1,9 @@
 import {Component} from '@angular/core';
 import {Router} from '@angular/router';
 
-import {AuthenticationService} from '../_services';
-import {User} from '../_models';
+import {UserLogin} from '../_models';
 import {TranslateService} from '@ngx-translate/core';
+import {UserService} from '../_services/user.service';
 
 @Component({
   selector: 'app-nav',
@@ -12,20 +12,20 @@ import {TranslateService} from '@ngx-translate/core';
 })
 export class NavComponent {
   isExpanded = false;
-  currentUser: User;
+  currentUserLogin: UserLogin;
   openMenu = false;
   isOver = false;
 
   constructor(
     private router: Router,
     private translate: TranslateService,
-    private authenticationService: AuthenticationService
+    private userService: UserService
   ) {
-    this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
+    this.userService.currentUserLogin.subscribe(x => this.currentUserLogin = x);
   }
 
   get isLogged(): boolean {
-    return this.currentUser != null;
+    return this.currentUserLogin != null;
   }
 
   clickMenu(): void {
@@ -46,7 +46,7 @@ export class NavComponent {
   }
 
   async logout(): Promise<void> {
-    this.authenticationService.logout();
+    this.userService.logout();
     await this.router.navigate(['/home']);
 
   }

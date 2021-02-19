@@ -14,7 +14,7 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatButtonModule} from '@angular/material/button';
 import {MatMenuModule} from '@angular/material/menu';
-import {MerchantSignInComponent} from './merchant/signin/signin.component';
+import {SignInComponent} from './authentication/signin/signin.component';
 import {FooterComponent} from './footer/footer.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatDividerModule} from '@angular/material/divider';
@@ -22,7 +22,7 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatInputModule} from '@angular/material/input';
 import {MatCardModule} from '@angular/material/card';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
-import {MerchantSignUpComponent} from './merchant/signup/signup.component';
+import {MerchantSignUpComponent} from './authentication/signup/signup.component';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {MatSelectModule} from '@angular/material/select';
 import {MatCheckboxModule} from '@angular/material/checkbox';
@@ -45,7 +45,7 @@ export const isMock = environment.mock;
     FooterComponent,
     HomeComponent,
     NavComponent,
-    MerchantSignInComponent,
+    SignInComponent,
     MerchantSignUpComponent,
     MerchantDashboardComponent,
     PrivacyComponent,

@@ -1,18 +1,17 @@
 import {Component, OnInit} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
-import {AuthenticationService} from '../../_services';
-import {log} from 'util';
+import {AuthService} from '../../_services';
 import {first} from 'rxjs/operators';
-import {environment} from '../../../environments/environment';
 import {MockupUser} from '../../_helpers/mockupData';
+import {UserService} from '../../_services/user.service';
 
 @Component({
-  selector: 'app-merchant-signin',
+  selector: 'app-signin',
   templateUrl: './signin.component.html',
   styleUrls: ['./signin.component.css']
 })
-export class MerchantSignInComponent implements OnInit {
+export class SignInComponent implements OnInit {
   form: FormGroup;
   public loginInvalid: boolean;
   private formSubmitAttempt: boolean;
@@ -22,7 +21,8 @@ export class MerchantSignInComponent implements OnInit {
     private fb: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-    private authService: AuthenticationService,
+    private userService: UserService,
+    private authService: AuthService,
     private mockup: MockupUser
   ) {}
 
@@ -35,7 +35,7 @@ export class MerchantSignInComponent implements OnInit {
       password: ['', Validators.required]
     });
 
-    if (await this.authService.checkAuthenticated()) {
+    if (await this.userService.checkAuthenticated()) {
       await this.router.navigate([this.returnUrl]);
     }
 
@@ -49,10 +49,11 @@ export class MerchantSignInComponent implements OnInit {
         console.log('request login...');
         const username = this.form.get('username').value;
         const password = this.form.get('password').value;
-        this.authService.login(username, password)
+        this.userService.login(username, password)
           .pipe(first())
           .subscribe(
             data => {
+              console.log(data);
               this.router.navigate([this.returnUrl]);
             },
             error => {

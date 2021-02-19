@@ -1,5 +1,50 @@
-import {Merchant} from './merchant';
+/**
+ * User data response
+ */
+export class User {
+  email: string;
+  name: string;
+  surname: string;
 
+  public static fromJson(json): any {
+    if (json === null) {
+      return null;
+    }
+    return Object.assign(new User(), json);
+  }
+}
+
+/**
+ * User Login data response
+ */
+export class UserLogin {
+  id: string;
+  token: string;
+
+  constructor(id: string = '', token: string = '') {
+    this.id = id;
+    this.token = token;
+  }
+
+  public static fromJson(json): any {
+    if (json === null) {
+      return null;
+    }
+    return Object.assign(new UserLogin(), json);
+  }
+}
+
+/**
+ * User registration data request
+ */
+export class UserRegistrationPayload {
+  email: string;
+  password: string;
+  name: string;
+  surname: string;
+}
+
+/*
 export class User {
   name: string;
   surname: string;
@@ -20,3 +65,4 @@ export class User {
     return Object.assign(new User(), jsonObj);
   }
 }
+*/

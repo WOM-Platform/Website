@@ -1,6 +1,9 @@
-# NewSrc
+# Src
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.0.1.
+
+## API documentation
+[swagger](https://dev.wom.social/api/swagger/index.html)
 
 ## Development server
 

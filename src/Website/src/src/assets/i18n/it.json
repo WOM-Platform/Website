@@ -3,7 +3,9 @@
   "FLAG_NO": "No",
   "NAV": {
     "HOME": "Home",
+    "SIGN_IN": "Login",
     "MERCHANT": "Merchant",
+    "PROFILE": "Profilo",
     "SIGN_OUT": "Log out"
   },
   "HOME": {

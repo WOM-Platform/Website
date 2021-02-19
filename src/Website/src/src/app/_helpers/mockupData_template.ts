@@ -17,19 +17,13 @@ export class MockupUser {
     merchant.address = 'address';
     merchant.id = 'id';
     merchant.name = 'name';
-    merchant.fiscalCode = 'fc';
     merchant.zipCode = 'zip';
     merchant.city = 'city';
-    merchant.url = 'url';
-    merchant.pos = [];
-    merchant.pos.push(pos1);
 
     const user = new User();
     user.name = 'name';
     user.surname = 'surname';
     user.email = 'email';
-    user.merchants = [];
-    user.merchants.push(merchant);
 
     return user;
   }

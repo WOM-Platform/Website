@@ -1,8 +1,8 @@
 import {AuthGuard} from './_helpers/auth.guard';
 import {RouterModule, Routes} from '@angular/router';
 import {HomeComponent} from './home';
-import {MerchantSignInComponent} from './merchant/signin/signin.component';
-import {MerchantSignUpComponent} from './merchant/signup/signup.component';
+import {SignInComponent} from './authentication/signin/signin.component';
+import {MerchantSignUpComponent} from './authentication/signup/signup.component';
 import {MerchantDashboardComponent} from './merchant/dashboard/merchant-dashboard.component';
 import {PrivacyComponent} from './privacy/privacy.component';
 import {PrivacyPosComponent} from './privacy/pos/pos.component';
@@ -24,11 +24,11 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
-    path: 'user/signin',
-    component : MerchantSignInComponent
+    path: 'authentication/signin',
+    component : SignInComponent
   },
   {
-    path: 'user/signup',
+    path: 'authentication/signup',
     component : MerchantSignUpComponent
   },
   {
