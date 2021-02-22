@@ -26,6 +26,7 @@ import {MerchantSignUpComponent} from './authentication/signup/signup.component'
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {MatSelectModule} from '@angular/material/select';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatStepperModule} from '@angular/material/stepper';
 import {MerchantDashboardComponent} from './merchant/dashboard/merchant-dashboard.component';
 import {PrivacyComponent} from './privacy/privacy.component';
 import {PrivacyInstrumentComponent} from './privacy/instrument/instrument.component';
@@ -52,6 +53,9 @@ export const isMock = environment.mock;
     PrivacyInstrumentComponent,
     PrivacyPocketComponent,
     PrivacyPosComponent
+  ],
+  exports: [
+      MatStepperModule
   ],
   imports: [
     appRoutingModule,

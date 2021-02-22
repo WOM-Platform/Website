@@ -1,9 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
-import {AuthService} from '../../_services';
 import {first} from 'rxjs/operators';
-import {MockupUser} from '../../_helpers/mockupData';
 import {UserService} from '../../_services/user.service';
 
 @Component({
@@ -21,14 +19,11 @@ export class SignInComponent implements OnInit {
     private fb: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-    private userService: UserService,
-    private authService: AuthService,
-    private mockup: MockupUser
+    private userService: UserService
   ) {}
 
   async ngOnInit(): Promise<void> {
     this.returnUrl = this.route.snapshot.queryParams.returnUrl || '/home';
-    this.authService.publicKey().subscribe(data => console.log((data)));
 
     this.form = this.fb.group({
       username: ['', Validators.email],

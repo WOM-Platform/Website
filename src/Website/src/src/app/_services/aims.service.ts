@@ -21,7 +21,16 @@ export class AimsService {
      * List of all aims recognized by the WOM platform
      */
     getAll(): Observable<Aim[]>{
-        return this.http.get<Aim[]>(environment.baseUrl + environment.v1 + 'aims')
+        return this.http.get<Aim[]>(environment.baseUrl + environment.v2 + 'aims')
+            .pipe(map(response => response));
+    }
+
+    /**
+     * Gets the information of a single aim
+     * @param code Aim code, ex.: H
+     */
+    get(code: string): Observable<Aim> {
+        return this.http.get<Aim>(environment.baseUrl + environment.v1 + 'aim/' + code)
             .pipe(map(response => response));
     }
 }

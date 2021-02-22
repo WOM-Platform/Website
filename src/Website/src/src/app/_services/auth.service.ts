@@ -4,7 +4,7 @@ import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {environment} from '../../environments/environment';
 import {UserService} from './user.service';
-import {Pos} from "../_models";
+import {Merchant, Merchants, Pos} from '../_models';
 
 
 @Injectable({providedIn: 'root'})
@@ -13,6 +13,10 @@ export class AuthService {
 
   constructor(private http: HttpClient,
               private userService: UserService) {
+    if (!userService.currentUserLoginValue) {
+      return;
+    }
+
     this.headers = new HttpHeaders({
       Authorization: `Bearer ${userService.currentUserLoginValue.token}`
     });
@@ -44,4 +48,12 @@ export class AuthService {
       .pipe(map(value => value));
   }
 
+  /**
+   * Retrieve available WOM Merchants for the authenticated user
+   */
+  merchants(): Observable<Merchants> {
+    return this.http.get<Merchants>(environment.baseUrl + environment.v2 + 'auth/merchant',
+        {headers: this.headers})
+        .pipe(map(value => value));
+  }
 }
