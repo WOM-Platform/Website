@@ -39,6 +39,10 @@ import {HttpMockRequestInterceptor} from './_helpers/HttpMockRequestInterceptor'
 import {environment} from '../environments/environment';
 import {TokenInterceptorService} from './_helpers/httpInterceptor';
 import {UserHomeComponent} from './user/home/user-home.component';
+import {PosFormComponent} from './_forms/pos/forms-pos.directive';
+import {UserFormComponent} from "./_forms/user/forms-user.directive";
+import {MerchantFormComponent} from "./_forms/merchant/forms-merchant.directive";
+import {GoogleMapsModule} from "@angular/google-maps";
 
 // AoT requires an exported function for factories
 export const createTranslateLoader = (http: HttpClient) => new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -57,7 +61,10 @@ export const isMock = environment.mock;
     PrivacyInstrumentComponent,
     PrivacyPocketComponent,
     PrivacyPosComponent,
-    UserHomeComponent
+    UserHomeComponent,
+    PosFormComponent,
+    UserFormComponent,
+    MerchantFormComponent
   ],
   exports: [
       MatStepperModule
@@ -94,7 +101,8 @@ export const isMock = environment.mock;
     MatStepperModule,
     MatTooltipModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    GoogleMapsModule
   ],
   providers: [
     isMock

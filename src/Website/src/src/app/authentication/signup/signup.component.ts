@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {ActivatedRoute, Route, Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {UserService} from '../../_services/user.service';
-import {Merchant, PosRegistration, User, UserRegistrationPayload} from '../../_models';
+import {Merchant, PosRegistration, UserRegistrationPayload} from '../../_models';
 import {first} from 'rxjs/operators';
 import {MerchantService} from '../../_services/merchant.service';
 import {PosService} from '../../_services/pos.service';
@@ -21,11 +21,6 @@ export class MerchantSignUpComponent implements OnInit {
   public signupInvalid: boolean;
   private returnUrl: string;
 
-  countryList: string[] = ['a', 'b'];
-  businessList: string[] = ['a', 'b'];
-
-  posLon: string;
-  posLat: string;
   termsConditionsChecked: boolean;
 
   constructor(private fb: FormBuilder,
@@ -38,50 +33,27 @@ export class MerchantSignUpComponent implements OnInit {
   async ngOnInit(): Promise<void> {
     this.returnUrl = this.route.snapshot.queryParams.returnUrl || '/home';
 
-    this.form = this.fb.group({
-      email: ['', Validators.email],
-      password: ['', Validators.required],
-      passwordRepeat: ['', Validators.required],
-      firstName: ['', Validators.required],
-      lastName: ['', Validators.required]
-    });
-
-    this.formMerchant = this.fb.group({
-      name: ['', Validators.required],
-      fiscalCode: ['', Validators.required],
-      address: ['', !Validators.required],
-      cap: ['', !Validators.required],
-      city: ['', !Validators.required],
-      country: ['', !Validators.required],
-      primaryActivityType: ['', Validators.required],
-      url: ['', !Validators.required],
-      description: ['', Validators.required],
-    });
-
-    this.formPos = this.fb.group({
-      name: ['', Validators.required],
-      latitude: [{value: '', disabled: true}, Validators.required],
-      longitude: [{value: '', disabled: true}, Validators.required],
-      url: ['', !Validators.required]
-    });
-
     this.formSubmit = this.fb.group({
       termsConditionsCheckbox: ['', Validators.requiredTrue]
     });
   }
 
   async onSubmit(): Promise<void> {
+    if (!this.formSubmit.valid || !this.form.valid || !this.formMerchant.valid || !this.formPos.valid) {
+      return;
+    }
     const userData: UserRegistrationPayload = new UserRegistrationPayload() ;
-    userData.email = this.form.value.email;
-    userData.name = this.form.value.name;
-    userData.password = this.form.value.password;
-    userData.surname = this.form.value.surname;
+    userData.email = this.form.controls.email.value;
+    userData.name = this.form.controls.firstName.value;
+    userData.password = this.form.controls.password.value;
+    userData.surname = this.form.controls.lastName.value;
 
     const register = await this.userService.register(userData).pipe(first()).subscribe(
         result => {
         console.log(result);
         if (result.id !== null) {
           console.log(result);
+          this.logIn(userData.email, userData.password);
         }
       }, error => {
         console.log(error);
@@ -100,15 +72,15 @@ export class MerchantSignUpComponent implements OnInit {
 
   registerMerchant(): any {
     const merchant: Merchant = new Merchant();
-    merchant.fiscalCode = this.formMerchant.value.fiscalCode;
-    merchant.url = this.formMerchant.value.url;
-    merchant.description = this.formMerchant.value.description;
-    merchant.country = this.formMerchant.value.country;
-    merchant.city = this.formMerchant.value.city;
-    merchant.zipCode = this.formMerchant.value.zipCode;
-    merchant.address = this.formMerchant.value.address;
-    merchant.primaryActivityType = this.formMerchant.value.primaryActivityType;
-    merchant.name = this.formMerchant.value.name;
+    merchant.fiscalCode = this.formMerchant.controls.fiscalCode.value;
+    merchant.url = this.formMerchant.controls.url.value;
+    merchant.description = this.formMerchant.controls.description.value;
+    merchant.country = this.formMerchant.controls.country.value;
+    merchant.city = this.formMerchant.controls.city.value;
+    merchant.zipCode = this.formMerchant.controls.cap.value;
+    merchant.address = this.formMerchant.controls.address.value;
+    merchant.primaryActivityType = this.formMerchant.controls.primaryActivityType.value;
+    merchant.name = this.formMerchant.controls.name.value;
 
     this.merchantService.register(merchant).pipe(first()).subscribe(
         result => {
@@ -120,11 +92,12 @@ export class MerchantSignUpComponent implements OnInit {
 
   registerPos(merchantId: string): any {
     const pos: PosRegistration = new PosRegistration();
-    pos.url = this.formPos.value.url;
-    pos.longitude = this.formPos.value.longitude;
-    pos.latitude = this.formPos.value.latitude;
-    pos.name = this.formPos.value.name;
+    pos.url = this.formPos.controls.url.value;
+    pos.longitude = this.formPos.controls.longitude.value;
+    pos.latitude = this.formPos.controls.latitude.value;
+    pos.name = this.formPos.controls.name.value;
     pos.ownerMerchantId = merchantId;
+
 
     this.posService.register(pos).pipe(first()).subscribe(
         result => {

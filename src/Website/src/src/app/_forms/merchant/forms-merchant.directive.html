@@ -1,0 +1,123 @@
+<form [formGroup]="form">
+    <!-- MERCHANT DATA -->
+    <table class="full-width">
+        <tr>
+            <td colspan="2">
+                <h1>{{ 'SIGN_UP.MERCHANT.TITLE' | translate }}</h1>
+
+                <mat-form-field>
+                    <label>
+                        <input matInput type="text" placeholder="{{ 'SIGN_UP.MERCHANT.NAME' | translate }}" formControlName="name" required>
+                    </label>
+                    <mat-error>
+                        Please provide a valid name for the Merchant
+                    </mat-error>
+                </mat-form-field>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <mat-form-field>
+                    <label>
+                        <input matInput type="text" placeholder="{{ 'SIGN_UP.MERCHANT.CF' | translate }}" formControlName="fiscalCode" required>
+                    </label>
+                    <mat-error>
+                        Please provide a valid fiscal code
+                    </mat-error>
+                </mat-form-field>
+            </td>
+        </tr>
+    </table>
+
+    <!-- OPTIONAL MERCHANT DATA -->
+    <div class="row form-subgroup">
+        <p class="description" [innerHTML]="'SIGN_UP.MERCHANT.OPTIONAL_TEXT' | translate"></p>
+        <table class="full-width">
+            <tr>
+                <td colspan="2">
+                    <mat-form-field>
+                        <label>
+                            <input matInput type="text" placeholder="{{ 'SIGN_UP.MERCHANT.ADDRESS' | translate }}" formControlName="address">
+                        </label>
+                    </mat-form-field>
+                </td>
+            <tr>
+            <tr>
+                <td colspan="1">
+                    <mat-form-field>
+                        <label>
+                            <input matInput #cap placeholder="{{ 'SIGN_UP.MERCHANT.CAP' | translate }}" formControlName="cap">
+                        </label>
+                        <mat-hint align="start">{{cap.value.length}} / 5</mat-hint>
+                    </mat-form-field>
+                </td>
+                <td>
+                    <mat-form-field>
+                        <label>
+                            <input matInput type="text" placeholder="{{ 'SIGN_UP.MERCHANT.CITY' | translate }}" formControlName="city">
+                        </label>
+                    </mat-form-field>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <mat-form-field appearance="fill">
+                        <mat-label>{{ 'SIGN_UP.MERCHANT.SELECT_COUNTRY' | translate }}</mat-label>
+                        <mat-select formControlName="country" >
+                            <mat-option *ngFor="let country of countryList" [value]="country">{{country}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <mat-divider [inset]="true"></mat-divider>
+    <table class="full-width">
+        <tr>
+            <td>
+                <mat-form-field appearance="fill">
+                    <mat-label>{{ 'SIGN_UP.MERCHANT.BUSINESS' | translate }}</mat-label>
+                    <mat-select formControlName="primaryActivityType" >
+                        <mat-option *ngFor="let business of businessList" [value]="business">{{business}}</mat-option>
+                    </mat-select>
+                    <mat-error>
+                        Please select a primary business
+                    </mat-error>
+                </mat-form-field>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <mat-form-field>
+                    <label>
+                        <input matInput type="text" placeholder="{{ 'SIGN_UP.MERCHANT.WEBSITE' | translate }}" formControlName="url">
+                    </label>
+                </mat-form-field>
+            </td>
+        <tr>
+        <tr>
+            <td>
+                <p class="description" [innerHTML]="'SIGN_UP.MERCHANT.OPTIONAL_WEBSITE_TEXT' | translate"></p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <mat-form-field class="example-full-width ">
+                    <label>
+                        <textarea class="form-subgroup" matInput placeholder="{{ 'SIGN_UP.MERCHANT.DESCRIPTION' | translate }}" formControlName="description"></textarea>
+                    </label>
+                    <mat-error>
+                        Please provide a short description for your merchant
+                    </mat-error>
+                </mat-form-field>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <p class="description">
+                    {{ 'SIGN_UP.MERCHANT.DESCRIPTION_TEXT' | translate }}
+                </p>
+            </td>
+        </tr>
+    </table>
+</form>
