@@ -3,7 +3,7 @@
     <form [formGroup]="form" (ngSubmit)="onSubmit()">
       <h2>{{ 'SIGN_IN.TITLE' | translate }}</h2>
       <mat-error *ngIf="loginInvalid">
-        {{ 'SIGN_IN.ERR.LOGIN' | translate }}
+        {{error}}
       </mat-error>
       <mat-form-field class="full-width-input">
         <label>

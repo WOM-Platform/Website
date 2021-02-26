@@ -27,6 +27,8 @@ import {FlexLayoutModule} from '@angular/flex-layout';
 import {MatSelectModule} from '@angular/material/select';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatStepperModule} from '@angular/material/stepper';
+import {MatExpansionModule} from '@angular/material/expansion';
+import {MatTooltipModule} from '@angular/material/tooltip';
 import {MerchantDashboardComponent} from './merchant/dashboard/merchant-dashboard.component';
 import {PrivacyComponent} from './privacy/privacy.component';
 import {PrivacyInstrumentComponent} from './privacy/instrument/instrument.component';
@@ -35,6 +37,8 @@ import {PrivacyPosComponent} from './privacy/pos/pos.component';
 import {HttpMockRequestInterceptor} from './_helpers/HttpMockRequestInterceptor';
 
 import {environment} from '../environments/environment';
+import {TokenInterceptorService} from './_helpers/httpInterceptor';
+import {UserHomeComponent} from './user/home/user-home.component';
 
 // AoT requires an exported function for factories
 export const createTranslateLoader = (http: HttpClient) => new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -52,7 +56,8 @@ export const isMock = environment.mock;
     PrivacyComponent,
     PrivacyInstrumentComponent,
     PrivacyPocketComponent,
-    PrivacyPosComponent
+    PrivacyPosComponent,
+    UserHomeComponent
   ],
   exports: [
       MatStepperModule
@@ -77,6 +82,7 @@ export const isMock = environment.mock;
     MatIconModule,
     MatToolbarModule,
     MatButtonModule,
+    MatExpansionModule,
     MatCheckboxModule,
     MatMenuModule,
     MatDividerModule,
@@ -85,6 +91,8 @@ export const isMock = environment.mock;
     MatCardModule,
     MatSlideToggleModule,
     MatSelectModule,
+    MatStepperModule,
+    MatTooltipModule,
     ReactiveFormsModule,
     FormsModule
   ],
@@ -95,7 +103,11 @@ export const isMock = environment.mock;
           useClass: HttpMockRequestInterceptor,
           multi: true
         }]
-      : []
+      : [{
+          provide: HTTP_INTERCEPTORS,
+          useClass: TokenInterceptorService,
+          multi: true
+        }]
   ],
   bootstrap: [AppComponent]
 })

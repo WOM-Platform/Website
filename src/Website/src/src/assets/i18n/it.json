@@ -63,11 +63,13 @@
       "URL": "URL",
       "URL_OPTIONAL_TEXT": "<i>Opzionale.</i>\nVerrà mostrato agli utenti quando viene confermato il pagamento. Può essere utilizzato per visualizzare ulteriori informazioni riguardo il POS del Merchant."
     },
+    "DONE": "Fine",
     "TERMS_CONDITIONS": "Accetta i termini e le condizioni di utilizzo",
     "BTN_SIGN_UP": "Registrati",
     "ERR": {
       "FORM": "Ricontrolla il form per gli errori",
       "REPRESENTATIVE": {
+        "STEPPER_TITLE": "Dati personali",
         "EMAIL": "Inserisci un indirizzo e-mail valido",
         "PASSWORD": "Inserisci una password valida",
         "REPEAT_PASSWORD": "Inserisci una password valida",
@@ -76,6 +78,7 @@
       },
       "MERCHANT": {
         "TITLE": "MERCHANT",
+        "MERCHANT_TITLE": "Registrazione Merchant",
         "NAME": "Nome Merchant/Attività",
         "CF": "Codice fiscale",
         "OPTIONAL_TEXT": "<i>Opzionale.</i>\nIndirizzo principale della propria attività.",
@@ -107,5 +110,22 @@
   },
   "MERCHANT": {
 
+  },
+  "USER": {
+    "HOME": {
+      "WELCOME": "Benvenuto",
+      "MERCHANT_TITLE": "Elenco Merchant",
+      "ADD_MERCHANT_TOOLTIP": "Aggiungi un nuovo Merchant",
+      "MERCHANT": {
+        "NAME": "Merchant",
+        "CODE": "Codice fiscale",
+        "ADDRESS": "Indirizzo",
+        "ACTIVITY_TYPE": "Attività primaria",
+        "URL": "Sito web",
+        "POS_TITLE": "POS",
+        "POS_SUBTITLE": "Visualizza o modifica",
+        "ADD_POS_TOOLTIP": "Aggiungi un nuovo punto di servizio 'POS' per il Merchant"
+      }
+    }
   }
 }

@@ -5,7 +5,18 @@ html, body {
   height: 100%;
   background: #fafafa;
 }
+
 body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.container {
+  max-width: 1000px;
+  margin: 2em auto;
+  text-align: left;
+}
+
+.mat-card {
+  padding: 5px;
 }

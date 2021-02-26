@@ -19,7 +19,7 @@
     "BTN_FORGOT_PASSWORD": "Forgot your password?",
     "BTN_SIGN_UP": "Sign up",
     "ERR": {
-      "LOGIN": "The username and password were not recognised",
+      "LOGIN": "The username and/or password were not recognised",
       "EMAIL": "Please provide a valid email address",
       "PASSWORD": "Please provide a valid password"
     }
@@ -29,6 +29,7 @@
     "SUBTITLE": "Fill in the form below to sign up to the <b>WOM&nbsp;Platform</b> as a <i>Merchant</i>, in order to start receiving payments.",
     "BTN_ALREADY_REGISTERED": "Already registered?",
     "REPRESENTATIVE": {
+      "STEPPER_TITLE": "Personal data",
       "TITLE": "Representative",
       "EMAIL": "Email Address",
       "PASSWORD": "Password",
@@ -38,6 +39,7 @@
     },
     "MERCHANT": {
       "TITLE": "MERCHANT",
+      "STEPPER_TITLE": "Merchant registration",
       "NAME": "Merchant/Business Name",
       "CF": "Italian fiscal code",
       "OPTIONAL_TEXT": "<i>Optional.</i>\nMain address of your business.",
@@ -64,9 +66,27 @@
       "URL_OPTIONAL_TEXT": "<i>Optional.</i>\nWill be shown to users when the payment is confirmed. Can be used to show more information about the POS of the Merchant."
     },
     "TERMS_CONDITIONS": "Accept terms and conditions",
+    "DONE": "Done",
     "BTN_SIGN_UP": "Sign Up"
   },
   "MERCHANT": {
 
+  },
+  "USER": {
+    "HOME": {
+      "WELCOME": "Welcome",
+      "MERCHANT_TITLE": "Merchant list",
+      "ADD_MERCHANT_TOOLTIP": "Add a new Merchant",
+      "MERCHANT": {
+        "NAME": "Merchant",
+        "CODE": "Fiscal code",
+        "ADDRESS": "Address",
+        "ACTIVITY_TYPE": "Primary activity",
+        "URL": "Website",
+        "POS_TITLE": "POS",
+        "POS_SUBTITLE": "View & edit",
+        "ADD_POS_TOOLTIP": "Add a new Point of Service 'POS' for Merchant"
+      }
+    }
   }
 }

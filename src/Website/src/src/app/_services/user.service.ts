@@ -7,7 +7,8 @@ import {environment} from '../../environments/environment';
 
 @Injectable({providedIn: 'root'})
 export class UserService {
-    headers: HttpHeaders;
+    localUrlV1 = environment.baseUrl + environment.v1 + 'user/';
+    localUrlV2 = environment.baseUrl + environment.v2 + 'user/';
 
     // Login data
     public currentUserLogin: Observable<UserLogin>;
@@ -45,26 +46,19 @@ export class UserService {
      * @param password password associated for the username
      */
     login(email: string, password: string): Observable<any> {
-        return this.http.post<any>(environment.baseUrl + environment.v1 + 'user/login', {
+        return this.http.post<any>(this.localUrlV1 + 'login', {
             email,
             password
         })
-            .pipe(map(login => {
+            .pipe(map(response => {
                 // login successful if there's a valid user in the response
-                if (login) {
-                    // hydrate a full User object from its JSON representation (to have its methods/logic)
-                    login = UserLogin.fromJson(login);
-
+                if (response) {
+                    const login = UserLogin.fromJson(response);
                     // store user details and jwt token in local storage to keep user logged in between page refreshes
                     localStorage.setItem('currentUserLogin', JSON.stringify(login));
                     this.currentUserLoginSubject.next(login);
-
-                    // Update headers for subsequent calls
-                    this.headers = new HttpHeaders({
-                        Authorization: `Bearer ${login.token}`
-                    });
+                    return login;
                 }
-                return login;
             }));
     }
 
@@ -72,10 +66,7 @@ export class UserService {
      * Notify the server that the user has logged out & remove local storage data
      */
     logout(): void {
-        this.http.post<any>(environment.baseUrl + environment.v1 + 'user/logout', {
-            id: this.currentUserLoginSubject.value.id,
-            token: this.currentUserLoginSubject.value.token
-        })
+        this.http.post<any>(this.localUrlV1 + 'logout', {})
             .pipe(map(value => {
                 console.log('logout: ' + value);
             }));
@@ -91,8 +82,8 @@ export class UserService {
     /**
      * Get user data for current user id
      */
-    getLoggedUser(): Observable<any | User> {
-        return this.http.get<any>(environment.baseUrl + environment.v1 + 'user/' + this.currentUserLoginSubject.value.id)
+    getLoggedUser(): Observable<User> {
+        return this.http.get<User>(this.localUrlV1 + this.currentUserLoginSubject.value.id)
             .pipe(map(user => {
                 // user id is correct if value is not null
                 if (user) {
@@ -111,8 +102,8 @@ export class UserService {
      * Register a new user
      * @param data user data
      */
-    register(data: UserRegistrationPayload): Observable<any> {
-        return this.http.post<any>(environment.baseUrl + environment.v1 + 'user/register', data)
+    register(data: UserRegistrationPayload): Observable<User> {
+        return this.http.post<User>(this.localUrlV1 + 'register', data)
             .pipe(map(response => response));
     }
 
@@ -120,8 +111,8 @@ export class UserService {
      * Update an existing user's data
      * @param data user data
      */
-    update(data: UserRegistrationPayload): Observable<any> {
-        return this.http.patch(environment.baseUrl + environment.v1 + 'user/' + this.currentUserLoginSubject.value.id,
+    update(data: UserRegistrationPayload): Observable<User> {
+        return this.http.patch<User>(this.localUrlV1 + this.currentUserLoginSubject.value.id,
             data).pipe(map (response => response));
     }
 
@@ -129,9 +120,7 @@ export class UserService {
      * verify status of user account
      */
     verify(): Observable<any> {
-        return this.http.post<any>(environment.baseUrl
-            + environment.v1
-            + 'user/' + this.currentUserLoginSubject.value.id + '/verify',
+        return this.http.post<any>(this.localUrlV1 + this.currentUserLoginSubject.value.id + '/verify',
             {token: this.currentUserLoginSubject.value.token}).pipe(map (response => response));
     }
 
@@ -140,7 +129,7 @@ export class UserService {
      * @param email registered user's email (username)
      */
     passwordReset(email: string): Observable<any> {
-        return this.http.post<any>(environment.baseUrl + environment.v1 + 'user/password-reset',
+        return this.http.post<any>(this.localUrlV1 + 'password-reset',
             {email}).pipe(map (response => response));
     }
 }

@@ -1,0 +1,16 @@
+.merchant-container {
+    padding: 5px;
+}
+
+.merchant-header > h1 {
+    display: inline-block;
+}
+
+.button-container {
+    float: left;
+    margin-right: 10px;
+}
+
+mat-panel-title{
+    font-weight: bold;
+}

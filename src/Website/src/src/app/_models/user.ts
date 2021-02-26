@@ -1,10 +1,18 @@
 /**
- * User data response
+ * User registration data request
  */
-export class User {
+export class UserRegistrationPayload {
   email: string;
+  password: string;
   name: string;
   surname: string;
+}
+
+/**
+ * User data response
+ */
+export class User extends UserRegistrationPayload {
+  id: string;
 
   public static fromJson(json): any {
     if (json === null) {
@@ -33,36 +41,3 @@ export class UserLogin {
     return Object.assign(new UserLogin(), json);
   }
 }
-
-/**
- * User registration data request
- */
-export class UserRegistrationPayload {
-  email: string;
-  password: string;
-  name: string;
-  surname: string;
-}
-
-/*
-export class User {
-  name: string;
-  surname: string;
-  email: string;
-  merchants: Merchant[];
-
-  constructor(name: string = '', surname: string = '', email: string = '', merchants: Merchant[] = []) {
-    this.name = name;
-    this.surname = surname;
-    this.email = email;
-    this.merchants = merchants;
-  }
-
-  public static fromJSON(jsonObj): any {
-    if (jsonObj == null) {
-      return null;
-    }
-    return Object.assign(new User(), jsonObj);
-  }
-}
-*/

@@ -3,36 +3,46 @@ import {Pos} from './pos';
 export class Merchant {
   id: string;
   name: string;
-  primaryActivity: string;
+  fiscalCode: string;
+  primaryActivityType: string;
   address: string;
   zipCode: string;
   city: string;
   country: string;
   description: string;
-  websiteUrl: string;
+  url: string;
+
+  public static fromJson(json): any {
+    if (json === null) {
+      return null;
+    }
+    return Object.assign(new Merchant(), json);
+  }
+}
+
+export class MerchantContainer extends Merchant {
+  pos: Pos[];
+
+  public static fromJson(json): any {
+    if (json === null) {
+      return null;
+    }
+    return Object.assign(new MerchantContainer(), json);
+  }
 }
 
 export class Merchants {
+  name: string;
+  surname: string;
   email: string;
   merchants: MerchantContainer[];
+
+  public static fromJson(json): any {
+    if (json === null) {
+      return null;
+    }
+    return Object.assign(new Merchants(), json);
+  }
 }
 
-export class MerchantContainer {
-  id: MerchantId;
-  name: string;
-  fiscalCode: string;
-  address: string;
-  zipCode: string;
-  city: string;
-  country: string;
-  url: string;
-  pos: Pos[];
-}
 
-export class MerchantId {
-  timestamp: number;
-  machine: number;
-  pid: number;
-  increment: number;
-  creationTime: Date;
-}

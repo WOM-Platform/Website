@@ -1,9 +1,3 @@
-.container {
-  max-width: 1000px;
-  margin: 2em auto;
-  text-align: left;
-}
-
 .badge {
   max-width: 50%;
   display: inline-block;

@@ -8,6 +8,7 @@ import {PrivacyComponent} from './privacy/privacy.component';
 import {PrivacyPosComponent} from './privacy/pos/pos.component';
 import {PrivacyPocketComponent} from './privacy/pocket/pocket.component';
 import {PrivacyInstrumentComponent} from './privacy/instrument/instrument.component';
+import {UserHomeComponent} from './user/home/user-home.component';
 
 const routes: Routes = [
   {
@@ -21,6 +22,11 @@ const routes: Routes = [
   {
     path: 'merchant',
     component :  MerchantDashboardComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'user/home',
+    component: UserHomeComponent,
     canActivate: [AuthGuard]
   },
   {
