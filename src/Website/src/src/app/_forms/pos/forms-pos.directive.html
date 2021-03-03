@@ -12,7 +12,7 @@
                         <input matInput type="text" placeholder="{{ 'SIGN_UP.POS.NAME' | translate }}" formControlName="name">
                     </label>
                     <mat-error>
-                        Please insert a name for your POS
+                        {{'SIGN_UP.POS.NAME_ERROR' | translate}}
                     </mat-error>
                 </mat-form-field>
             </td>
@@ -40,6 +40,9 @@
                     <label>
                         <input matInput type="text" placeholder="{{ 'SIGN_UP.POS.LAT' | translate }}" [value]="posLat" formControlName="latitude">
                     </label>
+                    <mat-error>
+                        {{'SIGN_UP.POS.LAT_LON_ERROR' | translate}}
+                    </mat-error>
                 </mat-form-field>
             </td>
             <td>
@@ -65,9 +68,4 @@
             </td>
         </tr>
     </table>
-    <mat-divider [inset]="true"></mat-divider>
-    <div>
-        <button mat-button matStepperPrevious>Back</button>
-        <button mat-button matStepperNext>Next</button>
-    </div>
 </form>

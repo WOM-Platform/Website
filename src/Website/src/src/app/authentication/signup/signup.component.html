@@ -5,12 +5,12 @@
     <p>
       <a [routerLink]="['/authentication/signin']">{{ "SIGN_UP.BTN_ALREADY_REGISTERED" | translate }}</a>
     </p>
+    <mat-error *ngIf="signupInvalid">
+      {{ 'SIGN_UP.FORM_ERROR' | translate }}
+    </mat-error>
     <mat-horizontal-stepper linear #stepper>
       <mat-step [stepControl]="form">
         <ng-template matStepLabel>{{ 'SIGN_UP.REPRESENTATIVE.STEPPER_TITLE' | translate }}</ng-template>
-        <mat-error *ngIf="signupInvalid">
-          {{ 'SIGN_UP.ERR.FORM' | translate }}
-        </mat-error>
         <!-- REPRESENTATIVE DATA -->
         <app-forms-user [(form)]="form"></app-forms-user>
       </mat-step>
@@ -18,34 +18,51 @@
       <!-- OPTIONAL SECTION -->
       <mat-step [stepControl]="formMerchant" [optional]="true">
         <ng-template matStepLabel>{{ 'SIGN_UP.MERCHANT.STEPPER_TITLE' | translate }}</ng-template>
-        <mat-error *ngIf="signupInvalid">
-          {{ 'SIGN_UP.ERR.FORM' | translate }}
-        </mat-error>
+        <mat-checkbox class="mat-checkbox-merchant" [(ngModel)]="requireMerchantRegistration">
+          <mat-label>
+            {{'SIGN_UP.MERCHANT.CHECKBOX' | translate}}
+          </mat-label>
+        </mat-checkbox>
 
         <!-- MERCHANT SECTION -->
-        <app-forms-merchant [(form)]="formMerchant"></app-forms-merchant>
+        <app-forms-merchant [(form)]="formMerchant" *ngIf="requireMerchantRegistration">
+
+        </app-forms-merchant>
         <mat-divider [inset]="true"></mat-divider>
 
         <!-- POS SECTION -->
-        <app-forms-pos [(form)]="formPos" >
-        </app-forms-pos>
+        <mat-checkbox class="mat-checkbox-merchant" [(ngModel)]="requirePosRegistration" *ngIf="requireMerchantRegistration">
+          <mat-label>
+            {{'SIGN_UP.POS.CHECKBOX' | translate}}
+          </mat-label>
+        </mat-checkbox>
+        <app-forms-pos [(form)]="formPos" *ngIf="requirePosRegistration && requireMerchantRegistration"></app-forms-pos>
+
+        <div>
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button matStepperNext>Next</button>
+        </div>
       </mat-step>
 
       <!-- CONFIRM SECTION -->
       <mat-step [stepControl]="formSubmit">
         <form [formGroup]="formSubmit">
           <ng-template matStepLabel>{{ 'SIGN_UP.DONE' | translate }}</ng-template>
-          <mat-error *ngIf="signupInvalid">
-            {{ 'SIGN_UP.ERR.FORM' | translate }}
-          </mat-error>
+          <mat-form-field>
+            <h2>{{'SIGN_UP.TERMS_CONDITIONS_TITLE' | translate}}</h2>
+            <label>
+              <textarea class="form-subgroup" matInput formControlName="tcInfo"></textarea>
+            </label>
+          </mat-form-field>
           <mat-form-field  appearance="example-full-width" style="height: 10px">
             <label>
               <input matInput formControlName="termsConditionsCheckbox" [hidden]="true">
             </label>
             <mat-error>
-              Please accept the terms and conditions
+              {{'SIGN_UP.TC_ERROR' | translate}}
             </mat-error>
           </mat-form-field>
+
           <mat-checkbox class="example-margin" [checked]="termsConditionsChecked" formControlName="termsConditionsCheckbox">
             {{ 'SIGN_UP.TERMS_CONDITIONS' | translate }}
           </mat-checkbox>

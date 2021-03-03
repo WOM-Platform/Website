@@ -18,53 +18,73 @@ export class MerchantSignUpComponent implements OnInit {
   formPos: FormGroup;
   formSubmit: FormGroup;
 
-  public signupInvalid: boolean;
-  private returnUrl: string;
-
+  signupInvalid: boolean;
+  returnUrl: string;
+  requireMerchantRegistration: boolean;
+  requirePosRegistration: boolean;
   termsConditionsChecked: boolean;
+  termsAndConditionsText: string;
 
   constructor(private fb: FormBuilder,
               private route: ActivatedRoute,
               private router: Router,
               private userService: UserService,
               private merchantService: MerchantService,
-              private posService: PosService) {}
+              private posService: PosService) {
+      this.termsAndConditionsText = 'Insert t&c text here';
+  }
 
   async ngOnInit(): Promise<void> {
     this.returnUrl = this.route.snapshot.queryParams.returnUrl || '/home';
 
     this.formSubmit = this.fb.group({
-      termsConditionsCheckbox: ['', Validators.requiredTrue]
+      termsConditionsCheckbox: ['', Validators.requiredTrue],
+        tcInfo: [{value: this.termsAndConditionsText, disabled: true}, !Validators.required]
     });
   }
 
-  async onSubmit(): Promise<void> {
-    if (!this.formSubmit.valid || !this.form.valid || !this.formMerchant.valid || !this.formPos.valid) {
+  onSubmit(): any {
+    this.signupInvalid = false;
+    const merchantFormValid = (this.requireMerchantRegistration && this.formMerchant.valid) || !this.requireMerchantRegistration;
+    const posFormValid = (this.requirePosRegistration && this.formPos.valid) || !this.requirePosRegistration;
+    console.log('form: ' + this.form.valid);
+    console.log('submit: ' + this.formSubmit.valid);
+    console.log('merchant: ' + merchantFormValid);
+    console.log('pos: ' + posFormValid);
+
+    if (!this.form.valid || !this.formSubmit.valid || !merchantFormValid || !posFormValid) {
+      console.log('signup invalid');
+      this.signupInvalid = true;
       return;
     }
+
     const userData: UserRegistrationPayload = new UserRegistrationPayload() ;
     userData.email = this.form.controls.email.value;
     userData.name = this.form.controls.firstName.value;
     userData.password = this.form.controls.password.value;
     userData.surname = this.form.controls.lastName.value;
 
-    const register = await this.userService.register(userData).pipe(first()).subscribe(
+    this.userService.register(userData).pipe(first()).subscribe(
         result => {
-        console.log(result);
         if (result.id !== null) {
           console.log(result);
           this.logIn(userData.email, userData.password);
         }
       }, error => {
-        console.log(error);
+          this.signupInvalid = true;
+          console.log(error);
       });
   }
 
   logIn(username: string, password: string): any {
-    this.userService.login(username, password).pipe(first()).subscribe(
+    this.userService.login(username, password).pipe().subscribe(
         result => {
           console.log(result);
-          this.registerMerchant();
+          if (this.requireMerchantRegistration) {
+            this.registerMerchant();
+          } else {
+            this.router.navigate(['/user/home']).then(r => r);
+          }
         }, error => {
           console.log(error);
         });
@@ -84,7 +104,12 @@ export class MerchantSignUpComponent implements OnInit {
 
     this.merchantService.register(merchant).pipe(first()).subscribe(
         result => {
-          this.registerPos(result.id);
+          console.log(result);
+          if (this.requirePosRegistration) {
+            this.registerPos(result.id);
+          } else {
+            this.router.navigate(['/user/home']).then(r => r);
+          }
         }, error => {
           console.log(error);
         });
@@ -98,7 +123,6 @@ export class MerchantSignUpComponent implements OnInit {
     pos.name = this.formPos.controls.name.value;
     pos.ownerMerchantId = merchantId;
 
-
     this.posService.register(pos).pipe(first()).subscribe(
         result => {
           console.log(result);
@@ -107,4 +131,8 @@ export class MerchantSignUpComponent implements OnInit {
           console.log(error);
         });
   }
+
+    tcLinkClicked(): any {
+      this.router.navigate(['/privacy']).then(r => r);
+    }
 }

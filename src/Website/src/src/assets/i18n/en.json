@@ -40,37 +40,49 @@
     "MERCHANT": {
       "TITLE": "MERCHANT",
       "STEPPER_TITLE": "Merchant registration",
+      "CHECKBOX": "Register a merchant",
       "NAME": "Merchant/Business Name",
+      "NAME_ERROR": "Please provide a valid name for the Merchant - 8 characters minimum",
       "CF": "Italian fiscal code",
-      "OPTIONAL_TEXT": "<i>Optional.</i>\nMain address of your business.",
+      "CF_ERROR": "Please provide a valid fiscal code",
+      "OPTIONAL_TEXT": "Main address of your business.",
       "ADDRESS": "Address",
-      "CAP": "CAP",
+      "ADDRESS_ERROR": "Please enter an address",
+      "CAP": "CAP/City code",
+      "CAP_ERROR": "Please enter the cap/city code",
       "CITY": "City",
+      "CITY_ERROR": "Please enter the merchant's city",
       "SELECT_COUNTRY": "Select country",
+      "SELECT_COUNTRY_ERROR": "Please select your merchant's country",
       "BUSINESS": "Select primary business",
-      "WEBSITE": "Website",
+      "BUSINESS_ERROR": "Please select a primary business",
+      "WEBSITE": "Website, ex.: http://www.example.com",
       "OPTIONAL_WEBSITE_TEXT": "<i>Optional.</i>\nWeb site of your business.",
       "DESCRIPTION": "Description",
+      "DESCRIPTION_ERROR": "Please provide a short description for your merchant",
       "DESCRIPTION_TEXT": "Short description of your business and how you intend to monetize WOM&nbsp;Vouchers (goods or services)."
     },
     "POS": {
       "TITLE": "Your first Point of Service",
+      "CHECKBOX": "Register your first Point Of Service (POS)",
       "SUBTITLE_A": "Fill out this part of the form in order to create a <b>Point of Service</b>&nbsp;(POS) instance for your Merchant account. You will be able to receive WOM&nbsp;payments straight away using your POS.",
       "SUBTITLE_B": "You will be able to create additional Points of Service after sign up.",
       "NAME": "Name",
+      "NAME_ERROR": "Please insert a name for your POS",
       "NAME_TEXT": "POS name, will be shown to users while performing a payment.",
       "MAP_TITLE": "",
       "LAT": "Latitude",
       "LON": "Longitude",
+      "LAT_LON_ERROR": "Please select a location on the map",
       "URL": "URL",
       "URL_OPTIONAL_TEXT": "<i>Optional.</i>\nWill be shown to users when the payment is confirmed. Can be used to show more information about the POS of the Merchant."
     },
+    "TERMS_CONDITIONS_TITLE": "Terms & Conditions",
     "TERMS_CONDITIONS": "Accept terms and conditions",
+    "TC_ERROR": "Please accept the terms and conditions",
     "DONE": "Done",
-    "BTN_SIGN_UP": "Sign Up"
-  },
-  "MERCHANT": {
-
+    "BTN_SIGN_UP": "Sign Up",
+    "FORM_ERROR": "Error - check all fields and try again"
   },
   "USER": {
     "HOME": {
