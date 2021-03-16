@@ -1,0 +1,14 @@
+<h2 mat-dialog-title>{{"USER.ADD_MERCHANT.TITLE" | translate}}</h2>
+<mat-dialog-content >
+    <mat-error *ngIf="formInputError">
+        {{"USER.ADD_MERCHANT.INPUT_ERROR" | translate}}
+    </mat-error>
+    <mat-error *ngIf="formApiError">
+        {{"USER.ADD_MERCHANT.API_ERROR" | translate}}
+    </mat-error>
+    <app-forms-merchant [(form)]="formMerchant" [merchant]="data.data ? data.data : null" ></app-forms-merchant>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Cancel</button>
+    <button mat-button (click)="onSubmit()" cdkFocusInitial>Add</button>
+</mat-dialog-actions>

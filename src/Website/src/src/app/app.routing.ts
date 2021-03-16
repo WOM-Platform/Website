@@ -9,6 +9,7 @@ import {PrivacyPosComponent} from './privacy/pos/pos.component';
 import {PrivacyPocketComponent} from './privacy/pocket/pocket.component';
 import {PrivacyInstrumentComponent} from './privacy/instrument/instrument.component';
 import {UserHomeComponent} from './user/home/user-home.component';
+import {UserNotVerifiedComponent} from './user/not-verified/user-not-verified.component';
 
 const routes: Routes = [
   {
@@ -22,6 +23,11 @@ const routes: Routes = [
   {
     path: 'merchant',
     component :  MerchantDashboardComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'user/not-verified',
+    component: UserNotVerifiedComponent,
     canActivate: [AuthGuard]
   },
   {

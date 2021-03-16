@@ -17,13 +17,22 @@ export class MerchantSignUpComponent implements OnInit {
   formMerchant: FormGroup;
   formPos: FormGroup;
   formSubmit: FormGroup;
+  errorMessage: string;
 
   signupInvalid: boolean;
+  signupTimeout: boolean;
+  signupComplete: boolean;
   returnUrl: string;
   requireMerchantRegistration: boolean;
   requirePosRegistration: boolean;
   termsConditionsChecked: boolean;
   termsAndConditionsText: string;
+
+  // Spinner
+  color = 'primary';
+  mode = 'indeterminate';
+  value = 50;
+  displayProgressSpinner = false;
 
   constructor(private fb: FormBuilder,
               private route: ActivatedRoute,
@@ -44,16 +53,19 @@ export class MerchantSignUpComponent implements OnInit {
   }
 
   onSubmit(): any {
+    this.errorMessage = '';
     this.signupInvalid = false;
-    const merchantFormValid = (this.requireMerchantRegistration && this.formMerchant.valid) || !this.requireMerchantRegistration;
-    const posFormValid = (this.requirePosRegistration && this.formPos.valid) || !this.requirePosRegistration;
-    console.log('form: ' + this.form.valid);
-    console.log('submit: ' + this.formSubmit.valid);
-    console.log('merchant: ' + merchantFormValid);
-    console.log('pos: ' + posFormValid);
+    this.signupComplete = false;
+    this.showProgressSpinner();
+
+    const merchantFormValid = this.requireMerchantRegistration
+        ? (this.formMerchant !== undefined && this.formMerchant.valid)
+        : true;
+    const posFormValid = this.requirePosRegistration
+        ? (this.formPos !== undefined && this.formPos.valid)
+        : true;
 
     if (!this.form.valid || !this.formSubmit.valid || !merchantFormValid || !posFormValid) {
-      console.log('signup invalid');
       this.signupInvalid = true;
       return;
     }
@@ -66,41 +78,35 @@ export class MerchantSignUpComponent implements OnInit {
 
     this.userService.register(userData).pipe(first()).subscribe(
         result => {
-        if (result.id !== null) {
-          console.log(result);
-          this.logIn(userData.email, userData.password);
-        }
-      }, error => {
-          this.signupInvalid = true;
-          console.log(error);
-      });
-  }
-
-  logIn(username: string, password: string): any {
-    this.userService.login(username, password).pipe().subscribe(
-        result => {
-          console.log(result);
-          if (this.requireMerchantRegistration) {
-            this.registerMerchant();
-          } else {
-            this.router.navigate(['/user/home']).then(r => r);
-          }
+            if (result.id !== null) {
+              console.log(result);
+              this.logIn(userData.email, userData.password);
+            }
         }, error => {
+          this.signupInvalid = true;
+          this.errorMessage = error.title;
+          this.signupComplete = true;
           console.log(error);
+          this.displayProgressSpinner = false;
         });
   }
 
   registerMerchant(): any {
     const merchant: Merchant = new Merchant();
     merchant.fiscalCode = this.formMerchant.controls.fiscalCode.value;
-    merchant.url = this.formMerchant.controls.url.value;
-    merchant.description = this.formMerchant.controls.description.value;
     merchant.country = this.formMerchant.controls.country.value;
     merchant.city = this.formMerchant.controls.city.value;
     merchant.zipCode = this.formMerchant.controls.cap.value;
     merchant.address = this.formMerchant.controls.address.value;
     merchant.primaryActivityType = this.formMerchant.controls.primaryActivityType.value;
     merchant.name = this.formMerchant.controls.name.value;
+    // Optional values
+    if (this.formMerchant.controls.url.value !== '') {
+        merchant.url = this.formMerchant.controls.url.value;
+    }
+    if (this.formMerchant.controls.description.value !== '') {
+      merchant.description = this.formMerchant.controls.description.value;
+    }
 
     this.merchantService.register(merchant).pipe(first()).subscribe(
         result => {
@@ -108,31 +114,77 @@ export class MerchantSignUpComponent implements OnInit {
           if (this.requirePosRegistration) {
             this.registerPos(result.id);
           } else {
+            this.displayProgressSpinner = false;
+            this.signupComplete = true;
             this.router.navigate(['/user/home']).then(r => r);
           }
         }, error => {
-          console.log(error);
+            this.signupInvalid = true;
+            this.errorMessage = error.title;
+            this.displayProgressSpinner = false;
+            this.signupComplete = true;
+            console.log(error);
         });
   }
 
   registerPos(merchantId: string): any {
     const pos: PosRegistration = new PosRegistration();
-    pos.url = this.formPos.controls.url.value;
     pos.longitude = this.formPos.controls.longitude.value;
     pos.latitude = this.formPos.controls.latitude.value;
     pos.name = this.formPos.controls.name.value;
     pos.ownerMerchantId = merchantId;
+    // Optional values
+    if (this.formPos.controls.url.value !== '') {
+        pos.url = this.formPos.controls.url.value;
+    }
 
     this.posService.register(pos).pipe(first()).subscribe(
         result => {
           console.log(result);
+          this.displayProgressSpinner = false;
+          this.signupComplete = true;
           this.router.navigate(['/user/home']).then(r => r);
         }, error => {
-          console.log(error);
+            this.signupInvalid = true;
+            this.errorMessage = error.title;
+            this.displayProgressSpinner = false;
+            this.signupComplete = true;
+            console.log(error);
         });
   }
 
-    tcLinkClicked(): any {
+  logIn(username: string, password: string): any {
+    this.userService.login(username, password).pipe().subscribe(
+        result => {
+            console.log(result);
+            if (this.requireMerchantRegistration) {
+                this.registerMerchant();
+            } else {
+                this.displayProgressSpinner = false;
+                this.signupComplete = true;
+                this.router.navigate(['/user/home']).then(r => r);
+            }
+        }, error => {
+            this.signupInvalid = true;
+            this.errorMessage = error.title;
+            this.displayProgressSpinner = false;
+            this.signupComplete = true;
+            console.log(error);
+        });
+  }
+
+  tcLinkClicked(): any {
       this.router.navigate(['/privacy']).then(r => r);
-    }
+  }
+
+  showProgressSpinner = () => {
+    this.displayProgressSpinner = true;
+    setTimeout(() => {
+        if (!this.signupComplete) {
+            this.displayProgressSpinner = false;
+            this.signupInvalid = true;
+            this.signupTimeout = true;
+        }
+    }, 10000);
+  }
 }

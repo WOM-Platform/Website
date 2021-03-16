@@ -7,10 +7,18 @@
 }
 
 .button-container {
-    float: left;
-    margin-right: 10px;
+    float: right;
+    margin-right: 0px;
 }
 
 mat-panel-title{
     font-weight: bold;
+}
+
+p {
+    margin: 2px;
+}
+
+.pos-card {
+    margin-top: 1em;
 }

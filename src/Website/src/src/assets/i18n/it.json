@@ -81,7 +81,8 @@
     "TERMS_CONDITIONS": "Accetta i termini e le condizioni di utilizzo",
     "TC_ERROR": "Accetta i termini e condizioni per continuare",
     "BTN_SIGN_UP": "Registrati",
-    "FORM_ERROR": "Errore - controlla tutti i campi e riprova"
+    "FORM_ERROR": "Errore - controlla tutti i campi e riprova",
+    "TIMEOUT_ERROR": "Il servizio impiega troppo tempo a rispondere - controllare la connessione ad internet e riprovare"
   },
   "MERCHANT": {
 
@@ -91,6 +92,7 @@
       "WELCOME": "Benvenuto",
       "MERCHANT_TITLE": "Elenco Merchant",
       "ADD_MERCHANT_TOOLTIP": "Aggiungi un nuovo Merchant",
+      "EDIT_MERCHANT_TOOLTIP": "Modifica i dati di questo Merchant",
       "MERCHANT": {
         "NAME": "Merchant",
         "CODE": "Codice fiscale",
@@ -101,6 +103,28 @@
         "POS_SUBTITLE": "Visualizza o modifica",
         "ADD_POS_TOOLTIP": "Aggiungi un nuovo punto di servizio 'POS' per il Merchant"
       }
+    },
+    "NOT_VERIFIED": {
+      "TITLE": "Verifica il tuo account cliccando sul link che hai ricevuto per email.",
+      "SUBTITLE": "Non hai ricevuto nulla?",
+      "SEND_EMAIL_LINK": "Clicca qui",
+      "SEND_EMAIL_TEXT": "per ricevere un nuovo email di verifica all'indirizzo "
+    },
+    "ADD_MERCHANT": {
+      "TITLE": "Aggiungi un nuovo merchant",
+      "CANCEL": "Annulla",
+      "ADD": "Aggiungi",
+      "SUCCESS": "Merchant aggiunto",
+      "INPUT_ERROR": "Compila i campi in rosso per continuare",
+      "API_ERROR": "Ci sono alcuni errori nei dati o un problema di connessione con il server. Controlla i dati e riprova."
+    },
+    "ADD_POS": {
+      "TITLE": "Aggiungi un nuovo POS",
+      "CANCEL": "Annulla",
+      "ADD": "Aggiungi",
+      "SUCCESS": "POS aggiunto",
+      "INPUT_ERROR": "Compila i campi in rosso per continuare",
+      "API_ERROR": "Ci sono alcuni errori nei dati o un problema di connessione con il server. Controlla i dati e riprova."
     }
   }
 }

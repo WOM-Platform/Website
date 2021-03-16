@@ -4,6 +4,8 @@ export class Pos {
   url: string;
   privateKey: string;
   publicKey: string;
+  latitude: number;
+  longitude: number;
 
   public static fromJson(json): any {
     if (json === null) {

@@ -47,13 +47,22 @@ export class UserService {
      */
     login(email: string, password: string): Observable<any> {
         return this.http.post<any>(this.localUrlV1 + 'login', {
+            /*
             email,
-            password
+            password,
+            clientName: '',
+            persistent: true
+            */
+        }, {
+            observe: 'response',
+            headers: {
+                Authorization: 'Basic ' + btoa(email + ':' + password)
+            }
         })
             .pipe(map(response => {
                 // login successful if there's a valid user in the response
-                if (response) {
-                    const login = UserLogin.fromJson(response);
+                if (response.body) {
+                    const login = UserLogin.fromJson(response.body);
                     // store user details and jwt token in local storage to keep user logged in between page refreshes
                     localStorage.setItem('currentUserLogin', JSON.stringify(login));
                     this.currentUserLoginSubject.next(login);
@@ -120,8 +129,8 @@ export class UserService {
      * verify status of user account
      */
     verify(): Observable<any> {
-        return this.http.post<any>(this.localUrlV1 + this.currentUserLoginSubject.value.id + '/verify',
-            {token: this.currentUserLoginSubject.value.token}).pipe(map (response => response));
+        return this.http.post<any>(this.localUrlV1 + this.currentUserLoginSubject.value.id + '/verify', {})
+            .pipe(map (response => response));
     }
 
     /**

@@ -82,13 +82,15 @@
     "TC_ERROR": "Please accept the terms and conditions",
     "DONE": "Done",
     "BTN_SIGN_UP": "Sign Up",
-    "FORM_ERROR": "Error - check all fields and try again"
+    "FORM_ERROR": "Error - check all fields and try again",
+    "TIMEOUT_ERROR": "Server is taking too long to respond - make sure your internet connection is stable and try again"
   },
   "USER": {
     "HOME": {
       "WELCOME": "Welcome",
       "MERCHANT_TITLE": "Merchant list",
       "ADD_MERCHANT_TOOLTIP": "Add a new Merchant",
+      "EDIT_MERCHANT_TOOLTIP": "Edit this merchant's data",
       "MERCHANT": {
         "NAME": "Merchant",
         "CODE": "Fiscal code",
@@ -99,6 +101,36 @@
         "POS_SUBTITLE": "View & edit",
         "ADD_POS_TOOLTIP": "Add a new Point of Service 'POS' for Merchant"
       }
+    },
+    "NOT_VERIFIED": {
+      "TITLE": "Please verify your account by clicking on the link that you received in your email.",
+      "SUBTITLE": "Didn't receive the email?",
+      "SEND_EMAIL_LINK": "Click here",
+      "SEND_EMAIL_TEXT": "to receive another one for"
+    },
+    "ADD_MERCHANT": {
+      "TITLE": "Add a new merchant",
+      "CANCEL": "Cancel",
+      "ADD": "Add",
+      "SUCCESS": "Merchant added",
+      "INPUT_ERROR": "Please fill out the form",
+      "API_ERROR": "There are errors in the form or there is a problem contacting the server. Check the data and try again."
+    },
+    "EDIT_MERCHANT": {
+      "TITLE": "Edit merchant",
+      "CANCEL": "Cancel",
+      "ADD": "Confirm",
+      "SUCCESS": "Merchant edited",
+      "INPUT_ERROR": "Please fill out the form",
+      "API_ERROR": "There are errors in the form or there is a problem contacting the server. Check the data and try again."
+    },
+    "ADD_POS": {
+      "TITLE": "Add a new Point Of Service",
+      "CANCEL": "Cancel",
+      "ADD": "Add",
+      "SUCCESS": "POS added",
+      "INPUT_ERROR": "Please fill out the form",
+      "API_ERROR": "There are errors in the form or there is a problem contacting the server. Check the data and try again."
     }
   }
 }

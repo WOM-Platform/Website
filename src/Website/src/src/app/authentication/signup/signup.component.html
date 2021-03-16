@@ -5,8 +5,13 @@
     <p>
       <a [routerLink]="['/authentication/signin']">{{ "SIGN_UP.BTN_ALREADY_REGISTERED" | translate }}</a>
     </p>
+    <mat-error *ngIf="signupTimeout">
+      {{'SIGN_UP.TIMEOUT_ERROR' | translate}}
+    </mat-error>
     <mat-error *ngIf="signupInvalid">
       {{ 'SIGN_UP.FORM_ERROR' | translate }}
+      <br>
+      {{errorMessage}}
     </mat-error>
     <mat-horizontal-stepper linear #stepper>
       <mat-step [stepControl]="form">
@@ -78,3 +83,7 @@
     </mat-horizontal-stepper>
   </mat-card-content>
 </mat-card>
+
+<app-progress-spinner class="example-margin" [color]="color" [mode]="mode" [value]="value" [backdropEnabled]="true" [positionGloballyCenter]="true"
+                      [displayProgressSpinner]="displayProgressSpinner">
+</app-progress-spinner>

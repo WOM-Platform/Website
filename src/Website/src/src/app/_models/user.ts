@@ -28,10 +28,12 @@ export class User extends UserRegistrationPayload {
 export class UserLogin {
   id: string;
   token: string;
+  verified: boolean;
 
-  constructor(id: string = '', token: string = '') {
+  constructor(id: string = '', token: string = '', verified: boolean = false) {
     this.id = id;
     this.token = token;
+    this.verified = verified;
   }
 
   public static fromJson(json): any {

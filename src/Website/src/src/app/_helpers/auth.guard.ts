@@ -3,6 +3,7 @@ import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from
 
 import { AuthService } from '../_services';
 import {UserService} from '../_services/user.service';
+import {environment} from '../../environments/environment';
 
 @Injectable({ providedIn: 'root' })
 export class AuthGuard implements CanActivate {
@@ -15,7 +16,20 @@ export class AuthGuard implements CanActivate {
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
     const currentUserLogin = this.userService.currentUserLoginValue;
     if (currentUserLogin) {
-      // authorised so return true
+      let verified = true;
+      // check if user has validated email
+      if (environment.production) {
+        verified = currentUserLogin.verified;
+      }
+
+      if (state.url.includes('not-verified')) {
+        if (verified) {
+          this.router.navigate(['user/home']).then(r => {});
+        }
+      } else if (!verified) {
+        this.router.navigate(['/user/not-verified'], {queryParams: {returnUrl: state.url}}).then(r => {
+        });
+      }
       return true;
     }
 

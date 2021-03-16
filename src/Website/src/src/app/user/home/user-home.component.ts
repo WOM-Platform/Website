@@ -1,9 +1,15 @@
 import {Component, OnInit} from '@angular/core';
 import {UserService} from '../../_services/user.service';
-import {Merchants} from '../../_models';
+import {Merchant, Merchants} from '../../_models';
 import {MerchantService} from '../../_services/merchant.service';
 import {AuthService} from '../../_services';
-import {TooltipPosition} from '@angular/material/tooltip';
+import {MatDialog} from '@angular/material/dialog';
+import {AddMerchantDialogComponent, MerchantDialogData} from '../add-merchant/add-merchant.component';
+import {MatSnackBar} from '@angular/material/snack-bar';
+import {TranslateService} from '@ngx-translate/core';
+import {first} from 'rxjs/operators';
+import {AddPosDialogComponent} from '../add-pos/add-pos.component';
+import {DialogType} from "../../_models/dialogType";
 
 @Component({
     selector: 'app-user-home',
@@ -14,14 +20,16 @@ export class UserHomeComponent implements OnInit {
     username: string;
     merchants: Merchants;
 
-    constructor(private userService: UserService,
+    constructor(public dialog: MatDialog,
+                private snackBar: MatSnackBar,
+                private userService: UserService,
                 private merchantService: MerchantService,
-                private authService: AuthService) {
+                private authService: AuthService,
+                private translate: TranslateService) {
     }
 
     ngOnInit(): any {
         this.username = this.userService.currentUserValue.name + ' ' +   this.userService.currentUserValue.surname;
-
         this.authService.merchants().pipe().subscribe(
             response =>
             {
@@ -31,11 +39,60 @@ export class UserHomeComponent implements OnInit {
             });
     }
 
-    addMerchant() {
-        // TODO
+    addMerchant(): any {
+        const merchantDialogData = new MerchantDialogData();
+        merchantDialogData.data = null;
+        merchantDialogData.type = DialogType.create;
+        const dialogRef = this.dialog.open(AddMerchantDialogComponent, {
+            data: merchantDialogData
+        });
+        dialogRef.afterClosed().subscribe(result => {
+            if (result) {
+                // TODO: reload data
+                this.translate.get('USER.ADD_MERCHANT.SUCCESS').pipe(first()).subscribe(
+                    response => {
+                        this.openSnackBar(response);
+                    });
+            }
+        });
     }
 
-    addPos() {
-        // TODO
+    addPos(merchantId: string): any {
+        const dialogRef = this.dialog.open(AddPosDialogComponent, {
+            data: merchantId
+        });
+        dialogRef.afterClosed().subscribe(result => {
+            if (result) {
+                // TODO: reload data
+                this.translate.get('USER.ADD_POS.SUCCESS').pipe(first()).subscribe(
+                    response => {
+                        this.openSnackBar(response);
+                    });
+            }
+        });
+    }
+
+    editMerchant(merchant: Merchant): any {
+        const merchantDialogData = new MerchantDialogData();
+        merchantDialogData.data = merchant;
+        merchantDialogData.type = DialogType.edit;
+        const dialogRef = this.dialog.open(AddMerchantDialogComponent, {
+            data: merchantDialogData
+        });
+        dialogRef.afterClosed().subscribe(result => {
+            if (result) {
+                // TODO: reload data
+                this.translate.get('USER.EDIT_MERCHANT.SUCCESS').pipe(first()).subscribe(
+                    response => {
+                        this.openSnackBar(response);
+                    });
+            }
+        });
+    }
+
+    openSnackBar(message = 'null'): any {
+        this.snackBar.open(message, null, {
+            duration: 2000
+        });
     }
 }

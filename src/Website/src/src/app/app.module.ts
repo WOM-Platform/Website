@@ -21,7 +21,9 @@ import {MatDividerModule} from '@angular/material/divider';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatInputModule} from '@angular/material/input';
 import {MatCardModule} from '@angular/material/card';
+import {MatDialogModule} from '@angular/material/dialog';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MerchantSignUpComponent} from './authentication/signup/signup.component';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {MatSelectModule} from '@angular/material/select';
@@ -40,9 +42,16 @@ import {environment} from '../environments/environment';
 import {TokenInterceptorService} from './_helpers/httpInterceptor';
 import {UserHomeComponent} from './user/home/user-home.component';
 import {PosFormComponent} from './_forms/pos/forms-pos.directive';
-import {UserFormComponent} from "./_forms/user/forms-user.directive";
-import {MerchantFormComponent} from "./_forms/merchant/forms-merchant.directive";
-import {GoogleMapsModule} from "@angular/google-maps";
+import {UserFormComponent} from './_forms/user/forms-user.directive';
+import {MerchantFormComponent} from './_forms/merchant/forms-merchant.directive';
+import {GoogleMapsModule} from '@angular/google-maps';
+import {ProgressSpinnerComponent} from './_progressSpinner/progress-spinner.component';
+import {OverlayModule} from '@angular/cdk/overlay';
+import {AppOverlayModule} from './_overlay/overlay.module';
+import {UserNotVerifiedComponent} from './user/not-verified/user-not-verified.component';
+import {AddMerchantDialogComponent} from './user/add-merchant/add-merchant.component';
+import {AddPosDialogComponent} from './user/add-pos/add-pos.component';
+import {CookieService} from "ngx-cookie-service";
 
 // AoT requires an exported function for factories
 export const createTranslateLoader = (http: HttpClient) => new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -64,7 +73,11 @@ export const isMock = environment.mock;
     UserHomeComponent,
     PosFormComponent,
     UserFormComponent,
-    MerchantFormComponent
+    MerchantFormComponent,
+    ProgressSpinnerComponent,
+    UserNotVerifiedComponent,
+    AddMerchantDialogComponent,
+    AddPosDialogComponent
   ],
   exports: [
       MatStepperModule
@@ -100,9 +113,13 @@ export const isMock = environment.mock;
     MatSelectModule,
     MatStepperModule,
     MatTooltipModule,
+    MatDialogModule,
+    MatSnackBarModule,
     ReactiveFormsModule,
     FormsModule,
-    GoogleMapsModule
+    GoogleMapsModule,
+    OverlayModule,
+    AppOverlayModule
   ],
   providers: [
     isMock
@@ -110,13 +127,18 @@ export const isMock = environment.mock;
           provide: HTTP_INTERCEPTORS,
           useClass: HttpMockRequestInterceptor,
           multi: true
-        }]
+        },
+          CookieService
+        ]
       : [{
           provide: HTTP_INTERCEPTORS,
           useClass: TokenInterceptorService,
           multi: true
-        }]
+        },
+          CookieService
+        ]
   ],
+  entryComponents: [ProgressSpinnerComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

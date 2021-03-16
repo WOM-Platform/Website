@@ -1,7 +1,7 @@
 import {Component, Input, OnInit, Output} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {EventEmitter} from '@angular/core';
-import {countryList, primaryActivityType} from '../../_models';
+import {countryList, Merchant, primaryActivityType} from '../../_models';
 
 @Component({
     selector: 'app-forms-merchant',
@@ -13,6 +13,7 @@ export class MerchantFormComponent implements OnInit {
     businessList: string[] = primaryActivityType;
 
     @Input() form: FormGroup;
+    @Input() merchant: Merchant;
     @Output() formChange = new EventEmitter<FormGroup>();
     constructor(private fb: FormBuilder){}
 
@@ -38,5 +39,18 @@ export class MerchantFormComponent implements OnInit {
         this.form.get('primaryActivityType').valueChanges.subscribe(value => this.formChange.emit(this.form));
         this.form.get('url').valueChanges.subscribe(value => this.formChange.emit(this.form));
         this.form.get('description').valueChanges.subscribe(value => this.formChange.emit(this.form));
+
+        if (this.merchant !== null) {
+            console.log('editing...');
+            this.form.controls.name.setValue(this.merchant.name);
+            this.form.controls.fiscalCode.setValue(this.merchant.fiscalCode);
+            this.form.controls.address.setValue(this.merchant.address);
+            this.form.controls.cap.setValue(this.merchant.zipCode);
+            this.form.controls.city.setValue(this.merchant.city);
+            this.form.controls.country.setValue(this.merchant.country);
+            this.form.controls.primaryActivityType.setValue(this.merchant.primaryActivityType);
+            this.form.controls.url.setValue(this.merchant.url);
+            this.form.controls.description.setValue(this.merchant.description);
+        }
     }
 }
