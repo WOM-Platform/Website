@@ -60,12 +60,12 @@
       "OPTIONAL_WEBSITE_TEXT": "<i>Optional.</i>\nWeb site of your business.",
       "DESCRIPTION": "Description",
       "DESCRIPTION_ERROR": "Please provide a short description for your merchant",
-      "DESCRIPTION_TEXT": "Short description of your business and how you intend to monetize WOM&nbsp;Vouchers (goods or services)."
+      "DESCRIPTION_TEXT": "Short description of your business and how you intend to monetize WOM Vouchers (goods or services)."
     },
     "POS": {
       "TITLE": "Your first Point of Service",
       "CHECKBOX": "Register your first Point Of Service (POS)",
-      "SUBTITLE_A": "Fill out this part of the form in order to create a <b>Point of Service</b>&nbsp;(POS) instance for your Merchant account. You will be able to receive WOM&nbsp;payments straight away using your POS.",
+      "SUBTITLE_A": "Fill out this part of the form in order to create a <b>Point of Service</b>&nbsp;(POS) instance for your Merchant account. You will be able to receive WOM payments straight away using your POS.",
       "SUBTITLE_B": "You will be able to create additional Points of Service after sign up.",
       "NAME": "Name",
       "NAME_ERROR": "Please insert a name for your POS",

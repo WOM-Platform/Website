@@ -6,7 +6,7 @@
     <mat-error *ngIf="formApiError">
         {{(data.type === dialogTypes.create ? "USER.ADD_MERCHANT.API_ERROR" : "USER.EDIT_MERCHANT.API_ERROR") | translate}}
     </mat-error>
-    <app-forms-merchant [(form)]="formMerchant" [merchant]="data.data" ></app-forms-merchant>
+    <app-forms-merchant [(form)]="formMerchant" [merchant]="merchantData" ></app-forms-merchant>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
     <button mat-button mat-dialog-close>{{(data.type === dialogTypes.create ? "USER.ADD_MERCHANT.CANCEL" : "USER.EDIT_MERCHANT.CANCEL") | translate}}</button>

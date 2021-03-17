@@ -98,7 +98,7 @@ export class MerchantSignUpComponent implements OnInit {
     merchant.city = this.formMerchant.controls.city.value;
     merchant.zipCode = this.formMerchant.controls.cap.value;
     merchant.address = this.formMerchant.controls.address.value;
-    merchant.primaryActivityType = this.formMerchant.controls.primaryActivityType.value;
+    merchant.primaryActivity = this.formMerchant.controls.primaryActivity.value;
     merchant.name = this.formMerchant.controls.name.value;
     // Optional values
     if (this.formMerchant.controls.url.value !== '') {

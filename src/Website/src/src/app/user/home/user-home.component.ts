@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {UserService} from '../../_services/user.service';
 import {Merchant, Merchants} from '../../_models';
 import {MerchantService} from '../../_services/merchant.service';
@@ -10,15 +10,17 @@ import {TranslateService} from '@ngx-translate/core';
 import {first} from 'rxjs/operators';
 import {AddPosDialogComponent} from '../add-pos/add-pos.component';
 import {DialogType} from '../../_models/dialogType';
+import {Subscription} from 'rxjs';
 
 @Component({
     selector: 'app-user-home',
     templateUrl: './user-home.component.html',
     styleUrls: ['./user-home.component.css']
 })
-export class UserHomeComponent implements OnInit {
+export class UserHomeComponent implements OnInit, OnDestroy {
     username: string;
     merchants: Merchants;
+    merchantSubscription: Subscription;
 
     constructor(public dialog: MatDialog,
                 private snackBar: MatSnackBar,
@@ -30,7 +32,15 @@ export class UserHomeComponent implements OnInit {
 
     ngOnInit(): any {
         this.username = this.userService.currentUserValue.name + ' ' +   this.userService.currentUserValue.surname;
-        this.authService.merchants().pipe().subscribe(
+        this.loadData();
+    }
+
+    ngOnDestroy(): any {
+        this.merchantSubscription.unsubscribe();
+    }
+
+    loadData(): any {
+        this.merchantSubscription = this.authService.merchants().pipe().subscribe(
             response =>
             {
                 this.merchants = response;
@@ -48,7 +58,7 @@ export class UserHomeComponent implements OnInit {
         });
         dialogRef.afterClosed().subscribe(result => {
             if (result) {
-                // TODO: reload data
+                this.loadData();
                 this.translate.get('USER.ADD_MERCHANT.SUCCESS').pipe(first()).subscribe(
                     response => {
                         this.openSnackBar(response);
@@ -81,7 +91,7 @@ export class UserHomeComponent implements OnInit {
         });
         dialogRef.afterClosed().subscribe(result => {
             if (result) {
-                // TODO: reload data
+                this.loadData();
                 this.translate.get('USER.EDIT_MERCHANT.SUCCESS').pipe(first()).subscribe(
                     response => {
                         this.openSnackBar(response);

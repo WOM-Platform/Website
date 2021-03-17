@@ -4,7 +4,7 @@ export class Merchant {
   id: string;
   name: string;
   fiscalCode: string;
-  primaryActivityType: string;
+  primaryActivity: string;
   address: string;
   zipCode: string;
   city: string;

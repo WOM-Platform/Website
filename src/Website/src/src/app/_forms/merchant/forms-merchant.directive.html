@@ -91,7 +91,7 @@
             <td>
                 <mat-form-field appearance="fill">
                     <mat-label>{{ 'SIGN_UP.MERCHANT.BUSINESS' | translate }}</mat-label>
-                    <mat-select formControlName="primaryActivityType" >
+                    <mat-select formControlName="primaryActivity" >
                         <mat-option *ngFor="let business of businessList" [value]="business">{{business}}</mat-option>
                     </mat-select>
                     <mat-error>

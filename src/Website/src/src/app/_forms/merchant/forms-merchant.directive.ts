@@ -25,7 +25,7 @@ export class MerchantFormComponent implements OnInit {
             cap: ['', Validators.required],
             city: ['', Validators.required],
             country: ['', Validators.required],
-            primaryActivityType: ['', Validators.required],
+            primaryActivity: ['', Validators.required],
             url: ['', !Validators.required],
             description: ['', !Validators.required],
         });
@@ -36,7 +36,7 @@ export class MerchantFormComponent implements OnInit {
         this.form.get('cap').valueChanges.subscribe(value => this.formChange.emit(this.form));
         this.form.get('city').valueChanges.subscribe(value => this.formChange.emit(this.form));
         this.form.get('country').valueChanges.subscribe(value => this.formChange.emit(this.form));
-        this.form.get('primaryActivityType').valueChanges.subscribe(value => this.formChange.emit(this.form));
+        this.form.get('primaryActivity').valueChanges.subscribe(value => this.formChange.emit(this.form));
         this.form.get('url').valueChanges.subscribe(value => this.formChange.emit(this.form));
         this.form.get('description').valueChanges.subscribe(value => this.formChange.emit(this.form));
 
@@ -47,7 +47,7 @@ export class MerchantFormComponent implements OnInit {
             this.form.controls.cap.setValue(this.merchant.zipCode);
             this.form.controls.city.setValue(this.merchant.city);
             this.form.controls.country.setValue(this.merchant.country);
-            this.form.controls.primaryActivityType.setValue(this.merchant.primaryActivityType);
+            this.form.controls.primaryActivity.setValue(this.merchant.primaryActivity);
             this.form.controls.url.setValue(this.merchant.url);
             this.form.controls.description.setValue(this.merchant.description);
         }
