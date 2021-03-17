@@ -1,17 +1,18 @@
 export const primaryActivityType = [
+    'Agricolture',
     'Construction',
-    'Manufacture',
-    'Retail commerce',
+    'Manifacture',
+    'RetailCommerce',
     'Transport',
-    'Lodging and accommodation',
-    'Food and catering',
+    'Lodging',
+    'Food',
     'Information',
-    'Financial services',
+    'Finance',
     'Travel',
     'Education',
-    'Health and Well-being',
+    'Health',
     'Sports',
     'Services',
     'Entertainment',
-    'Public organizations'
+    'Organizations'
 ];
