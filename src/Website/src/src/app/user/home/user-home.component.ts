@@ -9,7 +9,7 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 import {TranslateService} from '@ngx-translate/core';
 import {first} from 'rxjs/operators';
 import {AddPosDialogComponent} from '../add-pos/add-pos.component';
-import {DialogType} from "../../_models/dialogType";
+import {DialogType} from '../../_models/dialogType';
 
 @Component({
     selector: 'app-user-home',

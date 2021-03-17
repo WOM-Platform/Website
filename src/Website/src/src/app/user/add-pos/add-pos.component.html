@@ -9,6 +9,6 @@
     <app-forms-pos [(form)]="formPos" ></app-forms-pos>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
-    <button mat-button mat-dialog-close>Cancel</button>
-    <button mat-button (click)="onSubmit()" cdkFocusInitial>Add</button>
+    <button mat-button mat-dialog-close>{{"USER.ADD_POS.CANCEL" | translate}}</button>
+    <button mat-button (click)="onSubmit()" cdkFocusInitial>{{"USER.ADD_POS.ADD" | translate}}</button>
 </mat-dialog-actions>

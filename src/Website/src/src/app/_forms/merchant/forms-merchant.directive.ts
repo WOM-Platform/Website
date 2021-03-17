@@ -41,7 +41,6 @@ export class MerchantFormComponent implements OnInit {
         this.form.get('description').valueChanges.subscribe(value => this.formChange.emit(this.form));
 
         if (this.merchant !== null) {
-            console.log('editing...');
             this.form.controls.name.setValue(this.merchant.name);
             this.form.controls.fiscalCode.setValue(this.merchant.fiscalCode);
             this.form.controls.address.setValue(this.merchant.address);

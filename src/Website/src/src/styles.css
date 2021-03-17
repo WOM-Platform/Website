@@ -20,3 +20,11 @@ body {
 .mat-card {
   padding: 5px;
 }
+
+.mat-form-field-infix {
+  width: fit-content !important;
+}
+
+.map-container {
+  width: auto !important;
+}

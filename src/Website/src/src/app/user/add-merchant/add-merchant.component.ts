@@ -15,11 +15,11 @@ export class AddMerchantDialogComponent {
     formMerchant: FormGroup;
     formInputError: boolean;
     formApiError: boolean;
+    dialogTypes = DialogType;
 
     constructor(@Inject(MAT_DIALOG_DATA) public data: MerchantDialogData,
                 public dialogRef: MatDialogRef<AddMerchantDialogComponent>,
                 private merchantService: MerchantService) {
-        console.log(data);
     }
 
     onSubmit(): any {
