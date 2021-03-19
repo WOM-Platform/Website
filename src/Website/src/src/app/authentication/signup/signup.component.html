@@ -11,13 +11,13 @@
     <mat-error *ngIf="signupInvalid">
       {{ 'SIGN_UP.FORM_ERROR' | translate }}
       <br>
-      {{errorMessage}}
+      {{errorMessage | translate}}
     </mat-error>
     <mat-horizontal-stepper linear #stepper>
       <mat-step [stepControl]="form">
         <ng-template matStepLabel>{{ 'SIGN_UP.REPRESENTATIVE.STEPPER_TITLE' | translate }}</ng-template>
         <!-- REPRESENTATIVE DATA -->
-        <app-forms-user [(form)]="form"></app-forms-user>
+        <app-forms-user [(form)]="form" [disabled]="userRegistered"></app-forms-user>
       </mat-step>
 
       <!-- OPTIONAL SECTION -->
@@ -30,7 +30,7 @@
         </mat-checkbox>
 
         <!-- MERCHANT SECTION -->
-        <app-forms-merchant [(form)]="formMerchant" *ngIf="requireMerchantRegistration">
+        <app-forms-merchant [(form)]="formMerchant" [merchant]="null" *ngIf="requireMerchantRegistration">
 
         </app-forms-merchant>
         <mat-divider [inset]="true"></mat-divider>
@@ -44,8 +44,8 @@
         <app-forms-pos [(form)]="formPos" *ngIf="requirePosRegistration && requireMerchantRegistration"></app-forms-pos>
 
         <div>
-          <button mat-button matStepperPrevious>Back</button>
-          <button mat-button matStepperNext>Next</button>
+          <button mat-button matStepperPrevious>{{'SIGN_UP.BACK' | translate}}</button>
+          <button mat-button matStepperNext>{{'SIGN_UP.NEXT' | translate}}</button>
         </div>
       </mat-step>
 

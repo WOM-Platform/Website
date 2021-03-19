@@ -6,6 +6,8 @@ import {Merchant, PosRegistration, UserRegistrationPayload} from '../../_models'
 import {first} from 'rxjs/operators';
 import {MerchantService} from '../../_services/merchant.service';
 import {PosService} from '../../_services/pos.service';
+import {MatDialog} from '@angular/material/dialog';
+import {LogInErrorDialogComponent} from './signup-login-error.directive';
 
 @Component({
   selector: 'app-merchant-signup',
@@ -27,6 +29,8 @@ export class MerchantSignUpComponent implements OnInit {
   requirePosRegistration: boolean;
   termsConditionsChecked: boolean;
   termsAndConditionsText: string;
+  userRegistered = false;
+  userSignedIn = false;
 
   // Spinner
   color = 'primary';
@@ -34,7 +38,8 @@ export class MerchantSignUpComponent implements OnInit {
   value = 50;
   displayProgressSpinner = false;
 
-  constructor(private fb: FormBuilder,
+  constructor(public dialog: MatDialog,
+              private fb: FormBuilder,
               private route: ActivatedRoute,
               private router: Router,
               private userService: UserService,
@@ -66,8 +71,11 @@ export class MerchantSignUpComponent implements OnInit {
         : true;
 
     if (!this.form.valid || !this.formSubmit.valid || !merchantFormValid || !posFormValid) {
-      this.signupInvalid = true;
-      return;
+        this.signupInvalid = true;
+        this.signupComplete = true;
+        this.displayProgressSpinner = false;
+
+        return;
     }
 
     const userData: UserRegistrationPayload = new UserRegistrationPayload() ;
@@ -76,18 +84,28 @@ export class MerchantSignUpComponent implements OnInit {
     userData.password = this.form.controls.password.value;
     userData.surname = this.form.controls.lastName.value;
 
+    if (this.userRegistered) {
+        this.logIn(userData.email, userData.password);
+        return;
+    }
+
     this.userService.register(userData).pipe(first()).subscribe(
         result => {
             if (result.id !== null) {
-              console.log(result);
-              this.logIn(userData.email, userData.password);
+                console.log(result);
+                this.userRegistered = true;
+                this.logIn(userData.email, userData.password);
             }
         }, error => {
-          this.signupInvalid = true;
-          this.errorMessage = error.title;
-          this.signupComplete = true;
-          console.log(error);
-          this.displayProgressSpinner = false;
+            if (error.status === 422) {
+                this.errorMessage = 'SIGN_UP.EMAIL_EXISTS_ERROR';
+            } else {
+                this.errorMessage = 'SIGN_UP.GENERIC_ERROR';
+            }
+            this.signupInvalid = true;
+            this.signupComplete = true;
+            this.displayProgressSpinner = false;
+            console.log(error);
         });
   }
 
@@ -119,8 +137,12 @@ export class MerchantSignUpComponent implements OnInit {
             this.router.navigate(['/user/home']).then(r => r);
           }
         }, error => {
+            if (error.status === 422) {
+                this.errorMessage = 'SIGN_UP.FISCAL_CODE_EXISTS_ERROR';
+            } else {
+                this.errorMessage = 'SIGN_UP.GENERIC_ERROR';
+            }
             this.signupInvalid = true;
-            this.errorMessage = error.title;
             this.displayProgressSpinner = false;
             this.signupComplete = true;
             console.log(error);
@@ -146,7 +168,7 @@ export class MerchantSignUpComponent implements OnInit {
           this.router.navigate(['/user/home']).then(r => r);
         }, error => {
             this.signupInvalid = true;
-            this.errorMessage = error.title;
+            this.errorMessage = 'SIGN_UP.GENERIC_ERROR';
             this.displayProgressSpinner = false;
             this.signupComplete = true;
             console.log(error);
@@ -154,22 +176,47 @@ export class MerchantSignUpComponent implements OnInit {
   }
 
   logIn(username: string, password: string): any {
+    if (this.userSignedIn) {
+        console.log('user already signed in');
+        if (this.requireMerchantRegistration) {
+            this.registerMerchant();
+        } else {
+            this.displayProgressSpinner = false;
+            this.signupComplete = true;
+            this.router.navigate(['/user/home']).then(r => r);
+        }
+        return;
+    }
     this.userService.login(username, password).pipe().subscribe(
         result => {
             console.log(result);
-            if (this.requireMerchantRegistration) {
-                this.registerMerchant();
-            } else {
-                this.displayProgressSpinner = false;
-                this.signupComplete = true;
-                this.router.navigate(['/user/home']).then(r => r);
-            }
+            this.userService.getLoggedUser().pipe().subscribe(
+                user => {
+                    console.log('user');
+                    this.userSignedIn = true;
+                    if (this.requireMerchantRegistration) {
+                        this.registerMerchant();
+                    } else {
+                        this.displayProgressSpinner = false;
+                        this.signupComplete = true;
+                        this.router.navigate(['/user/home']).then(r => r);
+                    }
+                }, error => {
+                    this.displayProgressSpinner = false;
+                    this.signupComplete = true;
+                    console.log(error);
+                });
         }, error => {
             this.signupInvalid = true;
             this.errorMessage = error.title;
             this.displayProgressSpinner = false;
             this.signupComplete = true;
             console.log(error);
+
+            const dialogRef = this.dialog.open(LogInErrorDialogComponent);
+            dialogRef.afterClosed().subscribe(result => {
+                this.router.navigate(['/authentication/signin']).then(r => r);
+            });
         });
   }
 

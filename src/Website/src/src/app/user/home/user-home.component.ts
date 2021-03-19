@@ -73,7 +73,7 @@ export class UserHomeComponent implements OnInit, OnDestroy {
         });
         dialogRef.afterClosed().subscribe(result => {
             if (result) {
-                // TODO: reload data
+                this.loadData();
                 this.translate.get('USER.ADD_POS.SUCCESS').pipe(first()).subscribe(
                     response => {
                         this.openSnackBar(response);

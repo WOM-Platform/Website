@@ -137,9 +137,23 @@ export class UserService {
      * ask for password reset
      * @param email registered user's email (username)
      */
-    passwordReset(email: string): Observable<any> {
+    passwordResetRequest(email: string): Observable<any> {
         return this.http.post<any>(this.localUrlV1 + 'password-reset',
             {email}).pipe(map (response => response));
+    }
+
+    /**
+     * Send new password
+     * @param userId user's id to reset password for
+     * @param token confirmation token
+     * @param password new password
+     */
+    passwordReset(userId: string, token: string, password: string): Observable<any> {
+        return this.http.post<any>(this.localUrlV1 + userId + '/password-reset',
+            {
+                token,
+                password
+            }).pipe(map (response => response));
     }
 }
 

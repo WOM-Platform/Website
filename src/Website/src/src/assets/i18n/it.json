@@ -28,13 +28,21 @@
     "TITLE": "Registrati alla piattaforma WOM",
     "SUBTITLE": "Compila il form sottostante per registrarti alla Piattaforma <b>WOM&nbsp;</b> come <i>Merchant</i>, in modo da iniziare a ricevere pagamenti.",
     "BTN_ALREADY_REGISTERED": "Già registrato?",
+    "NEXT": "Avanti",
+    "BACK": "Indietro",
+    "DONE": "Fine",
     "REPRESENTATIVE": {
       "TITLE": "Rappresentante",
       "EMAIL": "Indirizzo E-mail",
+      "EMAIL_ERROR": "Inserisci un indirizzo email valido",
       "PASSWORD": "Password",
       "REPEAT_PASSWORD": "Ripeti la password",
+      "PASSWORD_ERROR": "Inserisci una password",
+      "PASSWORD_NO_MATCH_ERROR": "Le password non corrispondono",
       "NAME": "Nome",
-      "SURNAME": "Cognome"
+      "NAME_ERROR": "Inserisci il tuo nome",
+      "SURNAME": "Cognome",
+      "SURNAME_ERROR": "Inserisci il tuo cognome"
     },
     "MERCHANT": {
       "MERCHANT_TITLE": "Registrazione Merchant",
@@ -76,11 +84,13 @@
       "URL": "URL",
       "URL_OPTIONAL_TEXT": "<i>Opzionale.</i>\nVerrà mostrato agli utenti quando viene confermato il pagamento. Può essere utilizzato per visualizzare ulteriori informazioni riguardo il POS del Merchant."
     },
-    "DONE": "Fine",
     "TERMS_CONDITIONS_TITLE": "Termini e condizioni",
     "TERMS_CONDITIONS": "Accetta i termini e le condizioni di utilizzo",
     "TC_ERROR": "Accetta i termini e condizioni per continuare",
     "BTN_SIGN_UP": "Registrati",
+    "EMAIL_EXISTS_ERROR": "Questo indirizzo email è stato già utilizzato.",
+    "FISCAL_CODE_EXISTS_ERROR": "Il codice fiscale del Merchant è stato già utilizzato.",
+    "GENERIC_ERROR": "Ci sono degli errori nei dati immessi.",
     "FORM_ERROR": "Errore - controlla tutti i campi e riprova",
     "TIMEOUT_ERROR": "Il servizio impiega troppo tempo a rispondere - controllare la connessione ad internet e riprovare"
   },
@@ -123,8 +133,21 @@
       "CANCEL": "Annulla",
       "ADD": "Aggiungi",
       "SUCCESS": "POS aggiunto",
-      "INPUT_ERROR": "Compila i campi in rosso per continuare",
+      "INPUT_ERROR": "Compila i campi in rosso per continuare e assicurati di aver selezionato una posizione sulla mappa.",
       "API_ERROR": "Ci sono alcuni errori nei dati o un problema di connessione con il server. Controlla i dati e riprova."
     }
+  },
+  "RESET_PASSWORD": {
+    "TITLE": "Aggiorna password",
+    "RESET_BUTTON": "Aggiorna password",
+    "SNACKBAR_SUCCESS": "Password aggiornata",
+    "SNACKBAR_HOME": "Clicca qui per fare il login",
+    "EXPIRED_LINK_ERROR": "Il link per aggiornare la password è scaduto."
+  },
+  "REQUEST_NEW_PASSWORD": {
+    "TITLE": "Richiedi una password nuova",
+    "REQUEST_BUTTON": "Invia la richiesta",
+    "REQUEST_SENT": "Richiesta inviata! Controlla la tua email",
+    "HOME": "Home"
   }
 }

@@ -21,6 +21,10 @@ export class AddPosDialogComponent {
 
     onSubmit(): any {
         this.formInputError = this.formPos === undefined;
+        if (this.formPos.controls.latitude.value === 0) {
+            this.formInputError = true;
+            return;
+        }
 
         const pos: PosRegistration = new PosRegistration();
         pos.longitude = this.formPos.controls.longitude.value;

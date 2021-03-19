@@ -20,14 +20,17 @@ export class MerchantFormComponent implements OnInit {
     ngOnInit(): any {
         this.form = this.fb.group({
             name: ['', [Validators.required, Validators.minLength(8)]],
-            fiscalCode: ['', [Validators.required, Validators.minLength(16), Validators.maxLength(16)]],
+            fiscalCode: [
+                {value: '', disabled: this.merchant !== null},
+                [Validators.required, Validators.minLength(16), Validators.maxLength(16)]
+            ],
             address: ['', !Validators.required],
             cap: ['', Validators.required],
             city: ['', Validators.required],
             country: ['', Validators.required],
             primaryActivity: ['', Validators.required],
             url: ['', !Validators.required],
-            description: ['', !Validators.required],
+            description: ['', !Validators.required]
         });
 
         this.form.get('name').valueChanges.subscribe(value => this.formChange.emit(this.form));

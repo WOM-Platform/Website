@@ -28,14 +28,22 @@
     "TITLE": "Sign up to the WOM Platform",
     "SUBTITLE": "Fill in the form below to sign up to the <b>WOM&nbsp;Platform</b> as a <i>Merchant</i>, in order to start receiving payments.",
     "BTN_ALREADY_REGISTERED": "Already registered?",
+    "NEXT": "Next",
+    "BACK": "Back",
+    "DONE": "Done",
     "REPRESENTATIVE": {
       "STEPPER_TITLE": "Personal data",
       "TITLE": "Representative",
       "EMAIL": "Email Address",
+      "EMAIL_ERROR": "Please provide a valid email address",
       "PASSWORD": "Password",
       "REPEAT_PASSWORD": "Repeat password",
+      "PASSWORD_ERROR": "Please provide a valid password",
+      "PASSWORD_NO_MATCH_ERROR": "Passwords do not match",
       "NAME": "First Name",
-      "SURNAME": "Last Name"
+      "NAME_ERROR": "Please provide your name",
+      "SURNAME": "Last Name",
+      "SURNAME_ERROR": "Please provide your surname"
     },
     "MERCHANT": {
       "TITLE": "MERCHANT",
@@ -80,8 +88,10 @@
     "TERMS_CONDITIONS_TITLE": "Terms & Conditions",
     "TERMS_CONDITIONS": "Accept terms and conditions",
     "TC_ERROR": "Please accept the terms and conditions",
-    "DONE": "Done",
     "BTN_SIGN_UP": "Sign Up",
+    "FISCAL_CODE_EXISTS_ERROR": "The merchant's fiscal code has already been used",
+    "EMAIL_EXISTS_ERROR": "This email address has already been used",
+    "GENERIC_ERROR": "There are errors in the form data",
     "FORM_ERROR": "Error - check all fields and try again",
     "TIMEOUT_ERROR": "Server is taking too long to respond - make sure your internet connection is stable and try again"
   },
@@ -129,8 +139,21 @@
       "CANCEL": "Cancel",
       "ADD": "Add",
       "SUCCESS": "POS added",
-      "INPUT_ERROR": "Please fill out the form",
+      "INPUT_ERROR": "Please fill out the form and make sure you have selected a location on the map.",
       "API_ERROR": "There are errors in the form or there is a problem contacting the server. Check the data and try again."
     }
+  },
+  "RESET_PASSWORD": {
+    "TITLE": "Password reset",
+    "RESET_BUTTON": "Update password",
+    "SNACKBAR_SUCCESS": "Password updated!",
+    "SNACKBAR_HOME": "Click here to login",
+    "EXPIRED_LINK_ERROR": "The link used to reset your password has expired."
+  },
+  "REQUEST_NEW_PASSWORD": {
+    "TITLE": "Request a new password",
+    "REQUEST_BUTTON": "Send request",
+    "REQUEST_SENT": "Request sent! Check your email",
+    "HOME": "Home"
   }
 }

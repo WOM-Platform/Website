@@ -9,7 +9,7 @@
                         <input matInput placeholder="{{ 'SIGN_UP.REPRESENTATIVE.EMAIL' | translate }}" formControlName="email" required>
                     </label>
                     <mat-error>
-                        Please provide a valid email address
+                        {{'SIGN_UP.REPRESENTATIVE.EMAIL_ERROR' | translate}}
                     </mat-error>
                 </mat-form-field>
             </td>
@@ -21,7 +21,7 @@
                         <input matInput type="password" placeholder="{{ 'SIGN_UP.REPRESENTATIVE.PASSWORD' | translate }}" formControlName="password" required>
                     </label>
                     <mat-error>
-                        Please provide a valid password
+                        {{'SIGN_UP.REPRESENTATIVE.PASSWORD_ERROR' | translate}}
                     </mat-error>
                 </mat-form-field>
             </td>
@@ -31,7 +31,7 @@
                         <input matInput type="password" placeholder="{{ 'SIGN_UP.REPRESENTATIVE.REPEAT_PASSWORD' | translate }}" formControlName="passwordRepeat" required>
                     </label>
                     <mat-error>
-                        Please provide a valid password
+                        {{'SIGN_UP.REPRESENTATIVE.PASSWORD_ERROR' | translate}}
                     </mat-error>
                 </mat-form-field>
             </td>
@@ -43,7 +43,7 @@
                         <input matInput type="text" placeholder="{{ 'SIGN_UP.REPRESENTATIVE.NAME' | translate }}" formControlName="firstName" required>
                     </label>
                     <mat-error>
-                        Please provide your name
+                        {{'SIGN_UP.REPRESENTATIVE.NAME_ERROR' | translate}}
                     </mat-error>
                 </mat-form-field>
             </td>
@@ -53,7 +53,7 @@
                         <input matInput type="text" placeholder="{{ 'SIGN_UP.REPRESENTATIVE.SURNAME' | translate }}" formControlName="lastName" required>
                     </label>
                     <mat-error>
-                        Please provide your surname
+                        {{'SIGN_UP.REPRESENTATIVE.SURNAME_ERROR' | translate}}
                     </mat-error>
                 </mat-form-field>
             </td>
@@ -61,6 +61,6 @@
     </table>
     <mat-divider [inset]="true"></mat-divider>
     <div>
-        <button mat-button matStepperNext>Next</button>
+        <button mat-button matStepperNext>{{'SIGN_UP.NEXT' | translate}}</button>
     </div>
 </form>

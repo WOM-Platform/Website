@@ -51,7 +51,12 @@ import {AppOverlayModule} from './_overlay/overlay.module';
 import {UserNotVerifiedComponent} from './user/not-verified/user-not-verified.component';
 import {AddMerchantDialogComponent} from './user/add-merchant/add-merchant.component';
 import {AddPosDialogComponent} from './user/add-pos/add-pos.component';
-import {CookieService} from "ngx-cookie-service";
+import {CookieService} from 'ngx-cookie-service';
+import {ResetPasswordComponent} from './authentication/reset-password/reset-password.component';
+import {LogInErrorDialogComponent} from './authentication/signup/signup-login-error.directive';
+import {UserVerifyComponent} from './user/verify/user-verify.component';
+import {PageNotFoundComponent} from './pageNotFound/page-not-found.component';
+import {RequestNewPasswordComponent} from './authentication/requestNewPassword/request-new-password.component';
 
 // AoT requires an exported function for factories
 export const createTranslateLoader = (http: HttpClient) => new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -77,7 +82,12 @@ export const isMock = environment.mock;
     ProgressSpinnerComponent,
     UserNotVerifiedComponent,
     AddMerchantDialogComponent,
-    AddPosDialogComponent
+    AddPosDialogComponent,
+    ResetPasswordComponent,
+    LogInErrorDialogComponent,
+    UserVerifyComponent,
+    RequestNewPasswordComponent,
+    PageNotFoundComponent
   ],
   exports: [
       MatStepperModule
