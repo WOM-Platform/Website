@@ -1,6 +1,6 @@
 # BUILD step
 
-FROM node:15.8 as build
+FROM node:15.12 as build
 
 WORKDIR /app
 
@@ -10,16 +10,16 @@ ENV PATH /app/node_modules/.bin:$PATH
 # Dependencies
 COPY package.json /app/package.json
 RUN npm install
-RUN npm install -g @angular/cli@11.1.3
+RUN npm install -g @angular/cli@11.2.5
 
-COPY ../.. /app
+COPY . /app
 
 # Build
-RUN ng build --output-path=dist
+RUN ng build --output-path=/app/dist
 
 # DISTRIBUTE step
 
-FROM nginx:1.19.6-alpine
+FROM nginx:1.19.8-alpine
 COPY --from=build /app/dist /usr/share/nginx/html
 EXPOSE 80
 
