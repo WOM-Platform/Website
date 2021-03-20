@@ -13,8 +13,11 @@ export class AppComponent {
   title = 'app';
 
   constructor(translate: TranslateService) {
-    translate.setDefaultLang('en');
+    translate.addLangs(['en', 'it']);
 
+    translate.setDefaultLang('it');
+
+    console.log('browser lang: ', translate.getBrowserLang());
     if (translate.getBrowserLang()) {
       translate.use(translate.getBrowserLang());
     }
