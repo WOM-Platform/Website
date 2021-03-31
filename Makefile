@@ -5,11 +5,15 @@ DC_RUN := ${DC} run --rm
 
 .PHONY: up
 up:
-	${DC} up -d
+	${DC} up -d website
 	${DC} ps
 	@echo
 	@echo 'Service is now up'
 	@echo
+
+.PHONY: build
+build:
+	${DC} up -d --build website
 
 .PHONY: ps
 ps:
