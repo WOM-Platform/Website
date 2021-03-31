@@ -29,6 +29,7 @@
     "BACK": "Indietro",
     "DONE": "Fine",
     "REPRESENTATIVE": {
+      "STEPPER_TITLE": "Dati personali",
       "TITLE": "Rappresentante",
       "EMAIL": "Indirizzo E-mail",
       "EMAIL_ERROR": "Inserisci un indirizzo email valido",
@@ -42,6 +43,7 @@
       "SURNAME_ERROR": "Inserisci il tuo cognome"
     },
     "MERCHANT": {
+      "STEPPER_TITLE": "Registrazione Merchant",
       "MERCHANT_TITLE": "Registrazione Merchant",
       "TITLE": "MERCHANT",
       "CHECKBOX": "Registra un merchant",
@@ -100,6 +102,7 @@
       "MERCHANT_TITLE": "Elenco Merchant",
       "ADD_MERCHANT_TOOLTIP": "Aggiungi un nuovo Merchant",
       "EDIT_MERCHANT_TOOLTIP": "Modifica i dati di questo Merchant",
+      "EDIT_MERCHANT_BTN": "Modifica",
       "MERCHANT": {
         "NAME": "Merchant",
         "CODE": "Codice fiscale",
@@ -123,6 +126,14 @@
       "ADD": "Aggiungi",
       "SUCCESS": "Merchant aggiunto",
       "INPUT_ERROR": "Compila i campi in rosso per continuare",
+      "API_ERROR": "Ci sono alcuni errori nei dati o un problema di connessione con il server. Controlla i dati e riprova."
+    },
+    "EDIT_MERCHANT": {
+      "TITLE": "Modifica il merchant",
+      "CANCEL": "Annulla",
+      "ADD": "Conferma",
+      "SUCCESS": "Merchant modificato",
+      "INPUT_ERROR": "Controlla di aver inserito i dati nel form",
       "API_ERROR": "Ci sono alcuni errori nei dati o un problema di connessione con il server. Controlla i dati e riprova."
     },
     "ADD_POS": {

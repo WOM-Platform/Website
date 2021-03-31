@@ -33,7 +33,7 @@ const routes: Routes = [
   {
     path: 'user/not-verified',
     component: UserNotVerifiedComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
   },
   {
     path: 'user/home',

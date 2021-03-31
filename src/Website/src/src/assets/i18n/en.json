@@ -98,6 +98,7 @@
       "MERCHANT_TITLE": "Merchant list",
       "ADD_MERCHANT_TOOLTIP": "Add a new Merchant",
       "EDIT_MERCHANT_TOOLTIP": "Edit this merchant's data",
+      "EDIT_MERCHANT_BTN": "Edit",
       "MERCHANT": {
         "NAME": "Merchant",
         "CODE": "Fiscal code",
