@@ -1,0 +1,14 @@
+<h2 mat-dialog-title>{{"USER.ADD_POS.TITLE" | translate}}</h2>
+<mat-dialog-content >
+    <mat-error *ngIf="formInputError">
+        {{"USER.ADD_POS.INPUT_ERROR" | translate}}
+    </mat-error>
+    <mat-error *ngIf="formApiError">
+        {{"USER.ADD_POS.API_ERROR" | translate}}
+    </mat-error>
+    <app-forms-pos [(form)]="formPos" ></app-forms-pos>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>{{"USER.ADD_POS.CANCEL" | translate}}</button>
+    <button mat-button (click)="onSubmit()" cdkFocusInitial>{{"USER.ADD_POS.ADD" | translate}}</button>
+</mat-dialog-actions>

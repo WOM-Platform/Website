@@ -1,0 +1,23 @@
+.full-width {
+    width: 100%;
+}
+
+mat-form-field {
+    width: 100%;
+    display: block;
+}
+
+.form-subgroup {
+    border: solid 2px #e0e5ef;
+    padding: 1em 0 1em 0;
+    margin: 2em 0 2em 0;
+    border-radius: 15px;
+}
+
+.description {
+    font-size: 0.9em;
+}
+
+.mat-divider {
+    margin-bottom: 10px !important;
+}

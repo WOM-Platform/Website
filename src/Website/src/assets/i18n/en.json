@@ -1,0 +1,189 @@
+{
+  "FLAG_YES": "Yes",
+  "FLAG_NO": "No",
+  "NAV": {
+    "HOME": "Home",
+    "SIGN_IN": "Login",
+    "PROFILE": "Profile",
+    "MERCHANT": "Merchant",
+    "SIGN_OUT": "Log out"
+  },
+  "SIGN_IN": {
+    "TITLE": "Sign in to the WOM platform",
+    "EMAIL": "Email",
+    "PASSWORD": "Password",
+    "BTN_SIGN_IN": "Login",
+    "BTN_FORGOT_PASSWORD": "Forgot your password?",
+    "BTN_SIGN_UP": "Sign up",
+    "ERR": {
+      "LOGIN": "The username and/or password were not recognised",
+      "EMAIL": "Please provide a valid email address",
+      "PASSWORD": "Please provide a valid password"
+    }
+  },
+  "SIGN_UP": {
+    "TITLE": "Sign up to the WOM Platform",
+    "SUBTITLE": "Fill in the form below to sign up to the <b>WOM&nbsp;Platform</b> as a <i>Merchant</i>, in order to start receiving payments.",
+    "BTN_ALREADY_REGISTERED": "Already registered?",
+    "NEXT": "Next",
+    "BACK": "Back",
+    "DONE": "Done",
+    "REPRESENTATIVE": {
+      "STEPPER_TITLE": "Personal data",
+      "TITLE": "Representative",
+      "EMAIL": "Email Address",
+      "EMAIL_ERROR": "Please provide a valid email address",
+      "PASSWORD": "Password",
+      "REPEAT_PASSWORD": "Repeat password",
+      "PASSWORD_ERROR": "Please provide a valid password",
+      "PASSWORD_NO_MATCH_ERROR": "Passwords do not match",
+      "NAME": "First Name",
+      "NAME_ERROR": "Please provide your name",
+      "SURNAME": "Last Name",
+      "SURNAME_ERROR": "Please provide your surname"
+    },
+    "MERCHANT": {
+      "TITLE": "MERCHANT",
+      "STEPPER_TITLE": "Merchant registration",
+      "CHECKBOX": "Register a merchant",
+      "NAME": "Merchant/Business Name",
+      "NAME_ERROR": "Please provide a valid name for the Merchant - 8 characters minimum",
+      "CF": "Italian fiscal code",
+      "CF_ERROR": "Please provide a valid fiscal code",
+      "OPTIONAL_TEXT": "Main address of your business.",
+      "ADDRESS": "Address",
+      "ADDRESS_ERROR": "Please enter an address",
+      "CAP": "CAP/City code",
+      "CAP_ERROR": "Please enter the cap/city code",
+      "CITY": "City",
+      "CITY_ERROR": "Please enter the merchant's city",
+      "SELECT_COUNTRY": "Select country",
+      "SELECT_COUNTRY_ERROR": "Please select your merchant's country",
+      "BUSINESS": "Select primary business",
+      "BUSINESS_ERROR": "Please select a primary business",
+      "WEBSITE": "Website, ex.: http://www.example.com",
+      "OPTIONAL_WEBSITE_TEXT": "<i>Optional.</i>\nWeb site of your business.",
+      "DESCRIPTION": "Description",
+      "DESCRIPTION_ERROR": "Please provide a short description for your merchant",
+      "DESCRIPTION_TEXT": "Short description of your business and how you intend to monetize WOM Vouchers (goods or services)."
+    },
+    "POS": {
+      "TITLE": "Your first Point of Service",
+      "CHECKBOX": "Register your first Point Of Service (POS)",
+      "SUBTITLE_A": "Fill out this part of the form in order to create a <b>Point of Service</b>&nbsp;(POS) instance for your Merchant account. You will be able to receive WOM payments straight away using your POS.",
+      "SUBTITLE_B": "You will be able to create additional Points of Service after sign up.",
+      "NAME": "Name",
+      "NAME_ERROR": "Please insert a name for your POS",
+      "NAME_TEXT": "POS name, will be shown to users while performing a payment.",
+      "MAP_TITLE": "",
+      "LAT": "Latitude",
+      "LON": "Longitude",
+      "LAT_LON_ERROR": "Please select a location on the map",
+      "URL": "URL",
+      "URL_OPTIONAL_TEXT": "<i>Optional.</i>\nWill be shown to users when the payment is confirmed. Can be used to show more information about the POS of the Merchant."
+    },
+    "TERMS_CONDITIONS_TITLE": "Terms & Conditions",
+    "TERMS_CONDITIONS": "Accept terms and conditions",
+    "TC_ERROR": "Please accept the terms and conditions",
+    "BTN_SIGN_UP": "Sign Up",
+    "FISCAL_CODE_EXISTS_ERROR": "The merchant's fiscal code has already been used",
+    "EMAIL_EXISTS_ERROR": "This email address has already been used",
+    "GENERIC_ERROR": "There are errors in the form data",
+    "FORM_ERROR": "Error - check all fields and try again",
+    "TIMEOUT_ERROR": "Server is taking too long to respond - make sure your internet connection is stable and try again"
+  },
+  "USER": {
+    "HOME": {
+      "WELCOME": "Welcome",
+      "MERCHANT_TITLE": "Merchant list",
+      "ADD_MERCHANT_TOOLTIP": "Add a new Merchant",
+      "EDIT_MERCHANT_TOOLTIP": "Edit this merchant's data",
+      "MERCHANT": {
+        "NAME": "Merchant",
+        "CODE": "Fiscal code",
+        "ADDRESS": "Address",
+        "ACTIVITY_TYPE": "Primary activity",
+        "URL": "Website",
+        "POS_TITLE": "POS",
+        "POS_SUBTITLE": "View & edit",
+        "ADD_POS_TOOLTIP": "Add a new Point of Service 'POS' for Merchant"
+      }
+    },
+    "NOT_VERIFIED": {
+      "TITLE": "Please verify your account by clicking on the link that you received in your email.",
+      "SUBTITLE": "Didn't receive the email?",
+      "SEND_EMAIL_LINK": "Click here",
+      "SEND_EMAIL_TEXT": "to receive another one for"
+    },
+    "ADD_MERCHANT": {
+      "TITLE": "Add a new merchant",
+      "CANCEL": "Cancel",
+      "ADD": "Add",
+      "SUCCESS": "Merchant added",
+      "INPUT_ERROR": "Please fill out the form",
+      "API_ERROR": "There are errors in the form or there is a problem contacting the server. Check the data and try again."
+    },
+    "EDIT_MERCHANT": {
+      "TITLE": "Edit merchant",
+      "CANCEL": "Cancel",
+      "ADD": "Confirm",
+      "SUCCESS": "Merchant edited",
+      "INPUT_ERROR": "Please fill out the form",
+      "API_ERROR": "There are errors in the form or there is a problem contacting the server. Check the data and try again."
+    },
+    "ADD_POS": {
+      "TITLE": "Add a new Point Of Service",
+      "CANCEL": "Cancel",
+      "ADD": "Add",
+      "SUCCESS": "POS added",
+      "INPUT_ERROR": "Please fill out the form and make sure you have selected a location on the map.",
+      "API_ERROR": "There are errors in the form or there is a problem contacting the server. Check the data and try again."
+    }
+  },
+  "RESET_PASSWORD": {
+    "TITLE": "Password reset",
+    "RESET_BUTTON": "Update password",
+    "SNACKBAR_SUCCESS": "Password updated!",
+    "SNACKBAR_HOME": "Click here to login",
+    "EXPIRED_LINK_ERROR": "The link used to reset your password has expired."
+  },
+  "REQUEST_NEW_PASSWORD": {
+    "TITLE": "Request a new password",
+    "REQUEST_BUTTON": "Send request",
+    "REQUEST_SENT": "Request sent! Check your email",
+    "HOME": "Home"
+  },
+  "HOME": {
+    "SECTION_A": {
+      "TITLE": "WOM is general-purpose rewarding platform based on a voucher exchange system.",
+      "A": "Many actions and activities done by individuals contribute to the <b>common good</b> and have an intrinsic social value, an effect known as “positive externalities” in economics.\n            WOMs are digital vouchers designed to recognize the value of actions having such a positive effect and to provide a tool to reward these positive externalities.",
+      "B": "WOM stands for <b>“Worth One Minute”</b>: each WOM&nbsp;voucher rewards one minute of socially-valuable effort performed by an individual.\n            Vouchers are fully anonymous.\n            They only store data about the social purpose for which they were earned, in addition to location and date where they were generated.",
+      "C": "WOM vouchers do not have a value in “real” fiat money.\n            They are proof a socially-valuable effort that an individual contributed towards a shared cause.\n            Each voucher keeps track of the kind of effort it compensates."
+    },
+    "SECTION_B": {
+      "TITLE": "How do I earn WOMs?",
+      "A": "WOM vouchers are gained by voluntarily performing socially-valuable work.\n            Each minute of effort is worth one WOM.\n            For vouchers to be generated, the performed activity must be officially recognized by the WOM&nbsp;platform.",
+      "B": "In order to be recognized, an activity or initiative must be evaluated as being socially-valuable and thus approved by the WOM&nbsp;platform’s ethical committee."
+    },
+    "SECTION_C": {
+      "TITLE": "How do I use my WOMs?",
+      "A": "Business owners, shopkeepers, public entities, or any other private citizen (generically called “merchants”) may freely decide to provide goods, service, or discounts to owners of WOM&nbsp;vouchers.\n            To do so, they create a <b>“WOM payment”</b>, which allows them to choose which kind of effort to reward: WOM&nbsp;vouchers can be filtered by purpose, location, and time.\n            Goods, services, and discounts can be determined freely by the merchant.",
+      "B": "By accepting specific kinds of WOM&nbsp;vouchers, merchants can indirectly contribute to a social campaign, incentivizing citizens contributing to the shared goal with their voluntary efforts.\n            Also, merchants can increase their visibility to the community working towards the shared goal."
+    },
+    "SECTION_D": {
+      "TITLE": " How does it work in practice?",
+      "VOLUNTEERS": "Volunteers",
+      "A": "WOM&nbsp;vouchers are managed by a mobile app, the <b>“WOM&nbsp;Pocket”</b>, which is installed on a personal device by <b>volunteers</b>.\n            The application allows volunteers to gather their vouchers, to store them, and to spend them.",
+      "MERCHANTS": "Merchants",
+      "B": "<b>Merchants</b> use a different application, the <b>“WOM&nbsp;POS”</b>, or a custom integration software.\n            These software components allow merchants to create new transactions, applying filters to collected WOM&nbsp;vouchers (filtering on purpose, place, and time) in order to accept only WOMs that are more coherent with their own motivations and aims.",
+      "INSTRUMENTS": "Instruments",
+      "C": "Owners of a social activity or an initiative with a social aim, such as non-profit organizations, associations, or private individuals, may contact <a href=\"mailto:info@wom.social\">info@wom.social</a> in order to be evaluated by the platform’s ethical committee and to be added to the list of <b>WOM&nbsp;Instruments</b> that can generate vouchers and reward contributors.",
+      "TECHNICAL": "Technical",
+      "D": "WOM is an <b>open technology</b> provided as open source software, released under the <a href=\"https://opensource.org/licenses/MIT\">MIT&nbsp;license</a>.\n          It is developed in the open on GitHub, <a href=\"https://github.com/WOM-Platform\">take a look</a>."
+    },
+    "SECTION_E": {
+      "TITLE": "Stay in touch! \uD83D\uDCEB",
+      "A": "To develop new WOM integrations, POS connectors, or any other inquiry, please contact <a href=\"mailto:info@wom.social\">info@wom.social</a>."
+    }
+  }
+}

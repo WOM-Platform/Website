@@ -1,0 +1,21 @@
+<mat-toolbar class="app-toolbar" >
+  <img src="assets/images/wom-logo.png">
+  <span class="example-spacer"></span>
+  <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon" [matMenuTriggerFor]="menu">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item (click)="navigate('home')">
+      <mat-icon>home</mat-icon>
+      <span>{{ "NAV.HOME" | translate }}</span>
+    </button>
+    <button mat-menu-item (click)="navigate('user/home')">
+      <mat-icon>account_circle</mat-icon>
+      <span>{{ "NAV.PROFILE" | translate }}</span>
+    </button>
+    <button mat-menu-item *ngIf="isLogged" (click)="logout()">
+      <mat-icon>close</mat-icon>
+      <span>{{ "NAV.SIGN_OUT" | translate }}</span>
+    </button>
+  </mat-menu>
+</mat-toolbar>
