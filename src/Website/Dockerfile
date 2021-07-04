@@ -1,5 +1,4 @@
 # BUILD step
-
 FROM node:15.12 as build
 
 WORKDIR /app
@@ -18,9 +17,12 @@ COPY . /app
 RUN ng build --output-path=/app/dist
 
 # DISTRIBUTE step
+FROM nginx:1.21.0-alpine
 
-FROM nginx:1.19.8-alpine
 COPY --from=build /app/dist /usr/share/nginx/html
+COPY ./ng.conf /etc/nginx/conf.d/
+RUN rm /etc/nginx/conf.d/default.conf
+
 EXPOSE 80
 
 CMD ["nginx", "-g", "daemon off;"]
