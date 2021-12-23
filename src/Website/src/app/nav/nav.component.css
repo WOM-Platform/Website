@@ -1,5 +1,5 @@
 .mat-toolbar {
-  background-color: #e0e5ef;
+  background-color: #444558;
 }
 button.mat-menu-item {
   outline:none;
@@ -19,4 +19,24 @@ button.mat-menu-item {
 img {
   max-width: 100%;
   max-height: 50%;
+}
+
+.nav-button {
+  color: white;
+}
+
+.nav-icon-button {
+  color: white;
+}
+
+/* RESPONSIVE */
+@media screen and (max-width: 768px) {
+  .nav-button {
+    display: none;
+  }
+}
+@media (min-width: 769px) {
+  .nav-icon-button {
+    display: none;
+  }
 }

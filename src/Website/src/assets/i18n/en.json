@@ -3,6 +3,9 @@
   "FLAG_NO": "No",
   "NAV": {
     "HOME": "Home",
+    "VOLUNTEERS": "Volunteers",
+    "ABOUT": "What are WOMs",
+    "INSTRUMENT": "Instrument",
     "SIGN_IN": "Login",
     "PROFILE": "Profile",
     "MERCHANT": "Merchant",

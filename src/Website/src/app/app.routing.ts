@@ -14,6 +14,10 @@ import {ResetPasswordComponent} from './authentication/reset-password/reset-pass
 import {UserVerifyComponent} from './user/verify/user-verify.component';
 import {PageNotFoundComponent} from './pageNotFound/page-not-found.component';
 import {RequestNewPasswordComponent} from './authentication/requestNewPassword/request-new-password.component';
+import {MerchantComponent} from './merchant/merchant.component';
+import {VolunteerComponent} from './volunteer/volunteer.component';
+import {InstrumentComponent} from './instrument/instrument.component';
+import {AboutComponent} from './about/about.component';
 
 const routes: Routes = [
   {
@@ -26,7 +30,23 @@ const routes: Routes = [
     component: HomeComponent
   },
   {
+    path: 'about',
+    component: AboutComponent
+  },
+  {
+    path: 'volunteer',
+    component: VolunteerComponent
+  },
+  {
     path: 'merchant',
+    component: MerchantComponent
+  },
+  {
+    path: 'instrument',
+    component: InstrumentComponent
+  },
+  {
+    path: 'user/merchant',
     component :  MerchantDashboardComponent,
     canActivate: [AuthGuard]
   },

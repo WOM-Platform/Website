@@ -3,6 +3,9 @@
   "FLAG_NO": "No",
   "NAV": {
     "HOME": "Home",
+    "VOLUNTEERS": "Volontari",
+    "ABOUT": "Che cos'è",
+    "INSTRUMENT": "Instrument",
     "SIGN_IN": "Login",
     "MERCHANT": "Merchant",
     "PROFILE": "Profilo",

@@ -57,6 +57,10 @@ import {LogInErrorDialogComponent} from './authentication/signup/signup-login-er
 import {UserVerifyComponent} from './user/verify/user-verify.component';
 import {PageNotFoundComponent} from './pageNotFound/page-not-found.component';
 import {RequestNewPasswordComponent} from './authentication/requestNewPassword/request-new-password.component';
+import {MerchantComponent} from './merchant/merchant.component';
+import {InstrumentComponent} from "./instrument/instrument.component";
+import {VolunteerComponent} from "./volunteer/volunteer.component";
+import {AboutComponent} from "./about/about.component";
 
 // AoT requires an exported function for factories
 export const createTranslateLoader = (http: HttpClient) => new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -87,50 +91,58 @@ export const isMock = environment.mock;
     LogInErrorDialogComponent,
     UserVerifyComponent,
     RequestNewPasswordComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    MerchantComponent,
+    InstrumentComponent,
+    VolunteerComponent,
+    AboutComponent
   ],
   exports: [
       MatStepperModule
   ],
-  imports: [
-    appRoutingModule,
-    RouterModule.forRoot([
-      {path: '', component: HomeComponent, pathMatch: 'full'}
-    ]),
-    TranslateModule.forRoot({
-      defaultLanguage: 'en',
-      loader: {
-        provide: TranslateLoader,
-        useFactory: (createTranslateLoader),
-        deps: [HttpClient]
-      }
-    }),
-    BrowserModule,
-    HttpClientModule,
-    BrowserAnimationsModule,
-    FlexLayoutModule,
-    MatIconModule,
-    MatToolbarModule,
-    MatButtonModule,
-    MatExpansionModule,
-    MatCheckboxModule,
-    MatMenuModule,
-    MatDividerModule,
-    MatProgressSpinnerModule,
-    MatInputModule,
-    MatCardModule,
-    MatSlideToggleModule,
-    MatSelectModule,
-    MatStepperModule,
-    MatTooltipModule,
-    MatDialogModule,
-    MatSnackBarModule,
-    ReactiveFormsModule,
-    FormsModule,
-    GoogleMapsModule,
-    OverlayModule,
-    AppOverlayModule
-  ],
+    imports: [
+        appRoutingModule,
+        RouterModule.forRoot([
+            {path: '', component: HomeComponent, pathMatch: 'full'}
+        ]),
+        TranslateModule.forRoot({
+            defaultLanguage: 'en',
+            loader: {
+                provide: TranslateLoader,
+                useFactory: (createTranslateLoader),
+                deps: [HttpClient]
+            }
+        }),
+        BrowserModule,
+        HttpClientModule,
+        BrowserAnimationsModule,
+        FlexLayoutModule,
+        MatIconModule,
+        MatToolbarModule,
+        MatButtonModule,
+        MatExpansionModule,
+        MatCheckboxModule,
+        MatMenuModule,
+        MatDividerModule,
+        MatProgressSpinnerModule,
+        MatInputModule,
+        MatCardModule,
+        MatSlideToggleModule,
+        MatSelectModule,
+        MatStepperModule,
+        MatTooltipModule,
+        MatDialogModule,
+        MatSnackBarModule,
+        ReactiveFormsModule,
+        FormsModule,
+        GoogleMapsModule,
+        OverlayModule,
+        AppOverlayModule,
+        TranslateModule,
+        MatButtonModule,
+        MatButtonModule,
+        TranslateModule
+    ],
   providers: [
     isMock
       ? [{
