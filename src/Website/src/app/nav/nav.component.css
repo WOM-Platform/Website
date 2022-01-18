@@ -10,8 +10,9 @@ button.mat-menu-item {
 }
 
 .app-toolbar {
-  position: sticky;
-  position: -webkit-sticky; /* For macOS/iOS Safari */
+  height: 50px;
+  position: fixed;
+  position: -ms-device-fixed; /* For macOS/iOS Safari */
   top: 0; /* Sets the sticky toolbar to be on top */
   z-index: 1000; /* Ensure that your app's content doesn't overlap the toolbar */
 }

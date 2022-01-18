@@ -1,3 +1,52 @@
-<div class="mat-card">
-  Merchant
+<div class="container">
+  <span class="page-title">{{"MERCHANT.TITLE" | translate}}</span>
+  <div fxLayout="row wrap" fxLayoutGap="20px grid">
+    <div fxFlex="100%">
+      <p class="page-secondary-title" [innerHTML]="'VOLUNTEER.SECTION_A.TITLE' | translate"></p>
+      <p [innerHTML]="'VOLUNTEER.SECTION_A.A' | translate"></p>
+    </div>
+
+    <google-map
+            fxFlex="100%"
+            height="500px"
+            width="100%"
+            [zoom]="zoom"
+            [center]="center"
+            [options]="options"
+            (mapClick)="click($event)">
+    <map-marker
+            #markerElem="mapMarker"
+            *ngFor="let marker of markers"
+            [position]="marker.position"
+            [label]="marker.label"
+            [title]="marker.title"
+            [options]="marker.options"
+            (mapClick)="openInfo(markerElem, marker.info)"
+      >
+      </map-marker>
+
+      <map-info-window>{{ infoContent }}</map-info-window>
+    </google-map>
+    <!--
+    <button (click)="zoomIn()">Zoom in</button>
+    <button (click)="zoomOut()">Zoom out</button>
+    <button (click)="logCenter()">Log center</button>
+    <button (click)="addMarker()">Add marker</button>
+    -->
+
+    <div fxFlex="100%">
+      <p class="page-secondary-title" [innerHTML]="'MERCHANT.SECTION_B.TITLE' | translate"></p>
+      <p [innerHTML]="'MERCHANT.SECTION_B.A' | translate"></p>
+    </div>
+    <div fxFlex="50%" fxFlex.xs="100%">
+      <a href="https://play.google.com/store/apps/details?id=social.wom.pos" title="Download WOM POS from Google Play">
+        <img style="max-width: 100%;" src="assets/images/badge_google_play.png" alt="Google Play" />
+      </a>
+    </div>
+    <div fxFlex="50%" fxFlex.xs="100%">
+      <a href="https://apps.apple.com/it/app/wom-pos/id1468252634" title="Download WOM POS from App Store">
+        <img style="max-width: 100%;" src="assets/images/badge_app_store.png" alt="Apple App Store" />
+      </a>
+    </div>
+  </div>
 </div>

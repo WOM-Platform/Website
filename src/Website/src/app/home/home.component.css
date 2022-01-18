@@ -1,4 +1,4 @@
-.badge {
+.img-badge {
   max-width: 50%;
   display: inline-block;
   text-align: center;
@@ -28,9 +28,3 @@
   text-align: center;
 }
 
-.image {
-  width: 50%;
-  align-content: center;
-  text-align: center;
-  vertical-align: middle;
-}
