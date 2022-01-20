@@ -5,6 +5,7 @@
   <div fxLayout="row wrap">
     <img fxFlex="50%" fxFlex.xs="100%" class="image" src="assets/images/wom-logo.png" alt="WOM logo" />
     <div fxFlex="50%" fxFlex.xs="100%" class="section">
+      <h1 [innerHTML]="'HOME.SECTION_A.TITLE' | translate"></h1>
       <p [innerHTML]="'HOME.SECTION_A.A' | translate"></p>
       <button mat-flat-button fxFlexAlign="right" [innerHTML]="'GENERIC.BUTTON.MORE' | translate" (click)="navigate('about')"></button>
     </div>

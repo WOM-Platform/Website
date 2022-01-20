@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {GoogleMap, MapInfoWindow, MapMarker} from '@angular/google-maps';
 
 @Component({
@@ -6,9 +6,10 @@ import {GoogleMap, MapInfoWindow, MapMarker} from '@angular/google-maps';
   templateUrl: './merchant.component.html',
   styleUrls: ['./merchant.component.css']
 })
-export class MerchantComponent implements OnInit{
+export class MerchantComponent implements OnInit, AfterViewInit {
   @ViewChild(GoogleMap, { static: false }) map: GoogleMap;
   @ViewChild(MapInfoWindow, { static: false }) infoWindow: MapInfoWindow;
+  @ViewChild('mapSearchField') searchField: ElementRef;
   infoContent = '';
   markers = [];
   zoom = 12;
@@ -19,8 +20,8 @@ export class MerchantComponent implements OnInit{
     zoomControl: true,
     scrollwheel: true,
     disableDoubleClickZoom: false,
-    maxZoom: 15,
-    minZoom: 3,
+    maxZoom: 18,
+    minZoom: 6,
   };
 
   ngOnInit(): void {
@@ -39,6 +40,36 @@ export class MerchantComponent implements OnInit{
     this.addMarker();
     this.addMarker();
     this.addMarker();
+  }
+
+  ngAfterViewInit(): void {
+    const searchBox = new google.maps.places.SearchBox(
+        this.searchField.nativeElement
+    );
+    /*
+    this.map.controls[google.maps.ControlPosition.TOP_CENTER].push(
+        this.searchField.nativeElement
+    );
+*/
+    searchBox.addListener('places_changed', () => {
+      const places = searchBox.getPlaces();
+      if (places.length === 0) {
+        return;
+      }
+      const bounds = new google.maps.LatLngBounds();
+      places.forEach(place =>  {
+        if (!place.geometry || !place.geometry.location) {
+          return;
+        }
+        if (place.geometry.viewport) {
+          // Only geocodes have viewport
+          bounds.union(place.geometry.viewport);
+        } else {
+          bounds.extend(place.geometry.location);
+        }
+      });
+      this.map.fitBounds(bounds);
+    });
   }
 
   zoomIn(): void {
@@ -83,5 +114,15 @@ export class MerchantComponent implements OnInit{
   openInfo(marker: MapMarker, content): void {
     this.infoContent = content;
     this.infoWindow.open(marker);
+  }
+
+  boundsChanged(): void {
+    const bounds = this.map.getBounds().toJSON();
+    console.log('north: ' + bounds.north);
+    console.log('south: ' + bounds.south);
+    console.log('east: ' + bounds.east);
+    console.log('west: ' + bounds.west);
+
+    // TODO: update markers with search data
   }
 }

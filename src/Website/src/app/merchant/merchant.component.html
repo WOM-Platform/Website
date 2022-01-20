@@ -1,15 +1,27 @@
-<div class="container">
+<div class="container" xmlns="http://www.w3.org/1999/html">
   <span class="page-title">{{"MERCHANT.TITLE" | translate}}</span>
   <div fxLayout="row wrap" fxLayoutGap="20px grid">
     <div fxFlex="100%">
-      <p class="page-secondary-title" [innerHTML]="'VOLUNTEER.SECTION_A.TITLE' | translate"></p>
-      <p [innerHTML]="'VOLUNTEER.SECTION_A.A' | translate"></p>
+      <p class="page-secondary-title" [innerHTML]="'MERCHANT.SECTION_A.TITLE' | translate"></p>
+      <p [innerHTML]="'MERCHANT.SECTION_A.A' | translate"></p>
     </div>
 
+    <!-- FILTERS -->
+    <div fxFlex="25%" fxFlex.xs="100%">
+      <p [innerHTML]="'MERCHANT.FILTERS.SEARCH.TITLE' | translate"></p>
+      <input #mapSearchField placeholder="{{'MERCHANT.FILTERS.SEARCH.PLACEHOLDER' | translate}}" type="text" />
+
+      <mat-divider></mat-divider>
+      <button mat-flat-button color="primary">{{'MERCHANT.FILTERS.BTN_SEARCH' | translate}}</button>
+    </div>
+
+    <!-- MAP -->
     <google-map
-            fxFlex="100%"
+            fxFlex="75%"
+            fxFlex.xs="100%"
             height="500px"
             width="100%"
+            (boundsChanged)="boundsChanged()"
             [zoom]="zoom"
             [center]="center"
             [options]="options"

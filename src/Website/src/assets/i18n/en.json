@@ -122,29 +122,6 @@
     "FORM_ERROR": "Error - check all fields and try again",
     "TIMEOUT_ERROR": "Server is taking too long to respond - make sure your internet connection is stable and try again"
   },
-  "MERCHANT": {
-    "TITLE": "Merchants",
-    "SECTION_A": {
-      "TITLE": "Title",
-      "A": "Text"
-    },
-    "TITLE": "Merchants",
-    "SECTION_B": {
-      "TITLE": "POS",
-      "A": "Text"
-    }
-  },
-  "VOLUNTEER": {
-    "TITLE": "Volunteers",
-    "SECTION_A": {
-      "TITLE": "Title",
-      "A": "Text"
-    },
-    "SECTION_B": {
-      "TITLE": "Pocket",
-      "A": "Text"
-    }
-  },
   "USER": {
     "HOME": {
       "WELCOME": "Welcome",
@@ -254,6 +231,42 @@
       "TITLE": "How do I use my WOMs?",
       "A": "Business owners, shopkeepers, public entities, or any other private citizen (generically called “merchants”) may freely decide to provide goods, service, or discounts to owners of WOM&nbsp;vouchers.\n            To do so, they create a <b>“WOM payment”</b>, which allows them to choose which kind of effort to reward: WOM&nbsp;vouchers can be filtered by purpose, location, and time.\n            Goods, services, and discounts can be determined freely by the merchant.",
       "B": "By accepting specific kinds of WOM&nbsp;vouchers, merchants can indirectly contribute to a social campaign, incentivizing citizens contributing to the shared goal with their voluntary efforts.\n            Also, merchants can increase their visibility to the community working towards the shared goal."
+    }
+  },
+  "MERCHANT": {
+    "TITLE": "Merchants",
+    "FILTERS": {
+      "SEARCH": {
+        "TITLE": "Search in a specific place:",
+        "PLACEHOLDER": "Address, City, ..."
+      },
+      "BTN_SEARCH": "Cerca"
+    },
+    "SECTION_A": {
+      "TITLE": "Title",
+      "A": "Text"
+    },
+    "SECTION_B": {
+      "TITLE": "POS",
+      "A": "Text"
+    }
+  },
+  "VOLUNTEER": {
+    "TITLE": "Volunteers",
+    "SECTION_A": {
+      "TITLE": "Title",
+      "A": "Text"
+    },
+    "SECTION_B": {
+      "TITLE": "Pocket",
+      "A": "Text"
+    }
+  },
+  "INSTRUMENT": {
+    "TITLE": "INSTRUMENT",
+    "SECTION_A": {
+      "TITLE": "Todo",
+      "A": "Todo\n"
     }
   }
 }

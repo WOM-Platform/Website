@@ -123,29 +123,6 @@
     "FORM_ERROR": "Errore - controlla tutti i campi e riprova",
     "TIMEOUT_ERROR": "Il servizio impiega troppo tempo a rispondere - controllare la connessione ad internet e riprovare"
   },
-  "MERCHANT": {
-    "TITLE": "Merchants",
-    "SECTION_A": {
-      "TITLE": "Titolo",
-      "A": "Testo"
-    },
-    "TITLE": "Merchants",
-    "SECTION_B": {
-      "TITLE": "POS",
-      "A": "Testo"
-    }
-  },
-  "VOLUNTEER": {
-    "TITLE": "Volontari",
-    "SECTION_A": {
-      "TITLE": "Titolo",
-      "A": "Testo"
-    },
-    "SECTION_B": {
-      "TITLE": "Pocket",
-      "A": "Testo"
-    }
-  },
   "USER": {
     "HOME": {
       "WELCOME": "Benvenuto",
@@ -215,8 +192,9 @@
   },
   "HOME": {
     "SECTION_A": {
-      "A": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-      "B": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+      "TITLE": "Introduzione",
+      "A": "Molte delle azioni che gli individui compiono contribuiscono al bene collettivo e hanno un valore sociale, che in economia viene detto esternalità positiva. I WOM sono dei voucher elettronici concepiti per riconoscere il valore di queste azioni e per offrire a chiunque l’opportunità di premiarle.",
+      "B": "La piattaforma WOM è implementata e gestita da DIGIT SRL innovativa, Società benefit, Spin-off dell’Università di Urbino."
     },
     "SECTION_B": {
       "TITLE": "Volontari",
@@ -255,6 +233,42 @@
       "TITLE": "Come si usano i WOM?",
       "A": "Commercianti, esercenti, enti pubblici e privati possono liberamente decidere di concedere sconti su beni o servizi ai possessori di WOM.\n Per farlo, devono creare un <b>“WOM payment”</b>, che permette di selezionare quale tipo di attività premiare: i voucher WOM possono essere filtrati per tipologia, luogo e orario.\n   Il valore dello sconto praticato (e quindi dei WOM) è a totale discrezione di chi li accetta.",
       "B": " In tal modo, è possibile contribuire indirettamente al conseguimento di un obiettivo sociale, premiando chi si adopera direttamente allo scopo e accrescendo la propria visibilità tra i possessori di WOM.\n Inoltre, i merchant possono incrementare la loro visibilità all'interno della comunità lavorando per l'obiettivo comune."
+    }
+  },
+  "MERCHANT": {
+    "TITLE": "Merchant",
+    "FILTERS": {
+      "SEARCH": {
+        "TITLE": "Cerca in una località:",
+        "PLACEHOLDER": "Indirizzo, Città, ..."
+      },
+      "BTN_SEARCH": "Cerca"
+    },
+    "SECTION_A": {
+      "TITLE": "Dove spendo i miei WOM? Se voglio premiare le azioni socialmente utili, come metto a disposizione un servizio in cambio di WOM?",
+      "A": "I merchant sono componenti del sistema, registrati presso il registry, che hanno la possibilità di creare delle istanze di pagamento e quindi accettare dei voucher WOM forniti dagli utenti in cambio dei servizi e degli sconti che vorranno offrire.\nI merchant hanno la possibilità di scegliere il tipo di voucher che sono disposti ad accettare: possono quindi scegliere voucher generati soltanto per una data finalità (quindi promuovere quella finalità sociale), quelli generati in una data zona geografica (quindi incentivare azioni sociali nella loro realtà territoriale) oppure quelli generati in un certo intervallo di tempo. Queste condizioni di filtraggio possono essere incrociate tra di loro.\nLo strumento che permette ad un merchant di accettare pagamenti è uno strumento noto come Point of Sale."
+    },
+    "SECTION_B": {
+      "TITLE": "POS",
+      "A": "Testo"
+    }
+  },
+  "VOLUNTEER": {
+    "TITLE": "Volontari",
+    "SECTION_A": {
+      "TITLE": "Come funziona per gli utenti?",
+      "A": "La complessità della piattaforma è completamente mascherata agli utenti. Ogni utente può guadagnare WOM contribuendo con azioni socialmente utili ad uno degli aim al quale è associato uno degli Instrument registrati. Gli WOM guadagnati vengono collezionati nell’app Pocket. I Merchant, tramite il loro POS, forniscono servizi o beni in cambio di un numero prefissato di WOM. \nIl Pocket si interfaccia con Instrument e POS tramite un codice segreto codificato sotto forma di QRCode o integrato in un deep-link. Ad esempio, un utente che voglia spendere degli WOM per acquistare un servizio offerto da un Merchant dovrà scansionare il QRCode che quest’ultimo gli presenta e completare il pagamento nel proprio Pocket inserendo un pin di sicurezza. Il Merchant riceverà la conferma di avvenuto pagamento ed erogherà il servizio.\nÈ possibile ottenere WOM guadagnati con attività socialmente utili tramite un processo del tutto analogo.\n"
+    },
+    "SECTION_B": {
+      "TITLE": "Pocket",
+      "A": "L’applicazione mobile che gli utenti del sistema utilizzano si chiama pocket. Si tratta di una normale applicazione, disponibile per Android e iOS, che permette agli utenti di raccogliere i loro voucher WOM guadagnati e conservarli, come se fossero in un “borsello” virtuale. La stessa applicazione permette agli utenti di spendere i propri voucher.\n"
+    }
+  },
+  "INSTRUMENT": {
+    "TITLE": "Instrument",
+    "SECTION_A": {
+      "TITLE": "Come si generano WOM?",
+      "A": "Gli instrument sono componenti del sistema che sono riconosciuti dalla piattaforma (vengono approvati da parte del comitato etico) e che quindi permettono a volontari e partecipanti di svolgere azioni socialmente utili.\nOgni instrument riconosciuto dalla piattaforma permette quindi di perseguire uno degli obiettivi sociali individuati dalla piattaforma WOM (ad esempio iniziative per la salute pubblica, attività per la difesa dei diritti sociali o la difesa del patrimonio artistico culturale, etc.). Questi obiettivi prendono il nome di aim.\n"
     }
   }
 }

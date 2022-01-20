@@ -1,3 +1,8 @@
 <div class="container">
-  <span class="page-title">Instrument</span>
+  <span class="page-title">{{"INSTRUMENT.TITLE" | translate}}</span>
+  <div fxLayout="row wrap" fxLayoutGap="20px grid">
+    <div fxFlex="100%">
+      <p class="page-secondary-title" [innerHTML]="'INSTRUMENT.SECTION_A.TITLE' | translate"></p>
+      <p [innerHTML]="'INSTRUMENT.SECTION_A.A' | translate"></p>
+    </div>
 </div>
