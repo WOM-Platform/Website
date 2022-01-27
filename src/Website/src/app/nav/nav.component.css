@@ -30,6 +30,20 @@ img {
   color: white;
 }
 
+.lang-select {
+  margin-left: 10px;
+  width: 50px;
+  color: white;
+}
+
+.mat-divider {
+  border-color: white;
+}
+
+.divider {
+  height: 80%;
+}
+
 /* RESPONSIVE */
 @media screen and (max-width: 768px) {
   .nav-button {

@@ -164,7 +164,8 @@ export const isMock = environment.mock;
         FlexLayoutModule,
         FlexModule,
         MatButtonModule,
-        BreadcrumbModule
+        BreadcrumbModule,
+        MatDividerModule
     ],
   providers: [
       {
