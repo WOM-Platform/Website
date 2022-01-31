@@ -31,7 +31,6 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatStepperModule} from '@angular/material/stepper';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatTooltipModule} from '@angular/material/tooltip';
-import {MerchantDashboardComponent} from './merchant/dashboard/merchant-dashboard.component';
 import {PrivacyComponent} from './privacy/privacy.component';
 import {PrivacyInstrumentComponent} from './privacy/instrument/instrument.component';
 import {PrivacyPocketComponent} from './privacy/pocket/pocket.component';
@@ -64,6 +63,7 @@ import {BreadcrumbsComponent} from './breadcrumbs/breadcrumbs.component';
 import {MatGridListModule} from '@angular/material/grid-list';
 import { GoogleMapsModule } from '@angular/google-maps';
 import {BreadcrumbModule} from 'primeng-lts/breadcrumb';
+import {CommonModule} from '@angular/common';
 
 // AoT requires an exported function for factories
 export const createTranslateLoader = (http: HttpClient) => new TranslateHttpLoader(http, './assets/i18n/', '.json?cb=' + environment.i18n);
@@ -88,7 +88,6 @@ export const isMock = environment.mock;
     NavComponent,
     SignInComponent,
     MerchantSignUpComponent,
-    MerchantDashboardComponent,
     PrivacyComponent,
     PrivacyInstrumentComponent,
     PrivacyPocketComponent,
@@ -113,7 +112,7 @@ export const isMock = environment.mock;
     BreadcrumbsComponent
   ],
   exports: [
-      MatStepperModule
+      MatStepperModule,
   ],
     imports: [
         appRoutingModule,
@@ -121,7 +120,7 @@ export const isMock = environment.mock;
             {path: '', component: HomeComponent, pathMatch: 'full'}
         ]),
         TranslateModule.forRoot({
-            defaultLanguage: 'en',
+            defaultLanguage: 'it',
             loader: {
                 provide: TranslateLoader,
                 useFactory: (createTranslateLoader),
@@ -165,7 +164,8 @@ export const isMock = environment.mock;
         FlexModule,
         MatButtonModule,
         BreadcrumbModule,
-        MatDividerModule
+        MatDividerModule,
+        CommonModule
     ],
   providers: [
       {
@@ -174,7 +174,7 @@ export const isMock = environment.mock;
           deps: [TranslateService],
           multi: true
       },
-    isMock
+      isMock
       ? [{
           provide: HTTP_INTERCEPTORS,
           useClass: HttpMockRequestInterceptor,

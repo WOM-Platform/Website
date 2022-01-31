@@ -190,47 +190,66 @@
     }
   },
   "HOME": {
-    "SECTION_A": {
-      "A": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-      "B": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+    "SECTION_INTRO": {
+      "A": "<b>WOM - “Worth One Minute”</b> is a general-purpose rewarding platform based on a voucher exchange system. \nMany actions and activities made by individuals have an intrinsic social value, an effect known as <b>“positive externalities”</b> in economics. \nWOM aims to recognize all those actions that are a socially valuable contribution to a common goal and <b>reward the time people dedicate to them</b> by generating social digital vouchers. \nWOM vouchers reward every minute of a social effort. \n",
+      "B": "The WOM platform is implemented and managed by DIGIT srl. \nDIGIT srl is a <b>spin-off of the University of Urbino</b> that aims to <b>create social value through digital awareness</b>. It is founded on the conviction that the core of technology, platforms and, software need to be in the interest of human people and society and that social and digital innovation are related. \nWOM is only one of the social projects of DIGIT srl. \n"
     },
-    "SECTION_B": {
+    "SECTION_VOL": {
       "TITLE": "Volunteers",
-      "MESSAGE": "WOM&nbsp;vouchers are managed by a mobile app, the <b>“WOM&nbsp;Pocket”</b>, which is installed on a personal device by <b>volunteers</b>.\n            The application allows volunteers to gather their vouchers, to store them, and to spend them."
+      "MESSAGE": "By making socially valuable actions, every user gains WOM and becomes a <b>Volunteer</b>. Volunteers can manage their WOM vouchers by a mobile app, the <b>“WOM Pocket”</b>. They can install it on their device. The application allows volunteers to gather their vouchers, store them, and spend them."
     },
-    "SECTION_C": {
+    "SECTION_MERCH": {
       "TITLE": "Merchant",
-      "MESSAGE": "<b>Merchants</b> use a different application, the <b>“WOM&nbsp;POS”</b>, or a custom integration software.\n            These software components allow merchants to create new transactions, applying filters to collected WOM&nbsp;vouchers (filtering on purpose, place, and time) in order to accept only WOMs that are more coherent with their own motivations and aims."
+      "MESSAGE": "Local shops can take part in the project by becoming <b>Merchants</b>. Merchants are system components that can <b>create payment instances</b>. They can accept WOM vouchers in exchange for services and discounts. Merchants use a different application, the <b>“WOM POS”</b>, or a custom integration software. These software components allow merchants to create new transactions, applying filters to collected WOM vouchers.\n"
     },
-    "SECTION_D": {
+    "SECTION_INSTR": {
       "TITLE": "Instrument",
-      "MESSAGE": "Owners of a social activity or an initiative with a social aim, such as non-profit organizations, associations, or private individuals, may contact <a href=\"mailto:info@wom.social\">info@wom.social</a> in order to be evaluated by the platform’s ethical committee and to be added to the list of <b>WOM&nbsp;Instruments</b> that can generate vouchers and reward contributors."
+      "MESSAGE": "<b>Instruments</b> are owners of social activities or an initiative with a social aim recognized by the platform. Instruments <b>allow volunteers to take social actions</b>.\nOwners of this type of activity, such as non-profit organizations, associations, or private individuals, may contact info@wom.social to be evaluated by the platform’s ethical committee and added to the list of <b>WOM Instruments</b> that can generate vouchers and reward contributors. \n"
     },
-    "SECTION_E": {
+    "SECTION_REG": {
+      "TITLE": "Registry",
+      "MESSAGE": "The Registry is the central entity that <b>generates WOMs</b> requested by an Instrument, it <b>verifies their authenticity</b> when they are used by a Merchant and it makes sure they <b>can't be duplicated</b> or used twice."
+    },
+    "SECTION_TECH": {
       "TITLE": "Technical",
       "MESSAGE": "WOM is an <b>open technology</b> provided as open source software, released under the <a href=\"https://opensource.org/licenses/MIT\">MIT&nbsp;license</a>.\n          It is developed in the open on GitHub, <a href=\"https://github.com/WOM-Platform\">take a look</a>."
     },
-    "SECTION_F": {
+    "SECTION_CONTACT": {
       "TITLE": "Stay in touch! \uD83D\uDCEB",
-      "A": "To develop new WOM integrations, POS connectors, or any other inquiry, please contact <a href=\"mailto:info@wom.social\">info@wom.social</a>."
+      "MESSAGE": "To develop new WOM integrations, POS connectors, or any other inquiry, please contact <a href=\"mailto:info@wom.social\">info@wom.social</a>."
     }
   },
   "ABOUT": {
+    "TITLE": "The WOM platform",
     "SECTION_A": {
-      "TITLE": "WOM is general-purpose rewarding platform based on a voucher exchange system.",
-      "A": "Many actions and activities done by individuals contribute to the <b>common good</b> and have an intrinsic social value, an effect known as “positive externalities” in economics.\n            WOMs are digital vouchers designed to recognize the value of actions having such a positive effect and to provide a tool to reward these positive externalities.",
-      "B": "WOM stands for <b>“Worth One Minute”</b>: each WOM&nbsp;voucher rewards one minute of socially-valuable effort performed by an individual.\n            Vouchers are fully anonymous.\n            They only store data about the social purpose for which they were earned, in addition to location and date where they were generated.",
-      "C": "WOM vouchers do not have a value in “real” fiat money.\n            They are proof a socially-valuable effort that an individual contributed towards a shared cause.\n            Each voucher keeps track of the kind of effort it compensates."
+      "A": "WOM stands for <b>Worth One Minute</b> and is a <b>general-purpose rewarding platform based on a voucher exchange system</b> that rewards the positive impact of actions and activities done by people that contribute to a <b>common good</b>.",
+      "B": "Many actions have an <b>intrinsic social value</b>, an effect known as “positive externalities” in economics. WOM recognizes the impact of those actions and provides a tool to reward these positive externalities by <b>issuing WOMs</b>."
+    },
+    "SECTION_A_2": {
+      "TITLE": "What are WOMs",
+      "A": "WOMs are <b>digital vouchers</b> designed to recognize the value of actions having such a positive effect. Each WOM voucher rewards <b>one minute of socially-valuable effort performed by an individual</b>.",
+      "B": "The WOMs vouchers are <b>anonymous</b>. The only data they store is related to their social purpose and where and when they generate.\nWOM vouchers do not have value in <b>“real” fiat money</b>. They are proof of a socially-valuable effort that an individual contributed towards a shared cause.",
+      "C": "The <b>Registry</b> manages the voucher exchange and keeps track of the creation and consumption of WOMs.\nThe WOM platform is a <b>centralized system</b>. The Registry represents the <b>authority</b> that manages the exchange of cryptographic keys (which allow the secure exchange of information) and verifies that vouchers are earned and spent correctly. \nThe Registry <b>does not store the identity of users and their data</b>. WOM vouchers are anonymous, and their use is not tracked."
     },
     "SECTION_B": {
       "TITLE": "How do I earn WOMs?",
-      "A": "WOM vouchers are gained by voluntarily performing socially-valuable work.\n            Each minute of effort is worth one WOM.\n            For vouchers to be generated, the performed activity must be officially recognized by the WOM&nbsp;platform.",
-      "B": "In order to be recognized, an activity or initiative must be evaluated as being socially-valuable and thus approved by the WOM&nbsp;platform’s ethical committee."
+      "A": "WOM vouchers are gained by voluntarily performing socially-valuable work. Each minute of effort is worth one WOM. For the generation of WOM, <b>the performed activity must be officially recognized by the WOM platform</b>.",
+      "B": "To be recognized, activity or initiative must be evaluated as socially valuable and thus approved by the WOM platform ethical committee.\n"
     },
     "SECTION_C": {
       "TITLE": "How do I use my WOMs?",
-      "A": "Business owners, shopkeepers, public entities, or any other private citizen (generically called “merchants”) may freely decide to provide goods, service, or discounts to owners of WOM&nbsp;vouchers.\n            To do so, they create a <b>“WOM payment”</b>, which allows them to choose which kind of effort to reward: WOM&nbsp;vouchers can be filtered by purpose, location, and time.\n            Goods, services, and discounts can be determined freely by the merchant.",
-      "B": "By accepting specific kinds of WOM&nbsp;vouchers, merchants can indirectly contribute to a social campaign, incentivizing citizens contributing to the shared goal with their voluntary efforts.\n            Also, merchants can increase their visibility to the community working towards the shared goal."
+      "A": "Business owners, shopkeepers, public entities, or any other private citizen (generically called Merchants) may freely decide to provide goods, services, or discounts to owners of WOM vouchers. To do so, they create a <b>WOM payment</b> that allows them to choose which kind of effort to reward: WOM vouchers can be filtered by purpose, location, and time. Goods, services, and discounts can be determined freely by the Merchant."
+    }
+  },
+  "VOLUNTEER": {
+    "TITLE": "Volunteers",
+    "SECTION_A": {
+      "TITLE": "How does it work for users?",
+      "A": "Many actions and activities done by an individual contribute to a common good and have an intrinsic social value. By making those socially valuable actions, every user gains WOMs and becomes a <b>Volunteer</b>. \nVolunteers can use WOM vouchers to obtain services or goods provided by Merchants. Every Volunteer can collect all the vouchers gained on the app <b>\"WOM Pocket\"</b>."
+    },
+    "SECTION_B": {
+      "TITLE": "Pocket",
+      "A": "Volunteers can manage their WOM vouchers by a mobile app, the <b>\"WOM Pocket\"</b>. This app allows users to <b>collect their earned WOM vouchers</b>, keep them (as if they were in a virtual “wallet”) and spend their vouchers.\n\nThe WOM platform <b>has no cost</b> for the Volunteers and they can freely download the <b>Pocket</b> app from the <b>Android</b> and <b>iOS</b> stores.\n"
     }
   },
   "MERCHANT": {
@@ -243,30 +262,26 @@
       "BTN_SEARCH": "Cerca"
     },
     "SECTION_A": {
-      "TITLE": "Title",
-      "A": "Text"
+      "TITLE": "Where do i spend my WOMs? How can I reward socially useful actions with WOMs?",
+      "A": "Merchants are system components that can <b>create payment instances</b>. They can accept WOM vouchers in exchange for the services and discounts they offer. \nMerchants can <b>choose what type of vouchers they accept</b>. They can choose: vouchers generated only for a <b>given purpose</b> (thus promoting that social purpose), those generated in a given <b>geographical area</b> (thus encouraging social actions in their reality territorial), or those generated in a <b>defined time interval</b>. \nThe payment instances <b>do not involve money exchanges</b> but only discounts and gratuities.",
+      "B": "By accepting specific types of WOM vouchers, Merchants can indirectly contribute to a social campaign, encouraging citizens to contribute to the shared goal with their voluntary efforts. Also, merchants can increase their visibility to the community working towards the shared goal."
     },
     "SECTION_B": {
       "TITLE": "POS",
-      "A": "Text"
-    }
-  },
-  "VOLUNTEER": {
-    "TITLE": "Volunteers",
-    "SECTION_A": {
-      "TITLE": "Title",
-      "A": "Text"
-    },
-    "SECTION_B": {
-      "TITLE": "Pocket",
-      "A": "Text"
+      "A": "The tool Merchants can use to accept WOM payment is the app <b>“WOM POS” (Point of Sale)</b> or a custom integration software. These software components allow merchants to create new transactions, applying filters to collected WOM vouchers.\n",
+      "B": "The WOM platform <b>has no cost</b> for the Merchant that wants to use it <b>anonymously</b>. Merchants can freely download the <b>app POS</b> from the <b>Android</b> and <b>iOS</b> stores. There are <b>no transaction costs</b>. \nIf Merchants want to make <b>their offers more visible</b> and have <b>periodic reports</b> of the social value they have helped to generate, they can select <b>paid services</b>."
     }
   },
   "INSTRUMENT": {
-    "TITLE": "INSTRUMENT",
+    "TITLE": "Instrument",
     "SECTION_A": {
-      "TITLE": "Todo",
-      "A": "Todo\n"
+      "TITLE": "How can I generate WOMs?",
+      "A": "<b>Instruments</b> are system components <b>recognized by the WOM platform</b> and <b>approved by an ethical committee</b>. They can <b>generate vouchers and reward contributors</b>. \nAll owners of social activity or an initiative that allows volunteers to take social action can become Instruments and add to the list of <b>WOM Instruments</b>. \n",
+      "B": "Each Instrument <b>allows the pursuit of one of the social objectives identified by the WOM platform</b> (for example, initiatives for public health, activities for the defense of social rights or the protection of the artistic and cultural heritage, etc.). These objectives are called <b>aims</b>.",
+      "C": "The placing on the platform of <b>new Instruments</b> for the release of WOMs <b>has costs</b> related to the review process by the ethics and technical committees, the development of the connectors, and the maintenance of the WOM generation service."
+    },
+    "STATS": {
+      "AVAILABLE": "WOMs in circulation"
     }
   }
 }

@@ -1,5 +1,7 @@
 import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {GoogleMap, MapInfoWindow, MapMarker} from '@angular/google-maps';
+import {MapService} from '../_services';
+import {PosMap} from '../_models';
 
 @Component({
   selector: 'app-merchant',
@@ -21,8 +23,11 @@ export class MerchantComponent implements OnInit, AfterViewInit {
     scrollwheel: true,
     disableDoubleClickZoom: false,
     maxZoom: 18,
-    minZoom: 6,
+    minZoom: 5,
   };
+
+  constructor(private mapService: MapService) {
+  }
 
   ngOnInit(): void {
     navigator.geolocation.getCurrentPosition((position) => {
@@ -36,21 +41,13 @@ export class MerchantComponent implements OnInit, AfterViewInit {
         lng: 13.02318609717848,
       };
     });
-
-    this.addMarker();
-    this.addMarker();
-    this.addMarker();
   }
 
   ngAfterViewInit(): void {
     const searchBox = new google.maps.places.SearchBox(
         this.searchField.nativeElement
     );
-    /*
-    this.map.controls[google.maps.ControlPosition.TOP_CENTER].push(
-        this.searchField.nativeElement
-    );
-*/
+
     searchBox.addListener('places_changed', () => {
       const places = searchBox.getPlaces();
       if (places.length === 0) {
@@ -69,6 +66,7 @@ export class MerchantComponent implements OnInit, AfterViewInit {
         }
       });
       this.map.fitBounds(bounds);
+      this.boundsChanged();
     });
   }
 
@@ -93,36 +91,50 @@ export class MerchantComponent implements OnInit, AfterViewInit {
     console.log(JSON.stringify(this.map.getCenter()));
   }
 
-  addMarker(): void {
+  addMarker(posData: PosMap): void {
     this.markers.push({
       position: {
-        lat: 43.83833794129076 + ((Math.random() - 0.5) * 2) / 10,
-        lng: 13.02318609717848 + ((Math.random() - 0.5) * 2) / 10,
+        lat: posData.position.latitude,
+        lng: posData.position.longitude,
       },
-      // label: {
-      //   color: 'red',
-      //   text: 'Marker label ' + (this.markers.length + 1),
-      // },
-      title: 'Marker title ' + (this.markers.length + 1),
-      info: 'Marker info ' + (this.markers.length + 1),
+      title: posData.name,
+      info: posData.url,
       options: {
         animation: google.maps.Animation.DROP,
       },
+      clickable: true
     });
   }
 
   openInfo(marker: MapMarker, content): void {
-    this.infoContent = content;
+    this.infoContent = '<b>' + content.title + '</b>';
+    if (content.info !== null) {
+      this.infoContent += '<br><br>' + '<a href="' + content.info + '">' + content.info + '</a>';
+    }
     this.infoWindow.open(marker);
   }
 
   boundsChanged(): void {
-    const bounds = this.map.getBounds().toJSON();
-    console.log('north: ' + bounds.north);
-    console.log('south: ' + bounds.south);
-    console.log('east: ' + bounds.east);
-    console.log('west: ' + bounds.west);
+    if (this.map === null || this.map.getBounds() === null) {
+      return;
+    }
 
-    // TODO: update markers with search data
+    const bounds = this.map.getBounds().toJSON();
+    this.mapService.getPosList(
+        bounds.west.toString(),
+        bounds.east.toString(),
+        bounds.south.toString(),
+        bounds.north.toString()
+    ).subscribe(res => {
+      console.log(res);
+      this.markers = [];
+      if (res == null) {
+        return;
+      }
+      for (const i of res.pos) {
+        console.log(i);
+        this.addMarker(i);
+      }
+    });
   }
 }

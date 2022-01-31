@@ -3,7 +3,6 @@ import {RouterModule, Routes} from '@angular/router';
 import {HomeComponent} from './home';
 import {SignInComponent} from './authentication/signin/signin.component';
 import {MerchantSignUpComponent} from './authentication/signup/signup.component';
-import {MerchantDashboardComponent} from './merchant/dashboard/merchant-dashboard.component';
 import {PrivacyComponent} from './privacy/privacy.component';
 import {PrivacyPosComponent} from './privacy/pos/pos.component';
 import {PrivacyPocketComponent} from './privacy/pocket/pocket.component';
@@ -72,14 +71,6 @@ const routes: Routes = [
           breadcrumb: 'BREADCRUMBS.USER.USER'
         },
         children: [
-          {
-            path: 'merchant',
-            component :  MerchantDashboardComponent,
-            canActivate: [AuthGuard],
-            data: {
-              breadcrumb: 'BREADCRUMBS.USER.MERCHANT'
-            }
-          },
           {
             path: 'not-verified',
             component: UserNotVerifiedComponent,

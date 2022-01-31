@@ -191,28 +191,32 @@
     }
   },
   "HOME": {
-    "SECTION_A": {
+    "SECTION_INTRO": {
       "TITLE": "Introduzione",
       "A": "<b>WOM - \"Worth One Minute\"</b> è una piattaforma di ricompensa general-purpose basata su un sistema di scambio di voucher.\nMolte azioni e attività compiute dagli individui hanno un valore sociale intrinseco, un effetto noto in economia come <b>“esternalità positiva”</b>.\nWOM mira a riconoscere tutte quelle azioni che costituiscono un contributo socialmente prezioso per un obiettivo comune, <b>premiando il tempo che le persone dedicano a queste attività</b> attraverso la generazione di voucher sociali digitali.\nI voucher WOM premiano ogni minuto di impegno sociale.\n",
       "B": "DIGIT srl è uno <b>spin-off dell’Università di Urbino</b> che ha come obiettivo <b>creare un valore sociale attraverso la consapevolezza digitale</b>. DIGIT srl è stata fondata sulla convinzione che alla base della tecnologia, delle piattaforme e dei software ci debbano essere gli interessi dell’uomo e della società e che innovazione sociale e digitale siano indissolubilmente legate. \n"
     },
-    "SECTION_B": {
+    "SECTION_VOL": {
       "TITLE": "Volontari",
       "MESSAGE": "Compiendo azioni socialmente valide, ogni utente guadagna WOM e diventa un <b>Volontario</b>. I Volontari possono gestire i loro voucher WOM tramite un'app, <b>\"WOM Pocket\"</b>, che possono installare sul proprio dispositivo. L'applicazione consente ai Volontari di raccogliere i propri voucher, conservarli e spenderli.\n"
     },
-    "SECTION_C": {
+    "SECTION_MERCH": {
       "TITLE": "Merchant",
       "MESSAGE": "I negozi locali possono partecipare al progetto diventando <b>Merchants</b>. I Merchants sono componenti di sistema che possono <b>creare istanze di pagamento</b>. Possono accettare i voucher WOM in cambio di servizi e sconti. I Merchants utilizzano un'applicazione diversa, il <b>\"WOM POS\"</b>, o un software di integrazione personalizzato. Questi componenti software consentono ai Merchants di creare nuove transazioni, applicando filtri ai voucher WOM raccolti.\n"
     },
-    "SECTION_D": {
+    "SECTION_INSTR": {
       "TITLE": "Instrument",
       "MESSAGE": "Gli <b>Instruments</b> sono i proprietari di un'attività sociale o di un'iniziativa con finalità sociale riconosciuta dalla piattaforma. Gli Instruments <b>consentono ai volontari di intraprendere azioni sociali</b>.\nI titolari di questo tipo di attività, come organizzazioni no profit, associazioni o privati, possono contattare info@wom.social per essere valutati dal comitato etico della piattaforma e inseriti nella lista dei <b>WOM Instrument</b> che possono generare voucher e premiare i contributori."
     },
-    "SECTION_E": {
+    "SECTION_REG": {
+      "TITLE": "Registry",
+      "MESSAGE": "Il Registry è l'entità centrale che <b>genera i WOM</b> su richiesta degli Instrument, ne <b>verifica l'autenticità</b> quando devono essere usati presso un Merchant e ne <b>impedisce la duplicazione</b> o il doppio utilizzo."
+    },
+    "SECTION_TECH": {
       "TITLE": "Tecnico",
       "MESSAGE": "WOM è una <b>technologia open</b> fornita come software open source, rilasciata sotto la licenza <a href=\"https://opensource.org/licenses/MIT\">MIT</a>.\n È sviluppata in modo aperto su GitHub, <a href=\"https://github.com/WOM-Platform\">dagli un'occhiata</a>."
     },
-    "SECTION_F": {
+    "SECTION_CONTACT": {
       "TITLE": "Rimani in contatto! \uD83D\uDCEB",
       "MESSAGE": "Per sviluppare nuove integrazioni WOM, connettori POS, o per qualsiasi altra domanda, contatta <a href=\"mailto:info@wom.social\">info@wom.social</a>."
     }
@@ -277,6 +281,9 @@
       "A": "Gli <b>Instruments</b> sono componenti di sistema <b>riconosciuti dalla piattaforma WOM</b> e approvati da un <b>comitato etico</b>. Possono <b>generare vouchers e premiare i contributori</b>.\nTutti i titolari di attività sociali o di un'iniziativa che permetta ai volontari di intraprendere azioni sociali possono diventare Instruments e essere aggiunti all'elenco dei <b>WOM Instruments</b>.\n",
       "B": "Ogni Instrument <b>consente il perseguimento di uno degli obiettivi sociali individuati dalla piattaforma WOM</b> (ad esempio, iniziative per la salute pubblica, attività per la difesa dei diritti sociali o la tutela del patrimonio artistico e culturale, ecc.). Questi obiettivi sono chiamati <b>aim</b>.",
       "C": "L’inserimento nella piattaforma di <b>nuovi Instrument</b> per il rilascio di WOM <b>ha costi</b> legati al processo di revisione da parte dei comitati etici e tecnici, allo sviluppo dei connettori e al mantenimento del servizio di generazione WOM."
+    },
+    "STATS": {
+      "AVAILABLE": "WOM in circolazione"
     }
   }
 }

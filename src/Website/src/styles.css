@@ -114,3 +114,21 @@ p.content {
 .header-box-content {
   margin: 20px;
 }
+
+.rounded-container {
+  padding: 5px !important;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #444558;
+  border-radius: 10px;
+}
+
+.rounded-container-header {
+}
+
+.rounded-container-body {
+  border-top: 1px solid #444558;
+}
+.bold {
+  font-weight: bold;
+}

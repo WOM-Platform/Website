@@ -5,61 +5,71 @@
   <div fxLayout="row wrap">
     <img fxFlex="50%" fxFlex.xs="100%" class="image" src="assets/images/wom-logo.png" alt="WOM logo" />
     <div fxFlex="50%" fxFlex.xs="100%" class="section">
-      <h1 [innerHTML]="'HOME.SECTION_A.TITLE' | translate"></h1>
-      <p [innerHTML]="'HOME.SECTION_A.A' | translate"></p>
+      <h1 [innerHTML]="'HOME.SECTION_INTRO.TITLE' | translate"></h1>
+      <p [innerHTML]="'HOME.SECTION_INTRO.A' | translate"></p>
       <button mat-flat-button fxFlexAlign="right" [innerHTML]="'GENERIC.BUTTON.MORE' | translate" (click)="navigate('about')"></button>
     </div>
 
     <div fxFlex="50%" fxFlex.xs="100%" class="section">
-      <p [innerHTML]="'HOME.SECTION_A.B' | translate"></p>
+      <p [innerHTML]="'HOME.SECTION_INTRO.B' | translate"></p>
       <button mat-flat-button fxFlexAlign="right" [innerHTML]="'GENERIC.BUTTON.MORE' | translate" (click)="navigateExternal('https://www.digit.srl')"></button>
     </div>
     <img fxFlex="50%" fxFlex.xs="100%" class="image" src="assets/images/digit_logo.png" alt="DIGIT srl logo" />
 
     <div fxFlex="50%" fxFlex.xs="100%" class="section">
       <div class="header-box-title">
-        <h1 [innerHTML]="'HOME.SECTION_B.TITLE' | translate"></h1>
+        <h1 [innerHTML]="'HOME.SECTION_VOL.TITLE' | translate"></h1>
       </div>
       <div class="header-box-content">
-        <p [innerHTML]="'HOME.SECTION_B.MESSAGE' | translate"></p>
+        <p [innerHTML]="'HOME.SECTION_VOL.MESSAGE' | translate"></p>
         <button mat-flat-button fxFlexAlign="right" [innerHTML]="'GENERIC.BUTTON.MORE' | translate" (click)="navigate('volunteer')"></button>
       </div>
     </div>
 
     <div fxFlex="50%" fxFlex.xs="100%" class="section">
       <div class="header-box-title">
-        <h1 [innerHTML]="'HOME.SECTION_C.TITLE' | translate"></h1>
+        <h1 [innerHTML]="'HOME.SECTION_MERCH.TITLE' | translate"></h1>
       </div>
       <div class="header-box-content">
-        <p [innerHTML]="'HOME.SECTION_C.MESSAGE' | translate"></p>
+        <p [innerHTML]="'HOME.SECTION_MERCH.MESSAGE' | translate"></p>
         <button mat-flat-button fxFlexAlign="right" [innerHTML]="'GENERIC.BUTTON.MORE' | translate" (click)="navigate('merchant')"></button>
       </div>
     </div>
 
-    <div fxFlex="100%" class="section">
+    <div fxFlex="50%" fxFlex.xs="100%"  class="section">
       <div class="header-box-title">
-        <h1 [innerHTML]="'HOME.SECTION_D.TITLE' | translate"></h1>
+        <h1 [innerHTML]="'HOME.SECTION_INSTR.TITLE' | translate"></h1>
       </div>
       <div class="header-box-content">
-        <p [innerHTML]="'HOME.SECTION_D.MESSAGE' | translate"></p>
+        <p [innerHTML]="'HOME.SECTION_INSTR.MESSAGE' | translate"></p>
         <button mat-flat-button fxFlexAlign="right" [innerHTML]="'GENERIC.BUTTON.MORE' | translate" (click)="navigate('instrument')"></button>
+      </div>
+    </div>
+
+    <div fxFlex="50%" fxFlex.xs="100%"  class="section">
+      <div class="header-box-title">
+        <h1 [innerHTML]="'HOME.SECTION_REG.TITLE' | translate"></h1>
+      </div>
+      <div class="header-box-content">
+        <p [innerHTML]="'HOME.SECTION_REG.MESSAGE' | translate"></p>
+        <!--<button mat-flat-button fxFlexAlign="right" [innerHTML]="'GENERIC.BUTTON.MORE' | translate" (click)="navigate('instrument')"></button>-->
       </div>
     </div>
 
     <div fxFlex="100%" class="section">
       <div class="header-box-title">
-        <h1 [innerHTML]="'HOME.SECTION_E.TITLE' | translate"></h1>
+        <h1 [innerHTML]="'HOME.SECTION_TECH.TITLE' | translate"></h1>
       </div>
       <div class="header-box-content">
-        <p [innerHTML]="'HOME.SECTION_E.MESSAGE' | translate"></p>
+        <p [innerHTML]="'HOME.SECTION_TECH.MESSAGE' | translate"></p>
         <!--<button mat-flat-button fxFlexAlign="right" [innerHTML]="'GENERIC.BUTTON.MORE' | translate" (click)="navigate('instrument')"></button>-->
       </div>
     </div>
 
     <div fxFlex="100%" class="section">
       <div class="header-box-content">
-        <h1 [innerHTML]="'HOME.SECTION_F.TITLE' | translate"></h1>
-        <p [innerHTML]="'HOME.SECTION_F.MESSAGE' | translate"></p>
+        <h1 [innerHTML]="'HOME.SECTION_CONTACT.TITLE' | translate"></h1>
+        <p [innerHTML]="'HOME.SECTION_CONTACT.MESSAGE' | translate"></p>
         <!--<button mat-flat-button fxFlexAlign="right" [innerHTML]="'GENERIC.BUTTON.MORE' | translate" (click)="navigate('instrument')"></button>-->
       </div>
     </div>

@@ -44,6 +44,10 @@
               ]
             },
             "production": {
+              "index": {
+                "input": "src/index-prod.html",
+                "output": "index.html"
+              },
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",

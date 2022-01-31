@@ -7,5 +7,15 @@
       <p [innerHTML]="'INSTRUMENT.SECTION_A.B' | translate"></p>
       <p [innerHTML]="'INSTRUMENT.SECTION_A.C' | translate"></p>
     </div>
+    <div fxFlex="33.3%" fxFlex.xs="100%">
+
+    </div>
+    <div fxFlex="33.3%" fxFlex.xs="100%" class="rounded-container">
+      <p class="centered rounded-container-header" [innerHTML]="'INSTRUMENT.STATS.AVAILABLE' | translate"></p>
+      <p class="centered bold rounded-container-body">{{ stats.totalVouchersAvailable}}</p>
+    </div>
+    <div fxFlex="33.3%" fxFlex.xs="100%">
+
+    </div>
   </div>
 </div>

@@ -2,7 +2,12 @@
   <div class="container">
     <div fxLayout="row" color="primary">
       <div fxFlex="100%">
-        <p>WOM&nbsp;Platform&nbsp;&mdash;&nbsp;{{currentYear}}. <a [routerLink]="['/privacy']">Privacy policy</a> &#169; <a href="https://www.digit.srl" target="_blank">DIGIT srl</a></p>
+        <p>WOM&nbsp;Platform&nbsp;&mdash;&nbsp;{{currentYear}}.
+          <!-- Iubenda -->
+          <a href="https://www.iubenda.com/privacy-policy/73709321" class="iubenda-white iubenda-noiframe iubenda-embed iubenda-noiframe " title="Privacy Policy ">Privacy Policy</a><script type="text/javascript">(function (w,d) {var loader = function () {var s = d.createElement("script"), tag = d.getElementsByTagName("script")[0]; s.src="https://cdn.iubenda.com/iubenda.js"; tag.parentNode.insertBefore(s,tag);}; if(w.addEventListener){w.addEventListener("load", loader, false);}else if(w.attachEvent){w.attachEvent("onload", loader);}else{w.onload = loader;}})(window, document);</script>
+
+          <!--<a [routerLink]="['/privacy']">Privacy policy</a> -->
+          &#169; <a href="https://www.digit.srl" target="_blank">DIGIT srl</a></p>
       </div>
     </div>
   </div>

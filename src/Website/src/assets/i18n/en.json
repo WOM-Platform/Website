@@ -190,27 +190,31 @@
     }
   },
   "HOME": {
-    "SECTION_A": {
+    "SECTION_INTRO": {
       "A": "<b>WOM - “Worth One Minute”</b> is a general-purpose rewarding platform based on a voucher exchange system. \nMany actions and activities made by individuals have an intrinsic social value, an effect known as <b>“positive externalities”</b> in economics. \nWOM aims to recognize all those actions that are a socially valuable contribution to a common goal and <b>reward the time people dedicate to them</b> by generating social digital vouchers. \nWOM vouchers reward every minute of a social effort. \n",
       "B": "The WOM platform is implemented and managed by DIGIT srl. \nDIGIT srl is a <b>spin-off of the University of Urbino</b> that aims to <b>create social value through digital awareness</b>. It is founded on the conviction that the core of technology, platforms and, software need to be in the interest of human people and society and that social and digital innovation are related. \nWOM is only one of the social projects of DIGIT srl. \n"
     },
-    "SECTION_B": {
+    "SECTION_VOL": {
       "TITLE": "Volunteers",
       "MESSAGE": "By making socially valuable actions, every user gains WOM and becomes a <b>Volunteer</b>. Volunteers can manage their WOM vouchers by a mobile app, the <b>“WOM Pocket”</b>. They can install it on their device. The application allows volunteers to gather their vouchers, store them, and spend them."
     },
-    "SECTION_C": {
+    "SECTION_MERCH": {
       "TITLE": "Merchant",
       "MESSAGE": "Local shops can take part in the project by becoming <b>Merchants</b>. Merchants are system components that can <b>create payment instances</b>. They can accept WOM vouchers in exchange for services and discounts. Merchants use a different application, the <b>“WOM POS”</b>, or a custom integration software. These software components allow merchants to create new transactions, applying filters to collected WOM vouchers.\n"
     },
-    "SECTION_D": {
+    "SECTION_INSTR": {
       "TITLE": "Instrument",
       "MESSAGE": "<b>Instruments</b> are owners of social activities or an initiative with a social aim recognized by the platform. Instruments <b>allow volunteers to take social actions</b>.\nOwners of this type of activity, such as non-profit organizations, associations, or private individuals, may contact info@wom.social to be evaluated by the platform’s ethical committee and added to the list of <b>WOM Instruments</b> that can generate vouchers and reward contributors. \n"
     },
-    "SECTION_E": {
+    "SECTION_REG": {
+      "TITLE": "Registry",
+      "MESSAGE": "The Registry is the central entity that <b>generates WOMs</b> requested by an Instrument, it <b>verifies their authenticity</b> when they are used by a Merchant and it makes sure they <b>can't be duplicated</b> or used twice."
+    },
+    "SECTION_TECH": {
       "TITLE": "Technical",
       "MESSAGE": "WOM is an <b>open technology</b> provided as open source software, released under the <a href=\"https://opensource.org/licenses/MIT\">MIT&nbsp;license</a>.\n          It is developed in the open on GitHub, <a href=\"https://github.com/WOM-Platform\">take a look</a>."
     },
-    "SECTION_F": {
+    "SECTION_CONTACT": {
       "TITLE": "Stay in touch! \uD83D\uDCEB",
       "MESSAGE": "To develop new WOM integrations, POS connectors, or any other inquiry, please contact <a href=\"mailto:info@wom.social\">info@wom.social</a>."
     }
@@ -275,6 +279,9 @@
       "A": "<b>Instruments</b> are system components <b>recognized by the WOM platform</b> and <b>approved by an ethical committee</b>. They can <b>generate vouchers and reward contributors</b>. \nAll owners of social activity or an initiative that allows volunteers to take social action can become Instruments and add to the list of <b>WOM Instruments</b>. \n",
       "B": "Each Instrument <b>allows the pursuit of one of the social objectives identified by the WOM platform</b> (for example, initiatives for public health, activities for the defense of social rights or the protection of the artistic and cultural heritage, etc.). These objectives are called <b>aims</b>.",
       "C": "The placing on the platform of <b>new Instruments</b> for the release of WOMs <b>has costs</b> related to the review process by the ethics and technical committees, the development of the connectors, and the maintenance of the WOM generation service."
+    },
+    "STATS": {
+      "AVAILABLE": "WOMs in circulation"
     }
   }
 }
