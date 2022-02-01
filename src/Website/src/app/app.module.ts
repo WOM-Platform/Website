@@ -64,6 +64,8 @@ import {MatGridListModule} from '@angular/material/grid-list';
 import { GoogleMapsModule } from '@angular/google-maps';
 import {BreadcrumbModule} from 'primeng-lts/breadcrumb';
 import {CommonModule} from '@angular/common';
+import {StepcounterTcComponent} from './privacy/stepCounter/tc/stepcounter_tc.component';
+import {StepcounterPrivacyComponent} from './privacy/stepCounter/privacy/stepcounter_privacy.component';
 
 // AoT requires an exported function for factories
 export const createTranslateLoader = (http: HttpClient) => new TranslateHttpLoader(http, './assets/i18n/', '.json?cb=' + environment.i18n);
@@ -109,7 +111,9 @@ export const isMock = environment.mock;
     InstrumentComponent,
     VolunteerComponent,
     AboutComponent,
-    BreadcrumbsComponent
+    BreadcrumbsComponent,
+    StepcounterTcComponent,
+    StepcounterPrivacyComponent
   ],
   exports: [
       MatStepperModule,

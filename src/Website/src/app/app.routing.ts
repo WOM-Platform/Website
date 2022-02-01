@@ -17,6 +17,8 @@ import {MerchantComponent} from './merchant/merchant.component';
 import {VolunteerComponent} from './volunteer/volunteer.component';
 import {InstrumentComponent} from './instrument/instrument.component';
 import {AboutComponent} from './about/about.component';
+import {StepcounterPrivacyComponent} from './privacy/stepCounter/privacy/stepcounter_privacy.component';
+import {StepcounterTcComponent} from './privacy/stepCounter/tc/stepcounter_tc.component';
 
 const routes: Routes = [
   {
@@ -160,6 +162,26 @@ const routes: Routes = [
               breadcrumb: 'BREADCRUMBS.PRIVACY.INSTRUMENT'
             },
           },
+          {
+            path: 'stepcounter',
+            data: {
+              breadcrumb: 'BREADCRUMBS.PRIVACY.STEPCOUNTER.TITLE'
+            }, children: [
+            {
+              path: 'privacy',
+              component: StepcounterPrivacyComponent,
+              data: {
+                breadcrumb: 'BREADCRUMBS.PRIVACY.STEPCOUNTER.PRIVACY'
+              }
+            },
+            {
+              path: 'tc',
+              component: StepcounterTcComponent,
+              data: {
+                breadcrumb: 'BREADCRUMBS.PRIVACY.STEPCOUNTER.TC'
+              }
+            }]
+          }
         ]
       },
       {

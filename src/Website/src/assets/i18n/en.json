@@ -35,7 +35,12 @@
       "PRIVACY": "Privacy",
       "POS": "POS",
       "POCKET": "Pocket",
-      "INSTRUMENT": "Instrument"
+      "INSTRUMENT": "Instrument",
+      "STEPCOUNTER": {
+        "TITLE": "Step Counter",
+        "PRIVACY": "Privacy",
+        "STEPCOUNTER_TC": "Terms & Conditions"
+      }
     }
   },
   "SIGN_IN": {
