@@ -73,7 +73,7 @@ export function translateFactory(translate: TranslateService): any {
     return async () => {
         translate.setDefaultLang('en');
         translate.use('en');
-        return new Promise(resolve => {
+        return new Promise<void>(resolve => {
             translate.onLangChange.subscribe(() => {
                 resolve();
             });
