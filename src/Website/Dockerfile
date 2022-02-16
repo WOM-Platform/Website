@@ -16,6 +16,7 @@ RUN npm install
 COPY . /app
 
 # Build
+ENV NODE_OPTIONS=--openssl-legacy-provider
 RUN ng build --output-path=/app/dist
 
 # DISTRIBUTE step
