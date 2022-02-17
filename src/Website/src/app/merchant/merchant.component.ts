@@ -44,6 +44,7 @@ export class MerchantComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
+
     const searchBox = new google.maps.places.SearchBox(
         this.searchField.nativeElement
     );
@@ -53,6 +54,9 @@ export class MerchantComponent implements OnInit, AfterViewInit {
       if (places.length === 0) {
         return;
       }
+      if(google === undefined)
+        return;
+
       const bounds = new google.maps.LatLngBounds();
       places.forEach(place =>  {
         if (!place.geometry || !place.geometry.location) {

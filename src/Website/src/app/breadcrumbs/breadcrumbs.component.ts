@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
-import {MenuItem} from 'primeng-lts/api';
+import {MenuItem} from 'primeng/api';
 import {filter} from 'rxjs/operators';
 import {TranslateService} from '@ngx-translate/core';
 
