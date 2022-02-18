@@ -24,7 +24,7 @@ export class MerchantFormComponent implements OnInit {
                 {value: '', disabled: this.merchant !== null},
                 [Validators.required, Validators.minLength(16), Validators.maxLength(16)]
             ],
-            address: ['', !Validators.required],
+            address: ['', Validators.required],
             cap: ['', Validators.required],
             city: ['', Validators.required],
             country: ['', Validators.required],

@@ -8,6 +8,7 @@ import {MerchantService} from '../../_services/merchant.service';
 import {PosService} from '../../_services/pos.service';
 import {MatDialog} from '@angular/material/dialog';
 import {LogInErrorDialogComponent} from './signup-login-error.directive';
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
   selector: 'app-merchant-signup',
@@ -44,8 +45,9 @@ export class MerchantSignUpComponent implements OnInit {
               private router: Router,
               private userService: UserService,
               private merchantService: MerchantService,
-              private posService: PosService) {
-      this.termsAndConditionsText = 'Insert t&c text here';
+              private posService: PosService,
+              private  translate: TranslateService) {
+      this.termsAndConditionsText = translate.instant('TERMS_CONDITIONS.MAIN_TEXT');
   }
 
   async ngOnInit(): Promise<void> {
