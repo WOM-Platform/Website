@@ -27,7 +27,7 @@ export class PosFormComponent implements OnInit {
 
     ngOnInit(): any {
         this.form = this.fb.group({
-            name: ['', Validators.required],
+            name: ['', Validators.required, Validators.minLength(4)],
             latitude: [{value: 0, disabled: true}, Validators.required],
             longitude: [{value: 0, disabled: true}, Validators.required],
             url: ['', !Validators.required]
