@@ -1,5 +1,6 @@
 # BUILD step
-FROM node:15.12 as build
+
+FROM node:17.5 as build
 
 WORKDIR /app
 
@@ -8,21 +9,21 @@ ENV PATH /app/node_modules/.bin:$PATH
 
 # Dependencies
 COPY package.json /app/package.json
+RUN npm install -g npm@latest
+RUN npm install -g @angular/cli@13.2.3
 RUN npm install
-RUN npm install -g @angular/cli@11.2.5
 
 COPY . /app
 
 # Build
+ENV NODE_OPTIONS=--openssl-legacy-provider
 RUN ng build --output-path=/app/dist
 
 # DISTRIBUTE step
-FROM nginx:1.21.0-alpine
-
+FROM nginx:1.21-alpine
 COPY --from=build /app/dist /usr/share/nginx/html
 COPY ./ng.conf /etc/nginx/conf.d/
 RUN rm /etc/nginx/conf.d/default.conf
-
 EXPOSE 80
 
 CMD ["nginx", "-g", "daemon off;"]

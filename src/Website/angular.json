@@ -26,9 +26,12 @@
             "styles": [
               "./node_modules/@angular/material/prebuilt-themes/purple-green.css",
               "src/styles.css",
+              "node_modules/primeng/resources/themes/saga-blue/theme.css",
+              "node_modules/primeng/resources/primeng.min.css",
+              "node_modules/primeicons/primeicons.css"
             ],
             "scripts": [
-              "node_modules/jquery/dist/jquery.min.js",
+              "node_modules/jquery/dist/jquery.min.js"
             ]
           },
           "configurations": {
@@ -41,6 +44,10 @@
               ]
             },
             "production": {
+              "index": {
+                "input": "src/index-prod.html",
+                "output": "index.html"
+              },
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -108,15 +115,11 @@
           }
         },
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@angular-eslint/builder:lint",
           "options": {
-            "tsConfig": [
-              "tsconfig.app.json",
-              "tsconfig.spec.json",
-              "e2e/tsconfig.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
+            "lintFilePatterns": [
+              "src/**/*.ts",
+              "src/**/*.html"
             ]
           }
         },
@@ -135,5 +138,8 @@
       }
     }
   },
-  "defaultProject": "src"
+  "defaultProject": "src",
+  "cli": {
+    "defaultCollection": "@angular-eslint/schematics"
+  }
 }

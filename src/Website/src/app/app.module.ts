@@ -1,12 +1,12 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import {APP_INITIALIZER, NgModule} from '@angular/core';
 
 import { AppComponent } from './app.component';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {HttpClientModule, HTTP_INTERCEPTORS, HttpClient} from '@angular/common/http';
 import {appRoutingModule} from './app.routing';
 import {RouterModule} from '@angular/router';
-import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
+import {TranslateLoader, TranslateModule, TranslateService} from '@ngx-translate/core';
 import {HomeComponent} from './home';
 import {NavComponent} from './nav/nav.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -25,13 +25,12 @@ import {MatDialogModule} from '@angular/material/dialog';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MerchantSignUpComponent} from './authentication/signup/signup.component';
-import {FlexLayoutModule} from '@angular/flex-layout';
+import {FlexLayoutModule, FlexModule} from '@angular/flex-layout';
 import {MatSelectModule} from '@angular/material/select';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatStepperModule} from '@angular/material/stepper';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatTooltipModule} from '@angular/material/tooltip';
-import {MerchantDashboardComponent} from './merchant/dashboard/merchant-dashboard.component';
 import {PrivacyComponent} from './privacy/privacy.component';
 import {PrivacyInstrumentComponent} from './privacy/instrument/instrument.component';
 import {PrivacyPocketComponent} from './privacy/pocket/pocket.component';
@@ -44,7 +43,6 @@ import {UserHomeComponent} from './user/home/user-home.component';
 import {PosFormComponent} from './_forms/pos/forms-pos.directive';
 import {UserFormComponent} from './_forms/user/forms-user.directive';
 import {MerchantFormComponent} from './_forms/merchant/forms-merchant.directive';
-import {GoogleMapsModule} from '@angular/google-maps';
 import {ProgressSpinnerComponent} from './_progressSpinner/progress-spinner.component';
 import {OverlayModule} from '@angular/cdk/overlay';
 import {AppOverlayModule} from './_overlay/overlay.module';
@@ -57,9 +55,32 @@ import {LogInErrorDialogComponent} from './authentication/signup/signup-login-er
 import {UserVerifyComponent} from './user/verify/user-verify.component';
 import {PageNotFoundComponent} from './pageNotFound/page-not-found.component';
 import {RequestNewPasswordComponent} from './authentication/requestNewPassword/request-new-password.component';
+import {MerchantComponent} from './merchant/merchant.component';
+import {InstrumentComponent} from './instrument/instrument.component';
+import {VolunteerComponent} from './volunteer/volunteer.component';
+import {AboutComponent} from './about/about.component';
+import {BreadcrumbsComponent} from './breadcrumbs/breadcrumbs.component';
+import {MatGridListModule} from '@angular/material/grid-list';
+import { GoogleMapsModule } from '@angular/google-maps';
+import {BreadcrumbModule} from 'primeng/breadcrumb';
+import {CommonModule} from '@angular/common';
+import {StepcounterTcComponent} from './privacy/stepCounter/tc/stepcounter_tc.component';
+import {StepcounterPrivacyComponent} from './privacy/stepCounter/privacy/stepcounter_privacy.component';
+
 
 // AoT requires an exported function for factories
-export const createTranslateLoader = (http: HttpClient) => new TranslateHttpLoader(http, './assets/i18n/', '.json');
+export const createTranslateLoader = (http: HttpClient) => new TranslateHttpLoader(http, './assets/i18n/', '.json?cb=' + environment.i18n);
+export function translateFactory(translate: TranslateService): any {
+    return async () => {
+        translate.setDefaultLang('en');
+        translate.use('en');
+        return new Promise<void>(resolve => {
+            translate.onLangChange.subscribe(() => {
+                resolve();
+            });
+        });
+    };
+}
 export const isMock = environment.mock;
 
 @NgModule({
@@ -70,7 +91,6 @@ export const isMock = environment.mock;
     NavComponent,
     SignInComponent,
     MerchantSignUpComponent,
-    MerchantDashboardComponent,
     PrivacyComponent,
     PrivacyInstrumentComponent,
     PrivacyPocketComponent,
@@ -87,52 +107,79 @@ export const isMock = environment.mock;
     LogInErrorDialogComponent,
     UserVerifyComponent,
     RequestNewPasswordComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    MerchantComponent,
+    InstrumentComponent,
+    VolunteerComponent,
+    AboutComponent,
+    BreadcrumbsComponent,
+    StepcounterTcComponent,
+    StepcounterPrivacyComponent
   ],
   exports: [
-      MatStepperModule
+      MatStepperModule,
   ],
-  imports: [
-    appRoutingModule,
-    RouterModule.forRoot([
-      {path: '', component: HomeComponent, pathMatch: 'full'}
-    ]),
-    TranslateModule.forRoot({
-      defaultLanguage: 'en',
-      loader: {
-        provide: TranslateLoader,
-        useFactory: (createTranslateLoader),
-        deps: [HttpClient]
-      }
-    }),
-    BrowserModule,
-    HttpClientModule,
-    BrowserAnimationsModule,
-    FlexLayoutModule,
-    MatIconModule,
-    MatToolbarModule,
-    MatButtonModule,
-    MatExpansionModule,
-    MatCheckboxModule,
-    MatMenuModule,
-    MatDividerModule,
-    MatProgressSpinnerModule,
-    MatInputModule,
-    MatCardModule,
-    MatSlideToggleModule,
-    MatSelectModule,
-    MatStepperModule,
-    MatTooltipModule,
-    MatDialogModule,
-    MatSnackBarModule,
-    ReactiveFormsModule,
-    FormsModule,
-    GoogleMapsModule,
-    OverlayModule,
-    AppOverlayModule
-  ],
+    imports: [
+        appRoutingModule,
+        RouterModule.forRoot([
+            {path: '', component: HomeComponent, pathMatch: 'full'}
+        ]),
+        TranslateModule.forRoot({
+            defaultLanguage: 'it',
+            loader: {
+                provide: TranslateLoader,
+                useFactory: (createTranslateLoader),
+                deps: [HttpClient]
+            }
+        }),
+        BrowserModule,
+        HttpClientModule,
+        BrowserAnimationsModule,
+        FlexLayoutModule,
+        MatIconModule,
+        MatToolbarModule,
+        MatButtonModule,
+        MatExpansionModule,
+        MatCheckboxModule,
+        MatMenuModule,
+        MatDividerModule,
+        MatProgressSpinnerModule,
+        MatInputModule,
+        MatCardModule,
+        MatSlideToggleModule,
+        MatSelectModule,
+        MatStepperModule,
+        MatTooltipModule,
+        MatDialogModule,
+        MatSnackBarModule,
+        ReactiveFormsModule,
+        FormsModule,
+        GoogleMapsModule,
+        OverlayModule,
+        AppOverlayModule,
+        TranslateModule,
+        MatButtonModule,
+        MatButtonModule,
+        TranslateModule,
+        MatGridListModule,
+        MatGridListModule,
+        GoogleMapsModule,
+        FlexModule,
+        FlexLayoutModule,
+        FlexModule,
+        MatButtonModule,
+        BreadcrumbModule,
+        MatDividerModule,
+        CommonModule
+    ],
   providers: [
-    isMock
+      {
+          provide: APP_INITIALIZER,
+          useFactory: translateFactory,
+          deps: [TranslateService],
+          multi: true
+      },
+      isMock
       ? [{
           provide: HTTP_INTERCEPTORS,
           useClass: HttpMockRequestInterceptor,

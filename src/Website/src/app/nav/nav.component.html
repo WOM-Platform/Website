@@ -1,13 +1,55 @@
 <mat-toolbar class="app-toolbar" >
-  <img src="assets/images/wom-logo.png">
+  <img src="assets/images/wom-logo-bianco.png">
   <span class="example-spacer"></span>
-  <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon" [matMenuTriggerFor]="menu">
+  <button mat-button class="nav-button" (click)="navigate('home')">
+    <span>{{ "NAV.HOME" | translate }}</span>
+  </button>
+  <button mat-button class="nav-button" (click)="navigate('about')">
+    <span>{{ "NAV.ABOUT" | translate }}</span>
+  </button>
+  <button mat-button class="nav-button" (click)="navigate('volunteer')">
+    <span>{{ "NAV.VOLUNTEERS" | translate }}</span>
+  </button>
+  <button mat-button class="nav-button" (click)="navigate('merchant')">
+    <span>{{ "NAV.MERCHANT" | translate }}</span>
+  </button>
+  <button mat-button class="nav-button" (click)="navigate('instrument')">
+    <span>{{ "NAV.INSTRUMENT" | translate }}</span>
+  </button>
+  <button mat-button class="nav-button" (click)="navigate('user/home')">
+    <span>{{ "NAV.PROFILE" | translate }}</span>
+  </button>
+  <button mat-button class="nav-button" *ngIf="isLogged" (click)="logout()">
+    <span>{{ "NAV.SIGN_OUT" | translate }}</span>
+  </button>
+  <mat-divider class="divider nav-button" [vertical]="true"></mat-divider>
+  <mat-select class="lang-select" [(ngModel)]="selectLang" (selectionChange)="setTransLanguage()">
+    <mat-option *ngFor="let lang of TransLang" value="{{lang}}">{{ lang }}</mat-option>
+  </mat-select>
+
+  <button mat-icon-button class="example-icon nav-icon-button" aria-label="Example icon-button with menu icon" [matMenuTriggerFor]="menu">
     <mat-icon>menu</mat-icon>
   </button>
   <mat-menu #menu="matMenu">
     <button mat-menu-item (click)="navigate('home')">
       <mat-icon>home</mat-icon>
       <span>{{ "NAV.HOME" | translate }}</span>
+    </button>
+    <button mat-menu-item (click)="navigate('about')">
+      <mat-icon>info</mat-icon>
+      <span>{{ "NAV.ABOUT" | translate }}</span>
+    </button>
+    <button mat-menu-item (click)="navigate('volunteers')">
+      <mat-icon>person_pin_circle</mat-icon>
+      <span>{{ "NAV.VOLUNTEERS" | translate }}</span>
+    </button>
+    <button mat-menu-item (click)="navigate('merchant')">
+      <mat-icon>store</mat-icon>
+      <span>{{ "NAV.MERCHANT" | translate }}</span>
+    </button>
+    <button mat-menu-item (click)="navigate('instrument')">
+      <mat-icon>timer</mat-icon>
+      <span>{{ "NAV.INSTRUMENT" | translate }}</span>
     </button>
     <button mat-menu-item (click)="navigate('user/home')">
       <mat-icon>account_circle</mat-icon>

@@ -1,0 +1,21 @@
+<div class="container">
+  <span class="page-title">{{"INSTRUMENT.TITLE" | translate}}</span>
+  <div fxLayout="row wrap" fxLayoutGap="20px grid">
+    <div fxFlex="100%">
+      <p class="page-secondary-title" [innerHTML]="'INSTRUMENT.SECTION_A.TITLE' | translate"></p>
+      <p [innerHTML]="'INSTRUMENT.SECTION_A.A' | translate"></p>
+      <p [innerHTML]="'INSTRUMENT.SECTION_A.B' | translate"></p>
+      <p [innerHTML]="'INSTRUMENT.SECTION_A.C' | translate"></p>
+    </div>
+    <div fxFlex="33.3%" fxFlex.xs="100%">
+
+    </div>
+    <div fxFlex="33.3%" fxFlex.xs="100%" class="rounded-container">
+      <p class="centered rounded-container-header" [innerHTML]="'INSTRUMENT.STATS.AVAILABLE' | translate"></p>
+      <p class="centered bold rounded-container-body">{{ stats.totalVouchersAvailable}}</p>
+    </div>
+    <div fxFlex="33.3%" fxFlex.xs="100%">
+
+    </div>
+  </div>
+</div>

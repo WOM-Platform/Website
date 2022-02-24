@@ -46,8 +46,11 @@
                             <p *ngIf="merchant.description">
                                 {{merchant.description}}
                             </p>
-                            <button mat-raised-button color="primary" matTooltip="{{'USER.HOME.EDIT_MERCHANT_TOOLTIP' | translate}}"
-                                    (click)="editMerchant(merchant)">edit
+                            <button mat-raised-button
+                                    color="primary"
+                                    matTooltip="{{'USER.HOME.EDIT_MERCHANT_TOOLTIP' | translate}}"
+                                    (click)="editMerchant(merchant)">
+                                {{"USER.HOME.EDIT_MERCHANT_BTN" | translate}}
                             </button>
                             <!-- POS LIST -->
                             <mat-card class="pos-card">

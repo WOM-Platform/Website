@@ -1,0 +1,289 @@
+{
+  "FLAG_YES": "Si",
+  "FLAG_NO": "No",
+  "NAV": {
+    "HOME": "Home",
+    "VOLUNTEERS": "Volontari",
+    "ABOUT": "Che cos'è",
+    "INSTRUMENT": "Instrument",
+    "SIGN_IN": "Login",
+    "MERCHANT": "Merchant",
+    "PROFILE": "Profilo",
+    "SIGN_OUT": "Log out"
+  },
+  "BREADCRUMBS": {
+    "HOME": "Home",
+    "ABOUT": "Che cos'è",
+    "VOLUNTEER": "Volontari",
+    "MERCHANT": "Merchant",
+    "INSTRUMENT": "Instrument",
+    "USER" : {
+      "USER": "Il tuo profilo",
+      "MERCHANT": "Merchant",
+      "ERROR": "Errore",
+      "HOME": "Home",
+      "VERIFY": "Verifica"
+    },
+    "AUTHENTICATION": {
+      "AUTHENTICATION": "Autenticazione",
+      "SIGNIN": "Accesso",
+      "SIGNUP": "Registrazione",
+      "RESET_PASSWORD": "Recupero password",
+      "NEW_PASSWORD": "Richiesta nuova password"
+    },
+    "PRIVACY": {
+      "PRIVACY": "Privacy",
+      "POS": "POS",
+      "POCKET": "Pocket",
+      "INSTRUMENT": "Instrument"
+    }
+  },
+  "SIGN_IN": {
+    "TITLE": "Accedi alla piattaforma WOM",
+    "EMAIL": "Email",
+    "PASSWORD": "Password",
+    "BTN_SIGN_IN": "Login",
+    "BTN_FORGOT_PASSWORD": "Hai dimenticato la password?",
+    "BTN_SIGN_UP": "Registrati",
+    "ERR": {
+      "LOGIN": "Il nome utente e/o la password non sono validi",
+      "EMAIL": "Inserisci un indirizzo e-mail valido",
+      "PASSWORD": "Il campo password non può essere vuoto"
+    }
+  },
+  "SIGN_UP": {
+    "TITLE": "Registrati alla piattaforma WOM",
+    "SUBTITLE": "Compila il form sottostante per registrarti alla Piattaforma <b>WOM&nbsp;</b> come <i>Merchant</i>, in modo da iniziare a ricevere pagamenti.",
+    "BTN_ALREADY_REGISTERED": "Già registrato?",
+    "NEXT": "Avanti",
+    "BACK": "Indietro",
+    "DONE": "Fine",
+    "REPRESENTATIVE": {
+      "STEPPER_TITLE": "Dati personali",
+      "TITLE": "Rappresentante",
+      "EMAIL": "Indirizzo E-mail",
+      "EMAIL_ERROR": "Inserisci un indirizzo email valido",
+      "PASSWORD": "Password",
+      "REPEAT_PASSWORD": "Ripeti la password",
+      "PASSWORD_ERROR": "Inserisci una password",
+      "PASSWORD_NO_MATCH_ERROR": "Le password non corrispondono",
+      "NAME": "Nome",
+      "NAME_ERROR": "Inserisci il tuo nome",
+      "SURNAME": "Cognome",
+      "SURNAME_ERROR": "Inserisci il tuo cognome"
+    },
+    "MERCHANT": {
+      "STEPPER_TITLE": "Registrazione Merchant",
+      "MERCHANT_TITLE": "Registrazione Merchant",
+      "TITLE": "MERCHANT",
+      "CHECKBOX": "Registra un merchant",
+      "NAME": "Nome Merchant/Attività",
+      "NAME_ERROR": "Inserisci un nome valido per il Merchant - 8 caratteri minimo",
+      "CF": "Codice fiscale",
+      "CF_ERROR": "Inserisci il codice fiscale corretto",
+      "OPTIONAL_TEXT": "Indirizzo principale della propria attività.",
+      "ADDRESS": "Indirizzo",
+      "ADDRESS_ERROR": "Inserisci un indirizzo",
+      "CAP": "CAP",
+      "CAP_ERROR": "Inserisci il CAP",
+      "CITY": "Città",
+      "CITY_ERROR": "Inserisci la città del Merchant",
+      "SELECT_COUNTRY": "Seleziona il paese",
+      "SELECT_COUNTRY_ERROR": "Selezionare il paese dell'attività",
+      "BUSINESS": "Seleziona l'attività principale",
+      "BUSINESS_ERROR": "Selezionare un'attività primaria",
+      "WEBSITE": "Sito web, es.: http://www.example.com",
+      "OPTIONAL_WEBSITE_TEXT": "<i>Opzionale.</i>\nSito web della propria attività.",
+      "DESCRIPTION": "Descrizione",
+      "DESCRIPTION_ERROR": "Inserisci una breve descrizione per il tuo Merchant",
+      "DESCRIPTION_TEXT": "Una breve descrizione della propria attività e come intendi monetizzare i Voucher WOM (beni o servizi)."
+    },
+    "POS": {
+      "TITLE": "Il tuo primo <i>Point of Service</i>",
+      "CHECKBOX": "Registera il tuo primo Point Of Service (POS)",
+      "SUBTITLE_A": "Compila questa parte del form per creare una istanza di un <b>Point of Service</b>&nbsp;(POS) per il tuo account da Merchant. Potrai ricevere pagamenti in WOM&nbsp; fin da subito utilizzando il tuo POS.",
+      "SUBTITLE_B": "Potrai creare altri Point of Service dopo la registrazione.",
+      "NAME": "Nome",
+      "NAME_ERROR": "Inserisci un nome per il POS",
+      "NAME_TEXT": "Nome del POS, sarà visualizzato dagli utenti durante un pagamento.",
+      "MAP_TITLE": "",
+      "LAT": "Latitudine",
+      "LON": "Longitudine",
+      "LAT_LON_ERROR": "Seleziona una posizione sulla mappa",
+      "URL": "URL",
+      "URL_OPTIONAL_TEXT": "<i>Opzionale.</i>\nVerrà mostrato agli utenti quando viene confermato il pagamento. Può essere utilizzato per visualizzare ulteriori informazioni riguardo il POS del Merchant."
+    },
+    "TERMS_CONDITIONS_TITLE": "Termini e condizioni",
+    "TERMS_CONDITIONS": "Accetta i termini e le condizioni di utilizzo",
+    "TC_ERROR": "Accetta i termini e condizioni per continuare",
+    "BTN_SIGN_UP": "Registrati",
+    "EMAIL_EXISTS_ERROR": "Questo indirizzo email è stato già utilizzato.",
+    "FISCAL_CODE_EXISTS_ERROR": "Il codice fiscale del Merchant è stato già utilizzato.",
+    "GENERIC_ERROR": "Ci sono degli errori nei dati immessi.",
+    "FORM_ERROR": "Errore - controlla tutti i campi e riprova",
+    "TIMEOUT_ERROR": "Il servizio impiega troppo tempo a rispondere - controllare la connessione ad internet e riprovare"
+  },
+  "USER": {
+    "HOME": {
+      "WELCOME": "Benvenuto",
+      "MERCHANT_TITLE": "Elenco Merchant",
+      "ADD_MERCHANT_TOOLTIP": "Aggiungi un nuovo Merchant",
+      "EDIT_MERCHANT_TOOLTIP": "Modifica i dati di questo Merchant",
+      "EDIT_MERCHANT_BTN": "Modifica",
+      "MERCHANT": {
+        "NAME": "Merchant",
+        "CODE": "Codice fiscale",
+        "ADDRESS": "Indirizzo",
+        "ACTIVITY_TYPE": "Attività primaria",
+        "URL": "Sito web",
+        "POS_TITLE": "POS",
+        "POS_SUBTITLE": "Visualizza o modifica",
+        "ADD_POS_TOOLTIP": "Aggiungi un nuovo punto di servizio 'POS' per il Merchant"
+      }
+    },
+    "NOT_VERIFIED": {
+      "TITLE": "Verifica il tuo account cliccando sul link che hai ricevuto per email.",
+      "SUBTITLE": "Non hai ricevuto nulla?",
+      "SEND_EMAIL_LINK": "Clicca qui",
+      "SEND_EMAIL_TEXT": "per ricevere un nuovo email di verifica all'indirizzo "
+    },
+    "ADD_MERCHANT": {
+      "TITLE": "Aggiungi un nuovo merchant",
+      "CANCEL": "Annulla",
+      "ADD": "Aggiungi",
+      "SUCCESS": "Merchant aggiunto",
+      "INPUT_ERROR": "Compila i campi in rosso per continuare",
+      "API_ERROR": "Ci sono alcuni errori nei dati o un problema di connessione con il server. Controlla i dati e riprova."
+    },
+    "EDIT_MERCHANT": {
+      "TITLE": "Modifica il merchant",
+      "CANCEL": "Annulla",
+      "ADD": "Conferma",
+      "SUCCESS": "Merchant modificato",
+      "INPUT_ERROR": "Controlla di aver inserito i dati nel form",
+      "API_ERROR": "Ci sono alcuni errori nei dati o un problema di connessione con il server. Controlla i dati e riprova."
+    },
+    "ADD_POS": {
+      "TITLE": "Aggiungi un nuovo POS",
+      "CANCEL": "Annulla",
+      "ADD": "Aggiungi",
+      "SUCCESS": "POS aggiunto",
+      "INPUT_ERROR": "Compila i campi in rosso per continuare e assicurati di aver selezionato una posizione sulla mappa.",
+      "API_ERROR": "Ci sono alcuni errori nei dati o un problema di connessione con il server. Controlla i dati e riprova."
+    }
+  },
+  "RESET_PASSWORD": {
+    "TITLE": "Aggiorna password",
+    "RESET_BUTTON": "Aggiorna password",
+    "SNACKBAR_SUCCESS": "Password aggiornata",
+    "SNACKBAR_HOME": "Clicca qui per fare il login",
+    "EXPIRED_LINK_ERROR": "Il link per aggiornare la password è scaduto."
+  },
+  "REQUEST_NEW_PASSWORD": {
+    "TITLE": "Richiedi una password nuova",
+    "REQUEST_BUTTON": "Invia la richiesta",
+    "REQUEST_SENT": "Richiesta inviata! Controlla la tua email",
+    "HOME": "Home"
+  },
+  "GENERIC": {
+    "BUTTON": {
+      "MORE": "Scopri di più"
+    }
+  },
+  "HOME": {
+    "SECTION_INTRO": {
+      "TITLE": "Introduzione",
+      "A": "<b>WOM - \"Worth One Minute\"</b> è una piattaforma di ricompensa general-purpose basata su un sistema di scambio di voucher.\nMolte azioni e attività compiute dagli individui hanno un valore sociale intrinseco, un effetto noto in economia come <b>“esternalità positiva”</b>.\nWOM mira a riconoscere tutte quelle azioni che costituiscono un contributo socialmente prezioso per un obiettivo comune, <b>premiando il tempo che le persone dedicano a queste attività</b> attraverso la generazione di voucher sociali digitali.\nI voucher WOM premiano ogni minuto di impegno sociale.\n",
+      "B": "DIGIT srl è uno <b>spin-off dell’Università di Urbino</b> che ha come obiettivo <b>creare un valore sociale attraverso la consapevolezza digitale</b>. DIGIT srl è stata fondata sulla convinzione che alla base della tecnologia, delle piattaforme e dei software ci debbano essere gli interessi dell’uomo e della società e che innovazione sociale e digitale siano indissolubilmente legate. \n"
+    },
+    "SECTION_VOL": {
+      "TITLE": "Volontari",
+      "MESSAGE": "Compiendo azioni socialmente valide, ogni utente guadagna WOM e diventa un <b>Volontario</b>. I Volontari possono gestire i loro voucher WOM tramite un'app, <b>\"WOM Pocket\"</b>, che possono installare sul proprio dispositivo. L'applicazione consente ai Volontari di raccogliere i propri voucher, conservarli e spenderli.\n"
+    },
+    "SECTION_MERCH": {
+      "TITLE": "Merchant",
+      "MESSAGE": "I negozi locali possono partecipare al progetto diventando <b>Merchants</b>. I Merchants sono componenti di sistema che possono <b>creare istanze di pagamento</b>. Possono accettare i voucher WOM in cambio di servizi e sconti. I Merchants utilizzano un'applicazione diversa, il <b>\"WOM POS\"</b>, o un software di integrazione personalizzato. Questi componenti software consentono ai Merchants di creare nuove transazioni, applicando filtri ai voucher WOM raccolti.\n"
+    },
+    "SECTION_INSTR": {
+      "TITLE": "Instrument",
+      "MESSAGE": "Gli <b>Instruments</b> sono i proprietari di un'attività sociale o di un'iniziativa con finalità sociale riconosciuta dalla piattaforma. Gli Instruments <b>consentono ai volontari di intraprendere azioni sociali</b>.\nI titolari di questo tipo di attività, come organizzazioni no profit, associazioni o privati, possono contattare info@wom.social per essere valutati dal comitato etico della piattaforma e inseriti nella lista dei <b>WOM Instrument</b> che possono generare voucher e premiare i contributori."
+    },
+    "SECTION_REG": {
+      "TITLE": "Registry",
+      "MESSAGE": "Il Registry è l'entità centrale che <b>genera i WOM</b> su richiesta degli Instrument, ne <b>verifica l'autenticità</b> quando devono essere usati presso un Merchant e ne <b>impedisce la duplicazione</b> o il doppio utilizzo."
+    },
+    "SECTION_TECH": {
+      "TITLE": "Tecnico",
+      "MESSAGE": "WOM è una <b>technologia open</b> fornita come software open source, rilasciata sotto la licenza <a href=\"https://opensource.org/licenses/MIT\">MIT</a>.\n È sviluppata in modo aperto su GitHub, <a href=\"https://github.com/WOM-Platform\">dagli un'occhiata</a>."
+    },
+    "SECTION_CONTACT": {
+      "TITLE": "Rimani in contatto! \uD83D\uDCEB",
+      "MESSAGE": "Per sviluppare nuove integrazioni WOM, connettori POS, o per qualsiasi altra domanda, contatta <a href=\"mailto:info@wom.social\">info@wom.social</a>."
+    }
+  },
+  "ABOUT": {
+    "TITLE": "La piattaforma WOM",
+    "SECTION_A": {
+      "A": "WOM sta per <b>Worth One Minute</b>, cioè 'Vale un minuto'. È una piattaforma di ricompensa general-purpose basata su un sistema di scambio di voucher che premia l'impatto positivo di azioni e attività svolte da persone che contribuiscono a un bene comune.",
+      "B": "Molte azioni hanno un <b>valore sociale intrinseco</b>, un effetto noto in economia come “esternalità positiva”. WOM riconosce l'impatto di queste azioni e fornisce uno strumento per premiare queste esternalità positive mediante <b>l'emissione di WOM.</b>"
+    },
+    "SECTION_A_2": {
+      "TITLE": "Cosa sono i WOM",
+      "A": "I WOM sono <b>voucher digitali</b> progettati per riconoscere il valore di azioni che hanno un effetto positivo. Ogni voucher WOM premia <b>un minuto di impegno socialmente prezioso</b> svolto da un individuo.",
+      "B": "I voucher WOMs sono <b>anonimi</b>. Gli unici dati che raccolgono sono relativi al loro scopo sociale e dove e quando vengono generati.\nI voucher WOM non hanno <b>controvalore in denaro</b>. Sono la prova di uno sforzo socialmente prezioso che un individuo ha effettuato verso una causa condivisa.",
+      "C": "Il <b>Registry</b> gestisce lo scambio dei voucher e tiene traccia della creazione e del consumo dei WOM.\nLa piattaforma WOM è un <b>sistema centralizzato</b>. Il <b>Registry</b> rappresenta l'autorità che gestisce lo scambio delle chiavi crittografiche (che consentono lo scambio sicuro delle informazioni) e verifica che i voucher siano guadagnati e spesi correttamente.\nIl Registry <b>non memorizza l'identità degli utenti e i loro dati</b>. I voucher WOM sono anonimi e il loro utilizzo non è tracciato."
+    },
+    "SECTION_B": {
+      "TITLE": "Come faccio a guadagnare WOM?",
+      "A": "I voucher WOM si ottengono svolgendo volontariamente un’azione socialmente preziosa. Ogni minuto di sforzo vale un WOM. Per la generazione del WOM, <b>l'attività svolta deve essere ufficialmente riconosciuta dalla piattaforma WOM</b>.",
+      "B": "Per essere riconosciuta, l'attività o l'iniziativa deve essere valutata come socialmente preziosa e quindi approvata dal comitato etico della piattaforma WOM.\n"
+    },
+    "SECTION_C": {
+      "TITLE": "Come utilizzo i miei WOM?",
+      "A": "Imprenditori, negozianti, enti pubblici o qualsiasi altro privato cittadino (generalmente chiamato Merchants) possono liberamente decidere di fornire beni, servizi o sconti ai possessori di voucher WOM. Per fare ciò, creano un <b>“WOM payment”</b> che consente loro di scegliere quale tipo di sforzo premiare: i voucher WOM possono essere filtrati per scopo, luogo e tempo. Merci, servizi e sconti possono essere determinati liberamente dal Merchants."
+    }
+  },
+  "VOLUNTEER": {
+    "TITLE": "Volontari",
+    "SECTION_A": {
+      "TITLE": "Come funziona per gli utenti?",
+      "A": "Molte azioni e attività compiute da un individuo contribuiscono a un bene comune e hanno un valore sociale intrinseco. Compiendo queste azioni socialmente preziose, ogni utente guadagna WOM e diventa un Volontario.\nI Volontari possono utilizzare i voucher WOM per ottenere servizi o beni forniti dai Merchants.\nOgni Volontario può collezionare tutti i voucher guadagnati sull'app <b>\"WOM Pocket\"</b>."
+    },
+    "SECTION_B": {
+      "TITLE": "Pocket",
+      "A": "I Volontari possono gestire i loro voucher WOM tramite un'app mobile <b>\"WOM Pocket\"</b>. Questa app consente agli utenti di <b>raccogliere i voucher WOM guadagnati</b>, conservarli (come se fossero in un \"portafoglio\" virtuale) e spendere i loro voucher.\n\nLa piattaforma WOM non ha alcun costo per i Volontari che possono scaricare gratuitamente l'app <b>Pocket</b> dagli <b>store Android e iOS</b>."
+    }
+  },
+  "MERCHANT": {
+    "TITLE": "Merchant",
+    "FILTERS": {
+      "SEARCH": {
+        "TITLE": "Cerca in una località:",
+        "PLACEHOLDER": "Indirizzo, Città, ..."
+      },
+      "BTN_SEARCH": "Cerca"
+    },
+    "SECTION_A": {
+      "TITLE": "Dove spendo i miei WOM? Come posso premiare le azioni socialmente utili con i WOM?",
+      "A": "I Merchants sono componenti di sistema che possono <b>creare istanze di pagamento</b>. Possono accettare i voucher WOM in cambio dei servizi e degli sconti che offrono.\nI Merchants possono <b>scegliere che tipo di voucher accettare</b>. Possono scegliere: i voucher generati solo per un <b>determinato scopo</b> (promuovendo così tale scopo sociale), quelli generati in una determinata <b>area geografica</b> (incoraggiando così le azioni sociali nella loro realtà territoriale), o quelli generati in un <b>intervallo di tempo definito</b>.\nLe istanze di pagamento <b>non prevedono scambi di denaro</b> ma solo sconti e gratuità.",
+      "B": "Accettando tipologie specifiche di voucher WOM, i Merchants possono contribuire indirettamente a una campagna sociale, incentivando i cittadini a contribuire all'obiettivo condiviso con i loro sforzi volontari. Inoltre, i Merchants possono aumentare la loro visibilità presso la comunità lavorando per raggiungere l'obiettivo condiviso."
+    },
+    "SECTION_B": {
+      "TITLE": "POS",
+      "A": "Lo strumento che i Merchants possono utilizzare per accettare il pagamento WOM è l'app <b>\"WOM POS\" (Point of Sale)</b> o un software di integrazione personalizzato. Questi componenti software consentono ai Merchants di creare nuove transazioni, applicando filtri ai voucher WOM raccolti.",
+      "B": "La piattaforma WOM </b>non ha alcun costo per il Merchant che vuole utilizzarla in modo <b>anonimo</b>. I Merchant possono scaricare gratuitamente l'app <b>POS</b> dagli <b>store Android e iOS</b>. Non ci sono costi di transazione.\nSe i Merchant vogliono rendere <b>più visibili le loro offerte</b> e avere <b>rapporti periodici</b> sul valore sociale che hanno contribuito a generare, possono acquistare dei servizi a pagamento."
+    }
+  },
+  "INSTRUMENT": {
+    "TITLE": "Instrument",
+    "SECTION_A": {
+      "TITLE": "Come si generano WOM?",
+      "A": "Gli <b>Instruments</b> sono componenti di sistema <b>riconosciuti dalla piattaforma WOM</b> e approvati da un <b>comitato etico</b>. Possono <b>generare vouchers e premiare i contributori</b>.\nTutti i titolari di attività sociali o di un'iniziativa che permetta ai volontari di intraprendere azioni sociali possono diventare Instruments e essere aggiunti all'elenco dei <b>WOM Instruments</b>.\n",
+      "B": "Ogni Instrument <b>consente il perseguimento di uno degli obiettivi sociali individuati dalla piattaforma WOM</b> (ad esempio, iniziative per la salute pubblica, attività per la difesa dei diritti sociali o la tutela del patrimonio artistico e culturale, ecc.). Questi obiettivi sono chiamati <b>aim</b>.",
+      "C": "L’inserimento nella piattaforma di <b>nuovi Instrument</b> per il rilascio di WOM <b>ha costi</b> legati al processo di revisione da parte dei comitati etici e tecnici, allo sviluppo dei connettori e al mantenimento del servizio di generazione WOM."
+    },
+    "STATS": {
+      "AVAILABLE": "WOM in circolazione"
+    }
+  }
+}

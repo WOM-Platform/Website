@@ -1,7 +1,12 @@
 footer {
   text-align: center;
-  padding-bottom: 0.5em;
-  padding-top: 1em;
-  background-color: #e0e5ef;
+  /*padding-bottom: 0.5em;
+  padding-top: 1em;*/
+  background-color: #444558;
+  color: white;
+}
+
+a {
+  color: aqua;
 }
 

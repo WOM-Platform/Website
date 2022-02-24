@@ -1,8 +1,5 @@
 import { Component } from '@angular/core';
 import {TranslateService} from '@ngx-translate/core';
-import { MatToolbar } from '@angular/material/toolbar';
-import {MatButton} from '@angular/material/button';
-import {MatIcon} from '@angular/material/icon';
 
 @Component({
   selector: 'app-root',
@@ -14,7 +11,6 @@ export class AppComponent {
 
   constructor(translate: TranslateService) {
     translate.addLangs(['en', 'it']);
-
     translate.setDefaultLang('it');
 
     console.log('browser lang: ', translate.getBrowserLang());

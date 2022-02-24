@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 
 import {UserLogin} from '../_models';
@@ -10,11 +10,13 @@ import {UserService} from '../_services/user.service';
   templateUrl: './nav.component.html',
   styleUrls: ['./nav.component.css']
 })
-export class NavComponent {
+export class NavComponent implements OnInit {
   isExpanded = false;
   currentUserLogin: UserLogin;
   openMenu = false;
   isOver = false;
+  selectLang = '';
+  TransLang = [];
 
   constructor(
     private router: Router,
@@ -22,6 +24,17 @@ export class NavComponent {
     private userService: UserService
   ) {
     this.userService.currentUserLogin.subscribe(x => this.currentUserLogin = x);
+  }
+
+  setTransLanguage(): void {
+    this.translate.use(this.selectLang);
+  }
+  getTransLanguage(): void {
+    this.TransLang = [...this.translate.getLangs()];
+  }
+  ngOnInit(): void {
+    this.getTransLanguage();
+    this.selectLang = this.translate.getBrowserLang();
   }
 
   get isLogged(): boolean {
