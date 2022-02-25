@@ -113,9 +113,9 @@ export const isMock = environment.mock;
     VolunteerComponent,
     AboutComponent,
     BreadcrumbsComponent,
-    StepcounterTcComponent,
-    StepcounterPrivacyComponent,
-    ApplicationsComponent
+    ApplicationsComponent,
+    ApplicationsStepcounterComponent,
+    PrivacyStepcounterComponent
   ],
   exports: [
       MatStepperModule,
