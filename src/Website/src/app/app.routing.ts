@@ -18,10 +18,8 @@ import {MerchantComponent} from './merchant/merchant.component';
 import {VolunteerComponent} from './volunteer/volunteer.component';
 import {InstrumentComponent} from './instrument/instrument.component';
 import {AboutComponent} from './about/about.component';
-import {StepcounterPrivacyComponent} from './privacy/stepcounter/privacy/stepcounter_privacy.component';
-import {StepcounterTcComponent} from './privacy/stepcounter/tc/stepcounter_tc.component';
 import {ApplicationsComponent} from './applications/applications.component';
-import {ApplicationsStepcounterComponent} from './applications/stepcounter/applications.component';
+import {ApplicationsStepcounterComponent} from './applications/stepcounter/stepcounter.component';
 
 const routes: Routes = [
   {
