@@ -66,7 +66,7 @@ import {GoogleMapsModule} from '@angular/google-maps';
 import {BreadcrumbModule} from 'primeng/breadcrumb';
 import {CommonModule} from '@angular/common';
 import {ApplicationsComponent} from './applications/applications.component';
-import {ApplicationsStepcounterComponent} from './applications/stepcounter/applications.component';
+import {ApplicationsStepcounterComponent} from './applications/stepcounter/stepcounter.component';
 
 // AoT requires an exported function for factories
 export const createTranslateLoader = (http: HttpClient) => new TranslateHttpLoader(http, './assets/i18n/', '.json?cb=' + environment.i18n);

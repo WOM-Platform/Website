@@ -1,5 +1,5 @@
 # BUILD step
-FROM node:17.5 as build
+FROM node:17.4 as build
 
 WORKDIR /app
 
