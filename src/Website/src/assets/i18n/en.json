@@ -31,16 +31,16 @@
       "RESET_PASSWORD": "Password recovery",
       "NEW_PASSWORD": "Request new password"
     },
+    "APPLICATIONS": {
+      "APPLICATIONS": "Applications",
+      "STEPCOUNTER": "Stepcounter"
+    },
     "PRIVACY": {
-      "PRIVACY": "Privacy",
-      "POS": "POS",
+      "PRIVACY": "Privacy policy",
+      "POS": "Point of Service",
       "POCKET": "Pocket",
       "INSTRUMENT": "Instrument",
-      "STEPCOUNTER": {
-        "TITLE": "Step Counter",
-        "PRIVACY": "Privacy",
-        "STEPCOUNTER_TC": "Terms & Conditions"
-      }
+      "STEPCOUNTER": "Stepcounter"
     }
   },
   "SIGN_IN": {
@@ -287,6 +287,11 @@
     },
     "STATS": {
       "AVAILABLE": "WOMs in circulation"
+    }
+  },
+  "PRIVACY": {
+    "STEPCOUNTER": {
+      "TITLE": "‘WOM Stepcounter’ privacy policy"
     }
   }
 }
