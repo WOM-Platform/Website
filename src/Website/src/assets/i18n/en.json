@@ -293,5 +293,11 @@
     "STEPCOUNTER": {
       "TITLE": "‘WOM Stepcounter’ privacy policy"
     }
+  },
+  "APPLICATIONS": {
+    "STEPCOUNTER": {
+      "TITLE": "WOM Stepcounter",
+      "MAIN_CONTENT": "<p>Tieni il conto dei tuoi passi con WOM Step Counter, la prima app che premia ciò che fai abitualmente!</p> <p>Grazie a WOM Step Counter poi trasformare i tuoi passi in WOM, i voucher digitali che premiano l’impegno sociale. Inizierai a collezionare WOM dopo aver superato i 3000 passi.</p>"
+    }
   }
 }

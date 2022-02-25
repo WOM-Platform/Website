@@ -19,7 +19,6 @@ ENV NODE_OPTIONS=--openssl-legacy-provider
 RUN ng build --output-path=/app/dist
 
 # DISTRIBUTE step
-
 FROM nginx:1.21-alpine
 COPY --from=build /app/dist /usr/share/nginx/html
 COPY ./ng.conf /etc/nginx/conf.d/
