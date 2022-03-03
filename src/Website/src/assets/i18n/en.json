@@ -171,9 +171,16 @@
       "TITLE": "Add a new Point Of Service",
       "CANCEL": "Cancel",
       "ADD": "Add",
-      "SUCCESS": "POS added",
+      "SUCCESS": "POS added!",
       "INPUT_ERROR": "Please fill out the form and make sure you have selected a location on the map.",
       "API_ERROR": "There are errors in the form or there is a problem contacting the server. Check the data and try again."
+    },
+    "EDIT_POS": {
+      "TITLE": "Update your Point Of Service",
+      "SUCCESS": "POS updated!",
+      "CANCEL": "Cancel",
+      "API_ERROR": "There are errors in the form or there is a problem contacting the server. Check the data and try again.",
+      "INPUT_ERROR": "Please fill out the form and make sure you have selected a location on the map."
     }
   },
   "RESET_PASSWORD": {

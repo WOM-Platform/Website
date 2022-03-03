@@ -21,6 +21,7 @@ export class PosFormComponent implements OnInit {
     };
 
     @Input() form: FormGroup;
+    @Input() edit: boolean = false;
     @Output() formChange = new EventEmitter<FormGroup>();
 
     constructor(private fb: FormBuilder){}
@@ -30,13 +31,15 @@ export class PosFormComponent implements OnInit {
             name: ['', Validators.required, Validators.minLength(4)],
             latitude: [{value: 0, disabled: true}, Validators.required],
             longitude: [{value: 0, disabled: true}, Validators.required],
-            url: ['', !Validators.required]
+            url: ['', !Validators.required],
+            isActive: ['', !Validators.required]
         });
 
         this.form.get('name').valueChanges.subscribe(value => this.formChange.emit(this.form));
         this.form.get('latitude').valueChanges.subscribe(value => this.formChange.emit(this.form));
         this.form.get('longitude').valueChanges.subscribe(value => this.formChange.emit(this.form));
         this.form.get('url').valueChanges.subscribe(value => this.formChange.emit(this.form));
+        this.form.get('isActive').valueChanges.subscribe(value => this.formChange.emit(this.form));
     }
 
     mapClick(event): any {

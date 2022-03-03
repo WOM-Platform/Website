@@ -8,7 +8,7 @@ import {AddMerchantDialogComponent, MerchantDialogData} from '../add-merchant/ad
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {TranslateService} from '@ngx-translate/core';
 import {first} from 'rxjs/operators';
-import {AddPosDialogComponent} from '../add-pos/add-pos.component';
+import {AddPosDialogComponent, PosDialogData} from '../add-pos/add-pos.component';
 import {DialogType} from '../../_models/dialogType';
 import {Subscription} from 'rxjs';
 
@@ -68,8 +68,25 @@ export class UserHomeComponent implements OnInit, OnDestroy {
     }
 
     addPos(merchantId: string): any {
+        const posData = new PosDialogData();
+        posData.merchantId = merchantId;
+        posData.isEdit = false;
+
+        this.openPosDialog(posData);
+    }
+
+    editPos(merchantId: string, posId: string): void {
+        const posData = new PosDialogData();
+        posData.merchantId = merchantId;
+        posData.posId = posId;
+        posData.isEdit = true;
+
+        this.openPosDialog(posData);
+    }
+
+    openPosDialog(posData: PosDialogData): void {
         const dialogRef = this.dialog.open(AddPosDialogComponent, {
-            data: merchantId
+            data: posData
         });
         dialogRef.afterClosed().subscribe(result => {
             if (result) {

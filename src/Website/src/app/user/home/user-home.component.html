@@ -66,9 +66,14 @@
                                     <mat-card-title>{{"USER.HOME.MERCHANT.POS_TITLE" | translate}}</mat-card-title>
                                     <mat-card-subtitle>{{"USER.HOME.MERCHANT.POS_SUBTITLE" | translate}}</mat-card-subtitle>
                                 </mat-card-header>
-                                    <ng-container *ngFor="let pos of merchant.pos">
+                                    <ng-container *ngFor="let pos  of merchant.pos">
                                         <mat-card-content>
-                                        {{pos.name}}
+                                            <button mat-icon-button
+                                                    color="primary"
+                                                    (click)="editPos(pos.id)">
+                                                <mat-icon>edit</mat-icon>
+                                            </button>
+                                        <button mat-button>{{pos.name}}</button>
                                         </mat-card-content>
                                     </ng-container>
                             </mat-card>

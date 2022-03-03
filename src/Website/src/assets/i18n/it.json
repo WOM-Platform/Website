@@ -172,9 +172,16 @@
       "TITLE": "Aggiungi un nuovo POS",
       "CANCEL": "Annulla",
       "ADD": "Aggiungi",
-      "SUCCESS": "POS aggiunto",
+      "SUCCESS": "POS aggiunto!",
       "INPUT_ERROR": "Compila i campi in rosso per continuare e assicurati di aver selezionato una posizione sulla mappa.",
       "API_ERROR": "Ci sono alcuni errori nei dati o un problema di connessione con il server. Controlla i dati e riprova."
+    },
+    "EDIT_POS": {
+      "TITLE": "Modifica il POS",
+      "SUCCESS": "POS aggiornato!",
+      "CANCEL": "Annulla",
+      "API_ERROR": "Ci sono alcuni errori nei dati o un problema di connessione con il server. Controlla i dati e riprova.",
+      "INPUT_ERROR": "Compila i campi in rosso per continuare e assicurati di aver selezionato una posizione sulla mappa."
     }
   },
   "RESET_PASSWORD": {
