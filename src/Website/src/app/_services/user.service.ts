@@ -121,7 +121,7 @@ export class UserService {
      * @param data user data
      */
     update(data: UserRegistrationPayload): Observable<User> {
-        return this.http.patch<User>(this.localUrlV1 + this.currentUserLoginSubject.value.id,
+        return this.http.post<User>(this.localUrlV1 + this.currentUserLoginSubject.value.id,
             data).pipe(map (response => response));
     }
 

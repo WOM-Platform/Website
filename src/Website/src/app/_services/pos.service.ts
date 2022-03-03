@@ -27,9 +27,13 @@ export class PosService {
      * @param pos data to update
      */
     update(pos: Pos): Observable<Pos> {
-        return this.http.patch<Pos>(this.localUrlV1 + pos.id,
+        return this.http.put<Pos>(this.localUrlV1 + pos.id,
             {
-
+                name: pos.name,
+                latitude: pos.latitude,
+                longitude: pos.longitude,
+                url: pos.url,
+                isActive: pos.isActive
             })
             .pipe(map (response => response));
     }
@@ -39,7 +43,7 @@ export class PosService {
      * @param pos data of pos to create
      */
     register(pos: PosRegistration): Observable<Pos> {
-        return this.http.put<Pos>(this.localUrlV1,
+        return this.http.post<Pos>(this.localUrlV1,
             {
                 ownerMerchantId: pos.ownerMerchantId,
                 name: pos.name,
