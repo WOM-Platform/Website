@@ -62,7 +62,6 @@ export class UserHomeComponent implements OnInit, OnDestroy {
         posData.merchantId = merchantId;
         posData.pos = pos;
         posData.isEdit = true;
-        console.log(pos);
         this.openPosDialog(posData);
     }
 

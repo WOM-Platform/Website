@@ -107,6 +107,7 @@
       "CHECKBOX": "Register your Point Of Service (POS)",
       "SUBTITLE_A": "Fill out this part of the form in order to create a <b>Point of Service</b>&nbsp;(POS) instance for your Merchant account. You will be able to receive WOM payments straight away using your POS.",
       "SUBTITLE_B": "",
+      "IS_ACTIVE_TEXT": "De-select to disable this POS",
       "NAME": "Name",
       "NAME_ERROR": "Please insert a name for your POS",
       "NAME_TEXT": "POS name, will be shown to users while performing a payment.",

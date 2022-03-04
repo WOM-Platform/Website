@@ -14,6 +14,7 @@ export class PosFormComponent implements OnInit, AfterViewInit {
 
     posLon: string;
     posLat: string;
+    isActive: boolean;
     marker: google.maps.Marker;
     options: google.maps.MapOptions = {
         center: {lat: 45.788, lng: 9.948},
@@ -33,7 +34,7 @@ export class PosFormComponent implements OnInit, AfterViewInit {
             latitude: [{value: 0, disabled: true}, Validators.required],
             longitude: [{value: 0, disabled: true}, Validators.required],
             url: ['', !Validators.required],
-            isActive: ['', !Validators.required]
+            isActive: [{value: this.pos ? this.pos.isActive : true}, !Validators.required]
         });
 
         this.form.get('name').valueChanges.subscribe(value => this.formChange.emit(this.form));
@@ -51,14 +52,15 @@ export class PosFormComponent implements OnInit, AfterViewInit {
 
             this.posLat = this.pos.latitude.toFixed(5);
             this.posLon = this.pos.longitude.toFixed(5);
+            this.isActive = this.pos.isActive;
         }
     }
 
     ngAfterViewInit() {
-        const latLng = new google.maps.LatLng(this.pos.latitude, this.pos.longitude);
-        if(!google)
+        if(!this.pos || !google)
             return;
 
+        const latLng = new google.maps.LatLng(this.pos.latitude, this.pos.longitude);
         if (!this.marker) {
             this.marker = new google.maps.Marker({
                 position: latLng,
@@ -75,7 +77,6 @@ export class PosFormComponent implements OnInit, AfterViewInit {
     }
 
     mapClick(event): any {
-        console.log(event);
         const clickedLocation = event.latLng;
         if (!this.marker) {
             this.marker = new google.maps.Marker({
@@ -99,5 +100,10 @@ export class PosFormComponent implements OnInit, AfterViewInit {
 
         this.posLat = currentLocation.lat().toFixed(5);
         this.posLon = currentLocation.lng().toFixed(5);
+    }
+
+    onIsActiveChanged(event) {
+        console.log(this.isActive);
+        this.pos.isActive = this.isActive;
     }
 }
