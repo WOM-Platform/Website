@@ -1,8 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {UserService} from '../../_services/user.service';
-import {Merchant, Merchants} from '../../_models';
-import {MerchantService} from '../../_services/merchant.service';
-import {AuthService} from '../../_services';
+import {UserService, MerchantService, AuthService} from '../../_services';
+import {Merchant, Merchants, Pos} from '../../_models';
 import {MatDialog} from '@angular/material/dialog';
 import {AddMerchantDialogComponent, MerchantDialogData} from '../add-merchant/add-merchant.component';
 import {MatSnackBar} from '@angular/material/snack-bar';
@@ -44,9 +42,50 @@ export class UserHomeComponent implements OnInit, OnDestroy {
             response =>
             {
                 this.merchants = response;
+                console.log(response);
             }, error => {
                 console.log(error);
             });
+    }
+
+    addPos(merchantId: string): any {
+        const posData = new PosDialogData();
+        posData.merchantId = merchantId;
+        posData.isEdit = false;
+        posData.pos = null;
+
+        this.openPosDialog(posData);
+    }
+
+    editPos(merchantId: string, pos: Pos): void {
+        const posData = new PosDialogData();
+        posData.merchantId = merchantId;
+        posData.pos = pos;
+        posData.isEdit = true;
+        console.log(pos);
+        this.openPosDialog(posData);
+    }
+
+    openPosDialog(posData: PosDialogData): void {
+        const dialogRef = this.dialog.open(AddPosDialogComponent, {
+            data: posData
+        });
+        dialogRef.afterClosed().subscribe(result => {
+            if (result) {
+                this.loadData();
+                let successString;
+                if(posData.isEdit) {
+                    successString = 'USER.EDIT_POS.SUCCESS';
+                }
+                else {
+                    successString = 'USER.ADD_POS.SUCCESS';
+                }
+                this.translate.get(successString).pipe(first()).subscribe(
+                    response => {
+                        this.openSnackBar(response);
+                    });
+            }
+        });
     }
 
     addMerchant(): any {
@@ -60,38 +99,6 @@ export class UserHomeComponent implements OnInit, OnDestroy {
             if (result) {
                 this.loadData();
                 this.translate.get('USER.ADD_MERCHANT.SUCCESS').pipe(first()).subscribe(
-                    response => {
-                        this.openSnackBar(response);
-                    });
-            }
-        });
-    }
-
-    addPos(merchantId: string): any {
-        const posData = new PosDialogData();
-        posData.merchantId = merchantId;
-        posData.isEdit = false;
-
-        this.openPosDialog(posData);
-    }
-
-    editPos(merchantId: string, posId: string): void {
-        const posData = new PosDialogData();
-        posData.merchantId = merchantId;
-        posData.posId = posId;
-        posData.isEdit = true;
-
-        this.openPosDialog(posData);
-    }
-
-    openPosDialog(posData: PosDialogData): void {
-        const dialogRef = this.dialog.open(AddPosDialogComponent, {
-            data: posData
-        });
-        dialogRef.afterClosed().subscribe(result => {
-            if (result) {
-                this.loadData();
-                this.translate.get('USER.ADD_POS.SUCCESS').pipe(first()).subscribe(
                     response => {
                         this.openSnackBar(response);
                     });
@@ -119,7 +126,7 @@ export class UserHomeComponent implements OnInit, OnDestroy {
 
     openSnackBar(message = 'null'): any {
         this.snackBar.open(message, null, {
-            duration: 2000
+            duration: 5000
         });
     }
 }

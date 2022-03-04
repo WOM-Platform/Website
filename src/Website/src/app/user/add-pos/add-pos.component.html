@@ -4,7 +4,7 @@
     </ng-container>
     <ng-template #addPosTitle>
         {{"USER.ADD_POS.TITLE" | translate}}
-    </ng-template>{{"USER.ADD_POS.TITLE" | translate}}
+    </ng-template>
 </h2>
 <mat-dialog-content >
     <mat-error *ngIf="formInputError">
@@ -23,7 +23,7 @@
             {{"USER.ADD_POS.API_ERROR" | translate}}
         </ng-template>
     </mat-error>
-    <app-forms-pos [(form)]="formPos" [edit]="data.isEdit"></app-forms-pos>
+    <app-forms-pos [(form)]="formPos" [pos]="data.pos"></app-forms-pos>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
     <button mat-button mat-dialog-close>

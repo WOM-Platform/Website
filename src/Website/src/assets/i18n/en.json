@@ -58,7 +58,7 @@
   },
   "SIGN_UP": {
     "TITLE": "Sign up to the WOM Platform",
-    "SUBTITLE": "Fill in the form below to sign up to the <b>WOM&nbsp;Platform</b> as a <i>Merchant</i>, in order to start receiving payments.",
+    "SUBTITLE": "Fill in the form below to sign up to the <b>WOM&nbsp;Platform</b>.",
     "BTN_ALREADY_REGISTERED": "Already registered?",
     "NEXT": "Next",
     "BACK": "Back",
@@ -103,10 +103,10 @@
       "DESCRIPTION_TEXT": "Short description of your business and how you intend to monetize WOM Vouchers (goods or services)."
     },
     "POS": {
-      "TITLE": "Your first Point of Service",
-      "CHECKBOX": "Register your first Point Of Service (POS)",
+      "TITLE": "Your Point of Service",
+      "CHECKBOX": "Register your Point Of Service (POS)",
       "SUBTITLE_A": "Fill out this part of the form in order to create a <b>Point of Service</b>&nbsp;(POS) instance for your Merchant account. You will be able to receive WOM payments straight away using your POS.",
-      "SUBTITLE_B": "You will be able to create additional Points of Service after sign up.",
+      "SUBTITLE_B": "",
       "NAME": "Name",
       "NAME_ERROR": "Please insert a name for your POS",
       "NAME_TEXT": "POS name, will be shown to users while performing a payment.",
@@ -122,7 +122,7 @@
     "TC_ERROR": "Please accept the terms and conditions",
     "BTN_SIGN_UP": "Sign Up",
     "FISCAL_CODE_EXISTS_ERROR": "The merchant's fiscal code has already been used",
-    "EMAIL_EXISTS_ERROR": "This email address has already been used",
+    "EMAIL_EXISTS_ERROR": "This email address has already been used or the selected password is too weak.",
     "GENERIC_ERROR": "There are errors in the form data",
     "FORM_ERROR": "Error - check all fields and try again",
     "TIMEOUT_ERROR": "Server is taking too long to respond - make sure your internet connection is stable and try again"
@@ -141,7 +141,7 @@
         "ACTIVITY_TYPE": "Primary activity",
         "URL": "Website",
         "POS_TITLE": "POS",
-        "POS_SUBTITLE": "View & edit",
+        "POS_SUBTITLE": "List of POS",
         "ADD_POS_TOOLTIP": "Add a new Point of Service 'POS' for Merchant"
       }
     },
@@ -176,6 +176,7 @@
       "API_ERROR": "There are errors in the form or there is a problem contacting the server. Check the data and try again."
     },
     "EDIT_POS": {
+      "ADD": "Edit",
       "TITLE": "Update your Point Of Service",
       "SUCCESS": "POS updated!",
       "CANCEL": "Cancel",

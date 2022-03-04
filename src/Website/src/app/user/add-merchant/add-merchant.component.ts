@@ -2,7 +2,7 @@ import {ChangeDetectorRef, Component, Inject, OnInit} from '@angular/core';
 import {Merchant} from '../../_models';
 import {first} from 'rxjs/operators';
 import {FormGroup} from '@angular/forms';
-import {MerchantService} from '../../_services/merchant.service';
+import {MerchantService} from '../../_services';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {DialogType} from '../../_models/dialogType';
 
@@ -27,6 +27,7 @@ export class AddMerchantDialogComponent implements OnInit {
         this.merchantData = this.data.data;
         this.cd.detectChanges();
     }
+
     onSubmit(): any {
         switch (this.data.type) {
             case DialogType.create:
