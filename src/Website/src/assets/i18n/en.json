@@ -278,7 +278,8 @@
     "SECTION_A": {
       "TITLE": "Where do i spend my WOMs? How can I reward socially useful actions with WOMs?",
       "A": "Merchants are system components that can <b>create payment instances</b>. They can accept WOM vouchers in exchange for the services and discounts they offer. \nMerchants can <b>choose what type of vouchers they accept</b>. They can choose: vouchers generated only for a <b>given purpose</b> (thus promoting that social purpose), those generated in a given <b>geographical area</b> (thus encouraging social actions in their reality territorial), or those generated in a <b>defined time interval</b>. \nThe payment instances <b>do not involve money exchanges</b> but only discounts and gratuities.",
-      "B": "By accepting specific types of WOM vouchers, Merchants can indirectly contribute to a social campaign, encouraging citizens to contribute to the shared goal with their voluntary efforts. Also, merchants can increase their visibility to the community working towards the shared goal."
+      "B": "By accepting specific types of WOM vouchers, Merchants can indirectly contribute to a social campaign, encouraging citizens to contribute to the shared goal with their voluntary efforts. Also, merchants can increase their visibility to the community working towards the shared goal.",
+      "C": "Want to be a merchant? Sign in <a href='/authentication/signin'>here</a>"
     },
     "SECTION_B": {
       "TITLE": "POS",

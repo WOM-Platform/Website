@@ -280,7 +280,8 @@
     "SECTION_A": {
       "TITLE": "Dove spendo i miei WOM? Come posso premiare le azioni socialmente utili con i WOM?",
       "A": "I Merchants sono componenti di sistema che possono <b>creare istanze di pagamento</b>. Possono accettare i voucher WOM in cambio dei servizi e degli sconti che offrono.\nI Merchants possono <b>scegliere che tipo di voucher accettare</b>. Possono scegliere: i voucher generati solo per un <b>determinato scopo</b> (promuovendo così tale scopo sociale), quelli generati in una determinata <b>area geografica</b> (incoraggiando così le azioni sociali nella loro realtà territoriale), o quelli generati in un <b>intervallo di tempo definito</b>.\nLe istanze di pagamento <b>non prevedono scambi di denaro</b> ma solo sconti e gratuità.",
-      "B": "Accettando tipologie specifiche di voucher WOM, i Merchants possono contribuire indirettamente a una campagna sociale, incentivando i cittadini a contribuire all'obiettivo condiviso con i loro sforzi volontari. Inoltre, i Merchants possono aumentare la loro visibilità presso la comunità lavorando per raggiungere l'obiettivo condiviso."
+      "B": "Accettando tipologie specifiche di voucher WOM, i Merchants possono contribuire indirettamente a una campagna sociale, incentivando i cittadini a contribuire all'obiettivo condiviso con i loro sforzi volontari. Inoltre, i Merchants possono aumentare la loro visibilità presso la comunità lavorando per raggiungere l'obiettivo condiviso.",
+      "C": "Vuoi registrarti come merchant? Accedi <a href='/authentication/signin'>qui</a>"
     },
     "SECTION_B": {
       "TITLE": "POS",
