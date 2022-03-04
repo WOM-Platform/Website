@@ -1,6 +1,10 @@
 # BUILD step
 FROM node:17.4 as build
 
+# Import variables
+ARG ARG_GOOGLE_MAPS_API
+ENV GOOGLE_MAPS_API=$ARG_GOOGLE_MAPS_API
+
 WORKDIR /app
 
 # Add `/app/node_modules/.bin` to $PATH
