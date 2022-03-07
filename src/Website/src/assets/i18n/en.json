@@ -307,7 +307,7 @@
   "APPLICATIONS": {
     "STEPCOUNTER": {
       "TITLE": "WOM Stepcounter",
-      "MAIN_CONTENT": "<p>Tieni il conto dei tuoi passi con WOM Step Counter, la prima app che premia ciò che fai abitualmente!</p> <p>Grazie a WOM Step Counter poi trasformare i tuoi passi in WOM, i voucher digitali che premiano l’impegno sociale. Inizierai a collezionare WOM dopo aver superato i 3000 passi.</p>"
+      "MAIN_CONTENT": "<p>Keep track of the steps you take with WOM StepCounter, an app that rewards you for the things you do in your daily life!</p> <p>Thanks to WOM StepCounter you will be able to convert your steps into digital vouchers, that reward social effort. You will receive vouchers if you keep track of more than 3.000 steps per day.</p>"
     }
   }
 }
