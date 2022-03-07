@@ -4,7 +4,7 @@
   "NAV": {
     "HOME": "Home",
     "VOLUNTEERS": "Volontari",
-    "ABOUT": "Che cos'è",
+    "ABOUT": "Che cos’è",
     "INSTRUMENT": "Instrument",
     "SIGN_IN": "Login",
     "MERCHANT": "Merchant",
@@ -13,7 +13,7 @@
   },
   "BREADCRUMBS": {
     "HOME": "Home",
-    "ABOUT": "Che cos'è",
+    "ABOUT": "Che cos’è",
     "VOLUNTEER": "Volontari",
     "MERCHANT": "Merchant",
     "INSTRUMENT": "Instrument",
@@ -31,16 +31,16 @@
       "RESET_PASSWORD": "Recupero password",
       "NEW_PASSWORD": "Richiesta nuova password"
     },
+    "APPLICATIONS": {
+      "APPLICATIONS": "Applicazioni",
+      "STEPCOUNTER": "Contapassi"
+    },
     "PRIVACY": {
-      "PRIVACY": "Privacy",
+      "PRIVACY": "Informativa sulla privacy",
       "POS": "POS",
       "POCKET": "Pocket",
       "INSTRUMENT": "Instrument",
-      "STEPCOUNTER": {
-        "TITLE": "Step Counter",
-        "PRIVACY": "Privacy",
-        "TC": "Termini e Condizioni"
-      }
+      "STEPCOUNTER": "Contapassi"
     }
   },
   "SIGN_IN": {
@@ -58,7 +58,7 @@
   },
   "SIGN_UP": {
     "TITLE": "Registrati alla piattaforma WOM",
-    "SUBTITLE": "Compila il form sottostante per registrarti alla Piattaforma <b>WOM&nbsp;</b> come <i>Merchant</i>, in modo da iniziare a ricevere pagamenti.",
+    "SUBTITLE": "Compila il form sottostante per registrarti alla Piattaforma <b>WOM&nbsp;</b>.",
     "BTN_ALREADY_REGISTERED": "Già registrato?",
     "NEXT": "Avanti",
     "BACK": "Indietro",
@@ -66,7 +66,7 @@
     "REPRESENTATIVE": {
       "STEPPER_TITLE": "Dati personali",
       "TITLE": "Rappresentante",
-      "EMAIL": "Indirizzo E-mail",
+      "EMAIL": "Indirizzo e-mail",
       "EMAIL_ERROR": "Inserisci un indirizzo email valido",
       "PASSWORD": "Password",
       "REPEAT_PASSWORD": "Ripeti la password",
@@ -104,10 +104,11 @@
       "DESCRIPTION_TEXT": "Una breve descrizione della propria attività e come intendi monetizzare i Voucher WOM (beni o servizi)."
     },
     "POS": {
-      "TITLE": "Il tuo primo <i>Point of Service</i>",
-      "CHECKBOX": "Registera il tuo primo Point Of Service (POS)",
+      "TITLE": "Il tuo <i>Point of Service</i>",
+      "CHECKBOX": "Registera il tuo Point Of Service (POS)",
       "SUBTITLE_A": "Compila questa parte del form per creare una istanza di un <b>Point of Service</b>&nbsp;(POS) per il tuo account da Merchant. Potrai ricevere pagamenti in WOM&nbsp; fin da subito utilizzando il tuo POS.",
-      "SUBTITLE_B": "Potrai creare altri Point of Service dopo la registrazione.",
+      "SUBTITLE_B": "",
+      "IS_ACTIVE_TEXT": "De-seleziona per disattivare il POS",
       "NAME": "Nome",
       "NAME_ERROR": "Inserisci un nome per il POS",
       "NAME_TEXT": "Nome del POS, sarà visualizzato dagli utenti durante un pagamento.",
@@ -122,7 +123,7 @@
     "TERMS_CONDITIONS": "Accetta i termini e le condizioni di utilizzo",
     "TC_ERROR": "Accetta i termini e condizioni per continuare",
     "BTN_SIGN_UP": "Registrati",
-    "EMAIL_EXISTS_ERROR": "Questo indirizzo email è stato già utilizzato.",
+    "EMAIL_EXISTS_ERROR": "Questo indirizzo email è stato già utilizzato oppure la password selezionata è troppo debole.",
     "FISCAL_CODE_EXISTS_ERROR": "Il codice fiscale del Merchant è stato già utilizzato.",
     "GENERIC_ERROR": "Ci sono degli errori nei dati immessi.",
     "FORM_ERROR": "Errore - controlla tutti i campi e riprova",
@@ -142,7 +143,7 @@
         "ACTIVITY_TYPE": "Attività primaria",
         "URL": "Sito web",
         "POS_TITLE": "POS",
-        "POS_SUBTITLE": "Visualizza o modifica",
+        "POS_SUBTITLE": "lista dei POS",
         "ADD_POS_TOOLTIP": "Aggiungi un nuovo punto di servizio 'POS' per il Merchant"
       }
     },
@@ -172,9 +173,17 @@
       "TITLE": "Aggiungi un nuovo POS",
       "CANCEL": "Annulla",
       "ADD": "Aggiungi",
-      "SUCCESS": "POS aggiunto",
+      "SUCCESS": "POS aggiunto!",
       "INPUT_ERROR": "Compila i campi in rosso per continuare e assicurati di aver selezionato una posizione sulla mappa.",
       "API_ERROR": "Ci sono alcuni errori nei dati o un problema di connessione con il server. Controlla i dati e riprova."
+    },
+    "EDIT_POS": {
+      "TITLE": "Modifica il POS",
+      "ADD": "Modifica",
+      "SUCCESS": "POS aggiornato!",
+      "CANCEL": "Annulla",
+      "API_ERROR": "Ci sono alcuni errori nei dati o un problema di connessione con il server. Controlla i dati e riprova.",
+      "INPUT_ERROR": "Compila i campi in rosso per continuare e assicurati di aver selezionato una posizione sulla mappa."
     }
   },
   "RESET_PASSWORD": {
@@ -271,7 +280,8 @@
     "SECTION_A": {
       "TITLE": "Dove spendo i miei WOM? Come posso premiare le azioni socialmente utili con i WOM?",
       "A": "I Merchants sono componenti di sistema che possono <b>creare istanze di pagamento</b>. Possono accettare i voucher WOM in cambio dei servizi e degli sconti che offrono.\nI Merchants possono <b>scegliere che tipo di voucher accettare</b>. Possono scegliere: i voucher generati solo per un <b>determinato scopo</b> (promuovendo così tale scopo sociale), quelli generati in una determinata <b>area geografica</b> (incoraggiando così le azioni sociali nella loro realtà territoriale), o quelli generati in un <b>intervallo di tempo definito</b>.\nLe istanze di pagamento <b>non prevedono scambi di denaro</b> ma solo sconti e gratuità.",
-      "B": "Accettando tipologie specifiche di voucher WOM, i Merchants possono contribuire indirettamente a una campagna sociale, incentivando i cittadini a contribuire all'obiettivo condiviso con i loro sforzi volontari. Inoltre, i Merchants possono aumentare la loro visibilità presso la comunità lavorando per raggiungere l'obiettivo condiviso."
+      "B": "Accettando tipologie specifiche di voucher WOM, i Merchants possono contribuire indirettamente a una campagna sociale, incentivando i cittadini a contribuire all'obiettivo condiviso con i loro sforzi volontari. Inoltre, i Merchants possono aumentare la loro visibilità presso la comunità lavorando per raggiungere l'obiettivo condiviso.",
+      "C": "Vuoi registrarti come merchant? Accedi <a href='/authentication/signin'>qui</a>"
     },
     "SECTION_B": {
       "TITLE": "POS",
@@ -289,6 +299,20 @@
     },
     "STATS": {
       "AVAILABLE": "WOM in circolazione"
+    }
+  },
+  "TERMS_CONDITIONS": {
+    "MAIN_TEXT": "Le diamo il benvenuto su WOM!\n\nI termini e le condizioni seguenti indicano regole e normative per l'utilizzo del sito di DIGIT srl, all'indirizzo https://wom.social.\n\nAccedendo a questo sito, Lei accetta i termini e le condizioni seguenti. Le chiediamo di non continuare a registrarti al servizio WOM nel caso in cui non fosse d'accordo con tutti i termini e le condizioni in questa pagina.\n\nLicenza:\n\nA meno che indicato altrimenti, DIGIT srl e/o gli affiliati con licenza detengono i diritti di proprietà intellettuale per tutto il materiale su WOM. Tutti i diritti di proprietà intellettuale sono riservati. \n\nIl presente accordo ha inizio dalla data di registrazione.\n\nResponsabilità sui contenuti:\n\nNon possiamo essere ritenuti responsabili per i contenuti presenti sul Suo sito. Accetta di proteggerci e difenderci da qualsiasi azione legale proveniente dal Suo sito. Non devono essere aggiunti collegamenti sul Suo sito che potrebbero essere interpretati come calunniosi, osceni, criminali o che infrangono, violano o suggeriscono la violazione di diritti di terzi.\n\nDiritti riservati:\n\nCi riserviamo il diritto di richiedere la rimozione di tutti i collegamenti o di un collegamento specifico al nostro sito. Deve approvare immediatamente la richiesta di rimozione dei collegamenti. Ci riserviamo il diritto di modificare termini e condizioni, oltre che politica di collegamento in qualsiasi momento. Continuando a usare il nostro sito, accetta di essere vincolato dai presenti termini e condizioni.\n\nRimozione di collegamenti dal nostro sito:\n\nNel caso in cui un collegamento sul nostro sito sia offensivo per qualsiasi motivo, può contattarci e informarci in qualsiasi momento. Considereremo le richieste di rimozione dei collegamenti, tuttavia non siamo obbligati a completare la rimozione o rispondere direttamente.\n\nNon garantiamo l'accuratezza delle informazioni presenti sul sito. Non garantiamo che le informazioni siano complete o precise, né promettiamo di assicurare che il sito resti disponibile o che il materiale sul sito venga costantemente aggiornato.\n\nEsclusione di responsabilità:\n\nNella misura massima consentita dalla legge, escludiamo ogni rappresentanza, garanzia e condizione correlata al nostro sito e all'uso dello stesso. \n\nLe limitazioni e i divieti di responsabilità indicati in questa sezione e in altre parti di questa esclusione di responsabilità: (a) sono soggetti al paragrafo precedente; (b) governano tutte le responsabilità correlate a questa esclusione di responsabilità, incluse quelle correlate a contratto, torto o violazione di obblighi normativi.\n\nSe sito, informazioni e servizi vengono forniti gratuitamente, non possiamo essere ritenuti responsabili per perdite o danni di qualsiasi natura.\n"
+  },
+  "PRIVACY": {
+    "STEPCOUNTER": {
+      "TITLE": "Informativa sulla privacy ‘WOM Contapassi’"
+    }
+  },
+  "APPLICATIONS": {
+    "STEPCOUNTER": {
+      "TITLE": "WOM Contapassi",
+      "MAIN_CONTENT": "<p>Tieni il conto dei tuoi passi con WOM Step Counter, la prima app che premia ciò che fai abitualmente!</p> <p>Grazie a WOM Step Counter poi trasformare i tuoi passi in WOM, i voucher digitali che premiano l’impegno sociale. Inizierai a collezionare WOM dopo aver superato i 3000 passi.</p>"
     }
   }
 }

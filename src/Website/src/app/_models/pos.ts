@@ -2,10 +2,11 @@ export class Pos {
   id: string;
   name: string;
   url: string;
-  privateKey: string;
-  publicKey: string;
+  // privateKey: string;
+  // publicKey: string;
   latitude: number;
   longitude: number;
+  isActive: boolean;
 
   public static fromJson(json): any {
     if (json === null) {

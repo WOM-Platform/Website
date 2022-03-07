@@ -8,8 +8,6 @@ import {EventEmitter} from '@angular/core';
     styleUrls: ['./forms-user.directive.css', '../forms.directive.css']
 })
 export class UserFormComponent implements OnInit, OnChanges {
-    posLon: string;
-    posLat: string;
 
     @Input() form: FormGroup;
     @Input() disabled: boolean;

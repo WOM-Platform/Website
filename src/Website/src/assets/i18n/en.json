@@ -31,16 +31,16 @@
       "RESET_PASSWORD": "Password recovery",
       "NEW_PASSWORD": "Request new password"
     },
+    "APPLICATIONS": {
+      "APPLICATIONS": "Applications",
+      "STEPCOUNTER": "Stepcounter"
+    },
     "PRIVACY": {
-      "PRIVACY": "Privacy",
-      "POS": "POS",
+      "PRIVACY": "Privacy policy",
+      "POS": "Point of Service",
       "POCKET": "Pocket",
       "INSTRUMENT": "Instrument",
-      "STEPCOUNTER": {
-        "TITLE": "Step Counter",
-        "PRIVACY": "Privacy",
-        "STEPCOUNTER_TC": "Terms & Conditions"
-      }
+      "STEPCOUNTER": "Stepcounter"
     }
   },
   "SIGN_IN": {
@@ -58,7 +58,7 @@
   },
   "SIGN_UP": {
     "TITLE": "Sign up to the WOM Platform",
-    "SUBTITLE": "Fill in the form below to sign up to the <b>WOM&nbsp;Platform</b> as a <i>Merchant</i>, in order to start receiving payments.",
+    "SUBTITLE": "Fill in the form below to sign up to the <b>WOM&nbsp;Platform</b>.",
     "BTN_ALREADY_REGISTERED": "Already registered?",
     "NEXT": "Next",
     "BACK": "Back",
@@ -103,10 +103,11 @@
       "DESCRIPTION_TEXT": "Short description of your business and how you intend to monetize WOM Vouchers (goods or services)."
     },
     "POS": {
-      "TITLE": "Your first Point of Service",
-      "CHECKBOX": "Register your first Point Of Service (POS)",
+      "TITLE": "Your Point of Service",
+      "CHECKBOX": "Register your Point Of Service (POS)",
       "SUBTITLE_A": "Fill out this part of the form in order to create a <b>Point of Service</b>&nbsp;(POS) instance for your Merchant account. You will be able to receive WOM payments straight away using your POS.",
-      "SUBTITLE_B": "You will be able to create additional Points of Service after sign up.",
+      "SUBTITLE_B": "",
+      "IS_ACTIVE_TEXT": "De-select to disable this POS",
       "NAME": "Name",
       "NAME_ERROR": "Please insert a name for your POS",
       "NAME_TEXT": "POS name, will be shown to users while performing a payment.",
@@ -122,7 +123,7 @@
     "TC_ERROR": "Please accept the terms and conditions",
     "BTN_SIGN_UP": "Sign Up",
     "FISCAL_CODE_EXISTS_ERROR": "The merchant's fiscal code has already been used",
-    "EMAIL_EXISTS_ERROR": "This email address has already been used",
+    "EMAIL_EXISTS_ERROR": "This email address has already been used or the selected password is too weak.",
     "GENERIC_ERROR": "There are errors in the form data",
     "FORM_ERROR": "Error - check all fields and try again",
     "TIMEOUT_ERROR": "Server is taking too long to respond - make sure your internet connection is stable and try again"
@@ -141,7 +142,7 @@
         "ACTIVITY_TYPE": "Primary activity",
         "URL": "Website",
         "POS_TITLE": "POS",
-        "POS_SUBTITLE": "View & edit",
+        "POS_SUBTITLE": "List of POS",
         "ADD_POS_TOOLTIP": "Add a new Point of Service 'POS' for Merchant"
       }
     },
@@ -171,9 +172,17 @@
       "TITLE": "Add a new Point Of Service",
       "CANCEL": "Cancel",
       "ADD": "Add",
-      "SUCCESS": "POS added",
+      "SUCCESS": "POS added!",
       "INPUT_ERROR": "Please fill out the form and make sure you have selected a location on the map.",
       "API_ERROR": "There are errors in the form or there is a problem contacting the server. Check the data and try again."
+    },
+    "EDIT_POS": {
+      "ADD": "Edit",
+      "TITLE": "Update your Point Of Service",
+      "SUCCESS": "POS updated!",
+      "CANCEL": "Cancel",
+      "API_ERROR": "There are errors in the form or there is a problem contacting the server. Check the data and try again.",
+      "INPUT_ERROR": "Please fill out the form and make sure you have selected a location on the map."
     }
   },
   "RESET_PASSWORD": {
@@ -264,12 +273,13 @@
         "TITLE": "Search in a specific place:",
         "PLACEHOLDER": "Address, City, ..."
       },
-      "BTN_SEARCH": "Cerca"
+      "BTN_SEARCH": "Search"
     },
     "SECTION_A": {
       "TITLE": "Where do i spend my WOMs? How can I reward socially useful actions with WOMs?",
       "A": "Merchants are system components that can <b>create payment instances</b>. They can accept WOM vouchers in exchange for the services and discounts they offer. \nMerchants can <b>choose what type of vouchers they accept</b>. They can choose: vouchers generated only for a <b>given purpose</b> (thus promoting that social purpose), those generated in a given <b>geographical area</b> (thus encouraging social actions in their reality territorial), or those generated in a <b>defined time interval</b>. \nThe payment instances <b>do not involve money exchanges</b> but only discounts and gratuities.",
-      "B": "By accepting specific types of WOM vouchers, Merchants can indirectly contribute to a social campaign, encouraging citizens to contribute to the shared goal with their voluntary efforts. Also, merchants can increase their visibility to the community working towards the shared goal."
+      "B": "By accepting specific types of WOM vouchers, Merchants can indirectly contribute to a social campaign, encouraging citizens to contribute to the shared goal with their voluntary efforts. Also, merchants can increase their visibility to the community working towards the shared goal.",
+      "C": "Want to be a merchant? Sign in <a href='/authentication/signin'>here</a>"
     },
     "SECTION_B": {
       "TITLE": "POS",
@@ -287,6 +297,17 @@
     },
     "STATS": {
       "AVAILABLE": "WOMs in circulation"
+    }
+  },
+  "PRIVACY": {
+    "STEPCOUNTER": {
+      "TITLE": "‘WOM Stepcounter’ privacy policy"
+    }
+  },
+  "APPLICATIONS": {
+    "STEPCOUNTER": {
+      "TITLE": "WOM Stepcounter",
+      "MAIN_CONTENT": "<p>Tieni il conto dei tuoi passi con WOM Step Counter, la prima app che premia ciò che fai abitualmente!</p> <p>Grazie a WOM Step Counter poi trasformare i tuoi passi in WOM, i voucher digitali che premiano l’impegno sociale. Inizierai a collezionare WOM dopo aver superato i 3000 passi.</p>"
     }
   }
 }

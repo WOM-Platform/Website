@@ -43,11 +43,11 @@
                 }
               ]
             },
+            "development":{
+              "sourceMap": true,
+              "optimization": false
+            },
             "production": {
-              "index": {
-                "input": "src/index-prod.html",
-                "output": "index.html"
-              },
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -82,6 +82,9 @@
             "browserTarget": "src:build"
           },
           "configurations": {
+            "development": {
+              "browserTarget": "src:build:development"
+            },
             "production": {
               "browserTarget": "src:build:production"
             },

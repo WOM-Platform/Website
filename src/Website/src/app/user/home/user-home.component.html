@@ -19,6 +19,12 @@
                         <mat-expansion-panel>
                             <mat-expansion-panel-header>
                                 <mat-panel-title>
+                                    <button mat-icon-button
+                                            color="primary"
+                                            matTooltip="{{'USER.HOME.EDIT_MERCHANT_TOOLTIP' | translate}}"
+                                            (click)="editMerchant(merchant)">
+                                        <mat-icon>edit</mat-icon>
+                                    </button>
                                     {{merchant.name}}
                                 </mat-panel-title>
                             </mat-expansion-panel-header>
@@ -46,12 +52,12 @@
                             <p *ngIf="merchant.description">
                                 {{merchant.description}}
                             </p>
-                            <button mat-raised-button
+                            <!--<button mat-raised-button
                                     color="primary"
                                     matTooltip="{{'USER.HOME.EDIT_MERCHANT_TOOLTIP' | translate}}"
                                     (click)="editMerchant(merchant)">
                                 {{"USER.HOME.EDIT_MERCHANT_BTN" | translate}}
-                            </button>
+                            </button>-->
                             <!-- POS LIST -->
                             <mat-card class="pos-card">
                                 <mat-card-header>
@@ -68,7 +74,12 @@
                                 </mat-card-header>
                                     <ng-container *ngFor="let pos of merchant.pos">
                                         <mat-card-content>
-                                        {{pos.name}}
+                                            <button mat-icon-button
+                                                    color="primary"
+                                                    (click)="editPos(merchant.id, pos)">
+                                                <mat-icon>edit</mat-icon>
+                                            </button>
+                                        <button mat-button (click)="editPos(merchant.id, pos)">{{pos.name}}</button>
                                         </mat-card-content>
                                     </ng-container>
                             </mat-card>

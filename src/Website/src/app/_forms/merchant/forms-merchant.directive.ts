@@ -22,9 +22,9 @@ export class MerchantFormComponent implements OnInit {
             name: ['', [Validators.required, Validators.minLength(8)]],
             fiscalCode: [
                 {value: '', disabled: this.merchant !== null},
-                [Validators.required, Validators.minLength(16), Validators.maxLength(16)]
+                [Validators.required, Validators.minLength(11), Validators.maxLength(16)]
             ],
-            address: ['', !Validators.required],
+            address: ['', Validators.required],
             cap: ['', Validators.required],
             city: ['', Validators.required],
             country: ['', Validators.required],

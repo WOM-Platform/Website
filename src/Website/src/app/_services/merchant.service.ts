@@ -26,7 +26,7 @@ export class MerchantService {
      * @param merchant data to update
      */
     update(merchant: Merchant): Observable<Merchant> {
-        return this.http.patch<Merchant>(this.localUrlV1 + merchant.id,
+        return this.http.put<Merchant>(this.localUrlV1 + merchant.id,
             {
                 name: merchant.name,
                 fiscalCode: merchant.fiscalCode,
@@ -46,7 +46,7 @@ export class MerchantService {
      * @param merchant data of merchant to create
      */
     register(merchant: Merchant): Observable<Merchant> {
-        return this.http.put<Merchant>(this.localUrlV1,
+        return this.http.post<Merchant>(this.localUrlV1,
             {
                 name: merchant.name,
                 fiscalCode: merchant.fiscalCode,

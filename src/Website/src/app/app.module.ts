@@ -1,7 +1,7 @@
-import { BrowserModule } from '@angular/platform-browser';
+import {BrowserModule} from '@angular/platform-browser';
 import {APP_INITIALIZER, NgModule} from '@angular/core';
 
-import { AppComponent } from './app.component';
+import {AppComponent} from './app.component';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {HttpClientModule, HTTP_INTERCEPTORS, HttpClient} from '@angular/common/http';
 import {appRoutingModule} from './app.routing';
@@ -9,7 +9,7 @@ import {RouterModule} from '@angular/router';
 import {TranslateLoader, TranslateModule, TranslateService} from '@ngx-translate/core';
 import {HomeComponent} from './home';
 import {NavComponent} from './nav/nav.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatIconModule} from '@angular/material/icon';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatButtonModule} from '@angular/material/button';
@@ -35,6 +35,7 @@ import {PrivacyComponent} from './privacy/privacy.component';
 import {PrivacyInstrumentComponent} from './privacy/instrument/instrument.component';
 import {PrivacyPocketComponent} from './privacy/pocket/pocket.component';
 import {PrivacyPosComponent} from './privacy/pos/pos.component';
+import {PrivacyStepcounterComponent} from './privacy/stepcounter/stepcounter.component';
 import {HttpMockRequestInterceptor} from './_helpers/HttpMockRequestInterceptor';
 
 import {environment} from '../environments/environment';
@@ -61,12 +62,11 @@ import {VolunteerComponent} from './volunteer/volunteer.component';
 import {AboutComponent} from './about/about.component';
 import {BreadcrumbsComponent} from './breadcrumbs/breadcrumbs.component';
 import {MatGridListModule} from '@angular/material/grid-list';
-import { GoogleMapsModule } from '@angular/google-maps';
+import {GoogleMapsModule} from '@angular/google-maps';
 import {BreadcrumbModule} from 'primeng/breadcrumb';
 import {CommonModule} from '@angular/common';
-import {StepcounterTcComponent} from './privacy/stepCounter/tc/stepcounter_tc.component';
-import {StepcounterPrivacyComponent} from './privacy/stepCounter/privacy/stepcounter_privacy.component';
-
+import {ApplicationsComponent} from './applications/applications.component';
+import {ApplicationsStepcounterComponent} from './applications/stepcounter/stepcounter.component';
 
 // AoT requires an exported function for factories
 export const createTranslateLoader = (http: HttpClient) => new TranslateHttpLoader(http, './assets/i18n/', '.json?cb=' + environment.i18n);
@@ -113,8 +113,9 @@ export const isMock = environment.mock;
     VolunteerComponent,
     AboutComponent,
     BreadcrumbsComponent,
-    StepcounterTcComponent,
-    StepcounterPrivacyComponent
+    ApplicationsComponent,
+    ApplicationsStepcounterComponent,
+    PrivacyStepcounterComponent
   ],
   exports: [
       MatStepperModule,

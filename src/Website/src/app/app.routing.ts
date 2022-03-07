@@ -7,6 +7,7 @@ import {PrivacyComponent} from './privacy/privacy.component';
 import {PrivacyPosComponent} from './privacy/pos/pos.component';
 import {PrivacyPocketComponent} from './privacy/pocket/pocket.component';
 import {PrivacyInstrumentComponent} from './privacy/instrument/instrument.component';
+import {PrivacyStepcounterComponent} from './privacy/stepcounter/stepcounter.component';
 import {UserHomeComponent} from './user/home/user-home.component';
 import {UserNotVerifiedComponent} from './user/not-verified/user-not-verified.component';
 import {ResetPasswordComponent} from './authentication/reset-password/reset-password.component';
@@ -17,8 +18,8 @@ import {MerchantComponent} from './merchant/merchant.component';
 import {VolunteerComponent} from './volunteer/volunteer.component';
 import {InstrumentComponent} from './instrument/instrument.component';
 import {AboutComponent} from './about/about.component';
-import {StepcounterPrivacyComponent} from './privacy/stepCounter/privacy/stepcounter_privacy.component';
-import {StepcounterTcComponent} from './privacy/stepCounter/tc/stepcounter_tc.component';
+import {ApplicationsComponent} from './applications/applications.component';
+import {ApplicationsStepcounterComponent} from './applications/stepcounter/stepcounter.component';
 
 const routes: Routes = [
   {
@@ -135,6 +136,22 @@ const routes: Routes = [
         ]
       },
       {
+        path: 'applications',
+        component: ApplicationsComponent,
+        data: {
+          breadcrumb: 'BREADCRUMBS.APPLICATIONS.APPLICATIONS'
+        },
+        children: [
+          {
+            path: 'stepcounter',
+            component: ApplicationsStepcounterComponent,
+            data: {
+              breadcrumb: 'BREADCRUMBS.APPLICATIONS.STEPCOUNTER'
+            },
+          }
+        ],
+      },
+      {
         path: 'privacy',
         component : PrivacyComponent,
         data: {
@@ -164,23 +181,10 @@ const routes: Routes = [
           },
           {
             path: 'stepcounter',
+            component : PrivacyStepcounterComponent,
             data: {
-              breadcrumb: 'BREADCRUMBS.PRIVACY.STEPCOUNTER.TITLE'
-            }, children: [
-            {
-              path: 'privacy',
-              component: StepcounterPrivacyComponent,
-              data: {
-                breadcrumb: 'BREADCRUMBS.PRIVACY.STEPCOUNTER.PRIVACY'
-              }
+              breadcrumb: 'BREADCRUMBS.PRIVACY.STEPCOUNTER'
             },
-            {
-              path: 'tc',
-              component: StepcounterTcComponent,
-              data: {
-                breadcrumb: 'BREADCRUMBS.PRIVACY.STEPCOUNTER.TC'
-              }
-            }]
           }
         ]
       },

@@ -6,7 +6,7 @@
     <p [innerHTML]="'SIGN_UP.POS.SUBTITLE_B' | translate"></p>
     <table class="full-width">
         <tr>
-            <td colspan="2">
+            <td colspan="1">
                 <mat-form-field class="example-full-width">
                     <label>
                         <input matInput type="text" placeholder="{{ 'SIGN_UP.POS.NAME' | translate }}" formControlName="name">
@@ -15,6 +15,14 @@
                         {{'SIGN_UP.POS.NAME_ERROR' | translate}}
                     </mat-error>
                 </mat-form-field>
+            </td>
+            <td colspan="1" [hidden]="!pos">
+                <mat-checkbox
+                        formControlName="isActive"
+                        [(ngModel)]="isActive"
+                        (change)="onIsActiveChanged($event)">
+                    {{'SIGN_UP.POS.IS_ACTIVE_TEXT' | translate}}
+                </mat-checkbox>
             </td>
         </tr>
         <tr>

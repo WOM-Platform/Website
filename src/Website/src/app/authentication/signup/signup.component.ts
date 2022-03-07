@@ -1,13 +1,12 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
-import {UserService} from '../../_services/user.service';
+import {UserService, MerchantService, PosService} from '../../_services';
 import {Merchant, PosRegistration, UserRegistrationPayload} from '../../_models';
 import {first} from 'rxjs/operators';
-import {MerchantService} from '../../_services/merchant.service';
-import {PosService} from '../../_services/pos.service';
 import {MatDialog} from '@angular/material/dialog';
 import {LogInErrorDialogComponent} from './signup-login-error.directive';
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
   selector: 'app-merchant-signup',
@@ -15,79 +14,92 @@ import {LogInErrorDialogComponent} from './signup-login-error.directive';
   styleUrls: ['./signup.component.css']
 })
 export class MerchantSignUpComponent implements OnInit {
-  form: FormGroup;
-  formMerchant: FormGroup;
-  formPos: FormGroup;
-  formSubmit: FormGroup;
-  errorMessage: string;
+    formUser: FormGroup;
+    formMerchant: FormGroup;
+    formPos: FormGroup;
+    formSubmit: FormGroup;
+    errorMessage: string;
 
-  signupInvalid: boolean;
-  signupTimeout: boolean;
-  signupComplete: boolean;
-  returnUrl: string;
-  requireMerchantRegistration: boolean;
-  requirePosRegistration: boolean;
-  termsConditionsChecked: boolean;
-  termsAndConditionsText: string;
-  userRegistered = false;
-  userSignedIn = false;
+    signupInvalid: boolean;
+    signupTimeout: boolean;
+    signupComplete: boolean;
+    returnUrl: string;
+    requireMerchantRegistration: boolean;
+    requirePosRegistration: boolean;
+    termsConditionsChecked: boolean;
+    termsAndConditionsText: string;
+    userRegistered = false;
+    userSignedIn = false;
 
-  // Spinner
-  color = 'primary';
-  mode = 'indeterminate';
-  value = 50;
-  displayProgressSpinner = false;
+      // Spinner
+      color = 'primary';
+      mode = 'indeterminate';
+      value = 50;
+      displayProgressSpinner = false;
 
-  constructor(public dialog: MatDialog,
-              private fb: FormBuilder,
-              private route: ActivatedRoute,
-              private router: Router,
-              private userService: UserService,
-              private merchantService: MerchantService,
-              private posService: PosService) {
-      this.termsAndConditionsText = 'Insert t&c text here';
-  }
+      constructor(public dialog: MatDialog,
+                  private fb: FormBuilder,
+                  private route: ActivatedRoute,
+                  private router: Router,
+                  private userService: UserService,
+                  private merchantService: MerchantService,
+                  private posService: PosService,
+                  private  translate: TranslateService) {
+          this.termsAndConditionsText = translate.instant('TERMS_CONDITIONS.MAIN_TEXT');
+      }
 
-  async ngOnInit(): Promise<void> {
-    this.returnUrl = this.route.snapshot.queryParams.returnUrl || '/home';
+    async ngOnInit(): Promise<void> {
+        this.returnUrl = this.route.snapshot.queryParams.returnUrl || '/home';
 
-    this.formSubmit = this.fb.group({
-      termsConditionsCheckbox: ['', Validators.requiredTrue],
-        tcInfo: [{value: this.termsAndConditionsText, disabled: true}, !Validators.required]
-    });
-  }
-
-  onSubmit(): any {
-    this.errorMessage = '';
-    this.signupInvalid = false;
-    this.signupComplete = false;
-    this.showProgressSpinner();
-
-    const merchantFormValid = this.requireMerchantRegistration
-        ? (this.formMerchant !== undefined && this.formMerchant.valid)
-        : true;
-    const posFormValid = this.requirePosRegistration
-        ? (this.formPos !== undefined && this.formPos.valid)
-        : true;
-
-    if (!this.form.valid || !this.formSubmit.valid || !merchantFormValid || !posFormValid) {
-        this.signupInvalid = true;
-        this.signupComplete = true;
-        this.displayProgressSpinner = false;
-
-        return;
+        this.formSubmit = this.fb.group({
+          termsConditionsCheckbox: ['', Validators.requiredTrue],
+            tcInfo: [{value: this.termsAndConditionsText, disabled: true}, !Validators.required]
+        });
     }
 
-    const userData: UserRegistrationPayload = new UserRegistrationPayload() ;
-    userData.email = this.form.controls.email.value;
-    userData.name = this.form.controls.firstName.value;
-    userData.password = this.form.controls.password.value;
-    userData.surname = this.form.controls.lastName.value;
+    onSubmit(): any {
+        this.errorMessage = '';
+        this.signupInvalid = false;
+        this.signupComplete = false;
+        //this.showProgressSpinner();
 
-    if (this.userRegistered) {
-        this.logIn(userData.email, userData.password);
-        return;
-    }
+          /*
+        const merchantFormValid = this.requireMerchantRegistration
+            ? (this.formMerchant !== undefined && this.formMerchant.valid)
+            : true;
+        const posFormValid = this.requirePosRegistration
+            ? (this.formPos !== undefined && this.formPos.valid)
+            : true;
+
+        if (!this.form.valid || !this.formSubmit.valid || !merchantFormValid || !posFormValid) {
+            this.signupInvalid = true;
+            this.signupComplete = true;
+            this.displayProgressSpinner = false;
+
+            return;
+        }
+        */
+
+        if (!this.formUser || !this.formUser.valid || !this.formSubmit.valid) {
+              this.signupInvalid = true;
+              this.signupComplete = true;
+              this.displayProgressSpinner = false;
+
+              return;
+        }
+        this.requireMerchantRegistration = false;
+        this.requirePosRegistration = false;
+
+        const userData: UserRegistrationPayload = new UserRegistrationPayload() ;
+        userData.email = this.formUser.controls.email.value;
+        userData.name = this.formUser.controls.firstName.value;
+        userData.password = this.formUser.controls.password.value;
+        userData.surname = this.formUser.controls.lastName.value;
+
+        if (this.userRegistered) {
+            this.logIn(userData.email, userData.password);
+            return;
+        }
 
     this.userService.register(userData).pipe(first()).subscribe(
         result => {
