@@ -3,7 +3,7 @@ import {Router} from '@angular/router';
 
 import {UserLogin} from '../_models';
 import {TranslateService} from '@ngx-translate/core';
-import {UserService} from '../_services/user.service';
+import {UserService} from '../_services';
 
 @Component({
   selector: 'app-nav',

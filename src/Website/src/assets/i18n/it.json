@@ -3,7 +3,11 @@
   "FLAG_NO": "No",
   "NAV": {
     "HOME": "Home",
-    "VOLUNTEERS": "Volontari",
+    "VOLUNTEERS": {
+      "TITLE": "Volontari",
+      "WHO_ARE": "Chi sono",
+      "APPLICATIONS": "Applicazioni"
+    },
     "ABOUT": "Che cos’è",
     "INSTRUMENT": "Instrument",
     "SIGN_IN": "Login",
