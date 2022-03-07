@@ -7,9 +7,19 @@
   <button mat-button class="nav-button" (click)="navigate('about')">
     <span>{{ "NAV.ABOUT" | translate }}</span>
   </button>
-  <button mat-button class="nav-button" (click)="navigate('volunteer')">
-    <span>{{ "NAV.VOLUNTEERS" | translate }}</span>
+
+  <button mat-button class="nav-button" [matMenuTriggerFor]="menuVolunteer">
+    <span>{{ "NAV.VOLUNTEERS.TITLE" | translate }}</span>
   </button>
+  <mat-menu #menuVolunteer="matMenu">
+    <button mat-menu-item (click)="navigate('volunteer')">
+      <span>{{ "NAV.VOLUNTEERS.WHO_ARE" | translate }}</span>
+    </button>
+    <button mat-menu-item (click)="navigate('applications')">
+      <span>{{ "NAV.VOLUNTEERS.APPLICATIONS" | translate }}</span>
+    </button>
+  </mat-menu>
+
   <button mat-button class="nav-button" (click)="navigate('merchant')">
     <span>{{ "NAV.MERCHANT" | translate }}</span>
   </button>
