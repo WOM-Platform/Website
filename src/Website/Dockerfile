@@ -22,7 +22,7 @@ RUN ./process_apikeys.sh
 
 # Build
 ENV NODE_OPTIONS=--openssl-legacy-provider
-RUN ng build --output-path=/app/dist
+RUN ng build --output-path=/app/dist --configuration=production
 
 # DISTRIBUTE step
 FROM nginx:1.21-alpine
