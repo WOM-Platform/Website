@@ -37,10 +37,16 @@
     },
     "APPLICATIONS": {
       "APPLICATIONS": "Applicazioni",
-      "STEPCOUNTER": "Contapassi"
+      "OVERVIEW": "Panoramica",
+      "STEPCOUNTER": "Contapassi",
+      "UNIVERSITIES": "Università",
+      "AWORLD": "AWorld",
+      "CODYMAZE": "CodyMaze",
+      "BALANCE": "Balance"
     },
     "PRIVACY": {
       "PRIVACY": "Informativa sulla privacy",
+      "OVERVIEW": "Panoramica",
       "POS": "POS",
       "POCKET": "Pocket",
       "INSTRUMENT": "Instrument",
@@ -309,14 +315,51 @@
     "MAIN_TEXT": "Le diamo il benvenuto su WOM!\n\nI termini e le condizioni seguenti indicano regole e normative per l'utilizzo del sito di DIGIT srl, all'indirizzo https://wom.social.\n\nAccedendo a questo sito, Lei accetta i termini e le condizioni seguenti. Le chiediamo di non continuare a registrarti al servizio WOM nel caso in cui non fosse d'accordo con tutti i termini e le condizioni in questa pagina.\n\nLicenza:\n\nA meno che indicato altrimenti, DIGIT srl e/o gli affiliati con licenza detengono i diritti di proprietà intellettuale per tutto il materiale su WOM. Tutti i diritti di proprietà intellettuale sono riservati. \n\nIl presente accordo ha inizio dalla data di registrazione.\n\nResponsabilità sui contenuti:\n\nNon possiamo essere ritenuti responsabili per i contenuti presenti sul Suo sito. Accetta di proteggerci e difenderci da qualsiasi azione legale proveniente dal Suo sito. Non devono essere aggiunti collegamenti sul Suo sito che potrebbero essere interpretati come calunniosi, osceni, criminali o che infrangono, violano o suggeriscono la violazione di diritti di terzi.\n\nDiritti riservati:\n\nCi riserviamo il diritto di richiedere la rimozione di tutti i collegamenti o di un collegamento specifico al nostro sito. Deve approvare immediatamente la richiesta di rimozione dei collegamenti. Ci riserviamo il diritto di modificare termini e condizioni, oltre che politica di collegamento in qualsiasi momento. Continuando a usare il nostro sito, accetta di essere vincolato dai presenti termini e condizioni.\n\nRimozione di collegamenti dal nostro sito:\n\nNel caso in cui un collegamento sul nostro sito sia offensivo per qualsiasi motivo, può contattarci e informarci in qualsiasi momento. Considereremo le richieste di rimozione dei collegamenti, tuttavia non siamo obbligati a completare la rimozione o rispondere direttamente.\n\nNon garantiamo l'accuratezza delle informazioni presenti sul sito. Non garantiamo che le informazioni siano complete o precise, né promettiamo di assicurare che il sito resti disponibile o che il materiale sul sito venga costantemente aggiornato.\n\nEsclusione di responsabilità:\n\nNella misura massima consentita dalla legge, escludiamo ogni rappresentanza, garanzia e condizione correlata al nostro sito e all'uso dello stesso. \n\nLe limitazioni e i divieti di responsabilità indicati in questa sezione e in altre parti di questa esclusione di responsabilità: (a) sono soggetti al paragrafo precedente; (b) governano tutte le responsabilità correlate a questa esclusione di responsabilità, incluse quelle correlate a contratto, torto o violazione di obblighi normativi.\n\nSe sito, informazioni e servizi vengono forniti gratuitamente, non possiamo essere ritenuti responsabili per perdite o danni di qualsiasi natura.\n"
   },
   "PRIVACY": {
+    "SIDENAV": {
+      "TITLE": "Applicazioni",
+      "OVERVIEW": "Panoramica"
+    },
+    "OVERVIEW": {
+      "TITLE": "PRIVACY",
+      "MAIN_CONTENT": "Nel menu laterale si trovano le privacy policy delle applicazioni legate ai WOM."
+    },
     "STEPCOUNTER": {
       "TITLE": "Informativa sulla privacy ‘WOM Contapassi’"
     }
   },
   "APPLICATIONS": {
+    "SIDENAV": {
+      "TITLE": "Applicazioni",
+      "OVERVIEW": "Panoramica",
+      "STEPCOUNTER": "Stepcounter",
+      "AWORLD": "AWorld",
+      "UNIVERSITIES": "Università",
+      "BALANCE": "Balance",
+      "CODYMAZE": "CodyMaze"
+    },
+    "OVERVIEW": {
+      "TITLE": "Lista di applicazioni per ottenere WOM",
+      "MAIN_CONTENT": "Qui puoi trovare una lista con tutte le applicazioni che ti permettono di ottenere WOM. <br> Dai un'occhiata alla lista nel menu laterale!"
+    },
     "STEPCOUNTER": {
       "TITLE": "WOM Contapassi",
-      "MAIN_CONTENT": "<p>Tieni il conto dei tuoi passi con WOM Step Counter, la prima app che premia ciò che fai abitualmente!</p> <p>Grazie a WOM Step Counter poi trasformare i tuoi passi in WOM, i voucher digitali che premiano l’impegno sociale. Inizierai a collezionare WOM dopo aver superato i 3000 passi.</p>"
+      "MAIN_CONTENT": "Tieni il conto dei tuoi passi con WOM Step Counter, la prima app che premia ciò che fai abitualmente! <br> Grazie a WOM Step Counter poi trasformare i tuoi passi in WOM, i voucher digitali che premiano l’impegno sociale. Inizierai a collezionare WOM dopo aver superato i 3000 passi."
+    },
+    "UNIVERSITIES": {
+      "TITLE": "Università",
+      "MAIN_CONTENT": "Le seguenti università rilasciano WOM per ciascun esame superato dagli studenti. <br> Clicca sul link di ciascuna università per avere maggiori informazioni:"
+    },
+    "AWORLD": {
+      "TITLE": "AWorld",
+      "MAIN_CONTENT": "DIGIT SRL ha instaurato un accordo con AWorld per convertire le tue azioni per una vita sostenibile in WOM. Dai un'occhiata al seguente link per maggiori informazioni:"
+    },
+    "BALANCE": {
+      "TITLE": "Balance",
+      "MAIN_CONTENT": "Balance é un'applicazione sviluppata dai ricercatori dell'Università di Urbino per valutare la tua stabilità attraverso l'investigazione dei tuoi indici stabilometrici con il solo smartphone."
+    },
+    "CODYMAZE": {
+      "TITLE": "CodyMaze",
+      "MAIN_CONTENT": "Una scacchiera a cielo aperto di 25 blocchi in cui gli studenti si muoveranno come robot guidati dalle istruzioni che appariranno via via sullo smartphone. Un labirinto mai uguale, che appare diverso a ciascun giocatore e che si rinnova ad ogni ingresso.<br> Come uscirne? Mettendo in pratica i principi base del coding che si assimilano anche giocando!"
     }
   }
 }

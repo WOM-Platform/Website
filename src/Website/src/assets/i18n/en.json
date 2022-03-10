@@ -37,10 +37,16 @@
     },
     "APPLICATIONS": {
       "APPLICATIONS": "Applications",
-      "STEPCOUNTER": "Stepcounter"
+      "OVERVIEW": "Overview",
+      "STEPCOUNTER": "Stepcounter",
+      "UNIVERSITIES": "Universities",
+      "AWORLD": "AWorld",
+      "CODYMAZE": "CodyMaze",
+      "BALANCE": "Balance"
     },
     "PRIVACY": {
       "PRIVACY": "Privacy policy",
+      "OVERVIREW": "Overview",
       "POS": "Point of Service",
       "POCKET": "Pocket",
       "INSTRUMENT": "Instrument",
@@ -304,14 +310,49 @@
     }
   },
   "PRIVACY": {
+    "SIDENAV": {
+      "TITLE": "Applications",
+      "OVERVIEW": "Overview"
+    },
+    "OVERVIEW": {
+      "TITLE": "PRIVACY",
+      "MAIN_CONTENT": "You can find all the privacy policies for WOM applications in the side manu."
+    },
     "STEPCOUNTER": {
       "TITLE": "‘WOM Stepcounter’ privacy policy"
     }
   },
   "APPLICATIONS": {
+    "SIDENAV": {
+      "TITLE": "Applications",
+      "OVERVIEW": "Overview",
+      "STEPCOUNTER": "Stepcounter",
+      "AWORLD": "AWorld",
+      "UNIVERSITIES": "Universities"
+    },
+    "OVERVIEW": {
+      "TITLE": "List of applications for gaining WOMs",
+      "MAIN_CONTENT": "Here you can find a list of all applications that allow you to gain WOMs. <br> Check out the list in the side menu!"
+    },
     "STEPCOUNTER": {
       "TITLE": "WOM Stepcounter",
-      "MAIN_CONTENT": "<p>Tieni il conto dei tuoi passi con WOM Step Counter, la prima app che premia ciò che fai abitualmente!</p> <p>Grazie a WOM Step Counter poi trasformare i tuoi passi in WOM, i voucher digitali che premiano l’impegno sociale. Inizierai a collezionare WOM dopo aver superato i 3000 passi.</p>"
+      "MAIN_CONTENT": "Tieni il conto dei tuoi passi con WOM Step Counter, la prima app che premia ciò che fai abitualmente!<br> Grazie a WOM Step Counter poi trasformare i tuoi passi in WOM, i voucher digitali che premiano l’impegno sociale. Inizierai a collezionare WOM dopo aver superato i 3000 passi."
+    },
+    "UNIVERSITIES": {
+      "TITLE": "Universities",
+      "MAIN_CONTENT": "The following universities are now giving out WOMs for every successful exam. Click on the link of each university for more information:"
+    },
+    "AWORLD": {
+      "TITLE": "AWorld",
+      "MAIN_CONTENT": "DIGIT SRL has teamed up with AWorld to convert your sustainable living actions into WOMs. Check out the following link for more information:"
+    },
+    "BALANCE": {
+      "TITLE": "Balance - Postural Stability",
+      "MAIN_CONTENT": "Balance is an application developed by researchers at the University of Urbino to evaluate your stability by investigating your stabilometric indices with just your smartphone."
+    },
+    "CODYMAZE": {
+      "TITLE": "CodyMaze",
+      "MAIN_CONTENT": "An open-air chessboard of 25 blocks in which the students will move around like robots guided by the instructions that will appear gradually on the smartphone. <br> A labyrinth that is never the same, which appears different to each player and changes at each entry.<br> How to get out of it? By putting into practice the basic principles of coding that you assimilate even while playing!"
     }
   }
 }

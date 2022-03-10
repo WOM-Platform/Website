@@ -20,6 +20,12 @@ import {InstrumentComponent} from './instrument/instrument.component';
 import {AboutComponent} from './about/about.component';
 import {ApplicationsComponent} from './applications/applications.component';
 import {ApplicationsStepcounterComponent} from './applications/stepcounter/stepcounter.component';
+import {PrivacyOverviewComponent} from "./privacy/overview/overview.component";
+import {ApplicationsOverviewComponent} from "./applications/overview/overview.component";
+import {ApplicationsUniversitiesComponent} from "./applications/universities/universities.component";
+import {ApplicationsAworldComponent} from "./applications/aworld/aworld.component";
+import {ApplicationsCodymazeComponent} from "./applications/codymaze/codymaze.component";
+import {ApplicationsBalanceComponent} from "./applications/balance/balance.component";
 
 const routes: Routes = [
   {
@@ -143,13 +149,53 @@ const routes: Routes = [
         },
         children: [
           {
+            path: "",
+            redirectTo: "overview",
+            pathMatch: "full"
+          },
+          {
+            path: 'overview',
+            component: ApplicationsOverviewComponent,
+            data: {
+              breadcrumb: 'BREADCRUMBS.APPLICATIONS.OVERVIEW'
+            },
+          },
+          {
             path: 'stepcounter',
             component: ApplicationsStepcounterComponent,
             data: {
               breadcrumb: 'BREADCRUMBS.APPLICATIONS.STEPCOUNTER'
             },
+          },
+          {
+            path: 'universities',
+            component: ApplicationsUniversitiesComponent,
+            data: {
+              breadcrumb: 'BREADCRUMBS.APPLICATIONS.UNIVERSITIES'
+            },
+          },
+          {
+            path: 'aworld',
+            component: ApplicationsAworldComponent,
+            data: {
+              breadcrumb: 'BREADCRUMBS.APPLICATIONS.AWORLD'
+            }
+          },
+          {
+            path: 'codymaze',
+            component: ApplicationsCodymazeComponent,
+            data: {
+              breadcrumb: 'BREADCRUMBS.APPLICATIONS.CODYMAZE'
+            }
+          },
+          {
+            path: 'balance',
+            component: ApplicationsBalanceComponent,
+            data: {
+              breadcrumb: 'BREADCRUMBS.APPLICATIONS.BALANCE'
+            },
           }
-        ],
+        ]
       },
       {
         path: 'privacy',
@@ -158,6 +204,18 @@ const routes: Routes = [
           breadcrumb: 'BREADCRUMBS.PRIVACY.PRIVACY'
         },
         children: [
+          {
+            path: "",
+            redirectTo: "overview",
+            pathMatch: "full"
+          },
+          {
+            path: 'overview',
+            component : PrivacyOverviewComponent,
+            data: {
+              breadcrumb: 'BREADCRUMBS.PRIVACY.OVERVIEW'
+            },
+          },
           {
             path: 'pos',
             component : PrivacyPosComponent,

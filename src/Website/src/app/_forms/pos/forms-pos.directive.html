@@ -4,76 +4,67 @@
     <p [innerHTML]="'SIGN_UP.POS.SUBTITLE_A' | translate"></p>
 
     <p [innerHTML]="'SIGN_UP.POS.SUBTITLE_B' | translate"></p>
-    <table class="full-width">
-        <tr>
-            <td colspan="1">
-                <mat-form-field class="example-full-width">
-                    <label>
-                        <input matInput type="text" placeholder="{{ 'SIGN_UP.POS.NAME' | translate }}" formControlName="name">
-                    </label>
-                    <mat-error>
-                        {{'SIGN_UP.POS.NAME_ERROR' | translate}}
-                    </mat-error>
-                </mat-form-field>
-            </td>
-            <td colspan="1" [hidden]="!pos">
-                <mat-checkbox
-                        formControlName="isActive"
-                        [(ngModel)]="isActive"
-                        (change)="onIsActiveChanged($event)">
-                    {{'SIGN_UP.POS.IS_ACTIVE_TEXT' | translate}}
-                </mat-checkbox>
-            </td>
-        </tr>
-        <tr>
-            <td colspan="2">
-                <p class="description">
-                    {{ 'SIGN_UP.POS.NAME_TEXT' | translate }}
-                </p>
-            </td>
-        </tr>
-        <tr>
-            <td colspan="2">
-                {{ 'SIGN_UP.POS.MAP_TITLE' | translate }}
-                <div>
-                    <google-map [options]="options"
-                                (mapClick)="mapClick($event)">
-                    </google-map>
-                </div>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <mat-form-field class="example-full-width">
-                    <label>
-                        <input matInput type="text" placeholder="{{ 'SIGN_UP.POS.LAT' | translate }}" [value]="posLat" formControlName="latitude">
-                    </label>
-                    <mat-error>
-                        {{'SIGN_UP.POS.LAT_LON_ERROR' | translate}}
-                    </mat-error>
-                </mat-form-field>
-            </td>
-            <td>
-                <mat-form-field class="example-full-width">
-                    <label>
-                        <input matInput type="text" placeholder="{{ 'SIGN_UP.POS.LON' | translate }}" [value]="posLon" formControlName="longitude">
-                    </label>
-                </mat-form-field>
-            </td>
-        </tr>
-        <tr>
-            <td colspan="2">
-                <mat-form-field class="example-full-width">
-                    <label>
-                        <input matInput type="text" placeholder="{{ 'SIGN_UP.POS.URL' | translate }}" formControlName="url">
-                    </label>
-                </mat-form-field>
-            </td>
-        </tr>
-        <tr>
-            <td colspan="2">
-                <p class="description" [innerHTML]="'SIGN_UP.POS.URL_OPTIONAL_TEXT' | translate"></p>
-            </td>
-        </tr>
-    </table>
+    <div fxLayout="row wrap" fxLayoutGap="10px grid" class="full-width">
+        <div fxFlex="50%" fxFlex.xs="100%">
+            <mat-form-field>
+                <label>
+                    <input matInput type="text" placeholder="{{ 'SIGN_UP.POS.NAME' | translate }}" formControlName="name">
+                </label>
+                <mat-error>
+                    {{'SIGN_UP.POS.NAME_ERROR' | translate}}
+                </mat-error>
+            </mat-form-field>
+        </div>
+        <div fxFlex="50%" fxFlex.xs="100%" [hidden]="!pos">
+            <mat-checkbox
+                    formControlName="isActive"
+                    [(ngModel)]="isActive"
+                    (change)="onIsActiveChanged($event)">
+                {{'SIGN_UP.POS.IS_ACTIVE_TEXT' | translate}}
+            </mat-checkbox>
+        </div>
+        <div fxFlex="100%">
+            <p class="description">
+                {{ 'SIGN_UP.POS.NAME_TEXT' | translate }}
+            </p>
+        </div>
+        <div fxFlex="50%" fxFlex.xs="100%">
+            <input #mapSearchField placeholder="{{'MERCHANT.FILTERS.SEARCH.PLACEHOLDER' | translate}}" type="text" class="full-width" />
+        </div>
+        <div fxFlex="100%">
+            {{ 'SIGN_UP.POS.MAP_TITLE' | translate }}
+            <div>
+                <google-map [options]="options"
+                            (mapClick)="mapClick($event)">
+                </google-map>
+            </div>
+        </div>
+        <div fxFlex="50%" fxFlex.xs="100%">
+            <mat-form-field class="example-full-width">
+                <label>
+                    <input matInput type="text" placeholder="{{ 'SIGN_UP.POS.LAT' | translate }}" [value]="posLat" formControlName="latitude">
+                </label>
+                <mat-error>
+                    {{'SIGN_UP.POS.LAT_LON_ERROR' | translate}}
+                </mat-error>
+            </mat-form-field>
+        </div>
+        <div fxFlex="50%" fxFlex.xs="100%">
+            <mat-form-field class="example-full-width">
+                <label>
+                    <input matInput type="text" placeholder="{{ 'SIGN_UP.POS.LON' | translate }}" [value]="posLon" formControlName="longitude">
+                </label>
+            </mat-form-field>
+        </div>
+        <div fxFlex="100%">
+            <mat-form-field class="example-full-width">
+                <label>
+                    <input matInput type="text" placeholder="{{ 'SIGN_UP.POS.URL' | translate }}" formControlName="url">
+                </label>
+            </mat-form-field>
+        </div>
+        <div fxFlex="100%">
+            <p class="description" [innerHTML]="'SIGN_UP.POS.URL_OPTIONAL_TEXT' | translate"></p>
+        </div>
+    </div>
 </form>

@@ -67,6 +67,14 @@ import {BreadcrumbModule} from 'primeng/breadcrumb';
 import {CommonModule} from '@angular/common';
 import {ApplicationsComponent} from './applications/applications.component';
 import {ApplicationsStepcounterComponent} from './applications/stepcounter/stepcounter.component';
+import {PrivacyOverviewComponent} from "./privacy/overview/overview.component";
+import {MatSidenavModule} from "@angular/material/sidenav";
+import {MatListModule} from "@angular/material/list";
+import {ApplicationsOverviewComponent} from "./applications/overview/overview.component";
+import {ApplicationsUniversitiesComponent} from "./applications/universities/universities.component";
+import {ApplicationsAworldComponent} from "./applications/aworld/aworld.component";
+import {ApplicationsCodymazeComponent} from "./applications/codymaze/codymaze.component";
+import {ApplicationsBalanceComponent} from "./applications/balance/balance.component";
 
 // AoT requires an exported function for factories
 export const createTranslateLoader = (http: HttpClient) => new TranslateHttpLoader(http, './assets/i18n/', '.json?cb=' + environment.i18n);
@@ -114,8 +122,14 @@ export const isMock = environment.mock;
     AboutComponent,
     BreadcrumbsComponent,
     ApplicationsComponent,
+    ApplicationsOverviewComponent,
     ApplicationsStepcounterComponent,
-    PrivacyStepcounterComponent
+    ApplicationsUniversitiesComponent,
+    ApplicationsAworldComponent,
+    ApplicationsCodymazeComponent,
+    ApplicationsBalanceComponent,
+    PrivacyStepcounterComponent,
+    PrivacyOverviewComponent
   ],
   exports: [
       MatStepperModule,
@@ -171,7 +185,9 @@ export const isMock = environment.mock;
         MatButtonModule,
         BreadcrumbModule,
         MatDividerModule,
-        CommonModule
+        CommonModule,
+        MatSidenavModule,
+        MatListModule
     ],
   providers: [
       {
