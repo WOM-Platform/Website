@@ -91,10 +91,10 @@ export class MerchantSignUpComponent implements OnInit {
         this.requirePosRegistration = false;
 
         const userData: UserRegistrationPayload = new UserRegistrationPayload() ;
-        userData.email = this.formUser.controls.email.value;
-        userData.name = this.formUser.controls.firstName.value;
-        userData.password = this.formUser.controls.password.value;
-        userData.surname = this.formUser.controls.lastName.value;
+        userData.email = this.formUser.controls.email.value.trim();
+        userData.name = this.formUser.controls.firstName.value.trim();
+        userData.password = this.formUser.controls.password.value.trim();
+        userData.surname = this.formUser.controls.lastName.value.trim();
 
         if (this.userRegistered) {
             this.logIn(userData.email, userData.password);

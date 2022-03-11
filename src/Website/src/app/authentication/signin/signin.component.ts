@@ -44,8 +44,8 @@ export class SignInComponent implements OnInit {
     if (this.form.valid) {
       try {
         console.log('request login...');
-        const username = this.form.get('username').value;
-        const password = this.form.get('password').value;
+        const username = this.form.get('username').value.trim();
+        const password = this.form.get('password').value.trim();
         this.userService.login(username, password)
           .pipe(first())
           .subscribe(
