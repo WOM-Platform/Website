@@ -4,6 +4,9 @@ import {Router} from '@angular/router';
 import {UserLogin} from '../_models';
 import {TranslateService} from '@ngx-translate/core';
 import {UserService} from '../_services';
+import {AddMerchantDialogComponent} from "../user/add-merchant/add-merchant.component";
+import {first} from "rxjs/operators";
+import {MatDialog} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-nav',
@@ -21,7 +24,8 @@ export class NavComponent implements OnInit {
   constructor(
     private router: Router,
     private translate: TranslateService,
-    private userService: UserService
+    private userService: UserService,
+    public dialog: MatDialog
   ) {
     this.userService.currentUserLogin.subscribe(x => this.currentUserLogin = x);
   }
@@ -58,9 +62,21 @@ export class NavComponent implements OnInit {
     await this.router.navigate(['/' + link]);
   }
 
-  async logout(): Promise<void> {
-    this.userService.logout();
-    await this.router.navigate(['/home']);
-
+  logout(): void {
+    const dialogRef = this.dialog.open(LogoutDialogComponent, null);
+    dialogRef.afterClosed().subscribe(async result => {
+      if(result) {
+        this.userService.logout();
+        await this.router.navigate(['/home']);
+      }
+    });
   }
+}
+
+@Component({
+  selector: 'app-nav-logout-dialog',
+  templateUrl: 'nav-logout-dialog.component.html'
+})
+export class LogoutDialogComponent {
+
 }

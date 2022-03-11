@@ -13,7 +13,13 @@
     "SIGN_IN": "Login",
     "PROFILE": "Profile",
     "MERCHANT": "Merchant",
-    "SIGN_OUT": "Log out"
+    "SIGN_OUT": "Log out",
+    "LOGOUT_DIALOG": {
+      "TITLE": "Log out",
+      "CONTENT": "Do you want to log out?",
+      "CONFIRM": "Ok",
+      "CANCEL": "Cancel"
+    }
   },
   "BREADCRUMBS": {
     "HOME": "Home",
@@ -37,10 +43,16 @@
     },
     "APPLICATIONS": {
       "APPLICATIONS": "Applications",
-      "STEPCOUNTER": "Stepcounter"
+      "OVERVIEW": "Overview",
+      "STEPCOUNTER": "Stepcounter",
+      "UNIVERSITIES": "Universities",
+      "AWORLD": "AWorld",
+      "CODYMAZE": "CodyMaze",
+      "BALANCE": "Balance"
     },
     "PRIVACY": {
       "PRIVACY": "Privacy policy",
+      "OVERVIEW": "Overview",
       "POS": "Point of Service",
       "POCKET": "Pocket",
       "INSTRUMENT": "Instrument",
@@ -150,11 +162,25 @@
         "ADD_POS_TOOLTIP": "Add a new Point of Service 'POS' for Merchant"
       }
     },
+    "ERRORS": {
+      "MERCHANT_LIST_401": "Can't get the merchant list: Unauthorized",
+      "MERCHANT_LIST_404": "Can't get the merchant list: Not found",
+      "MERCHANT_LIST_GENERIC": "Can't get the merchant list: Unknown Error"
+    },
+    "VERIFY": {
+      "TITLE": "User verification",
+      "VERIFYING": "Checking to see if user is verified...",
+      "VERIFIED": "User verified!",
+      "GO_HOME_BUTTON": "Click here",
+      "GO_HOME_TEXT": "To go to your profile.",
+      "NOT_VERIFIED": "Your verification token has expired or there was an error validating your account."
+    },
     "NOT_VERIFIED": {
       "TITLE": "Please verify your account by clicking on the link that you received in your email.",
       "SUBTITLE": "Didn't receive the email?",
       "SEND_EMAIL_LINK": "Click here",
-      "SEND_EMAIL_TEXT": "to receive another one for"
+      "SEND_EMAIL_TEXT": "to receive another one for",
+      "EMAIL_SENT": "Verification email sent!"
     },
     "ADD_MERCHANT": {
       "TITLE": "Add a new merchant",
@@ -304,14 +330,53 @@
     }
   },
   "PRIVACY": {
+    "SIDENAV": {
+      "TITLE": "Applications",
+      "OVERVIEW": "Overview"
+    },
+    "OVERVIEW": {
+      "TITLE": "PRIVACY",
+      "MAIN_CONTENT": "You can find all the privacy policies for WOM applications in the side manu."
+    },
     "STEPCOUNTER": {
       "TITLE": "‘WOM Stepcounter’ privacy policy"
     }
   },
   "APPLICATIONS": {
+    "SIDENAV": {
+      "TITLE": "Applications",
+      "OVERVIEW": "Overview",
+      "STEPCOUNTER": "Stepcounter",
+      "AWORLD": "AWorld",
+      "UNIVERSITIES": "Universities"
+    },
+    "OVERVIEW": {
+      "TITLE": "List of applications for gaining WOMs",
+      "MAIN_CONTENT": "Here you can find a list of all applications that allow you to gain WOMs. <br> Check out the list in the side menu!"
+    },
     "STEPCOUNTER": {
       "TITLE": "WOM Stepcounter",
-      "MAIN_CONTENT": "<p>Keep track of the steps you take with WOM StepCounter, an app that rewards you for the things you do in your daily life!</p> <p>Thanks to WOM StepCounter you will be able to convert your steps into digital vouchers, that reward social effort. You will receive vouchers if you keep track of more than 3.000 steps per day.</p>"
+      "MAIN_CONTENT": "Keep track of the steps you take with WOM StepCounter, an app that rewards you for the things you do in your daily life!<br /><br />Thanks to WOM StepCounter you will be able to convert your steps into digital vouchers, that reward social effort. You will receive vouchers if you keep track of more than 3.000 steps per day."
+    },
+    "UNIVERSITIES": {
+      "TITLE": "Universities",
+      "MAIN_CONTENT": "The following universities are now giving out WOMs for every successful exam. Click on the link of each university for more information:"
+    },
+    "AWORLD": {
+      "TITLE": "AWorld",
+      "MAIN_CONTENT": "DIGIT SRL has teamed up with AWorld to convert your sustainable living actions into WOMs. Check out the following link for more information:"
+    },
+    "BALANCE": {
+      "TITLE": "Balance - Postural Stability",
+      "MAIN_CONTENT": "Balance is an application developed by researchers at the University of Urbino to evaluate your stability by investigating your stabilometric indices with just your smartphone."
+    },
+    "CODYMAZE": {
+      "TITLE": "CodyMaze",
+      "MAIN_CONTENT": "An open-air chessboard of 25 blocks in which the students will move around like robots guided by the instructions that will appear gradually on the smartphone. <br> A labyrinth that is never the same, which appears different to each player and changes at each entry.<br> How to get out of it? By putting into practice the basic principles of coding that you assimilate even while playing!"
     }
+  },
+  "404": {
+    "TITLE": "Looks like you’re lost",
+    "HOME_BUTTON": "Go Home"
   }
 }

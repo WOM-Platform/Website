@@ -12,6 +12,7 @@ export class MerchantComponent implements OnInit, AfterViewInit {
   @ViewChild(GoogleMap, { static: false }) map: GoogleMap;
   @ViewChild(MapInfoWindow, { static: false }) infoWindow: MapInfoWindow;
   @ViewChild('mapSearchField') searchField: ElementRef;
+  searchBox: google.maps.places.SearchBox;
   infoContent = '';
   markers = [];
   zoom = 12;
@@ -45,12 +46,12 @@ export class MerchantComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
 
-    const searchBox = new google.maps.places.SearchBox(
+    this.searchBox = new google.maps.places.SearchBox(
         this.searchField.nativeElement
     );
 
-    searchBox.addListener('places_changed', () => {
-      const places = searchBox.getPlaces();
+    this.searchBox.addListener('places_changed', () => {
+      const places = this.searchBox.getPlaces();
       if (places.length === 0) {
         return;
       }
@@ -88,11 +89,11 @@ export class MerchantComponent implements OnInit, AfterViewInit {
   }
 
   click(event: google.maps.MapMouseEvent): void {
-    console.log(event);
+    // console.log(event);
   }
 
   logCenter(): void {
-    console.log(JSON.stringify(this.map.getCenter()));
+    // console.log(JSON.stringify(this.map.getCenter()));
   }
 
   addMarker(posData: PosMap): void {
