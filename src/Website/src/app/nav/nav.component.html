@@ -49,10 +49,20 @@
       <mat-icon>info</mat-icon>
       <span>{{ "NAV.ABOUT" | translate }}</span>
     </button>
-    <button mat-menu-item (click)="navigate('volunteers')">
+    
+    <button mat-menu-item [matMenuTriggerFor]="menuMobileVolunteer">
       <mat-icon>person_pin_circle</mat-icon>
-      <span>{{ "NAV.VOLUNTEERS" | translate }}</span>
+      <span>{{ "NAV.VOLUNTEERS.TITLE" | translate }}</span>
     </button>
+    <mat-menu #menuMobileVolunteer="matMenu">
+      <button mat-menu-item (click)="navigate('volunteer')">
+        <span>{{ "NAV.VOLUNTEERS.WHO_ARE" | translate }}</span>
+      </button>
+      <button mat-menu-item (click)="navigate('applications')">
+        <span>{{ "NAV.VOLUNTEERS.APPLICATIONS" | translate }}</span>
+      </button>
+    </mat-menu>
+
     <button mat-menu-item (click)="navigate('merchant')">
       <mat-icon>store</mat-icon>
       <span>{{ "NAV.MERCHANT" | translate }}</span>
