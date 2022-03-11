@@ -174,7 +174,8 @@
       "VERIFIED": "Utente verificato!",
       "GO_HOME_BUTTON": "Clicca qui",
       "GO_HOME_TEXT": "Per andare al tuo profilo.",
-      "NOT_VERIFIED": "Il tuo token di verifica è scaduto o c'è stato un errore nella validazione del tuo account."
+      "NOT_VERIFIED": "Il tuo token di verifica è scaduto o c'è stato un errore nella validazione del tuo account.",
+      "GO_SIGNIN_BUTTON": "Login"
     },
     "NOT_VERIFIED": {
       "TITLE": "Verifica il tuo account cliccando sul link che hai ricevuto per email.",

@@ -27,29 +27,29 @@ export class UserVerifyComponent implements OnInit{
             return;
         }
 
-        if(!user) {
-            this.workingText = this.translate.instant('USER.VERIFY.VERIFYING');
-            this.route.queryParams
-                .subscribe(params => {
-                    if(!params || !params.userId) {
-                        this.router.navigate(['/home']).then();
-                    } else {
-                        this.userId = params.userId;
-                        this.sendVerification(params.userId, params.token);
-                    }
-                },
-                error => {
-                    console.log(error);
+        this.workingText = this.translate.instant('USER.VERIFY.VERIFYING');
+        this.route.queryParams
+            .subscribe(params => {
+                if(!params || !params.userId) {
                     this.router.navigate(['/home']).then();
+                } else {
+                    this.userId = params.userId;
+                    this.sendVerification(params.userId, params.token);
                 }
-                );
-            return;
-        }
+            },
+            error => {
+                console.log(error);
+                this.router.navigate(['/home']).then();
+            }
+            );
+        return;
+
     }
 
     sendVerification(userId:string, token: string): void {
         this.userService.sendVerification(userId, token).subscribe(res => {
             console.log(res);
+            this.userService.logout();
             this.workingText = this.translate.instant('USER.VERIFY.VERIFIED');
         }, error => {
             console.log(error);
@@ -61,5 +61,9 @@ export class UserVerifyComponent implements OnInit{
         this.snackBar.open(message, null, {
             duration: 5000
         });
+    }
+
+    navigate(url: string): void {
+        this.router.navigate([url]);
     }
 }

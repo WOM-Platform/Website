@@ -2,6 +2,8 @@
     <span class="page-title" [innerHTML]="'USER.VERIFY.TITLE' | translate"></span>
     <ng-container *ngIf="workingText !== ''">
         <span [innerHTML]="workingText"></span>
+        <br>
+        <button mat-stroked-button (click)="navigate('/authentication/signin')">{{'USER.VERIFY.GO_SIGNIN_BUTTON' | translate}}</button>
     </ng-container>
     <ng-container *ngIf="workingText === ''">
         <p>{{"USER.VERIFY.NOT_VERIFIED" | translate}}</p>

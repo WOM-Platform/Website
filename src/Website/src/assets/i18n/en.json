@@ -173,7 +173,8 @@
       "VERIFIED": "User verified!",
       "GO_HOME_BUTTON": "Click here",
       "GO_HOME_TEXT": "To go to your profile.",
-      "NOT_VERIFIED": "Your verification token has expired or there was an error validating your account."
+      "NOT_VERIFIED": "Your verification token has expired or there was an error validating your account.",
+      "GO_SIGNIN_BUTTON": "Login"
     },
     "NOT_VERIFIED": {
       "TITLE": "Please verify your account by clicking on the link that you received in your email.",
