@@ -13,7 +13,13 @@
     "SIGN_IN": "Login",
     "MERCHANT": "Merchant",
     "PROFILE": "Profilo",
-    "SIGN_OUT": "Log out"
+    "SIGN_OUT": "Log out",
+    "LOGOUT_DIALOG": {
+      "TITLE": "Log out",
+      "CONTENT": "Vuoi disconnetterti?",
+      "CONFIRM": "Ok",
+      "CANCEL": "Annulla"
+    }
   },
   "BREADCRUMBS": {
     "HOME": "Home",
@@ -157,11 +163,25 @@
         "ADD_POS_TOOLTIP": "Aggiungi un nuovo punto di servizio 'POS' per il Merchant"
       }
     },
+    "ERRORS": {
+      "MERCHANT_LIST_401": "Impossibile recuperare la lista dei merchant: Non autorizzato",
+      "MERCHANT_LIST_404": "Impossibile recuperare la lista dei merchant: Non trovato",
+      "MERCHANT_LIST_GENERIC": "Impossibile recuperare la lista dei merchant: errore sconosciuto"
+    },
+    "VERIFY": {
+      "TITLE": "Verifica utente",
+      "VERIFYING": "Controllo che l'utente sia stato verificato...",
+      "VERIFIED": "Utente verificato!",
+      "GO_HOME_BUTTON": "Clicca qui",
+      "GO_HOME_TEXT": "Per andare al tuo profilo.",
+      "NOT_VERIFIED": "Il tuo token di verifica è scaduto o c'è stato un errore nella validazione del tuo account."
+    },
     "NOT_VERIFIED": {
       "TITLE": "Verifica il tuo account cliccando sul link che hai ricevuto per email.",
       "SUBTITLE": "Non hai ricevuto nulla?",
       "SEND_EMAIL_LINK": "Clicca qui",
-      "SEND_EMAIL_TEXT": "per ricevere un nuovo email di verifica all'indirizzo "
+      "SEND_EMAIL_TEXT": "per ricevere un nuovo email di verifica all'indirizzo ",
+      "EMAIL_SENT": "Email inviata!"
     },
     "ADD_MERCHANT": {
       "TITLE": "Aggiungi un nuovo merchant",
@@ -361,5 +381,9 @@
       "TITLE": "CodyMaze",
       "MAIN_CONTENT": "Una scacchiera a cielo aperto di 25 blocchi in cui gli studenti si muoveranno come robot guidati dalle istruzioni che appariranno via via sullo smartphone. Un labirinto mai uguale, che appare diverso a ciascun giocatore e che si rinnova ad ogni ingresso.<br> Come uscirne? Mettendo in pratica i principi base del coding che si assimilano anche giocando!"
     }
+  },
+  "404": {
+    "TITLE": "Sembra che tu ti sia perso!",
+    "HOME_BUTTON": "Torna a Casa"
   }
 }

@@ -13,7 +13,13 @@
     "SIGN_IN": "Login",
     "PROFILE": "Profile",
     "MERCHANT": "Merchant",
-    "SIGN_OUT": "Log out"
+    "SIGN_OUT": "Log out",
+    "LOGOUT_DIALOG": {
+      "TITLE": "Log out",
+      "CONTENT": "Do you want to log out?",
+      "CONFIRM": "Ok",
+      "CANCEL": "Cancel"
+    }
   },
   "BREADCRUMBS": {
     "HOME": "Home",
@@ -156,11 +162,25 @@
         "ADD_POS_TOOLTIP": "Add a new Point of Service 'POS' for Merchant"
       }
     },
+    "ERRORS": {
+      "MERCHANT_LIST_401": "Can't get the merchant list: Unauthorized",
+      "MERCHANT_LIST_404": "Can't get the merchant list: Not found",
+      "MERCHANT_LIST_GENERIC": "Can't get the merchant list: Unknown Error"
+    },
+    "VERIFY": {
+      "TITLE": "User verification",
+      "VERIFYING": "Checking to see if user is verified...",
+      "VERIFIED": "User verified!",
+      "GO_HOME_BUTTON": "Click here",
+      "GO_HOME_TEXT": "To go to your profile.",
+      "NOT_VERIFIED": "Your verification token has expired or there was an error validating your account."
+    },
     "NOT_VERIFIED": {
       "TITLE": "Please verify your account by clicking on the link that you received in your email.",
       "SUBTITLE": "Didn't receive the email?",
       "SEND_EMAIL_LINK": "Click here",
-      "SEND_EMAIL_TEXT": "to receive another one for"
+      "SEND_EMAIL_TEXT": "to receive another one for",
+      "EMAIL_SENT": "Verification email sent!"
     },
     "ADD_MERCHANT": {
       "TITLE": "Add a new merchant",
@@ -354,5 +374,9 @@
       "TITLE": "CodyMaze",
       "MAIN_CONTENT": "An open-air chessboard of 25 blocks in which the students will move around like robots guided by the instructions that will appear gradually on the smartphone. <br> A labyrinth that is never the same, which appears different to each player and changes at each entry.<br> How to get out of it? By putting into practice the basic principles of coding that you assimilate even while playing!"
     }
+  },
+  "404": {
+    "TITLE": "Look like you're lost",
+    "HOME_BUTTON": "Go Home"
   }
 }

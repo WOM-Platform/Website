@@ -8,7 +8,7 @@ import {appRoutingModule} from './app.routing';
 import {RouterModule} from '@angular/router';
 import {TranslateLoader, TranslateModule, TranslateService} from '@ngx-translate/core';
 import {HomeComponent} from './home';
-import {NavComponent} from './nav/nav.component';
+import {LogoutDialogComponent, NavComponent} from './nav/nav.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatIconModule} from '@angular/material/icon';
 import {MatToolbarModule} from '@angular/material/toolbar';
@@ -129,7 +129,8 @@ export const isMock = environment.mock;
     ApplicationsCodymazeComponent,
     ApplicationsBalanceComponent,
     PrivacyStepcounterComponent,
-    PrivacyOverviewComponent
+    PrivacyOverviewComponent,
+    LogoutDialogComponent
   ],
   exports: [
       MatStepperModule,

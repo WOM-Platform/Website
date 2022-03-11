@@ -1,13 +1,9 @@
-<mat-card>
-    <mat-card-content>
-        <p>
-            {{"USER.NOT_VERIFIED.TITLE" | translate}}
-        </p>
-        <p>
-            {{"USER.NOT_VERIFIED.SUBTITLE" | translate}}
-            <button (click)="sendValidationEmail()" >{{"USER.NOT_VERIFIED.SEND_EMAIL_LINK" | translate}}</button>
-            {{"USER.NOT_VERIFIED.SEND_EMAIL_TEXT" | translate}}
-            {{user.email}}
-        </p>
-    </mat-card-content>
-</mat-card>
+<div class="container">
+    <p>{{"USER.NOT_VERIFIED.TITLE" | translate}} </p>
+    <span>{{"USER.NOT_VERIFIED.SUBTITLE" | translate}}</span><br>
+    <span>
+        <button mat-stroked-button color="primary" (click)="sendValidationEmail()" >{{"USER.NOT_VERIFIED.SEND_EMAIL_LINK" | translate}}</button>
+        {{"USER.NOT_VERIFIED.SEND_EMAIL_TEXT" | translate}}
+        <b>{{user.email}}</b>
+    </span>
+</div>

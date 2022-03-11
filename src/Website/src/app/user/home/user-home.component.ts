@@ -42,9 +42,10 @@ export class UserHomeComponent implements OnInit, OnDestroy {
             response =>
             {
                 this.merchants = response;
-                console.log(response);
+                // console.log(response);
             }, error => {
-                console.log(error);
+                // console.log(error);
+                console.log('error downloading merchant data');
             });
     }
 

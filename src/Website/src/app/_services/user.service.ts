@@ -128,8 +128,26 @@ export class UserService {
     /**
      * verify status of user account
      */
-    verify(): Observable<any> {
-        return this.http.post<any>(this.localUrlV1 + this.currentUserLoginSubject.value.id + '/verify', {})
+    verify(userId: string = null): Observable<any> {
+        const id = userId != null ? userId : this.currentUserLoginSubject.value.id;
+        return this.http.post<any>(this.localUrlV1 + id + '/verify', {})
+            .pipe(map (response => response));
+    }
+
+    /**
+     * verify status of user account
+     */
+    sendVerification(userId: string, token: string): Observable<any> {
+        return this.http.post<any>(this.localUrlV1 + userId + '/verify?token=' + token, {})
+            .pipe(map (response => response));
+    }
+
+    /**
+     * request new verification email
+     */
+    requestVerificationEmail(userId: string = null): Observable<any> {
+        const id = userId != null ? userId : this.currentUserLoginSubject.value.id;
+        return this.http.post<any>(this.localUrlV1 + id + '/request-verification', {})
             .pipe(map (response => response));
     }
 
