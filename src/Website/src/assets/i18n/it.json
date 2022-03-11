@@ -110,9 +110,9 @@
       "CITY": "Città",
       "CITY_ERROR": "Inserisci la città del Merchant",
       "SELECT_COUNTRY": "Seleziona il paese",
-      "SELECT_COUNTRY_ERROR": "Selezionare il paese dell'attività",
-      "BUSINESS": "Seleziona l'attività principale",
-      "BUSINESS_ERROR": "Selezionare un'attività primaria",
+      "SELECT_COUNTRY_ERROR": "Selezionare il paese dell’attività",
+      "BUSINESS": "Seleziona l’attività principale",
+      "BUSINESS_ERROR": "Selezionare un’attività primaria",
       "WEBSITE": "Sito web, es.: http://www.example.com",
       "OPTIONAL_WEBSITE_TEXT": "<i>Opzionale.</i>\nSito web della propria attività.",
       "DESCRIPTION": "Descrizione",
@@ -160,7 +160,7 @@
         "URL": "Sito web",
         "POS_TITLE": "POS",
         "POS_SUBTITLE": "lista dei POS",
-        "ADD_POS_TOOLTIP": "Aggiungi un nuovo punto di servizio 'POS' per il Merchant"
+        "ADD_POS_TOOLTIP": "Aggiungi un nuovo punto di servizio “POS” per il Merchant"
       }
     },
     "ERRORS": {
@@ -170,7 +170,7 @@
     },
     "VERIFY": {
       "TITLE": "Verifica utente",
-      "VERIFYING": "Controllo che l'utente sia stato verificato...",
+      "VERIFYING": "Controllo che l’utente sia stato verificato...",
       "VERIFIED": "Utente verificato!",
       "GO_HOME_BUTTON": "Clicca qui",
       "GO_HOME_TEXT": "Per andare al tuo profilo.",
@@ -181,7 +181,7 @@
       "TITLE": "Verifica il tuo account cliccando sul link che hai ricevuto per email.",
       "SUBTITLE": "Non hai ricevuto nulla?",
       "SEND_EMAIL_LINK": "Clicca qui",
-      "SEND_EMAIL_TEXT": "per ricevere un nuovo email di verifica all'indirizzo ",
+      "SEND_EMAIL_TEXT": "per ricevere un nuovo email di verifica all’indirizzo ",
       "EMAIL_SENT": "Email inviata!"
     },
     "ADD_MERCHANT": {
@@ -243,23 +243,23 @@
     },
     "SECTION_VOL": {
       "TITLE": "Volontari",
-      "MESSAGE": "Compiendo azioni socialmente valide, ogni utente guadagna WOM e diventa un <b>Volontario</b>. I Volontari possono gestire i loro voucher WOM tramite un'app, <b>\"WOM Pocket\"</b>, che possono installare sul proprio dispositivo. L'applicazione consente ai Volontari di raccogliere i propri voucher, conservarli e spenderli.\n"
+      "MESSAGE": "Compiendo azioni socialmente valide, ogni utente guadagna WOM e diventa un <b>Volontario</b>. I Volontari possono gestire i loro voucher WOM tramite un’app, <b>\"WOM Pocket\"</b>, che possono installare sul proprio dispositivo. L’applicazione consente ai Volontari di raccogliere i propri voucher, conservarli e spenderli.\n"
     },
     "SECTION_MERCH": {
       "TITLE": "Merchant",
-      "MESSAGE": "I negozi locali possono partecipare al progetto diventando <b>Merchants</b>. I Merchants sono componenti di sistema che possono <b>creare istanze di pagamento</b>. Possono accettare i voucher WOM in cambio di servizi e sconti. I Merchants utilizzano un'applicazione diversa, il <b>\"WOM POS\"</b>, o un software di integrazione personalizzato. Questi componenti software consentono ai Merchants di creare nuove transazioni, applicando filtri ai voucher WOM raccolti.\n"
+      "MESSAGE": "I negozi locali possono partecipare al progetto diventando <b>Merchants</b>. I Merchants sono componenti di sistema che possono <b>creare istanze di pagamento</b>. Possono accettare i voucher WOM in cambio di servizi e sconti. I Merchants utilizzano un’applicazione diversa, il <b>\"WOM POS\"</b>, o un software di integrazione personalizzato. Questi componenti software consentono ai Merchants di creare nuove transazioni, applicando filtri ai voucher WOM raccolti.\n"
     },
     "SECTION_INSTR": {
       "TITLE": "Instrument",
-      "MESSAGE": "Gli <b>Instruments</b> sono i proprietari di un'attività sociale o di un'iniziativa con finalità sociale riconosciuta dalla piattaforma. Gli Instruments <b>consentono ai volontari di intraprendere azioni sociali</b>.\nI titolari di questo tipo di attività, come organizzazioni no profit, associazioni o privati, possono contattare info@wom.social per essere valutati dal comitato etico della piattaforma e inseriti nella lista dei <b>WOM Instrument</b> che possono generare voucher e premiare i contributori."
+      "MESSAGE": "Gli <b>Instruments</b> sono i proprietari di un’attività sociale o di un’iniziativa con finalità sociale riconosciuta dalla piattaforma. Gli Instruments <b>consentono ai volontari di intraprendere azioni sociali</b>.\nI titolari di questo tipo di attività, come organizzazioni no profit, associazioni o privati, possono contattare info@wom.social per essere valutati dal comitato etico della piattaforma e inseriti nella lista dei <b>WOM Instrument</b> che possono generare voucher e premiare i contributori."
     },
     "SECTION_REG": {
       "TITLE": "Registry",
-      "MESSAGE": "Il Registry è l'entità centrale che <b>genera i WOM</b> su richiesta degli Instrument, ne <b>verifica l'autenticità</b> quando devono essere usati presso un Merchant e ne <b>impedisce la duplicazione</b> o il doppio utilizzo."
+      "MESSAGE": "Il Registry è l’entità centrale che <b>genera i WOM</b> su richiesta degli Instrument, ne <b>verifica l’autenticità</b> quando devono essere usati presso un Merchant e ne <b>impedisce la duplicazione</b> o il doppio utilizzo."
     },
     "SECTION_TECH": {
       "TITLE": "Tecnico",
-      "MESSAGE": "WOM è una <b>technologia open</b> fornita come software open source, rilasciata sotto la licenza <a href=\"https://opensource.org/licenses/MIT\">MIT</a>.\n È sviluppata in modo aperto su GitHub, <a href=\"https://github.com/WOM-Platform\">dagli un'occhiata</a>."
+      "MESSAGE": "WOM è una <b>technologia open</b> fornita come software open source, rilasciata sotto la licenza <a href=\"https://opensource.org/licenses/MIT\">MIT</a>.\n È sviluppata in modo aperto su GitHub, <a href=\"https://github.com/WOM-Platform\">dagli un’occhiata</a>."
     },
     "SECTION_CONTACT": {
       "TITLE": "Rimani in contatto! \uD83D\uDCEB",
@@ -269,19 +269,19 @@
   "ABOUT": {
     "TITLE": "La piattaforma WOM",
     "SECTION_A": {
-      "A": "WOM sta per <b>Worth One Minute</b>, cioè 'Vale un minuto'. È una piattaforma di ricompensa general-purpose basata su un sistema di scambio di voucher che premia l'impatto positivo di azioni e attività svolte da persone che contribuiscono a un bene comune.",
-      "B": "Molte azioni hanno un <b>valore sociale intrinseco</b>, un effetto noto in economia come “esternalità positiva”. WOM riconosce l'impatto di queste azioni e fornisce uno strumento per premiare queste esternalità positive mediante <b>l'emissione di WOM.</b>"
+      "A": "WOM sta per <b>Worth One Minute</b>, cioè “Vale un minuto”. È una piattaforma di ricompensa general-purpose basata su un sistema di scambio di voucher che premia l’impatto positivo di azioni e attività svolte da persone che contribuiscono a un bene comune.",
+      "B": "Molte azioni hanno un <b>valore sociale intrinseco</b>, un effetto noto in economia come “esternalità positiva”. WOM riconosce l’impatto di queste azioni e fornisce uno strumento per premiare queste esternalità positive mediante <b>l’emissione di WOM.</b>"
     },
     "SECTION_A_2": {
       "TITLE": "Cosa sono i WOM",
       "A": "I WOM sono <b>voucher digitali</b> progettati per riconoscere il valore di azioni che hanno un effetto positivo. Ogni voucher WOM premia <b>un minuto di impegno socialmente prezioso</b> svolto da un individuo.",
       "B": "I voucher WOMs sono <b>anonimi</b>. Gli unici dati che raccolgono sono relativi al loro scopo sociale e dove e quando vengono generati.\nI voucher WOM non hanno <b>controvalore in denaro</b>. Sono la prova di uno sforzo socialmente prezioso che un individuo ha effettuato verso una causa condivisa.",
-      "C": "Il <b>Registry</b> gestisce lo scambio dei voucher e tiene traccia della creazione e del consumo dei WOM.\nLa piattaforma WOM è un <b>sistema centralizzato</b>. Il <b>Registry</b> rappresenta l'autorità che gestisce lo scambio delle chiavi crittografiche (che consentono lo scambio sicuro delle informazioni) e verifica che i voucher siano guadagnati e spesi correttamente.\nIl Registry <b>non memorizza l'identità degli utenti e i loro dati</b>. I voucher WOM sono anonimi e il loro utilizzo non è tracciato."
+      "C": "Il <b>Registry</b> gestisce lo scambio dei voucher e tiene traccia della creazione e del consumo dei WOM.\nLa piattaforma WOM è un <b>sistema centralizzato</b>. Il <b>Registry</b> rappresenta l’autorità che gestisce lo scambio delle chiavi crittografiche (che consentono lo scambio sicuro delle informazioni) e verifica che i voucher siano guadagnati e spesi correttamente.\nIl Registry <b>non memorizza l’identità degli utenti e i loro dati</b>. I voucher WOM sono anonimi e il loro utilizzo non è tracciato."
     },
     "SECTION_B": {
       "TITLE": "Come faccio a guadagnare WOM?",
-      "A": "I voucher WOM si ottengono svolgendo volontariamente un’azione socialmente preziosa. Ogni minuto di sforzo vale un WOM. Per la generazione del WOM, <b>l'attività svolta deve essere ufficialmente riconosciuta dalla piattaforma WOM</b>.",
-      "B": "Per essere riconosciuta, l'attività o l'iniziativa deve essere valutata come socialmente preziosa e quindi approvata dal comitato etico della piattaforma WOM.\n"
+      "A": "I voucher WOM si ottengono svolgendo volontariamente un’azione socialmente preziosa. Ogni minuto di sforzo vale un WOM. Per la generazione del WOM, <b>l’attività svolta deve essere ufficialmente riconosciuta dalla piattaforma WOM</b>.",
+      "B": "Per essere riconosciuta, l’attività o l’iniziativa deve essere valutata come socialmente preziosa e quindi approvata dal comitato etico della piattaforma WOM.\n"
     },
     "SECTION_C": {
       "TITLE": "Come utilizzo i miei WOM?",
@@ -292,11 +292,11 @@
     "TITLE": "Volontari",
     "SECTION_A": {
       "TITLE": "Come funziona per gli utenti?",
-      "A": "Molte azioni e attività compiute da un individuo contribuiscono a un bene comune e hanno un valore sociale intrinseco. Compiendo queste azioni socialmente preziose, ogni utente guadagna WOM e diventa un Volontario.\nI Volontari possono utilizzare i voucher WOM per ottenere servizi o beni forniti dai Merchants.\nOgni Volontario può collezionare tutti i voucher guadagnati sull'app <b>\"WOM Pocket\"</b>."
+      "A": "Molte azioni e attività compiute da un individuo contribuiscono a un bene comune e hanno un valore sociale intrinseco. Compiendo queste azioni socialmente preziose, ogni utente guadagna WOM e diventa un Volontario.\nI Volontari possono utilizzare i voucher WOM per ottenere servizi o beni forniti dai Merchants.\nOgni Volontario può collezionare tutti i voucher guadagnati sull’app <b>\"WOM Pocket\"</b>."
     },
     "SECTION_B": {
       "TITLE": "Pocket",
-      "A": "I Volontari possono gestire i loro voucher WOM tramite un'app mobile <b>\"WOM Pocket\"</b>. Questa app consente agli utenti di <b>raccogliere i voucher WOM guadagnati</b>, conservarli (come se fossero in un \"portafoglio\" virtuale) e spendere i loro voucher.\n\nLa piattaforma WOM non ha alcun costo per i Volontari che possono scaricare gratuitamente l'app <b>Pocket</b> dagli <b>store Android e iOS</b>."
+      "A": "I Volontari possono gestire i loro voucher WOM tramite un’app mobile <b>\"WOM Pocket\"</b>. Questa app consente agli utenti di <b>raccogliere i voucher WOM guadagnati</b>, conservarli (come se fossero in un \"portafoglio\" virtuale) e spendere i loro voucher.\n\nLa piattaforma WOM non ha alcun costo per i Volontari che possono scaricare gratuitamente l’app <b>Pocket</b> dagli <b>store Android e iOS</b>."
     }
   },
   "MERCHANT": {
@@ -311,20 +311,20 @@
     "SECTION_A": {
       "TITLE": "Dove spendo i miei WOM? Come posso premiare le azioni socialmente utili con i WOM?",
       "A": "I Merchants sono componenti di sistema che possono <b>creare istanze di pagamento</b>. Possono accettare i voucher WOM in cambio dei servizi e degli sconti che offrono.\nI Merchants possono <b>scegliere che tipo di voucher accettare</b>. Possono scegliere: i voucher generati solo per un <b>determinato scopo</b> (promuovendo così tale scopo sociale), quelli generati in una determinata <b>area geografica</b> (incoraggiando così le azioni sociali nella loro realtà territoriale), o quelli generati in un <b>intervallo di tempo definito</b>.\nLe istanze di pagamento <b>non prevedono scambi di denaro</b> ma solo sconti e gratuità.",
-      "B": "Accettando tipologie specifiche di voucher WOM, i Merchants possono contribuire indirettamente a una campagna sociale, incentivando i cittadini a contribuire all'obiettivo condiviso con i loro sforzi volontari. Inoltre, i Merchants possono aumentare la loro visibilità presso la comunità lavorando per raggiungere l'obiettivo condiviso.",
+      "B": "Accettando tipologie specifiche di voucher WOM, i Merchants possono contribuire indirettamente a una campagna sociale, incentivando i cittadini a contribuire all’obiettivo condiviso con i loro sforzi volontari. Inoltre, i Merchants possono aumentare la loro visibilità presso la comunità lavorando per raggiungere l’obiettivo condiviso.",
       "C": "Vuoi registrarti come merchant? Accedi <a href='/authentication/signin'>qui</a>"
     },
     "SECTION_B": {
       "TITLE": "POS",
-      "A": "Lo strumento che i Merchants possono utilizzare per accettare il pagamento WOM è l'app <b>\"WOM POS\" (Point of Sale)</b> o un software di integrazione personalizzato. Questi componenti software consentono ai Merchants di creare nuove transazioni, applicando filtri ai voucher WOM raccolti.",
-      "B": "La piattaforma WOM </b>non ha alcun costo per il Merchant che vuole utilizzarla in modo <b>anonimo</b>. I Merchant possono scaricare gratuitamente l'app <b>POS</b> dagli <b>store Android e iOS</b>. Non ci sono costi di transazione.\nSe i Merchant vogliono rendere <b>più visibili le loro offerte</b> e avere <b>rapporti periodici</b> sul valore sociale che hanno contribuito a generare, possono acquistare dei servizi a pagamento."
+      "A": "Lo strumento che i Merchants possono utilizzare per accettare il pagamento WOM è l’app <b>\"WOM POS\" (Point of Sale)</b> o un software di integrazione personalizzato. Questi componenti software consentono ai Merchants di creare nuove transazioni, applicando filtri ai voucher WOM raccolti.",
+      "B": "La piattaforma WOM </b>non ha alcun costo per il Merchant che vuole utilizzarla in modo <b>anonimo</b>. I Merchant possono scaricare gratuitamente l’app <b>POS</b> dagli <b>store Android e iOS</b>. Non ci sono costi di transazione.\nSe i Merchant vogliono rendere <b>più visibili le loro offerte</b> e avere <b>rapporti periodici</b> sul valore sociale che hanno contribuito a generare, possono acquistare dei servizi a pagamento."
     }
   },
   "INSTRUMENT": {
     "TITLE": "Instrument",
     "SECTION_A": {
       "TITLE": "Come si generano WOM?",
-      "A": "Gli <b>Instruments</b> sono componenti di sistema <b>riconosciuti dalla piattaforma WOM</b> e approvati da un <b>comitato etico</b>. Possono <b>generare vouchers e premiare i contributori</b>.\nTutti i titolari di attività sociali o di un'iniziativa che permetta ai volontari di intraprendere azioni sociali possono diventare Instruments e essere aggiunti all'elenco dei <b>WOM Instruments</b>.\n",
+      "A": "Gli <b>Instruments</b> sono componenti di sistema <b>riconosciuti dalla piattaforma WOM</b> e approvati da un <b>comitato etico</b>. Possono <b>generare vouchers e premiare i contributori</b>.\nTutti i titolari di attività sociali o di un’iniziativa che permetta ai volontari di intraprendere azioni sociali possono diventare Instruments e essere aggiunti all’elenco dei <b>WOM Instruments</b>.\n",
       "B": "Ogni Instrument <b>consente il perseguimento di uno degli obiettivi sociali individuati dalla piattaforma WOM</b> (ad esempio, iniziative per la salute pubblica, attività per la difesa dei diritti sociali o la tutela del patrimonio artistico e culturale, ecc.). Questi obiettivi sono chiamati <b>aim</b>.",
       "C": "L’inserimento nella piattaforma di <b>nuovi Instrument</b> per il rilascio di WOM <b>ha costi</b> legati al processo di revisione da parte dei comitati etici e tecnici, allo sviluppo dei connettori e al mantenimento del servizio di generazione WOM."
     },
@@ -333,7 +333,7 @@
     }
   },
   "TERMS_CONDITIONS": {
-    "MAIN_TEXT": "Le diamo il benvenuto su WOM!\n\nI termini e le condizioni seguenti indicano regole e normative per l'utilizzo del sito di DIGIT srl, all'indirizzo https://wom.social.\n\nAccedendo a questo sito, Lei accetta i termini e le condizioni seguenti. Le chiediamo di non continuare a registrarti al servizio WOM nel caso in cui non fosse d'accordo con tutti i termini e le condizioni in questa pagina.\n\nLicenza:\n\nA meno che indicato altrimenti, DIGIT srl e/o gli affiliati con licenza detengono i diritti di proprietà intellettuale per tutto il materiale su WOM. Tutti i diritti di proprietà intellettuale sono riservati. \n\nIl presente accordo ha inizio dalla data di registrazione.\n\nResponsabilità sui contenuti:\n\nNon possiamo essere ritenuti responsabili per i contenuti presenti sul Suo sito. Accetta di proteggerci e difenderci da qualsiasi azione legale proveniente dal Suo sito. Non devono essere aggiunti collegamenti sul Suo sito che potrebbero essere interpretati come calunniosi, osceni, criminali o che infrangono, violano o suggeriscono la violazione di diritti di terzi.\n\nDiritti riservati:\n\nCi riserviamo il diritto di richiedere la rimozione di tutti i collegamenti o di un collegamento specifico al nostro sito. Deve approvare immediatamente la richiesta di rimozione dei collegamenti. Ci riserviamo il diritto di modificare termini e condizioni, oltre che politica di collegamento in qualsiasi momento. Continuando a usare il nostro sito, accetta di essere vincolato dai presenti termini e condizioni.\n\nRimozione di collegamenti dal nostro sito:\n\nNel caso in cui un collegamento sul nostro sito sia offensivo per qualsiasi motivo, può contattarci e informarci in qualsiasi momento. Considereremo le richieste di rimozione dei collegamenti, tuttavia non siamo obbligati a completare la rimozione o rispondere direttamente.\n\nNon garantiamo l'accuratezza delle informazioni presenti sul sito. Non garantiamo che le informazioni siano complete o precise, né promettiamo di assicurare che il sito resti disponibile o che il materiale sul sito venga costantemente aggiornato.\n\nEsclusione di responsabilità:\n\nNella misura massima consentita dalla legge, escludiamo ogni rappresentanza, garanzia e condizione correlata al nostro sito e all'uso dello stesso. \n\nLe limitazioni e i divieti di responsabilità indicati in questa sezione e in altre parti di questa esclusione di responsabilità: (a) sono soggetti al paragrafo precedente; (b) governano tutte le responsabilità correlate a questa esclusione di responsabilità, incluse quelle correlate a contratto, torto o violazione di obblighi normativi.\n\nSe sito, informazioni e servizi vengono forniti gratuitamente, non possiamo essere ritenuti responsabili per perdite o danni di qualsiasi natura.\n"
+    "MAIN_TEXT": "Le diamo il benvenuto su WOM!\n\nI termini e le condizioni seguenti indicano regole e normative per l’utilizzo del sito di DIGIT srl, all’indirizzo https://wom.social.\n\nAccedendo a questo sito, Lei accetta i termini e le condizioni seguenti. Le chiediamo di non continuare a registrarti al servizio WOM nel caso in cui non fosse d’accordo con tutti i termini e le condizioni in questa pagina.\n\nLicenza:\n\nA meno che indicato altrimenti, DIGIT srl e/o gli affiliati con licenza detengono i diritti di proprietà intellettuale per tutto il materiale su WOM. Tutti i diritti di proprietà intellettuale sono riservati. \n\nIl presente accordo ha inizio dalla data di registrazione.\n\nResponsabilità sui contenuti:\n\nNon possiamo essere ritenuti responsabili per i contenuti presenti sul Suo sito. Accetta di proteggerci e difenderci da qualsiasi azione legale proveniente dal Suo sito. Non devono essere aggiunti collegamenti sul Suo sito che potrebbero essere interpretati come calunniosi, osceni, criminali o che infrangono, violano o suggeriscono la violazione di diritti di terzi.\n\nDiritti riservati:\n\nCi riserviamo il diritto di richiedere la rimozione di tutti i collegamenti o di un collegamento specifico al nostro sito. Deve approvare immediatamente la richiesta di rimozione dei collegamenti. Ci riserviamo il diritto di modificare termini e condizioni, oltre che politica di collegamento in qualsiasi momento. Continuando a usare il nostro sito, accetta di essere vincolato dai presenti termini e condizioni.\n\nRimozione di collegamenti dal nostro sito:\n\nNel caso in cui un collegamento sul nostro sito sia offensivo per qualsiasi motivo, può contattarci e informarci in qualsiasi momento. Considereremo le richieste di rimozione dei collegamenti, tuttavia non siamo obbligati a completare la rimozione o rispondere direttamente.\n\nNon garantiamo l’accuratezza delle informazioni presenti sul sito. Non garantiamo che le informazioni siano complete o precise, né promettiamo di assicurare che il sito resti disponibile o che il materiale sul sito venga costantemente aggiornato.\n\nEsclusione di responsabilità:\n\nNella misura massima consentita dalla legge, escludiamo ogni rappresentanza, garanzia e condizione correlata al nostro sito e all’uso dello stesso. \n\nLe limitazioni e i divieti di responsabilità indicati in questa sezione e in altre parti di questa esclusione di responsabilità: (a) sono soggetti al paragrafo precedente; (b) governano tutte le responsabilità correlate a questa esclusione di responsabilità, incluse quelle correlate a contratto, torto o violazione di obblighi normativi.\n\nSe sito, informazioni e servizi vengono forniti gratuitamente, non possiamo essere ritenuti responsabili per perdite o danni di qualsiasi natura.\n"
   },
   "PRIVACY": {
     "SIDENAV": {
@@ -352,7 +352,7 @@
     "SIDENAV": {
       "TITLE": "Applicazioni",
       "OVERVIEW": "Panoramica",
-      "STEPCOUNTER": "Stepcounter",
+      "STEPCOUNTER": "Contapassi",
       "AWORLD": "AWorld",
       "UNIVERSITIES": "Università",
       "BALANCE": "Balance",
@@ -360,27 +360,27 @@
     },
     "OVERVIEW": {
       "TITLE": "Lista di applicazioni per ottenere WOM",
-      "MAIN_CONTENT": "Qui puoi trovare una lista con tutte le applicazioni che ti permettono di ottenere WOM. <br> Dai un'occhiata alla lista nel menu laterale!"
+      "MAIN_CONTENT": "Qui puoi trovare una lista con tutte le applicazioni che ti permettono di ottenere WOM. <br> Dai un’occhiata alla lista nel menu laterale!"
     },
     "STEPCOUNTER": {
       "TITLE": "WOM Contapassi",
-      "MAIN_CONTENT": "Tieni il conto dei tuoi passi con WOM Step Counter, la prima app che premia ciò che fai abitualmente! <br> Grazie a WOM Step Counter poi trasformare i tuoi passi in WOM, i voucher digitali che premiano l’impegno sociale. Inizierai a collezionare WOM dopo aver superato i 3000 passi."
+      "MAIN_CONTENT": "Tieni il conto dei tuoi passi con WOM Step Counter, la prima app che premia ciò che fai abitualmente! <br /> Grazie a WOM Step Counter poi trasformare i tuoi passi in WOM, i voucher digitali che premiano l’impegno sociale. Inizierai a collezionare WOM dopo aver superato i 3000 passi."
     },
     "UNIVERSITIES": {
       "TITLE": "Università",
-      "MAIN_CONTENT": "Le seguenti università rilasciano WOM per ciascun esame superato dagli studenti. <br> Clicca sul link di ciascuna università per avere maggiori informazioni:"
+      "MAIN_CONTENT": "Le seguenti università rilasciano WOM per ciascun esame superato dagli studenti. <br /> Clicca sul link di ciascuna università per avere maggiori informazioni:"
     },
     "AWORLD": {
       "TITLE": "AWorld",
-      "MAIN_CONTENT": "DIGIT SRL ha instaurato un accordo con AWorld per convertire le tue azioni per una vita sostenibile in WOM. Dai un'occhiata al seguente link per maggiori informazioni:"
+      "MAIN_CONTENT": "DIGIT srl ha instaurato un accordo con AWorld per convertire le tue azioni per una vita sostenibile in WOM. Dai un’occhiata al seguente link per maggiori informazioni:"
     },
     "BALANCE": {
       "TITLE": "Balance",
-      "MAIN_CONTENT": "Balance é un'applicazione sviluppata dai ricercatori dell'Università di Urbino per valutare la tua stabilità attraverso l'investigazione dei tuoi indici stabilometrici con il solo smartphone."
+      "MAIN_CONTENT": "Balance è un’applicazione sviluppata dai ricercatori dell’Università di Urbino per valutare la tua stabilità attraverso l’investigazione dei tuoi indici stabilometrici con il solo smartphone."
     },
     "CODYMAZE": {
       "TITLE": "CodyMaze",
-      "MAIN_CONTENT": "Una scacchiera a cielo aperto di 25 blocchi in cui gli studenti si muoveranno come robot guidati dalle istruzioni che appariranno via via sullo smartphone. Un labirinto mai uguale, che appare diverso a ciascun giocatore e che si rinnova ad ogni ingresso.<br> Come uscirne? Mettendo in pratica i principi base del coding che si assimilano anche giocando!"
+      "MAIN_CONTENT": "Una scacchiera a cielo aperto di 25 blocchi in cui gli studenti si muoveranno come robot guidati dalle istruzioni che appariranno via via sullo smartphone. Un labirinto mai uguale, che appare diverso a ciascun giocatore e che si rinnova ad ogni ingresso. <br /> Come uscirne? Mettendo in pratica i principi base del coding che si assimilano anche giocando!"
     }
   },
   "404": {
