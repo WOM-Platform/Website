@@ -345,7 +345,44 @@
       "MAIN_CONTENT": "Nel menu laterale si trovano le privacy policy delle applicazioni legate ai WOM."
     },
     "STEPCOUNTER": {
-      "TITLE": "Informativa sulla privacy ‘WOM Contapassi’"
+      "TITLE": "Informativa sulla privacy ‘WOM Contapassi’",
+      "CONTENT": [
+        "<p>La presente informativa privacy è resa in conformità al Regolamento (UE) 2016/679 (“GDPR”) e alla normativa vigente in materia di protezione dei dati personali e contiene tutte le informazioni sul trattamento e sulla gestione dei dati personali che vengono raccolti quando si installa l’applicazione <strong>WOM Contapassi</strong> (di seguito “applicazione”) sul proprio dispositivo mobile.</p>",
+        "<p>L’app WOM Contapassi permette di convertire l&#8217;impegno per la propria salute fisica in voucher anonimi, tramite la piattaforma WOM.</p>",
+        "<h2>1. Titolare del trattamento</h2>",
+        "<p>Il titolare del trattamento dei dati personali, cioè il soggetto che assume le decisioni in merito alle modalità e alle finalità del trattamento, è Digit s.r.l., con sede legale in Corso Giuseppe Garibaldi&nbsp;66, 61029, Urbino&nbsp;(PU), nella persona del suo legale rappresentante.</p>",
+        "<p>Digit s.r.l. è uno <em>spin-off</em> dell’Università degli Studi di Urbino “Carlo Bo”.</p>",
+        "<h2>2. Dati oggetto del trattamento&nbsp;</h2>",
+        "<p>L’app WOM Contapassi raccoglie e tratta localmente i dati relativi alle attività di fitness dell’utente, così come sono esposte dalla piattaforma su cui l&#8217;applicazione è installata (Google Fit su Android, Apple Healthkit su iOS).</p>",
+        "<p>Non vi è una fase di registrazione e dunque non sono raccolte o altrimenti trattate informazioni personali dell’utente di tipo anagrafico o di contatto.</p>",
+        "<h2>3. Finalità del trattamento</h2>",
+        "<p>La finalità del progetto è favorire la fruizione attiva del territorio e la partecipazione agli eventi che in esso si svolgono, offrendo nuove modalità di coinvolgimento, riconoscendo il valore sociale della partecipazione e conservando memoria dei dati necessari a ricevere informazioni, segnalazioni e premi di partecipazione riferiti solo a luoghi ed eventi effettivamente frequentati dall’utente. Questi dati vengono memorizzati esclusivamente in locale sul dispositivo dell’utente.</p>",
+        "<h2>4. Basi legali del trattamento</h2>",
+        "<p>La base giuridica del trattamento consiste nel <strong>consenso </strong>liberamente espresso dall’utente al momento del download e della prima apertura dell&#8217;applicazione che permette a WOM Contapassi di registrare in locale le proprie attività. Tale consenso è dato per le finalità presentate al punto 3.</p>",
+        "<h2>5. Modalità di raccolta dei dati</h2>",
+        "<p>Dopo l’installazione di WOM Contapassi sul proprio dispositivo, vengono raccolti i dati relativi alle attività dell’utente tramite le interfacce di programmazione offerte da Google Fit o Apple Healthkit, rispettivamente su Android e su iOS.</p>",
+        "<h2>6. Durata del trattamento</h2>",
+        "<p>I dati sono memorizzati esclusivamente sul dispositivo dell’utente fintanto che l’applicazione rimane installata.</p>",
+        "<h2>7. Modalità del trattamento, comunicazione e diffusione dei dati</h2>",
+        "<p>I dati raccolti da WOM Contapassi sono memorizzati esclusivamente sul dispositivo dell’utente (<em>local data storage</em>). Tramite la memorizzazione, l’utente dispone di un diario delle proprie attività.</p>",
+        "<h2>8. Eventuali parti terze coinvolte</h2>",
+        "<p>I dati sono memorizzati nella memoria del dispositivo (<em>local data storage</em>) e non vengono ceduti a soggetti terzi.</p>",
+        "<h2>9. Diritti dell’interessato</h2>",
+        "<p>Ai sensi degli artt. 15 e ss. del Regolamento, l’utente ha il diritto di:</p>",
+        "<ul>",
+        "<li>ricevere conferma dell’esistenza dei suoi dati personali, accedere al loro contenuto e ottenerne copia (<strong>diritto di accesso</strong>);</li>",
+        "<li>aggiornare, modificare e/o correggere i suoi dati personali (<strong>diritto di rettifica</strong>);</li>",
+        "<li>chiedere la cancellazione o la limitazione del trattamento dei dati personali nelle ipotesi previste dal Regolamento (<strong>diritto di cancellazione</strong> e <strong>diritto alla limitazione del trattamento</strong>);</li>",
+        "<li>opporsi al trattamento nelle ipotesi in cui sia previsto dal Regolamento (<strong>diritto di opposizione</strong>),&nbsp;</li>",
+        "<li>ricevere copia dei dati forniti in formato strutturato, di uso comune e leggibile da un dispositivo automatico e chiedere che tali dati siano trasmessi ad un altro Titolare del trattamento se tecnicamente fattibile (<strong>diritto alla portabilità</strong>).&nbsp;</li>",
+        "</ul>",
+        "<p>L’interessato ha inoltre il diritto di proporre reclamo all’autorità di controllo.</p>",
+        "<p>Per esercitare i suoi diritti, l’utente può scrivere in ogni momento alla seguente e-mail: <a href=\"mailto:info@digit.srl\">info@digit.srl</a> oppure all’indirizzo:</p>",
+        "<p>DIGIT s.r.l.<br>Corso Giuseppe Garibaldi,&nbsp;66<br>61029, Urbino&nbsp;(PU)<br>c.a. Responsabile della protezione dati personali</p>",
+        "<h2>10. Aggiornamenti dell’informativa</h2>",
+        "<p>La presente informativa privacy potrà essere aggiornata nel tempo, pertanto Digit s.r.l. indicherà la data dell’ultimo aggiornamento in calce all&#8217;informativa stessa.</p>"
+      ],
+      "LAST_UPDATE": "Ultimo aggiornamento"
     }
   },
   "APPLICATIONS": {

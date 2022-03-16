@@ -7,6 +7,8 @@ import {HttpClientModule, HTTP_INTERCEPTORS, HttpClient} from '@angular/common/h
 import {appRoutingModule} from './app.routing';
 import {RouterModule} from '@angular/router';
 import {TranslateLoader, TranslateModule, TranslateService} from '@ngx-translate/core';
+import {JoinstringsPipe} from 'src/app/_helpers/joinstringsPipe';
+
 import {HomeComponent} from './home';
 import {LogoutDialogComponent, NavComponent} from './nav/nav.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
@@ -130,7 +132,9 @@ export const isMock = environment.mock;
     ApplicationsBalanceComponent,
     PrivacyStepcounterComponent,
     PrivacyOverviewComponent,
-    LogoutDialogComponent
+    LogoutDialogComponent,
+
+    JoinstringsPipe,
   ],
   exports: [
       MatStepperModule,
