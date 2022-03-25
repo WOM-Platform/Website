@@ -50,7 +50,7 @@ export class MerchantService {
             {
                 name: merchant.name,
                 fiscalCode: merchant.fiscalCode,
-                primaryActivityType: merchant.primaryActivity,
+                primaryActivity: merchant.primaryActivity,
                 address: merchant.address,
                 zipCode: merchant.zipCode,
                 city: merchant.city,
