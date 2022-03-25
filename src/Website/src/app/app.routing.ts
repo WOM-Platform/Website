@@ -26,6 +26,7 @@ import {ApplicationsUniversitiesComponent} from "./applications/universities/uni
 import {ApplicationsAworldComponent} from "./applications/aworld/aworld.component";
 import {ApplicationsCodymazeComponent} from "./applications/codymaze/codymaze.component";
 import {ApplicationsBalanceComponent} from "./applications/balance/balance.component";
+import {ContactsComponent} from "./contacts/contacts.component";
 
 const routes: Routes = [
   {
@@ -73,6 +74,13 @@ const routes: Routes = [
         data: {
           breadcrumb: 'BREADCRUMBS.INSTRUMENT'
         },
+      },
+      {
+        path: 'contacts',
+        component: ContactsComponent,
+        data: {
+          breadcrumb: 'BREADCRUMBS.CONTACTS'
+        }
       },
       {
         path: 'user',

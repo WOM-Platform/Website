@@ -77,6 +77,8 @@ import {ApplicationsUniversitiesComponent} from "./applications/universities/uni
 import {ApplicationsAworldComponent} from "./applications/aworld/aworld.component";
 import {ApplicationsCodymazeComponent} from "./applications/codymaze/codymaze.component";
 import {ApplicationsBalanceComponent} from "./applications/balance/balance.component";
+import {ContactsComponent} from "./contacts/contacts.component";
+import {ContactFormComponent} from "./_forms/contact/forms-contact.directive";
 
 // AoT requires an exported function for factories
 export const createTranslateLoader = (http: HttpClient) => new TranslateHttpLoader(http, './assets/i18n/', '.json?cb=' + environment.i18n);
@@ -133,8 +135,9 @@ export const isMock = environment.mock;
     PrivacyStepcounterComponent,
     PrivacyOverviewComponent,
     LogoutDialogComponent,
-
+    ContactsComponent,
     JoinstringsPipe,
+    ContactFormComponent
   ],
   exports: [
       MatStepperModule,

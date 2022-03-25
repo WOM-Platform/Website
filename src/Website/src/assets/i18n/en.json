@@ -5,11 +5,12 @@
     "HOME": "Home",
     "VOLUNTEERS": {
       "TITLE": "Volunteers",
-      "WHO_ARE": "Who are they",
-      "APPLICATIONS": "Applications"
+      "WHO_ARE": "About",
+      "APPLICATIONS": "How to earn WOMs"
     },
     "ABOUT": "What are WOMs",
     "INSTRUMENT": "Instrument",
+    "CONTACTS": "Contact Us",
     "SIGN_IN": "Login",
     "PROFILE": "Profile",
     "MERCHANT": "Merchant",
@@ -27,6 +28,7 @@
     "VOLUNTEER": "Volunteers",
     "MERCHANT": "Merchant",
     "INSTRUMENT": "Instrument",
+    "CONTACTS": "Contact us",
     "USER" : {
       "USER": "Your profile",
       "MERCHANT": "Merchant",
@@ -330,6 +332,25 @@
       "AVAILABLE": "WOMs in circulation"
     }
   },
+  "CONTACTS": {
+    "TITLE": "Contacts",
+    "SEND_SUCCESS": "Sent!",
+    "SEND_ERROR": "There was an error sending the request. Please try again.",
+    "FORM_ERROR": "There seems to be something missing in the form.",
+    "SEND": "Send",
+    "FORM": {
+      "TITLE": "Have any questions? Fill out the form below to reach out to us!",
+      "SENDER_NAME": "Name",
+      "SENDER_EMAIL": "E-mail address",
+      "SUBJECT": "E-mail subject",
+      "CONTENT": "Write your message here",
+      "NO_TEXT_ERROR": "Required field",
+      "EMAIL_ERROR": "Please enter a valid email address"
+    }
+  },
+  "TERMS_CONDITIONS": {
+    "MAIN_TEXT": "Welcome to the WOM platform!\n\n The following is in italian language only.  \n\nI termini e le condizioni seguenti indicano regole e normative per l’utilizzo del sito di DIGIT srl, all’indirizzo https://wom.social.\n\nAccedendo a questo sito, Lei accetta i termini e le condizioni seguenti. Le chiediamo di non continuare a registrarti al servizio WOM nel caso in cui non fosse d’accordo con tutti i termini e le condizioni in questa pagina.\n\nLicenza:\n\nA meno che indicato altrimenti, DIGIT srl e/o gli affiliati con licenza detengono i diritti di proprietà intellettuale per tutto il materiale su WOM. Tutti i diritti di proprietà intellettuale sono riservati. \n\nIl presente accordo ha inizio dalla data di registrazione.\n\nResponsabilità sui contenuti:\n\nNon possiamo essere ritenuti responsabili per i contenuti presenti sul Suo sito. Accetta di proteggerci e difenderci da qualsiasi azione legale proveniente dal Suo sito. Non devono essere aggiunti collegamenti sul Suo sito che potrebbero essere interpretati come calunniosi, osceni, criminali o che infrangono, violano o suggeriscono la violazione di diritti di terzi.\n\nDiritti riservati:\n\nCi riserviamo il diritto di richiedere la rimozione di tutti i collegamenti o di un collegamento specifico al nostro sito. Deve approvare immediatamente la richiesta di rimozione dei collegamenti. Ci riserviamo il diritto di modificare termini e condizioni, oltre che politica di collegamento in qualsiasi momento. Continuando a usare il nostro sito, accetta di essere vincolato dai presenti termini e condizioni.\n\nRimozione di collegamenti dal nostro sito:\n\nNel caso in cui un collegamento sul nostro sito sia offensivo per qualsiasi motivo, può contattarci e informarci in qualsiasi momento. Considereremo le richieste di rimozione dei collegamenti, tuttavia non siamo obbligati a completare la rimozione o rispondere direttamente.\n\nNon garantiamo l’accuratezza delle informazioni presenti sul sito. Non garantiamo che le informazioni siano complete o precise, né promettiamo di assicurare che il sito resti disponibile o che il materiale sul sito venga costantemente aggiornato.\n\nEsclusione di responsabilità:\n\nNella misura massima consentita dalla legge, escludiamo ogni rappresentanza, garanzia e condizione correlata al nostro sito e all’uso dello stesso. \n\nLe limitazioni e i divieti di responsabilità indicati in questa sezione e in altre parti di questa esclusione di responsabilità: (a) sono soggetti al paragrafo precedente; (b) governano tutte le responsabilità correlate a questa esclusione di responsabilità, incluse quelle correlate a contratto, torto o violazione di obblighi normativi.\n\nSe sito, informazioni e servizi vengono forniti gratuitamente, non possiamo essere ritenuti responsabili per perdite o danni di qualsiasi natura.\n"
+  },
   "PRIVACY": {
     "SIDENAV": {
       "TITLE": "Applications",
@@ -390,7 +411,7 @@
     },
     "OVERVIEW": {
       "TITLE": "List of applications for gaining WOMs",
-      "MAIN_CONTENT": "Here you can find a list of all applications that allow you to gain WOMs. <br> Check out the list in the side menu!"
+      "MAIN_CONTENT": "WOM vouchers can be earned by voluntarily doing a socially useful action. For a WOM to be generated, <b>the activity has to be formally acknowledged by the WOM platform.</b> <br> Volounteers can obtain WOMs through the use of <b>specific applications</b> that recognize the social value of their actions <br> <b>Check out the list of the applications in the side menu!</b>"
     },
     "STEPCOUNTER": {
       "TITLE": "WOM Stepcounter",
@@ -398,19 +419,19 @@
     },
     "UNIVERSITIES": {
       "TITLE": "Universities",
-      "MAIN_CONTENT": "The following universities are now giving out WOMs for every successful exam. Click on the link of each university for more information:"
+      "MAIN_CONTENT": "WOM is a project that acknowledges actions that have an intrinsic social value, and exactly because of this it recognizes the effort of each univeristy student in passing their exams Check out which universities will let you earn WOMs for each successful exam. <br>Click on the link of each university for more information:"
     },
     "AWORLD": {
       "TITLE": "AWorld",
-      "MAIN_CONTENT": "DIGIT SRL has teamed up with AWorld to convert your sustainable living actions into WOMs. Check out the following link for more information:"
+      "MAIN_CONTENT": "AWorld is an App that promotes sustainable living in the modern world. <br> DIGIT SRL has teamed up with AWorld to convert your sustainable living actions into WOMs. Check out the following link for more information:"
     },
     "BALANCE": {
       "TITLE": "Balance - Postural Stability",
-      "MAIN_CONTENT": "Balance is an application developed by researchers at the University of Urbino to evaluate your stability by investigating your stabilometric indices with just your smartphone."
+      "MAIN_CONTENT": "Balance - Postural Stability© is an application developed by researchers at the University of Urbino to evaluate your stability by investigating your stabilometric indices with just your smartphone.<br> Measure your postural stability every day to earn WOMs! <br> You can start collecting WOMs after doing a measurement in 2 different days."
     },
     "CODYMAZE": {
       "TITLE": "CodyMaze",
-      "MAIN_CONTENT": "An open-air chessboard of 25 blocks in which the students will move around like robots guided by the instructions that will appear gradually on the smartphone. <br> A labyrinth that is never the same, which appears different to each player and changes at each entry.<br> How to get out of it? By putting into practice the basic principles of coding that you assimilate even while playing!"
+      "MAIN_CONTENT": "An open-air chessboard of 25 blocks in which the students will move around like robots guided by the instructions that will appear gradually on the smartphone. <br> A labyrinth that is never the same, which appears different to each player and changes at each entry.<br> How to get out of it? By putting into practice the basic principles of coding that you assimilate even while playing! <br> Earn WOMs by having fun!"
     }
   },
   "404": {
