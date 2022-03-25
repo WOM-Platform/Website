@@ -11,7 +11,7 @@ export class EmailService {
     sendEmail(emailData: EmailData): Observable<any> {
         let headers = new HttpHeaders()
             .set('accept', 'application/json')
-            .set('api-key', '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')
+            .set('api-key', '#SENDINBLUEAPI#')
             .set('content-type', 'application/json');
         return this.http.post<any>('https://api.sendinblue.com/v3/smtp/email',
             {
