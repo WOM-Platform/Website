@@ -1,9 +1,13 @@
 # BUILD step
 FROM node:17.4 as build
 
-# Import variables
+# Import environment variables from build args
+
 ARG ARG_GOOGLE_MAPS_API
 ENV GOOGLE_MAPS_API=$ARG_GOOGLE_MAPS_API
+
+ARG ARG_SEND_IN_BLUE_API
+ENV SEND_IN_BLUE_API=ARG_SEND_IN_BLUE_API
 
 WORKDIR /app
 
