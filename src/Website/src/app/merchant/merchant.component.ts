@@ -101,6 +101,7 @@ export class MerchantComponent implements OnInit, AfterViewInit {
   }
 
   addMarker(posData: PosMap): void {
+    console.log(posData);
     const marker: google.maps.Marker = new google.maps.Marker();
     marker.setPosition({
       lat: posData.position.latitude,
