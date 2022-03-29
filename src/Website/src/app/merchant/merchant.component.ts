@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {AfterViewChecked, AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {GoogleMap, MapInfoWindow, MapMarker} from '@angular/google-maps';
 import {MapService} from '../_services';
 import {Pos, PosMap} from '../_models';
@@ -16,6 +16,7 @@ export class MerchantComponent implements OnInit, AfterViewInit {
   @ViewChild(MapMarker, { static: false }) mapMarker: MapMarker;
   @ViewChild(MapInfoWindow, { static: false }) infoWindow: MapInfoWindow;
   @ViewChild('mapSearchField') searchField: ElementRef;
+  mapLoaded = false;
   searchBox: google.maps.places.SearchBox;
   infoContent = '';
   markers = [];
@@ -31,7 +32,7 @@ export class MerchantComponent implements OnInit, AfterViewInit {
     zoomControl: true,
     scrollwheel: true,
     disableDoubleClickZoom: false,
-    maxZoom: 18,
+    maxZoom: 22,
     minZoom: 5,
   };
 
@@ -44,16 +45,14 @@ export class MerchantComponent implements OnInit, AfterViewInit {
         lat: position.coords.latitude,
         lng: position.coords.longitude,
       };
+      this.zoom = 17;
     }, () => {
-      this.center = {
-        lat: 43.83833794129076,
-        lng: 13.02318609717848,
-      };
+      console.log('Position not allowed.');
+      this.zoom = 17;
     });
   }
 
   ngAfterViewInit(): void {
-
     this.searchBox = new google.maps.places.SearchBox(
         this.searchField.nativeElement
     );
@@ -81,6 +80,14 @@ export class MerchantComponent implements OnInit, AfterViewInit {
       this.map.fitBounds(bounds);
       this.boundsChanged();
     });
+
+    this.map.googleMap.addListener( 'idle', () => {
+      if (!this.mapLoaded) {
+        setTimeout(() => {
+          this.map.googleMap.setZoom(this.map.googleMap.getZoom() - 1);
+        }, 1000)
+      }
+    })
   }
 
   zoomIn(): void {
@@ -101,7 +108,6 @@ export class MerchantComponent implements OnInit, AfterViewInit {
   }
 
   addMarker(posData: PosMap): void {
-    console.log(posData);
     const marker: google.maps.Marker = new google.maps.Marker();
     marker.setPosition({
       lat: posData.position.latitude,
@@ -129,7 +135,13 @@ export class MerchantComponent implements OnInit, AfterViewInit {
 
   boundsChanged(): void {
     if (this.map === null || this.map.getBounds() === null) {
+      console.log('map not available.');
       return;
+    }
+
+    if(!this.mapLoaded) {
+      this.mapLoaded = true;
+      console.log(this.map.getBounds().toJSON());
     }
 
     const bounds = this.map.getBounds().toJSON();
@@ -153,7 +165,6 @@ export class MerchantComponent implements OnInit, AfterViewInit {
   onPosSelection(event: MatSelectionListChange) {
     const pos: PosMap = event.options[0].value;
     const marker: google.maps.Marker = this.markers.find(m => m.title === pos.name);
-    console.log(marker);
     google.maps.event.trigger(marker, 'click', {
       latLng:marker.getPosition()
     });
