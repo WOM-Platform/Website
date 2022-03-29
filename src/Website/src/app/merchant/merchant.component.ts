@@ -1,10 +1,9 @@
-import {AfterViewChecked, AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {GoogleMap, MapInfoWindow, MapMarker} from '@angular/google-maps';
 import {MapService} from '../_services';
-import {Pos, PosMap} from '../_models';
+import {PosMap} from '../_models';
 import {MatSelectionListChange} from "@angular/material/list";
-import {mark} from "@angular/compiler-cli/src/ngtsc/perf/src/clock";
-import {MatAnchor} from "@angular/material/button";
+import {MarkerClusterer} from "@googlemaps/markerclusterer";
 
 @Component({
   selector: 'app-merchant',
@@ -19,7 +18,7 @@ export class MerchantComponent implements OnInit, AfterViewInit {
   mapLoaded = false;
   searchBox: google.maps.places.SearchBox;
   infoContent = '';
-  markers = [];
+  markers: google.maps.Marker[] = [];
   posList: PosMap[] = [];
   zoom = 12;
   center: google.maps.LatLngLiteral = {
@@ -127,7 +126,6 @@ export class MerchantComponent implements OnInit, AfterViewInit {
       info: posData.url,
     });
     this.markers.push(marker);
-
     /*
     marker.addListener("click", () => {
       this.infoWindow.infoWindow.open(marker.getMap(), marker);
@@ -168,12 +166,19 @@ export class MerchantComponent implements OnInit, AfterViewInit {
       for (const i of res.pos) {
         this.addMarker(i);
       }
+
+      /*
+      const markerClusterer = new MarkerClusterer({
+        map: this.map.googleMap,
+        markers: this.markers
+      });
+      */
     });
   }
 
   onPosSelection(event: MatSelectionListChange) {
     const pos: PosMap = event.options[0].value;
-    const marker: google.maps.Marker = this.markers.find(m => m.title === pos.name);
+    const marker: google.maps.Marker = this.markers.find(m => m.getTitle() === pos.name);
     google.maps.event.trigger(marker, 'click', {
       latLng:marker.getPosition()
     });
