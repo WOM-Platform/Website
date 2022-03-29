@@ -108,14 +108,24 @@ export class MerchantComponent implements OnInit, AfterViewInit {
   }
 
   addMarker(posData: PosMap): void {
-    const marker: google.maps.Marker = new google.maps.Marker();
-    marker.setPosition({
-      lat: posData.position.latitude,
-      lng: posData.position.longitude,
+    var icon = {
+      url: "assets/images/wom_map_pin.png", // url
+      scaledSize: new google.maps.Size(30, 50), // scaled size
+      //origin: new google.maps.Point(0,0), // origin
+      anchor: new google.maps.Point(15, 50) // anchor
+    };
+    const marker: google.maps.Marker = new google.maps.Marker({
+      title: posData.name,
+      clickable: true,
+      icon: icon,
+      position: {
+        lat: posData.position.latitude,
+        lng: posData.position.longitude,
+      }
     });
-    marker.setTitle(posData.name);
-    marker.setValues({info: posData.url});
-    marker.setClickable(true);
+    marker.setValues({
+      info: posData.url,
+    });
     this.markers.push(marker);
 
     /*
@@ -141,7 +151,6 @@ export class MerchantComponent implements OnInit, AfterViewInit {
 
     if(!this.mapLoaded) {
       this.mapLoaded = true;
-      console.log(this.map.getBounds().toJSON());
     }
 
     const bounds = this.map.getBounds().toJSON();
