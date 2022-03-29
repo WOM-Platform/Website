@@ -106,7 +106,9 @@
                     <label>
                         <input matInput type="text" placeholder="{{ 'SIGN_UP.MERCHANT.WEBSITE' | translate }}" formControlName="url">
                     </label>
-
+                    <mat-error>
+                        {{'SIGN_UP.MERCHANT.URL_ERROR' | translate}}
+                    </mat-error>
                 </mat-form-field>
             </td>
         </tr>

@@ -54,5 +54,14 @@ export class MerchantFormComponent implements OnInit {
             this.form.controls.url.setValue(this.merchant.url);
             this.form.controls.description.setValue(this.merchant.description);
         }
+
+        this.form.controls.url.valueChanges.subscribe(text => {
+            if (text){
+                const urlRegex = /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/;
+                this.form.controls.url.setValidators([Validators.required, Validators.pattern(urlRegex)])
+            } else {
+                this.form.controls.url.setValidators(null);
+            }
+        })
     }
 }
