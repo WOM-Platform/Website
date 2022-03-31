@@ -9,6 +9,6 @@
     <app-forms-merchant [(form)]="formMerchant" [merchant]="merchantData" ></app-forms-merchant>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
-    <button mat-button mat-dialog-close>{{(data.type === dialogTypes.create ? "USER.ADD_MERCHANT.CANCEL" : "USER.EDIT_MERCHANT.CANCEL") | translate}}</button>
+    <button mat-button mat-dialog-close (click)="onCancel()">{{(data.type === dialogTypes.create ? "USER.ADD_MERCHANT.CANCEL" : "USER.EDIT_MERCHANT.CANCEL") | translate}}</button>
     <button mat-button (click)="onSubmit()" cdkFocusInitial>{{(data.type === dialogTypes.create ? "USER.ADD_MERCHANT.ADD" : "USER.EDIT_MERCHANT.ADD") | translate}}</button>
 </mat-dialog-actions>

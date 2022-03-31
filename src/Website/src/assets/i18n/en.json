@@ -116,6 +116,7 @@
       "BUSINESS_ERROR": "Please select a primary business",
       "WEBSITE": "Website, ex.: http://www.example.com",
       "OPTIONAL_WEBSITE_TEXT": "<i>Optional.</i>\nWeb site of your business.",
+      "URL_ERROR": "Make sure your website address is correct and starts with http or https",
       "DESCRIPTION": "Description",
       "DESCRIPTION_ERROR": "Please provide a short description for your merchant",
       "DESCRIPTION_TEXT": "Short description of your business and how you intend to monetize WOM Vouchers (goods or services)."

@@ -5,6 +5,8 @@ import {FormGroup} from '@angular/forms';
 import {MerchantService} from '../../_services';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {DialogType} from '../../_models/dialogType';
+import {StorageService} from "../../_services/storage.service";
+import {MerchantFormComponent} from "../../_forms/merchant/forms-merchant.directive";
 
 @Component({
     selector: 'app-merchant-dialog',
@@ -21,7 +23,8 @@ export class AddMerchantDialogComponent implements OnInit {
     constructor(@Inject(MAT_DIALOG_DATA) public data: MerchantDialogData,
                 public dialogRef: MatDialogRef<AddMerchantDialogComponent>,
                 private merchantService: MerchantService,
-                private cd: ChangeDetectorRef) {}
+                private cd: ChangeDetectorRef,
+                private storageService: StorageService) {}
 
     ngOnInit(): any {
         this.merchantData = this.data.data;
@@ -39,12 +42,16 @@ export class AddMerchantDialogComponent implements OnInit {
         }
     }
 
+    onCancel(): any {
+        this.storageService.clear(this.storageService.merchantFormKey);
+    }
+
     create(): any {
         const merchant = this.createMerchantDataStruct();
         this.merchantService.register(merchant).pipe(first()).subscribe(
             result => {
-                console.log(result);
                 this.dialogRef.close(true);
+                this.storageService.clear(this.storageService.merchantFormKey);
             }, error => {
                 this.formApiError = true;
                 console.log(error);
@@ -56,8 +63,8 @@ export class AddMerchantDialogComponent implements OnInit {
         merchant.id = this.merchantData.id;
         this.merchantService.update(merchant).pipe(first()).subscribe(
             result => {
-                console.log(result);
                 this.dialogRef.close(true);
+                this.storageService.clear(this.storageService.merchantFormKey);
             }, error => {
                 this.formApiError = true;
                 console.log(error);
@@ -81,7 +88,6 @@ export class AddMerchantDialogComponent implements OnInit {
         if (this.formMerchant.controls.description.value !== '') {
             merchant.description = this.formMerchant.controls.description.value;
         }
-
         return merchant;
     }
 }

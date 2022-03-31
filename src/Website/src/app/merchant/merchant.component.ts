@@ -1,10 +1,8 @@
-import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, OnInit, QueryList, ViewChild, ViewChildren} from '@angular/core';
 import {GoogleMap, MapInfoWindow, MapMarker} from '@angular/google-maps';
 import {MapService} from '../_services';
-import {Pos, PosMap} from '../_models';
+import {PosMap} from '../_models';
 import {MatSelectionListChange} from "@angular/material/list";
-import {mark} from "@angular/compiler-cli/src/ngtsc/perf/src/clock";
-import {MatAnchor} from "@angular/material/button";
 
 @Component({
   selector: 'app-merchant',
@@ -13,12 +11,14 @@ import {MatAnchor} from "@angular/material/button";
 })
 export class MerchantComponent implements OnInit, AfterViewInit {
   @ViewChild(GoogleMap, { static: false }) map: GoogleMap;
-  @ViewChild(MapMarker, { static: false }) mapMarker: MapMarker;
   @ViewChild(MapInfoWindow, { static: false }) infoWindow: MapInfoWindow;
   @ViewChild('mapSearchField') searchField: ElementRef;
+  @ViewChildren('markerElem') mapMarkerElem: QueryList<MapMarker>;
+
+  mapLoaded = false;
   searchBox: google.maps.places.SearchBox;
   infoContent = '';
-  markers = [];
+  markers: google.maps.Marker[] = [];
   posList: PosMap[] = [];
   zoom = 12;
   center: google.maps.LatLngLiteral = {
@@ -31,7 +31,7 @@ export class MerchantComponent implements OnInit, AfterViewInit {
     zoomControl: true,
     scrollwheel: true,
     disableDoubleClickZoom: false,
-    maxZoom: 18,
+    maxZoom: 22,
     minZoom: 5,
   };
 
@@ -44,16 +44,14 @@ export class MerchantComponent implements OnInit, AfterViewInit {
         lat: position.coords.latitude,
         lng: position.coords.longitude,
       };
+      this.zoom = 17;
     }, () => {
-      this.center = {
-        lat: 43.83833794129076,
-        lng: 13.02318609717848,
-      };
+      console.log('Position not allowed.');
+      this.zoom = 17;
     });
   }
 
   ngAfterViewInit(): void {
-
     this.searchBox = new google.maps.places.SearchBox(
         this.searchField.nativeElement
     );
@@ -81,6 +79,14 @@ export class MerchantComponent implements OnInit, AfterViewInit {
       this.map.fitBounds(bounds);
       this.boundsChanged();
     });
+
+    this.map.googleMap.addListener( 'idle', () => {
+      if (!this.mapLoaded) {
+        setTimeout(() => {
+          this.map.googleMap.setZoom(this.map.googleMap.getZoom() - 1);
+        }, 1000)
+      }
+    })
   }
 
   zoomIn(): void {
@@ -101,34 +107,43 @@ export class MerchantComponent implements OnInit, AfterViewInit {
   }
 
   addMarker(posData: PosMap): void {
-    const marker: google.maps.Marker = new google.maps.Marker();
-    marker.setPosition({
-      lat: posData.position.latitude,
-      lng: posData.position.longitude,
+    var icon = {
+      url: "assets/images/wom_map_pin.png", // url
+      scaledSize: new google.maps.Size(30, 50), // scaled size
+      //origin: new google.maps.Point(0,0), // origin
+      anchor: new google.maps.Point(15, 50) // anchor
+    };
+    const marker: google.maps.Marker = new google.maps.Marker({
+      title: posData.name,
+      clickable: true,
+      icon: icon,
+      position: {
+        lat: posData.position.latitude,
+        lng: posData.position.longitude,
+      }
     });
-    marker.setTitle(posData.name);
-    marker.setValues({info: posData.url});
-    marker.setClickable(true);
+    marker.setValues({
+      info: posData.url,
+    });
     this.markers.push(marker);
-
-    /*
-    marker.addListener("click", () => {
-      this.infoWindow.infoWindow.open(marker.getMap(), marker);
-    });
-    */
   }
 
-  openInfo(marker: MapMarker, content): void {
-    this.infoContent = '<b>' + content.title + '</b>';
-    if (content.info !== null) {
-      this.infoContent += '<br><br>' + '<a href="' + content.info + ' "target="_blank">' + content.info + '</a>';
+  openInfo(marker: MapMarker, content: google.maps.Marker): void {
+    this.infoContent = '<b>' + content.getTitle() + '</b>';
+    if (content.get('info') !== null) {
+      this.infoContent += '<br><br>' + '<a href="' + content.get('info') + ' "target="_blank">' + content.get('info') + '</a>';
     }
     this.infoWindow.open(marker);
   }
 
   boundsChanged(): void {
     if (this.map === null || this.map.getBounds() === null) {
+      console.log('map not available.');
       return;
+    }
+
+    if(!this.mapLoaded) {
+      this.mapLoaded = true;
     }
 
     const bounds = this.map.getBounds().toJSON();
@@ -146,13 +161,21 @@ export class MerchantComponent implements OnInit, AfterViewInit {
       for (const i of res.pos) {
         this.addMarker(i);
       }
+
+      /*
+      const markerClusterer = new MarkerClusterer({
+        map: this.map.googleMap,
+        markers: this.markers
+      });
+      */
     });
   }
 
   onPosSelection(event: MatSelectionListChange) {
     const pos: PosMap = event.options[0].value;
-    const marker: google.maps.Marker = this.markers.find(m => m.title === pos.name);
-    console.log(marker);
+    const marker: google.maps.Marker = this.markers.find(m => m.getTitle() === pos.name);
+    this.openInfo(this.mapMarkerElem.find(mm => mm.getTitle() === pos.name), marker);
+
     google.maps.event.trigger(marker, 'click', {
       latLng:marker.getPosition()
     });

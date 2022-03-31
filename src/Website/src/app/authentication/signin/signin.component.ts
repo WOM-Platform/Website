@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import {first} from 'rxjs/operators';
-import {UserService} from '../../_services/user.service';
+import {UserService} from '../../_services';
 import {TranslateService} from '@ngx-translate/core';
 
 @Component({
@@ -13,6 +13,7 @@ import {TranslateService} from '@ngx-translate/core';
 export class SignInComponent implements OnInit {
   error: string;
   form: FormGroup;
+  hide = true;
   public loginInvalid: boolean;
   private formSubmitAttempt: boolean;
   private returnUrl: string;

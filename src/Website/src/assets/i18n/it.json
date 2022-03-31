@@ -117,6 +117,7 @@
       "BUSINESS_ERROR": "Selezionare un’attività primaria",
       "WEBSITE": "Sito web, es.: http://www.example.com",
       "OPTIONAL_WEBSITE_TEXT": "<i>Opzionale.</i>\nSito web della propria attività.",
+      "URL_ERROR": "Assicurati che l'indirizzo del sito sia corretto e che inizi con http o https",
       "DESCRIPTION": "Descrizione",
       "DESCRIPTION_ERROR": "Inserisci una breve descrizione per il tuo Merchant",
       "DESCRIPTION_TEXT": "Una breve descrizione della propria attività e come intendi monetizzare i Voucher WOM (beni o servizi)."
