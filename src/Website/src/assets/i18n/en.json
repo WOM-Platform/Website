@@ -32,7 +32,7 @@
     "USER" : {
       "USER": "Your profile",
       "MERCHANT": "Merchant",
-      "ERROR": "Error",
+      "ERROR": "Not verified",
       "HOME": "Home",
       "VERIFY": "Verify"
     },
