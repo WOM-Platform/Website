@@ -1,18 +1,33 @@
-import {AfterViewInit, Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
+import {
+    AfterViewInit,
+    Component,
+    ElementRef,
+    EventEmitter,
+    Input,
+    OnDestroy,
+    OnInit,
+    Output,
+    ViewChild
+} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import MapTypeId = google.maps.MapTypeId;
 import {GoogleMap} from '@angular/google-maps';
-import {Merchant, Pos} from "../../_models";
+import {LatLon, Pos} from "../../_models";
+import {debounceTime, switchMap, takeUntil} from "rxjs/operators";
+import {StorageService} from "../../_services/storage.service";
+import {Observable, Subject, Subscription} from "rxjs";
 
 @Component({
     selector: 'app-forms-pos',
     templateUrl: './forms-pos.directive.html',
     styleUrls: ['./forms-pos.directive.css', '../forms.directive.css']
 })
-export class PosFormComponent implements OnInit, AfterViewInit {
+export class PosFormComponent implements OnInit, AfterViewInit, OnDestroy {
     @ViewChild(GoogleMap, { static: false }) map: GoogleMap;
     @ViewChild('mapSearchField') searchField: ElementRef;
 
+    unsubscribe = new Subject<void>()
+    observeChanges: Subscription;
     posLon: string;
     posLat: string;
     isActive: boolean;
@@ -27,13 +42,14 @@ export class PosFormComponent implements OnInit, AfterViewInit {
     @Input() pos: Pos;
     @Output() formChange = new EventEmitter<FormGroup>();
 
-    constructor(private fb: FormBuilder){}
+    constructor(private fb: FormBuilder,
+                private storageService: StorageService){}
 
     ngOnInit(): any {
         this.form = this.fb.group({
             name: ['', [Validators.required, Validators.minLength(4)]],
-            latitude: [{value: 0, disabled: true}, Validators.required],
-            longitude: [{value: 0, disabled: true}, Validators.required],
+            latitude: [{value: 0, disabled: false}, Validators.required],
+            longitude: [{value: 0, disabled: false}, Validators.required],
             url: ['', !Validators.required],
             isActive: [{value: this.pos ? this.pos.isActive : true}, !Validators.required]
         });
@@ -54,13 +70,32 @@ export class PosFormComponent implements OnInit, AfterViewInit {
             this.posLat = this.pos.latitude.toFixed(5);
             this.posLon = this.pos.longitude.toFixed(5);
             this.isActive = this.pos.isActive;
+        } else {
+            // Load from local storage if available
+            const localData = this.storageService.load(this.storageService.posFormKey);
+            if (localData) {
+                this.form.controls.name.setValue(localData.name ?? '');
+                this.form.controls.latitude.setValue(localData.latitude ?? '');
+                this.form.controls.longitude.setValue(localData.longitude ?? '');
+                this.form.controls.url.setValue(localData.url ?? '');
+                this.form.controls.isActive.setValue(localData.isActive ?? '');
+
+                this.posLat = localData.latitude ? localData.latitude.toFixed(5) : '';
+                this.posLon = localData.longitude ? localData.longitude.toFixed(5) : '';
+                this.isActive = localData.isActive;
+            }
+
+            this.form.valueChanges.pipe(
+                debounceTime(500),
+                switchMap(async (formValue) => {
+                    this.storageService.save(formValue, this.storageService.posFormKey);
+                }),
+                takeUntil(this.unsubscribe)
+            ).subscribe(() => {})
         }
     }
 
     ngAfterViewInit() {
-        if(!this.pos || !google)
-            return;
-
         const searchBox = new google.maps.places.SearchBox(
             this.searchField.nativeElement
         );
@@ -70,7 +105,7 @@ export class PosFormComponent implements OnInit, AfterViewInit {
             if (places.length === 0) {
                 return;
             }
-            if(google === undefined)
+            if(!google)
                 return;
 
             const bounds = new google.maps.LatLngBounds();
@@ -89,7 +124,16 @@ export class PosFormComponent implements OnInit, AfterViewInit {
             this.map.fitBounds(bounds);
         });
 
-        const latLng = new google.maps.LatLng(this.pos.latitude, this.pos.longitude);
+        var latLng: google.maps.LatLng;
+        if (this.pos) {
+            latLng = new google.maps.LatLng(this.pos.latitude, this.pos.longitude);
+        } else if (this.storageService.load(this.storageService.posFormKey)) {
+            const localData = this.storageService.load(this.storageService.posFormKey);
+            latLng = new google.maps.LatLng(localData.latitude, localData.longitude);
+        } else {
+            return;
+        }
+
         if (!this.marker) {
             this.marker = new google.maps.Marker({
                 position: latLng,
@@ -136,7 +180,10 @@ export class PosFormComponent implements OnInit, AfterViewInit {
     }
 
     onIsActiveChanged(event) {
-        console.log(this.isActive);
         this.pos.isActive = this.isActive;
+    }
+
+    ngOnDestroy() {
+        this.unsubscribe.next();
     }
 }

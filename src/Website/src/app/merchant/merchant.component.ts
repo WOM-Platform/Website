@@ -1,9 +1,8 @@
-import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, OnInit, QueryList, ViewChild, ViewChildren} from '@angular/core';
 import {GoogleMap, MapInfoWindow, MapMarker} from '@angular/google-maps';
 import {MapService} from '../_services';
 import {PosMap} from '../_models';
 import {MatSelectionListChange} from "@angular/material/list";
-import {MarkerClusterer} from "@googlemaps/markerclusterer";
 
 @Component({
   selector: 'app-merchant',
@@ -12,9 +11,10 @@ import {MarkerClusterer} from "@googlemaps/markerclusterer";
 })
 export class MerchantComponent implements OnInit, AfterViewInit {
   @ViewChild(GoogleMap, { static: false }) map: GoogleMap;
-  @ViewChild(MapMarker, { static: false }) mapMarker: MapMarker;
   @ViewChild(MapInfoWindow, { static: false }) infoWindow: MapInfoWindow;
   @ViewChild('mapSearchField') searchField: ElementRef;
+  @ViewChildren('markerElem') mapMarkerElem: QueryList<MapMarker>;
+
   mapLoaded = false;
   searchBox: google.maps.places.SearchBox;
   infoContent = '';
@@ -126,17 +126,12 @@ export class MerchantComponent implements OnInit, AfterViewInit {
       info: posData.url,
     });
     this.markers.push(marker);
-    /*
-    marker.addListener("click", () => {
-      this.infoWindow.infoWindow.open(marker.getMap(), marker);
-    });
-    */
   }
 
-  openInfo(marker: MapMarker, content): void {
-    this.infoContent = '<b>' + content.title + '</b>';
-    if (content.info !== null) {
-      this.infoContent += '<br><br>' + '<a href="' + content.info + ' "target="_blank">' + content.info + '</a>';
+  openInfo(marker: MapMarker, content: google.maps.Marker): void {
+    this.infoContent = '<b>' + content.getTitle() + '</b>';
+    if (content.get('info') !== null) {
+      this.infoContent += '<br><br>' + '<a href="' + content.get('info') + ' "target="_blank">' + content.get('info') + '</a>';
     }
     this.infoWindow.open(marker);
   }
@@ -179,6 +174,8 @@ export class MerchantComponent implements OnInit, AfterViewInit {
   onPosSelection(event: MatSelectionListChange) {
     const pos: PosMap = event.options[0].value;
     const marker: google.maps.Marker = this.markers.find(m => m.getTitle() === pos.name);
+    this.openInfo(this.mapMarkerElem.find(mm => mm.getTitle() === pos.name), marker);
+
     google.maps.event.trigger(marker, 'click', {
       latLng:marker.getPosition()
     });

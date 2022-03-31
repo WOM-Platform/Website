@@ -1,10 +1,10 @@
-import {ChangeDetectorRef, Component, Inject} from '@angular/core';
+import {Component, Inject} from '@angular/core';
 import {Pos, PosRegistration} from '../../_models';
 import {first} from 'rxjs/operators';
 import {FormGroup} from '@angular/forms';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
-import {PosService} from '../../_services/pos.service';
-import {DialogType} from "../../_models/dialogType";
+import {PosService} from '../../_services';
+import {StorageService} from "../../_services/storage.service";
 
 @Component({
     selector: 'app-pos-dialog',
@@ -18,7 +18,8 @@ export class AddPosDialogComponent {
 
     constructor(@Inject(MAT_DIALOG_DATA) public data: PosDialogData,
                 public dialogRef: MatDialogRef<AddPosDialogComponent>,
-                private posService: PosService) {
+                private posService: PosService,
+                private  storageService: StorageService) {
     }
 
     onSubmit(): any {
@@ -34,6 +35,10 @@ export class AddPosDialogComponent {
         }
     }
 
+    onCancel(): any {
+        this.storageService.clear(this.storageService.merchantFormKey);
+    }
+
     edit() {
         this.data.pos.longitude = this.formPos.controls.longitude.value;
         this.data.pos.latitude = this.formPos.controls.latitude.value;
@@ -47,8 +52,8 @@ export class AddPosDialogComponent {
 
         this.posService.update(this.data.pos).pipe(first()).subscribe(
             result => {
-                console.log(result);
                 this.dialogRef.close(true);
+                this.storageService.clear(this.storageService.posFormKey);
             }, error => {
                 this.formApiError = true;
                 console.log(error);
@@ -69,8 +74,8 @@ export class AddPosDialogComponent {
 
         this.posService.register(pos).pipe(first()).subscribe(
             result => {
-                console.log(result);
                 this.dialogRef.close(true);
+                this.storageService.clear(this.storageService.posFormKey);
             }, error => {
                 this.formApiError = true;
                 console.log(error);

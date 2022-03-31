@@ -29,11 +29,10 @@
       <map-marker
             #markerElem="mapMarker"
             *ngFor="let marker of markers"
-            [position]="marker.position"
-            [label]="marker.label"
-            [title]="marker.title"
-            [options]="marker.options"
-            [icon]="marker.icon"
+            [position]="marker.getPosition()"
+            [label]="marker.getLabel()"
+            [title]="marker.getTitle()"
+            [icon]="marker.getIcon()"
             (mapClick)="openInfo(markerElem, marker)"
       >
       </map-marker>
