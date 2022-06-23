@@ -8,6 +8,7 @@ import {PrivacyPosComponent} from './privacy/pos/pos.component';
 import {PrivacyPocketComponent} from './privacy/pocket/pocket.component';
 import {PrivacyInstrumentComponent} from './privacy/instrument/instrument.component';
 import {PrivacyStepcounterComponent} from './privacy/stepcounter/stepcounter.component';
+import {PrivacyWebsiteComponent} from './privacy/website/website.component';
 import {UserHomeComponent} from './user/home/user-home.component';
 import {UserNotVerifiedComponent} from './user/not-verified/user-not-verified.component';
 import {ResetPasswordComponent} from './authentication/reset-password/reset-password.component';
@@ -250,6 +251,13 @@ const routes: Routes = [
             component : PrivacyOverviewComponent,
             data: {
               breadcrumb: 'BREADCRUMBS.PRIVACY.OVERVIEW'
+            },
+          },
+          {
+            path: 'website',
+            component : PrivacyWebsiteComponent,
+            data: {
+              breadcrumb: 'BREADCRUMBS.PRIVACY.WEBSITE'
             },
           },
           {

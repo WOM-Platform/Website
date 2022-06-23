@@ -38,6 +38,7 @@ import {PrivacyInstrumentComponent} from './privacy/instrument/instrument.compon
 import {PrivacyPocketComponent} from './privacy/pocket/pocket.component';
 import {PrivacyPosComponent} from './privacy/pos/pos.component';
 import {PrivacyStepcounterComponent} from './privacy/stepcounter/stepcounter.component';
+import {PrivacyWebsiteComponent} from './privacy/website/website.component';
 import {HttpMockRequestInterceptor} from './_helpers/HttpMockRequestInterceptor';
 
 import {environment} from '../environments/environment';
@@ -141,6 +142,7 @@ export const isMock = environment.mock;
     ApplicationsCodymazeComponent,
     ApplicationsBalanceComponent,
     PrivacyStepcounterComponent,
+    PrivacyWebsiteComponent,
     PrivacyOverviewComponent,
     LogoutDialogComponent,
     ContactsComponent,
