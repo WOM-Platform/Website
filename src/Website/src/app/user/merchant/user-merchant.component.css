@@ -1,0 +1,24 @@
+.merchant-container {
+    padding: 5px;
+}
+
+.merchant-header > h1 {
+    display: inline-block;
+}
+
+.button-container {
+    float: right;
+    margin-right: 0;
+}
+
+mat-panel-title{
+    font-weight: bold;
+}
+
+p {
+    margin: 2px;
+}
+
+.pos-card {
+    margin-top: 1em;
+}

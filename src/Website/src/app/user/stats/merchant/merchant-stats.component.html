@@ -1,0 +1,23 @@
+<div>
+    <ng-container *ngFor="let merchant of merchants">
+        <div style="display: block">
+            <span>{{merchant.name}}</span>
+            <ng-container *ngFor="let pos of merchant.pos">
+                <div class="chart-container">
+                    <ngx-charts-advanced-pie-chart
+                            [results]="single"
+                            [label]="'WOM utilizzati per' + pos.name"
+                            [animations]="animate"
+                            [gradient]="gradient"
+                            [tooltipDisabled]="tooltipDisabled"
+                            (select)="onSelect($event)"
+                            (activate)="onActivate($event)"
+                            (deactivate)="onDeactivate($event)"
+                    >
+                    </ngx-charts-advanced-pie-chart>
+                </div>
+            </ng-container>
+
+        </div>
+    </ng-container>
+</div>

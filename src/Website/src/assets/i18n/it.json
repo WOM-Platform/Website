@@ -34,7 +34,8 @@
       "MERCHANT": "Merchant",
       "ERROR": "Non verificato",
       "HOME": "Home",
-      "VERIFY": "Verifica"
+      "VERIFY": "Verifica",
+      "MERCHANT-STATS": "Statistiche"
     },
     "AUTHENTICATION": {
       "AUTHENTICATION": "Autenticazione",
@@ -151,6 +152,10 @@
   "USER": {
     "HOME": {
       "WELCOME": "Benvenuto",
+      "MERCHANT_TITLE": "Merchant"
+    },
+    "MERCHANT": {
+      "WELCOME": "Benvenuto",
       "MERCHANT_TITLE": "Elenco Merchant",
       "ADD_MERCHANT_TOOLTIP": "Aggiungi un nuovo Merchant",
       "EDIT_MERCHANT_TOOLTIP": "Modifica i dati di questo Merchant",
@@ -164,6 +169,16 @@
         "POS_TITLE": "POS",
         "POS_SUBTITLE": "lista dei POS",
         "ADD_POS_TOOLTIP": "Aggiungi un nuovo punto di servizio “POS” per il Merchant"
+      }
+    },
+    "STATS": {
+      "DATE_SELECTOR": {
+        "TITLE": "Select the date range",
+        "START": "Start date",
+        "END": "End date",
+        "HINT": "MM/DD/YYYY – MM/DD/YYYY",
+        "CANCEL": "Cancel",
+        "APPLY": "Apply"
       }
     },
     "ERRORS": {

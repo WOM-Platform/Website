@@ -79,6 +79,14 @@ import {ApplicationsCodymazeComponent} from "./applications/codymaze/codymaze.co
 import {ApplicationsBalanceComponent} from "./applications/balance/balance.component";
 import {ContactsComponent} from "./contacts/contacts.component";
 import {ContactFormComponent} from "./_forms/contact/forms-contact.directive";
+import {MerchantStatsComponent} from "./user/stats/merchant/merchant-stats.component";
+import {NgxChartsModule} from "@swimlane/ngx-charts";
+import {UserStatsComponent} from "./user/stats/user-stats.component";
+import {MatTabsModule} from "@angular/material/tabs";
+import {MatDatepickerModule} from "@angular/material/datepicker";
+import {MatNativeDateModule} from "@angular/material/core";
+import {UserMerchantComponent} from "./user/merchant/user-merchant.component";
+import { PdfViewerModule } from 'ng2-pdf-viewer';
 
 // AoT requires an exported function for factories
 export const createTranslateLoader = (http: HttpClient) => new TranslateHttpLoader(http, './assets/i18n/', '.json?cb=' + environment.i18n);
@@ -137,7 +145,10 @@ export const isMock = environment.mock;
     LogoutDialogComponent,
     ContactsComponent,
     JoinstringsPipe,
-    ContactFormComponent
+    ContactFormComponent,
+    MerchantStatsComponent,
+    UserStatsComponent,
+    UserMerchantComponent
   ],
   exports: [
       MatStepperModule,
@@ -195,7 +206,12 @@ export const isMock = environment.mock;
         MatDividerModule,
         CommonModule,
         MatSidenavModule,
-        MatListModule
+        MatListModule,
+        NgxChartsModule,
+        MatTabsModule,
+        MatDatepickerModule,
+        MatNativeDateModule,
+        PdfViewerModule
     ],
   providers: [
       {

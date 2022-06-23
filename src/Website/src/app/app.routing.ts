@@ -27,6 +27,9 @@ import {ApplicationsAworldComponent} from "./applications/aworld/aworld.componen
 import {ApplicationsCodymazeComponent} from "./applications/codymaze/codymaze.component";
 import {ApplicationsBalanceComponent} from "./applications/balance/balance.component";
 import {ContactsComponent} from "./contacts/contacts.component";
+import {MerchantStatsComponent} from "./user/stats/merchant/merchant-stats.component";
+import {UserStatsComponent} from "./user/stats/user-stats.component";
+import {UserMerchantComponent} from "./user/merchant/user-merchant.component";
 
 const routes: Routes = [
   {
@@ -84,16 +87,32 @@ const routes: Routes = [
       },
       {
         path: 'user',
+        canActivate: [AuthGuard],
         data: {
           breadcrumb: 'BREADCRUMBS.USER.USER'
         },
         children: [
+          {
+            path: '',
+            component: UserHomeComponent,
+            canActivate: [AuthGuard],
+            data: {
+              breadcrumb: 'BREADCRUMBS.USER.HOME'
+            }
+          },
           {
             path: 'not-verified',
             component: UserNotVerifiedComponent,
             canActivate: [AuthGuard],
             data: {
               breadcrumb: 'BREADCRUMBS.USER.ERROR'
+            }
+          },
+          {
+            path: 'verify',
+            component: UserVerifyComponent,
+            data: {
+              breadcrumb: 'BREADCRUMBS.USER.VERIFY'
             }
           },
           {
@@ -105,12 +124,21 @@ const routes: Routes = [
             }
           },
           {
-            path: 'verify',
-            component: UserVerifyComponent,
+            path: 'merchant',
+            component: UserMerchantComponent,
+            canActivate: [AuthGuard],
             data: {
-              breadcrumb: 'BREADCRUMBS.USER.VERIFY'
+              breadcrumb: 'BREADCRUMBS.USER.MERCHANT'
             }
           },
+          /*{
+            path: 'user-stats',
+            component: UserStatsComponent,
+            canActivate: [AuthGuard],
+            data: {
+              breadcrumb: 'BREADCRUMBS.USER.MERCHANT-STATS'
+            }
+          }*/
         ]
       },
       {

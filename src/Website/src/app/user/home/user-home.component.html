@@ -2,91 +2,20 @@
     <div class="mat-card" >
         <h3>{{"USER.HOME.WELCOME" | translate}}, {{username}}</h3>
         <mat-divider></mat-divider>
-        <div class="merchant-container">
-            <div class="merchant-header">
-                <h1>{{"USER.HOME.MERCHANT_TITLE" | translate}}</h1>
-                <div class="button-container" >
-                    <button mat-icon-button color="primary" matTooltip="{{'USER.HOME.ADD_MERCHANT_TOOLTIP' | translate}}"
-                            (click)="addMerchant()">
-                        <mat-icon>add</mat-icon>
-                    </button>
+        <div fxLayout="row wrap">
+            <div fxFlex="50%" fxFlex.xs="100%" class="header-box-link section">
+               <a routerLink="/user/merchant">
+                   <div class="header-box-title">
+                        <h1 [innerHTML]="'USER.HOME.MERCHANT_TITLE' | translate"></h1>
                 </div>
+               </a>
             </div>
-
-            <ng-container *ngIf="merchants">
-                <mat-accordion class="merchant-mat-accordion">
-                    <ng-container *ngFor="let merchant of merchants.merchants">
-                        <mat-expansion-panel>
-                            <mat-expansion-panel-header>
-                                <mat-panel-title>
-                                    <button mat-icon-button
-                                            color="primary"
-                                            matTooltip="{{'USER.HOME.EDIT_MERCHANT_TOOLTIP' | translate}}"
-                                            (click)="editMerchant(merchant)">
-                                        <mat-icon>edit</mat-icon>
-                                    </button>
-                                    {{merchant.name}}
-                                </mat-panel-title>
-                            </mat-expansion-panel-header>
-                            <mat-divider></mat-divider>
-
-                            <p>
-                                <b>{{"USER.HOME.MERCHANT.CODE" | translate}}</b>:
-                                {{merchant.fiscalCode}}
-                            </p>
-                            <p>
-                                <b>{{"USER.HOME.MERCHANT.ADDRESS" | translate}}</b>:
-                                {{merchant.address}},
-                                {{merchant.zipCode}},
-                                {{merchant.city}},
-                                {{merchant.country}}
-                            </p>
-                            <p>
-                                <b>{{"USER.HOME.MERCHANT.ACTIVITY_TYPE" | translate}}</b>:
-                                {{merchant.primaryActivity}}
-                            </p>
-                            <p *ngIf="merchant.url">
-                                <b>{{"USER.HOME.MERCHANT.URL" | translate}}</b>:
-                                <a [href]="merchant.url" target="_blank">{{merchant.url}}</a>
-                            </p>
-                            <p *ngIf="merchant.description">
-                                {{merchant.description}}
-                            </p>
-                            <!--<button mat-raised-button
-                                    color="primary"
-                                    matTooltip="{{'USER.HOME.EDIT_MERCHANT_TOOLTIP' | translate}}"
-                                    (click)="editMerchant(merchant)">
-                                {{"USER.HOME.EDIT_MERCHANT_BTN" | translate}}
-                            </button>-->
-                            <!-- POS LIST -->
-                            <mat-card class="pos-card">
-                                <mat-card-header>
-                                    <div class="button-container">
-                                        <button mat-icon-button
-                                                color="primary"
-                                                matTooltip="{{'USER.HOME.MERCHANT.ADD_POS_TOOLTIP' | translate}} {{merchant.name}}"
-                                                (click)="addPos(merchant.id)">
-                                            <mat-icon>add</mat-icon>
-                                        </button>
-                                    </div>
-                                    <mat-card-title>{{"USER.HOME.MERCHANT.POS_TITLE" | translate}}</mat-card-title>
-                                    <mat-card-subtitle>{{"USER.HOME.MERCHANT.POS_SUBTITLE" | translate}}</mat-card-subtitle>
-                                </mat-card-header>
-                                    <ng-container *ngFor="let pos of merchant.pos">
-                                        <mat-card-content>
-                                            <button mat-icon-button
-                                                    color="primary"
-                                                    (click)="editPos(merchant.id, pos)">
-                                                <mat-icon>edit</mat-icon>
-                                            </button>
-                                        <button mat-button (click)="editPos(merchant.id, pos)">{{pos.name}}</button>
-                                        </mat-card-content>
-                                    </ng-container>
-                            </mat-card>
-                        </mat-expansion-panel>
-                    </ng-container>
-                </mat-accordion>
-            </ng-container>
-        </div>
+            <!--
+            <div fxFlex="50%" fxFlex.xs="100%" class="section">
+                <a href="#"><div class="header-box-title">
+                    <h1 [innerHTML]="'USER.HOME.INSTRUMENT' | translate"></h1>
+                </div></a>
+            </div>
+            -->
     </div>
 </div>

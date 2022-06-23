@@ -34,7 +34,8 @@
       "MERCHANT": "Merchant",
       "ERROR": "Not verified",
       "HOME": "Home",
-      "VERIFY": "Verify"
+      "VERIFY": "Verify",
+      "MERCHANT-STATS": "Statistics"
     },
     "AUTHENTICATION": {
       "AUTHENTICATION": "Authentication",
@@ -163,6 +164,16 @@
         "POS_TITLE": "POS",
         "POS_SUBTITLE": "List of POS",
         "ADD_POS_TOOLTIP": "Add a new Point of Service 'POS' for Merchant"
+      }
+    },
+    "STATS": {
+      "DATE_SELECTOR": {
+        "TITLE": "Select the date range",
+        "START": "Start date",
+        "END": "End date",
+        "HINT": "MM/DD/YYYY – MM/DD/YYYY",
+        "CANCEL": "Cancel",
+        "APPLY": "Apply"
       }
     },
     "ERRORS": {
