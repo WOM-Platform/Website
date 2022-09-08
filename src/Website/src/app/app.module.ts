@@ -87,9 +87,15 @@ import {MatDatepickerModule} from "@angular/material/datepicker";
 import {MatNativeDateModule} from "@angular/material/core";
 import {UserMerchantComponent} from "./user/merchant/user-merchant.component";
 import { PdfViewerModule } from 'ng2-pdf-viewer';
+import {BillingCheckoutComponent} from "./billing/checkout/checkout.component";
+import {BillingSuccessComponent} from "./billing/success/success.component";
+import {BillingCancelComponent} from "./billing/cancel/cancel.component";
+import {CarouselModule} from "primeng/carousel";
+import { ManageComponent } from './manage/manage/manage.component';
 import { UrbinoComponent } from './about/urbino/urbino.component';
 import {AboutComponent} from "./about/about/about.component";
 import {AboutSectionComponent} from "./about/about-section.component";
+import { PdfViewerContainerComponent } from './components/pdf-viewer-container/pdf-viewer-container/pdf-viewer-container.component';
 
 // AoT requires an exported function for factories
 export const createTranslateLoader = (http: HttpClient) => new TranslateHttpLoader(http, './assets/i18n/', '.json?cb=' + environment.i18n);
@@ -154,7 +160,8 @@ export const isMock = environment.mock;
     UserMerchantComponent,
     UrbinoComponent,
     AboutComponent,
-    AboutSectionComponent
+    AboutSectionComponent,
+    PdfViewerContainerComponent
   ],
   exports: [
       MatStepperModule,
