@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./urbino.component.css']
 })
 export class UrbinoComponent implements OnInit {
+  src1 = "/assets/pdf/tutorial_contapassi.pdf";
 
   constructor() { }
 

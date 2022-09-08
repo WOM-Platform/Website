@@ -1,9 +1,9 @@
 <div fxFlex="100%">
     <nav *ngIf="isLoaded" fxLayout="row" fxLayoutAlign="space-between stretch" >
-        <button mat-flat-button fxFlexAlign="start" (click)="prevPage()" [hidden]="page === 1" class="previous">
+        <button mat-flat-button fxFlexAlign="start" (click)="prevPage()" [disabled]="page === 1" class="previous">
             Prev
         </button>
-        <button mat-flat-button fxFlexAlign="end" (click)="nextPage()" [hidden]="page === totalPages" class="next">
+        <button mat-flat-button fxFlexAlign="end" (click)="nextPage()" [disabled]="page === totalPages" class="next">
             Next
         </button>
     </nav>
