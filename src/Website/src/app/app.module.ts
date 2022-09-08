@@ -62,7 +62,6 @@ import {RequestNewPasswordComponent} from './authentication/requestNewPassword/r
 import {MerchantComponent} from './merchant/merchant.component';
 import {InstrumentComponent} from './instrument/instrument.component';
 import {VolunteerComponent} from './volunteer/volunteer.component';
-import {AboutComponent} from './about/about.component';
 import {BreadcrumbsComponent} from './breadcrumbs/breadcrumbs.component';
 import {MatGridListModule} from '@angular/material/grid-list';
 import {GoogleMapsModule} from '@angular/google-maps';
@@ -88,6 +87,9 @@ import {MatDatepickerModule} from "@angular/material/datepicker";
 import {MatNativeDateModule} from "@angular/material/core";
 import {UserMerchantComponent} from "./user/merchant/user-merchant.component";
 import { PdfViewerModule } from 'ng2-pdf-viewer';
+import { UrbinoComponent } from './about/urbino/urbino.component';
+import {AboutComponent} from "./about/about/about.component";
+import {AboutSectionComponent} from "./about/about-section.component";
 
 // AoT requires an exported function for factories
 export const createTranslateLoader = (http: HttpClient) => new TranslateHttpLoader(http, './assets/i18n/', '.json?cb=' + environment.i18n);
@@ -132,7 +134,6 @@ export const isMock = environment.mock;
     MerchantComponent,
     InstrumentComponent,
     VolunteerComponent,
-    AboutComponent,
     BreadcrumbsComponent,
     ApplicationsComponent,
     ApplicationsOverviewComponent,
@@ -150,7 +151,10 @@ export const isMock = environment.mock;
     ContactFormComponent,
     MerchantStatsComponent,
     UserStatsComponent,
-    UserMerchantComponent
+    UserMerchantComponent,
+    UrbinoComponent,
+    AboutComponent,
+    AboutSectionComponent
   ],
   exports: [
       MatStepperModule,

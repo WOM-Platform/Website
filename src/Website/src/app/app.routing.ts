@@ -18,7 +18,6 @@ import {RequestNewPasswordComponent} from './authentication/requestNewPassword/r
 import {MerchantComponent} from './merchant/merchant.component';
 import {VolunteerComponent} from './volunteer/volunteer.component';
 import {InstrumentComponent} from './instrument/instrument.component';
-import {AboutComponent} from './about/about.component';
 import {ApplicationsComponent} from './applications/applications.component';
 import {ApplicationsStepcounterComponent} from './applications/stepcounter/stepcounter.component';
 import {PrivacyOverviewComponent} from "./privacy/overview/overview.component";
@@ -31,6 +30,9 @@ import {ContactsComponent} from "./contacts/contacts.component";
 import {MerchantStatsComponent} from "./user/stats/merchant/merchant-stats.component";
 import {UserStatsComponent} from "./user/stats/user-stats.component";
 import {UserMerchantComponent} from "./user/merchant/user-merchant.component";
+import {UrbinoComponent} from "./about/urbino/urbino.component";
+import {AboutSectionComponent} from "./about/about-section.component";
+import {AboutComponent} from "./about/about/about.component";
 
 const routes: Routes = [
   {
@@ -52,11 +54,34 @@ const routes: Routes = [
         },
       },
       {
-        path: 'about',
-        component: AboutComponent,
+        path: 'about-section',
+        component: AboutSectionComponent,
         data: {
-          breadcrumb: 'BREADCRUMBS.ABOUT'
+          breadcrumb: 'BREADCRUMBS.ABOUT.TITLE'
         },
+        children: [
+          {
+            path: "",
+            redirectTo: "about",
+            pathMatch: "full"
+          },
+          {
+            path: "about",
+            component: AboutComponent,
+            pathMatch: "full",
+            data: {
+              breadcrumb: 'BREADCRUMBS.ABOUT.ABOUT'
+            },
+          },
+          {
+            path: "urbino",
+            component: UrbinoComponent,
+            pathMatch: "full",
+            data: {
+              breadcrumb: 'BREADCRUMBS.ABOUT.URBINO'
+            },
+          }
+        ]
       },
       {
         path: 'volunteer',

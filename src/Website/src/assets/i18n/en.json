@@ -8,7 +8,11 @@
       "WHO_ARE": "About",
       "APPLICATIONS": "How to earn WOMs"
     },
-    "ABOUT": "What are WOMs",
+    "ABOUT": {
+      "TITLE": "About",
+      "ABOUT": "About",
+      "URBINO": "Wom for Urbino"
+    },
     "INSTRUMENT": "Instrument",
     "CONTACTS": "Contact Us",
     "SIGN_IN": "Login",
@@ -24,7 +28,11 @@
   },
   "BREADCRUMBS": {
     "HOME": "Home",
-    "ABOUT": "About",
+    "ABOUT": {
+      "TITLE": "About",
+      "ABOUT": "About",
+      "URBINO": "Wom for Urbino"
+    },
     "VOLUNTEER": "Volunteers",
     "MERCHANT": "Merchant",
     "INSTRUMENT": "Instrument",
@@ -36,6 +44,10 @@
       "HOME": "Home",
       "VERIFY": "Verify",
       "MERCHANT-STATS": "Statistics"
+    },
+    "MANAGE": {
+      "TITLE": "Manage",
+      "HOME": "Overview"
     },
     "AUTHENTICATION": {
       "AUTHENTICATION": "Authentication",
@@ -60,6 +72,20 @@
       "POCKET": "Pocket",
       "INSTRUMENT": "Instrument",
       "STEPCOUNTER": "Stepcounter"
+    },
+    "BILLING": {
+      "TITLE": "Buy",
+      "INSTRUMENT": {
+        "TITLE": "Instrument",
+        "PLANS": "Plans"
+      },
+      "MERCHANT": {
+        "TITLE": "Merchant",
+        "PLANS": "Plans"
+      },
+      "CHECKOUT": "Checkout",
+      "SUCCESS": "Payment complete",
+      "ERROR": "Payment error"
     }
   },
   "SIGN_IN": {
@@ -298,6 +324,13 @@
     "SECTION_C": {
       "TITLE": "How do I use my WOMs?",
       "A": "Business owners, shopkeepers, public entities, or any other private citizen (generically called Merchants) may freely decide to provide goods, services, or discounts to owners of WOM vouchers. To do so, they create a <b>WOM payment</b> that allows them to choose which kind of effort to reward: WOM vouchers can be filtered by purpose, location, and time. Goods, services, and discounts can be determined freely by the Merchant."
+    },
+    "URBINO": {
+      "TITLE": "WOM FOR URBINO",
+      "SECTION_A": {
+        "A": "Questa sezione è dedicata a <b>WOM per Urbino</b>, il progetto che da <b>maggio 2022</b> è stato avviato nella città di <b>Urbino</b>.\n<b>WOM per Urbino</b> è la prima forma di sperimentazione del progetto WOM. La scelta di Urbino come <b>prima città ad utilizzare WOM</b> deriva dalla collaborazione di <b>DIGIT srl</b>, <b>Università di Urbino</b> e <b>Città di Urbino</b>, che ha concesso il suo patrocinio.",
+        "B": "Il progetto è stato lanciato dal <b>4 maggio 2022</b> tramite una conferenza stampa (per rivedere la conferenza <a href='https://youtu.be/1kiTku77HO4' target='_blank'>Clicca qui</a>).\nAttualmente i cittadini, gli studenti e i turisti hanno varie possibilità di ottenere <b>WOM</b> e di utilizzarli per ottenere <b>sconti</b> nei negozi convenzionati al progetto.  "
+      }
     }
   },
   "VOLUNTEER": {
@@ -449,5 +482,19 @@
   "404": {
     "TITLE": "Looks like you’re lost",
     "HOME_BUTTON": "Go Home"
+  },
+  "BILLING": {
+    "RECURRING": {
+      "INTERVAL": {
+        "YEAR": "years",
+        "YEARS": "years",
+        "MONTH": "month",
+        "MONTHS": "months",
+        "WEEK": "week",
+        "WEEKS": "weeks",
+        "DAY": "day",
+        "DAYS": "days"
+      }
+    }
   }
 }
