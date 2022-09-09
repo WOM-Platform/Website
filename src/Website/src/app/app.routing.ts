@@ -27,9 +27,12 @@ import {ApplicationsAworldComponent} from "./applications/aworld/aworld.componen
 import {ApplicationsCodymazeComponent} from "./applications/codymaze/codymaze.component";
 import {ApplicationsBalanceComponent} from "./applications/balance/balance.component";
 import {ContactsComponent} from "./contacts/contacts.component";
-import {MerchantStatsComponent} from "./user/stats/merchant/merchant-stats.component";
-import {UserStatsComponent} from "./user/stats/user-stats.component";
 import {UserMerchantComponent} from "./user/merchant/user-merchant.component";
+import {BillingCheckoutComponent} from "./billing/checkout/checkout.component";
+import {BillingSuccessComponent} from "./billing/success/success.component";
+import {BillingCancelComponent} from "./billing/cancel/cancel.component";
+import {ManageGuard} from "./_helpers/manage.guard";
+import {ManageComponent} from "./manage/manage/manage.component";
 import {UrbinoComponent} from "./about/urbino/urbino.component";
 import {AboutSectionComponent} from "./about/about-section.component";
 import {AboutComponent} from "./about/about/about.component";
@@ -165,6 +168,23 @@ const routes: Routes = [
               breadcrumb: 'BREADCRUMBS.USER.MERCHANT-STATS'
             }
           }*/
+          {
+            path: 'manage',
+            canActivate: [AuthGuard, ManageGuard],
+            data: {
+              breadcrumb: 'BREADCRUMBS.MANAGE.TITLE'
+            },
+            children: [
+              {
+                path: '',
+                component: ManageComponent,
+                canActivate: [AuthGuard, ManageGuard],
+                data: {
+                  breadcrumb: 'BREADCRUMBS.MANAGE.HOME'
+                }
+              }
+            ]
+          },
         ]
       },
       {
@@ -312,6 +332,40 @@ const routes: Routes = [
             data: {
               breadcrumb: 'BREADCRUMBS.PRIVACY.STEPCOUNTER'
             },
+          }
+        ]
+      },
+      {
+        path: 'billing',
+        data: {
+          breadcrumb: 'BREADCRUMBS.BILLING.TITLE'
+        },
+        children: [
+          {
+            path: "",
+            redirectTo: "checkout",
+            pathMatch: "full"
+          },
+          {
+            path: "checkout",
+            component: BillingCheckoutComponent,
+            data: {
+              breadcrumb: 'BREADCRUMBS.BILLING.CHECKOUT'
+            }
+          },
+          {
+            path: "success",
+            component: BillingSuccessComponent,
+            data: {
+              breadcrumb: 'BREADCRUMBS.BILLING.SUCCESS'
+            }
+          },
+          {
+            path: "cancel",
+            component: BillingCancelComponent,
+            data: {
+              breadcrumb: 'BREADCRUMBS.BILLING.ERROR'
+            }
           }
         ]
       },

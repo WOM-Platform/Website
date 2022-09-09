@@ -7,7 +7,7 @@ import {
     HttpResponse
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import {Observable, throwError} from 'rxjs';
+import {Observable, of, throwError} from 'rxjs';
 import {catchError, tap} from 'rxjs/operators';
 import {UserLogin} from '../_models';
 import {MatSnackBar} from "@angular/material/snack-bar";
@@ -35,9 +35,14 @@ export class TokenInterceptorService implements HttpInterceptor {
 
         // Add auth to requests
         const user: UserLogin = JSON.parse(userLogin);
-        const duplicate = req.clone( {setHeaders: {
+        let duplicate = req.clone( {setHeaders: {
             Authorization: 'Bearer ' + user.token
         }});
+
+        // TMP
+        //if(req.url.includes('roles')) {
+        //    return of(new HttpResponse({ status: 200, body: true }));
+        //}
 
         return next.handle(duplicate).pipe(
             tap((ev: HttpEvent<any>) => {
