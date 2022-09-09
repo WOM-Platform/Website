@@ -158,6 +158,10 @@ export const isMock = environment.mock;
     MerchantStatsComponent,
     UserStatsComponent,
     UserMerchantComponent,
+    BillingCheckoutComponent,
+    BillingSuccessComponent,
+    BillingCancelComponent,
+    ManageComponent,
     UrbinoComponent,
     AboutComponent,
     AboutSectionComponent,
@@ -224,7 +228,8 @@ export const isMock = environment.mock;
         MatTabsModule,
         MatDatepickerModule,
         MatNativeDateModule,
-        PdfViewerModule
+        PdfViewerModule,
+        CarouselModule
     ],
   providers: [
       {

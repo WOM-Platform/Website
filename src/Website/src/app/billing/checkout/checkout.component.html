@@ -1,0 +1,41 @@
+<ng-container *ngFor="let slide of products">
+
+</ng-container>
+
+<p-carousel [value]="products" styleClass="custom-carousel" [numVisible]="3" [numScroll]="1"
+            [circular]="true" [autoplayInterval]="0" [responsiveOptions]="responsiveOptions">
+    <ng-template let-slide pTemplate="item">
+        <div class="mat-card">
+            <div class="mat-card-title">
+                <h3>{{slide.product.name}}</h3>
+            </div>
+            <div class="mat-card-content">
+                <ng-container *ngIf="slide.type === 'recurring'">
+                    <h5>
+                        {{getCurrencySymbol(slide.currency)}}
+                        {{getCurrencyValue(slide.unitAmount)}} /
+                        {{getRecurringPeriod(slide.recurring.interval, slide.recurring.intervalCount)}}
+                    </h5>
+                </ng-container>
+
+                <!--
+                <h5>billing scheme: {{product.billingScheme}}</h5>
+                <h5>currency: {{product.currency}}</h5>
+                <h5>tiers mode: {{product.tiersMode}}</h5>
+                <h5>type: {{product.type}}</h5>
+                <ng-container *ngIf="product.type === 'recurring'">
+                    <h5>aggregate usage: {{product.recurring.aggregateUsage}}</h5>
+                    <h5>aggregate interval: {{product.recurring.interval}}</h5>
+                    <h5>aggregate interval count: {{product.recurring.intervalCount}}</h5>
+                    <h5>aggregate trial period days: {{product.recurring.trialPeriodDays}}</h5>
+                    <h5>aggregate usage type: {{product.recurring.usageType}}</h5>
+                </ng-container>
+                <h5>unit amount: {{product.unitAmount}}</h5>
+                <h5>unit amount decimal{{product.unitAmountDecimal}}</h5>
+                -->
+                <button (click)="checkout(slide.id)" id="checkout-button">Acquista</button>
+            </div>
+        </div>
+    </ng-template>
+</p-carousel>
+
