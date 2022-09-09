@@ -38,6 +38,7 @@ import {PrivacyInstrumentComponent} from './privacy/instrument/instrument.compon
 import {PrivacyPocketComponent} from './privacy/pocket/pocket.component';
 import {PrivacyPosComponent} from './privacy/pos/pos.component';
 import {PrivacyStepcounterComponent} from './privacy/stepcounter/stepcounter.component';
+import {PrivacyWebsiteComponent} from './privacy/website/website.component';
 import {HttpMockRequestInterceptor} from './_helpers/HttpMockRequestInterceptor';
 
 import {environment} from '../environments/environment';
@@ -61,7 +62,6 @@ import {RequestNewPasswordComponent} from './authentication/requestNewPassword/r
 import {MerchantComponent} from './merchant/merchant.component';
 import {InstrumentComponent} from './instrument/instrument.component';
 import {VolunteerComponent} from './volunteer/volunteer.component';
-import {AboutComponent} from './about/about.component';
 import {BreadcrumbsComponent} from './breadcrumbs/breadcrumbs.component';
 import {MatGridListModule} from '@angular/material/grid-list';
 import {GoogleMapsModule} from '@angular/google-maps';
@@ -79,6 +79,23 @@ import {ApplicationsCodymazeComponent} from "./applications/codymaze/codymaze.co
 import {ApplicationsBalanceComponent} from "./applications/balance/balance.component";
 import {ContactsComponent} from "./contacts/contacts.component";
 import {ContactFormComponent} from "./_forms/contact/forms-contact.directive";
+import {MerchantStatsComponent} from "./user/stats/merchant/merchant-stats.component";
+import {NgxChartsModule} from "@swimlane/ngx-charts";
+import {UserStatsComponent} from "./user/stats/user-stats.component";
+import {MatTabsModule} from "@angular/material/tabs";
+import {MatDatepickerModule} from "@angular/material/datepicker";
+import {MatNativeDateModule} from "@angular/material/core";
+import {UserMerchantComponent} from "./user/merchant/user-merchant.component";
+import { PdfViewerModule } from 'ng2-pdf-viewer';
+import {BillingCheckoutComponent} from "./billing/checkout/checkout.component";
+import {BillingSuccessComponent} from "./billing/success/success.component";
+import {BillingCancelComponent} from "./billing/cancel/cancel.component";
+import {CarouselModule} from "primeng/carousel";
+import { ManageComponent } from './manage/manage/manage.component';
+import { UrbinoComponent } from './about/urbino/urbino.component';
+import {AboutComponent} from "./about/about/about.component";
+import {AboutSectionComponent} from "./about/about-section.component";
+import { PdfViewerContainerComponent } from './components/pdf-viewer-container/pdf-viewer-container/pdf-viewer-container.component';
 
 // AoT requires an exported function for factories
 export const createTranslateLoader = (http: HttpClient) => new TranslateHttpLoader(http, './assets/i18n/', '.json?cb=' + environment.i18n);
@@ -123,7 +140,6 @@ export const isMock = environment.mock;
     MerchantComponent,
     InstrumentComponent,
     VolunteerComponent,
-    AboutComponent,
     BreadcrumbsComponent,
     ApplicationsComponent,
     ApplicationsOverviewComponent,
@@ -133,11 +149,19 @@ export const isMock = environment.mock;
     ApplicationsCodymazeComponent,
     ApplicationsBalanceComponent,
     PrivacyStepcounterComponent,
+    PrivacyWebsiteComponent,
     PrivacyOverviewComponent,
     LogoutDialogComponent,
     ContactsComponent,
     JoinstringsPipe,
-    ContactFormComponent
+    ContactFormComponent,
+    MerchantStatsComponent,
+    UserStatsComponent,
+    UserMerchantComponent,
+    UrbinoComponent,
+    AboutComponent,
+    AboutSectionComponent,
+    PdfViewerContainerComponent
   ],
   exports: [
       MatStepperModule,
@@ -195,7 +219,12 @@ export const isMock = environment.mock;
         MatDividerModule,
         CommonModule,
         MatSidenavModule,
-        MatListModule
+        MatListModule,
+        NgxChartsModule,
+        MatTabsModule,
+        MatDatepickerModule,
+        MatNativeDateModule,
+        PdfViewerModule
     ],
   providers: [
       {

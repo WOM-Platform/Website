@@ -110,6 +110,18 @@ p.content {
   font-weight: bold;
   font-size: 3em;
 }
+.header-box-link a:link {
+  text-decoration: none;
+}
+.header-box-link a:visited {
+  text-decoration: none;
+}
+.header-box-link a:hover {
+  text-decoration: none;
+}
+.header-box-link a:active {
+  text-decoration: none;
+}
 
 .header-box-content {
   margin: 20px;

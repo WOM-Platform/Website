@@ -8,7 +8,11 @@
       "WHO_ARE": "Chi sono",
       "APPLICATIONS": "Come guadagnare WOM"
     },
-    "ABOUT": "Che cos’è",
+    "ABOUT": {
+      "TITLE": "Che cos'è",
+      "ABOUT": "Che cos'è",
+      "URBINO": "Wom per Urbino"
+    },
     "INSTRUMENT": "Instrument",
     "SIGN_IN": "Login",
     "MERCHANT": "Merchant",
@@ -24,7 +28,11 @@
   },
   "BREADCRUMBS": {
     "HOME": "Home",
-    "ABOUT": "Che cos’è",
+    "ABOUT": {
+      "TITLE": "Che cos'è",
+      "ABOUT": "Che cos'è",
+      "URBINO": "Wom per Urbino"
+    },
     "VOLUNTEER": "Volontari",
     "MERCHANT": "Merchant",
     "INSTRUMENT": "Instrument",
@@ -34,7 +42,12 @@
       "MERCHANT": "Merchant",
       "ERROR": "Non verificato",
       "HOME": "Home",
-      "VERIFY": "Verifica"
+      "VERIFY": "Verifica",
+      "MERCHANT-STATS": "Statistiche"
+    },
+    "MANAGE": {
+      "TITLE": "Gestione",
+      "HOME": "Panoramica"
     },
     "AUTHENTICATION": {
       "AUTHENTICATION": "Autenticazione",
@@ -59,6 +72,20 @@
       "POCKET": "Pocket",
       "INSTRUMENT": "Instrument",
       "STEPCOUNTER": "Contapassi"
+    },
+    "BILLING": {
+      "TITLE": "Acquista",
+      "INSTRUMENT": {
+        "TITLE": "Instrument",
+        "PLANS": "Piani"
+      },
+      "MERCHANT": {
+        "TITLE": "Merchant",
+        "PLANS": "Piani"
+      },
+      "CHECKOUT": "Checkout",
+      "SUCCESS": "Pagamento completato",
+      "ERROR": "Errore pagamento"
     }
   },
   "SIGN_IN": {
@@ -151,6 +178,10 @@
   "USER": {
     "HOME": {
       "WELCOME": "Benvenuto",
+      "MERCHANT_TITLE": "Merchant"
+    },
+    "MERCHANT": {
+      "WELCOME": "Benvenuto",
       "MERCHANT_TITLE": "Elenco Merchant",
       "ADD_MERCHANT_TOOLTIP": "Aggiungi un nuovo Merchant",
       "EDIT_MERCHANT_TOOLTIP": "Modifica i dati di questo Merchant",
@@ -164,6 +195,16 @@
         "POS_TITLE": "POS",
         "POS_SUBTITLE": "lista dei POS",
         "ADD_POS_TOOLTIP": "Aggiungi un nuovo punto di servizio “POS” per il Merchant"
+      }
+    },
+    "STATS": {
+      "DATE_SELECTOR": {
+        "TITLE": "Select the date range",
+        "START": "Start date",
+        "END": "End date",
+        "HINT": "MM/DD/YYYY – MM/DD/YYYY",
+        "CANCEL": "Cancel",
+        "APPLY": "Apply"
       }
     },
     "ERRORS": {
@@ -289,6 +330,13 @@
     "SECTION_C": {
       "TITLE": "Come utilizzo i miei WOM?",
       "A": "Imprenditori, negozianti, enti pubblici o qualsiasi altro privato cittadino (generalmente chiamato Merchants) possono liberamente decidere di fornire beni, servizi o sconti ai possessori di voucher WOM. Per fare ciò, creano un <b>“WOM payment”</b> che consente loro di scegliere quale tipo di sforzo premiare: i voucher WOM possono essere filtrati per scopo, luogo e tempo. Merci, servizi e sconti possono essere determinati liberamente dal Merchants."
+    },
+    "URBINO": {
+      "TITLE": "WOM PER URBINO",
+      "SECTION_A": {
+        "A": "Questa sezione è dedicata a <b>WOM per Urbino</b>, il progetto che da <b>maggio 2022</b> è stato avviato nella città di <b>Urbino</b>.\n<b>WOM per Urbino</b> è la prima forma di sperimentazione del progetto WOM. La scelta di Urbino come <b>prima città ad utilizzare WOM</b> deriva dalla collaborazione di <b>DIGIT srl</b>, <b>Università di Urbino</b> e <b>Città di Urbino</b>, che ha concesso il suo patrocinio.",
+        "B": "Il progetto è stato lanciato dal <b>4 maggio 2022</b> tramite una conferenza stampa (per rivedere la conferenza <a href='https://youtu.be/1kiTku77HO4' target='_blank'>Clicca qui</a>).\nAttualmente i cittadini, gli studenti e i turisti hanno varie possibilità di ottenere <b>WOM</b> e di utilizzarli per ottenere <b>sconti</b> nei negozi convenzionati al progetto.  "
+      }
     }
   },
   "VOLUNTEER": {
@@ -443,5 +491,19 @@
   "404": {
     "TITLE": "Sembra che tu ti sia perso!",
     "HOME_BUTTON": "Torna a Casa"
+  },
+  "BILLING": {
+    "RECURRING": {
+      "INTERVAL": {
+        "YEAR": "anno",
+        "YEARS": "anni",
+        "MONTH": "mese",
+        "MONTHS": "mesi",
+        "WEEK": "settimana",
+        "WEEKS": "settimane",
+        "DAY": "giorno",
+        "DAYS": "giorni"
+      }
+    }
   }
 }

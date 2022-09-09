@@ -26,5 +26,15 @@
 
 .img-container {
   text-align: center;
+  position: relative;
 }
+
+.image-overlay {
+  width: 23%;
+  min-width: 125px;
+  position: absolute;
+  left: 7%;
+  top: 55%;
+}
+
 

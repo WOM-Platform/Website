@@ -8,6 +8,7 @@ import {PrivacyPosComponent} from './privacy/pos/pos.component';
 import {PrivacyPocketComponent} from './privacy/pocket/pocket.component';
 import {PrivacyInstrumentComponent} from './privacy/instrument/instrument.component';
 import {PrivacyStepcounterComponent} from './privacy/stepcounter/stepcounter.component';
+import {PrivacyWebsiteComponent} from './privacy/website/website.component';
 import {UserHomeComponent} from './user/home/user-home.component';
 import {UserNotVerifiedComponent} from './user/not-verified/user-not-verified.component';
 import {ResetPasswordComponent} from './authentication/reset-password/reset-password.component';
@@ -17,7 +18,6 @@ import {RequestNewPasswordComponent} from './authentication/requestNewPassword/r
 import {MerchantComponent} from './merchant/merchant.component';
 import {VolunteerComponent} from './volunteer/volunteer.component';
 import {InstrumentComponent} from './instrument/instrument.component';
-import {AboutComponent} from './about/about.component';
 import {ApplicationsComponent} from './applications/applications.component';
 import {ApplicationsStepcounterComponent} from './applications/stepcounter/stepcounter.component';
 import {PrivacyOverviewComponent} from "./privacy/overview/overview.component";
@@ -27,6 +27,12 @@ import {ApplicationsAworldComponent} from "./applications/aworld/aworld.componen
 import {ApplicationsCodymazeComponent} from "./applications/codymaze/codymaze.component";
 import {ApplicationsBalanceComponent} from "./applications/balance/balance.component";
 import {ContactsComponent} from "./contacts/contacts.component";
+import {MerchantStatsComponent} from "./user/stats/merchant/merchant-stats.component";
+import {UserStatsComponent} from "./user/stats/user-stats.component";
+import {UserMerchantComponent} from "./user/merchant/user-merchant.component";
+import {UrbinoComponent} from "./about/urbino/urbino.component";
+import {AboutSectionComponent} from "./about/about-section.component";
+import {AboutComponent} from "./about/about/about.component";
 
 const routes: Routes = [
   {
@@ -48,11 +54,34 @@ const routes: Routes = [
         },
       },
       {
-        path: 'about',
-        component: AboutComponent,
+        path: 'about-section',
+        component: AboutSectionComponent,
         data: {
-          breadcrumb: 'BREADCRUMBS.ABOUT'
+          breadcrumb: 'BREADCRUMBS.ABOUT.TITLE'
         },
+        children: [
+          {
+            path: "",
+            redirectTo: "about",
+            pathMatch: "full"
+          },
+          {
+            path: "about",
+            component: AboutComponent,
+            pathMatch: "full",
+            data: {
+              breadcrumb: 'BREADCRUMBS.ABOUT.ABOUT'
+            },
+          },
+          {
+            path: "urbino",
+            component: UrbinoComponent,
+            pathMatch: "full",
+            data: {
+              breadcrumb: 'BREADCRUMBS.ABOUT.URBINO'
+            },
+          }
+        ]
       },
       {
         path: 'volunteer',
@@ -84,16 +113,32 @@ const routes: Routes = [
       },
       {
         path: 'user',
+        canActivate: [AuthGuard],
         data: {
           breadcrumb: 'BREADCRUMBS.USER.USER'
         },
         children: [
+          {
+            path: '',
+            component: UserHomeComponent,
+            canActivate: [AuthGuard],
+            data: {
+              breadcrumb: 'BREADCRUMBS.USER.HOME'
+            }
+          },
           {
             path: 'not-verified',
             component: UserNotVerifiedComponent,
             canActivate: [AuthGuard],
             data: {
               breadcrumb: 'BREADCRUMBS.USER.ERROR'
+            }
+          },
+          {
+            path: 'verify',
+            component: UserVerifyComponent,
+            data: {
+              breadcrumb: 'BREADCRUMBS.USER.VERIFY'
             }
           },
           {
@@ -105,12 +150,21 @@ const routes: Routes = [
             }
           },
           {
-            path: 'verify',
-            component: UserVerifyComponent,
+            path: 'merchant',
+            component: UserMerchantComponent,
+            canActivate: [AuthGuard],
             data: {
-              breadcrumb: 'BREADCRUMBS.USER.VERIFY'
+              breadcrumb: 'BREADCRUMBS.USER.MERCHANT'
             }
           },
+          /*{
+            path: 'user-stats',
+            component: UserStatsComponent,
+            canActivate: [AuthGuard],
+            data: {
+              breadcrumb: 'BREADCRUMBS.USER.MERCHANT-STATS'
+            }
+          }*/
         ]
       },
       {
@@ -222,6 +276,13 @@ const routes: Routes = [
             component : PrivacyOverviewComponent,
             data: {
               breadcrumb: 'BREADCRUMBS.PRIVACY.OVERVIEW'
+            },
+          },
+          {
+            path: 'website',
+            component : PrivacyWebsiteComponent,
+            data: {
+              breadcrumb: 'BREADCRUMBS.PRIVACY.WEBSITE'
             },
           },
           {
