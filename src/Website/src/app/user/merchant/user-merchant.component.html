@@ -80,7 +80,7 @@
                             <mat-card class="pos-card">
                                 <mat-card-header>
                                     <div class="button-container">
-                                        <button mat-icon-button
+                                        <button *ngIf="merchant.enabled" mat-icon-button
                                                 color="primary"
                                                 matTooltip="{{'USER.MERCHANT.MERCHANT.ADD_POS_TOOLTIP' | translate}} {{merchant.name}}"
                                                 (click)="addPos(merchant.id)">
