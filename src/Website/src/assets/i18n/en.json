@@ -177,9 +177,15 @@
   "USER": {
     "HOME": {
       "WELCOME": "Welcome",
-      "MERCHANT_TITLE": "Merchant list",
+      "MERCHANT_TITLE": "Merchant"
+    },
+    "MERCHANT": {
+      "WELCOME": "Welcome",
+      "MERCHANT_TITLE": "Your Merchants",
       "ADD_MERCHANT_TOOLTIP": "Add a new Merchant",
       "EDIT_MERCHANT_TOOLTIP": "Edit this merchant's data",
+      "ENABLED_MERCHANT_TOOLTIP": "This merchant is ready to accept WOM!",
+      "NOT_ENABLED_MERCHANT_TOOLTIP": "Merchant not enabled - click here for further information",
       "EDIT_MERCHANT_BTN": "Edit",
       "MERCHANT": {
         "NAME": "Merchant",
@@ -189,7 +195,9 @@
         "URL": "Website",
         "POS_TITLE": "POS",
         "POS_SUBTITLE": "List of POS",
-        "ADD_POS_TOOLTIP": "Add a new Point of Service 'POS' for Merchant"
+        "ADD_POS_TOOLTIP": "Add a new Point of Service 'POS' for Merchant",
+        "SEND_ACTIVATION_REQUEST": "Request activation",
+        "SEND_ACTIVATION_REQUEST_CONFIRM": "Your request has been sent! We will take care of it within the next 48 hours."
       }
     },
     "STATS": {

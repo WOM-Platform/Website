@@ -9,6 +9,9 @@ import {first} from 'rxjs/operators';
 import {AddPosDialogComponent, PosDialogData} from '../add-pos/add-pos.component';
 import {DialogType} from '../../_models/dialogType';
 import {Subscription} from 'rxjs';
+import {EmailService} from "../../_services/email.service";
+import {EmailData} from "../../_models/emailData";
+import {environment} from "../../../environments/environment";
 
 @Component({
     selector: 'app-user-merchant',
@@ -25,6 +28,7 @@ export class UserMerchantComponent implements OnInit, OnDestroy {
                 private userService: UserService,
                 private merchantService: MerchantService,
                 private authService: AuthService,
+                private emailService: EmailService,
                 private translate: TranslateService) {
     }
 
@@ -121,6 +125,26 @@ export class UserMerchantComponent implements OnInit, OnDestroy {
                         this.openSnackBar(response);
                     });
             }
+        });
+    }
+
+    requestEnabling(merchant: Merchant) {
+        let emailData = new EmailData();
+        emailData.senderEmail = environment.noreplyEmail;
+        emailData.senderName = this.userService.currentUserValue.name + " " + this.userService.currentUserValue.surname;
+        emailData.toEmail = environment.baseEmail;
+        emailData.toName = 'WOM Administrator';
+        emailData.subject = "WOM Merchant request #" + merchant.id;
+        emailData.content = "Request from " + this.userService.currentUserValue.email + "  for merchant "
+            + "<br><b>id</b>: " + merchant.id
+            + "<br><b>name:</b> " + merchant.name
+            + "<br><b>fiscal code:</b> " + merchant.fiscalCode;
+
+        this.emailService.sendEmail(emailData).subscribe(res => {
+            this.openSnackBar(this.translate.instant('USER.MERCHANT.MERCHANT.SEND_ACTIVATION_REQUEST_CONFIRM'));
+        },
+        error => {
+            console.log(error);
         });
     }
 
