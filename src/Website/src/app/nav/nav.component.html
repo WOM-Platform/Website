@@ -56,10 +56,17 @@
       <mat-icon>home</mat-icon>
       <span>{{ "NAV.HOME" | translate }}</span>
     </button>
-    <button mat-menu-item (click)="navigate('about')">
-      <mat-icon>info</mat-icon>
-      <span>{{ "NAV.ABOUT" | translate }}</span>
+    <button mat-button class="nav-button"  [matMenuTriggerFor]="menuAbout">
+      <span>{{ "NAV.ABOUT.TITLE" | translate }}</span>
     </button>
+    <mat-menu #menuAbout="matMenu">
+      <button mat-menu-item (click)="navigate('about-section/about')">
+        <span>{{ "NAV.ABOUT.ABOUT" | translate }}</span>
+      </button>
+      <button mat-menu-item (click)="navigate('about-section/urbino')">
+        <span>{{ "NAV.ABOUT.URBINO" | translate }}</span>
+      </button>
+    </mat-menu>
 
     <button mat-menu-item [matMenuTriggerFor]="menuMobileVolunteer">
       <mat-icon>person_pin_circle</mat-icon>

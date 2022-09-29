@@ -25,7 +25,25 @@
                                             (click)="editMerchant(merchant)">
                                         <mat-icon>edit</mat-icon>
                                     </button>
-                                    {{merchant.name}}
+                                    <ng-template [ngIf]="merchant.enabled" [ngIfElse]="not_enabled">
+                                        <button mat-icon-button
+                                                color="primary"
+                                                matTooltip="{{'USER.MERCHANT.ENABLED_MERCHANT_TOOLTIP' | translate}}">
+                                            <mat-icon class="green-icon">check_circle</mat-icon>
+                                        </button>
+                                        {{merchant.name}}
+                                    </ng-template>
+                                    <ng-template #not_enabled>
+                                        <button mat-icon-button
+                                                color="primary"
+                                                matTooltip="{{'USER.MERCHANT.NOT_ENABLED_MERCHANT_TOOLTIP' | translate}}">
+                                            <mat-icon color="warn">remove_circle</mat-icon>
+                                        </button>
+                                        <span style="margin-right: 5px">{{merchant.name}}</span>
+                                        <span>
+                                            <button mat-flat-button color="warn" (click)="requestEnabling(merchant)">{{'USER.MERCHANT.MERCHANT.SEND_ACTIVATION_REQUEST' | translate}}</button>
+                                        </span>
+                                    </ng-template>
                                 </mat-panel-title>
                             </mat-expansion-panel-header>
                             <mat-divider></mat-divider>
@@ -62,7 +80,7 @@
                             <mat-card class="pos-card">
                                 <mat-card-header>
                                     <div class="button-container">
-                                        <button mat-icon-button
+                                        <button *ngIf="merchant.enabled" mat-icon-button
                                                 color="primary"
                                                 matTooltip="{{'USER.MERCHANT.MERCHANT.ADD_POS_TOOLTIP' | translate}} {{merchant.name}}"
                                                 (click)="addPos(merchant.id)">

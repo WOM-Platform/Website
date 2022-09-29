@@ -182,9 +182,11 @@
     },
     "MERCHANT": {
       "WELCOME": "Benvenuto",
-      "MERCHANT_TITLE": "Elenco Merchant",
+      "MERCHANT_TITLE": "I tuoi Merchant",
       "ADD_MERCHANT_TOOLTIP": "Aggiungi un nuovo Merchant",
       "EDIT_MERCHANT_TOOLTIP": "Modifica i dati di questo Merchant",
+      "ENABLED_MERCHANT_TOOLTIP": "Questo merchant è pronto ad accettare WOM!",
+      "NOT_ENABLED_MERCHANT_TOOLTIP": "Merchant non abilitato - clicca qui per avere ulteriori informazioni",
       "EDIT_MERCHANT_BTN": "Modifica",
       "MERCHANT": {
         "NAME": "Merchant",
@@ -194,7 +196,9 @@
         "URL": "Sito web",
         "POS_TITLE": "POS",
         "POS_SUBTITLE": "lista dei POS",
-        "ADD_POS_TOOLTIP": "Aggiungi un nuovo punto di servizio “POS” per il Merchant"
+        "ADD_POS_TOOLTIP": "Aggiungi un nuovo punto di servizio “POS” per il Merchant",
+        "SEND_ACTIVATION_REQUEST": "Richiedi abilitazione",
+        "SEND_ACTIVATION_REQUEST_CONFIRM": "La tua richiesta è stata inviata! Ce ne occuperemo entro le prossime 48 ore."
       }
     },
     "STATS": {

@@ -5,5 +5,8 @@ export const environment = {
   baseBillingUrl: 'https://billing.wom.social/',
   v1: 'v1/',
   v2: 'v2/',
-  i18n: '1.1.0'
+  i18n: '1.1.0',
+  noreplyEmail: 'noreply@wom.social',
+  baseEmail: 'info@digit.srl',
+  sendInBlueApiKey: '#SENDINBLUEAPI#'
 };
