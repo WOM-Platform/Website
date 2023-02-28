@@ -1,5 +1,5 @@
 {
-  "FLAG_YES": "Si",
+  "FLAG_YES": "Sì",
   "FLAG_NO": "No",
   "NAV": {
     "HOME": "Home",
@@ -18,9 +18,9 @@
     "MERCHANT": "Merchant",
     "CONTACTS": "Contattaci",
     "PROFILE": "Profilo",
-    "SIGN_OUT": "Log out",
+    "SIGN_OUT": "Disconnetti",
     "LOGOUT_DIALOG": {
-      "TITLE": "Log out",
+      "TITLE": "Disconnetti",
       "CONTENT": "Vuoi disconnetterti?",
       "CONFIRM": "Ok",
       "CANCEL": "Annulla"
@@ -29,9 +29,9 @@
   "BREADCRUMBS": {
     "HOME": "Home",
     "ABOUT": {
-      "TITLE": "Che cos'è",
-      "ABOUT": "Che cos'è",
-      "URBINO": "Wom per Urbino"
+      "TITLE": "Che cos’è",
+      "ABOUT": "Che cos’è",
+      "URBINO": "WOM per Urbino"
     },
     "VOLUNTEER": "Volontari",
     "MERCHANT": "Merchant",
@@ -93,7 +93,7 @@
     "TITLE": "Accedi alla piattaforma WOM",
     "EMAIL": "Email",
     "PASSWORD": "Password",
-    "BTN_SIGN_IN": "Login",
+    "BTN_SIGN_IN": "Accedi",
     "BTN_FORGOT_PASSWORD": "Hai dimenticato la password?",
     "BTN_SIGN_UP": "Registrati",
     "ERR": {
@@ -104,7 +104,7 @@
   },
   "SIGN_UP": {
     "TITLE": "Registrati alla piattaforma WOM",
-    "SUBTITLE": "Compila il form sottostante per registrarti alla Piattaforma <b>WOM&nbsp;</b>.",
+    "SUBTITLE": "Compila il form sottostante per registrarti alla Piattaforma&nbsp;<b>WOM</b>.",
     "BTN_ALREADY_REGISTERED": "Già registrato?",
     "NEXT": "Avanti",
     "BACK": "Indietro",
@@ -143,17 +143,17 @@
       "SELECT_COUNTRY_ERROR": "Selezionare il paese dell’attività",
       "BUSINESS": "Seleziona l’attività principale",
       "BUSINESS_ERROR": "Selezionare un’attività primaria",
-      "WEBSITE": "Sito web, es.: http://www.example.com",
+      "WEBSITE": "Sito web, ad es.: http://www.example.com",
       "OPTIONAL_WEBSITE_TEXT": "<i>Opzionale.</i>\nSito web della propria attività.",
-      "URL_ERROR": "Assicurati che l'indirizzo del sito sia corretto e che inizi con http o https",
+      "URL_ERROR": "Assicurati che l’indirizzo del sito sia corretto e che inizi con http o https",
       "DESCRIPTION": "Descrizione",
       "DESCRIPTION_ERROR": "Inserisci una breve descrizione per il tuo Merchant",
       "DESCRIPTION_TEXT": "Una breve descrizione della propria attività e come intendi monetizzare i Voucher WOM (beni o servizi)."
     },
     "POS": {
       "TITLE": "Il tuo <i>Point of Service</i>",
-      "CHECKBOX": "Registera il tuo Point Of Service (POS)",
-      "SUBTITLE_A": "Compila questa parte del form per creare una istanza di un <b>Point of Service</b>&nbsp;(POS) per il tuo account da Merchant. Potrai ricevere pagamenti in WOM&nbsp; fin da subito utilizzando il tuo POS.",
+      "CHECKBOX": "Registra il tuo Point of Service&nbsp;(POS)",
+      "SUBTITLE_A": "Compila questa parte del modulo per creare una istanza di un <b>Point of Service</b>&nbsp;(POS) per il tuo account da Merchant. Potrai ricevere pagamenti in WOM fin da subito utilizzando il tuo POS.",
       "SUBTITLE_B": "",
       "IS_ACTIVE_TEXT": "De-seleziona per disattivare il POS",
       "NAME": "Nome",
@@ -174,7 +174,7 @@
     "FISCAL_CODE_EXISTS_ERROR": "Il codice fiscale del Merchant è stato già utilizzato.",
     "GENERIC_ERROR": "Ci sono degli errori nei dati immessi.",
     "FORM_ERROR": "Errore - controlla tutti i campi e riprova",
-    "TIMEOUT_ERROR": "Il servizio impiega troppo tempo a rispondere - controllare la connessione ad internet e riprovare"
+    "TIMEOUT_ERROR": "Il servizio sta impiegando troppo tempo per rispondere: controllare la connessione ad internet e riprovare"
   },
   "USER": {
     "HOME": {
@@ -196,10 +196,10 @@
         "ACTIVITY_TYPE": "Attività primaria",
         "URL": "Sito web",
         "POS_TITLE": "POS",
-        "POS_SUBTITLE": "lista dei POS",
+        "POS_SUBTITLE": "Lista dei POS",
         "ADD_POS_TOOLTIP": "Aggiungi un nuovo punto di servizio “POS” per il Merchant",
         "SEND_ACTIVATION_REQUEST": "Richiedi abilitazione",
-        "SEND_ACTIVATION_REQUEST_CONFIRM": "La tua richiesta è stata inviata! Ce ne occuperemo entro le prossime 48 ore."
+        "SEND_ACTIVATION_REQUEST_CONFIRM": "La tua richiesta è stata inviata! Ce ne occuperemo al più presto."
       }
     },
     "STATS": {
@@ -213,17 +213,17 @@
       }
     },
     "ERRORS": {
-      "MERCHANT_LIST_401": "Impossibile recuperare la lista dei merchant: Non autorizzato",
-      "MERCHANT_LIST_404": "Impossibile recuperare la lista dei merchant: Non trovato",
-      "MERCHANT_LIST_GENERIC": "Impossibile recuperare la lista dei merchant: errore sconosciuto"
+      "MERCHANT_LIST_401": "Impossibile recuperare la lista dei Merchant: Non autorizzato",
+      "MERCHANT_LIST_404": "Impossibile recuperare la lista dei Merchant: Non trovato",
+      "MERCHANT_LIST_GENERIC": "Impossibile recuperare la lista dei Merchant: errore sconosciuto"
     },
     "VERIFY": {
       "TITLE": "Verifica utente",
-      "VERIFYING": "Controllo che l’utente sia stato verificato...",
+      "VERIFYING": "Controllo che l’utente sia stato verificato…",
       "VERIFIED": "Utente verificato!",
       "GO_HOME_BUTTON": "Clicca qui",
       "GO_HOME_TEXT": "Per andare al tuo profilo.",
-      "NOT_VERIFIED": "Il tuo token di verifica è scaduto o c'è stato un errore nella validazione del tuo account.",
+      "NOT_VERIFIED": "Il tuo token di verifica è scaduto o c’è stato un errore nella validazione del tuo account.",
       "GO_SIGNIN_BUTTON": "Login"
     },
     "NOT_VERIFIED": {
@@ -234,7 +234,7 @@
       "EMAIL_SENT": "Email inviata!"
     },
     "ADD_MERCHANT": {
-      "TITLE": "Aggiungi un nuovo merchant",
+      "TITLE": "Aggiungi un nuovo Merchant",
       "CANCEL": "Annulla",
       "ADD": "Aggiungi",
       "SUCCESS": "Merchant aggiunto",
@@ -242,7 +242,7 @@
       "API_ERROR": "Ci sono alcuni errori nei dati o un problema di connessione con il server. Controlla i dati e riprova."
     },
     "EDIT_MERCHANT": {
-      "TITLE": "Modifica il merchant",
+      "TITLE": "Modifica il Merchant",
       "CANCEL": "Annulla",
       "ADD": "Conferma",
       "SUCCESS": "Merchant modificato",
@@ -270,11 +270,11 @@
     "TITLE": "Aggiorna password",
     "RESET_BUTTON": "Aggiorna password",
     "SNACKBAR_SUCCESS": "Password aggiornata",
-    "SNACKBAR_HOME": "Clicca qui per fare il login",
+    "SNACKBAR_HOME": "Clicca qui per accedere",
     "EXPIRED_LINK_ERROR": "Il link per aggiornare la password è scaduto."
   },
   "REQUEST_NEW_PASSWORD": {
-    "TITLE": "Richiedi una password nuova",
+    "TITLE": "Richiedi una nuova password",
     "REQUEST_BUTTON": "Invia la richiesta",
     "REQUEST_SENT": "Richiesta inviata! Controlla la tua email",
     "HOME": "Home"
@@ -287,16 +287,16 @@
   "HOME": {
     "SECTION_INTRO": {
       "TITLE": "Introduzione",
-      "A": "<b>WOM - \"Worth One Minute\"</b> è una piattaforma di ricompensa general-purpose basata su un sistema di scambio di voucher.\nMolte azioni e attività compiute dagli individui hanno un valore sociale intrinseco, un effetto noto in economia come <b>“esternalità positiva”</b>.\nWOM mira a riconoscere tutte quelle azioni che costituiscono un contributo socialmente prezioso per un obiettivo comune, <b>premiando il tempo che le persone dedicano a queste attività</b> attraverso la generazione di voucher sociali digitali.\nI voucher WOM premiano ogni minuto di impegno sociale.\n",
-      "B": "DIGIT srl è uno <b>spin-off dell’Università di Urbino</b> che ha come obiettivo <b>creare un valore sociale attraverso la consapevolezza digitale</b>. DIGIT srl è stata fondata sulla convinzione che alla base della tecnologia, delle piattaforme e dei software ci debbano essere gli interessi dell’uomo e della società e che innovazione sociale e digitale siano indissolubilmente legate. \n"
+      "A": "<b>WOM - “Worth One Minute”</b> è una piattaforma di ricompensa general-purpose basata su un sistema di scambio di voucher.\nMolte azioni e attività compiute dagli individui hanno un valore sociale intrinseco, un effetto noto in economia come <b>“esternalità positiva”</b>.\nWOM mira a riconoscere tutte quelle azioni che costituiscono un contributo socialmente prezioso per un obiettivo comune, <b>premiando il tempo che le persone dedicano a queste attività</b> attraverso la generazione di voucher sociali digitali.\nI voucher WOM premiano ogni minuto di impegno sociale.",
+      "B": "DIGIT srl è uno <b>spin-off dell’Università di Urbino</b> che ha come obiettivo <b>creare un valore sociale attraverso la consapevolezza digitale</b>. DIGIT srl è stata fondata sulla convinzione che alla base della tecnologia, delle piattaforme e dei software ci debbano essere gli interessi dell’uomo e della società e che innovazione sociale e digitale siano indissolubilmente legate."
     },
     "SECTION_VOL": {
       "TITLE": "Volontari",
-      "MESSAGE": "Compiendo azioni socialmente valide, ogni utente guadagna WOM e diventa un <b>Volontario</b>. I Volontari possono gestire i loro voucher WOM tramite un’app, <b>\"WOM Pocket\"</b>, che possono installare sul proprio dispositivo. L’applicazione consente ai Volontari di raccogliere i propri voucher, conservarli e spenderli.\n"
+      "MESSAGE": "Compiendo azioni socialmente valide, ogni utente guadagna WOM e diventa un <b>Volontario</b>. I Volontari possono gestire i loro voucher WOM tramite un’app, <b>“WOM Pocket”</b>, che possono installare sul proprio dispositivo. L’applicazione consente ai Volontari di raccogliere i propri voucher, conservarli e spenderli."
     },
     "SECTION_MERCH": {
       "TITLE": "Merchant",
-      "MESSAGE": "I negozi locali possono partecipare al progetto diventando <b>Merchants</b>. I Merchants sono componenti di sistema che possono <b>creare istanze di pagamento</b>. Possono accettare i voucher WOM in cambio di servizi e sconti. I Merchants utilizzano un’applicazione diversa, il <b>\"WOM POS\"</b>, o un software di integrazione personalizzato. Questi componenti software consentono ai Merchants di creare nuove transazioni, applicando filtri ai voucher WOM raccolti.\n"
+      "MESSAGE": "I negozi locali possono partecipare al progetto diventando <b>Merchants</b>. I Merchants sono componenti di sistema che possono <b>creare istanze di pagamento</b>. Possono accettare i voucher WOM in cambio di servizi e sconti. I Merchants utilizzano un’applicazione diversa, il <b>“WOM POS”</b>, o un software di integrazione personalizzato. Questi componenti software consentono ai Merchants di creare nuove transazioni, applicando filtri ai voucher WOM raccolti."
     },
     "SECTION_INSTR": {
       "TITLE": "Instrument",
@@ -311,8 +311,8 @@
       "MESSAGE": "WOM è una <b>technologia open</b> fornita come software open source, rilasciata sotto la licenza <a href=\"https://opensource.org/licenses/MIT\">MIT</a>.\n È sviluppata in modo aperto su GitHub, <a href=\"https://github.com/WOM-Platform\">dagli un’occhiata</a>."
     },
     "SECTION_CONTACT": {
-      "TITLE": "Rimani in contatto! \uD83D\uDCEB",
-      "MESSAGE": "Per sviluppare nuove integrazioni WOM, connettori POS, o per qualsiasi altra domanda, contatta <a href=\"mailto:info@wom.social\">info@wom.social</a>."
+      "TITLE": "Rimaniamo in contatto!&nbsp;\uD83D\uDCEB",
+      "MESSAGE": "Per sviluppare nuove integrazioni WOM, connettori POS o per qualsiasi altra domanda, contattaci a <a href=\"mailto:info@wom.social\">info@wom.social</a>."
     }
   },
   "ABOUT": {
@@ -348,11 +348,11 @@
     "TITLE": "Volontari",
     "SECTION_A": {
       "TITLE": "Come funziona per gli utenti?",
-      "A": "Molte azioni e attività compiute da un individuo contribuiscono a un bene comune e hanno un valore sociale intrinseco. Compiendo queste azioni socialmente preziose, ogni utente guadagna WOM e diventa un Volontario.\nI Volontari possono utilizzare i voucher WOM per ottenere servizi o beni forniti dai Merchants.\nOgni Volontario può collezionare tutti i voucher guadagnati sull’app <b>\"WOM Pocket\"</b>."
+      "A": "Molte azioni e attività compiute da un individuo contribuiscono a un bene comune e hanno un valore sociale intrinseco. Compiendo queste azioni socialmente preziose, ogni utente guadagna WOM e diventa un Volontario.\nI Volontari possono utilizzare i voucher WOM per ottenere servizi o beni forniti dai Merchants.\nOgni Volontario può collezionare tutti i voucher guadagnati sull’app <b>“WOM Pocket”</b>."
     },
     "SECTION_B": {
       "TITLE": "Pocket",
-      "A": "I Volontari possono gestire i loro voucher WOM tramite un’app mobile <b>\"WOM Pocket\"</b>. Questa app consente agli utenti di <b>raccogliere i voucher WOM guadagnati</b>, conservarli (come se fossero in un \"portafoglio\" virtuale) e spendere i loro voucher.\n\nLa piattaforma WOM non ha alcun costo per i Volontari che possono scaricare gratuitamente l’app <b>Pocket</b> dagli <b>store Android e iOS</b>."
+      "A": "I Volontari possono gestire i loro voucher WOM tramite un’app mobile <b>“WOM Pocket”</b>. Questa app consente agli utenti di <b>raccogliere i voucher WOM guadagnati</b>, conservarli (come se fossero in un “portafoglio” virtuale) e spendere i loro voucher.\n\nLa piattaforma WOM non ha alcun costo per i Volontari che possono scaricare gratuitamente l’app <b>Pocket</b> dagli <b>store Android e iOS</b>."
     }
   },
   "MERCHANT": {
@@ -372,7 +372,7 @@
     },
     "SECTION_B": {
       "TITLE": "POS",
-      "A": "Lo strumento che i Merchants possono utilizzare per accettare il pagamento WOM è l’app <b>\"WOM POS\" (Point of Sale)</b> o un software di integrazione personalizzato. Questi componenti software consentono ai Merchants di creare nuove transazioni, applicando filtri ai voucher WOM raccolti.",
+      "A": "Lo strumento che i Merchants possono utilizzare per accettare il pagamento WOM è l’app <b>“WOM POS” (Point of Sale)</b> o un software di integrazione personalizzato. Questi componenti software consentono ai Merchants di creare nuove transazioni, applicando filtri ai voucher WOM raccolti.",
       "B": "La piattaforma WOM </b>non ha alcun costo per il Merchant che vuole utilizzarla in modo <b>anonimo</b>. I Merchant possono scaricare gratuitamente l’app <b>POS</b> dagli <b>store Android e iOS</b>. Non ci sono costi di transazione.\nSe i Merchant vogliono rendere <b>più visibili le loro offerte</b> e avere <b>rapporti periodici</b> sul valore sociale che hanno contribuito a generare, possono acquistare dei servizi a pagamento."
     }
   },
@@ -391,14 +391,14 @@
   "CONTACTS": {
     "TITLE": "Contatti",
     "SEND_SUCCESS": "Inviato!",
-    "SEND_ERROR": "C'è stato un errore nell'invio della richiesta. Riprova.",
+    "SEND_ERROR": "C'è stato un errore nell’invio della richiesta. Riprova.",
     "FORM_ERROR": "Sembra che manchi ancora qualche informazione nel form.",
     "SEND": "Invia",
     "FORM": {
       "TITLE": "Domande o dubbi riguardo i WOM? Compila il form sottostante per contattarci!",
       "SENDER_NAME": "Nome",
       "SENDER_EMAIL": "Indirizzo e-mail",
-      "SUBJECT": "Soggetto dell'e-mail",
+      "SUBJECT": "Soggetto dell’e-mail",
       "CONTENT": "Scrivi il tuo messaggio qui",
       "NO_TEXT_ERROR": "Campo obbligatorio",
       "EMAIL_ERROR": "Inserisci un indirizzo email valido"
@@ -429,12 +429,20 @@
         "<p>Il titolare del trattamento dei dati personali, cioè il soggetto che assume le decisioni in merito alle modalità e alle finalità del trattamento, è Digit s.r.l., con sede legale in Corso Giuseppe Garibaldi&nbsp;66, 61029, Urbino&nbsp;(PU), nella persona del suo legale rappresentante.</p>",
         "<h2>2. Dati oggetto del trattamento</h2>",
         "<p>Il sito Web non gestisce né raccoglie dati degli utenti, fatta eccezione per gli indirizzi IP, necessari per la trasmissione dei dati, che però non vengono mai memorizzati né registrati nei log di sistema.</p>",
-        "<p>Il sito Web permette agli utenti di registrarsi come gestori (<em>Merchant</em> e <em>Instrument</em>) per la piattaforma WOM. In questo caso, l’utente fornirà espressamente alcuni suoi dati personali utilizzati al fine della registrazione.</p>",
-        "<h2>3. Durata del trattamento</h2>",
-        "<p>Il sito Web non registra dati personali, salvo quelli espressamente forniti per la registrazione dell’utente. In quest’ultimo caso, i dati vengono memorizzati finché non viene eliminato il profilo dell’utente.</p>",
-        "<h2>4. Terze parti</h2>",
+        "<p>Il sito Web permette agli utenti di registrarsi come gestori (<em>Merchant</em> e <em>Instrument</em>) per la piattaforma WOM. In questo caso, l’utente fornirà espressamente alcuni suoi dati personali utilizzati al fine della registrazione (tra cui, nome, cognome, codice fiscale, indirizzo e-mail).</p>",
+        "<h2>3. Finalità del trattamento</h2>",
+        "<p>La finalità della piattaforma&nbsp;WOM è quello di riconoscere il valore sociale della partecipazione e delle attività socialmente utili. Al fine di permettere l’emissione e l’uso di voucher WOM, che certificano queste attività, il sistema richiede la registrazione dei dati personali delle entità che generano voucher (Instrument) e che li consumano (Merchant).</p>",
+        "<h2>4. Basi legali del trattamento</h2>",
+        "<p>La base giuridica del trattamento consiste nel <strong>consenso</strong> liberamente espresso dall’utente al momento della registrazione alla piattaforma. Tale consenso è dato per le finalità presentate al punto&nbsp;3.</p>",
+        "<h2>5. Modalità di raccolta dei dati</h2>",
+        "<p>I dati personali degli utenti che desiderano registrarsi alla piattaforma vengono raccolti durante il processo di registrazione, al quale si accede tramite la <a href=\"/authentication/signin\">pagina dedicata sul sito Web</a>.</p>",
+        "<h2>6. Durata del trattamento</h2>",
+        "<p>Il sito Web non registra dati personali durante la navigazione, salvo quelli espressamente forniti per la registrazione dell’utente. In quest’ultimo caso, i dati vengono memorizzati finché non viene eliminato il profilo dell’utente.</p>",
+        "<h2>7. Modalità del trattamento, comunicazione e diffusione dei dati</h2>",
+        "<p>I dati raccolti dal sito Web e dalla piattaforma sono memorizzati in maniera sicura con sistemi allo stato dell’arte. I dati vengono diffusi dal sistema soltanto a utenti autorizzati della piattaforma stessa tramite delle specifica API&nbsp;(Application Programming Interface) per le finalità descritte al punto&nbsp;3 e non vengono diffusi in altro modo.</p>",
+        "<h2>8. Terze parti</h2>",
         "<p>Il sito Web include degli script di Fathom Analytics, conformi al GDPR e che rispettano la <a href=\"https://usefathom.com/privacy\">propria informativa sulla privacy</a>.</p>",
-        "<h2>5. Diritti dell’interessato</h2>",
+        "<h2>9. Diritti dell’interessato</h2>",
         "<p>Ai sensi degli artt. 15 e ss. del Regolamento, l’utente ha il diritto di:</p>",
         "<ul>",
         "<li>ricevere conferma dell’esistenza dei suoi dati personali, accedere al loro contenuto e ottenerne copia (<strong>diritto di accesso</strong>);</li>",
@@ -479,8 +487,8 @@
         "<li>ricevere conferma dell’esistenza dei suoi dati personali, accedere al loro contenuto e ottenerne copia (<strong>diritto di accesso</strong>);</li>",
         "<li>aggiornare, modificare e/o correggere i suoi dati personali (<strong>diritto di rettifica</strong>);</li>",
         "<li>chiedere la cancellazione o la limitazione del trattamento dei dati personali nelle ipotesi previste dal Regolamento (<strong>diritto di cancellazione</strong> e <strong>diritto alla limitazione del trattamento</strong>);</li>",
-        "<li>opporsi al trattamento nelle ipotesi in cui sia previsto dal Regolamento (<strong>diritto di opposizione</strong>),&nbsp;</li>",
-        "<li>ricevere copia dei dati forniti in formato strutturato, di uso comune e leggibile da un dispositivo automatico e chiedere che tali dati siano trasmessi ad un altro Titolare del trattamento se tecnicamente fattibile (<strong>diritto alla portabilità</strong>).&nbsp;</li>",
+        "<li>opporsi al trattamento nelle ipotesi in cui sia previsto dal Regolamento (<strong>diritto di opposizione</strong>),</li>",
+        "<li>ricevere copia dei dati forniti in formato strutturato, di uso comune e leggibile da un dispositivo automatico e chiedere che tali dati siano trasmessi ad un altro Titolare del trattamento se tecnicamente fattibile (<strong>diritto alla portabilità</strong>).</li>",
         "</ul>",
         "<p>L’interessato ha inoltre il diritto di proporre reclamo all’autorità di controllo.</p>",
         "<p>Per esercitare i suoi diritti, l’utente può scrivere in ogni momento alla seguente e-mail: <a href=\"mailto:info@digit.srl\">info@digit.srl</a> oppure all’indirizzo:</p>",
@@ -503,12 +511,12 @@
     },
     "OVERVIEW": {
       "TITLE": "Lista di applicazioni per ottenere WOM",
-      "MAIN_CONTENT": "I voucher WOM possono essere ottenuti svolgendo volontariamente un’azione socialmente preziosa. Per la la generazione del WOM, <b>l’attività svolta deve essere ufficialmente riconosciuta dalla piattaforma WOM.</b>\n",
-      "CONTENT_A": "I Volontari possono ottenere WOM anche attraverso l’utilizzo di <b>specifiche applicazioni</b> che riconoscono il valore sociale delle azioni che svolgono. <br><b>Scopri quali dando un’occhiata al menu laterale!</b>\n"
+      "MAIN_CONTENT": "I voucher WOM possono essere ottenuti svolgendo volontariamente un’azione socialmente preziosa. Per la la generazione del WOM, <b>l’attività svolta deve essere ufficialmente riconosciuta dalla piattaforma WOM.</b>",
+      "CONTENT_A": "I Volontari possono ottenere WOM anche attraverso l’utilizzo di <b>specifiche applicazioni</b> che riconoscono il valore sociale delle azioni che svolgono. <br /><b>Scopri quali dando un’occhiata al menu laterale!</b>"
     },
     "STEPCOUNTER": {
       "TITLE": "WOM Contapassi",
-      "MAIN_CONTENT": "Tieni il conto dei tuoi passi con WOM Step Counter, la prima app che premia ciò che fai abitualmente! <br /> Grazie a WOM Step Counter poi trasformare i tuoi passi in WOM, i voucher digitali che premiano l’impegno sociale. Inizierai a collezionare WOM dopo aver superato i 3000 passi."
+      "MAIN_CONTENT": "Tieni il conto dei tuoi passi con WOM Step Counter, la prima app che premia ciò che fai abitualmente!<br />Grazie a WOM Step Counter poi trasformare i tuoi passi in WOM, i voucher digitali che premiano l’impegno sociale. Inizierai a collezionare WOM dopo aver superato i 3000&nbsp;passi."
     },
     "UNIVERSITIES": {
       "TITLE": "Università",
@@ -520,16 +528,16 @@
     },
     "BALANCE": {
       "TITLE": "Balance",
-      "MAIN_CONTENT": "Balance - Postural Stability © è un'app sviluppata dai ricercatori dell'Università di Urbino per misurare la tua stabilità posturale attraverso l’utilizzo del tuo smartphone.\n<br>Misurare la tua stabilità posturale tutti i giorni per ottenere WOM.\n<br>Inizierai a collezionare WOM dopo aver effettuato due misurazioni in due giorni diversi!\n"
+      "MAIN_CONTENT": "Balance - Postural Stability © è un’app sviluppata dai ricercatori dell’Università di Urbino per misurare la tua stabilità posturale attraverso l’utilizzo del tuo smartphone.<br />Misurare la tua stabilità posturale tutti i giorni per ottenere WOM.<br />Inizierai a collezionare WOM dopo aver effettuato due misurazioni in due giorni diversi!"
     },
     "CODYMAZE": {
       "TITLE": "CodyMaze",
-      "MAIN_CONTENT": "Una scacchiera a cielo aperto di 25 blocchi in cui gli studenti si muoveranno come robot guidati dalle istruzioni che appariranno via via sullo smartphone. Un labirinto mai uguale, che appare diverso a ciascun giocatore e che si rinnova ad ogni ingresso. <br /> Come uscirne? Mettendo in pratica i principi base del coding che si assimilano anche giocando!<br> Guadagna WOM divertendoti!"
+      "MAIN_CONTENT": "Una scacchiera a cielo aperto di 25 blocchi in cui gli studenti si muoveranno come robot guidati dalle istruzioni che appariranno via via sullo smartphone. Un labirinto mai uguale, che appare diverso a ciascun giocatore e che si rinnova ad ogni ingresso.<br />Come uscirne? Mettendo in pratica i principi base del coding che si assimilano anche giocando!<br />Guadagna WOM divertendoti!"
     }
   },
   "404": {
     "TITLE": "Sembra che tu ti sia perso!",
-    "HOME_BUTTON": "Torna a Casa"
+    "HOME_BUTTON": "Torna alla pagina principale"
   },
   "BILLING": {
     "RECURRING": {

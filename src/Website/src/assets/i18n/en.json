@@ -124,8 +124,9 @@
       "SURNAME_ERROR": "Please provide your surname"
     },
     "MERCHANT": {
-      "TITLE": "MERCHANT",
       "STEPPER_TITLE": "Merchant registration",
+      "MERCHANT_TITLE": "Merchant registration",
+      "TITLE": "MERCHANT",
       "CHECKBOX": "Register a merchant",
       "NAME": "Merchant/Business Name",
       "NAME_ERROR": "Please provide a valid name for the Merchant - 8 characters minimum",
@@ -137,9 +138,9 @@
       "CAP": "CAP/City code",
       "CAP_ERROR": "Please enter the cap/city code",
       "CITY": "City",
-      "CITY_ERROR": "Please enter the merchant's city",
+      "CITY_ERROR": "Please enter the merchant’s city",
       "SELECT_COUNTRY": "Select country",
-      "SELECT_COUNTRY_ERROR": "Please select your merchant's country",
+      "SELECT_COUNTRY_ERROR": "Please select your merchant’s country",
       "BUSINESS": "Select primary business",
       "BUSINESS_ERROR": "Please select a primary business",
       "WEBSITE": "Website, ex.: http://www.example.com",
@@ -169,7 +170,7 @@
     "TERMS_CONDITIONS": "Accept terms and conditions",
     "TC_ERROR": "Please accept the terms and conditions",
     "BTN_SIGN_UP": "Sign Up",
-    "FISCAL_CODE_EXISTS_ERROR": "The merchant's fiscal code has already been used",
+    "FISCAL_CODE_EXISTS_ERROR": "The merchant’s fiscal code has already been used",
     "EMAIL_EXISTS_ERROR": "This email address has already been used or the selected password is too weak.",
     "GENERIC_ERROR": "There are errors in the form data",
     "FORM_ERROR": "Error - check all fields and try again",
@@ -184,7 +185,7 @@
       "WELCOME": "Welcome",
       "MERCHANT_TITLE": "Your Merchants",
       "ADD_MERCHANT_TOOLTIP": "Add a new Merchant",
-      "EDIT_MERCHANT_TOOLTIP": "Edit this merchant's data",
+      "EDIT_MERCHANT_TOOLTIP": "Edit this merchant’s data",
       "ENABLED_MERCHANT_TOOLTIP": "This merchant is ready to accept WOM!",
       "NOT_ENABLED_MERCHANT_TOOLTIP": "Merchant not enabled - click here for further information",
       "EDIT_MERCHANT_BTN": "Edit",
@@ -196,7 +197,7 @@
         "URL": "Website",
         "POS_TITLE": "POS",
         "POS_SUBTITLE": "List of POS",
-        "ADD_POS_TOOLTIP": "Add a new Point of Service 'POS' for Merchant",
+        "ADD_POS_TOOLTIP": "Add a new Point of Service ‘POS’ for Merchant",
         "SEND_ACTIVATION_REQUEST": "Request activation",
         "SEND_ACTIVATION_REQUEST_CONFIRM": "Your request has been sent! We will take care of it within the next 48 hours."
       }
@@ -212,13 +213,13 @@
       }
     },
     "ERRORS": {
-      "MERCHANT_LIST_401": "Can't get the merchant list: Unauthorized",
-      "MERCHANT_LIST_404": "Can't get the merchant list: Not found",
-      "MERCHANT_LIST_GENERIC": "Can't get the merchant list: Unknown Error"
+      "MERCHANT_LIST_401": "Can’t get the merchant list: Unauthorized",
+      "MERCHANT_LIST_404": "Can’t get the merchant list: Not found",
+      "MERCHANT_LIST_GENERIC": "Can’t get the merchant list: Unknown Error"
     },
     "VERIFY": {
       "TITLE": "User verification",
-      "VERIFYING": "Checking to see if user is verified...",
+      "VERIFYING": "Checking to see if user is verified…",
       "VERIFIED": "User verified!",
       "GO_HOME_BUTTON": "Click here",
       "GO_HOME_TEXT": "To go to your profile.",
@@ -227,13 +228,13 @@
     },
     "NOT_VERIFIED": {
       "TITLE": "Please verify your account by clicking on the link that you received in your email.",
-      "SUBTITLE": "Didn't receive the email?",
+      "SUBTITLE": "Didn’t receive the email?",
       "SEND_EMAIL_LINK": "Click here",
       "SEND_EMAIL_TEXT": "to receive another one for",
       "EMAIL_SENT": "Verification email sent!"
     },
     "ADD_MERCHANT": {
-      "TITLE": "Add a new merchant",
+      "TITLE": "Add a new Merchant",
       "CANCEL": "Cancel",
       "ADD": "Add",
       "SUCCESS": "Merchant added",
@@ -241,7 +242,7 @@
       "API_ERROR": "There are errors in the form or there is a problem contacting the server. Check the data and try again."
     },
     "EDIT_MERCHANT": {
-      "TITLE": "Edit merchant",
+      "TITLE": "Edit Merchant",
       "CANCEL": "Cancel",
       "ADD": "Confirm",
       "SUCCESS": "Merchant edited",
@@ -302,7 +303,7 @@
     },
     "SECTION_REG": {
       "TITLE": "Registry",
-      "MESSAGE": "The Registry is the central entity that <b>generates WOMs</b> requested by an Instrument, it <b>verifies their authenticity</b> when they are used by a Merchant and it makes sure they <b>can't be duplicated</b> or used twice."
+      "MESSAGE": "The Registry is the central entity that <b>generates WOMs</b> requested by an Instrument, it <b>verifies their authenticity</b> when they are used by a Merchant and it makes sure they <b>can’t be duplicated</b> or used twice."
     },
     "SECTION_TECH": {
       "TITLE": "Technical",
@@ -338,7 +339,7 @@
       "TITLE": "WOM FOR URBINO",
       "SECTION_A": {
         "A": "Questa sezione è dedicata a <b>WOM per Urbino</b>, il progetto che da <b>maggio 2022</b> è stato avviato nella città di <b>Urbino</b>.\n<b>WOM per Urbino</b> è la prima forma di sperimentazione del progetto WOM. La scelta di Urbino come <b>prima città ad utilizzare WOM</b> deriva dalla collaborazione di <b>DIGIT srl</b>, <b>Università di Urbino</b> e <b>Città di Urbino</b>, che ha concesso il suo patrocinio.",
-        "B": "Il progetto è stato lanciato dal <b>4 maggio 2022</b> tramite una conferenza stampa (per rivedere la conferenza <a href='https://youtu.be/1kiTku77HO4' target='_blank'>Clicca qui</a>).\nAttualmente i cittadini, gli studenti e i turisti hanno varie possibilità di ottenere <b>WOM</b> e di utilizzarli per ottenere <b>sconti</b> nei negozi convenzionati al progetto.  "
+        "B": "Il progetto è stato lanciato dal <b>4 maggio 2022</b> tramite una conferenza stampa (per rivedere la conferenza <a href=\"https://youtu.be/1kiTku77HO4\" target=\"_blank\">Clicca qui</a>).\nAttualmente i cittadini, gli studenti e i turisti hanno varie possibilità di ottenere <b>WOM</b> e di utilizzarli per ottenere <b>sconti</b> nei negozi convenzionati al progetto."
       }
     }
   },
@@ -366,7 +367,7 @@
       "TITLE": "Where do i spend my WOMs? How can I reward socially useful actions with WOMs?",
       "A": "Merchants are system components that can <b>create payment instances</b>. They can accept WOM vouchers in exchange for the services and discounts they offer. \nMerchants can <b>choose what type of vouchers they accept</b>. They can choose: vouchers generated only for a <b>given purpose</b> (thus promoting that social purpose), those generated in a given <b>geographical area</b> (thus encouraging social actions in their reality territorial), or those generated in a <b>defined time interval</b>. \nThe payment instances <b>do not involve money exchanges</b> but only discounts and gratuities.",
       "B": "By accepting specific types of WOM vouchers, Merchants can indirectly contribute to a social campaign, encouraging citizens to contribute to the shared goal with their voluntary efforts. Also, merchants can increase their visibility to the community working towards the shared goal.",
-      "C": "Want to be a merchant? Sign in <a href='/authentication/signin'>here</a>"
+      "C": "Want to be a merchant? Sign in <a href=\"/authentication/signin\">here</a>"
     },
     "SECTION_B": {
       "TITLE": "POS",
@@ -422,18 +423,26 @@
     "WEBSITE": {
       "TITLE": "‘WOM Website’ privacy policy",
       "CONTENT": [
-        "<p>This privacy policy is conform to the General Data Protection Regulation&nbsp;(“GRPD”) 2016/679 and national data protection laws in Italy. It contains all information about the collection and treatment of data by the <strong>“WOM Website”</strong> (from now “the website”).</p>",
+        "<p>This privacy policy is conform to the General Data Protection Regulation&nbsp;(“GDPR”) 2016/679 and national data protection laws in Italy. It contains all information about the collection and treatment of data by the <strong>“WOM Website”</strong> (from now “the website”).</p>",
         "<h2>1. Data controller</h2>",
         "<p>The data controller, that is the entity that determines the purposes and the means of the processing of personal data, is DIGIT s.r.l., with registered address Corso Giuseppe Garibaldi&nbsp;66, 61029, Urbino&nbsp;(PU).</p>",
         "<p>Digit s.r.l. is a <em>spin-off</em> of Università degli Studi di Urbino “Carlo Bo” (University of Urbino, Italy).</p>",
         "<h2>2. Data subject to processing</h2>",
         "<p>The website does not handle nor collect any user data, except for IP addresses which are used for the purpose of data transmission and never stored nor logged.</p>",
-        "<p>The website does not provide user registration, thus other personal information is never collected.</p>",
-        "<h2>3. Duration of data storage</h2>",
+        "<p>The website allows users to register to the WOM&nbsp;platform as business entities (<em>Merchants</em> and <em>Instruments</em>). In order to register, users will supply a set of personal data required to process the registration of their profile (among which, name, surname, fiscal code or VAT number, e-mail address, etc.).</p>",
+        "<h2>3. Purpose of processing</h2>",
+        "<p>The WOM&nbsp;platform’s purpose is that of recognizing the social utility of activities performed by its users. In order to allow the generation and expenditure of WOM&nbsp;vouchers, which are used as proof of these activities, the system requires that entities that generate vouchers (Instruments) and that consume vouchers (Merchants) are registered.</p>",
+        "<h2>4. Legal basis of the processing</h2>",
+        "<p>The legal basis of data processing is provided by the freely expressed <strong>consent</strong> of the user, when registering to the WOM&nbsp;platform. Consent is provided exclusively for the purposes expressed at point&nbsp;3 of this document.</p>",
+        "<h2>5. Means of data collection</h2>",
+        "<p>User data is freely provided by the user during the registration process, which can be initiated through a <a href=\"/authentication/signin\">specific page on the website</a>.</p>",
+        "<h2>6. Duration of data storage</h2>",
         "<p>Personal data is never stored by the website, except for the data expressely provided for user registration. This data is stored as long as the user profile is maintained on the platform.</p>",
-        "<h2>4. Third parties</h2>",
+        "<h2>7. Means of processing and transmission of data</h2>",
+        "<p>Data collected by the website and the platform is stored in a safe manner using state of the art technology. All data is transmitted only to authorized users through specific APIs&nbsp;(Application Programming Interfaces), for the purposes expressed at point&nbsp;3, and is never automatically distributed through other means.</p>",
+        "<h2>8. Third parties</h2>",
         "<p>The website includes scripts by Fathom Analytics, which comply with the GDPR and are subject to <a href=\"https://usefathom.com/privacy\">their own privacy notice</a>.</p>",
-        "<h2>5. Rights of the data subject</h2>",
+        "<h2>9. Rights of the data subject</h2>",
         "<p>According to article 15 and following of the GDPR, the user has the following rights:</p>",
         "<ul>",
         "<li>obtain confirmation of the existence of their personal data, accessing it and obtaining a copy of it (<strong>right of access</strong>);</li>",
@@ -452,7 +461,7 @@
     "STEPCOUNTER": {
       "TITLE": "‘WOM Stepcounter’ privacy policy",
       "CONTENT": [
-        "<p>This privacy policy is conform to the General Data Protection Regulation&nbsp;(“GRPD”) 2016/679 and national data protection laws in Italy. It contains all information about the collection and treatment of data by the <strong>“WOM Stepcounter”</strong> application (from now “the app”).</p>",
+        "<p>This privacy policy is conform to the General Data Protection Regulation&nbsp;(“GDPR”) 2016/679 and national data protection laws in Italy. It contains all information about the collection and treatment of data by the <strong>“WOM Stepcounter”</strong> application (from now “the app”).</p>",
         "<p>The app enables the conversion of effort towards personal health and fitness into anonymous vouchers, through the “WOM Platform”.</p>",
         "<h2>1. Data controller</h2>",
         "<p>The data controller, that is the entity that determines the purposes and the means of the processing of personal data, is DIGIT s.r.l., with registered address Corso Giuseppe Garibaldi&nbsp;66, 61029, Urbino&nbsp;(PU).</p>",
