@@ -68,6 +68,7 @@
     "PRIVACY": {
       "PRIVACY": "Privacy policy",
       "OVERVIEW": "Overview",
+      "WEBSITE": "Website",
       "POS": "Point of Service",
       "POCKET": "Pocket",
       "INSTRUMENT": "Instrument",
@@ -407,11 +408,46 @@
   "PRIVACY": {
     "SIDENAV": {
       "TITLE": "Applications",
-      "OVERVIEW": "Overview"
+      "OVERVIEW": "Overview",
+      "WEBSITE": "Website",
+      "POS": "POS app",
+      "POCKET": "Pocket app",
+      "INSTRUMENT": "Instrument app",
+      "STEPCOUNTER": "Step counter app"
     },
     "OVERVIEW": {
       "TITLE": "PRIVACY POLICIES",
       "MAIN_CONTENT": "You can find all the privacy policies for the WOM Platform and its applications in the side menu."
+    },
+    "WEBSITE": {
+      "TITLE": "‘WOM Website’ privacy policy",
+      "CONTENT": [
+        "<p>This privacy policy is conform to the General Data Protection Regulation&nbsp;(“GRPD”) 2016/679 and national data protection laws in Italy. It contains all information about the collection and treatment of data by the <strong>“WOM Website”</strong> (from now “the website”).</p>",
+        "<h2>1. Data controller</h2>",
+        "<p>The data controller, that is the entity that determines the purposes and the means of the processing of personal data, is DIGIT s.r.l., with registered address Corso Giuseppe Garibaldi&nbsp;66, 61029, Urbino&nbsp;(PU).</p>",
+        "<p>Digit s.r.l. is a <em>spin-off</em> of Università degli Studi di Urbino “Carlo Bo” (University of Urbino, Italy).</p>",
+        "<h2>2. Data subject to processing</h2>",
+        "<p>The website does not handle nor collect any user data, except for IP addresses which are used for the purpose of data transmission and never stored nor logged.</p>",
+        "<p>The website does not provide user registration, thus other personal information is never collected.</p>",
+        "<h2>3. Duration of data storage</h2>",
+        "<p>Personal data is never stored by the website, except for the data expressely provided for user registration. This data is stored as long as the user profile is maintained on the platform.</p>",
+        "<h2>4. Third parties</h2>",
+        "<p>The website includes scripts by Fathom Analytics, which comply with the GDPR and are subject to <a href=\"https://usefathom.com/privacy\">their own privacy notice</a>.</p>",
+        "<h2>5. Rights of the data subject</h2>",
+        "<p>According to article 15 and following of the GDPR, the user has the following rights:</p>",
+        "<ul>",
+        "<li>obtain confirmation of the existence of their personal data, accessing it and obtaining a copy of it (<strong>right of access</strong>);</li>",
+        "<li>update, modify and/or correct their personal data (<strong>diritto di rectification</strong>);</li>",
+        "<li>ask the removal or restriction of data processing, as determined by the GDPR (<strong>right of cancellation</strong> e <strong>right to restriction of the processing</strong>);</li>",
+        "<li>oppose the processing, as determined by the GDPR (<strong>right to object</strong>),</li>",
+        "<li>obtain a copy of the data in a common structured format and ask for it to be transmitted to a different Data controller, if technically feasible (<strong>right to portability</strong>).</li>",
+        "</ul>",
+        "<p>The user also has the right of complaint to the supervisory authorities.</p>",
+        "<p>To exercise these rights, the user may contact the following e-mail address: <a href=\"mailto:info@digit.srl\">info@digit.srl</a> or write to the following address:</p>",
+        "<p>DIGIT s.r.l.<br>Corso Giuseppe Garibaldi,&nbsp;66<br>61029, Urbino&nbsp;(PU)<br>c.a. Responsabile della protezione dati personali</p>",
+        "<h2>6. Updates to the privacy policy</h2>",
+        "<p>This document may be updated in the future. Refer to the last update date at the bottom of the document.</p>"
+      ]
     },
     "STEPCOUNTER": {
       "TITLE": "‘WOM Stepcounter’ privacy policy",
@@ -443,16 +479,16 @@
         "<li>update, modify and/or correct their personal data (<strong>diritto di rectification</strong>);</li>",
         "<li>ask the removal or restriction of data processing, as determined by the GDPR (<strong>right of cancellation</strong> e <strong>right to restriction of the processing</strong>);</li>",
         "<li>oppose the processing, as determined by the GDPR (<strong>right to object</strong>),</li>",
-        "<li>obtain a copy of the data in a common structured format and ask for it to be transmitted to a different Data controller, if technically feasible (<strong>right to portability<</strong>).</li>",
+        "<li>obtain a copy of the data in a common structured format and ask for it to be transmitted to a different Data controller, if technically feasible (<strong>right to portability</strong>).</li>",
         "</ul>",
         "<p>The user also has the right of complaint to the supervisory authorities.</p>",
         "<p>To exercise these rights, the user may contact the following e-mail address: <a href=\"mailto:info@digit.srl\">info@digit.srl</a> or write to the following address:</p>",
         "<p>DIGIT s.r.l.<br>Corso Giuseppe Garibaldi,&nbsp;66<br>61029, Urbino&nbsp;(PU)<br>c.a. Responsabile della protezione dati personali</p>",
         "<h2>10. Updates to the privacy policy</h2>",
         "<p>This document may be updated in the future. Refer to the last update date at the bottom of the document.</p>"
-      ],
-      "LAST_UPDATE": "Last update"
-    }
+      ]
+    },
+    "LAST_UPDATE": "Last update"
   },
   "APPLICATIONS": {
     "SIDENAV": {
