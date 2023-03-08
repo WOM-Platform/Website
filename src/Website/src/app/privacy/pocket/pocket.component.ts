@@ -1,8 +1,11 @@
-import {Component} from '@angular/core';
+import { Component } from '@angular/core';
+import { TranslateService } from "@ngx-translate/core";
 
 @Component({
-  selector: 'app-privacy-pocket',
-  templateUrl: './pocket.component.html',
-  styleUrls: ['./pocket.component.css', '../privacy.component.css']
+    selector: 'app-privacy-pocket',
+    templateUrl: './pocket.component.html'
 })
-export class PrivacyPocketComponent {}
+export class PrivacyPocketComponent {
+  constructor(private translate: TranslateService) {
+  }
+}
