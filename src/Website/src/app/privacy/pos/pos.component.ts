@@ -7,4 +7,5 @@ import { TranslateService } from "@ngx-translate/core";
 })
 export class PrivacyPosComponent {
     constructor(private translate: TranslateService) {
+	}
 }
