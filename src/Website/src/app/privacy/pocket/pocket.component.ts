@@ -6,6 +6,6 @@ import { TranslateService } from "@ngx-translate/core";
     templateUrl: './pocket.component.html'
 })
 export class PrivacyPocketComponent {
-  constructor(private translate: TranslateService) {
-  }
+    constructor(private translate: TranslateService) {
+    }
 }
