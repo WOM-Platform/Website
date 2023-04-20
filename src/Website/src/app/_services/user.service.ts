@@ -143,12 +143,22 @@ export class UserService {
     }
 
     /**
-     * request new verification email
+     * request new verification email using user id
      */
-    requestVerificationEmail(userId: string = null): Observable<any> {
+    requestVerificationEmailById(userId: string = null): Observable<any> {
         const id = userId != null ? userId : this.currentUserLoginSubject.value.id;
         return this.http.post<any>(this.localUrlV1 + id + '/request-verification', {})
             .pipe(map (response => response));
+    }
+
+    /**
+     * request new verification using e-mail
+     */
+    requestVerificationEmailByEmail(email: string = null): Observable<any> {
+        const e = email != null ? email : this.currentUserValue.email;
+        return this.http.post<any>(this.localUrlV1 + 'request-verification', {
+            email: e
+        }).pipe(map (response => response));
     }
 
     /**

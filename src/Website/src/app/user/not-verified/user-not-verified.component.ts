@@ -21,7 +21,7 @@ export class UserNotVerifiedComponent  {
     }
 
     sendValidationEmail(): any {
-        this.userService.requestVerificationEmail().subscribe(result => {
+        this.userService.requestVerificationEmailById().subscribe(result => {
             const message = this.translate.instant('USER.NOT_VERIFIED.EMAIL_SENT');
             this.openSnackBar(message);
         });

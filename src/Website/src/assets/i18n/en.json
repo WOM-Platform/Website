@@ -221,6 +221,10 @@
       "TITLE": "User verification",
       "VERIFYING": "Checking to see if user is verified…",
       "VERIFIED": "User verified!",
+      "INVALID_PARAMS": "Oops! Seems like you followed a wrong link! If you're looking for a new account validation e-mail write your email in the box below and click on the 'send' button:",
+      "REQUEST_NEW_VALIDATION":" If you're looking for a new account validation e-mail write your email in the box below and click on the 'send' button:",
+      "EMAIL_REQUEST_ERROR": "We couldn't send a new verification email to this email address.",
+      "EMAIL_REQUEST_SUCCESS": "Verification email sent!",
       "GO_HOME_BUTTON": "Click here",
       "GO_HOME_TEXT": "To go to your profile.",
       "NOT_VERIFIED": "Your verification token has expired or there was an error validating your account.",
@@ -231,6 +235,7 @@
       "SUBTITLE": "Didn’t receive the email?",
       "SEND_EMAIL_LINK": "Click here",
       "SEND_EMAIL_TEXT": "to receive another one for",
+      "REQUEST_NEW_EMAIL_LINK": "Send",
       "EMAIL_SENT": "Verification email sent!"
     },
     "ADD_MERCHANT": {

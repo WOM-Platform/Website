@@ -221,6 +221,10 @@
       "TITLE": "Verifica utente",
       "VERIFYING": "Controllo che l’utente sia stato verificato…",
       "VERIFIED": "Utente verificato!",
+      "INVALID_PARAMS": "Ops! Sembra che il link al quale hai navigato non è corretto! Se vuoi chiedere una nuova e-mail di validazione scrivi il tuo indirizzo e-mail nella casella sottostante e clicca sul pulsante 'invia':",
+      "REQUEST_NEW_VALIDATION":"Se vuoi chiedere una nuova e-mail di validazione scrivi il tuo indirizzo e-mail nella casella sottostante e clicca sul pulsante 'invia':",
+      "EMAIL_REQUEST_ERROR": "Non è stato possibile inviare una nuova notifica a questo indirizzo email",
+      "EMAIL_REQUEST_SUCCESS": "Email inviata con successo!",
       "GO_HOME_BUTTON": "Clicca qui",
       "GO_HOME_TEXT": "Per andare al tuo profilo.",
       "NOT_VERIFIED": "Il tuo token di verifica è scaduto o c’è stato un errore nella validazione del tuo account.",
@@ -229,6 +233,7 @@
     "NOT_VERIFIED": {
       "TITLE": "Verifica il tuo account cliccando sul link che hai ricevuto per email.",
       "SUBTITLE": "Non hai ricevuto nulla?",
+      "REQUEST_NEW_EMAIL_LINK": "Invia",
       "SEND_EMAIL_LINK": "Clicca qui",
       "SEND_EMAIL_TEXT": "per ricevere un nuovo email di verifica all’indirizzo ",
       "EMAIL_SENT": "Email inviata!"
