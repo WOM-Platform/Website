@@ -116,7 +116,6 @@ const routes: Routes = [
       },
       {
         path: 'user',
-        canActivate: [AuthGuard],
         data: {
           breadcrumb: 'BREADCRUMBS.USER.USER'
         },
