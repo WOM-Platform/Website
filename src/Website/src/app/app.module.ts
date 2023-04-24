@@ -96,6 +96,8 @@ import { UrbinoComponent } from './about/urbino/urbino.component';
 import {AboutComponent} from "./about/about/about.component";
 import {AboutSectionComponent} from "./about/about-section.component";
 import { PdfViewerContainerComponent } from './components/pdf-viewer-container/pdf-viewer-container/pdf-viewer-container.component';
+import {DialogConfirmCancelComponent} from "./components/dialog-confirm-cancel/dialog-confirm-cancel";
+import {DialogConfirmComponent} from "./components/dialog-confirm/dialog-confirm";
 
 // AoT requires an exported function for factories
 export const createTranslateLoader = (http: HttpClient) => new TranslateHttpLoader(http, './assets/i18n/', '.json?cb=' + environment.i18n);
@@ -165,7 +167,9 @@ export const isMock = environment.mock;
     UrbinoComponent,
     AboutComponent,
     AboutSectionComponent,
-    PdfViewerContainerComponent
+    PdfViewerContainerComponent,
+    DialogConfirmCancelComponent,
+    DialogConfirmComponent
   ],
   exports: [
       MatStepperModule,

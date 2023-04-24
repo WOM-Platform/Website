@@ -199,6 +199,17 @@
         "POS_SUBTITLE": "List of POS",
         "ADD_POS_TOOLTIP": "Add a new Point of Service ‘POS’ for Merchant",
         "SEND_ACTIVATION_REQUEST": "Request activation",
+        "ACTIVATION_DIALOG": {
+          "TITLE": "Request activation",
+          "MESSAGE": "Do you want to send a request to activate this merchant?",
+          "CONFIRM": "Send",
+          "CANCEL": "Cancel"
+        },
+        "ACTIVATION_ERROR": {
+          "TITLE": "Request failed",
+          "MESSAGE": "We couldn't send the request at the moment. Try again later.",
+          "CONFIRM": "Close"
+        },
         "SEND_ACTIVATION_REQUEST_CONFIRM": "Your request has been sent! We will take care of it within the next 48 hours."
       }
     },

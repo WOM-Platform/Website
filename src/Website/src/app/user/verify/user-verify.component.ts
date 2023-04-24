@@ -71,7 +71,6 @@ export class UserVerifyComponent implements OnInit{
         this.userService.requestVerificationEmailByEmail(this.email).subscribe(result => {
                 const message = this.translate.instant('USER.NOT_VERIFIED.EMAIL_SENT');
                 this.openSnackBar(message, 'home');
-                this.openSnackBar(this.translate.instant('USER.VERIFY.EMAIL_REQUEST_SUCCESS'));
                 console.log(result);
             },
             error => {

@@ -199,6 +199,17 @@
         "POS_SUBTITLE": "Lista dei POS",
         "ADD_POS_TOOLTIP": "Aggiungi un nuovo punto di servizio “POS” per il Merchant",
         "SEND_ACTIVATION_REQUEST": "Richiedi abilitazione",
+        "ACTIVATION_DIALOG": {
+          "TITLE": "Richiesta abilitazione",
+          "MESSAGE": "Vuoi inviare la richiesta di abilitazione per questo merchant?",
+          "CONFIRM": "Invia",
+          "CANCEL": "Annulla"
+        },
+        "ACTIVATION_ERROR": {
+          "TITLE": "Richiesta fallita",
+          "MESSAGE": "Non è stato posibile inviare la richiesta al momento. Riprova più tardi.",
+          "CONFIRM": "Chiudi"
+        },
         "SEND_ACTIVATION_REQUEST_CONFIRM": "La tua richiesta è stata inviata! Ce ne occuperemo al più presto."
       }
     },

@@ -12,6 +12,8 @@ import {Subscription} from 'rxjs';
 import {EmailService} from "../../_services/email.service";
 import {EmailData} from "../../_models/emailData";
 import {environment} from "../../../environments/environment";
+import {DialogConfirmCancelComponent} from "../../components/dialog-confirm-cancel/dialog-confirm-cancel";
+import {DialogConfirmComponent} from "../../components/dialog-confirm/dialog-confirm";
 
 @Component({
     selector: 'app-user-merchant',
@@ -129,22 +131,44 @@ export class UserMerchantComponent implements OnInit, OnDestroy {
     }
 
     requestEnabling(merchant: Merchant) {
-        let emailData = new EmailData();
-        emailData.senderEmail = environment.noreplyEmail;
-        emailData.senderName = this.userService.currentUserValue.name + " " + this.userService.currentUserValue.surname;
-        emailData.toEmail = environment.baseEmail;
-        emailData.toName = 'WOM Administrator';
-        emailData.subject = "WOM Merchant request #" + merchant.id;
-        emailData.content = "Request from " + this.userService.currentUserValue.email + "  for merchant "
-            + "<br><b>id</b>: " + merchant.id
-            + "<br><b>name:</b> " + merchant.name
-            + "<br><b>fiscal code:</b> " + merchant.fiscalCode;
+        const dialogRef = this.dialog.open(DialogConfirmCancelComponent, {
+            data: {
+                'title': this.translate.instant('USER.MERCHANT.MERCHANT.ACTIVATION_DIALOG.TITLE'),
+                'message': this.translate.instant('USER.MERCHANT.MERCHANT.ACTIVATION_DIALOG.MESSAGE'),
+                'confirm': this.translate.instant('USER.MERCHANT.MERCHANT.ACTIVATION_DIALOG.CONFIRM'),
+                'cancel': this.translate.instant('USER.MERCHANT.MERCHANT.ACTIVATION_DIALOG.CANCEL')
+            }
+        });
 
-        this.emailService.sendEmail(emailData).subscribe(res => {
-            this.openSnackBar(this.translate.instant('USER.MERCHANT.MERCHANT.SEND_ACTIVATION_REQUEST_CONFIRM'));
-        },
-        error => {
-            console.log(error);
+        dialogRef.afterClosed().subscribe(result => {
+            if (result) {
+                let emailData = new EmailData();
+                emailData.senderEmail = environment.noreplyEmail;
+                emailData.senderName = this.userService.currentUserValue.name + " " + this.userService.currentUserValue.surname;
+                emailData.toEmail = environment.baseEmail;
+                emailData.toName = 'WOM Administrator';
+                emailData.subject = "WOM Merchant request #" + merchant.id;
+                emailData.content = "Request from " + this.userService.currentUserValue.email + "  for merchant "
+                    + "<br><b>id</b>: " + merchant.id
+                    + "<br><b>name:</b> " + merchant.name
+                    + "<br><b>fiscal code:</b> " + merchant.fiscalCode;
+
+                this.emailService.sendEmail(emailData).subscribe(res => {
+                    this.openSnackBar(this.translate.instant('USER.MERCHANT.MERCHANT.SEND_ACTIVATION_REQUEST_CONFIRM'));
+                },
+                error => {
+                    console.log(error);
+                    const dialogRefErr = this.dialog.open(DialogConfirmComponent, {
+                        data: {
+                            'title': this.translate.instant('USER.MERCHANT.MERCHANT.ACTIVATION_ERROR.TITLE'),
+                            'message': this.translate.instant('USER.MERCHANT.MERCHANT.ACTIVATION_ERROR.MESSAGE'),
+                            'confirm': this.translate.instant('USER.MERCHANT.MERCHANT.ACTIVATION_ERROR.CONFIRM'),
+                        }
+                    });
+                    dialogRefErr.afterClosed().subscribe(result => {
+                    });
+                });
+            }
         });
     }
 
