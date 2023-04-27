@@ -302,6 +302,7 @@
   },
   "HOME": {
     "SECTION_INTRO": {
+      "TITLE": "Introduction",
       "A": "<b>WOM - “Worth One Minute”</b> is a general-purpose rewarding platform based on a voucher exchange system. \nMany actions and activities made by individuals have an intrinsic social value, an effect known as <b>“positive externalities”</b> in economics. \nWOM aims to recognize all those actions that are a socially valuable contribution to a common goal and <b>reward the time people dedicate to them</b> by generating social digital vouchers. \nWOM vouchers reward every minute of a social effort. \n",
       "B": "The WOM platform is implemented and managed by DIGIT srl. \nDIGIT srl is a <b>spin-off of the University of Urbino</b> that aims to <b>create social value through digital awareness</b>. It is founded on the conviction that the core of technology, platforms and, software need to be in the interest of human people and society and that social and digital innovation are related. \nWOM is only one of the social projects of DIGIT srl. \n"
     },
