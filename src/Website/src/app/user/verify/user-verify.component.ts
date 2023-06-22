@@ -27,20 +27,26 @@ export class UserVerifyComponent implements OnInit{
     ngOnInit() {
         this.errorText = '';
         this.error = false;
-        const user = this.userService.currentUserLoginValue;
-        if(user && user.verified){
-            this.workingText = this.translate.instant('USER.VERIFY.VERIFIED');
-            return;
-        }
+
 
         this.workingText = this.translate.instant('USER.VERIFY.VERIFYING');
         this.route.queryParams
             .subscribe(params => {
-                if(!params || !params.userId) {
+                const user = this.userService.currentUserLoginValue;
+
+                if(!params || !params.userId || !params.token) {
+                    if(user && user.verified){
+                        this.workingText = this.translate.instant('USER.VERIFY.VERIFIED');
+                        return;
+                    }
                     this.error = true;
                     console.warn('params error: ', params);
                     this.workingText = this.translate.instant('USER.VERIFY.INVALID_PARAMS');
                 } else {
+                    if(user.id === params.userId && user.verified){
+                        this.workingText = this.translate.instant('USER.VERIFY.VERIFIED');
+                        return;
+                    }
                     this.userId = params.userId;
                     this.sendVerification(params.userId, params.token);
                 }
