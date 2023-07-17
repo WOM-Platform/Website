@@ -116,7 +116,7 @@
       "EMAIL_ERROR": "Inserisci un indirizzo email valido",
       "PASSWORD": "Password",
       "REPEAT_PASSWORD": "Ripeti la password",
-      "PASSWORD_ERROR": "Inserisci una password",
+      "PASSWORD_ERROR": "Inserisci una password minima di 8 caratteri",
       "PASSWORD_NO_MATCH_ERROR": "Le password non corrispondono",
       "NAME": "Nome",
       "NAME_ERROR": "Inserisci il tuo nome",

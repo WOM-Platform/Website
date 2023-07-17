@@ -1,66 +1,98 @@
 <form [formGroup]="form">
-    <table class="full-width">
-        <tr>
-            <td colspan="2">
-                <h1>{{ 'SIGN_UP.REPRESENTATIVE.TITLE' | translate }}</h1>
+  <table class="full-width">
+    <tr>
+      <td colspan="2">
+        <h1>{{ 'SIGN_UP.REPRESENTATIVE.TITLE' | translate }}</h1>
 
-                <mat-form-field>
-                    <label>
-                        <input matInput placeholder="{{ 'SIGN_UP.REPRESENTATIVE.EMAIL' | translate }}" formControlName="email" required>
-                    </label>
-                    <mat-error>
-                        {{'SIGN_UP.REPRESENTATIVE.EMAIL_ERROR' | translate}}
-                    </mat-error>
-                </mat-form-field>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <mat-form-field>
-                    <label>
-                        <input matInput type="password" placeholder="{{ 'SIGN_UP.REPRESENTATIVE.PASSWORD' | translate }}" formControlName="password" required>
-                    </label>
-                    <mat-error>
-                        {{'SIGN_UP.REPRESENTATIVE.PASSWORD_ERROR' | translate}}
-                    </mat-error>
-                </mat-form-field>
-            </td>
-            <td>
-                <mat-form-field>
-                    <label>
-                        <input matInput type="password" placeholder="{{ 'SIGN_UP.REPRESENTATIVE.REPEAT_PASSWORD' | translate }}" formControlName="passwordRepeat" required>
-                    </label>
-                    <mat-error>
-                        {{'SIGN_UP.REPRESENTATIVE.PASSWORD_ERROR' | translate}}
-                    </mat-error>
-                </mat-form-field>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <mat-form-field>
-                    <label>
-                        <input matInput type="text" placeholder="{{ 'SIGN_UP.REPRESENTATIVE.NAME' | translate }}" formControlName="firstName" required>
-                    </label>
-                    <mat-error>
-                        {{'SIGN_UP.REPRESENTATIVE.NAME_ERROR' | translate}}
-                    </mat-error>
-                </mat-form-field>
-            </td>
-            <td>
-                <mat-form-field>
-                    <label>
-                        <input matInput type="text" placeholder="{{ 'SIGN_UP.REPRESENTATIVE.SURNAME' | translate }}" formControlName="lastName" required>
-                    </label>
-                    <mat-error>
-                        {{'SIGN_UP.REPRESENTATIVE.SURNAME_ERROR' | translate}}
-                    </mat-error>
-                </mat-form-field>
-            </td>
-        </tr>
-    </table>
-    <mat-divider [inset]="true"></mat-divider>
-    <div>
-        <button mat-button matStepperNext>{{'SIGN_UP.NEXT' | translate}}</button>
-    </div>
+        <mat-form-field>
+          <label>
+            <input
+              matInput
+              placeholder="{{ 'SIGN_UP.REPRESENTATIVE.EMAIL' | translate }}"
+              formControlName="email"
+              required
+            />
+          </label>
+          <mat-error>
+            {{'SIGN_UP.REPRESENTATIVE.EMAIL_ERROR' | translate}}
+          </mat-error>
+        </mat-form-field>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <mat-form-field>
+          <label>
+            <input
+              matInput
+              type="password"
+              placeholder="{{ 'SIGN_UP.REPRESENTATIVE.PASSWORD' | translate }}"
+              formControlName="password"
+              required
+              minlength="8"
+            />
+          </label>
+          <mat-error>
+            {{'SIGN_UP.REPRESENTATIVE.PASSWORD_ERROR' | translate}}
+          </mat-error>
+        </mat-form-field>
+      </td>
+      <td>
+        <mat-form-field>
+          <label>
+            <input
+              matInput
+              type="password"
+              placeholder="{{ 'SIGN_UP.REPRESENTATIVE.REPEAT_PASSWORD' | translate }}"
+              formControlName="passwordRepeat"
+              required
+            />
+          </label>
+          <mat-error>
+            {{'SIGN_UP.REPRESENTATIVE.PASSWORD_ERROR' | translate}}
+          </mat-error>
+        </mat-form-field>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <mat-form-field>
+          <label>
+            <input
+              matInput
+              type="text"
+              placeholder="{{ 'SIGN_UP.REPRESENTATIVE.NAME' | translate }}"
+              formControlName="firstName"
+              required
+            />
+          </label>
+          <mat-error>
+            {{'SIGN_UP.REPRESENTATIVE.NAME_ERROR' | translate}}
+          </mat-error>
+        </mat-form-field>
+      </td>
+      <td>
+        <mat-form-field>
+          <label>
+            <input
+              matInput
+              type="text"
+              placeholder="{{ 'SIGN_UP.REPRESENTATIVE.SURNAME' | translate }}"
+              formControlName="lastName"
+              required
+            />
+          </label>
+          <mat-error>
+            {{'SIGN_UP.REPRESENTATIVE.SURNAME_ERROR' | translate}}
+          </mat-error>
+        </mat-form-field>
+      </td>
+    </tr>
+  </table>
+  <mat-divider [inset]="true"></mat-divider>
+  <div>
+    <button mat-button color="primary" matStepperNext>
+      {{'SIGN_UP.NEXT' | translate}}
+    </button>
+  </div>
 </form>
