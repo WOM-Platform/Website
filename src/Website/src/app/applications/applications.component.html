@@ -13,52 +13,12 @@
     >
       <mat-nav-list>
         <a
+          *ngFor="let app of applicationsList"
           mat-list-item
-          routerLink="/applications/overview"
+          [routerLink]="'/applications/' + app.path"
           routerLinkActive="active-link"
           (click)="mobileQuery.matches ? snav.toggle() : null"
-          >{{ "APPLICATIONS.SIDENAV.OVERVIEW" | translate }}</a
-        >
-        <a
-          mat-list-item
-          routerLink="/applications/stepcounter"
-          routerLinkActive="active-link"
-          (click)="mobileQuery.matches ? snav.toggle() : null"
-          >{{ "APPLICATIONS.SIDENAV.STEPCOUNTER" | translate }}</a
-        >
-        <a
-          mat-list-item
-          routerLink="/applications/balance"
-          routerLinkActive="active-link"
-          (click)="mobileQuery.matches ? snav.toggle() : null"
-          >{{ "APPLICATIONS.SIDENAV.BALANCE" | translate }}</a
-        >
-        <a
-          mat-list-item
-          routerLink="/applications/codymaze"
-          routerLinkActive="active-link"
-          (click)="mobileQuery.matches ? snav.toggle() : null"
-          >{{ "APPLICATIONS.SIDENAV.CODYMAZE" | translate }}</a
-        >
-        <a
-          mat-list-item
-          routerLink="/applications/libraries"
-          routerLinkActive="active-link"
-          (click)="mobileQuery.matches ? snav.toggle() : null"
-          >{{ "APPLICATIONS.SIDENAV.LIBRARIES" | translate }}</a
-        >
-        <a
-          mat-list-item
-          routerLink="/applications/universities"
-          (click)="mobileQuery.matches ? snav.toggle() : null"
-          >{{ "APPLICATIONS.SIDENAV.UNIVERSITIES" | translate }}</a
-        >
-        <a
-          mat-list-item
-          routerLink="/applications/aworld"
-          routerLinkActive="active-link"
-          (click)="mobileQuery.matches ? snav.toggle() : null"
-          >{{ "APPLICATIONS.SIDENAV.AWORLD" | translate }}</a
+          >{{ app.name | translate }}</a
         >
       </mat-nav-list>
     </mat-sidenav>

@@ -1,6 +1,8 @@
 import {ChangeDetectorRef, Component, OnDestroy, OnInit} from '@angular/core';
 import {MediaMatcher} from "@angular/cdk/layout";
 
+import {applicationsList} from "./applications-list"
+
 @Component({
   selector: 'app-applications',
   templateUrl: './applications.component.html',
@@ -12,6 +14,8 @@ export class ApplicationsComponent implements OnInit, OnDestroy{
   snavOpened: boolean;
   _mobileQueryListener: () => void;
 
+  applicationsList = applicationsList;
+  
   constructor(changeDetectorRef: ChangeDetectorRef, media: MediaMatcher) {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
