@@ -63,7 +63,8 @@
       "UNIVERSITIES": "Università",
       "AWORLD": "AWorld",
       "CODYMAZE": "CodyMaze",
-      "BALANCE": "Balance"
+      "BALANCE": "Balance",
+      "LIBRARIES": "Biblioteche"
     },
     "PRIVACY": {
       "PRIVACY": "Informativa sulla privacy",
@@ -602,7 +603,8 @@
       "AWORLD": "AWorld",
       "UNIVERSITIES": "Università",
       "BALANCE": "Balance",
-      "CODYMAZE": "CodyMaze"
+      "CODYMAZE": "CodyMaze",
+      "LIBRARIES": "Biblioteche"
     },
     "OVERVIEW": {
       "TITLE": "Lista di applicazioni per ottenere WOM",
