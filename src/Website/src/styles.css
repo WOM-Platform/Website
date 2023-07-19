@@ -36,8 +36,10 @@ mat-sidenav-content {
 .main-container {
   padding-top: 50px;
 }
+
+
 .container {
-  max-width: 1000px;
+  max-width: 1000px !important;
   margin: 2em auto 0 auto;
   text-align: left;
   padding: 5px 30px 10px 30px;
