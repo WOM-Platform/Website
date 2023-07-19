@@ -116,7 +116,7 @@
       "EMAIL_ERROR": "Please provide a valid email address",
       "PASSWORD": "Password",
       "REPEAT_PASSWORD": "Repeat password",
-      "PASSWORD_ERROR": "Please provide a valid password",
+      "PASSWORD_ERROR": "Please provide a minimum password of 8 characters",
       "PASSWORD_NO_MATCH_ERROR": "Passwords do not match",
       "NAME": "First Name",
       "NAME_ERROR": "Please provide your name",
