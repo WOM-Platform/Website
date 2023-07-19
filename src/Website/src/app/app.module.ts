@@ -77,6 +77,7 @@ import {ApplicationsUniversitiesComponent} from "./applications/universities/uni
 import {ApplicationsAworldComponent} from "./applications/aworld/aworld.component";
 import {ApplicationsCodymazeComponent} from "./applications/codymaze/codymaze.component";
 import {ApplicationsBalanceComponent} from "./applications/balance/balance.component";
+import {ApplicationsLibrariesComponent} from "./applications/libraries/libraries.component";
 import {ContactsComponent} from "./contacts/contacts.component";
 import {ContactFormComponent} from "./_forms/contact/forms-contact.directive";
 import {MerchantStatsComponent} from "./user/stats/merchant/merchant-stats.component";
@@ -169,7 +170,8 @@ export const isMock = environment.mock;
     AboutSectionComponent,
     PdfViewerContainerComponent,
     DialogConfirmCancelComponent,
-    DialogConfirmComponent
+    DialogConfirmComponent,
+    ApplicationsLibrariesComponent
   ],
   exports: [
       MatStepperModule,
