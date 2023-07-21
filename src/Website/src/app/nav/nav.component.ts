@@ -7,6 +7,7 @@ import {UserService} from '../_services';
 import {AddMerchantDialogComponent} from "../user/add-merchant/add-merchant.component";
 import {first} from "rxjs/operators";
 import {MatDialog} from "@angular/material/dialog";
+import { menuItems } from './menu-items';
 
 @Component({
   selector: 'app-nav',
@@ -20,7 +21,8 @@ export class NavComponent implements OnInit {
   isOver = false;
   selectLang = '';
   TransLang = [];
-
+  menuItems = menuItems
+  
   constructor(
     private router: Router,
     private translate: TranslateService,
