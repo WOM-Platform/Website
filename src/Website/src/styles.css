@@ -33,10 +33,6 @@ mat-sidenav-content {
   min-height: 100vh;
 }
 
-.main-container {
-  padding-top: 50px;
-}
-
 
 .container {
   max-width: 1000px !important;
