@@ -37,6 +37,7 @@ import {ManageComponent} from "./manage/manage/manage.component";
 import {UrbinoComponent} from "./about/urbino/urbino.component";
 import {AboutSectionComponent} from "./about/about-section.component";
 import {AboutComponent} from "./about/about/about.component";
+import { FanoComponent } from './about/fano/fano.component';
 
 const routes: Routes = [
   {
@@ -84,7 +85,16 @@ const routes: Routes = [
             data: {
               breadcrumb: 'BREADCRUMBS.ABOUT.URBINO'
             },
+          },
+          {
+            path: "fano",
+            component: FanoComponent,
+            pathMatch: "full",
+            data: {
+              breadcrumb: 'BREADCRUMBS.ABOUT.FANO'
+            },
           }
+
         ]
       },
       {

@@ -99,6 +99,7 @@ import {AboutSectionComponent} from "./about/about-section.component";
 import { PdfViewerContainerComponent } from './components/pdf-viewer-container/pdf-viewer-container/pdf-viewer-container.component';
 import {DialogConfirmCancelComponent} from "./components/dialog-confirm-cancel/dialog-confirm-cancel";
 import {DialogConfirmComponent} from "./components/dialog-confirm/dialog-confirm";
+import { FanoComponent } from './about/fano/fano.component';
 
 // AoT requires an exported function for factories
 export const createTranslateLoader = (http: HttpClient) => new TranslateHttpLoader(http, './assets/i18n/', '.json?cb=' + environment.i18n);
@@ -171,7 +172,8 @@ export const isMock = environment.mock;
     PdfViewerContainerComponent,
     DialogConfirmCancelComponent,
     DialogConfirmComponent,
-    ApplicationsLibrariesComponent
+    ApplicationsLibrariesComponent,
+    FanoComponent
   ],
   exports: [
       MatStepperModule,

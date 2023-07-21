@@ -11,7 +11,8 @@
     "ABOUT": {
       "TITLE": "Che cos'è",
       "ABOUT": "Che cos'è",
-      "URBINO": "Wom per Urbino"
+      "URBINO": "Wom per Urbino",
+      "FANO": "Wom per Fano"
     },
     "INSTRUMENT": "Instrument",
     "SIGN_IN": "Login",
@@ -31,7 +32,8 @@
     "ABOUT": {
       "TITLE": "Che cos’è",
       "ABOUT": "Che cos’è",
-      "URBINO": "WOM per Urbino"
+      "URBINO": "WOM per Urbino",
+      "FANO": "WOM per Fano"
     },
     "VOLUNTEER": "Volontari",
     "MERCHANT": "Merchant",
@@ -359,6 +361,9 @@
         "A": "Questa sezione è dedicata a <b>WOM per Urbino</b>, il progetto che da <b>maggio 2022</b> è stato avviato nella città di <b>Urbino</b>.\n<b>WOM per Urbino</b> è la prima forma di sperimentazione del progetto WOM. La scelta di Urbino come <b>prima città ad utilizzare WOM</b> deriva dalla collaborazione di <b>DIGIT srl</b>, <b>Università di Urbino</b> e <b>Città di Urbino</b>, che ha concesso il suo patrocinio.",
         "B": "Il progetto è stato lanciato dal <b>4 maggio 2022</b> tramite una conferenza stampa (per rivedere la conferenza <a href='https://youtu.be/1kiTku77HO4' target='_blank'>Clicca qui</a>).\nAttualmente i cittadini, gli studenti e i turisti hanno varie possibilità di ottenere <b>WOM</b> e di utilizzarli per ottenere <b>sconti</b> nei negozi convenzionati al progetto.  "
       }
+    },
+    "FANO": {
+      "TITLE": "WOM PER FANO"
     }
   },
   "VOLUNTEER": {
