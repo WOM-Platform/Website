@@ -1,18 +1,34 @@
 <div class="container">
-    <span class="page-title" [innerHTML]="'APPLICATIONS.BALANCE.TITLE' | translate"></span>
-    <div fxLayout="row wrap" fxLayoutGap="20px grid">
-        <div fxFlex="100%">
-            <p [innerHTML]="'APPLICATIONS.BALANCE.MAIN_CONTENT' | translate"></p>
-        </div>
-        <div fxFlex="50%" fxFlex.xs="100%">
-            <a href="https://play.google.com/store/apps/details?id=srl.digit.balance" target="_blank" title="Download Balance from Google Play">
-                <img style="max-width: 100%;" src="assets/images/badge_google_play.png" alt="Google Play" />
-            </a>
-        </div>
-        <div fxFlex="50%" fxFlex.xs="100%">
-            <a href="https://apps.apple.com/it/app/balance-postural-stability/id1554439528" target="_blank" title="Download Balance from App Store">
-                <img style="max-width: 100%;" src="assets/images/badge_app_store.png" alt="Apple App Store" />
-            </a>
-        </div>
+  <span
+    class="page-title"
+    [innerHTML]="'APPLICATIONS.BALANCE.TITLE' | translate"
+  ></span>
+
+  <div fxLayout="row wrap" fxLayoutGap="20px grid">
+    <div fxFlex="100%">
+      <p [innerHTML]="'APPLICATIONS.BALANCE.MAIN_CONTENT' | translate"></p>
     </div>
+  </div>
+
+  <div class="d-flex justify-content-around flex-wrap" style="margin-top: 3rem">
+    <!-- First app-logo-store component -->
+    <app-logo-store
+      [appURL]="
+        'https://play.google.com/store/apps/details?id=srl.digit.balance'
+      "
+      [storeImage]="'assets/images/badge_google_play.png'"
+      [alt]="'Google Play'"
+      [title]="'Download Balance from Google Play'"
+    ></app-logo-store>
+
+    <!-- Second app-logo-store component -->
+    <app-logo-store
+      [appURL]="
+        'https://apps.apple.com/it/app/balance-postural-stability/id1554439528'
+      "
+      [storeImage]="'assets/images/badge_app_store.png'"
+      [alt]="'Apple App Store'"
+      [title]="'Download Balance from App Store'"
+    ></app-logo-store>
+  </div>
 </div>

@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { DialogConfirmCancelComponent } from './dialog-confirm-cancel/dialog-confirm-cancel';
 import { DialogConfirmComponent } from './dialog-confirm/dialog-confirm';
-import { LogoStoresComponent } from './logo-stores/logo-stores.component';
+import { LogoStoreComponent } from './logo-store/logo-store.component';
 
 import {MatButtonModule} from '@angular/material/button';
 import {MatCardModule} from '@angular/material/card';
@@ -37,7 +37,7 @@ import { PdfViewerModule } from 'ng2-pdf-viewer';
   declarations: [
     DialogConfirmCancelComponent,
     DialogConfirmComponent,
-    LogoStoresComponent,
+    LogoStoreComponent,
     PdfViewerContainerComponent
   ],
   imports: [
@@ -74,6 +74,7 @@ import { PdfViewerModule } from 'ng2-pdf-viewer';
   exports: [
     DialogConfirmCancelComponent,
     DialogConfirmComponent,
+    LogoStoreComponent,
     MatButtonModule,
     MatButtonModule,
     MatButtonModule,
