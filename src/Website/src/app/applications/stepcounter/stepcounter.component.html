@@ -1,79 +1,114 @@
 <div class="container">
-    <span class="page-title" [innerHTML]="'APPLICATIONS.STEPCOUNTER.TITLE' | translate"></span>
-    <div fxLayout="row wrap" fxLayoutGap="20px grid">
-        <div fxFlex="100%">
-            <p [innerHTML]="'APPLICATIONS.STEPCOUNTER.MAIN_CONTENT' | translate"></p>
-        </div>
-        <div fxFlex="50%" fxFlex.xs="100%">
-            <a href="https://play.google.com/store/apps/details?id=srl.digit.wom_step_counter" target="_blank" title="Download WOM Stepcounter from Google Play">
-                <img style="max-width: 100%;" src="assets/images/badge_google_play.png" alt="Google Play" />
-            </a>
-        </div>
-        <div fxFlex="50%" fxFlex.xs="100%">
-            <a href="https://apps.apple.com/it/app/wom-step-counter/id1600679595" target="_blank" title="Download WOM Stepcounter from App Store">
-                <img style="max-width: 100%;" src="assets/images/badge_app_store.png" alt="Apple App Store" />
-            </a>
-        </div>
-
-        <div fxFlex="100%" class="">
-            <nav *ngIf="isLoaded_1" fxLayout="row" fxLayoutAlign="space-between stretch" >
-                <button mat-flat-button fxFlexAlign="start" (click)="prevPage(tutorial_1_src)" [disabled]="page_1 === 1" class="previous">
-                    Prev
-                </button>
-                <button mat-flat-button fxFlexAlign="end" (click)="nextPage(tutorial_1_src)" [disabled]="page_1 === totalPages_1" class="next">
-                    Next
-                </button>
-                <!--<p class="">{{ page_1 }} / {{ totalPages_1 }}</p>-->
-            </nav>
-            <pdf-viewer
-                    [src]="tutorial_1_src"
-                    [original-size]="true"
-                    [render-text]="true"
-                    [rotation]="0"
-                    [show-all]="false"
-                    [fit-to-page]="true"
-                    [zoom]="1"
-                    [zoom-scale]="'page-width'"
-                    [stick-to-page]="true"
-                    [external-link-target]="'blank'"
-                    [autoresize]="true"
-                    [show-borders]="false"
-                    class="pdf-viewer"
-                    [page]="page_1"
-                    (after-load-complete)="afterLoadComplete($event, tutorial_1_src)"
-            ></pdf-viewer>
-        </div>
-
-        <div fxFlex="100%" class="">
-            <nav *ngIf="isLoaded_2" fxLayout="row" fxLayoutAlign="space-between stretch" >
-                <button mat-flat-button fxFlexAlign="start" (click)="prevPage(tutorial_2_src)" [disabled]="page_2 === 1" class="previous">
-                    Prev
-                </button>
-                <button mat-flat-button fxFlexAlign="end" (click)="nextPage(tutorial_2_src)" [disabled]="page_2 === totalPages_2" class="next">
-                    Next
-                </button>
-                <!--<p class="">{{ page_1 }} / {{ totalPages_1 }}</p>-->
-            </nav>
-            <pdf-viewer
-                    [src]="tutorial_2_src"
-                    [original-size]="true"
-                    [render-text]="true"
-                    [rotation]="0"
-                    [show-all]="false"
-                    [fit-to-page]="true"
-                    [zoom]="1"
-                    [zoom-scale]="'page-width'"
-                    [stick-to-page]="true"
-                    [external-link-target]="'blank'"
-                    [autoresize]="true"
-                    [show-borders]="false"
-                    class="pdf-viewer"
-                    [page]="page_2"
-                    (after-load-complete)="afterLoadComplete($event, tutorial_2_src)"
-            ></pdf-viewer>
-        </div>
-        <div fxFlex="100%" style="text-align: center">
-            <a href="/privacy/stepcounter" [innerHTML]="'BREADCRUMBS.PRIVACY.PRIVACY' | translate"></a>
-        </div>
+  <span
+    class="page-title"
+    [innerHTML]="'APPLICATIONS.STEPCOUNTER.TITLE' | translate"
+  ></span>
+  <app-store-logos
+    [appName]="'WOM Stepcounter'"
+    [appleURL]="'https://apps.apple.com/it/app/wom-step-counter/id1600679595'"
+    [googleURL]="
+      'https://play.google.com/store/apps/details?id=srl.digit.wom_step_counter'
+    "
+  ></app-store-logos>
+  <div fxLayout="row wrap" fxLayoutGap="20px grid">
+    <div fxFlex="100%">
+      <p [innerHTML]="'APPLICATIONS.STEPCOUNTER.MAIN_CONTENT' | translate"></p>
     </div>
+
+    <div fxFlex="100%" class="">
+      <nav
+        *ngIf="isLoaded_1"
+        fxLayout="row"
+        fxLayoutAlign="space-between stretch"
+      >
+        <button
+          mat-flat-button
+          fxFlexAlign="start"
+          (click)="prevPage(tutorial_1_src)"
+          [disabled]="page_1 === 1"
+          class="previous"
+        >
+          Prev
+        </button>
+        <button
+          mat-flat-button
+          fxFlexAlign="end"
+          (click)="nextPage(tutorial_1_src)"
+          [disabled]="page_1 === totalPages_1"
+          class="next"
+        >
+          Next
+        </button>
+        <!--<p class="">{{ page_1 }} / {{ totalPages_1 }}</p>-->
+      </nav>
+      <pdf-viewer
+        [src]="tutorial_1_src"
+        [original-size]="true"
+        [render-text]="true"
+        [rotation]="0"
+        [show-all]="false"
+        [fit-to-page]="true"
+        [zoom]="1"
+        [zoom-scale]="'page-width'"
+        [stick-to-page]="true"
+        [external-link-target]="'blank'"
+        [autoresize]="true"
+        [show-borders]="false"
+        class="pdf-viewer"
+        [page]="page_1"
+        (after-load-complete)="afterLoadComplete($event, tutorial_1_src)"
+      ></pdf-viewer>
+    </div>
+
+    <div fxFlex="100%" class="">
+      <nav
+        *ngIf="isLoaded_2"
+        fxLayout="row"
+        fxLayoutAlign="space-between stretch"
+      >
+        <button
+          mat-flat-button
+          fxFlexAlign="start"
+          (click)="prevPage(tutorial_2_src)"
+          [disabled]="page_2 === 1"
+          class="previous"
+        >
+          Prev
+        </button>
+        <button
+          mat-flat-button
+          fxFlexAlign="end"
+          (click)="nextPage(tutorial_2_src)"
+          [disabled]="page_2 === totalPages_2"
+          class="next"
+        >
+          Next
+        </button>
+        <!--<p class="">{{ page_1 }} / {{ totalPages_1 }}</p>-->
+      </nav>
+      <pdf-viewer
+        [src]="tutorial_2_src"
+        [original-size]="true"
+        [render-text]="true"
+        [rotation]="0"
+        [show-all]="false"
+        [fit-to-page]="true"
+        [zoom]="1"
+        [zoom-scale]="'page-width'"
+        [stick-to-page]="true"
+        [external-link-target]="'blank'"
+        [autoresize]="true"
+        [show-borders]="false"
+        class="pdf-viewer"
+        [page]="page_2"
+        (after-load-complete)="afterLoadComplete($event, tutorial_2_src)"
+      ></pdf-viewer>
+    </div>
+    <div fxFlex="100%" style="text-align: center">
+      <a
+        href="/privacy/stepcounter"
+        [innerHTML]="'BREADCRUMBS.PRIVACY.PRIVACY' | translate"
+      ></a>
+    </div>
+  </div>
 </div>
