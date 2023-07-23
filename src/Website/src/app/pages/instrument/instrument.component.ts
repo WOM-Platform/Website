@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {StatsService} from '../_services';
-import {Stats} from '../_models/stats';
+import {StatsService} from '../../_services';
+import {Stats} from '../../_models/stats';
 import {LangChangeEvent, TranslateService} from '@ngx-translate/core';
 
 @Component({

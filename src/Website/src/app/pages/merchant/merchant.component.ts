@@ -1,7 +1,7 @@
 import {AfterViewInit, Component, ElementRef, OnInit, QueryList, ViewChild, ViewChildren} from '@angular/core';
 import {GoogleMap, MapInfoWindow, MapMarker} from '@angular/google-maps';
-import {MapService} from '../_services';
-import {PosMap} from '../_models';
+import {MapService} from '../../_services';
+import {PosMap} from '../../_models';
 import {MatSelectionListChange} from "@angular/material/list";
 
 @Component({
