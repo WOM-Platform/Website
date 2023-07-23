@@ -3,6 +3,12 @@
     class="page-title"
     [innerHTML]="'APPLICATIONS.STEPCOUNTER.TITLE' | translate"
   ></span>
+
+  <div fxLayout="row wrap" fxLayoutGap="20px grid">
+    <div fxFlex="100%">
+      <p [innerHTML]="'APPLICATIONS.STEPCOUNTER.MAIN_CONTENT' | translate"></p>
+    </div>
+  </div>
   <app-store-logos
     [appName]="'WOM Stepcounter'"
     [appleURL]="'https://apps.apple.com/it/app/wom-step-counter/id1600679595'"
@@ -11,10 +17,6 @@
     "
   ></app-store-logos>
   <div fxLayout="row wrap" fxLayoutGap="20px grid">
-    <div fxFlex="100%">
-      <p [innerHTML]="'APPLICATIONS.STEPCOUNTER.MAIN_CONTENT' | translate"></p>
-    </div>
-
     <div fxFlex="100%" class="">
       <nav
         *ngIf="isLoaded_1"
