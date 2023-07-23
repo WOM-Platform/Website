@@ -12,8 +12,8 @@ import {Subscription} from 'rxjs';
 import {EmailService} from "../../_services/email.service";
 import {EmailData} from "../../_models/emailData";
 import {environment} from "../../../environments/environment";
-import {DialogConfirmCancelComponent} from "../../components/dialog-confirm-cancel/dialog-confirm-cancel";
-import {DialogConfirmComponent} from "../../components/dialog-confirm/dialog-confirm";
+import {DialogConfirmCancelComponent} from "../../shared/dialog-confirm-cancel/dialog-confirm-cancel";
+import {DialogConfirmComponent} from "../../shared/dialog-confirm/dialog-confirm";
 
 @Component({
     selector: 'app-user-merchant',
