@@ -1,11 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-logo-store',
-  templateUrl: './logo-store.component.html',
-  styleUrls: ['./logo-store.component.css']
+  selector: 'app-store-logo',
+  templateUrl: './store-logo.component.html',
+  styleUrls: ['./store-logo.component.css']
 })
-export class LogoStoreComponent implements OnInit {
+export class StoreLogoComponent implements OnInit {
   @Input() appURL :string = ""
   @Input() storeImage :string = ""
   @Input() alt: string =""

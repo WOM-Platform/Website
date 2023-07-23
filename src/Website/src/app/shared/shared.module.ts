@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { DialogConfirmCancelComponent } from './dialog-confirm-cancel/dialog-confirm-cancel';
 import { DialogConfirmComponent } from './dialog-confirm/dialog-confirm';
-import { LogoStoreComponent } from './logo-store/logo-store.component';
+import { StoreLogoComponent } from './store-logos/store-logo/store-logo.component';
 
 import {MatButtonModule} from '@angular/material/button';
 import {MatCardModule} from '@angular/material/card';
@@ -29,6 +29,7 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import { PdfViewerContainerComponent } from './pdf-viewer-container/pdf-viewer-container.component';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
+import { StoreLogosComponent } from './store-logos/store-logos.component';
 
 
 
@@ -37,8 +38,9 @@ import { PdfViewerModule } from 'ng2-pdf-viewer';
   declarations: [
     DialogConfirmCancelComponent,
     DialogConfirmComponent,
-    LogoStoreComponent,
-    PdfViewerContainerComponent
+    StoreLogoComponent,
+    PdfViewerContainerComponent,
+    StoreLogosComponent
   ],
   imports: [
     CommonModule,
@@ -74,7 +76,6 @@ import { PdfViewerModule } from 'ng2-pdf-viewer';
   exports: [
     DialogConfirmCancelComponent,
     DialogConfirmComponent,
-    LogoStoreComponent,
     MatButtonModule,
     MatButtonModule,
     MatButtonModule,
@@ -104,6 +105,7 @@ import { PdfViewerModule } from 'ng2-pdf-viewer';
     MatTooltipModule,
     PdfViewerContainerComponent,
     PdfViewerModule,
+    StoreLogosComponent
   ]
 })
 export class SharedModule { }
