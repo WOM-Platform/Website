@@ -1,7 +1,13 @@
 <div class="container">
-    <h1>{{"PRIVACY.WEBSITE.TITLE" | translate}}</h1>
+  <h1>{{ "PRIVACY.WEBSITE.TITLE" | translate }}</h1>
 
-    <div class="text-content" [innerHTML]="'PRIVACY.WEBSITE.CONTENT' | translate | joinstrings"></div>
+  <div
+    class="text-content"
+    [innerHTML]="'PRIVACY.WEBSITE.CONTENT' | translate | joinstrings"
+  ></div>
 
-    <p>{{"PRIVACY.LAST_UPDATE" | translate}}: <strong>27 February 2023</strong>.</p>
+  <p>
+    {{ "PRIVACY.LAST_UPDATE" | translate }}:
+    <strong>27 {{ "PRIVACY.MONTH.FEBRUARY" | translate }} 2023</strong>.
+  </p>
 </div>

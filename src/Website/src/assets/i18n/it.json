@@ -598,7 +598,20 @@
         "<p>La presente informativa privacy potrà essere aggiornata nel tempo, pertanto Digit s.r.l. indicherà la data dell’ultimo aggiornamento in calce all’informativa stessa.</p>"
       ]
     },
-    "LAST_UPDATE": "Ultimo aggiornamento"
+    "LAST_UPDATE": "Ultimo aggiornamento",
+    "MONTH":{ 
+      "JANUARY": "Gennaio", 
+      "FEBRUARY": "Febbraio", 
+      "MARCH":"Marzo", 
+      "APRIL": "Aprile", 
+      "MAY": "Maggio", 
+      "JUNE":"Giugno", 
+      "JULY":"Luglio", 
+      "AUGUST": "Agosto", 
+      "SEPTEMBER": "Settembre", 
+      "OCTOBER":"Ottobre", 
+      "DECEMBER": "Dicembre" 
+    }
   },
   "APPLICATIONS": {
     "SIDENAV": {

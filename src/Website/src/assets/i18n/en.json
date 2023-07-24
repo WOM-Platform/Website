@@ -601,7 +601,20 @@
         "<p>This document may be updated in the future. Refer to the last update date at the bottom of the document.</p>"
       ]
     },
-    "LAST_UPDATE": "Last update"
+    "LAST_UPDATE": "Last update",
+    "MONTH":{ 
+      "JANUARY": "January", 
+      "FEBRUARY": "February", 
+      "MARCH":"March", 
+      "APRIL": "April", 
+      "MAY": "May", 
+      "JUNE":"June", 
+      "JULY":"July", 
+      "AUGUST": "August", 
+      "SEPTEMBER": "September", 
+      "OCTOBER":"October", 
+      "DECEMBER": "December" 
+    }
   },
   "APPLICATIONS": {
     "SIDENAV": {
