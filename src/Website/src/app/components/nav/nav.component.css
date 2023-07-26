@@ -79,3 +79,94 @@ img {
   align-items: center; 
   justify-content: center; 
 } 
+
+
+.sidenav-container {
+  height: 100%;
+}
+
+.sidenav {
+  width: 200px;
+}
+
+.sidenav .mat-toolbar {
+  background: inherit;
+}
+
+.mat-toolbar.mat-primary {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.lang-select {
+  margin-left: 10px;
+  width: 50px;
+  color: white;
+}
+.menu-pc {
+  display: none;
+}
+
+mat-nav-list {
+  padding: 0;
+}
+mat-nav-list a {
+  font-size: 11pt;
+}
+
+mat-toolbar {
+  background-color: #444558;
+}
+button.mat-menu-item {
+  outline:none;
+}
+
+.example-spacer {
+  flex: 1 1 auto;
+}
+
+.app-toolbar {
+  height: 50px;
+  position: fixed;
+  position: -ms-device-fixed; /* For macOS/iOS Safari */
+  top: 0; /* Sets the sticky toolbar to be on top */
+  z-index: 1000; /* Ensure that your app's content doesn't overlap the toolbar */
+}
+
+img {
+  max-width: 100%;
+  max-height: 50%;
+}
+
+.nav-button {
+  color: white;
+}
+
+.nav-icon-button {
+  color: white;
+}
+
+.lang-select {
+  margin-left: 10px;
+  width: 50px;
+  color: white;
+}
+
+.mat-divider {
+  border-color: white;
+}
+
+.divider {
+  height: 80%;
+}
+
+
+@media(min-width: 767px) {
+  .sidenav {
+    display: none
+  }
+  .menu-pc {
+    display: block;
+  }
+}

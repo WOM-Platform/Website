@@ -1,0 +1,13 @@
+<div class="container">
+  <h1>{{ "PRIVACY.STEPCOUNTER.TITLE" | translate }}</h1>
+
+  <div
+    class="text-content"
+    [innerHTML]="'PRIVACY.STEPCOUNTER.CONTENT' | translate | joinstrings"
+  ></div>
+
+  <p>
+    {{ "PRIVACY.LAST_UPDATE" | translate }}:
+    <strong>15 {{ "PRIVACY.MONTH.FEBRUARY" | translate }} 2022</strong>.
+  </p>
+</div>
