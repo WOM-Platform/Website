@@ -1,7 +1,9 @@
-<div fxLayout="column" fxFlexFill>
+<div>
   <app-nav>
-    <app-breadcrumbs></app-breadcrumbs>
-    <router-outlet style="background-color: black"></router-outlet>
-    <app-footer></app-footer
-  ></app-nav>
+    <div style="min-height: 94vh; display: flex; flex-direction: column">
+      <app-breadcrumbs></app-breadcrumbs>
+      <router-outlet style="background-color: black"></router-outlet>
+      <app-footer style="margin-top: auto"></app-footer>
+    </div>
+  </app-nav>
 </div>
