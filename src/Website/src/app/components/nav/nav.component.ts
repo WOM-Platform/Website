@@ -9,26 +9,30 @@ import {first} from "rxjs/operators";
 import {MatDialog} from "@angular/material/dialog";
 import { menuItems } from './menu-items';
 
+
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { Observable } from 'rxjs';
+import { map, shareReplay } from 'rxjs/operators';
+
+
 @Component({
   selector: 'app-nav',
   templateUrl: './nav.component.html',
   styleUrls: ['./nav.component.css']
 })
 export class NavComponent implements OnInit {
-  isExpanded = false;
   currentUserLogin: UserLogin;
-  openMenu = false;
-  isOver = false;
   selectLang = '';
   TransLang = [];
-  menuItems = menuItems
-  
-  constructor(
-    private router: Router,
-    private translate: TranslateService,
-    private userService: UserService,
-    public dialog: MatDialog
-  ) {
+  openMenu = false;
+
+  isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
+    .pipe(
+      map(result => result.matches),
+      shareReplay()
+    );
+
+  constructor(private breakpointObserver: BreakpointObserver, private translate: TranslateService, private router: Router, public dialog: MatDialog, private userService: UserService) {
     this.userService.currentUserLogin.subscribe(x => this.currentUserLogin = x);
   }
 
@@ -38,6 +42,12 @@ export class NavComponent implements OnInit {
   getTransLanguage(): void {
     this.TransLang = [...this.translate.getLangs()];
   }
+
+  async navigate(link: string): Promise<void> {
+    this.openMenu = false;
+    await this.router.navigate(['/' + link]);
+  }
+
   ngOnInit(): void {
     this.getTransLanguage();
     this.selectLang = this.translate.getBrowserLang();
@@ -45,23 +55,6 @@ export class NavComponent implements OnInit {
 
   get isLogged(): boolean {
     return this.currentUserLogin != null;
-  }
-
-  clickMenu(): void {
-    this.openMenu = !this.openMenu;
-  }
-
-  collapse(): void {
-    this.isExpanded = false;
-  }
-
-  toggle(): void {
-    this.isExpanded = !this.isExpanded;
-  }
-
-  async navigate(link: string): Promise<void> {
-    this.openMenu = false;
-    await this.router.navigate(['/' + link]);
   }
 
   logout(): void {

@@ -1,0 +1,13 @@
+<div class="container">
+  <h1>{{ "PRIVACY.POCKET.TITLE" | translate }}</h1>
+
+  <div
+    class="text-content"
+    [innerHTML]="'PRIVACY.POCKET.CONTENT' | translate | joinstrings"
+  ></div>
+
+  <p>
+    {{ "PRIVACY.LAST_UPDATE" | translate }}:
+    <strong>8 {{ "PRIVACY.MONTH.MARCH" | translate }} 2023</strong>.
+  </p>
+</div>
