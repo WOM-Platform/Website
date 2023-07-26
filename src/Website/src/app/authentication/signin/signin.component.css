@@ -24,3 +24,7 @@ mat-form-field {
 .text-spacing {
   padding: 0 1em 0 1em;
 }
+
+.full-width-input {
+  width: 100%;
+}
