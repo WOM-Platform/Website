@@ -602,18 +602,18 @@
       ]
     },
     "LAST_UPDATE": "Last update",
-    "MONTH":{ 
-      "JANUARY": "January", 
-      "FEBRUARY": "February", 
-      "MARCH":"March", 
-      "APRIL": "April", 
-      "MAY": "May", 
-      "JUNE":"June", 
-      "JULY":"July", 
-      "AUGUST": "August", 
-      "SEPTEMBER": "September", 
-      "OCTOBER":"October", 
-      "DECEMBER": "December" 
+    "MONTH":{
+      "JANUARY": "January",
+      "FEBRUARY": "February",
+      "MARCH":"March",
+      "APRIL": "April",
+      "MAY": "May",
+      "JUNE":"June",
+      "JULY":"July",
+      "AUGUST": "August",
+      "SEPTEMBER": "September",
+      "OCTOBER":"October",
+      "DECEMBER": "December"
     }
   },
   "APPLICATIONS": {
@@ -635,9 +635,9 @@
     },
     "LIBRARIES": {
       "TITLE": "Libraries",
-      "MAIN_CONTENT":"to translate",
-      "SECOND_TITLE": "to translate",
-      "SECOND_CONTENT":"to translate"
+      "MAIN_CONTENT":"The WOM platform rewards actions that have an intrinsic social value which translates into the enrichment of volunteers, as also their cultural growth and their education. Access to books and literature is instrumental for this purpose, which is often guaranteed by libraries and bookstores that stimulate individually citizens and can involve both schools and group activities. The WOM platform recognises how much value reading has as a vehicle for cultural and social growth, for both individuals and the community.",
+      "SECOND_TITLE": "Libraries in Fano, the “city that reads“",
+      "SECOND_CONTENT":"Within the “ReadSharing: la lettura condivisa” project, financed by the “Città che legge 2020” initiative, a series of activities were launched to involve high school students, stimulating their approach to reading and making it become an experience of exchange and personal gratification.<br/>The <a href='https://sistemabibliotecariofano.it'>Biblioteca Federiciana and Mediateca Montanari of Fano</a> contribute to the WOM platform by giving value to reading books, participating in reading groups or cultural events, creating digital contents and the participating in the project's editorials that have been activated along with the high schools of Fano."
     },
     "UNIVERSITIES": {
       "TITLE": "Universities",
