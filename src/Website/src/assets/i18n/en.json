@@ -627,7 +627,8 @@
     },
     "OVERVIEW": {
       "TITLE": "List of applications for gaining WOMs",
-      "MAIN_CONTENT": "WOM vouchers can be earned by voluntarily doing a socially useful action. For a WOM to be generated, <b>the activity has to be formally acknowledged by the WOM platform.</b> <br> Volounteers can obtain WOMs through the use of <b>specific applications</b> that recognize the social value of their actions <br> <b>Check out the list of the applications in the side menu!</b>"
+      "MAIN_CONTENT": "WOM vouchers can be earned by voluntarily doing a socially useful action. For a WOM to be generated, <b>the activity has to be formally acknowledged by the WOM platform.</b> <br>",
+      "CONTENT_A": "Volunteers can obtain WOMs through the use of <b>specific applications</b> that recognize the social value of their actions. <br> <b>Check out the list of the applications in the side menu!</b>"
     },
     "STEPCOUNTER": {
       "TITLE": "WOM Stepcounter",
