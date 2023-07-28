@@ -151,6 +151,10 @@ p.content {
   font-weight: bold;
 }
 
+mat-form-field label {
+  width: 100%;
+}
+  
 @media only screen and (max-width: 768px) {
   .mobile-only {
     display: inherit;
