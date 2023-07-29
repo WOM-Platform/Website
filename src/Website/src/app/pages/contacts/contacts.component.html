@@ -1,5 +1,7 @@
 <div class="container">
-    <span class="page-title">{{"CONTACTS.TITLE" | translate}}</span>
-    <app-forms-contact [(form)]="formData"></app-forms-contact>
-    <button mat-raised-button (click)="onSubmit()" cdkFocusInitial>{{"CONTACTS.SEND" | translate}}</button>
+  <h1 class="page-title">{{ "CONTACTS.TITLE" | translate }}</h1>
+  <app-forms-contact [(form)]="formData"></app-forms-contact>
+  <button mat-raised-button (click)="onSubmit()" cdkFocusInitial>
+    {{ "CONTACTS.SEND" | translate }}
+  </button>
 </div>

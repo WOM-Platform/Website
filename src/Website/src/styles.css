@@ -1,5 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
-@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
 
 /* COLOR STYLES */
 .green-icon {
@@ -16,14 +16,14 @@ body {
   font-family: "Raleway", sans-serif !important;
 }
 p, li {
-  font-size: 1.2rem !important;
+  font-size: 1.1rem;
   line-height: 1.4;
   text-align: justify;
   text-justify: inter-word;
 }
-h1 {
-  font-size: 2rem !important;
-}
+
+
+
 h2 {
   font-size: 1.6rem !important;
 }
@@ -64,8 +64,8 @@ mat-sidenav-content {
 
 .page-secondary-title {
   display: block;
+  font-size: 1.2rem;
   font-weight: bold;
-  font-size: 1.5em;
   color: #444558;
   text-align: left;
   margin: auto;

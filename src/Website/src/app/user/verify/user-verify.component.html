@@ -1,45 +1,57 @@
 <div class="container">
-    <span class="page-title" [innerHTML]="'USER.VERIFY.TITLE' | translate"></span>
+  <h1 class="page-title" [innerHTML]="'USER.VERIFY.TITLE' | translate"></h1>
 
-    <!-- Correct url query parameters or no parameters -->
-    <ng-container *ngIf="workingText !== ''">
-        <p [innerHTML]="workingText"></p>
-        <button *ngIf="!error"
-                mat-stroked-button
-                (click)="navigate('/authentication/signin')">
-            {{'USER.VERIFY.GO_SIGNIN_BUTTON' | translate}}
-        </button>
-        <input *ngIf="error"
-               [(ngModel)]="email"
-               type="email"
-               class="p-inputtext input-width"
-               placeholder="{{ 'SIGN_UP.REPRESENTATIVE.EMAIL' | translate }}">
-        <button *ngIf="error"
-                mat-stroked-button color="primary"
-                style="margin-left: 1em"
-                [disabled]="email === ''"
-                (click)="sendValidationEmail()" >
-            {{"USER.NOT_VERIFIED.REQUEST_NEW_EMAIL_LINK" | translate}}
-        </button>
-    </ng-container>
+  <!-- Correct url query parameters or no parameters -->
+  <ng-container *ngIf="workingText !== ''">
+    <p [innerHTML]="workingText"></p>
+    <button
+      *ngIf="!error"
+      mat-stroked-button
+      (click)="navigate('/authentication/signin')"
+    >
+      {{ "USER.VERIFY.GO_SIGNIN_BUTTON" | translate }}
+    </button>
+    <input
+      *ngIf="error"
+      [(ngModel)]="email"
+      type="email"
+      class="p-inputtext input-width"
+      placeholder="{{ 'SIGN_UP.REPRESENTATIVE.EMAIL' | translate }}"
+    />
+    <button
+      *ngIf="error"
+      mat-stroked-button
+      color="primary"
+      style="margin-left: 1em"
+      [disabled]="email === ''"
+      (click)="sendValidationEmail()"
+    >
+      {{ "USER.NOT_VERIFIED.REQUEST_NEW_EMAIL_LINK" | translate }}
+    </button>
+  </ng-container>
 
-    <!-- Wrong url query parameters -->
-    <ng-container *ngIf="workingText === ''">
-        <p>{{"USER.VERIFY.NOT_VERIFIED" | translate}}</p>
-        <p>{{"USER.VERIFY.REQUEST_NEW_VALIDATION" | translate}}</p>
-        <input *ngIf="error"
-               [(ngModel)]="email"
-               type="email"
-               class="p-inputtext input-width"
-               placeholder="{{ 'SIGN_UP.REPRESENTATIVE.EMAIL' | translate }}">
-        <button *ngIf="error"
-                mat-stroked-button color="primary"
-                style="margin-left: 1em"
-                [disabled]="email === ''"
-                (click)="sendValidationEmail()" >
-            {{"USER.NOT_VERIFIED.REQUEST_NEW_EMAIL_LINK" | translate}}
-        </button>
-    </ng-container>
-    <br>
-    <span style="color: darkred" [innerHTML]="errorText"></span>
+  <!-- Wrong url query parameters -->
+  <ng-container *ngIf="workingText === ''">
+    <p>{{ "USER.VERIFY.NOT_VERIFIED" | translate }}</p>
+    <p>{{ "USER.VERIFY.REQUEST_NEW_VALIDATION" | translate }}</p>
+    <input
+      *ngIf="error"
+      [(ngModel)]="email"
+      type="email"
+      class="p-inputtext input-width"
+      placeholder="{{ 'SIGN_UP.REPRESENTATIVE.EMAIL' | translate }}"
+    />
+    <button
+      *ngIf="error"
+      mat-stroked-button
+      color="primary"
+      style="margin-left: 1em"
+      [disabled]="email === ''"
+      (click)="sendValidationEmail()"
+    >
+      {{ "USER.NOT_VERIFIED.REQUEST_NEW_EMAIL_LINK" | translate }}
+    </button>
+  </ng-container>
+  <br />
+  <span style="color: darkred" [innerHTML]="errorText"></span>
 </div>
