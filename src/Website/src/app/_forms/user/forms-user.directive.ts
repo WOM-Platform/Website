@@ -1,5 +1,5 @@
 import {Component, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators} from '@angular/forms';
 import {EventEmitter} from '@angular/core';
 
 @Component({
@@ -12,16 +12,21 @@ export class UserFormComponent implements OnInit, OnChanges {
     @Input() form: FormGroup;
     @Input() disabled: boolean;
     @Output() formChange = new EventEmitter<FormGroup>();
+
     constructor(private fb: FormBuilder){}
 
     ngOnInit(): any {
+ 
+
         this.form = this.fb.group({
-            email: [{value: '', disabled: this.disabled}, Validators.email],
-            password: [{value: '', disabled: this.disabled}, Validators.required],
-            passwordRepeat: [{value: '', disabled: this.disabled}, Validators.required],
-            firstName: [{value: '', disabled: this.disabled}, Validators.required],
-            lastName: [{value: '', disabled: this.disabled}, Validators.required]
-        });
+            email: [{ value: '', disabled: this.disabled }, Validators.email],
+            password: [{ value: '', disabled: this.disabled }, Validators.required],
+            passwordRepeat: [{ value: '', disabled: this.disabled }, Validators.required], 
+            firstName: [{ value: '', disabled: this.disabled }, Validators.required],
+            lastName: [{ value: '', disabled: this.disabled }, Validators.required]
+          },       {
+            validator: isPasswordMatch("password", "passwordRepeat")
+          });
 
         this.form.get('email').valueChanges.subscribe(value => this.formChange.emit(this.form));
         this.form.get('password').valueChanges.subscribe(value => this.formChange.emit(this.form));
@@ -40,4 +45,25 @@ export class UserFormComponent implements OnInit, OnChanges {
             this.form.controls.lastName.disable();
         }
     }
+    
 }
+
+
+
+  export const isPasswordMatch = (controlName: string, matchingControlName: string) => {
+    return (formGroup: FormGroup) => {
+        let control = formGroup.controls[controlName];
+        let matchingControl = formGroup.controls[matchingControlName]
+        if (
+          matchingControl.errors &&
+          !matchingControl.errors.confirmPasswordValidator
+        ) {
+          return;
+        }
+        if (control.value !== matchingControl.value) {
+          matchingControl.setErrors({ confirmPasswordValidator: true });
+        } else {
+          matchingControl.setErrors(null);
+        }
+      };
+    }
