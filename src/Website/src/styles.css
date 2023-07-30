@@ -22,8 +22,6 @@ p, li {
   text-justify: inter-word;
 }
 
-
-
 h2 {
   font-size: 1.6rem !important;
 }
@@ -36,9 +34,8 @@ mat-sidenav-content {
 
 .container {
   max-width: 1000px !important;
-  margin: 2em auto 0 auto;
   text-align: left;
-  padding: 5px 30px 10px 30px;
+  /* padding: 5px 30px 10px 30px; */
 }
 
 .mat-card {
@@ -55,11 +52,9 @@ mat-sidenav-content {
 
 .page-title {
   display: block;
-  font-weight: bold;
-  font-size: 2em;
   color: #444558;
   text-align: center;
-  margin: 0 0 60px 0;
+  margin: 2rem 0;
 }
 
 .page-secondary-title {

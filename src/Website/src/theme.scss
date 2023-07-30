@@ -1,12 +1,35 @@
 @import '~@angular/material/theming';
 @include mat-core();
 
+// // Your custom typography configuration
+// $my-typography: mat-typography-config(
+//   $font-family: 'Roboto, "Helvetica Neue", sans-serif',
+//   $headline: mat-typography-level(36px, 48px, 700),
+//   $body-1: mat-typography-level(16px, 24px, 400),
+  
+// );
+
+// Rest of your theming configuration
 $my-app-primary: mat-palette($mat-blue-grey);
 $my-app-accent:  mat-palette($mat-pink, 500, 900, A100);
 $my-app-warn:    mat-palette($mat-deep-orange);
+
+// Apply the typography to the theme
 $my-app-theme: mat-light-theme($my-app-primary, $my-app-accent, $my-app-warn);
+//$my-app-theme: map_merge($my-app-theme, (typography: $my-typography));
+
+// Include the theme in your application
 @include angular-material-theme($my-app-theme);
 
-.mat-body, .mat-body-1, .mat-typography .mat-body, .mat-typography .mat-body-1, .mat-typography {
-    font-size: 2.6rem !important;
-  }
+
+.mat-h1, .mat-headline, .mat-typography .mat-h1, .mat-typography .mat-headline, .mat-typography h1 {
+    font-size: 2.6rem;
+    font-weight: 600;
+}
+
+@media (max-width: 767px) {
+    .mat-h1, .mat-headline, .mat-typography .mat-h1, .mat-typography .mat-headline, .mat-typography h1 {
+        font-size: 1.6rem;
+       
+      }
+}
