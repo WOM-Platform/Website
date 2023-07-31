@@ -41,7 +41,7 @@ mat-sidenav-content {
   display: block;
   color: #444558;
   text-align: center;
-  margin: 2rem 0;
+  margin: 4rem 0;
 }
 
 .page-secondary-title {
@@ -53,9 +53,9 @@ mat-sidenav-content {
   margin: auto;
 }
 
-p.content {
+/* p.content {
   margin-top: 20px;
-}
+} */
 
 .section button {
   background-color: #444558;
@@ -144,6 +144,10 @@ mat-form-field label {
 
   .desktop-only {
     display: none;
+  }
+
+  .page-title {
+    margin: 2.5rem 0;
   }
 }
 
