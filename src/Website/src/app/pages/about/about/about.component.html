@@ -5,26 +5,23 @@
   <p class="content" [innerHTML]="'ABOUT.SECTION_A.A' | translate"></p>
   <p class="content" [innerHTML]="'ABOUT.SECTION_A.B' | translate"></p>
 
-  <div fxLayout="row wrap" fxLayoutGap="20px grid">
-    <div fxFlex="100%">
-      <p
-        class="page-secondary-title"
-        [innerHTML]="'ABOUT.SECTION_A_2.TITLE' | translate"
-      ></p>
-      <p [innerHTML]="'ABOUT.SECTION_A_2.A' | translate"></p>
-      <p [innerHTML]="'ABOUT.SECTION_A_2.B' | translate"></p>
-    </div>
-    <div fxFlex="50%" fxFlex.xs="100%">
+  <h2 [innerHTML]="'ABOUT.SECTION_A_2.TITLE' | translate"></h2>
+  <p [innerHTML]="'ABOUT.SECTION_A_2.A' | translate"></p>
+  <p [innerHTML]="'ABOUT.SECTION_A_2.B' | translate"></p>
+
+  <div
+    class="justify-content-center"
+    fxLayout="row wrap"
+    fxLayoutGap="20px grid"
+  >
+    <div fxFlex="60%" fxFlex.xs="100%">
       <div>
-        <p
-          class="page-secondary-title"
-          [innerHTML]="'ABOUT.SECTION_B.TITLE' | translate"
-        ></p>
+        <h2 [innerHTML]="'ABOUT.SECTION_B.TITLE' | translate"></h2>
         <p [innerHTML]="'ABOUT.SECTION_B.A' | translate"></p>
         <p [innerHTML]="'ABOUT.SECTION_B.B' | translate"></p>
       </div>
     </div>
-    <div class="justify-content-center" fxFlex="50%" fxFlex.xs="100%">
+    <div class="justify-content-center" fxFlex="40%" fxFlex.xs="50%">
       <img
         fxFlex="50%"
         fxFlex.xs="100%"
@@ -35,10 +32,7 @@
     </div>
     <div fxFlex="100%">
       <div>
-        <p
-          class="page-secondary-title"
-          [innerHTML]="'ABOUT.SECTION_C.TITLE' | translate"
-        ></p>
+        <h2 [innerHTML]="'ABOUT.SECTION_C.TITLE' | translate"></h2>
         <p [innerHTML]="'ABOUT.SECTION_C.A' | translate"></p>
       </div>
     </div>
