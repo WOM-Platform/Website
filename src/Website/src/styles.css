@@ -132,6 +132,10 @@ mat-sidenav-content {
 mat-form-field label {
   width: 100%;
 }
+
+.font-notes {
+  font-size: 0.9rem;
+}
   
 @media only screen and (max-width: 768px) {
   .mobile-only {
@@ -144,6 +148,15 @@ mat-form-field label {
 
   .page-title {
     margin: 2.5rem 0;
+  }
+  
+  font-notes {
+    font-size: 0.9rem;
+  }
+
+
+  .font-notes {
+    font-size: 0.8rem;
   }
 }
 
