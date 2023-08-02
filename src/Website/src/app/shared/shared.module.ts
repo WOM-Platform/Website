@@ -2,6 +2,8 @@ import {APP_INITIALIZER, NgModule} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {TranslateLoader, TranslateModule, TranslateService} from '@ngx-translate/core';
+import {FlexLayoutModule, FlexModule} from '@angular/flex-layout';
+import {ReactiveFormsModule} from '@angular/forms';
 
 import {MatButtonModule} from '@angular/material/button';
 import {MatCardModule} from '@angular/material/card';
@@ -30,6 +32,9 @@ import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { StoreLogosComponent } from '../components/store-logos/store-logos.component';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
+import { FormsModule } from '@angular/forms';
+import { GoogleMapsModule } from '@angular/google-maps';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 
 // AoT requires an exported function for factories
@@ -53,6 +58,9 @@ export function translateFactory(translate: TranslateService): any {
   ],
   imports: [
     CommonModule,
+    FlexModule,
+    FormsModule,
+    GoogleMapsModule,
     MatButtonModule,
     MatButtonModule,
     MatButtonModule,
@@ -80,7 +88,9 @@ export function translateFactory(translate: TranslateService): any {
     MatTabsModule,
     MatToolbarModule,
     MatTooltipModule,
+    NgxChartsModule,
     PdfViewerModule,
+    ReactiveFormsModule,
     TranslateModule.forRoot({
       defaultLanguage: 'it',
       loader: {
@@ -91,6 +101,9 @@ export function translateFactory(translate: TranslateService): any {
   }),
   ],
   exports: [
+    FlexModule,
+    FormsModule,
+    GoogleMapsModule,
     MatButtonModule,
     MatButtonModule,
     MatButtonModule,
@@ -118,7 +131,9 @@ export function translateFactory(translate: TranslateService): any {
     MatTabsModule,
     MatToolbarModule,
     MatTooltipModule,
+    NgxChartsModule,
     PdfViewerModule,
+    ReactiveFormsModule,
     TranslateModule,
   ],
   providers: [

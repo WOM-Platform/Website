@@ -10,12 +10,16 @@ import { UserStatsComponent } from './stats/user-stats.component';
 import { UserVerifyComponent } from './verify/user-verify.component';
 import { AuthRoutingModule } from './auth-routing.module';
 import { SharedModule } from '../shared/shared.module';
+import { MerchantFormComponent } from '../_forms/merchant/forms-merchant.directive';
+import { PosFormComponent } from '../_forms/pos/forms-pos.directive';
 
 @NgModule({
   declarations: [
     AddMerchantDialogComponent,
     AddPosDialogComponent,
     MerchantStatsComponent,     
+    MerchantFormComponent,
+    PosFormComponent,
     UserHomeComponent,
     UserMerchantComponent,
     UserNotVerifiedComponent,

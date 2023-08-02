@@ -8,9 +8,7 @@ import {RouterModule} from '@angular/router';
 import {JoinstringsPipe} from 'src/app/_helpers/joinstringsPipe';
 
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {FlexLayoutModule, FlexModule} from '@angular/flex-layout';
 import {FooterComponent} from './components/footer/footer.component';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HomeComponent} from './pages/home';
 import {HttpMockRequestInterceptor} from './_helpers/HttpMockRequestInterceptor';
 import {LogoutDialogComponent, NavComponent} from './components/nav/nav.component';
@@ -29,8 +27,6 @@ import { SharedModule } from './shared/shared.module';
 import { UrbinoComponent } from './pages/about/urbino/urbino.component';
 import {AboutComponent} from "./pages/about/about/about.component";
 import {AboutSectionComponent} from "./pages/about/about-section.component";
-import {AddMerchantDialogComponent} from './user/add-merchant/add-merchant.component';
-import {AddPosDialogComponent} from './user/add-pos/add-pos.component';
 import {ApplicationsAworldComponent} from "./pages/volunteers/applications/aworld/aworld.component";
 import {ApplicationsBalanceComponent} from "./pages/volunteers/applications/balance/balance.component";
 import {ApplicationsCodymazeComponent} from "./pages/volunteers/applications/codymaze/codymaze.component";
@@ -52,27 +48,17 @@ import {ContactsComponent} from "./pages/contacts/contacts.component";
 import {CookieService} from 'ngx-cookie-service';
 
 import {environment} from '../environments/environment';
-import {GoogleMapsModule} from '@angular/google-maps';
 import {InstrumentComponent} from './pages/instrument/instrument.component';
 import {LogInErrorDialogComponent} from './authentication/signup/signup-login-error.directive';
 import {MerchantComponent} from './pages/merchant/merchant.component';
-import {MerchantFormComponent} from './_forms/merchant/forms-merchant.directive';
-import {MerchantStatsComponent} from "./user/stats/merchant/merchant-stats.component";
-import {NgxChartsModule} from "@swimlane/ngx-charts";
 import {OverlayModule} from '@angular/cdk/overlay';
 import {PageNotFoundComponent} from './pageNotFound/page-not-found.component';
-import {PosFormComponent} from './_forms/pos/forms-pos.directive';
 import {PrivacyOverviewComponent} from "./privacy/overview/overview.component";
 import {ProgressSpinnerComponent} from './_progressSpinner/progress-spinner.component';
 import {RequestNewPasswordComponent} from './authentication/requestNewPassword/request-new-password.component';
 import {ResetPasswordComponent} from './authentication/reset-password/reset-password.component';
 import {TokenInterceptorService} from './_helpers/httpInterceptor';
 import {UserFormComponent} from './_forms/user/forms-user.directive';
-import {UserHomeComponent} from './user/home/user-home.component';
-import {UserMerchantComponent} from "./user/merchant/user-merchant.component";
-import {UserNotVerifiedComponent} from './user/not-verified/user-not-verified.component';
-import {UserStatsComponent} from "./user/stats/user-stats.component";
-import {UserVerifyComponent} from './user/verify/user-verify.component';
 import {VolunteerComponent} from './pages/volunteers/volunteer/volunteer.component';
 import {DialogConfirmCancelComponent} from "./components/dialog-confirm-cancel/dialog-confirm-cancel";
 import {DialogConfirmComponent} from "./components/dialog-confirm/dialog-confirm";
@@ -85,6 +71,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
+import { AuthModule } from './user/auth.module';
 
 // AoT requires an exported function for factories
 export const isMock = environment.mock;
@@ -98,8 +85,6 @@ export const isMock = environment.mock;
       StoreLogosComponent,
     AboutComponent,
     AboutSectionComponent,
-    AddMerchantDialogComponent,
-    AddPosDialogComponent,
     AppComponent,
     ApplicationsAworldComponent,
     ApplicationsBalanceComponent,
@@ -124,12 +109,9 @@ export const isMock = environment.mock;
     LogoutDialogComponent,
     ManageComponent,
     MerchantComponent,
-    MerchantFormComponent,
     MerchantSignUpComponent,
-    MerchantStatsComponent,
     NavComponent,
     PageNotFoundComponent,
-    PosFormComponent,
     PrivacyComponent,
     PrivacyInstrumentComponent,
     PrivacyOverviewComponent,
@@ -143,17 +125,13 @@ export const isMock = environment.mock;
     SignInComponent,
     UrbinoComponent,
     UserFormComponent,
-    UserHomeComponent,
-    UserMerchantComponent,
-    UserNotVerifiedComponent,
-    UserStatsComponent,
-    UserVerifyComponent,
     VolunteerComponent,
   ],
   exports: [
   ],
     imports: [
         appRoutingModule,
+        AuthModule,
         RouterModule.forRoot([
             {path: '', component: HomeComponent, pathMatch: 'full'}
         ]),
@@ -163,17 +141,8 @@ export const isMock = environment.mock;
         BrowserModule,
         CarouselModule,
         CommonModule,
-        FlexLayoutModule,
-        FlexLayoutModule,
-        FlexModule,
-        FlexModule,
-        FormsModule,
-        GoogleMapsModule,
-        GoogleMapsModule,
         HttpClientModule,
-        NgxChartsModule,
         OverlayModule,
-        ReactiveFormsModule,
         SharedModule,
         LayoutModule,
         MatToolbarModule,
