@@ -341,7 +341,7 @@
       "B": "Molte azioni hanno un <b>valore sociale intrinseco</b>, un effetto noto in economia come “esternalità positiva”. WOM riconosce l’impatto di queste azioni e fornisce uno strumento per premiare queste esternalità positive mediante <b>l’emissione di WOM.</b>"
     },
     "SECTION_A_2": {
-      "TITLE": "Cosa sono i WOM",
+      "TITLE": "Cosa sono i WOM?",
       "A": "I WOM sono <b>voucher digitali</b> progettati per riconoscere il valore di azioni che hanno un effetto positivo. Ogni voucher WOM premia <b>un minuto di impegno socialmente prezioso</b> svolto da un individuo.",
       "B": "I voucher WOMs sono <b>anonimi</b>. Gli unici dati che raccolgono sono relativi al loro scopo sociale e dove e quando vengono generati.\nI voucher WOM non hanno <b>controvalore in denaro</b>. Sono la prova di uno sforzo socialmente prezioso che un individuo ha effettuato verso una causa condivisa.",
       "C": "Il <b>Registry</b> gestisce lo scambio dei voucher e tiene traccia della creazione e del consumo dei WOM.\nLa piattaforma WOM è un <b>sistema centralizzato</b>. Il <b>Registry</b> rappresenta l’autorità che gestisce lo scambio delle chiavi crittografiche (che consentono lo scambio sicuro delle informazioni) e verifica che i voucher siano guadagnati e spesi correttamente.\nIl Registry <b>non memorizza l’identità degli utenti e i loro dati</b>. I voucher WOM sono anonimi e il loro utilizzo non è tracciato."
@@ -356,14 +356,14 @@
       "A": "Imprenditori, negozianti, enti pubblici o qualsiasi altro privato cittadino (generalmente chiamato Merchants) possono liberamente decidere di fornire beni, servizi o sconti ai possessori di voucher WOM. Per fare ciò, creano un <b>“WOM payment”</b> che consente loro di scegliere quale tipo di sforzo premiare: i voucher WOM possono essere filtrati per scopo, luogo e tempo. Merci, servizi e sconti possono essere determinati liberamente dal Merchants."
     },
     "URBINO": {
-      "TITLE": "WOM PER URBINO",
+      "TITLE": "WOM per Urbino",
       "SECTION_A": {
         "A": "Questa sezione è dedicata a <b>WOM per Urbino</b>, il progetto che da <b>maggio 2022</b> è stato avviato nella città di <b>Urbino</b>.\n<b>WOM per Urbino</b> è la prima forma di sperimentazione del progetto WOM. La scelta di Urbino come <b>prima città ad utilizzare WOM</b> deriva dalla collaborazione di <b>DIGIT srl</b>, <b>Università di Urbino</b> e <b>Città di Urbino</b>, che ha concesso il suo patrocinio.",
         "B": "Il progetto è stato lanciato dal <b>4 maggio 2022</b> tramite una conferenza stampa (per rivedere la conferenza <a href='https://youtu.be/1kiTku77HO4' target='_blank'>Clicca qui</a>).\nAttualmente i cittadini, gli studenti e i turisti hanno varie possibilità di ottenere <b>WOM</b> e di utilizzarli per ottenere <b>sconti</b> nei negozi convenzionati al progetto.  "
       }
     },
     "FANO": {
-      "TITLE": "WOM PER FANO"
+      "TITLE": "WOM per Fano"
     }
   },
   "VOLUNTEER": {
@@ -387,7 +387,7 @@
       "BTN_SEARCH": "Cerca"
     },
     "SECTION_A": {
-      "TITLE": "Dove spendo i miei WOM? Come posso premiare le azioni socialmente utili con i WOM?",
+      "TITLE": "Dove spendo i miei WOM?<br/> Come posso premiare le azioni socialmente utili con i WOM?",
       "A": "I Merchants sono componenti di sistema che possono <b>creare istanze di pagamento</b>. Possono accettare i voucher WOM in cambio dei servizi e degli sconti che offrono.\nI Merchants possono <b>scegliere che tipo di voucher accettare</b>. Possono scegliere: i voucher generati solo per un <b>determinato scopo</b> (promuovendo così tale scopo sociale), quelli generati in una determinata <b>area geografica</b> (incoraggiando così le azioni sociali nella loro realtà territoriale), o quelli generati in un <b>intervallo di tempo definito</b>.\nLe istanze di pagamento <b>non prevedono scambi di denaro</b> ma solo sconti e gratuità.",
       "B": "Accettando tipologie specifiche di voucher WOM, i Merchants possono contribuire indirettamente a una campagna sociale, incentivando i cittadini a contribuire all’obiettivo condiviso con i loro sforzi volontari. Inoltre, i Merchants possono aumentare la loro visibilità presso la comunità lavorando per raggiungere l’obiettivo condiviso.",
       "C": "Vuoi registrarti come merchant? Accedi <a href='/authentication/signin'>qui</a>"
