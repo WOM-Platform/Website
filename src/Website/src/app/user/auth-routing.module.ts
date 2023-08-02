@@ -7,6 +7,7 @@ import { UserHomeComponent } from './home/user-home.component';
 import { UserMerchantComponent } from './merchant/user-merchant.component';
 import { UserNotVerifiedComponent } from './not-verified/user-not-verified.component';
 import { UserVerifyComponent } from './verify/user-verify.component';
+import { UserStatsComponent } from './stats/user-stats.component';
 
 const routes : Routes = [
     {
@@ -54,14 +55,14 @@ const routes : Routes = [
               breadcrumb: 'BREADCRUMBS.USER.MERCHANT'
             }
           },
-          /*{
+          {
             path: 'user-stats',
             component: UserStatsComponent,
             canActivate: [AuthGuard],
             data: {
               breadcrumb: 'BREADCRUMBS.USER.MERCHANT-STATS'
             }
-          }*/
+          },
           {
             path: 'manage',
             canActivate: [AuthGuard, ManageGuard],

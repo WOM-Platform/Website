@@ -22,3 +22,24 @@ p {
 .pos-card {
     margin-top: 1em;
 }
+
+.welcome-greetings {
+    margin: 20px 0;
+}
+
+.btn-stats {
+    display: flex;
+    color: #fff;
+    justify-content: center;
+    border-radius: 20px;
+    padding: 9px 27px;
+    background-image: linear-gradient(to right, #3CA55C 0%, #B5AC49 100%);
+    box-shadow: 0 4px 12px -2px gray;
+    text-transform: uppercase;
+}     
+
+.btn-stats:hover {
+  background-position: right center; /* change the direction of the change here */
+  color: #fff;
+  text-decoration: none;
+}

@@ -14,6 +14,7 @@ import {EmailData} from "../../_models/emailData";
 import {environment} from "../../../environments/environment";
 import {DialogConfirmCancelComponent} from "../../components/dialog-confirm-cancel/dialog-confirm-cancel";
 import {DialogConfirmComponent} from "../../components/dialog-confirm/dialog-confirm";
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-user-merchant',
@@ -25,13 +26,15 @@ export class UserMerchantComponent implements OnInit, OnDestroy {
     merchants: Merchants;
     merchantSubscription: Subscription;
 
-    constructor(public dialog: MatDialog,
-                private snackBar: MatSnackBar,
-                private userService: UserService,
-                private merchantService: MerchantService,
+    constructor(
+        public dialog: MatDialog,
                 private authService: AuthService,
                 private emailService: EmailService,
-                private translate: TranslateService) {
+                private router: Router,
+                private snackBar: MatSnackBar,
+                private translate: TranslateService,
+                private userService: UserService,
+                ) {
     }
 
     ngOnInit(): any {
@@ -176,5 +179,9 @@ export class UserMerchantComponent implements OnInit, OnDestroy {
         this.snackBar.open(message, null, {
             duration: 5000
         });
+    }
+
+    openStats() {
+        this.router.navigateByUrl("/user/user-stats")
     }
 }

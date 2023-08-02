@@ -6,7 +6,6 @@ import {MerchantService} from '../../_services';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {DialogType} from '../../_models/dialogType';
 import {StorageService} from "../../_services/storage.service";
-import {MerchantFormComponent} from "../../_forms/merchant/forms-merchant.directive";
 
 @Component({
     selector: 'app-merchant-dialog',
