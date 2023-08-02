@@ -218,12 +218,12 @@
     },
     "STATS": {
       "DATE_SELECTOR": {
-        "TITLE": "Select the date range",
-        "START": "Start date",
-        "END": "End date",
+        "TITLE": "Selezionare un intervallo di date",
+        "START": "Data inizio",
+        "END": "Data fine",
         "HINT": "MM/DD/YYYY – MM/DD/YYYY",
-        "CANCEL": "Cancel",
-        "APPLY": "Apply"
+        "CANCEL": "Cancella",
+        "APPLY": "Conferma"
       }
     },
     "ERRORS": {
