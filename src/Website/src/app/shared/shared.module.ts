@@ -1,7 +1,7 @@
-import { NgModule } from '@angular/core';
+import {APP_INITIALIZER, NgModule} from '@angular/core';
 import { CommonModule } from '@angular/common';
-
-
+import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+import {TranslateLoader, TranslateModule, TranslateService} from '@ngx-translate/core';
 
 import {MatButtonModule} from '@angular/material/button';
 import {MatCardModule} from '@angular/material/card';
@@ -28,8 +28,23 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import { PdfViewerContainerComponent } from '../components/pdf-viewer-container/pdf-viewer-container.component';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { StoreLogosComponent } from '../components/store-logos/store-logos.component';
+import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 
 
+// AoT requires an exported function for factories
+export const createTranslateLoader = (http: HttpClient) => new TranslateHttpLoader(http, './assets/i18n/', '.json?cb=' + environment.i18n);
+export function translateFactory(translate: TranslateService): any {
+    return async () => {
+        translate.setDefaultLang('en');
+        translate.use('en');
+        return new Promise<void>(resolve => {
+            translate.onLangChange.subscribe(() => {
+                resolve();
+            });
+        });
+    };
+}
 
 
 @NgModule({
@@ -66,6 +81,14 @@ import { StoreLogosComponent } from '../components/store-logos/store-logos.compo
     MatToolbarModule,
     MatTooltipModule,
     PdfViewerModule,
+    TranslateModule.forRoot({
+      defaultLanguage: 'it',
+      loader: {
+          provide: TranslateLoader,
+          useFactory: (createTranslateLoader),
+          deps: [HttpClient]
+      }
+  }),
   ],
   exports: [
     MatButtonModule,
@@ -96,6 +119,15 @@ import { StoreLogosComponent } from '../components/store-logos/store-logos.compo
     MatToolbarModule,
     MatTooltipModule,
     PdfViewerModule,
-  ]
+    TranslateModule,
+  ],
+  providers: [
+    {
+      provide: APP_INITIALIZER,
+      useFactory: translateFactory,
+      deps: [TranslateService],
+      multi: true
+  },
+]
 })
 export class SharedModule { }

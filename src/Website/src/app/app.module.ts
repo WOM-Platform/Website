@@ -1,12 +1,10 @@
 import {BrowserModule} from '@angular/platform-browser';
-import {APP_INITIALIZER, NgModule} from '@angular/core';
+import { NgModule} from '@angular/core';
 
 import {AppComponent} from './app.component';
-import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {HttpClientModule, HTTP_INTERCEPTORS, HttpClient} from '@angular/common/http';
 import {appRoutingModule} from './app.routing';
 import {RouterModule} from '@angular/router';
-import {TranslateLoader, TranslateModule, TranslateService} from '@ngx-translate/core';
 import {JoinstringsPipe} from 'src/app/_helpers/joinstringsPipe';
 
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
@@ -89,18 +87,6 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 
 // AoT requires an exported function for factories
-export const createTranslateLoader = (http: HttpClient) => new TranslateHttpLoader(http, './assets/i18n/', '.json?cb=' + environment.i18n);
-export function translateFactory(translate: TranslateService): any {
-    return async () => {
-        translate.setDefaultLang('en');
-        translate.use('en');
-        return new Promise<void>(resolve => {
-            translate.onLangChange.subscribe(() => {
-                resolve();
-            });
-        });
-    };
-}
 export const isMock = environment.mock;
 
 @NgModule({
@@ -171,14 +157,6 @@ export const isMock = environment.mock;
         RouterModule.forRoot([
             {path: '', component: HomeComponent, pathMatch: 'full'}
         ]),
-        TranslateModule.forRoot({
-            defaultLanguage: 'it',
-            loader: {
-                provide: TranslateLoader,
-                useFactory: (createTranslateLoader),
-                deps: [HttpClient]
-            }
-        }),
         AppOverlayModule,
         BreadcrumbModule,
         BrowserAnimationsModule,
@@ -197,8 +175,6 @@ export const isMock = environment.mock;
         OverlayModule,
         ReactiveFormsModule,
         SharedModule,
-        TranslateModule,
-        TranslateModule,
         LayoutModule,
         MatToolbarModule,
         MatButtonModule,
@@ -207,12 +183,6 @@ export const isMock = environment.mock;
         MatListModule,
     ],
   providers: [
-      {
-          provide: APP_INITIALIZER,
-          useFactory: translateFactory,
-          deps: [TranslateService],
-          multi: true
-      },
       isMock
       ? [{
           provide: HTTP_INTERCEPTORS,
