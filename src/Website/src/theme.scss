@@ -52,6 +52,10 @@ p {
     margin-bottom: 1.5rem;
 }
 
+.margin-0 {
+    margin: 0;
+}
+
 @media (max-width: 767px) {
     .mat-h1, .mat-headline, .mat-typography .mat-h1, .mat-typography .mat-headline, .mat-typography h1 {
         font-size: 1.8rem;
