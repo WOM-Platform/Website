@@ -13,16 +13,12 @@ body {
   font-family: "Raleway", sans-serif !important;
 }
 
+.container {
+  margin-bottom: 50px;
+}
 /* This fixes pages with sidebar, which otherwise collapse */
 mat-sidenav-content {
   min-height: 100vh;
-}
-
-
-.container {
-  max-width: 1000px !important;
-  text-align: left;
-  /* padding: 5px 30px 10px 30px; */
 }
 
 .mat-card {

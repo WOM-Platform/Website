@@ -28,22 +28,22 @@ $my-app-theme: mat-light-theme($my-app-primary, $my-app-accent, $my-app-warn);
 }
 
 @font-face {
-    font-family: "Lexend-Deca";
-    src: local("Lexend-Deca"), url(./assets/fonts/Lexend-Deca/LexendDeca-Medium.ttf) format("truetype");
+    font-family: "Raleway";
+    src: local("Raleway"), url(./assets/fonts/Raleway/Raleway-SemiBold.ttf) format("truetype");
 }
 
 .mat-h1, .mat-headline, .mat-typography .mat-h1, .mat-typography .mat-headline, .mat-typography h1 {
-    font-family: "Lexend-Deca";
+    font-family: "Raleway";
     font-size: 2.6rem;
 }
 
 .mat-h2, .mat-title, .mat-typography .mat-h2, .mat-typography .mat-title, .mat-typography h2 {
-    font-family: "Lexend-Deca";
+    font-family: "Raleway";
     font-size: 1.5rem;
     font-weight: 500;
 }
 
-p{
+p {
     font-size: 1.1rem;
     font-family: "Roboto";
     line-height: 1.4;
@@ -64,5 +64,5 @@ p{
 
     p, li {
         font-size: 1.1rem;
-    }
+    }    
 }
