@@ -38,6 +38,7 @@
     (select)="onSelect($event)"
   >
   </ngx-charts-bar-vertical> -->
+
   <div
     class="d-flex justify-content-center flex-column align-items-center margin-t-section"
   >
@@ -66,7 +67,7 @@
       </div>
     </ng-container>
 
-    <ng-container *ngFor="let merchant of merchants">
+    <!-- <ng-container *ngFor="let merchant of merchants">
       <div style="display: block">
         <h2>{{ merchant.name }}</h2>
         <ng-container *ngFor="let pos of merchant.pos">
@@ -85,6 +86,12 @@
           </div>
         </ng-container>
       </div>
-    </ng-container>
+    </ng-container> -->
+  </div>
+  <div class="margin-t-section">
+    <div class="map margin-t-section">
+      <h2 class="text-center">Mappa Transazioni</h2>
+      <app-map></app-map>
+    </div>
   </div>
 </div>

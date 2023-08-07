@@ -13,11 +13,13 @@ import { MerchantFormComponent } from '../_forms/merchant/forms-merchant.directi
 import { PosFormComponent } from '../_forms/pos/forms-pos.directive';
 import { MerchantStatsComponent } from './stats/merchant/merchant-stats.component';
 import { UserStatsComponent } from './stats/user-stats.component';
+import { MapComponent } from '../components/map/map.component';
 
 @NgModule({
   declarations: [
     AddMerchantDialogComponent,
     AddPosDialogComponent,
+    MapComponent,
     MerchantStatsComponent,     
     MerchantFormComponent,
     PosFormComponent,

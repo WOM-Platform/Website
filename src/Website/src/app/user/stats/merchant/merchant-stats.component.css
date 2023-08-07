@@ -3,3 +3,9 @@
     width: 95%;
     height: 260px;
 }
+
+.map {
+    display: block;
+    margin: 0 auto;
+    width: 50%;
+}
