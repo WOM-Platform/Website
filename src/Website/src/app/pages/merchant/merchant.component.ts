@@ -2,7 +2,7 @@ import {AfterViewInit, Component, ElementRef, OnInit, QueryList, ViewChild, View
 import {GoogleMap, MapInfoWindow, MapMarker} from '@angular/google-maps';
 import {MapService} from '../../_services';
 import {PosMap} from '../../_models';
-import {MatSelectionListChange} from "@angular/material/list";
+import {MatLegacySelectionListChange as MatSelectionListChange} from "@angular/material/legacy-list";
 
 @Component({
   selector: 'app-merchant',

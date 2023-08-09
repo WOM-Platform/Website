@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import {UserService} from '../../_services';
 import {User} from '../../_models';
-import {MatSnackBar} from "@angular/material/snack-bar";
+import {MatLegacySnackBar as MatSnackBar} from "@angular/material/legacy-snack-bar";
 import {TranslateService} from "@ngx-translate/core";
 import {Router} from "@angular/router";
 

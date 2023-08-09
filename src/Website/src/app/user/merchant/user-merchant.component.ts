@@ -1,9 +1,9 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {UserService, MerchantService, AuthService} from '../../_services';
 import {Merchant, Merchants, Pos} from '../../_models';
-import {MatDialog} from '@angular/material/dialog';
+import {MatLegacyDialog as MatDialog} from '@angular/material/legacy-dialog';
 import {AddMerchantDialogComponent, MerchantDialogData} from '../add-merchant/add-merchant.component';
-import {MatSnackBar} from '@angular/material/snack-bar';
+import {MatLegacySnackBar as MatSnackBar} from '@angular/material/legacy-snack-bar';
 import {TranslateService} from '@ngx-translate/core';
 import {first} from 'rxjs/operators';
 import {AddPosDialogComponent, PosDialogData} from '../add-pos/add-pos.component';

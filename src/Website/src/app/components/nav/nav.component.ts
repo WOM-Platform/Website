@@ -6,7 +6,7 @@ import {TranslateService} from '@ngx-translate/core';
 import {UserService} from '../../_services';
 import {AddMerchantDialogComponent} from "../../user/add-merchant/add-merchant.component";
 import {first} from "rxjs/operators";
-import {MatDialog} from "@angular/material/dialog";
+import {MatLegacyDialog as MatDialog} from "@angular/material/legacy-dialog";
 import { menuItems } from './menu-items';
 
 
