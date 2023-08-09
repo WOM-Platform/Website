@@ -1,7 +1,7 @@
 import {ChangeDetectorRef, Component, Inject, OnInit} from '@angular/core';
 import {Merchant} from '../../_models';
 import {first} from 'rxjs/operators';
-import {FormGroup} from '@angular/forms';
+import {UntypedFormGroup} from '@angular/forms';
 import {MerchantService} from '../../_services';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {DialogType} from '../../_models/dialogType';
@@ -14,7 +14,7 @@ import {MerchantFormComponent} from "../../_forms/merchant/forms-merchant.direct
     styleUrls: ['add-merchant.component.css']
 })
 export class AddMerchantDialogComponent implements OnInit {
-    formMerchant: FormGroup;
+    formMerchant: UntypedFormGroup;
     formInputError: boolean;
     formApiError: boolean;
     dialogTypes = DialogType;

@@ -1,7 +1,7 @@
 import {Component} from "@angular/core";
 import {EmailService} from "../../_services/email.service";
 import {EmailData} from "../../_models/emailData";
-import {FormGroup} from "@angular/forms";
+import {UntypedFormGroup} from "@angular/forms";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {TranslateService} from "@ngx-translate/core";
 import {Router} from "@angular/router";
@@ -12,7 +12,7 @@ import {Router} from "@angular/router";
     styleUrls: ['./contacts.component.css']
 })
 export class ContactsComponent {
-    formData: FormGroup;
+    formData: UntypedFormGroup;
 
     constructor(private emailService: EmailService,
                 private router: Router,

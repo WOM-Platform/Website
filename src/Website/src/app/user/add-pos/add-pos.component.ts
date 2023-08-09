@@ -1,7 +1,7 @@
 import {Component, Inject} from '@angular/core';
 import {Pos, PosRegistration} from '../../_models';
 import {first} from 'rxjs/operators';
-import {FormGroup} from '@angular/forms';
+import {UntypedFormGroup} from '@angular/forms';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {PosService} from '../../_services';
 import {StorageService} from "../../_services/storage.service";
@@ -12,7 +12,7 @@ import {StorageService} from "../../_services/storage.service";
     styleUrls: ['add-pos.component.css']
 })
 export class AddPosDialogComponent {
-    formPos: FormGroup;
+    formPos: UntypedFormGroup;
     formInputError: boolean;
     formApiError: boolean;
 
