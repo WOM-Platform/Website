@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {User} from '../../_models';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {UntypedFormBuilder, UntypedFormGroup, Validators} from '@angular/forms';
 import {UserService} from '../../_services/user.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {MatSnackBar} from '@angular/material/snack-bar';
@@ -15,13 +15,13 @@ export class ResetPasswordComponent implements OnInit {
     user: User;
     userId: string;
     token: string;
-    form: FormGroup;
+    form: UntypedFormGroup;
     passwordNoMatch = false;
     expiredLink = false;
 
     constructor(private userService: UserService,
                 private route: ActivatedRoute,
-                private fb: FormBuilder,
+                private fb: UntypedFormBuilder,
                 private snackBar: MatSnackBar,
                 private router: Router,
                 private translate: TranslateService) {

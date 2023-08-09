@@ -1,5 +1,5 @@
 import {Component, Input, OnDestroy, OnInit, Output} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {UntypedFormBuilder, UntypedFormGroup, Validators} from '@angular/forms';
 import {EventEmitter} from '@angular/core';
 import {countryList, Merchant, primaryActivityType} from '../../_models';
 import {debounceTime, switchMap, takeUntil} from "rxjs/operators";
@@ -16,10 +16,10 @@ export class MerchantFormComponent implements OnInit, OnDestroy {
     businessList: string[] = primaryActivityType;
     private unsubscribe = new Subject<void>()
 
-    @Input() form: FormGroup;
+    @Input() form: UntypedFormGroup;
     @Input() merchant: Merchant;
-    @Output() formChange = new EventEmitter<FormGroup>();
-    constructor(private fb: FormBuilder,
+    @Output() formChange = new EventEmitter<UntypedFormGroup>();
+    constructor(private fb: UntypedFormBuilder,
                 private storageService: StorageService){}
 
     ngOnInit(): any {

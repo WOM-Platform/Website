@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {UntypedFormBuilder, UntypedFormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import {UserService, MerchantService, PosService} from '../../_services';
 import {Merchant, PosRegistration, UserRegistrationPayload} from '../../_models';
@@ -14,10 +14,10 @@ import {TranslateService} from "@ngx-translate/core";
   styleUrls: ['./signup.component.css']
 })
 export class MerchantSignUpComponent implements OnInit {
-    formUser: FormGroup;
-    formMerchant: FormGroup;
-    formPos: FormGroup;
-    formSubmit: FormGroup;
+    formUser: UntypedFormGroup;
+    formMerchant: UntypedFormGroup;
+    formPos: UntypedFormGroup;
+    formSubmit: UntypedFormGroup;
     errorMessage: string;
 
     signupInvalid: boolean;
@@ -38,7 +38,7 @@ export class MerchantSignUpComponent implements OnInit {
       displayProgressSpinner = false;
 
       constructor(public dialog: MatDialog,
-                  private fb: FormBuilder,
+                  private fb: UntypedFormBuilder,
                   private route: ActivatedRoute,
                   private router: Router,
                   private userService: UserService,

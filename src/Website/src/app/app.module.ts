@@ -104,72 +104,71 @@ export function translateFactory(translate: TranslateService): any {
 export const isMock = environment.mock;
 
 @NgModule({
-  declarations: [
-      DialogConfirmCancelComponent,
-      DialogConfirmComponent,
-      StoreLogoComponent,
-      PdfViewerContainerComponent,
-      StoreLogosComponent,
-    AboutComponent,
-    AboutSectionComponent,
-    AddMerchantDialogComponent,
-    AddPosDialogComponent,
-    AppComponent,
-    ApplicationsAworldComponent,
-    ApplicationsBalanceComponent,
-    ApplicationsCodymazeComponent,
-    ApplicationsComponent,
-    ApplicationsLibrariesComponent,
-    ApplicationsOverviewComponent,
-    ApplicationsStepcounterComponent,
-    ApplicationsUniversitiesComponent,
-    BillingCancelComponent,
-    BillingCheckoutComponent,
-    BillingSuccessComponent,
-    BreadcrumbsComponent,
-    ContactFormComponent,
-    ContactsComponent,
-    FanoComponent,
-    FooterComponent,
-    HomeComponent,
-    InstrumentComponent,
-    JoinstringsPipe,
-    LogInErrorDialogComponent,
-    LogoutDialogComponent,
-    ManageComponent,
-    MerchantComponent,
-    MerchantFormComponent,
-    MerchantSignUpComponent,
-    MerchantStatsComponent,
-    NavComponent,
-    PageNotFoundComponent,
-    PosFormComponent,
-    PrivacyComponent,
-    PrivacyInstrumentComponent,
-    PrivacyOverviewComponent,
-    PrivacyPocketComponent,
-    PrivacyPosComponent,
-    PrivacyStepcounterComponent,
-    PrivacyWebsiteComponent,
-    ProgressSpinnerComponent,
-    RequestNewPasswordComponent,
-    ResetPasswordComponent,
-    SignInComponent,
-    UrbinoComponent,
-    UserFormComponent,
-    UserHomeComponent,
-    UserMerchantComponent,
-    UserNotVerifiedComponent,
-    UserStatsComponent,
-    UserVerifyComponent,
-    VolunteerComponent,
-  ],
-  exports: [
-  ],
+    declarations: [
+        DialogConfirmCancelComponent,
+        DialogConfirmComponent,
+        StoreLogoComponent,
+        PdfViewerContainerComponent,
+        StoreLogosComponent,
+        AboutComponent,
+        AboutSectionComponent,
+        AddMerchantDialogComponent,
+        AddPosDialogComponent,
+        AppComponent,
+        ApplicationsAworldComponent,
+        ApplicationsBalanceComponent,
+        ApplicationsCodymazeComponent,
+        ApplicationsComponent,
+        ApplicationsLibrariesComponent,
+        ApplicationsOverviewComponent,
+        ApplicationsStepcounterComponent,
+        ApplicationsUniversitiesComponent,
+        BillingCancelComponent,
+        BillingCheckoutComponent,
+        BillingSuccessComponent,
+        BreadcrumbsComponent,
+        ContactFormComponent,
+        ContactsComponent,
+        FanoComponent,
+        FooterComponent,
+        HomeComponent,
+        InstrumentComponent,
+        JoinstringsPipe,
+        LogInErrorDialogComponent,
+        LogoutDialogComponent,
+        ManageComponent,
+        MerchantComponent,
+        MerchantFormComponent,
+        MerchantSignUpComponent,
+        MerchantStatsComponent,
+        NavComponent,
+        PageNotFoundComponent,
+        PosFormComponent,
+        PrivacyComponent,
+        PrivacyInstrumentComponent,
+        PrivacyOverviewComponent,
+        PrivacyPocketComponent,
+        PrivacyPosComponent,
+        PrivacyStepcounterComponent,
+        PrivacyWebsiteComponent,
+        ProgressSpinnerComponent,
+        RequestNewPasswordComponent,
+        ResetPasswordComponent,
+        SignInComponent,
+        UrbinoComponent,
+        UserFormComponent,
+        UserHomeComponent,
+        UserMerchantComponent,
+        UserNotVerifiedComponent,
+        UserStatsComponent,
+        UserVerifyComponent,
+        VolunteerComponent,
+    ],
+    exports: [],
     imports: [
         appRoutingModule,
         RouterModule.forRoot([
-            {path: '', component: HomeComponent, pathMatch: 'full'}
+            { path: '', component: HomeComponent, pathMatch: 'full' }
         ]),
         TranslateModule.forRoot({
             defaultLanguage: 'it',
@@ -206,30 +205,29 @@ export const isMock = environment.mock;
         MatIconModule,
         MatListModule,
     ],
-  providers: [
-      {
-          provide: APP_INITIALIZER,
-          useFactory: translateFactory,
-          deps: [TranslateService],
-          multi: true
-      },
-      isMock
-      ? [{
-          provide: HTTP_INTERCEPTORS,
-          useClass: HttpMockRequestInterceptor,
-          multi: true
+    providers: [
+        {
+            provide: APP_INITIALIZER,
+            useFactory: translateFactory,
+            deps: [TranslateService],
+            multi: true
         },
-          CookieService
-        ]
-      : [{
-          provide: HTTP_INTERCEPTORS,
-          useClass: TokenInterceptorService,
-          multi: true
-        },
-          CookieService
-        ]
-  ],
-  entryComponents: [ProgressSpinnerComponent],
-  bootstrap: [AppComponent]
+        isMock
+            ? [{
+                    provide: HTTP_INTERCEPTORS,
+                    useClass: HttpMockRequestInterceptor,
+                    multi: true
+                },
+                CookieService
+            ]
+            : [{
+                    provide: HTTP_INTERCEPTORS,
+                    useClass: TokenInterceptorService,
+                    multi: true
+                },
+                CookieService
+            ]
+    ],
+    bootstrap: [AppComponent]
 })
 export class AppModule { }
