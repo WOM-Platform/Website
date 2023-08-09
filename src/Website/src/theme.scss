@@ -24,7 +24,7 @@ $my-app-theme: mat-light-theme($my-app-primary, $my-app-accent, $my-app-warn);
 
 @font-face {
     font-family: "Roboto";
-    src: local("Roboto"), url(./assets/fonts/Roboto/Roboto-Regular.ttf) format("truetype");
+    src: local("Roboto"), url(./assets/fonts/Roboto/Roboto-Light.ttf) format("truetype");
 }
 
 @font-face {
