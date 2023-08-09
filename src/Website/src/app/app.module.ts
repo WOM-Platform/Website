@@ -10,7 +10,6 @@ import {TranslateLoader, TranslateModule, TranslateService} from '@ngx-translate
 import {JoinstringsPipe} from 'src/app/_helpers/joinstringsPipe';
 
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {FlexLayoutModule, FlexModule} from '@angular/flex-layout';
 import {FooterComponent} from './components/footer/footer.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HomeComponent} from './pages/home';
@@ -184,12 +183,7 @@ export const isMock = environment.mock;
         BrowserModule,
         CarouselModule,
         CommonModule,
-        FlexLayoutModule,
-        FlexLayoutModule,
-        FlexModule,
-        FlexModule,
         FormsModule,
-        GoogleMapsModule,
         GoogleMapsModule,
         HttpClientModule,
         NgxChartsModule,
