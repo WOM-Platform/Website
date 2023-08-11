@@ -37,4 +37,39 @@
   top: 55%;
 }
 
+.header-box-title {
+  background-color: #444558;
+  color: white;
+  margin: 20px;
+  align-content: center;
+  text-align: center;
+  object-fit: contain;
+}
 
+.header-box-content button {
+  background-color: #444558;
+  color: white;
+}
+
+
+.header-box-title h1 {
+  @apply px-4 py-2;
+  font-weight: bold;
+  font-size: 3em;
+}
+.header-box-link a:link {
+  text-decoration: none;
+}
+.header-box-link a:visited {
+  text-decoration: none;
+}
+.header-box-link a:hover {
+  text-decoration: none;
+}
+.header-box-link a:active {
+  text-decoration: none;
+}
+
+.header-box-content {
+  margin: 20px;
+}

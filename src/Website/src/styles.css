@@ -18,7 +18,11 @@ body {
 }
 
 .container {
-  margin-bottom: 50px;
+  @apply mx-auto max-w-screen-lg
+}
+
+.margin-top-p {
+  @apply mt-12
 }
 /* This fixes pages with sidebar, which otherwise collapse */
 mat-sidenav-content {
@@ -62,10 +66,7 @@ mat-sidenav-content {
   color: white;
 }
 
-.header-box-content button {
-  background-color: #444558;
-  color: white;
-}
+
 
 
 .image, .image-header {
@@ -85,35 +86,6 @@ mat-sidenav-content {
   margin-top: 20px;
 }
 
-.header-box-title {
-  background-color: #444558;
-  color: white;
-  margin: 20px;
-  align-content: center;
-  text-align: center;
-  object-fit: contain;
-}
-.header-box-title h1 {
-  padding: 50px 10px;
-  font-weight: bold;
-  font-size: 3em;
-}
-.header-box-link a:link {
-  text-decoration: none;
-}
-.header-box-link a:visited {
-  text-decoration: none;
-}
-.header-box-link a:hover {
-  text-decoration: none;
-}
-.header-box-link a:active {
-  text-decoration: none;
-}
-
-.header-box-content {
-  margin: 20px;
-}
 
 .rounded-container {
   padding: 5px !important;
