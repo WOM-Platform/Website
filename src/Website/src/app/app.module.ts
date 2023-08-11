@@ -81,11 +81,6 @@ import {StoreLogoComponent} from "./components/store-logos/store-logo/store-logo
 import {PdfViewerContainerComponent} from "./components/pdf-viewer-container/pdf-viewer-container.component";
 import {StoreLogosComponent} from "./components/store-logos/store-logos.component";
 import { LayoutModule } from '@angular/cdk/layout';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatLegacyButtonModule as MatButtonModule } from '@angular/material/legacy-button';
-import { MatSidenavModule } from '@angular/material/sidenav';
-import { MatIconModule } from '@angular/material/icon';
-import { MatLegacyListModule as MatListModule } from '@angular/material/legacy-list';
 
 // AoT requires an exported function for factories
 export const createTranslateLoader = (http: HttpClient) => new TranslateHttpLoader(http, './assets/i18n/', '.json?cb=' + environment.i18n);
@@ -191,13 +186,7 @@ export const isMock = environment.mock;
         ReactiveFormsModule,
         SharedModule,
         TranslateModule,
-        TranslateModule,
         LayoutModule,
-        MatToolbarModule,
-        MatButtonModule,
-        MatSidenavModule,
-        MatIconModule,
-        MatListModule,
     ],
     providers: [
         {

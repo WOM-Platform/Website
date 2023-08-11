@@ -2,18 +2,15 @@
   <div class="page-title">
     <h1>{{ "INSTRUMENT.TITLE" | translate }}</h1>
   </div>
-  <div fxLayout="row wrap" fxLayoutGap="20px grid">
-    <div fxFlex="100%">
+  <div class="flex flex-wrap items-center">
+    <div class="basis-full">
       <h2 [innerHTML]="'INSTRUMENT.SECTION_A.TITLE' | translate"></h2>
       <p [innerHTML]="'INSTRUMENT.SECTION_A.A' | translate"></p>
       <p [innerHTML]="'INSTRUMENT.SECTION_A.B' | translate"></p>
       <p [innerHTML]="'INSTRUMENT.SECTION_A.C' | translate"></p>
     </div>
-    <div fxFlex="33.3%" fxFlex.xs="100%"></div>
-
-    <div fxFlex="33.3%" fxFlex.xs="100%"></div>
   </div>
-  <div class="justify-content-center d-flex">
+  <div class="justify-center flex">
     <div class="rounded-container">
       <p
         class="centered rounded-container-header"
