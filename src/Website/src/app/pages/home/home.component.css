@@ -30,11 +30,11 @@
 }
 
 .image-overlay {
-  width: 23%;
-  min-width: 125px;
-  position: absolute;
-  left: 7%;
-  top: 55%;
+  @apply flex absolute bottom-10 left-5; 
+}
+
+.store-image {
+  @apply w-60;
 }
 
 .header-box-title {
@@ -72,4 +72,14 @@
 
 .header-box-content {
   margin: 20px;
+}
+
+@media(max-width: 769px){
+  .image-overlay {
+    @apply flex flex-col absolute bottom-3 left-2; 
+  }
+
+  .store-image {
+    @apply w-32
+  }
 }

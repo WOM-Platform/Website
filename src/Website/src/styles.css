@@ -95,9 +95,6 @@ mat-sidenav-content {
   border-radius: 10px;
 }
 
-.rounded-container-header {
-}
-
 .rounded-container-body {
   border-top: 1px solid #444558;
 }
@@ -114,6 +111,10 @@ mat-form-field label {
 }
   
 @media only screen and (max-width: 768px) {
+  .container {
+    @apply mx-2 max-w-screen-sm;
+  }
+
   .mobile-only {
     display: inherit;
   }
