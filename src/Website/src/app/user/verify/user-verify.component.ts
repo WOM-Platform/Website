@@ -2,8 +2,8 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {UserService} from '../../_services';
 import {ActivatedRoute, Router} from '@angular/router';
 import {TranslateService} from "@ngx-translate/core";
-import {MatLegacySnackBar as MatSnackBar} from "@angular/material/legacy-snack-bar";
 import {UntypedFormBuilder, FormGroup, Validators} from "@angular/forms";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
     selector: 'app-user-verify',

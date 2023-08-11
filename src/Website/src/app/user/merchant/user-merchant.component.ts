@@ -1,9 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {UserService, MerchantService, AuthService} from '../../_services';
 import {Merchant, Merchants, Pos} from '../../_models';
-import {MatLegacyDialog as MatDialog} from '@angular/material/legacy-dialog';
 import {AddMerchantDialogComponent, MerchantDialogData} from '../add-merchant/add-merchant.component';
-import {MatLegacySnackBar as MatSnackBar} from '@angular/material/legacy-snack-bar';
 import {TranslateService} from '@ngx-translate/core';
 import {first} from 'rxjs/operators';
 import {AddPosDialogComponent, PosDialogData} from '../add-pos/add-pos.component';
@@ -14,6 +12,8 @@ import {EmailData} from "../../_models/emailData";
 import {environment} from "../../../environments/environment";
 import {DialogConfirmCancelComponent} from "../../components/dialog-confirm-cancel/dialog-confirm-cancel";
 import {DialogConfirmComponent} from "../../components/dialog-confirm/dialog-confirm";
+import {MatDialog} from "@angular/material/dialog";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
     selector: 'app-user-merchant',
@@ -73,6 +73,7 @@ export class UserMerchantComponent implements OnInit, OnDestroy {
     }
 
     openPosDialog(posData: PosDialogData): void {
+
         const dialogRef = this.dialog.open(AddPosDialogComponent, {
             data: posData
         });

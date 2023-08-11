@@ -1,6 +1,4 @@
 import {Component, Input} from "@angular/core";
-import { BrowserModule } from '@angular/platform-browser';
-import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { single } from './data';
 import {Merchant, MerchantContainer} from "../../../_models";
 

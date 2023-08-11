@@ -6,13 +6,13 @@ import {TranslateService} from '@ngx-translate/core';
 import {UserService} from '../../_services';
 import {AddMerchantDialogComponent} from "../../user/add-merchant/add-merchant.component";
 import {first} from "rxjs/operators";
-import {MatLegacyDialog as MatDialog} from "@angular/material/legacy-dialog";
 import { menuItems } from './menu-items';
 
 
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
+import {MatDialog} from "@angular/material/dialog";
 
 
 @Component({

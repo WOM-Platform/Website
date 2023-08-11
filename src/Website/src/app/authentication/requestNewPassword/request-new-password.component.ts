@@ -3,7 +3,6 @@ import {UserService} from '../../_services/user.service';
 import {User} from '../../_models';
 import {ActivatedRoute, Router} from '@angular/router';
 import {UntypedFormBuilder, UntypedFormGroup, Validators} from '@angular/forms';
-import {MatLegacySnackBar as MatSnackBar} from '@angular/material/legacy-snack-bar';
 
 @Component({
     selector: 'app-request-new-password',

@@ -4,9 +4,9 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {UserService, MerchantService, PosService} from '../../_services';
 import {Merchant, PosRegistration, UserRegistrationPayload} from '../../_models';
 import {first} from 'rxjs/operators';
-import {MatLegacyDialog as MatDialog} from '@angular/material/legacy-dialog';
 import {LogInErrorDialogComponent} from './signup-login-error.directive';
 import {TranslateService} from "@ngx-translate/core";
+import {MatDialog} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-merchant-signup',

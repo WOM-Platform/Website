@@ -2,9 +2,9 @@ import {Component} from "@angular/core";
 import {EmailService} from "../../_services/email.service";
 import {EmailData} from "../../_models/emailData";
 import {UntypedFormGroup} from "@angular/forms";
-import {MatLegacySnackBar as MatSnackBar} from "@angular/material/legacy-snack-bar";
 import {TranslateService} from "@ngx-translate/core";
 import {Router} from "@angular/router";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
     selector: 'app-contacts',

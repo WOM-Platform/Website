@@ -3,8 +3,8 @@ import {User} from '../../_models';
 import {UntypedFormBuilder, UntypedFormGroup, Validators} from '@angular/forms';
 import {UserService} from '../../_services/user.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import {MatLegacySnackBar as MatSnackBar} from '@angular/material/legacy-snack-bar';
 import {TranslateService} from '@ngx-translate/core';
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
     selector: 'app-reset-password',
