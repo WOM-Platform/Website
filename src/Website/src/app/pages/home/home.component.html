@@ -30,112 +30,114 @@
   </div>
 </div>
 <div class="container">
-  <div fxLayout="row wrap">
-    <img
-      fxFlex="50%"
-      fxFlex.xs="100%"
-      class="image"
-      src="../../../assets/images/wom-logo.png"
-      alt="WOM logo"
-    />
-    <div fxFlex="50%" fxFlex.xs="100%" class="section">
-      <h1 [innerHTML]="'HOME.SECTION_INTRO.TITLE' | translate"></h1>
-      <p [innerHTML]="'HOME.SECTION_INTRO.A' | translate"></p>
-      <button
-        mat-flat-button
-        fxFlexAlign="right"
-        [innerHTML]="'GENERIC.BUTTON.MORE' | translate"
-        (click)="navigate('about')"
-      ></button>
+  <div class="flex flex-wrap items-center">
+    <div class="basis-full sm:basis-1/2">
+      <img
+        class="image"
+        src="../../../assets/images/wom-logo.png"
+        alt="WOM logo"
+      />
     </div>
 
-    <div fxFlex="50%" fxFlex.xs="100%" class="section">
+    <div class="section basis-full sm:basis-1/2">
+      <h1 [innerHTML]="'HOME.SECTION_INTRO.TITLE' | translate"></h1>
+      <p [innerHTML]="'HOME.SECTION_INTRO.A' | translate"></p>
+      <div class="flex justify-end">
+        <button
+          mat-flat-button
+          [innerHTML]="'GENERIC.BUTTON.MORE' | translate"
+          (click)="navigate('about')"
+        ></button>
+      </div>
+    </div>
+
+    <div class="section basis-full sm:basis-1/2">
       <p [innerHTML]="'HOME.SECTION_INTRO.B' | translate"></p>
       <button
         mat-flat-button
-        fxFlexAlign="right"
         [innerHTML]="'GENERIC.BUTTON.MORE' | translate"
         (click)="navigateExternal('https://www.digit.srl')"
       ></button>
     </div>
-    <img
-      fxFlex="50%"
-      fxFlex.xs="100%"
-      class="image"
-      src="../../../assets/images/digit_logo.png"
-      alt="DIGIT srl logo"
-    />
-
-    <div fxFlex="50%" fxFlex.xs="100%" class="section">
+    <div class="basis-full sm:basis-1/2">
+      <img
+        class="image"
+        src="../../../assets/images/digit_logo.png"
+        alt="DIGIT srl logo"
+      />
+    </div>
+  </div>
+  <div class="flex flex-wrap items-start">
+    <div class="section basis-full sm:basis-1/2">
       <div class="header-box-title">
         <h1 [innerHTML]="'HOME.SECTION_VOL.TITLE' | translate"></h1>
       </div>
       <div class="header-box-content">
         <p [innerHTML]="'HOME.SECTION_VOL.MESSAGE' | translate"></p>
-        <button
-          mat-flat-button
-          fxFlexAlign="right"
-          [innerHTML]="'GENERIC.BUTTON.MORE' | translate"
-          (click)="navigate('volunteer')"
-        ></button>
+        <div class="flex justify-center">
+          <button
+            mat-flat-button
+            [innerHTML]="'GENERIC.BUTTON.MORE' | translate"
+            (click)="navigate('volunteer')"
+          ></button>
+        </div>
       </div>
     </div>
 
-    <div fxFlex="50%" fxFlex.xs="100%" class="section">
+    <div class="section basis-full sm:basis-1/2">
       <div class="header-box-title">
         <h1 [innerHTML]="'HOME.SECTION_MERCH.TITLE' | translate"></h1>
       </div>
       <div class="header-box-content">
         <p [innerHTML]="'HOME.SECTION_MERCH.MESSAGE' | translate"></p>
-        <button
-          mat-flat-button
-          fxFlexAlign="right"
-          [innerHTML]="'GENERIC.BUTTON.MORE' | translate"
-          (click)="navigate('merchant')"
-        ></button>
+        <div class="flex justify-center">
+          <button
+            mat-flat-button
+            [innerHTML]="'GENERIC.BUTTON.MORE' | translate"
+            (click)="navigate('merchant')"
+          ></button>
+        </div>
       </div>
     </div>
 
-    <div fxFlex="50%" fxFlex.xs="100%" class="section">
+    <div class="section basis-full sm:basis-1/2">
       <div class="header-box-title">
         <h1 [innerHTML]="'HOME.SECTION_INSTR.TITLE' | translate"></h1>
       </div>
       <div class="header-box-content">
         <p [innerHTML]="'HOME.SECTION_INSTR.MESSAGE' | translate"></p>
-        <button
-          mat-flat-button
-          fxFlexAlign="right"
-          [innerHTML]="'GENERIC.BUTTON.MORE' | translate"
-          (click)="navigate('instrument')"
-        ></button>
+        <div class="flex justify-center">
+          <button
+            mat-flat-button
+            [innerHTML]="'GENERIC.BUTTON.MORE' | translate"
+            (click)="navigate('instrument')"
+          ></button>
+        </div>
       </div>
     </div>
 
-    <div fxFlex="50%" fxFlex.xs="100%" class="section">
+    <div class="section basis-full sm:basis-1/2">
       <div class="header-box-title">
         <h1 [innerHTML]="'HOME.SECTION_REG.TITLE' | translate"></h1>
       </div>
       <div class="header-box-content">
         <p [innerHTML]="'HOME.SECTION_REG.MESSAGE' | translate"></p>
-        <!--<button mat-flat-button fxFlexAlign="right" [innerHTML]="'GENERIC.BUTTON.MORE' | translate" (click)="navigate('instrument')"></button>-->
       </div>
     </div>
 
-    <div fxFlex="100%" class="section">
+    <div class="section basis-full">
       <div class="header-box-title">
         <h1 [innerHTML]="'HOME.SECTION_TECH.TITLE' | translate"></h1>
       </div>
       <div class="header-box-content">
         <p [innerHTML]="'HOME.SECTION_TECH.MESSAGE' | translate"></p>
-        <!--<button mat-flat-button fxFlexAlign="right" [innerHTML]="'GENERIC.BUTTON.MORE' | translate" (click)="navigate('instrument')"></button>-->
       </div>
     </div>
 
-    <div fxFlex="100%" class="section">
+    <div class="section basis-full">
       <div class="header-box-content">
         <h1 [innerHTML]="'HOME.SECTION_CONTACT.TITLE' | translate"></h1>
         <p [innerHTML]="'HOME.SECTION_CONTACT.MESSAGE' | translate"></p>
-        <!--<button mat-flat-button fxFlexAlign="right" [innerHTML]="'GENERIC.BUTTON.MORE' | translate" (click)="navigate('instrument')"></button>-->
       </div>
     </div>
   </div>

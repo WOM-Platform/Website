@@ -99,11 +99,11 @@
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
-    <mat-toolbar color="app-toolbar" class="d-flex justify-content-between">
-      <a routerLink="home">
-        <img height="40" src="../../../assets/images/wom-logo-bianco.png" />
+    <mat-toolbar color="app-toolbar" class="flex justify-between">
+      <a class="h-20 w-auto items-center flex" routerLink="home">
+        <img src="../../../assets/images/wom-logo-bianco.png" />
       </a>
-      <div class="d-flex flex-row align-items-center">
+      <div class="flex flex-row align-items-center">
         <!-- begin menu pc -->
         <div class="menu-pc">
           <button mat-button class="nav-button" (click)="navigate('home')">
