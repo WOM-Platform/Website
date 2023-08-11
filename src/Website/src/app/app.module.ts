@@ -186,7 +186,6 @@ export const isMock = environment.mock;
         ReactiveFormsModule,
         SharedModule,
         TranslateModule,
-        TranslateModule,
         LayoutModule,
     ],
     providers: [
