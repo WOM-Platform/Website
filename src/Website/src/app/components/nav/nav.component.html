@@ -107,10 +107,10 @@
         <!-- begin menu pc -->
         <div class="menu-pc">
           <button mat-button class="nav-button" (click)="navigate('home')">
-            <span>{{ "NAV.HOME" | translate }}</span>
+            {{ "NAV.HOME" | translate }}
           </button>
           <button mat-button class="nav-button" [matMenuTriggerFor]="menuAbout">
-            <span>{{ "NAV.ABOUT.TITLE" | translate }}</span>
+            {{ "NAV.ABOUT.TITLE" | translate }}
           </button>
           <mat-menu #menuAbout="matMenu">
             <button mat-menu-item (click)="navigate('about-section/about')">
