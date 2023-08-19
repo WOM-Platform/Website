@@ -3,7 +3,15 @@
     <h1>{{ "CONTACTS.TITLE" | translate }}</h1>
   </div>
   <app-forms-contact [(form)]="formData"></app-forms-contact>
-  <button mat-raised-button (click)="onSubmit()" cdkFocusInitial>
-    {{ "CONTACTS.SEND" | translate }}
-  </button>
+  <div class="flex justify-center">
+    <button
+      class="font-semibold"
+      color="primary"
+      mat-raised-button
+      (click)="onSubmit()"
+      cdkFocusInitial
+    >
+      {{ "CONTACTS.SEND" | translate }}
+    </button>
+  </div>
 </div>

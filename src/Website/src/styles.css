@@ -134,6 +134,10 @@ mat-form-field label {
   .font-notes {
     font-size: 0.8rem;
   }
+
+  .container {
+    @apply mx-auto max-w-screen-sm px-5
+  }
 }
 
 @media only screen and (min-width: 769px) {
