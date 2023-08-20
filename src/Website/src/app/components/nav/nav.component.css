@@ -171,6 +171,14 @@ button.selected:active {
   .nav-button {
     display: none;
   }
+
+  .sidenav {
+    width: 300px
+  }
+
+  .mat-expansion-panel-header .mat-content {
+    font-size: 15pt;
+  }
 }
 @media (min-width: 769px) {
   .nav-icon-button {
