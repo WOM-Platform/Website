@@ -17,6 +17,10 @@ body {
   font-family: "Raleway", sans-serif !important;
 }
 
+.h2-margin-bottom {
+  @apply mb-3
+}
+
 .container {
   @apply mx-auto max-w-screen-lg
 }

@@ -2,22 +2,14 @@
   <div class="mat-card">
     <h3>{{ "USER.HOME.WELCOME" | translate }}, {{ username }}</h3>
     <mat-divider></mat-divider>
-    <div class="justify-content-center" fxLayout="row wrap">
-      <div fxFlex="50%" fxFlex.xs="100%" class="header-box-link section">
+    <div class="flex flex-wrap justify-center">
+      <div class="header-box-link section text-center basis-full md:basis-1/2">
         <a routerLink="/user/merchant">
           <div class="header-box-title">
             <h1 [innerHTML]="'USER.HOME.MERCHANT_TITLE' | translate"></h1>
           </div>
         </a>
       </div>
-
-      <!--
-            <div fxFlex="50%" fxFlex.xs="100%" class="section">
-                <a href="#"><div class="header-box-title">
-                    <h1 [innerHTML]="'USER.HOME.INSTRUMENT' | translate"></h1>
-                </div></a>
-            </div>
-            -->
     </div>
   </div>
 </div>

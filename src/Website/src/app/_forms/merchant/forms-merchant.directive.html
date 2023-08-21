@@ -1,140 +1,139 @@
+<!-- <h1 class="py-6">{{ 'SIGN_UP.MERCHANT.TITLE' | translate }}</h1> -->
 <form [formGroup]="form">
-    <!-- MERCHANT DATA -->
-    <table class="full-width">
-        <tr>
-            <td colspan="2">
-                <h1>{{ 'SIGN_UP.MERCHANT.TITLE' | translate }}</h1>
+  <!-- MERCHANT DATA -->
+  <div class="flex">
+    <mat-form-field class="basis-1/3 pr-2" appearance="outline">
+      <label>
+        <input
+          matInput
+          type="text"
+          min="8"
+          placeholder="{{ 'SIGN_UP.MERCHANT.NAME' | translate }}"
+          formControlName="name"
+          required
+        />
+      </label>
+      <mat-error> {{'SIGN_UP.MERCHANT.NAME_ERROR' | translate}} </mat-error>
+    </mat-form-field>
 
-                <mat-form-field>
-                    <label>
-                        <input matInput type="text" min="8" placeholder="{{ 'SIGN_UP.MERCHANT.NAME' | translate }}" formControlName="name" required>
-                    </label>
-                    <mat-error>
-                        {{'SIGN_UP.MERCHANT.NAME_ERROR' | translate}}
-                    </mat-error>
-                </mat-form-field>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <mat-form-field>
-                    <label>
-                        <input matInput
-                               type="text"
-                               #cf
-                               minlength="11"
-                               maxlength="16"
-                               placeholder="{{ 'SIGN_UP.MERCHANT.CF' | translate }}"
-                               formControlName="fiscalCode"
-                               required>
-                    </label>
-                    <mat-hint align="start">{{cf.value.length}} / {{cf.maxLength}}</mat-hint>
-                    <mat-error>
-                        {{'SIGN_UP.MERCHANT.CF_ERROR' | translate}}
-                    </mat-error>
-                </mat-form-field>
-            </td>
-        </tr>
-    </table>
+    <mat-form-field class="basis-2/3 pl-2" appearance="outline">
+      <label>
+        <input
+          matInput
+          type="text"
+          #cf
+          minlength="11"
+          maxlength="16"
+          placeholder="{{ 'SIGN_UP.MERCHANT.CF' | translate }}"
+          formControlName="fiscalCode"
+          required
+        />
+      </label>
+      <mat-hint>{{cf.value.length}} / {{cf.maxLength}}</mat-hint>
+      <mat-error> {{'SIGN_UP.MERCHANT.CF_ERROR' | translate}} </mat-error>
+    </mat-form-field>
+  </div>
+  <!-- OPTIONAL MERCHANT DATA -->
+  <hr size="2px" color="black" class="my-6" />
 
-    <!-- OPTIONAL MERCHANT DATA -->
-    <div class="row form-subgroup">
-        <p class="description" [innerHTML]="'SIGN_UP.MERCHANT.OPTIONAL_TEXT' | translate"></p>
-        <table class="full-width">
-            <tr>
-                <td colspan="2">
-                    <mat-form-field>
-                        <label>
-                            <input matInput type="text" placeholder="{{ 'SIGN_UP.MERCHANT.ADDRESS' | translate }}" formControlName="address" required>
-                        </label>
-                        <mat-error>
-                            {{'SIGN_UP.MERCHANT.ADDRESS_ERROR' | translate}}
-                        </mat-error>
-                    </mat-form-field>
-                </td>
-            </tr>
-            <tr>
-                <td colspan="1">
-                    <mat-form-field>
-                        <label>
-                            <input matInput #cap placeholder="{{ 'SIGN_UP.MERCHANT.CAP' | translate }}" formControlName="cap" required>
-                        </label>
-                        <mat-hint align="start">{{cap.value.length}} / 5</mat-hint>
-                        <mat-error>
-                            {{'SIGN_UP.MERCHANT.CAP_ERROR' | translate}}
-                        </mat-error>
-                    </mat-form-field>
-                </td>
-                <td colspan="1">
-                    <mat-form-field>
-                        <label>
-                            <input matInput type="text" placeholder="{{ 'SIGN_UP.MERCHANT.CITY' | translate }}" formControlName="city" required>
-                        </label>
-                    </mat-form-field>
-                </td>
-            </tr>
-            <tr>
-                <td colspan="2">
-                    <mat-form-field appearance="fill">
-                        <mat-label>{{ 'SIGN_UP.MERCHANT.SELECT_COUNTRY' | translate }}</mat-label>
-                        <mat-select formControlName="country" required>
-                            <mat-option *ngFor="let country of countryList" [value]="country">{{country}}</mat-option>
-                        </mat-select>
-                    </mat-form-field>
-                </td>
-            </tr>
-        </table>
-    </div>
-    <mat-divider [inset]="true"></mat-divider>
-    <table class="full-width">
-        <tr>
-            <td>
-                <mat-form-field appearance="fill">
-                    <mat-label>{{ 'SIGN_UP.MERCHANT.BUSINESS' | translate }}</mat-label>
-                    <mat-select formControlName="primaryActivity" >
-                        <mat-option *ngFor="let business of businessList" [value]="business">{{business}}</mat-option>
-                    </mat-select>
-                    <mat-error>
-                        {{'SIGN_UP.MERCHANT.BUSINESS_ERROR' | translate}}
-                    </mat-error>
-                </mat-form-field>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <mat-form-field>
-                    <label>
-                        <input matInput type="text" placeholder="{{ 'SIGN_UP.MERCHANT.WEBSITE' | translate }}" formControlName="url">
-                    </label>
-                    <mat-error>
-                        {{'SIGN_UP.MERCHANT.URL_ERROR' | translate}}
-                    </mat-error>
-                </mat-form-field>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <p class="description" [innerHTML]="'SIGN_UP.MERCHANT.OPTIONAL_WEBSITE_TEXT' | translate"></p>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <mat-form-field class="example-full-width ">
-                    <label>
-                        <textarea class="form-subgroup" matInput placeholder="{{ 'SIGN_UP.MERCHANT.DESCRIPTION' | translate }}" formControlName="description"></textarea>
-                    </label>
-                    <mat-error>
-                        {{'SIGN_UP.MERCHANT.DESCRIPTION_ERROR' | translate}}
-                    </mat-error>
-                </mat-form-field>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <p class="description">
-                    {{ 'SIGN_UP.MERCHANT.DESCRIPTION_TEXT' | translate }}
-                </p>
-            </td>
-        </tr>
-    </table>
+  <p
+    class="description"
+    [innerHTML]="'SIGN_UP.MERCHANT.OPTIONAL_TEXT' | translate"
+  ></p>
+  <div class="flex flex-wrap">
+    <mat-form-field appearance="outline">
+      <label>
+        <input
+          matInput
+          type="text"
+          placeholder="{{ 'SIGN_UP.MERCHANT.ADDRESS' | translate }}"
+          formControlName="address"
+          required
+        />
+      </label>
+      <mat-error> {{'SIGN_UP.MERCHANT.ADDRESS_ERROR' | translate}} </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="basis-1/2 pr-2" appearance="outline">
+      <label>
+        <input
+          matInput
+          #cap
+          placeholder="{{ 'SIGN_UP.MERCHANT.CAP' | translate }}"
+          formControlName="cap"
+          required
+        />
+      </label>
+      <mat-hint>{{cap.value.length}} / 5</mat-hint>
+      <mat-error> {{'SIGN_UP.MERCHANT.CAP_ERROR' | translate}} </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="basis-1/2 pl-2" appearance="outline">
+      <label>
+        <input
+          matInput
+          type="text"
+          mr-2
+          placeholder="{{ 'SIGN_UP.MERCHANT.CITY' | translate }}"
+          formControlName="city"
+          required
+        />
+      </label>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>{{ 'SIGN_UP.MERCHANT.SELECT_COUNTRY' | translate }}</mat-label>
+      <mat-select formControlName="country" required>
+        <mat-option *ngFor="let country of countryList" [value]="country"
+          >{{country}}</mat-option
+        >
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <mat-divider [inset]="true"></mat-divider>
+
+  <mat-form-field>
+    <mat-label>{{ 'SIGN_UP.MERCHANT.BUSINESS' | translate }}</mat-label>
+    <mat-select formControlName="primaryActivity">
+      <mat-option *ngFor="let business of businessList" [value]="business"
+        >{{business}}</mat-option
+      >
+    </mat-select>
+    <mat-error> {{'SIGN_UP.MERCHANT.BUSINESS_ERROR' | translate}} </mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <label>
+      <input
+        matInput
+        type="text"
+        placeholder="{{ 'SIGN_UP.MERCHANT.WEBSITE' | translate }}"
+        formControlName="url"
+      />
+    </label>
+    <mat-error> {{'SIGN_UP.MERCHANT.URL_ERROR' | translate}} </mat-error>
+  </mat-form-field>
+
+  <p
+    class="description"
+    [innerHTML]="'SIGN_UP.MERCHANT.OPTIONAL_WEBSITE_TEXT' | translate"
+  ></p>
+
+  <mat-form-field appearance="outline" class="example-full-width">
+    <label>
+      <textarea
+        matInput
+        placeholder="{{ 'SIGN_UP.MERCHANT.DESCRIPTION' | translate }}"
+        formControlName="description"
+      ></textarea>
+    </label>
+    <mat-error>
+      {{'SIGN_UP.MERCHANT.DESCRIPTION_ERROR' | translate}}
+    </mat-error>
+  </mat-form-field>
+
+  <p class="description">
+    {{ 'SIGN_UP.MERCHANT.DESCRIPTION_TEXT' | translate }}
+  </p>
 </form>

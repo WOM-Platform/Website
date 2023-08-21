@@ -1,7 +1,7 @@
 <form [formGroup]="form">
+  <p fclass="basis-full" [innerHTML]="'CONTACTS.FORM.TITLE' | translate"></p>
   <div class="flex flex-wrap">
-    <p fclass="basis-full" [innerHTML]="'CONTACTS.FORM.TITLE' | translate"></p>
-    <mat-form-field class="px-2 basis-full sm:basis-1/2">
+    <mat-form-field appearance="outline" class="px-2 basis-full sm:basis-1/2">
       <input
         matInput
         type="text"
@@ -11,7 +11,7 @@
       />
       <mat-error>{{'CONTACTS.FORM.NO_TEXT_ERROR' | translate}}</mat-error>
     </mat-form-field>
-    <mat-form-field class="px-2 basis-full sm:basis-1/2">
+    <mat-form-field appearance="outline" class="px-2 basis-full sm:basis-1/2">
       <input
         matInput
         type="text"
@@ -21,7 +21,7 @@
       />
       <mat-error>{{'CONTACTS.FORM.EMAIL_ERROR' | translate}}</mat-error>
     </mat-form-field>
-    <mat-form-field class="px-2 basis-full">
+    <mat-form-field appearance="outline" class="px-2 basis-full">
       <input
         matInput
         type="text"
@@ -31,10 +31,9 @@
       />
       <mat-error>{{'CONTACTS.FORM.NO_TEXT_ERROR' | translate}}</mat-error>
     </mat-form-field>
-    <mat-form-field class="px-2 basis-full">
+    <mat-form-field appearance="outline" class="px-2 basis-full">
       <textarea
         matInput
-        class="form-subgroup"
         placeholder="{{ 'CONTACTS.FORM.CONTENT' | translate }}"
         formControlName="content"
         required

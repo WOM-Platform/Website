@@ -1,11 +1,13 @@
 <mat-card>
   <mat-card-content>
-    <h1>{{ "SIGN_UP.TITLE" | translate }}</h1>
+    <h2 class="h2-margin-bottom">{{ "SIGN_UP.TITLE" | translate }}</h2>
     <p [innerHTML]="'SIGN_UP.SUBTITLE' | translate"></p>
     <p>
-      <a [routerLink]="['/authentication/signin']">{{
-        "SIGN_UP.BTN_ALREADY_REGISTERED" | translate
-      }}</a>
+      <a
+        class="underline text-blue-400"
+        [routerLink]="['/authentication/signin']"
+        >{{ "SIGN_UP.BTN_ALREADY_REGISTERED" | translate }}</a
+      >
     </p>
     <mat-error *ngIf="signupTimeout">
       {{ "SIGN_UP.TIMEOUT_ERROR" | translate }}
@@ -66,7 +68,9 @@
             "SIGN_UP.DONE" | translate
           }}</ng-template>
           <mat-form-field appearance="fill">
-            <h2>{{ "SIGN_UP.TERMS_CONDITIONS_TITLE" | translate }}</h2>
+            <h2 class="h2-margin-bottom">
+              {{ "SIGN_UP.TERMS_CONDITIONS_TITLE" | translate }}
+            </h2>
             <label>
               <textarea
                 class="form-subgroup full-width-input"

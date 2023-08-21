@@ -1,27 +1,37 @@
-<div fxFlex="100%">
-    <nav *ngIf="isLoaded" fxLayout="row" fxLayoutAlign="space-between stretch" >
-        <button mat-flat-button fxFlexAlign="start" (click)="prevPage()" [disabled]="page === 1" class="previous">
-            Prev
-        </button>
-        <button mat-flat-button fxFlexAlign="end" (click)="nextPage()" [disabled]="page === totalPages" class="next">
-            Next
-        </button>
-    </nav>
-    <pdf-viewer
-            [src]="source"
-            [original-size]="original_size"
-            [render-text]="render_text"
-            [rotation]="rotation"
-            [show-all]="show_all"
-            [fit-to-page]="fit_to_page"
-            [zoom]="zoom"
-            [zoom-scale]="zoom_scale"
-            [stick-to-page]="stick_to_page"
-            [external-link-target]="external_link_target"
-            [autoresize]="autoresize"
-            [show-borders]="show_borders"
-            class="pdf-viewer"
-            [page]="page"
-            (after-load-complete)="afterLoadComplete($event)"
-    ></pdf-viewer>
+<div class="basis-full">
+  <nav class="flex justify-between" *ngIf="isLoaded">
+    <button
+      mat-flat-button
+      (click)="prevPage()"
+      [disabled]="page === 1"
+      class="previous"
+    >
+      Prev
+    </button>
+    <button
+      mat-flat-button
+      (click)="nextPage()"
+      [disabled]="page === totalPages"
+      class="next"
+    >
+      Next
+    </button>
+  </nav>
+  <pdf-viewer
+    [src]="source"
+    [original-size]="original_size"
+    [render-text]="render_text"
+    [rotation]="rotation"
+    [show-all]="show_all"
+    [fit-to-page]="fit_to_page"
+    [zoom]="zoom"
+    [zoom-scale]="zoom_scale"
+    [stick-to-page]="stick_to_page"
+    [external-link-target]="external_link_target"
+    [autoresize]="autoresize"
+    [show-borders]="show_borders"
+    class="pdf-viewer"
+    [page]="page"
+    (after-load-complete)="afterLoadComplete($event)"
+  ></pdf-viewer>
 </div>

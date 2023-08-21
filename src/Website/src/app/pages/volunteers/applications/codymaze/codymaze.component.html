@@ -2,11 +2,9 @@
   <div class="page-title">
     <h1 [innerHTML]="'APPLICATIONS.CODYMAZE.TITLE' | translate"></h1>
   </div>
-  <div fxLayout="row wrap" fxLayoutGap="20px grid">
-    <div fxFlex="100%">
-      <p [innerHTML]="'APPLICATIONS.CODYMAZE.MAIN_CONTENT' | translate"></p>
-    </div>
-  </div>
+
+  <p [innerHTML]="'APPLICATIONS.CODYMAZE.MAIN_CONTENT' | translate"></p>
+
   <app-store-logos
     [appName]="'CodyMaze Mirabilandia '"
     [appleURL]="

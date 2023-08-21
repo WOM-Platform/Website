@@ -2,19 +2,17 @@
   <div class="page-title">
     <h1 [innerHTML]="'APPLICATIONS.UNIVERSITIES.TITLE' | translate"></h1>
   </div>
-  <div fxLayout="row wrap" fxLayoutGap="20px grid">
-    <div fxFlex="100%">
-      <p [innerHTML]="'APPLICATIONS.UNIVERSITIES.MAIN_CONTENT' | translate"></p>
+  <p [innerHTML]="'APPLICATIONS.UNIVERSITIES.MAIN_CONTENT' | translate"></p>
+  <mat-list>
+    <div class="flex items-center justify-center">
+      <mat-icon>link</mat-icon>
+      <a
+        class="underline text-blue-400"
+        href="https://wom.uniurb.it/"
+        target="_blank"
+        title="WOM UniUrb"
+        >wom.uniurb.it</a
+      >
     </div>
-    <div fxFlex="100%">
-      <mat-list>
-        <mat-list-item>
-          <mat-icon>link</mat-icon>
-          <a href="https://wom.uniurb.it/" target="_blank" title="WOM UniUrb"
-            >wom.uniurb.it</a
-          >
-        </mat-list-item>
-      </mat-list>
-    </div>
-  </div>
+  </mat-list>
 </div>

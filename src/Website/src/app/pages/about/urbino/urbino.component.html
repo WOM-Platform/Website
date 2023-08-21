@@ -4,14 +4,19 @@
   </div>
   <p class="content" [innerHTML]="'ABOUT.URBINO.SECTION_A.A' | translate"></p>
   <p class="content" [innerHTML]="'ABOUT.URBINO.SECTION_A.B' | translate"></p>
-
-  <app-pdf-viewer-container
-    [source]="'/assets/pdf/urbino/brochure_merchant.pdf'"
-  ></app-pdf-viewer-container>
-  <app-pdf-viewer-container
-    [source]="'/assets/pdf/urbino/locandine_offerte.pdf'"
-  ></app-pdf-viewer-container>
-  <app-pdf-viewer-container
-    [source]="'/assets/pdf/urbino/wom_adesivo.pdf'"
-  ></app-pdf-viewer-container>
+  <div class="mt-6">
+    <app-pdf-viewer-container
+      [source]="'/assets/pdf/urbino/brochure_merchant.pdf'"
+    ></app-pdf-viewer-container>
+  </div>
+  <div class="mt-6">
+    <app-pdf-viewer-container
+      [source]="'/assets/pdf/urbino/locandine_offerte.pdf'"
+    ></app-pdf-viewer-container>
+  </div>
+  <div class="mt-6">
+    <app-pdf-viewer-container
+      [source]="'/assets/pdf/urbino/wom_adesivo.pdf'"
+    ></app-pdf-viewer-container>
+  </div>
 </div>
