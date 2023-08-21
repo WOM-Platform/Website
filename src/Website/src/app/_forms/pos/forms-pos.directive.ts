@@ -9,7 +9,7 @@ import {
     Output,
     ViewChild
 } from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {UntypedFormBuilder, UntypedFormGroup, Validators} from '@angular/forms';
 import MapTypeId = google.maps.MapTypeId;
 import {GoogleMap} from '@angular/google-maps';
 import {LatLon, Pos} from "../../_models";
@@ -38,11 +38,11 @@ export class PosFormComponent implements OnInit, AfterViewInit, OnDestroy {
         mapTypeId: MapTypeId.ROADMAP
     };
 
-    @Input() form: FormGroup;
+    @Input() form: UntypedFormGroup;
     @Input() pos: Pos;
-    @Output() formChange = new EventEmitter<FormGroup>();
+    @Output() formChange = new EventEmitter<UntypedFormGroup>();
 
-    constructor(private fb: FormBuilder,
+    constructor(private fb: UntypedFormBuilder,
                 private storageService: StorageService){}
 
     ngOnInit(): any {

@@ -1,36 +1,36 @@
-import { NgModule } from '@angular/core';
+import {APP_INITIALIZER, NgModule} from '@angular/core';
 import { CommonModule } from '@angular/common';
+import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+import {TranslateLoader, TranslateModule, TranslateService} from '@ngx-translate/core';
 
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
-
-import {MatButtonModule} from '@angular/material/button';
-import {MatCardModule} from '@angular/material/card';
-import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatButtonModule} from "@angular/material/button";
+import {MatCardModule} from "@angular/material/card";
+import {MatCheckboxModule} from "@angular/material/checkbox";
 import {MatDatepickerModule} from "@angular/material/datepicker";
-import {MatDialogModule} from '@angular/material/dialog';
+import {MatDialogModule} from "@angular/material/dialog";
 import {MatDividerModule} from '@angular/material/divider';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatGridListModule} from '@angular/material/grid-list';
 import {MatIconModule} from '@angular/material/icon';
-import {MatInputModule} from '@angular/material/input';
-import {MatListModule} from "@angular/material/list";
-import {MatMenuModule} from '@angular/material/menu';
+import {MatInputModule} from "@angular/material/input";
 import {MatNativeDateModule} from "@angular/material/core";
-import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
-import {MatSelectModule} from '@angular/material/select';
 import {MatSidenavModule} from "@angular/material/sidenav";
-import {MatSlideToggleModule} from '@angular/material/slide-toggle';
-import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatStepperModule} from '@angular/material/stepper';
-import {MatTabsModule} from "@angular/material/tabs";
 import {MatToolbarModule} from '@angular/material/toolbar';
-import {MatTooltipModule} from '@angular/material/tooltip';
-import { PdfViewerContainerComponent } from '../components/pdf-viewer-container/pdf-viewer-container.component';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
-import { StoreLogosComponent } from '../components/store-logos/store-logos.component';
-
-
-
+import {MatTooltipModule} from "@angular/material/tooltip";
+import {MatListModule} from "@angular/material/list";
+import {MatTabsModule} from "@angular/material/tabs";
+import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
+import {MatSlideToggleModule} from "@angular/material/slide-toggle";
+import {MatMenuModule} from "@angular/material/menu";
+import {MatSelectModule} from "@angular/material/select";
+import {MatSnackBarModule} from "@angular/material/snack-bar";
+import { GoogleMapsModule } from '@angular/google-maps';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { HttpClient } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -38,9 +38,8 @@ import { StoreLogosComponent } from '../components/store-logos/store-logos.compo
   ],
   imports: [
     CommonModule,
-    MatButtonModule,
-    MatButtonModule,
-    MatButtonModule,
+    FormsModule,
+    GoogleMapsModule,
     MatButtonModule,
     MatCardModule,
     MatCheckboxModule,
@@ -65,12 +64,21 @@ import { StoreLogosComponent } from '../components/store-logos/store-logos.compo
     MatTabsModule,
     MatToolbarModule,
     MatTooltipModule,
+    NgxChartsModule,
     PdfViewerModule,
+    ReactiveFormsModule,
+    TranslateModule.forRoot({
+      defaultLanguage: 'it',
+      loader: {
+          provide: TranslateLoader,
+          useFactory: (TranslateLoader),
+          deps: [HttpClient]
+      }
+  }),
   ],
   exports: [
-    MatButtonModule,
-    MatButtonModule,
-    MatButtonModule,
+    FormsModule,
+    GoogleMapsModule,
     MatButtonModule,
     MatCardModule,
     MatCheckboxModule,
@@ -95,7 +103,10 @@ import { StoreLogosComponent } from '../components/store-logos/store-logos.compo
     MatTabsModule,
     MatToolbarModule,
     MatTooltipModule,
+    NgxChartsModule,
     PdfViewerModule,
-  ]
+    ReactiveFormsModule,
+    TranslateModule,
+  ],
 })
 export class SharedModule { }

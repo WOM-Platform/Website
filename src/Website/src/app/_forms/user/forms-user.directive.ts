@@ -1,5 +1,5 @@
 import {Component, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
-import {AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators} from '@angular/forms';
+import {AbstractControl, UntypedFormBuilder, UntypedFormGroup, ValidationErrors, ValidatorFn, Validators} from '@angular/forms';
 import {EventEmitter} from '@angular/core';
 
 @Component({
@@ -9,11 +9,11 @@ import {EventEmitter} from '@angular/core';
 })
 export class UserFormComponent implements OnInit, OnChanges {
 
-    @Input() form: FormGroup;
+    @Input() form: UntypedFormGroup;
     @Input() disabled: boolean;
-    @Output() formChange = new EventEmitter<FormGroup>();
+    @Output() formChange = new EventEmitter<UntypedFormGroup>();
 
-    constructor(private fb: FormBuilder){}
+    constructor(private fb: UntypedFormBuilder){}
 
     ngOnInit(): any {
  
@@ -51,7 +51,7 @@ export class UserFormComponent implements OnInit, OnChanges {
 
 
   export const isPasswordMatch = (controlName: string, matchingControlName: string) => {
-    return (formGroup: FormGroup) => {
+    return (formGroup: UntypedFormGroup) => {
         let control = formGroup.controls[controlName];
         let matchingControl = formGroup.controls[matchingControlName]
         if (

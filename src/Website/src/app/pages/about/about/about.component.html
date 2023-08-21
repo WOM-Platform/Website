@@ -9,32 +9,16 @@
   <p [innerHTML]="'ABOUT.SECTION_A_2.A' | translate"></p>
   <p [innerHTML]="'ABOUT.SECTION_A_2.B' | translate"></p>
 
-  <div
-    class="justify-content-center"
-    fxLayout="row wrap"
-    fxLayoutGap="20px grid"
-  >
-    <div fxFlex="60%" fxFlex.xs="100%">
-      <div>
-        <h2 [innerHTML]="'ABOUT.SECTION_B.TITLE' | translate"></h2>
-        <p [innerHTML]="'ABOUT.SECTION_B.A' | translate"></p>
-        <p [innerHTML]="'ABOUT.SECTION_B.B' | translate"></p>
-      </div>
-    </div>
-    <div class="justify-content-center" fxFlex="40%" fxFlex.xs="50%">
-      <img
-        fxFlex="50%"
-        fxFlex.xs="100%"
-        class="image"
-        src="../../../../assets/images/wom_pocket.png"
-        alt="WOM Pocket app"
-      />
-    </div>
-    <div fxFlex="100%">
-      <div>
-        <h2 [innerHTML]="'ABOUT.SECTION_C.TITLE' | translate"></h2>
-        <p [innerHTML]="'ABOUT.SECTION_C.A' | translate"></p>
-      </div>
-    </div>
+  <div class="flex justify-center mb-6">
+    <img src="../../../../assets/images/wom_pocket.png" alt="WOM Pocket app" />
+  </div>
+
+  <h2 [innerHTML]="'ABOUT.SECTION_B.TITLE' | translate"></h2>
+  <p [innerHTML]="'ABOUT.SECTION_B.A' | translate"></p>
+  <p [innerHTML]="'ABOUT.SECTION_B.B' | translate"></p>
+
+  <div>
+    <h2 [innerHTML]="'ABOUT.SECTION_C.TITLE' | translate"></h2>
+    <p [innerHTML]="'ABOUT.SECTION_C.A' | translate"></p>
   </div>
 </div>

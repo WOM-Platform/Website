@@ -2,8 +2,8 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {UserService} from '../../_services';
 import {ActivatedRoute, Router} from '@angular/router';
 import {TranslateService} from "@ngx-translate/core";
+import {UntypedFormBuilder, FormGroup, Validators} from "@angular/forms";
 import {MatSnackBar} from "@angular/material/snack-bar";
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 
 @Component({
     selector: 'app-user-verify',
@@ -21,7 +21,7 @@ export class UserVerifyComponent implements OnInit{
                 private userService: UserService,
                 private translate: TranslateService,
                 private snackBar: MatSnackBar,
-                private fb: FormBuilder) {
+                private fb: UntypedFormBuilder) {
     }
 
     ngOnInit() {
