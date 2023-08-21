@@ -95,7 +95,8 @@ mat-sidenav-content {
   border-radius: 10px;
 }
 
-.rounded-container-header {
+.margin-t-section {
+  margin-top: 50px;
 }
 
 .rounded-container-body {

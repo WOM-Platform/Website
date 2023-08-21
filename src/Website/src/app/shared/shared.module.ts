@@ -1,5 +1,9 @@
-import { NgModule } from '@angular/core';
+import {APP_INITIALIZER, NgModule} from '@angular/core';
 import { CommonModule } from '@angular/common';
+import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+import {TranslateLoader, TranslateModule, TranslateService} from '@ngx-translate/core';
+
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 import {MatButtonModule} from "@angular/material/button";
 import {MatCardModule} from "@angular/material/card";
@@ -24,6 +28,9 @@ import {MatSlideToggleModule} from "@angular/material/slide-toggle";
 import {MatMenuModule} from "@angular/material/menu";
 import {MatSelectModule} from "@angular/material/select";
 import {MatSnackBarModule} from "@angular/material/snack-bar";
+import { GoogleMapsModule } from '@angular/google-maps';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { HttpClient } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -31,6 +38,8 @@ import {MatSnackBarModule} from "@angular/material/snack-bar";
   ],
   imports: [
     CommonModule,
+    FormsModule,
+    GoogleMapsModule,
     MatButtonModule,
     MatCardModule,
     MatCheckboxModule,
@@ -55,9 +64,21 @@ import {MatSnackBarModule} from "@angular/material/snack-bar";
     MatTabsModule,
     MatToolbarModule,
     MatTooltipModule,
+    NgxChartsModule,
     PdfViewerModule,
+    ReactiveFormsModule,
+    TranslateModule.forRoot({
+      defaultLanguage: 'it',
+      loader: {
+          provide: TranslateLoader,
+          useFactory: (TranslateLoader),
+          deps: [HttpClient]
+      }
+  }),
   ],
   exports: [
+    FormsModule,
+    GoogleMapsModule,
     MatButtonModule,
     MatCardModule,
     MatCheckboxModule,
@@ -82,7 +103,10 @@ import {MatSnackBarModule} from "@angular/material/snack-bar";
     MatTabsModule,
     MatToolbarModule,
     MatTooltipModule,
+    NgxChartsModule,
     PdfViewerModule,
-  ]
+    ReactiveFormsModule,
+    TranslateModule,
+  ],
 })
 export class SharedModule { }

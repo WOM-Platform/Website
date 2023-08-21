@@ -24,6 +24,7 @@
               "src/favicon.ico"
             ],
             "styles": [
+              "./node_modules/leaflet/dist/leaflet.css",
               "src/styles.css",
               "src/theme.scss",
               "node_modules/primeng/resources/themes/saga-blue/theme.css",
