@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {UntypedFormBuilder, UntypedFormGroup, Validators} from '@angular/forms';
+import {FormGroup, UntypedFormBuilder, UntypedFormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import {UserService, MerchantService, PosService} from '../../_services';
 import {Merchant, PosRegistration, UserRegistrationPayload} from '../../_models';
@@ -14,7 +14,7 @@ import {MatDialog} from "@angular/material/dialog";
   styleUrls: ['./signup.component.css']
 })
 export class MerchantSignUpComponent implements OnInit {
-    formUser: UntypedFormGroup;
+    formUser: FormGroup;
     formMerchant: UntypedFormGroup;
     formPos: UntypedFormGroup;
     formSubmit: UntypedFormGroup;

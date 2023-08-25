@@ -1,8 +1,11 @@
 <!-- <h1 class="py-6">{{ 'SIGN_UP.MERCHANT.TITLE' | translate }}</h1> -->
 <form [formGroup]="form">
   <!-- MERCHANT DATA -->
-  <div class="flex">
-    <mat-form-field class="basis-1/3 pr-2" appearance="outline">
+  <div class="flex flex-wrap">
+    <mat-form-field
+      class="basis-full sm:pr-2 sm:basis-1/2"
+      appearance="outline"
+    >
       <label>
         <input
           matInput
@@ -16,7 +19,10 @@
       <mat-error> {{'SIGN_UP.MERCHANT.NAME_ERROR' | translate}} </mat-error>
     </mat-form-field>
 
-    <mat-form-field class="basis-2/3 pl-2" appearance="outline">
+    <mat-form-field
+      class="basis-full sm:pl-2 sm:basis-1/2"
+      appearance="outline"
+    >
       <label>
         <input
           matInput

@@ -1,6 +1,14 @@
 import {Component, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
-import {AbstractControl, UntypedFormBuilder, UntypedFormGroup, ValidationErrors, ValidatorFn, Validators} from '@angular/forms';
+import {AbstractControl, FormBuilder, FormGroup, UntypedFormBuilder, UntypedFormGroup, ValidationErrors, ValidatorFn, Validators} from '@angular/forms';
 import {EventEmitter} from '@angular/core';
+
+type MerchantType = {
+  email: AbstractControl<any, any>;
+  password: AbstractControl<any, any>;
+  passwordRepeat: AbstractControl<any, any>;
+  firstName: AbstractControl<any, any>;
+  lastName: AbstractControl<any, any>;
+}
 
 @Component({
     selector: 'app-forms-user',
@@ -9,24 +17,22 @@ import {EventEmitter} from '@angular/core';
 })
 export class UserFormComponent implements OnInit, OnChanges {
 
-    @Input() form: UntypedFormGroup;
+    @Input() form: FormGroup;
     @Input() disabled: boolean;
     @Output() formChange = new EventEmitter<UntypedFormGroup>();
 
-    constructor(private fb: UntypedFormBuilder){}
+    constructor(private fb: FormBuilder){}
 
     ngOnInit(): any {
- 
-
-        this.form = this.fb.group({
-            email: [{ value: '', disabled: this.disabled }, Validators.email],
-            password: [{ value: '', disabled: this.disabled }, Validators.required],
-            passwordRepeat: [{ value: '', disabled: this.disabled }, Validators.required], 
-            firstName: [{ value: '', disabled: this.disabled }, Validators.required],
-            lastName: [{ value: '', disabled: this.disabled }, Validators.required]
-          },       {
-            validator: isPasswordMatch("password", "passwordRepeat")
-          });
+      this.form = this.fb.group({
+        email: ['', [Validators.email]],
+        password: ['', [Validators.required]],
+        passwordRepeat: ['', [Validators.required]],
+        firstName: ['', [Validators.required]],
+        lastName: ['', [Validators.required]]
+      }, {
+        validators: isPasswordMatch
+      });
 
         this.form.get('email').valueChanges.subscribe(value => this.formChange.emit(this.form));
         this.form.get('password').valueChanges.subscribe(value => this.formChange.emit(this.form));
@@ -36,7 +42,6 @@ export class UserFormComponent implements OnInit, OnChanges {
     }
 
     ngOnChanges(changes: SimpleChanges): any {
-        console.log('changed');
         if (this.disabled) {
             this.form.controls.email.disable();
             this.form.controls.password.disable();
@@ -51,7 +56,7 @@ export class UserFormComponent implements OnInit, OnChanges {
 
 
   export const isPasswordMatch = (controlName: string, matchingControlName: string) => {
-    return (formGroup: UntypedFormGroup) => {
+    return (formGroup: FormGroup) => {
         let control = formGroup.controls[controlName];
         let matchingControl = formGroup.controls[matchingControlName]
         if (

@@ -185,13 +185,14 @@
       "MERCHANT_TITLE": "Merchant"
     },
     "MERCHANT": {
-      "WELCOME": "Benvenuto",
-      "MERCHANT_TITLE": "I tuoi Merchant",
       "ADD_MERCHANT_TOOLTIP": "Aggiungi un nuovo Merchant",
+      "EDIT_MERCHANT_BTN": "Modifica",
       "EDIT_MERCHANT_TOOLTIP": "Modifica i dati di questo Merchant",
       "ENABLED_MERCHANT_TOOLTIP": "Questo merchant è pronto ad accettare WOM!",
+      "FIND_OUT_STATS": "Scopri le tue statistiche",
+      "MERCHANT_TITLE": "I tuoi Merchant",
       "NOT_ENABLED_MERCHANT_TOOLTIP": "Merchant non abilitato - clicca qui per avere ulteriori informazioni",
-      "EDIT_MERCHANT_BTN": "Modifica",
+      "WELCOME": "Benvenuto",
       "MERCHANT": {
         "NAME": "Merchant",
         "CODE": "Codice fiscale",

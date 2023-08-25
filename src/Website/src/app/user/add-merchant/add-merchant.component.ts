@@ -32,6 +32,15 @@ export class AddMerchantDialogComponent implements OnInit {
     }
 
     onSubmit(): any {
+
+        console.log("TEST")
+        console.log(this.formMerchant)
+
+        if (this.formMerchant.invalid) {
+            for (const control of Object.keys(this.formMerchant.controls)) {
+                this.formMerchant.controls[control].markAsTouched();
+              }
+        } else {
         switch (this.data.type) {
             case DialogType.create:
                 this.create();
@@ -40,6 +49,7 @@ export class AddMerchantDialogComponent implements OnInit {
                 this.edit();
                 break;
         }
+    }
     }
 
     onCancel(): any {
