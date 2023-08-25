@@ -33,7 +33,7 @@ img {
 .lang-select {
   @apply flex items-center font-semibold;
   margin-left: 10px;
-  width: 50px;
+  width: 80px;
   color: white;
 }
 
@@ -90,11 +90,7 @@ img {
   z-index: 1;
 }
 
-.lang-select {
-  margin-left: 10px;
-  width: 50px;
-  color: white;
-}
+
 .menu-pc {
   display: none;
 }
@@ -135,12 +131,6 @@ img {
 }
 
 .nav-icon-button {
-  color: white;
-}
-
-.lang-select {
-  margin-left: 10px;
-  width: 50px;
   color: white;
 }
 

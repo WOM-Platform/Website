@@ -193,15 +193,17 @@
           style="height: 50px"
         ></mat-divider>
         <!-- end menu pc-->
+
         <mat-select
           class="lang-select"
-          [(ngModel)]="selectLang"
+          [(value)]="selectLang"
           (selectionChange)="setTransLanguage()"
         >
           <mat-option *ngFor="let lang of TransLang" value="{{ lang }}">{{
             lang
           }}</mat-option>
         </mat-select>
+
         <button
           type="button"
           aria-label="Toggle drawer"

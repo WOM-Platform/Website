@@ -85,6 +85,8 @@ export class MerchantSignUpComponent implements OnInit {
               this.signupComplete = true;
               this.displayProgressSpinner = false;
 
+              this.errorMessage = 'SIGN_UP.GENERIC_ERROR';
+
               return;
         }
         this.requireMerchantRegistration = false;
@@ -110,6 +112,8 @@ export class MerchantSignUpComponent implements OnInit {
             }
         }, error => {
             if (error.status === 422) {
+                this.errorMessage = 'SIGN_UP.EMAIL_EXISTS_ERROR';
+            } else if (error.status === 400){
                 this.errorMessage = 'SIGN_UP.EMAIL_EXISTS_ERROR';
             } else {
                 this.errorMessage = 'SIGN_UP.GENERIC_ERROR';
@@ -151,6 +155,8 @@ export class MerchantSignUpComponent implements OnInit {
         }, error => {
             if (error.status === 422) {
                 this.errorMessage = 'SIGN_UP.FISCAL_CODE_EXISTS_ERROR';
+            }  else if (error.status === 400){
+                this.errorMessage = 'SIGN_UP.EMAIL_EXISTS_ERROR';
             } else {
                 this.errorMessage = 'SIGN_UP.GENERIC_ERROR';
             }
@@ -189,7 +195,6 @@ export class MerchantSignUpComponent implements OnInit {
 
   logIn(username: string, password: string): any {
     if (this.userSignedIn) {
-        console.log('user already signed in');
         if (this.requireMerchantRegistration) {
             this.registerMerchant();
         } else {

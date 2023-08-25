@@ -1,13 +1,18 @@
 <div class="container">
   <div class="mat-card">
-    <h3>{{ "USER.HOME.WELCOME" | translate }}, {{ username }}</h3>
+    <h2>{{ "USER.HOME.WELCOME" | translate }}, {{ username }}</h2>
     <mat-divider></mat-divider>
-    <div class="flex flex-wrap justify-center">
-      <div class="header-box-link section text-center basis-full md:basis-1/2">
+    <div class="flex flex-wrap justify-center mt-6">
+      <div class="header-box-link text-center basis-full md:basis-1/2">
         <a routerLink="/user/merchant">
-          <div class="header-box-title">
+          <button
+            class="rounded-full px-12 py-4 text-2xl bg-sky-500 hover:bg-sky-700"
+          >
+            {{ "USER.HOME.MERCHANT_TITLE" | translate }}
+          </button>
+          <!-- <div class="header-box-title">
             <h1 [innerHTML]="'USER.HOME.MERCHANT_TITLE' | translate"></h1>
-          </div>
+          </div> -->
         </a>
       </div>
     </div>

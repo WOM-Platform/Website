@@ -13,8 +13,6 @@
       {{ "SIGN_UP.TIMEOUT_ERROR" | translate }}
     </mat-error>
     <mat-error *ngIf="signupInvalid">
-      {{ "SIGN_UP.FORM_ERROR" | translate }}
-      <br />
       {{ errorMessage | translate }}
     </mat-error>
     <mat-horizontal-stepper [linear]="true" #stepper>
@@ -101,8 +99,10 @@
           </mat-checkbox>
           <br /><br />
           <mat-divider [inset]="true"></mat-divider>
-          <div>
-            <button mat-button matStepperPrevious>Back</button>
+          <div class="flex justify-end gap-3">
+            <button mat-button matStepperPrevious>
+              {{ "SIGN_UP.BACK" | translate }}
+            </button>
             <button mat-raised-button color="primary" (click)="onSubmit()">
               {{ "SIGN_UP.BTN_SIGN_UP" | translate }}
             </button>

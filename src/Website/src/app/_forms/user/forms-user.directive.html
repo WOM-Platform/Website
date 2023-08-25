@@ -6,7 +6,7 @@
           {{ 'SIGN_UP.REPRESENTATIVE.TITLE' | translate }}
         </h2>
 
-        <mat-form-field>
+        <mat-form-field appearance="outline">
           <label drawer>
             <input
               matInput
@@ -23,7 +23,7 @@
     </tr>
     <tr>
       <td>
-        <mat-form-field>
+        <mat-form-field class="mr-2" appearance="outline">
           <label drawer>
             <input
               matInput
@@ -39,8 +39,9 @@
           </mat-error>
         </mat-form-field>
       </td>
+
       <td>
-        <mat-form-field>
+        <mat-form-field class="ml-2" appearance="outline">
           <label drawer>
             <input
               matInput
@@ -58,7 +59,7 @@
     </tr>
     <tr>
       <td>
-        <mat-form-field>
+        <mat-form-field class="mr-2" appearance="outline">
           <label drawer>
             <input
               matInput
@@ -74,7 +75,7 @@
         </mat-form-field>
       </td>
       <td>
-        <mat-form-field>
+        <mat-form-field class="ml-2" appearance="outline">
           <label drawer>
             <input
               matInput
@@ -92,8 +93,8 @@
     </tr>
   </table>
   <mat-divider [inset]="true"></mat-divider>
-  <div>
-    <button mat-button color="primary" matStepperNext>
+  <div class="flex justify-end">
+    <button mat-raised-button color="primary" matStepperNext>
       {{'SIGN_UP.NEXT' | translate}}
     </button>
   </div>

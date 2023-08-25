@@ -174,7 +174,7 @@
     "TC_ERROR": "Please accept the terms and conditions",
     "BTN_SIGN_UP": "Sign Up",
     "FISCAL_CODE_EXISTS_ERROR": "The merchant’s fiscal code has already been used",
-    "EMAIL_EXISTS_ERROR": "This email address has already been used or the selected password is too weak.",
+    "EMAIL_EXISTS_ERROR": "This email address has already been used",
     "GENERIC_ERROR": "There are errors in the form data",
     "FORM_ERROR": "Error - check all fields and try again",
     "TIMEOUT_ERROR": "Server is taking too long to respond - make sure your internet connection is stable and try again"
@@ -248,7 +248,7 @@
       "TITLE": "Please verify your account by clicking on the link that you received in your email.",
       "SUBTITLE": "Didn’t receive the email?",
       "SEND_EMAIL_LINK": "Click here",
-      "SEND_EMAIL_TEXT": "to receive another one for",
+      "SEND_EMAIL_TEXT": "To receive another one for",
       "REQUEST_NEW_EMAIL_LINK": "Send",
       "EMAIL_SENT": "Verification email sent!"
     },
