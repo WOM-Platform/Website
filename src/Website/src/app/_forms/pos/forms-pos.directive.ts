@@ -48,11 +48,12 @@ export class PosFormComponent implements OnInit, AfterViewInit, OnDestroy {
     ngOnInit(): any {
         this.form = this.fb.group({
             name: ['', [Validators.required, Validators.minLength(4)]],
-            latitude: [{value: 0, disabled: false}, Validators.required],
-            longitude: [{value: 0, disabled: false}, Validators.required],
-            url: ['', !Validators.required],
-            isActive: [{value: this.pos ? this.pos.isActive : true}, !Validators.required]
-        });
+            latitude: [0, [Validators.required, this.latLonValidator]],
+            longitude: [0, [Validators.required, this.latLonValidator]],
+            url: ['', Validators.required],
+            isActive: [this.pos ? this.pos.isActive : true, Validators.required]
+          });
+          
 
         this.form.get('name').valueChanges.subscribe(value => this.formChange.emit(this.form));
         this.form.get('latitude').valueChanges.subscribe(value => this.formChange.emit(this.form));
@@ -147,6 +148,15 @@ export class PosFormComponent implements OnInit, AfterViewInit, OnDestroy {
             this.marker.setPosition(latLng);
         }
         this.markerLocation();
+    }
+
+    latLonValidator(control) {
+        const value = control.value;
+        if (value !== 0) {
+          return null; // Value is valid
+        } else {
+          return { nonZero: true }; // Value is not valid
+        }
     }
 
     mapClick(event): any {

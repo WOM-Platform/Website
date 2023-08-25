@@ -23,6 +23,11 @@ export class AddPosDialogComponent {
     }
 
     onSubmit(): any {
+        if (this.formPos.invalid) {
+            for (const control of Object.keys(this.formPos.controls)) {
+                this.formPos.controls[control].markAsTouched();
+              }
+        } else {
         this.formInputError = this.formPos === undefined;
         if (this.formPos.controls.latitude.value === 0) {
             this.formInputError = true;
@@ -32,6 +37,8 @@ export class AddPosDialogComponent {
             this.edit();
         }else {
             this.create();
+        }
+
         }
     }
 

@@ -134,18 +134,23 @@
                   }}</mat-card-subtitle>
                 </mat-card-header>
                 <ng-container *ngFor="let pos of merchant.pos">
-                  <mat-card-content>
-                    <button
-                      mat-icon-button
-                      color="primary"
-                      (click)="editPos(merchant.id, pos)"
-                    >
-                      <mat-icon>edit</mat-icon>
-                    </button>
-                    <button mat-button (click)="editPos(merchant.id, pos)">
+                  <div
+                    class="w-96 flex justify-between items-center"
+                    (click)="editPos(merchant.id, pos)"
+                  >
+                    <p>
                       {{ pos.name }}
-                    </button>
-                  </mat-card-content>
+                    </p>
+                    <div>
+                      <button
+                        mat-icon-button
+                        color="primary"
+                        (click)="editPos(merchant.id, pos)"
+                      >
+                        <mat-icon>edit</mat-icon>
+                      </button>
+                    </div>
+                  </div>
                 </ng-container>
               </mat-card>
             </mat-expansion-panel>
