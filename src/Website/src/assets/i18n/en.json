@@ -165,7 +165,9 @@
       "MAP_TITLE": "",
       "LAT": "Latitude",
       "LON": "Longitude",
-      "LAT_LON_ERROR": "Please select a location on the map",
+      "MAP_SELECT": "Please select a location on the map",
+      "LAT_ERROR": "Indicate latitude by map or manually",
+      "LON_ERROR": "Indicate longitude by map or manually",
       "URL": "URL",
       "URL_OPTIONAL_TEXT": "<i>Optional.</i>\nWill be shown to users when the payment is confirmed. Can be used to show more information about the POS of the Merchant."
     },

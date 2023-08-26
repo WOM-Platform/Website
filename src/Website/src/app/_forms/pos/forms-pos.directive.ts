@@ -50,11 +50,10 @@ export class PosFormComponent implements OnInit, AfterViewInit, OnDestroy {
             name: ['', [Validators.required, Validators.minLength(4)]],
             latitude: [0, [Validators.required, this.latLonValidator]],
             longitude: [0, [Validators.required, this.latLonValidator]],
-            url: ['', Validators.required],
-            isActive: [this.pos ? this.pos.isActive : true, Validators.required]
+            url: [''],
+            isActive: [(this.pos !== undefined && this.pos !== null)? this.pos.isActive : 'true', Validators.required]
           });
           
-
         this.form.get('name').valueChanges.subscribe(value => this.formChange.emit(this.form));
         this.form.get('latitude').valueChanges.subscribe(value => this.formChange.emit(this.form));
         this.form.get('longitude').valueChanges.subscribe(value => this.formChange.emit(this.form));
