@@ -7,7 +7,8 @@
   color: green;
 }
 
-html, body {
+html,
+body {
   height: 100%;
   background: #fbfbfb;
 }
@@ -18,15 +19,15 @@ body {
 }
 
 .h2-margin-bottom {
-  @apply mb-3
+  @apply mb-3;
 }
 
 .container {
-  @apply mx-auto max-w-screen-lg
+  @apply mx-auto max-w-screen-lg mb-20;
 }
 
 .margin-top-p {
-  @apply mt-12
+  @apply mt-12;
 }
 /* This fixes pages with sidebar, which otherwise collapse */
 mat-sidenav-content {
@@ -70,10 +71,8 @@ mat-sidenav-content {
   color: white;
 }
 
-
-
-
-.image, .image-header {
+.image,
+.image-header {
   width: 100%;
   align-content: center;
   text-align: center;
@@ -89,7 +88,6 @@ mat-sidenav-content {
 .section {
   margin-top: 20px;
 }
-
 
 .rounded-container {
   padding: 5px !important;
@@ -117,7 +115,7 @@ mat-form-field label {
 .font-notes {
   font-size: 0.9rem;
 }
-  
+
 @media only screen and (max-width: 768px) {
   .mobile-only {
     display: block;
@@ -130,18 +128,17 @@ mat-form-field label {
   .page-title {
     margin: 2.5rem 0;
   }
-  
+
   font-notes {
     font-size: 0.9rem;
   }
-
 
   .font-notes {
     font-size: 0.8rem;
   }
 
   .container {
-    @apply mx-auto max-w-screen-sm px-5
+    @apply mx-auto max-w-screen-sm px-5;
   }
 }
 

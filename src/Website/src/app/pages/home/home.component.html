@@ -47,7 +47,7 @@
           <button
             class="px-4 py-2 rounded-full"
             [innerHTML]="'GENERIC.BUTTON.MORE' | translate"
-            (click)="navigate('about-section/about')"
+            [routerLink]="['/about-section/about']"
           ></button>
         </div>
       </div>

@@ -6,9 +6,11 @@
   <div class="flex flex-wrap">
     <div class="basis-full">
       <h2 [innerHTML]="'MERCHANT.SECTION_A.TITLE' | translate"></h2>
-      <p [innerHTML]="'MERCHANT.SECTION_A.A' | translate"></p>
-      <p [innerHTML]="'MERCHANT.SECTION_A.B' | translate"></p>
-      <p [innerHTML]="'MERCHANT.SECTION_A.C' | translate"></p>
+      <div class="mt-6">
+        <p [innerHTML]="'MERCHANT.SECTION_A.A' | translate"></p>
+        <p [innerHTML]="'MERCHANT.SECTION_A.B' | translate"></p>
+        <p [innerHTML]="'MERCHANT.SECTION_A.C' | translate"></p>
+      </div>
     </div>
 
     <!-- FILTERS -->
@@ -105,11 +107,13 @@
     <button (click)="addMarker()">Add marker</button>
     -->
 
-  <div class="flex mt-6">
+  <div class="flex mt-11">
     <div class="basis-full">
       <h2 [innerHTML]="'MERCHANT.SECTION_B.TITLE' | translate"></h2>
-      <p [innerHTML]="'MERCHANT.SECTION_B.A' | translate"></p>
-      <p [innerHTML]="'MERCHANT.SECTION_B.B' | translate"></p>
+      <div class="mt-6">
+        <p [innerHTML]="'MERCHANT.SECTION_B.A' | translate"></p>
+        <p [innerHTML]="'MERCHANT.SECTION_B.B' | translate"></p>
+      </div>
     </div>
   </div>
 
