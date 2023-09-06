@@ -1,14 +1,55 @@
-<h2 mat-dialog-title>{{( data.type === dialogTypes.create ? "USER.ADD_MERCHANT.TITLE" : "USER.EDIT_MERCHANT.TITLE") | translate}}</h2>
-<mat-dialog-content >
-    <mat-error *ngIf="formInputError">
-        {{(data.type === dialogTypes.create ? "USER.ADD_MERCHANT.INPUT_ERROR" : "USER.EDIT_MERCHANT.INPUT_ERROR") | translate}}
-    </mat-error>
-    <mat-error *ngIf="formApiError">
-        {{(data.type === dialogTypes.create ? "USER.ADD_MERCHANT.API_ERROR" : "USER.EDIT_MERCHANT.API_ERROR") | translate}}
-    </mat-error>
-    <app-forms-merchant [(form)]="formMerchant" [merchant]="merchantData" ></app-forms-merchant>
+<div mat-dialog-title>
+  <h2 class="font-semibold">
+    {{
+      (data.type === dialogTypes.create
+        ? "USER.ADD_MERCHANT.TITLE"
+        : "USER.EDIT_MERCHANT.TITLE"
+      ) | translate
+    }}
+  </h2>
+</div>
+<mat-dialog-content>
+  <mat-error *ngIf="formInputError">
+    {{
+      (data.type === dialogTypes.create
+        ? "USER.ADD_MERCHANT.INPUT_ERROR"
+        : "USER.EDIT_MERCHANT.INPUT_ERROR"
+      ) | translate
+    }}
+  </mat-error>
+  <mat-error *ngIf="formApiError">
+    {{
+      (data.type === dialogTypes.create
+        ? "USER.ADD_MERCHANT.API_ERROR"
+        : "USER.EDIT_MERCHANT.API_ERROR"
+      ) | translate
+    }}
+  </mat-error>
+  <app-forms-merchant
+    [(form)]="formMerchant"
+    [merchant]="merchantData"
+  ></app-forms-merchant>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
-    <button mat-button mat-dialog-close (click)="onCancel()">{{(data.type === dialogTypes.create ? "USER.ADD_MERCHANT.CANCEL" : "USER.EDIT_MERCHANT.CANCEL") | translate}}</button>
-    <button mat-button (click)="onSubmit()" cdkFocusInitial>{{(data.type === dialogTypes.create ? "USER.ADD_MERCHANT.ADD" : "USER.EDIT_MERCHANT.ADD") | translate}}</button>
+  <button mat-button mat-dialog-close (click)="onCancel()">
+    {{
+      (data.type === dialogTypes.create
+        ? "USER.ADD_MERCHANT.CANCEL"
+        : "USER.EDIT_MERCHANT.CANCEL"
+      ) | translate
+    }}
+  </button>
+  <button
+    color="primary"
+    mat-raised-button
+    (click)="onSubmit()"
+    cdkFocusInitial
+  >
+    {{
+      (data.type === dialogTypes.create
+        ? "USER.ADD_MERCHANT.ADD"
+        : "USER.EDIT_MERCHANT.ADD"
+      ) | translate
+    }}
+  </button>
 </mat-dialog-actions>

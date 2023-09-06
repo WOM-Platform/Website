@@ -1,9 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {UserService, MerchantService, AuthService} from '../../_services';
 import {Merchant, Merchants, Pos} from '../../_models';
-import {MatDialog} from '@angular/material/dialog';
 import {AddMerchantDialogComponent, MerchantDialogData} from '../add-merchant/add-merchant.component';
-import {MatSnackBar} from '@angular/material/snack-bar';
 import {TranslateService} from '@ngx-translate/core';
 import {first} from 'rxjs/operators';
 import {AddPosDialogComponent, PosDialogData} from '../add-pos/add-pos.component';
@@ -14,6 +12,9 @@ import {EmailData} from "../../_models/emailData";
 import {environment} from "../../../environments/environment";
 import {DialogConfirmCancelComponent} from "../../components/dialog-confirm-cancel/dialog-confirm-cancel";
 import {DialogConfirmComponent} from "../../components/dialog-confirm/dialog-confirm";
+import {MatDialog} from "@angular/material/dialog";
+import {MatSnackBar} from "@angular/material/snack-bar";
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-user-merchant',
@@ -25,13 +26,15 @@ export class UserMerchantComponent implements OnInit, OnDestroy {
     merchants: Merchants;
     merchantSubscription: Subscription;
 
-    constructor(public dialog: MatDialog,
-                private snackBar: MatSnackBar,
-                private userService: UserService,
-                private merchantService: MerchantService,
+    constructor(
+        public dialog: MatDialog,
                 private authService: AuthService,
                 private emailService: EmailService,
-                private translate: TranslateService) {
+                private router: Router,
+                private snackBar: MatSnackBar,
+                private translate: TranslateService,
+                private userService: UserService,
+                ) {
     }
 
     ngOnInit(): any {
@@ -73,6 +76,7 @@ export class UserMerchantComponent implements OnInit, OnDestroy {
     }
 
     openPosDialog(posData: PosDialogData): void {
+
         const dialogRef = this.dialog.open(AddPosDialogComponent, {
             data: posData
         });
@@ -176,5 +180,9 @@ export class UserMerchantComponent implements OnInit, OnDestroy {
         this.snackBar.open(message, null, {
             duration: 5000
         });
+    }
+
+    openStats() {
+        this.router.navigateByUrl("/user/user-stats")
     }
 }

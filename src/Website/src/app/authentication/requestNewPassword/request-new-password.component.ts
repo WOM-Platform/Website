@@ -2,8 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {UserService} from '../../_services/user.service';
 import {User} from '../../_models';
 import {ActivatedRoute, Router} from '@angular/router';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {MatSnackBar} from '@angular/material/snack-bar';
+import {UntypedFormBuilder, UntypedFormGroup, Validators} from '@angular/forms';
 
 @Component({
     selector: 'app-request-new-password',
@@ -12,10 +11,10 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 })
 export class RequestNewPasswordComponent implements OnInit {
     requestSent = false;
-    form: FormGroup;
+    form: UntypedFormGroup;
 
     constructor(private userService: UserService,
-                private fb: FormBuilder){}
+                private fb: UntypedFormBuilder){}
 
     ngOnInit(): void {
         this.form = this.fb.group({

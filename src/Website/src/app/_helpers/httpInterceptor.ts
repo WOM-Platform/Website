@@ -10,9 +10,9 @@ import { Injectable } from '@angular/core';
 import {Observable, of, throwError} from 'rxjs';
 import {catchError, tap} from 'rxjs/operators';
 import {UserLogin} from '../_models';
-import {MatSnackBar} from "@angular/material/snack-bar";
 import {UserService} from "../_services";
 import {Router} from "@angular/router";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Injectable()
 export class TokenInterceptorService implements HttpInterceptor {

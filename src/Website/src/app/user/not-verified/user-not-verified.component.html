@@ -1,9 +1,12 @@
-<div class="container">
-    <p>{{"USER.NOT_VERIFIED.TITLE" | translate}} </p>
-    <span>{{"USER.NOT_VERIFIED.SUBTITLE" | translate}}</span><br>
-    <span>
-        <button mat-stroked-button color="primary" (click)="sendValidationEmail()" >{{"USER.NOT_VERIFIED.SEND_EMAIL_LINK" | translate}}</button>
-        {{"USER.NOT_VERIFIED.SEND_EMAIL_TEXT" | translate}}
-        <b>{{user.email}}</b>
-    </span>
+<div class="mt-11 container">
+  <h2>{{ "USER.NOT_VERIFIED.TITLE" | translate }}</h2>
+  <h3>{{ "USER.NOT_VERIFIED.SUBTITLE" | translate }}</h3>
+  <br />
+  {{ "USER.NOT_VERIFIED.SEND_EMAIL_TEXT" | translate }}
+  <b>{{ user.email }}</b>
+  <div class="flex justify-center mt-6">
+    <button mat-stroked-button color="primary" (click)="sendValidationEmail()">
+      {{ "USER.NOT_VERIFIED.SEND_EMAIL_LINK" | translate }}
+    </button>
+  </div>
 </div>

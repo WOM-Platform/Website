@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
-import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
+import { Router, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { AuthService, UserService } from '../_services';
 import { Location, LocationStrategy, PathLocationStrategy } from '@angular/common';
 import {RolesService} from "../_services/roles.service";
 
 @Injectable({ providedIn: 'root' })
-export class ManageGuard implements CanActivate {
+export class ManageGuard  {
     constructor(
         private router: Router,
         private authenticationService: AuthService,

@@ -1,0 +1,65 @@
+@use '@angular/material' as mat;
+
+@include mat.core();
+
+$my-primary: mat.define-palette(mat.$indigo-palette, 500);
+$my-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
+
+$my-theme: mat.define-light-theme((
+ color: (
+   primary: $my-primary,
+   accent: $my-accent,
+ ),
+ typography: mat.define-typography-config(),
+ density: 0,
+));
+
+@include mat.all-component-themes($my-theme);
+
+@font-face {
+    font-family: "Roboto";
+    src: local("Roboto"), url(./assets/fonts/Roboto/Roboto-Light.ttf) format("truetype");
+}
+
+@font-face {
+    font-family: "Raleway";
+    src: local("Raleway"), url(./assets/fonts/Raleway/Raleway-SemiBold.ttf) format("truetype");
+}
+
+.mat-h1, .mat-headline, .mat-typography .mat-h1, .mat-typography .mat-headline, .mat-typography h1 {
+    font-family: "Raleway";
+    font-size: 2.6rem;
+}
+
+.mat-h2, .mat-title, .mat-typography .mat-h2, .mat-typography .mat-title, .mat-typography h2 {
+    font-family: "Raleway";
+    font-size: 1.5rem;
+}
+
+p {
+    font-size: 1.1rem;
+    font-family: "Roboto";
+    line-height: 1.4;
+    text-align: justify;
+    text-justify: inter-word;
+    margin-bottom: 1.5rem;
+}
+
+.margin-0 {
+    margin: 0;
+}
+
+@media (max-width: 767px) {
+    .mat-h1, .mat-headline, .mat-typography .mat-h1, .mat-typography .mat-headline, .mat-typography h1 {
+        font-size: 1.8rem;
+
+      }
+
+    .mat-h2, .mat-title, .mat-typography .mat-h2, .mat-typography .mat-title, .mat-typography h2 {
+        font-size: 1.3rem;
+    }
+
+    p, li {
+        font-size: 1.1rem;
+    }
+}

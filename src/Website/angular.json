@@ -24,8 +24,9 @@
               "src/favicon.ico"
             ],
             "styles": [
-              "./node_modules/@angular/material/prebuilt-themes/purple-green.css",
+              "./node_modules/leaflet/dist/leaflet.css",
               "src/styles.css",
+              "src/theme.scss",
               "node_modules/primeng/resources/themes/saga-blue/theme.css",
               "node_modules/primeng/resources/primeng.min.css",
               "node_modules/primeicons/primeicons.css"
@@ -125,7 +126,8 @@
             "mock": {
               "browserTarget": "src:build:mock"
             }
-          }
+          },
+          "defaultConfiguration": "development" 
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
@@ -175,8 +177,9 @@
       }
     }
   },
-  "defaultProject": "src",
   "cli": {
-    "defaultCollection": "@angular-eslint/schematics"
+    "schematicCollections": [
+      "@angular-eslint/schematics"
+    ]
   }
 }

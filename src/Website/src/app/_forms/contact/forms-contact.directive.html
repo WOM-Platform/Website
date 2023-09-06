@@ -1,22 +1,44 @@
 <form [formGroup]="form">
-    <div fxLayout="row wrap" fxLayoutGap="20px grid">
-        <p fxFlex="100%" [innerHTML]="'CONTACTS.FORM.TITLE' | translate"></p>
-        <mat-form-field fxFlex="50%" fxFlex.xs="100%">
-            <input matInput type="text" placeholder="{{ 'CONTACTS.FORM.SENDER_NAME' | translate }}" formControlName="senderName" required>
-            <mat-error>{{'CONTACTS.FORM.NO_TEXT_ERROR' | translate}}</mat-error>
-        </mat-form-field>
-            <mat-form-field fxFlex="50%" fxFlex.xs="100%">
-            <input matInput type="text" placeholder="{{ 'CONTACTS.FORM.SENDER_EMAIL' | translate }}" formControlName="senderEmail" required>
-            <mat-error>{{'CONTACTS.FORM.EMAIL_ERROR' | translate}}</mat-error>
-        </mat-form-field>
-        <mat-form-field fxFlex="100%">
-            <input matInput type="text" placeholder="{{ 'CONTACTS.FORM.SUBJECT' | translate }}" formControlName="subject" required>
-            <mat-error>{{'CONTACTS.FORM.NO_TEXT_ERROR' | translate}}</mat-error>
-        </mat-form-field>
-        <mat-form-field fxFlex="100%">
-            <textarea matInput class="form-subgroup" placeholder="{{ 'CONTACTS.FORM.CONTENT' | translate }}" formControlName="content" required></textarea>
-            <mat-error>{{'CONTACTS.FORM.NO_TEXT_ERROR' | translate}}</mat-error>
-        </mat-form-field>
-    </div>
+  <p fclass="basis-full" [innerHTML]="'CONTACTS.FORM.TITLE' | translate"></p>
+  <div class="flex flex-wrap">
+    <mat-form-field appearance="outline" class="px-2 basis-full sm:basis-1/2">
+      <input
+        matInput
+        type="text"
+        placeholder="{{ 'CONTACTS.FORM.SENDER_NAME' | translate }}"
+        formControlName="senderName"
+        required
+      />
+      <mat-error>{{'CONTACTS.FORM.NO_TEXT_ERROR' | translate}}</mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="px-2 basis-full sm:basis-1/2">
+      <input
+        matInput
+        type="text"
+        placeholder="{{ 'CONTACTS.FORM.SENDER_EMAIL' | translate }}"
+        formControlName="senderEmail"
+        required
+      />
+      <mat-error>{{'CONTACTS.FORM.EMAIL_ERROR' | translate}}</mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="px-2 basis-full">
+      <input
+        matInput
+        type="text"
+        placeholder="{{ 'CONTACTS.FORM.SUBJECT' | translate }}"
+        formControlName="subject"
+        required
+      />
+      <mat-error>{{'CONTACTS.FORM.NO_TEXT_ERROR' | translate}}</mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="px-2 basis-full">
+      <textarea
+        matInput
+        placeholder="{{ 'CONTACTS.FORM.CONTENT' | translate }}"
+        formControlName="content"
+        required
+      ></textarea>
+      <mat-error>{{'CONTACTS.FORM.NO_TEXT_ERROR' | translate}}</mat-error>
+    </mat-form-field>
+  </div>
 </form>
-

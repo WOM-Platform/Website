@@ -1,0 +1,75 @@
+.img-badge {
+  max-width: 50%;
+  display: inline-block;
+  text-align: center;
+  vertical-align: middle;
+  font-style: italic;
+}
+
+.badge-row {
+  display: inline-block;
+}
+
+.badge a {
+  border: 0;
+  text-decoration: none;
+}
+
+.badge img {
+  max-width: 50%;
+  height: auto;
+}
+
+.badge img.off {
+  opacity: 0.5;
+}
+
+.img-container {
+  text-align: center;
+  position: relative;
+}
+
+.image-overlay {
+  width: 23%;
+  min-width: 125px;
+  position: absolute;
+  left: 7%;
+  top: 55%;
+}
+
+.header-box-title {
+  background-color: #444558;
+  color: white;
+  margin: 20px;
+  align-content: center;
+  text-align: center;
+  object-fit: contain;
+}
+
+.header-box-content button {
+  background-color: #444558;
+  color: white;
+}
+
+
+.header-box-title h1 {
+  @apply px-4 py-2;
+  font-weight: bold;
+  font-size: 3em;
+}
+.header-box-link a:link {
+  text-decoration: none;
+}
+.header-box-link a:visited {
+  text-decoration: none;
+}
+.header-box-link a:hover {
+  text-decoration: none;
+}
+.header-box-link a:active {
+  text-decoration: none;
+}
+
+.header-box-content {
+  margin: 20px;
+}

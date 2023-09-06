@@ -1,0 +1,19 @@
+<div class="flex justify-around flex-wrap" style="margin: 3rem 0">
+  <!-- First app-store-logo component -->
+  <app-store-logo
+    class="logo"
+    [appURL]="googleURL"
+    [storeImage]="'assets/images/badge_google_play.png'"
+    [alt]="'Google Play'"
+    [title]="'Download ' + appName + ' from Google Play'"
+  ></app-store-logo>
+
+  <!-- Second app-store-logo component -->
+  <app-store-logo
+    class="logo"
+    [appURL]="appleURL"
+    [storeImage]="'assets/images/badge_app_store.png'"
+    [alt]="'Apple App Store'"
+    [title]="'Download ' + appName + ' from App Store'"
+  ></app-store-logo>
+</div>

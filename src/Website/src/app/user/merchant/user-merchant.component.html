@@ -1,110 +1,167 @@
 <div class="container">
-    <div class="mat-card" >
-        <h3>{{"USER.MERCHANT.WELCOME" | translate}}, {{username}}</h3>
-        <mat-divider></mat-divider>
-        <div class="merchant-container">
-            <div class="merchant-header">
-                <h1>{{"USER.MERCHANT.MERCHANT_TITLE" | translate}}</h1>
-                <div class="button-container" >
-                    <button mat-icon-button color="primary" matTooltip="{{'USER.MERCHANT.ADD_MERCHANT_TOOLTIP' | translate}}"
-                            (click)="addMerchant()">
-                        <mat-icon>add</mat-icon>
+  <h3 class="welcome-greetings">
+    {{ "USER.MERCHANT.WELCOME" | translate }},
+    <span class="text-lime-500 font-semibold">{{ username }}</span>
+  </h3>
+  <mat-divider></mat-divider>
+  <div>
+    <div class="grid justify-items-stretch mt-11">
+      <h2 class="merchant-title">
+        {{ "USER.MERCHANT.MERCHANT_TITLE" | translate }}
+      </h2>
+
+      <button
+        class="justify-self-end"
+        mat-mini-fab
+        color="primary"
+        matTooltip="{{ 'USER.MERCHANT.ADD_MERCHANT_TOOLTIP' | translate }}"
+        (click)="addMerchant()"
+      >
+        <mat-icon>add</mat-icon>
+      </button>
+    </div>
+    <div class="mt-11">
+      <ng-container *ngIf="merchants">
+        <mat-accordion class="merchant-mat-accordion">
+          <ng-container *ngFor="let merchant of merchants.merchants">
+            <mat-expansion-panel>
+              <mat-expansion-panel-header class="my-2">
+                <mat-panel-title>
+                  <ng-template
+                    [ngIf]="merchant.enabled"
+                    [ngIfElse]="not_enabled"
+                  >
+                    <button
+                      mat-icon-button
+                      color="primary"
+                      matTooltip="{{
+                        'USER.MERCHANT.ENABLED_MERCHANT_TOOLTIP' | translate
+                      }}"
+                    >
+                      <mat-icon class="green-icon">check_circle</mat-icon>
                     </button>
-                </div>
-            </div>
+                    {{ merchant.name }}
+                  </ng-template>
+                  <ng-template #not_enabled>
+                    <button
+                      mat-icon-button
+                      color="primary"
+                      matTooltip="{{
+                        'USER.MERCHANT.NOT_ENABLED_MERCHANT_TOOLTIP' | translate
+                      }}"
+                    >
+                      <mat-icon color="warn">remove_circle</mat-icon>
+                    </button>
+                    <span style="margin-right: 5px">{{ merchant.name }}</span>
+                    <span>
+                      <button
+                        mat-flat-button
+                        color="warn"
+                        (click)="requestEnabling(merchant)"
+                      >
+                        {{
+                          "USER.MERCHANT.MERCHANT.SEND_ACTIVATION_REQUEST"
+                            | translate
+                        }}
+                      </button>
+                    </span>
+                  </ng-template>
+                  <button
+                    mat-icon-button
+                    color="primary"
+                    matTooltip="{{
+                      'USER.MERCHANT.EDIT_MERCHANT_TOOLTIP' | translate
+                    }}"
+                    (click)="editMerchant(merchant)"
+                  >
+                    <mat-icon>edit</mat-icon>
+                  </button>
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+              <mat-divider></mat-divider>
 
-            <ng-container *ngIf="merchants">
-                <mat-accordion class="merchant-mat-accordion">
-                    <ng-container *ngFor="let merchant of merchants.merchants">
-                        <mat-expansion-panel>
-                            <mat-expansion-panel-header>
-                                <mat-panel-title>
-                                    <button mat-icon-button
-                                            color="primary"
-                                            matTooltip="{{'USER.MERCHANT.EDIT_MERCHANT_TOOLTIP' | translate}}"
-                                            (click)="editMerchant(merchant)">
-                                        <mat-icon>edit</mat-icon>
-                                    </button>
-                                    <ng-template [ngIf]="merchant.enabled" [ngIfElse]="not_enabled">
-                                        <button mat-icon-button
-                                                color="primary"
-                                                matTooltip="{{'USER.MERCHANT.ENABLED_MERCHANT_TOOLTIP' | translate}}">
-                                            <mat-icon class="green-icon">check_circle</mat-icon>
-                                        </button>
-                                        {{merchant.name}}
-                                    </ng-template>
-                                    <ng-template #not_enabled>
-                                        <button mat-icon-button
-                                                color="primary"
-                                                matTooltip="{{'USER.MERCHANT.NOT_ENABLED_MERCHANT_TOOLTIP' | translate}}">
-                                            <mat-icon color="warn">remove_circle</mat-icon>
-                                        </button>
-                                        <span style="margin-right: 5px">{{merchant.name}}</span>
-                                        <span>
-                                            <button mat-flat-button color="warn" (click)="requestEnabling(merchant)">{{'USER.MERCHANT.MERCHANT.SEND_ACTIVATION_REQUEST' | translate}}</button>
-                                        </span>
-                                    </ng-template>
-                                </mat-panel-title>
-                            </mat-expansion-panel-header>
-                            <mat-divider></mat-divider>
-
-                            <p>
-                                <b>{{"USER.MERCHANT.MERCHANT.CODE" | translate}}</b>:
-                                {{merchant.fiscalCode}}
-                            </p>
-                            <p>
-                                <b>{{"USER.MERCHANT.MERCHANT.ADDRESS" | translate}}</b>:
-                                {{merchant.address}},
-                                {{merchant.zipCode}},
-                                {{merchant.city}},
-                                {{merchant.country}}
-                            </p>
-                            <p>
-                                <b>{{"USER.MERCHANT.MERCHANT.ACTIVITY_TYPE" | translate}}</b>:
-                                {{merchant.primaryActivity}}
-                            </p>
-                            <p *ngIf="merchant.url">
-                                <b>{{"USER.MERCHANT.MERCHANT.URL" | translate}}</b>:
-                                <a [href]="merchant.url" target="_blank">{{merchant.url}}</a>
-                            </p>
-                            <p *ngIf="merchant.description">
-                                {{merchant.description}}
-                            </p>
-                            <!--<button mat-raised-button
+              <p>
+                <b>{{ "USER.MERCHANT.MERCHANT.CODE" | translate }}</b
+                >:
+                {{ merchant.fiscalCode }}
+              </p>
+              <p>
+                <b>{{ "USER.MERCHANT.MERCHANT.ADDRESS" | translate }}</b
+                >: {{ merchant.address }}, {{ merchant.zipCode }},
+                {{ merchant.city }},
+                {{ merchant.country }}
+              </p>
+              <p>
+                <b>{{ "USER.MERCHANT.MERCHANT.ACTIVITY_TYPE" | translate }}</b
+                >:
+                {{ merchant.primaryActivity }}
+              </p>
+              <p *ngIf="merchant.url">
+                <b>{{ "USER.MERCHANT.MERCHANT.URL" | translate }}</b
+                >:
+                <a [href]="merchant.url" target="_blank">{{ merchant.url }}</a>
+              </p>
+              <p *ngIf="merchant.description">
+                {{ merchant.description }}
+              </p>
+              <!--<button mat-raised-button
                                     color="primary"
                                     matTooltip="{{'USER.MERCHANT.EDIT_MERCHANT_TOOLTIP' | translate}}"
                                     (click)="editMerchant(merchant)">
                                 {{"USER.MERCHANT.EDIT_MERCHANT_BTN" | translate}}
                             </button>-->
-                            <!-- POS LIST -->
-                            <mat-card class="pos-card">
-                                <mat-card-header>
-                                    <div class="button-container">
-                                        <button *ngIf="merchant.enabled" mat-icon-button
-                                                color="primary"
-                                                matTooltip="{{'USER.MERCHANT.MERCHANT.ADD_POS_TOOLTIP' | translate}} {{merchant.name}}"
-                                                (click)="addPos(merchant.id)">
-                                            <mat-icon>add</mat-icon>
-                                        </button>
-                                    </div>
-                                    <mat-card-title>{{"USER.MERCHANT.MERCHANT.POS_TITLE" | translate}}</mat-card-title>
-                                    <mat-card-subtitle>{{"USER.MERCHANT.MERCHANT.POS_SUBTITLE" | translate}}</mat-card-subtitle>
-                                </mat-card-header>
-                                    <ng-container *ngFor="let pos of merchant.pos">
-                                        <mat-card-content>
-                                            <button mat-icon-button
-                                                    color="primary"
-                                                    (click)="editPos(merchant.id, pos)">
-                                                <mat-icon>edit</mat-icon>
-                                            </button>
-                                        <button mat-button (click)="editPos(merchant.id, pos)">{{pos.name}}</button>
-                                        </mat-card-content>
-                                    </ng-container>
-                            </mat-card>
-                        </mat-expansion-panel>
-                    </ng-container>
-                </mat-accordion>
-            </ng-container>
-        </div>
+              <!-- POS LIST -->
+              <mat-card class="pos-card">
+                <mat-card-header>
+                  <div class="button-container">
+                    <button
+                      *ngIf="merchant.enabled"
+                      mat-icon-button
+                      color="primary"
+                      matTooltip="{{
+                        'USER.MERCHANT.MERCHANT.ADD_POS_TOOLTIP' | translate
+                      }} {{ merchant.name }}"
+                      (click)="addPos(merchant.id)"
+                    >
+                      <mat-icon>add</mat-icon>
+                    </button>
+                  </div>
+                  <mat-card-title>{{
+                    "USER.MERCHANT.MERCHANT.POS_TITLE" | translate
+                  }}</mat-card-title>
+                  <mat-card-subtitle>{{
+                    "USER.MERCHANT.MERCHANT.POS_SUBTITLE" | translate
+                  }}</mat-card-subtitle>
+                </mat-card-header>
+                <ng-container *ngFor="let pos of merchant.pos">
+                  <div
+                    class="w-96 flex justify-between items-center pl-5"
+                    (click)="editPos(merchant.id, pos)"
+                  >
+                    <p>
+                      {{ pos.name }}
+                    </p>
+                    <div>
+                      <button
+                        mat-icon-button
+                        color="primary"
+                        (click)="editPos(merchant.id, pos)"
+                      >
+                        <mat-icon>edit</mat-icon>
+                      </button>
+                    </div>
+                  </div>
+                </ng-container>
+              </mat-card>
+            </mat-expansion-panel>
+          </ng-container>
+        </mat-accordion>
+        <!-- <div class="flex justify-center margin-t-section">
+          <button (click)="openStats()" class="btn-stats">
+            {{ "USER.MERCHANT.FIND_OUT_STATS" | translate }}
+          </button>
+        </div> -->
+      </ng-container>
     </div>
+  </div>
 </div>

@@ -1,10 +1,10 @@
 import {Component, Inject} from '@angular/core';
 import {Pos, PosRegistration} from '../../_models';
 import {first} from 'rxjs/operators';
-import {FormGroup} from '@angular/forms';
-import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
+import {UntypedFormGroup} from '@angular/forms';
 import {PosService} from '../../_services';
 import {StorageService} from "../../_services/storage.service";
+import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 
 @Component({
     selector: 'app-pos-dialog',
@@ -12,7 +12,7 @@ import {StorageService} from "../../_services/storage.service";
     styleUrls: ['add-pos.component.css']
 })
 export class AddPosDialogComponent {
-    formPos: FormGroup;
+    formPos: UntypedFormGroup;
     formInputError: boolean;
     formApiError: boolean;
 
@@ -23,6 +23,11 @@ export class AddPosDialogComponent {
     }
 
     onSubmit(): any {
+        if (this.formPos.invalid) {
+            for (const control of Object.keys(this.formPos.controls)) {
+                this.formPos.controls[control].markAsTouched();
+              }
+        } else {
         this.formInputError = this.formPos === undefined;
         if (this.formPos.controls.latitude.value === 0) {
             this.formInputError = true;
@@ -32,6 +37,8 @@ export class AddPosDialogComponent {
             this.edit();
         }else {
             this.create();
+        }
+
         }
     }
 

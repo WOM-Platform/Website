@@ -1,12 +1,12 @@
 import {ChangeDetectorRef, Component, Inject, OnInit} from '@angular/core';
 import {Merchant} from '../../_models';
 import {first} from 'rxjs/operators';
-import {FormGroup} from '@angular/forms';
+import {UntypedFormGroup} from '@angular/forms';
 import {MerchantService} from '../../_services';
-import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {DialogType} from '../../_models/dialogType';
 import {StorageService} from "../../_services/storage.service";
 import {MerchantFormComponent} from "../../_forms/merchant/forms-merchant.directive";
+import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 
 @Component({
     selector: 'app-merchant-dialog',
@@ -14,7 +14,7 @@ import {MerchantFormComponent} from "../../_forms/merchant/forms-merchant.direct
     styleUrls: ['add-merchant.component.css']
 })
 export class AddMerchantDialogComponent implements OnInit {
-    formMerchant: FormGroup;
+    formMerchant: UntypedFormGroup;
     formInputError: boolean;
     formApiError: boolean;
     dialogTypes = DialogType;
@@ -32,6 +32,15 @@ export class AddMerchantDialogComponent implements OnInit {
     }
 
     onSubmit(): any {
+
+        console.log("TEST")
+        console.log(this.formMerchant)
+
+        if (this.formMerchant.invalid) {
+            for (const control of Object.keys(this.formMerchant.controls)) {
+                this.formMerchant.controls[control].markAsTouched();
+              }
+        } else {
         switch (this.data.type) {
             case DialogType.create:
                 this.create();
@@ -40,6 +49,7 @@ export class AddMerchantDialogComponent implements OnInit {
                 this.edit();
                 break;
         }
+    }
     }
 
     onCancel(): any {

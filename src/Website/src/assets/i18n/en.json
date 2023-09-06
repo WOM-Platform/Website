@@ -11,7 +11,8 @@
     "ABOUT": {
       "TITLE": "About",
       "ABOUT": "About",
-      "URBINO": "Wom for Urbino"
+      "URBINO": "Wom for Urbino",
+      "FANO": "Wom for Fano"
     },
     "INSTRUMENT": "Instrument",
     "CONTACTS": "Contact Us",
@@ -31,7 +32,8 @@
     "ABOUT": {
       "TITLE": "About",
       "ABOUT": "About",
-      "URBINO": "Wom for Urbino"
+      "URBINO": "Wom for Urbino",
+      "FANO": "Wom for Fano"
     },
     "VOLUNTEER": "Volunteers",
     "MERCHANT": "Merchant",
@@ -63,7 +65,8 @@
       "UNIVERSITIES": "Universities",
       "AWORLD": "AWorld",
       "CODYMAZE": "CodyMaze",
-      "BALANCE": "Balance"
+      "BALANCE": "Balance",
+      "LIBRARIES": "Libraries"
     },
     "PRIVACY": {
       "PRIVACY": "Privacy policy",
@@ -116,7 +119,7 @@
       "EMAIL_ERROR": "Please provide a valid email address",
       "PASSWORD": "Password",
       "REPEAT_PASSWORD": "Repeat password",
-      "PASSWORD_ERROR": "Please provide a valid password",
+      "PASSWORD_ERROR": "Please provide a minimum password of 8 characters",
       "PASSWORD_NO_MATCH_ERROR": "Passwords do not match",
       "NAME": "First Name",
       "NAME_ERROR": "Please provide your name",
@@ -162,7 +165,9 @@
       "MAP_TITLE": "",
       "LAT": "Latitude",
       "LON": "Longitude",
-      "LAT_LON_ERROR": "Please select a location on the map",
+      "MAP_SELECT": "Please select a location on the map",
+      "LAT_ERROR": "Indicate latitude by map or manually",
+      "LON_ERROR": "Indicate longitude by map or manually",
       "URL": "URL",
       "URL_OPTIONAL_TEXT": "<i>Optional.</i>\nWill be shown to users when the payment is confirmed. Can be used to show more information about the POS of the Merchant."
     },
@@ -171,7 +176,7 @@
     "TC_ERROR": "Please accept the terms and conditions",
     "BTN_SIGN_UP": "Sign Up",
     "FISCAL_CODE_EXISTS_ERROR": "The merchant’s fiscal code has already been used",
-    "EMAIL_EXISTS_ERROR": "This email address has already been used or the selected password is too weak.",
+    "EMAIL_EXISTS_ERROR": "This email address has already been used",
     "GENERIC_ERROR": "There are errors in the form data",
     "FORM_ERROR": "Error - check all fields and try again",
     "TIMEOUT_ERROR": "Server is taking too long to respond - make sure your internet connection is stable and try again"
@@ -182,12 +187,13 @@
       "MERCHANT_TITLE": "Merchant"
     },
     "MERCHANT": {
-      "WELCOME": "Welcome",
-      "MERCHANT_TITLE": "Your Merchants",
       "ADD_MERCHANT_TOOLTIP": "Add a new Merchant",
       "EDIT_MERCHANT_TOOLTIP": "Edit this merchant’s data",
       "ENABLED_MERCHANT_TOOLTIP": "This merchant is ready to accept WOM!",
+      "FIND_OUT_STATS": "Find out your statistics",
+      "MERCHANT_TITLE": "Your Merchants",
       "NOT_ENABLED_MERCHANT_TOOLTIP": "Merchant not enabled - click here for further information",
+      "WELCOME": "Welcome",
       "EDIT_MERCHANT_BTN": "Edit",
       "MERCHANT": {
         "NAME": "Merchant",
@@ -245,7 +251,7 @@
       "TITLE": "Please verify your account by clicking on the link that you received in your email.",
       "SUBTITLE": "Didn’t receive the email?",
       "SEND_EMAIL_LINK": "Click here",
-      "SEND_EMAIL_TEXT": "to receive another one for",
+      "SEND_EMAIL_TEXT": "To receive another one for",
       "REQUEST_NEW_EMAIL_LINK": "Send",
       "EMAIL_SENT": "Verification email sent!"
     },
@@ -353,11 +359,14 @@
       "A": "Business owners, shopkeepers, public entities, or any other private citizen (generically called Merchants) may freely decide to provide goods, services, or discounts to owners of WOM vouchers. To do so, they create a <b>WOM payment</b> that allows them to choose which kind of effort to reward: WOM vouchers can be filtered by purpose, location, and time. Goods, services, and discounts can be determined freely by the Merchant."
     },
     "URBINO": {
-      "TITLE": "WOM FOR URBINO",
+      "TITLE": "WOM for Urbino",
       "SECTION_A": {
         "A": "This section is dedicated to <b>WOM for Urbino</b>, the project that, since <b>may 2022</b>, has been launched in the city of <b>Urbino</b>.\n<b>WOM for Urbino</b> is the first experimentation platform for the WOM proejct. The choice of Urbino as the <b>first city to use WOM</b> comes from the collaboration with <b>DIGIT srl</b>, <b>University of Urbino</b> and <b>City of Urbino</b>, which gave us its patronage.",
         "B": "The project launched on <b>4 may 2022</b> during a press conference (you can see the conference <a href=\"https://youtu.be/1kiTku77HO4\" target=\"_blank\">Clicking here</a>).\nRight now citizens, students and turists have various possibilities to obtain <b>WOM</b> and use them to obtain <b>discounts</b> in stores conventioned with the project."
       }
+    },
+    "FANO": {
+      "TITLE": "WOM for Fano"
     }
   },
   "VOLUNTEER": {
@@ -595,7 +604,20 @@
         "<p>This document may be updated in the future. Refer to the last update date at the bottom of the document.</p>"
       ]
     },
-    "LAST_UPDATE": "Last update"
+    "LAST_UPDATE": "Last update",
+    "MONTH":{
+      "JANUARY": "January",
+      "FEBRUARY": "February",
+      "MARCH":"March",
+      "APRIL": "April",
+      "MAY": "May",
+      "JUNE":"June",
+      "JULY":"July",
+      "AUGUST": "August",
+      "SEPTEMBER": "September",
+      "OCTOBER":"October",
+      "DECEMBER": "December"
+    }
   },
   "APPLICATIONS": {
     "SIDENAV": {
@@ -603,15 +625,23 @@
       "OVERVIEW": "Overview",
       "STEPCOUNTER": "Stepcounter",
       "AWORLD": "AWorld",
-      "UNIVERSITIES": "Universities"
+      "UNIVERSITIES": "Universities",
+      "LIBRARIES": "Libraries"
     },
     "OVERVIEW": {
       "TITLE": "List of applications for gaining WOMs",
-      "MAIN_CONTENT": "WOM vouchers can be earned by voluntarily doing a socially useful action. For a WOM to be generated, <b>the activity has to be formally acknowledged by the WOM platform.</b> <br> Volounteers can obtain WOMs through the use of <b>specific applications</b> that recognize the social value of their actions <br> <b>Check out the list of the applications in the side menu!</b>"
+      "MAIN_CONTENT": "WOM vouchers can be earned by voluntarily doing a socially useful action. For a WOM to be generated, <b>the activity has to be formally acknowledged by the WOM platform.</b> <br>",
+      "CONTENT_A": "Volunteers can obtain WOMs through the use of <b>specific applications</b> that recognize the social value of their actions. <br> <b>Check out the list of the applications in the side menu!</b>"
     },
     "STEPCOUNTER": {
       "TITLE": "WOM Stepcounter",
       "MAIN_CONTENT": "Keep track of the steps you take with WOM StepCounter, an app that rewards you for the things you do in your daily life!<br /><br />Thanks to WOM StepCounter you will be able to convert your steps into digital vouchers, that reward social effort. You will receive vouchers if you keep track of more than 3.000 steps per day."
+    },
+    "LIBRARIES": {
+      "TITLE": "Libraries",
+      "MAIN_CONTENT":"The WOM platform rewards actions that have an intrinsic social value which translates into the enrichment of volunteers, as also their cultural growth and their education. Access to books and literature is instrumental for this purpose, which is often guaranteed by libraries and bookstores that stimulate individually citizens and can involve both schools and group activities. The WOM platform recognises how much value reading has as a vehicle for cultural and social growth, for both individuals and the community.",
+      "SECOND_TITLE": "Libraries in Fano, the “city that reads“",
+      "SECOND_CONTENT":"Within the “ReadSharing: la lettura condivisa” project, financed by the “Città che legge 2020” initiative, a series of activities were launched to involve high school students, stimulating their approach to reading and making it become an experience of exchange and personal gratification.<br/>The <a href='https://sistemabibliotecariofano.it'>Biblioteca Federiciana and Mediateca Montanari of Fano</a> contribute to the WOM platform by giving value to reading books, participating in reading groups or cultural events, creating digital contents and the participating in the project's editorials that have been activated along with the high schools of Fano."
     },
     "UNIVERSITIES": {
       "TITLE": "Universities",

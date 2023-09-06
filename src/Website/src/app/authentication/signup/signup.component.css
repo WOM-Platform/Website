@@ -34,3 +34,7 @@ mat-form-field {
 .mat-checkbox-merchant {
   padding: 10px;
 }
+
+.full-width-input {
+  width: 100%;
+}

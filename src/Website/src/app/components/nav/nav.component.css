@@ -1,0 +1,190 @@
+.mat-toolbar {
+  background-color: #444558;
+}
+button.mat-menu-item {
+  outline:none;
+}
+
+.example-spacer {
+  flex: 1 1 auto;
+}
+
+.app-toolbar {
+  height: 50px;
+  position: fixed;
+  position: -ms-device-fixed; /* For macOS/iOS Safari */
+  top: 0; /* Sets the sticky toolbar to be on top */
+  z-index: 1000; /* Ensure that your app's content doesn't overlap the toolbar */
+}
+
+img {
+  max-width: 100%;
+  max-height: 50%;
+}
+
+.nav-button {
+  color: white;
+}
+
+.nav-icon-button {
+  color: white;
+}
+
+.lang-select {
+  @apply flex items-center font-semibold;
+  margin-left: 10px;
+  width: 80px;
+  color: white;
+}
+
+.mat-divider {
+  border-color: white;
+}
+
+.divider {
+  height: 80%;
+}
+
+
+
+/* ------------------------------------------------------------- */ 
+.toolbar-item-spacer { 
+  flex: 1 1 auto; 
+} 
+ 
+.app-container { 
+  position: absolute; 
+  right: 0; 
+  height: 90%; 
+  margin: 0;  
+}   
+.app-sidenav { 
+  width: 230px; 
+  border: 1px solid black;
+  border-right: 0px;
+  border-top: 0px;
+} 
+.app-sidenav-content { 
+  display: flex; 
+  height: 100%; 
+  align-items: center; 
+  justify-content: center; 
+} 
+
+
+.sidenav-container {
+  height: 100%;
+}
+
+.sidenav {
+  width: 200px;
+}
+
+.sidenav .mat-toolbar {
+  background: inherit;
+}
+
+.mat-toolbar.mat-primary {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+
+.menu-pc {
+  display: none;
+}
+
+mat-nav-list {
+  padding: 0;
+}
+mat-nav-list a {
+  font-size: 11pt;
+}
+
+mat-toolbar {
+  background-color: #444558;
+}
+button.mat-menu-item {
+  outline:none;
+}
+
+.example-spacer {
+  flex: 1 1 auto;
+}
+
+.app-toolbar {
+  height: 50px;
+  position: fixed;
+  position: -ms-device-fixed; /* For macOS/iOS Safari */
+  top: 0; /* Sets the sticky toolbar to be on top */
+  z-index: 1000; /* Ensure that your app's content doesn't overlap the toolbar */
+}
+
+img {
+  max-width: 100%;
+  max-height: 50%;
+}
+
+.nav-button {
+  color: white;
+}
+
+.nav-icon-button {
+  color: white;
+}
+
+.mat-divider {
+  border-color: white;
+}
+
+.divider {
+  height: 80%;
+}
+
+.item-mob{
+  @apply flex flex-row items-center bg-slate-500
+}
+
+button.selected:active {
+  background-color: black;
+  color: white;
+}
+
+.mat-list-item{
+  @apply bg-red-400
+}
+
+
+/* RESPONSIVE */
+@media screen and (max-width: 768px) {
+  .nav-button {
+    display: none;
+  }
+
+  .sidenav {
+    width: 300px
+  }
+
+  .mat-expansion-panel-header .mat-content {
+    font-size: 15pt;
+  }
+}
+@media (min-width: 769px) {
+  .nav-icon-button {
+    display: none;
+  }
+}
+
+@media(min-width: 767px) {
+  .sidenav {
+    display: none
+  }
+  .menu-pc {
+    @apply flex items-center text-white;
+  }
+
+  .menu-pc button {
+    @apply font-semibold
+  }
+}

@@ -1,11 +1,12 @@
 import {Component, OnDestroy, OnInit} from "@angular/core";
-import {Merchants} from "../../_models";
-import {AuthService} from "../../_services";
+
 import {Subscription} from "rxjs";
 import {MatDatepickerInputEvent} from "@angular/material/datepicker";
 
 import { jsPDF } from "jspdf";
 import html2canvas from 'html2canvas';
+import { AuthService } from "src/app/_services";
+import { Merchants } from "src/app/_models";
 
 @Component({
     selector: 'app-user-stats',

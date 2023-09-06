@@ -4,3 +4,5 @@
 docker-compose.secrets.yml
 index-dev.html
 environment.dev-local.ts
+
+/src/Website/.angular/cache

@@ -1,12 +1,12 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {FormGroup, UntypedFormBuilder, UntypedFormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import {UserService, MerchantService, PosService} from '../../_services';
 import {Merchant, PosRegistration, UserRegistrationPayload} from '../../_models';
 import {first} from 'rxjs/operators';
-import {MatDialog} from '@angular/material/dialog';
 import {LogInErrorDialogComponent} from './signup-login-error.directive';
 import {TranslateService} from "@ngx-translate/core";
+import {MatDialog} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-merchant-signup',
@@ -15,9 +15,9 @@ import {TranslateService} from "@ngx-translate/core";
 })
 export class MerchantSignUpComponent implements OnInit {
     formUser: FormGroup;
-    formMerchant: FormGroup;
-    formPos: FormGroup;
-    formSubmit: FormGroup;
+    formMerchant: UntypedFormGroup;
+    formPos: UntypedFormGroup;
+    formSubmit: UntypedFormGroup;
     errorMessage: string;
 
     signupInvalid: boolean;
@@ -38,7 +38,7 @@ export class MerchantSignUpComponent implements OnInit {
       displayProgressSpinner = false;
 
       constructor(public dialog: MatDialog,
-                  private fb: FormBuilder,
+                  private fb: UntypedFormBuilder,
                   private route: ActivatedRoute,
                   private router: Router,
                   private userService: UserService,
@@ -85,6 +85,8 @@ export class MerchantSignUpComponent implements OnInit {
               this.signupComplete = true;
               this.displayProgressSpinner = false;
 
+              this.errorMessage = 'SIGN_UP.GENERIC_ERROR';
+
               return;
         }
         this.requireMerchantRegistration = false;
@@ -110,6 +112,8 @@ export class MerchantSignUpComponent implements OnInit {
             }
         }, error => {
             if (error.status === 422) {
+                this.errorMessage = 'SIGN_UP.EMAIL_EXISTS_ERROR';
+            } else if (error.status === 400){
                 this.errorMessage = 'SIGN_UP.EMAIL_EXISTS_ERROR';
             } else {
                 this.errorMessage = 'SIGN_UP.GENERIC_ERROR';
@@ -151,6 +155,8 @@ export class MerchantSignUpComponent implements OnInit {
         }, error => {
             if (error.status === 422) {
                 this.errorMessage = 'SIGN_UP.FISCAL_CODE_EXISTS_ERROR';
+            }  else if (error.status === 400){
+                this.errorMessage = 'SIGN_UP.EMAIL_EXISTS_ERROR';
             } else {
                 this.errorMessage = 'SIGN_UP.GENERIC_ERROR';
             }
@@ -189,7 +195,6 @@ export class MerchantSignUpComponent implements OnInit {
 
   logIn(username: string, password: string): any {
     if (this.userSignedIn) {
-        console.log('user already signed in');
         if (this.requireMerchantRegistration) {
             this.registerMerchant();
         } else {

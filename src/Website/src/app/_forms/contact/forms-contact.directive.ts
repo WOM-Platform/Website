@@ -1,5 +1,5 @@
 import {Component, Input, OnInit, Output} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {UntypedFormBuilder, UntypedFormGroup, Validators} from '@angular/forms';
 import {EventEmitter} from '@angular/core';
 import {EmailData} from "../../_models/emailData";
 
@@ -9,9 +9,9 @@ import {EmailData} from "../../_models/emailData";
     styleUrls: ['./forms-contact.directive.css', '../forms.directive.css']
 })
 export class ContactFormComponent implements OnInit {
-    @Input() form: FormGroup;
-    @Output() formChange = new EventEmitter<FormGroup>();
-    constructor(private fb: FormBuilder){}
+    @Input() form: UntypedFormGroup;
+    @Output() formChange = new EventEmitter<UntypedFormGroup>();
+    constructor(private fb: UntypedFormBuilder){}
 
     ngOnInit(): any {
         this.form = this.fb.group({

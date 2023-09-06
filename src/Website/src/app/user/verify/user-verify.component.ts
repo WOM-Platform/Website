@@ -2,8 +2,8 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {UserService} from '../../_services';
 import {ActivatedRoute, Router} from '@angular/router';
 import {TranslateService} from "@ngx-translate/core";
+import {UntypedFormBuilder, FormGroup, Validators} from "@angular/forms";
 import {MatSnackBar} from "@angular/material/snack-bar";
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 
 @Component({
     selector: 'app-user-verify',
@@ -21,26 +21,32 @@ export class UserVerifyComponent implements OnInit{
                 private userService: UserService,
                 private translate: TranslateService,
                 private snackBar: MatSnackBar,
-                private fb: FormBuilder) {
+                private fb: UntypedFormBuilder) {
     }
 
     ngOnInit() {
         this.errorText = '';
         this.error = false;
-        const user = this.userService.currentUserLoginValue;
-        if(user && user.verified){
-            this.workingText = this.translate.instant('USER.VERIFY.VERIFIED');
-            return;
-        }
+
 
         this.workingText = this.translate.instant('USER.VERIFY.VERIFYING');
         this.route.queryParams
             .subscribe(params => {
-                if(!params || !params.userId) {
+                const user = this.userService.currentUserLoginValue;
+
+                if(!params || !params.userId || !params.token) {
+                    if(user && user.verified){
+                        this.workingText = this.translate.instant('USER.VERIFY.VERIFIED');
+                        return;
+                    }
                     this.error = true;
                     console.warn('params error: ', params);
                     this.workingText = this.translate.instant('USER.VERIFY.INVALID_PARAMS');
                 } else {
+                    if(user.id === params.userId && user.verified){
+                        this.workingText = this.translate.instant('USER.VERIFY.VERIFIED');
+                        return;
+                    }
                     this.userId = params.userId;
                     this.sendVerification(params.userId, params.token);
                 }

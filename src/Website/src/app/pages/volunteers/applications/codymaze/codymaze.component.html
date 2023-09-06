@@ -1,0 +1,17 @@
+<div class="container">
+  <div class="page-title">
+    <h1 [innerHTML]="'APPLICATIONS.CODYMAZE.TITLE' | translate"></h1>
+  </div>
+
+  <p [innerHTML]="'APPLICATIONS.CODYMAZE.MAIN_CONTENT' | translate"></p>
+
+  <app-store-logos
+    [appName]="'CodyMaze Mirabilandia '"
+    [appleURL]="
+      'https://apps.apple.com/it/app/codymaze-mirabilandia/id1478122963'
+    "
+    [googleURL]="
+      'https://play.google.com/store/apps/details?id=org.codemooc.codymaze.mirabilandia'
+    "
+  ></app-store-logos>
+</div>

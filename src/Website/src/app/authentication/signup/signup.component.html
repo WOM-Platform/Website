@@ -1,23 +1,30 @@
 <mat-card>
   <mat-card-content>
-    <h1>{{ "SIGN_UP.TITLE" | translate }}</h1>
+    <h2 class="h2-margin-bottom">{{ "SIGN_UP.TITLE" | translate }}</h2>
     <p [innerHTML]="'SIGN_UP.SUBTITLE' | translate"></p>
     <p>
-      <a [routerLink]="['/authentication/signin']">{{ "SIGN_UP.BTN_ALREADY_REGISTERED" | translate }}</a>
+      <a
+        class="underline text-blue-400"
+        [routerLink]="['/authentication/signin']"
+        >{{ "SIGN_UP.BTN_ALREADY_REGISTERED" | translate }}</a
+      >
     </p>
     <mat-error *ngIf="signupTimeout">
-      {{'SIGN_UP.TIMEOUT_ERROR' | translate}}
+      {{ "SIGN_UP.TIMEOUT_ERROR" | translate }}
     </mat-error>
     <mat-error *ngIf="signupInvalid">
-      {{ 'SIGN_UP.FORM_ERROR' | translate }}
-      <br>
-      {{errorMessage | translate}}
+      {{ errorMessage | translate }}
     </mat-error>
-    <mat-horizontal-stepper linear #stepper>
-      <mat-step [stepControl]="formUser">
-        <ng-template matStepLabel>{{ 'SIGN_UP.REPRESENTATIVE.STEPPER_TITLE' | translate }}</ng-template>
+    <mat-horizontal-stepper [linear]="true" #stepper>
+      <mat-step [stepControl]="formUser" [completed]="false">
+        <ng-template matStepLabel>{{
+          "SIGN_UP.REPRESENTATIVE.STEPPER_TITLE" | translate
+        }}</ng-template>
         <!-- REPRESENTATIVE DATA -->
-        <app-forms-user [(form)]="formUser" [disabled]="userRegistered"></app-forms-user>
+        <app-forms-user
+          [(form)]="formUser"
+          [disabled]="userRegistered"
+        ></app-forms-user>
       </mat-step>
 
       <!-- OPTIONAL SECTION -->
@@ -30,15 +37,15 @@
           </mat-label>
         </mat-checkbox>
       -->
-        <!-- MERCHANT SECTION -->
-        <!--
+      <!-- MERCHANT SECTION -->
+      <!--
         <app-forms-merchant [(form)]="formMerchant" [merchant]="null" *ngIf="requireMerchantRegistration">
 
         </app-forms-merchant>
         <mat-divider [inset]="true"></mat-divider>
         -->
-        <!-- POS SECTION -->
-        <!--
+      <!-- POS SECTION -->
+      <!--
         <mat-checkbox class="mat-checkbox-merchant" [(ngModel)]="requirePosRegistration" *ngIf="requireMerchantRegistration">
           <mat-label>
             {{'SIGN_UP.POS.CHECKBOX' | translate}}
@@ -55,38 +62,64 @@
       <!-- CONFIRM SECTION -->
       <mat-step [stepControl]="formSubmit">
         <form [formGroup]="formSubmit">
-          <ng-template matStepLabel>{{ 'SIGN_UP.DONE' | translate }}</ng-template>
-          <mat-form-field>
-            <h2>{{'SIGN_UP.TERMS_CONDITIONS_TITLE' | translate}}</h2>
+          <ng-template matStepLabel>{{
+            "SIGN_UP.DONE" | translate
+          }}</ng-template>
+          <mat-form-field appearance="fill">
+            <h2 class="h2-margin-bottom">
+              {{ "SIGN_UP.TERMS_CONDITIONS_TITLE" | translate }}
+            </h2>
             <label>
-              <textarea class="form-subgroup" matInput formControlName="tcInfo"></textarea>
+              <textarea
+                class="form-subgroup full-width-input"
+                matInput
+                formControlName="tcInfo"
+              ></textarea>
             </label>
           </mat-form-field>
-          <mat-form-field  appearance="example-full-width" style="height: 10px">
+          <mat-form-field appearance="fill" style="height: 10px">
             <label>
-              <input matInput formControlName="termsConditionsCheckbox" [hidden]="true">
+              <input
+                matInput
+                formControlName="termsConditionsCheckbox"
+                [hidden]="true"
+              />
             </label>
             <mat-error>
-              {{'SIGN_UP.TC_ERROR' | translate}}
+              {{ "SIGN_UP.TC_ERROR" | translate }}
             </mat-error>
           </mat-form-field>
 
-          <mat-checkbox class="example-margin" [checked]="termsConditionsChecked" formControlName="termsConditionsCheckbox">
-            {{ 'SIGN_UP.TERMS_CONDITIONS' | translate }}
+          <mat-checkbox
+            class="example-margin"
+            [checked]="termsConditionsChecked"
+            formControlName="termsConditionsCheckbox"
+          >
+            {{ "SIGN_UP.TERMS_CONDITIONS" | translate }}
           </mat-checkbox>
-          <br><br>
+          <br /><br />
           <mat-divider [inset]="true"></mat-divider>
-          <div>
-            <button mat-button matStepperPrevious>Back</button>
-            <button mat-raised-button color="primary" (click)="onSubmit()">{{ 'SIGN_UP.BTN_SIGN_UP' | translate }}</button>
+          <div class="flex justify-end gap-3">
+            <button mat-button matStepperPrevious>
+              {{ "SIGN_UP.BACK" | translate }}
+            </button>
+            <button mat-raised-button color="primary" (click)="onSubmit()">
+              {{ "SIGN_UP.BTN_SIGN_UP" | translate }}
+            </button>
           </div>
         </form>
       </mat-step>
-
     </mat-horizontal-stepper>
   </mat-card-content>
 </mat-card>
 
-<app-progress-spinner class="example-margin" [color]="color" [mode]="mode" [value]="value" [backdropEnabled]="true" [positionGloballyCenter]="true"
-                      [displayProgressSpinner]="displayProgressSpinner">
+<app-progress-spinner
+  class="example-margin"
+  [color]="color"
+  [mode]="mode"
+  [value]="value"
+  [backdropEnabled]="true"
+  [positionGloballyCenter]="true"
+  [displayProgressSpinner]="displayProgressSpinner"
+>
 </app-progress-spinner>
