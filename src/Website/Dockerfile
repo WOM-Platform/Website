@@ -1,5 +1,5 @@
 # BUILD step
-FROM node:18.14 as build
+FROM node:18.17.1-alpine as build
 
 # Import environment variables from build args
 
@@ -17,7 +17,7 @@ ENV PATH /app/node_modules/.bin:$PATH
 # Dependencies
 COPY package.json /app/package.json
 RUN npm install -g npm@latest
-RUN npm install -g @angular/cli@13.3.10
+RUN npm install -g @angular/cli@16.1.8
 RUN npm install
 
 COPY . /app
