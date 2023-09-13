@@ -14,6 +14,9 @@
       "URBINO": "Wom for Urbino",
       "FANO": "Wom for Fano"
     },
+    "PROJECTS": {
+      "RETE-DELLE-RETI": "Rete delle Reti"
+    },
     "INSTRUMENT": "Instrument",
     "CONTACTS": "Contact Us",
     "SIGN_IN": "Login",
@@ -35,11 +38,14 @@
       "URBINO": "Wom for Urbino",
       "FANO": "Wom for Fano"
     },
+    "PROJECTS": {
+      "RETE-DELLE-RETI": "Rete delle Reti"
+    },
     "VOLUNTEER": "Volunteers",
     "MERCHANT": "Merchant",
     "INSTRUMENT": "Instrument",
     "CONTACTS": "Contact us",
-    "USER" : {
+    "USER": {
       "USER": "Your profile",
       "MERCHANT": "Merchant",
       "ERROR": "Not verified",
@@ -239,7 +245,7 @@
       "VERIFYING": "Checking to see if user is verified…",
       "VERIFIED": "User verified!",
       "INVALID_PARAMS": "Oops! Seems like you followed a wrong link! If you're looking for a new account validation e-mail write your email in the box below and click on the 'send' button:",
-      "REQUEST_NEW_VALIDATION":" If you're looking for a new account validation e-mail write your email in the box below and click on the 'send' button:",
+      "REQUEST_NEW_VALIDATION": " If you're looking for a new account validation e-mail write your email in the box below and click on the 'send' button:",
       "EMAIL_REQUEST_ERROR": "We couldn't send a new verification email to this email address.",
       "EMAIL_REQUEST_SUCCESS": "Verification email sent!",
       "GO_HOME_BUTTON": "Click here",
@@ -367,6 +373,12 @@
     },
     "FANO": {
       "TITLE": "WOM for Fano"
+    }
+  },
+  "PROJECTS": {
+    "RETE-DELLE-RETI": {
+      "TITLE": "Rete delle Reti",
+      "SUBTITLE": "IN EVERY LIBRARY, THE BEST OF ITALIAN LIBRARIES"
     }
   },
   "VOLUNTEER": {
@@ -605,17 +617,17 @@
       ]
     },
     "LAST_UPDATE": "Last update",
-    "MONTH":{
+    "MONTH": {
       "JANUARY": "January",
       "FEBRUARY": "February",
-      "MARCH":"March",
+      "MARCH": "March",
       "APRIL": "April",
       "MAY": "May",
-      "JUNE":"June",
-      "JULY":"July",
+      "JUNE": "June",
+      "JULY": "July",
       "AUGUST": "August",
       "SEPTEMBER": "September",
-      "OCTOBER":"October",
+      "OCTOBER": "October",
       "DECEMBER": "December"
     }
   },
@@ -639,9 +651,9 @@
     },
     "LIBRARIES": {
       "TITLE": "Libraries",
-      "MAIN_CONTENT":"The WOM platform rewards actions that have an intrinsic social value which translates into the enrichment of volunteers, as also their cultural growth and their education. Access to books and literature is instrumental for this purpose, which is often guaranteed by libraries and bookstores that stimulate individually citizens and can involve both schools and group activities. The WOM platform recognises how much value reading has as a vehicle for cultural and social growth, for both individuals and the community.",
+      "MAIN_CONTENT": "The WOM platform rewards actions that have an intrinsic social value which translates into the enrichment of volunteers, as also their cultural growth and their education. Access to books and literature is instrumental for this purpose, which is often guaranteed by libraries and bookstores that stimulate individually citizens and can involve both schools and group activities. The WOM platform recognises how much value reading has as a vehicle for cultural and social growth, for both individuals and the community.",
       "SECOND_TITLE": "Libraries in Fano, the “city that reads“",
-      "SECOND_CONTENT":"Within the “ReadSharing: la lettura condivisa” project, financed by the “Città che legge 2020” initiative, a series of activities were launched to involve high school students, stimulating their approach to reading and making it become an experience of exchange and personal gratification.<br/>The <a href='https://sistemabibliotecariofano.it'>Biblioteca Federiciana and Mediateca Montanari of Fano</a> contribute to the WOM platform by giving value to reading books, participating in reading groups or cultural events, creating digital contents and the participating in the project's editorials that have been activated along with the high schools of Fano."
+      "SECOND_CONTENT": "Within the “ReadSharing: la lettura condivisa” project, financed by the “Città che legge 2020” initiative, a series of activities were launched to involve high school students, stimulating their approach to reading and making it become an experience of exchange and personal gratification.<br/>The <a href='https://sistemabibliotecariofano.it'>Biblioteca Federiciana and Mediateca Montanari of Fano</a> contribute to the WOM platform by giving value to reading books, participating in reading groups or cultural events, creating digital contents and the participating in the project's editorials that have been activated along with the high schools of Fano."
     },
     "UNIVERSITIES": {
       "TITLE": "Universities",
