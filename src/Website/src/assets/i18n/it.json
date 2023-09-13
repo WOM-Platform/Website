@@ -14,6 +14,9 @@
       "URBINO": "Wom per Urbino",
       "FANO": "Wom per Fano"
     },
+    "PROJECTS": {
+      "RETE-DELLE-RETI": "Rete delle Reti"
+    },
     "INSTRUMENT": "Instrument",
     "SIGN_IN": "Login",
     "MERCHANT": "Merchant",
@@ -35,11 +38,14 @@
       "URBINO": "WOM per Urbino",
       "FANO": "WOM per Fano"
     },
+    "PROJECTS": {
+      "RETE-DELLE-RETI": "Rete delle Reti"
+    },
     "VOLUNTEER": "Volontari",
     "MERCHANT": "Merchant",
     "INSTRUMENT": "Instrument",
     "CONTACTS": "Contatti",
-    "USER" : {
+    "USER": {
       "USER": "Il tuo profilo",
       "MERCHANT": "Merchant",
       "ERROR": "Non verificato",
@@ -239,7 +245,7 @@
       "VERIFYING": "Controllo che l’utente sia stato verificato…",
       "VERIFIED": "Utente verificato!",
       "INVALID_PARAMS": "Ops! Sembra che il link al quale hai navigato non è corretto! Se vuoi chiedere una nuova e-mail di validazione scrivi il tuo indirizzo e-mail nella casella sottostante e clicca sul pulsante 'invia':",
-      "REQUEST_NEW_VALIDATION":"Se vuoi chiedere una nuova e-mail di validazione scrivi il tuo indirizzo e-mail nella casella sottostante e clicca sul pulsante 'invia':",
+      "REQUEST_NEW_VALIDATION": "Se vuoi chiedere una nuova e-mail di validazione scrivi il tuo indirizzo e-mail nella casella sottostante e clicca sul pulsante 'invia':",
       "EMAIL_REQUEST_ERROR": "Non è stato possibile inviare una nuova notifica a questo indirizzo email",
       "EMAIL_REQUEST_SUCCESS": "Email inviata con successo!",
       "GO_HOME_BUTTON": "Clicca qui",
@@ -367,6 +373,12 @@
     },
     "FANO": {
       "TITLE": "WOM per Fano"
+    }
+  },
+  "PROJECTS": {
+    "RETE-DELLE-RETI": {
+      "TITLE": "Rete delle Reti",
+      "SUBTITLE": "IN OGNI BIBLIOTECA, IL MEGLIO DELLE BIBLIOTECHE ITALIANE"
     }
   },
   "VOLUNTEER": {
@@ -602,18 +614,18 @@
       ]
     },
     "LAST_UPDATE": "Ultimo aggiornamento",
-    "MONTH":{ 
-      "JANUARY": "Gennaio", 
-      "FEBRUARY": "Febbraio", 
-      "MARCH":"Marzo", 
-      "APRIL": "Aprile", 
-      "MAY": "Maggio", 
-      "JUNE":"Giugno", 
-      "JULY":"Luglio", 
-      "AUGUST": "Agosto", 
-      "SEPTEMBER": "Settembre", 
-      "OCTOBER":"Ottobre", 
-      "DECEMBER": "Dicembre" 
+    "MONTH": {
+      "JANUARY": "Gennaio",
+      "FEBRUARY": "Febbraio",
+      "MARCH": "Marzo",
+      "APRIL": "Aprile",
+      "MAY": "Maggio",
+      "JUNE": "Giugno",
+      "JULY": "Luglio",
+      "AUGUST": "Agosto",
+      "SEPTEMBER": "Settembre",
+      "OCTOBER": "Ottobre",
+      "DECEMBER": "Dicembre"
     }
   },
   "APPLICATIONS": {
@@ -638,9 +650,9 @@
     },
     "LIBRARIES": {
       "TITLE": "Biblioteche",
-      "MAIN_CONTENT":"La piattaforma WOM premia le azioni che hanno un valore sociale intrinseco, passando attraverso l'arricchimento del volontari, il loro accrescimento culturale e la loro formazione. L’accesso ai libri e alla lettura è strumentale in questo e viene spesso garantito da biblioteche e librerie, che stimolano individualmente i cittadini e possono coinvolgerli in iniziative di gruppo, eventualmente coinvolgendo anche le scuole. La piattaforma WOM riconosce il valore della lettura, come veicolo per la crescita socio-culturale dell’individuo e della collettività.",
+      "MAIN_CONTENT": "La piattaforma WOM premia le azioni che hanno un valore sociale intrinseco, passando attraverso l'arricchimento del volontari, il loro accrescimento culturale e la loro formazione. L’accesso ai libri e alla lettura è strumentale in questo e viene spesso garantito da biblioteche e librerie, che stimolano individualmente i cittadini e possono coinvolgerli in iniziative di gruppo, eventualmente coinvolgendo anche le scuole. La piattaforma WOM riconosce il valore della lettura, come veicolo per la crescita socio-culturale dell’individuo e della collettività.",
       "SECOND_TITLE": "Biblioteche nella “città che legge” Fano",
-      "SECOND_CONTENT":"Nell’ambito del progetto “ReadSharing: la lettura condivisa”, finanziato dal bando “Città che legge 2020”, sono state lanciate una serie di attività per il coinvolgimento di ragazzi e ragazze delle scuole superiori, stimolando il loro avvicinamento alla lettura e rendendola un’esperienza di scambio e di gratificazione personale.<br/>La <a href='https://sistemabibliotecariofano.it'>Biblioteca Federiciana e la Mediateca Montanari di Fano</a> contribuiscono alla piattaforma WOM valorizzando le attività di lettura, la partecipazione a gruppi di lettura o ad eventi culturali, la pubblicazione di contenuti digitali e la partecipazione alle redazioni attive previste dal progetto e attivate tramite la scuole superiori di Fano."
+      "SECOND_CONTENT": "Nell’ambito del progetto “ReadSharing: la lettura condivisa”, finanziato dal bando “Città che legge 2020”, sono state lanciate una serie di attività per il coinvolgimento di ragazzi e ragazze delle scuole superiori, stimolando il loro avvicinamento alla lettura e rendendola un’esperienza di scambio e di gratificazione personale.<br/>La <a href='https://sistemabibliotecariofano.it'>Biblioteca Federiciana e la Mediateca Montanari di Fano</a> contribuiscono alla piattaforma WOM valorizzando le attività di lettura, la partecipazione a gruppi di lettura o ad eventi culturali, la pubblicazione di contenuti digitali e la partecipazione alle redazioni attive previste dal progetto e attivate tramite la scuole superiori di Fano."
     },
     "UNIVERSITIES": {
       "TITLE": "Università",
