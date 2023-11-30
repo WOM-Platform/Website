@@ -449,9 +449,9 @@
       "TITLE": "Applications",
       "OVERVIEW": "Overview",
       "WEBSITE": "Website",
-      "POS": "POS app",
-      "POCKET": "Pocket app",
-      "INSTRUMENT": "Instrument app",
+      "POS": "WOM POS",
+      "POCKET": "WOM Pocket",
+      "INSTRUMENT": "WOM Instrument",
       "STEPCOUNTER": "Step counter app"
     },
     "OVERVIEW": {
@@ -628,6 +628,7 @@
       "AUGUST": "August",
       "SEPTEMBER": "September",
       "OCTOBER": "October",
+      "NOVEMBER": "November",
       "DECEMBER": "December"
     }
   },

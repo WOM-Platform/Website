@@ -19,10 +19,7 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
             "aot": true,
-            "assets": [
-              "src/assets",
-              "src/favicon.ico"
-            ],
+            "assets": ["src/assets", "src/favicon.ico"],
             "styles": [
               "./node_modules/leaflet/dist/leaflet.css",
               "src/styles.css",
@@ -31,11 +28,8 @@
               "node_modules/primeng/resources/primeng.min.css",
               "node_modules/primeicons/primeicons.css"
             ],
-            "scripts": [
-              "node_modules/jquery/dist/jquery.min.js"
-            ],
+            "scripts": ["node_modules/jquery/dist/jquery.min.js"],
             "allowedCommonJsDependencies": [
-              "clone-deep",
               "core-js/modules/es.array.index-of.js",
               "'core-js/modules/es.array.iterator.js",
               "core-js/modules/es.array.reduce.js",
@@ -53,7 +47,11 @@
               "core-js/modules/web.dom-collections.iterator.js",
               "raf",
               "pdfjs-dist/build/pdf",
-              "pdfjs-dist/web/pdf_viewer"
+              "pdfjs-dist/web/pdf_viewer",
+              "leaflet",
+              "rfdc",
+              "html2canvas",
+              "rgbcolor"
             ]
           },
           "configurations": {
@@ -65,7 +63,7 @@
                 }
               ]
             },
-            "development-local":{
+            "development-local": {
               "sourceMap": true,
               "optimization": false,
               "fileReplacements": [
@@ -75,7 +73,7 @@
                 }
               ]
             },
-            "development":{
+            "development": {
               "sourceMap": true,
               "optimization": false
             },
@@ -127,7 +125,7 @@
               "browserTarget": "src:build:mock"
             }
           },
-          "defaultConfiguration": "development" 
+          "defaultConfiguration": "development"
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
@@ -142,10 +140,7 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.spec.json",
             "karmaConfig": "karma.conf.js",
-            "assets": [
-              "src/favicon.ico",
-              "src/assets"
-            ],
+            "assets": ["src/favicon.ico", "src/assets"],
             "styles": [
               "./node_modules/@angular/material/prebuilt-themes/purple-green.css",
               "src/styles.css"
@@ -156,10 +151,7 @@
         "lint": {
           "builder": "@angular-eslint/builder:lint",
           "options": {
-            "lintFilePatterns": [
-              "src/**/*.ts",
-              "src/**/*.html"
-            ]
+            "lintFilePatterns": ["src/**/*.ts", "src/**/*.html"]
           }
         },
         "e2e": {
@@ -178,8 +170,6 @@
     }
   },
   "cli": {
-    "schematicCollections": [
-      "@angular-eslint/schematics"
-    ]
+    "schematicCollections": ["@angular-eslint/schematics"]
   }
 }
