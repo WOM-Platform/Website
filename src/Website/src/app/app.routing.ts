@@ -9,25 +9,22 @@ import { ApplicationsLibrariesComponent } from "./pages/volunteers/applications/
 import { ApplicationsOverviewComponent } from "./pages/volunteers/applications/overview/overview.component";
 import { ApplicationsStepcounterComponent } from "./pages/volunteers/applications/stepcounter/stepcounter.component";
 import { ApplicationsUniversitiesComponent } from "./pages/volunteers/applications/universities/universities.component";
-import { AuthGuard } from "./_helpers/auth.guard";
 import { BillingCancelComponent } from "./billing/cancel/cancel.component";
 import { BillingCheckoutComponent } from "./billing/checkout/checkout.component";
 import { BillingSuccessComponent } from "./billing/success/success.component";
 import { ContactsComponent } from "./pages/contacts/contacts.component";
 import { HomeComponent } from "./pages/home";
 import { InstrumentComponent } from "./pages/instrument/instrument.component";
-import { ManageComponent } from "./manage/manage/manage.component";
-import { ManageGuard } from "./_helpers/manage.guard";
 import { MerchantComponent } from "./pages/merchant/merchant.component";
 import { MerchantSignUpComponent } from "./authentication/signup/signup.component";
 import { PageNotFoundComponent } from "./pageNotFound/page-not-found.component";
-import { PrivacyComponent } from "./privacy/privacy.component";
-import { PrivacyInstrumentComponent } from "./privacy/instrument/instrument.component";
-import { PrivacyOverviewComponent } from "./privacy/overview/overview.component";
-import { PrivacyPocketComponent } from "./privacy/pocket/pocket.component";
-import { PrivacyPosComponent } from "./privacy/pos/pos.component";
-import { PrivacyStepcounterComponent } from "./privacy/stepcounter/stepcounter.component";
-import { PrivacyWebsiteComponent } from "./privacy/website/website.component";
+import { PrivacyComponent } from "./pages/privacy/privacy.component";
+import { PrivacyInstrumentComponent } from "./pages/privacy/instrument/instrument.component";
+import { PrivacyOverviewComponent } from "./pages/privacy/overview/overview.component";
+import { PrivacyPocketComponent } from "./pages/privacy/pocket/pocket.component";
+import { PrivacyPosComponent } from "./pages/privacy/pos/pos.component";
+import { PrivacyStepcounterComponent } from "./pages/privacy/stepcounter/stepcounter.component";
+import { PrivacyWebsiteComponent } from "./pages/privacy/website/website.component";
 import { RequestNewPasswordComponent } from "./authentication/requestNewPassword/request-new-password.component";
 import { ResetPasswordComponent } from "./authentication/reset-password/reset-password.component";
 import { RouterModule, Routes } from "@angular/router";
@@ -144,7 +141,7 @@ const routes: Routes = [
           breadcrumb: "BREADCRUMBS.AUTHENTICATION.AUTHENTICATION",
         },
         children: [
-          {
+          /*{
             path: "signin",
             component: SignInComponent,
             data: {
@@ -157,7 +154,7 @@ const routes: Routes = [
             data: {
               breadcrumb: "BREADCRUMBS.AUTHENTICATION.SIGNUP",
             },
-          },
+          },*/
           {
             path: "reset-password",
             component: ResetPasswordComponent,
@@ -293,7 +290,7 @@ const routes: Routes = [
           },
         ],
       },
-      {
+      /*{
         path: "billing",
         data: {
           breadcrumb: "BREADCRUMBS.BILLING.TITLE",
@@ -326,7 +323,7 @@ const routes: Routes = [
             },
           },
         ],
-      },
+      },*/
       {
         path: "**",
         component: PageNotFoundComponent,

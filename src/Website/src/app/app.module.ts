@@ -27,12 +27,13 @@ import {
   NavComponent,
 } from "./components/nav/nav.component";
 import { MerchantSignUpComponent } from "./authentication/signup/signup.component";
-import { PrivacyComponent } from "./privacy/privacy.component";
-import { PrivacyInstrumentComponent } from "./privacy/instrument/instrument.component";
-import { PrivacyPocketComponent } from "./privacy/pocket/pocket.component";
-import { PrivacyPosComponent } from "./privacy/pos/pos.component";
-import { PrivacyStepcounterComponent } from "./privacy/stepcounter/stepcounter.component";
-import { PrivacyWebsiteComponent } from "./privacy/website/website.component";
+import { PrivacyComponent } from "./pages/privacy/privacy.component";
+import { PrivacyInstrumentComponent } from "./pages/privacy/instrument/instrument.component";
+import { PrivacyPocketComponent } from "./pages/privacy/pocket/pocket.component";
+import { PrivacyPosComponent } from "./pages/privacy/pos/pos.component";
+import { PrivacyStepcounterComponent } from "./pages/privacy/stepcounter/stepcounter.component";
+import { PrivacyWebsiteComponent } from "./pages/privacy/website/website.component";
+import { PrivacyOverviewComponent } from "./pages/privacy/overview/overview.component";
 import { SignInComponent } from "./authentication/signin/signin.component";
 
 import { FanoComponent } from "./pages/about/fano/fano.component";
@@ -68,7 +69,6 @@ import { LogInErrorDialogComponent } from "./authentication/signup/signup-login-
 import { MerchantComponent } from "./pages/merchant/merchant.component";
 import { OverlayModule } from "@angular/cdk/overlay";
 import { PageNotFoundComponent } from "./pageNotFound/page-not-found.component";
-import { PrivacyOverviewComponent } from "./privacy/overview/overview.component";
 import { ProgressSpinnerComponent } from "./_progressSpinner/progress-spinner.component";
 import { RequestNewPasswordComponent } from "./authentication/requestNewPassword/request-new-password.component";
 import { ResetPasswordComponent } from "./authentication/reset-password/reset-password.component";
