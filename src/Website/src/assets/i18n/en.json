@@ -405,7 +405,7 @@
       "TITLE": "Where do i spend my WOMs? How can I reward socially useful actions with WOMs?",
       "A": "Merchants are system components that can <b>create payment instances</b>. They can accept WOM vouchers in exchange for the services and discounts they offer. \nMerchants can <b>choose what type of vouchers they accept</b>. They can choose: vouchers generated only for a <b>given purpose</b> (thus promoting that social purpose), those generated in a given <b>geographical area</b> (thus encouraging social actions in their reality territorial), or those generated in a <b>defined time interval</b>. \nThe payment instances <b>do not involve money exchanges</b> but only discounts and gratuities.",
       "B": "By accepting specific types of WOM vouchers, Merchants can indirectly contribute to a social campaign, encouraging citizens to contribute to the shared goal with their voluntary efforts. Also, merchants can increase their visibility to the community working towards the shared goal.",
-      "C": "Want to be a merchant? Sign in <a href=\"/authentication/signin\">here</a>"
+      "C": "Want to be a merchant? Download the WOM POS app on your mobile device.</a>"
     },
     "SECTION_B": {
       "TITLE": "POS",
@@ -473,11 +473,11 @@
         "<h2>4. Legal basis of the processing</h2>",
         "<p>The legal basis of data processing is provided by the freely expressed <strong>consent</strong> of the user, when registering to the WOM&nbsp;platform. Consent is provided exclusively for the purposes expressed at point&nbsp;3 of this document.</p>",
         "<h2>5. Means of data collection</h2>",
-        "<p>User data is freely provided by the user during the registration process, which can be initiated through a <a href=\"/authentication/signin\">specific page on the website</a>.</p>",
+        "<p>No user data is collected.</p>",
         "<h2>6. Duration of data storage</h2>",
-        "<p>Personal data is never stored by the website, except for the data expressely provided for user registration. This data is stored as long as the user profile is maintained on the platform.</p>",
+        "<p>Personal data is never stored by the website.</p>",
         "<h2>7. Means of processing and transmission of data</h2>",
-        "<p>Data collected by the website and the platform is stored in a safe manner using state of the art technology. All data is transmitted only to authorized users through specific APIs&nbsp;(Application Programming Interfaces), for the purposes expressed at point&nbsp;3, and is never automatically distributed through other means.</p>",
+        "<p>No data is processed and transmitted</p>",
         "<h2>8. Third parties</h2>",
         "<p>The website includes scripts by Fathom Analytics, which comply with the GDPR and are subject to <a href=\"https://usefathom.com/privacy\">their own privacy notice</a>.</p>",
         "<h2>9. Rights of the data subject</h2>",
