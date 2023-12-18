@@ -405,7 +405,7 @@
       "TITLE": "Dove spendo i miei WOM?<br/> Come posso premiare le azioni socialmente utili con i WOM?",
       "A": "I Merchants sono componenti di sistema che possono <b>creare istanze di pagamento</b>. Possono accettare i voucher WOM in cambio dei servizi e degli sconti che offrono.\nI Merchants possono <b>scegliere che tipo di voucher accettare</b>. Possono scegliere: i voucher generati solo per un <b>determinato scopo</b> (promuovendo così tale scopo sociale), quelli generati in una determinata <b>area geografica</b> (incoraggiando così le azioni sociali nella loro realtà territoriale), o quelli generati in un <b>intervallo di tempo definito</b>.\nLe istanze di pagamento <b>non prevedono scambi di denaro</b> ma solo sconti e gratuità.",
       "B": "Accettando tipologie specifiche di voucher WOM, i Merchants possono contribuire indirettamente a una campagna sociale, incentivando i cittadini a contribuire all’obiettivo condiviso con i loro sforzi volontari. Inoltre, i Merchants possono aumentare la loro visibilità presso la comunità lavorando per raggiungere l’obiettivo condiviso.",
-      "C": "Vuoi registrarti come merchant? Accedi <a href='/authentication/signin'>qui</a>"
+      "C": "Vuoi registrarti come merchant? Scarica l'app WOM POS sul tuo dispositivo mobile."
     },
     "SECTION_B": {
       "TITLE": "POS",
@@ -544,7 +544,7 @@
         "<h2>4. Basi legali del trattamento</h2>",
         "<p>La base giuridica del trattamento consiste nel <strong>consenso</strong> liberamente espresso dall’utente al momento dell’installazione dell’applicazione. Tale consenso è dato per le finalità presentate al punto&nbsp;3.</p>",
         "<h2>5. Modalità di raccolta dei dati</h2>",
-        "<p>I dati personali degli utenti che desiderano registrarsi alla piattaforma vengono raccolti durante il processo di registrazione, al quale si accede tramite la <a href=\"/authentication/signin\">pagina dedicata sul sito Web</a>.</p>",
+        "<p>I dati personali degli utenti che desiderano registrarsi alla piattaforma vengono raccolti durante il processo di registrazione, al quale si accede tramite l'applicazione mobile WOM POS</a>.</p>",
         "<p>I dati statistici gestiti da Firebase Crashlytics vengono raccolti automaticamente durante l’utilizzo dell’applicazione.</p>",
         "<h2>6. Durata del trattamento</h2>",
         "<p>I dati espressamente forniti per la registrazione dell’utente e la gestione del suo profilo da Merchant vengono memorizzati finché non viene eliminato il profilo dell’utente.</p>",
