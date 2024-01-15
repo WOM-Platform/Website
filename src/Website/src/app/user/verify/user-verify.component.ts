@@ -33,7 +33,7 @@ export class UserVerifyComponent implements OnInit{
         this.route.queryParams
             .subscribe(params => {
                 const user = this.userService.currentUserLoginValue;
-
+                // console.log(params, user);
                 if(!params || !params.userId || !params.token) {
                     if(user && user.verified){
                         this.workingText = this.translate.instant('USER.VERIFY.VERIFIED');
@@ -43,9 +43,11 @@ export class UserVerifyComponent implements OnInit{
                     console.warn('params error: ', params);
                     this.workingText = this.translate.instant('USER.VERIFY.INVALID_PARAMS');
                 } else {
-                    if(user.id === params.userId && user.verified){
-                        this.workingText = this.translate.instant('USER.VERIFY.VERIFIED');
-                        return;
+                    if(user) {
+                        if (user.id === params.userId && user.verified) {
+                            this.workingText = this.translate.instant('USER.VERIFY.VERIFIED');
+                            return;
+                        }
                     }
                     this.userId = params.userId;
                     this.sendVerification(params.userId, params.token);
@@ -62,7 +64,7 @@ export class UserVerifyComponent implements OnInit{
 
     sendVerification(userId:string, token: string): void {
         this.userService.sendVerification(userId, token).subscribe(res => {
-            console.log(res);
+            // console.log(res);
             this.userService.logout();
             this.workingText = this.translate.instant('USER.VERIFY.VERIFIED');
         }, error => {
@@ -77,7 +79,7 @@ export class UserVerifyComponent implements OnInit{
         this.userService.requestVerificationEmailByEmail(this.email).subscribe(result => {
                 const message = this.translate.instant('USER.NOT_VERIFIED.EMAIL_SENT');
                 this.openSnackBar(message, 'home');
-                console.log(result);
+                // console.log(result);
             },
             error => {
                 console.error(error);
