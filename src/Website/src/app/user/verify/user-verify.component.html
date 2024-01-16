@@ -5,13 +5,7 @@
   <!-- Correct url query parameters or no parameters -->
   <ng-container *ngIf="workingText !== ''">
     <p [innerHTML]="workingText"></p>
-    <button
-      *ngIf="!error"
-      mat-stroked-button
-      (click)="navigate('/authentication/signin')"
-    >
-      {{ "USER.VERIFY.GO_SIGNIN_BUTTON" | translate }}
-    </button>
+    <p *ngIf="!error">{{ "USER.VERIFY.GO_BACK_TO_APP" | translate }}</p>
     <input
       *ngIf="error"
       [(ngModel)]="email"
@@ -21,9 +15,9 @@
     />
     <button
       *ngIf="error"
+      class="mt-2 lg:mt-0 lg:ml-0"
       mat-stroked-button
       color="primary"
-      style="margin-left: 1em"
       [disabled]="email === ''"
       (click)="sendValidationEmail()"
     >
