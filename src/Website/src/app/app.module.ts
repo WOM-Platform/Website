@@ -83,6 +83,7 @@ import { StoreLogosComponent } from "./components/store-logos/store-logos.compon
 import { LayoutModule } from "@angular/cdk/layout";
 import { AuthModule } from "./user/auth.module";
 import { ReteDelleRetiComponent } from "./pages/projects/rete-delle-reti/rete-delle-reti-component";
+import { Pesaro2024Component } from "./pages/pesaro2024/pesaro2024.component";
 
 // AoT requires an exported function for factories
 export const createTranslateLoader = (http: HttpClient) =>
@@ -155,6 +156,7 @@ export const isMock = environment.mock;
     UrbinoComponent,
     UserFormComponent,
     VolunteerComponent,
+    Pesaro2024Component,
   ],
   exports: [],
   imports: [

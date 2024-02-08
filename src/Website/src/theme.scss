@@ -57,6 +57,13 @@ p {
   margin-bottom: 1.5rem;
 }
 
+li {
+  font-size: 1.25rem;
+  font-family: "Roboto";
+
+  text-align: justify;
+  text-justify: inter-word;
+}
 .margin-0 {
   margin: 0;
 }
@@ -76,10 +83,5 @@ p {
   .mat-typography .mat-title,
   .mat-typography h2 {
     font-size: 1.3rem;
-  }
-
-  p,
-  li {
-    font-size: 1.1rem;
   }
 }

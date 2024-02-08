@@ -32,6 +32,7 @@ import { SignInComponent } from "./authentication/signin/signin.component";
 import { UrbinoComponent } from "./pages/about/urbino/urbino.component";
 import { VolunteerComponent } from "./pages/volunteers/volunteer/volunteer.component";
 import { ReteDelleRetiComponent } from "./pages/projects/rete-delle-reti/rete-delle-reti-component";
+import { Pesaro2024Component } from "./pages/pesaro2024/pesaro2024.component";
 
 const routes: Routes = [
   {
@@ -89,6 +90,14 @@ const routes: Routes = [
             },
           },
         ],
+      },
+      {
+        path: "pesaro2024",
+        component: Pesaro2024Component,
+        pathMatch: "full",
+        data: {
+          breadcrumb: "BREADCRUMBS.PESARO2024",
+        },
       },
       {
         path: "projects",
