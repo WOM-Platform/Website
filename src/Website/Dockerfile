@@ -16,7 +16,7 @@ ENV PATH /app/node_modules/.bin:$PATH
 
 # Dependencies
 COPY package.json /app/package.json
-RUN npm install -g npm@latest
+RUN npm install -g npm@9.6.3
 RUN npm install -g @angular/cli@16.1.8
 RUN npm install
 
