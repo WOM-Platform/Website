@@ -84,6 +84,8 @@ import { LayoutModule } from "@angular/cdk/layout";
 import { AuthModule } from "./user/auth.module";
 import { ReteDelleRetiComponent } from "./pages/projects/rete-delle-reti/rete-delle-reti-component";
 import { Pesaro2024Component } from "./pages/pesaro2024/pesaro2024.component";
+import { ToolkitForMerchantComponent } from "./pages/toolkit-for-merchant/toolkit-for-merchant.component";
+import { QrStoreLogoComponent } from "./components/store-logos/qr-store-logo/qr-store-logo.component";
 
 // AoT requires an exported function for factories
 export const createTranslateLoader = (http: HttpClient) =>
@@ -157,6 +159,8 @@ export const isMock = environment.mock;
     UserFormComponent,
     VolunteerComponent,
     Pesaro2024Component,
+    ToolkitForMerchantComponent,
+    QrStoreLogoComponent,
   ],
   exports: [],
   imports: [
