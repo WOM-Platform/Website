@@ -92,14 +92,14 @@ const routes: Routes = [
           },
         ],
       },
-      // {
-      //   path: "pesaro2024",
-      //   component: Pesaro2024Component,
-      //   pathMatch: "full",
-      //   data: {
-      //     breadcrumb: "BREADCRUMBS.PESARO2024",
-      //   },
-      // },
+      {
+        path: "pesaro2024",
+        component: Pesaro2024Component,
+        pathMatch: "full",
+        data: {
+          breadcrumb: "BREADCRUMBS.PESARO2024",
+        },
+      },
       {
         path: "toolkit-for-merchant",
         component: ToolkitForMerchantComponent,

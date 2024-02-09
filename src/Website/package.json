@@ -1,6 +1,6 @@
 {
   "name": "src",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "scripts": {
     "start:dev-local": "ng serve --configuration=development-local",
     "start:mock": "ng serve --configuration=mock",
