@@ -118,6 +118,11 @@ mat-form-field label {
   font-size: 0.9rem;
 }
 
+@media only screen and (max-width: 1050px) {
+  .container {
+    @apply mx-auto max-w-screen-md px-5;
+  }
+}
 @media only screen and (max-width: 768px) {
   .mobile-only {
     display: block;
