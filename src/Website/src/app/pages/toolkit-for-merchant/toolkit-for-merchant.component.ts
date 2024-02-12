@@ -1,9 +1,19 @@
-import { Component } from "@angular/core";
+import { Component, HostBinding } from "@angular/core";
+import {
+  trigger,
+  state,
+  style,
+  animate,
+  transition,
+} from "@angular/animations";
 
 @Component({
   selector: "app-toolkit-for-merchant",
   templateUrl: "./toolkit-for-merchant.component.html",
   styleUrls: ["./toolkit-for-merchant.component.css"],
+  animations: [
+    // animation triggers go here
+  ],
 })
 export class ToolkitForMerchantComponent {
   faqs = [
