@@ -13,9 +13,14 @@ services:
     labels:
     - "traefik.enable=true"
     - "traefik.docker.network=web"
-    - "traefik.protocol=http"
-    - "traefik.port=80"
-    - "traefik.frontend.rule=Host:wom.social"
-    - "traefik.frontend.entryPoints=http,https"
-    - "traefik.frontend.redirect.entryPoint=https"
+
+    - "traefik.http.routers.wom-web.rule=Host(`wom.social`)"
+    - "traefik.http.routers.wom-web.entrypoints=websecure"
+ 
+    - "traefik.http.routers.wom-web-insecure.rule=Host(`wom-social`)"
+    - "traefik.http.routers.wom-web-insecure.entrypoints=web"
+    - "traefik.http.routers.wom-web-insecure.middlewares=wom-web-redirect"
+    - "traefik.http.middlewares.wom-web-redirect.redirectscheme.scheme=https"
+    - "traefik.http.middlewares.wom-web-redirect.redirectscheme.permanent=true"
+
     restart: unless-stopped
