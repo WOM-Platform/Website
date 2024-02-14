@@ -83,9 +83,10 @@ import { StoreLogosComponent } from "./components/store-logos/store-logos.compon
 import { LayoutModule } from "@angular/cdk/layout";
 import { AuthModule } from "./user/auth.module";
 import { ReteDelleRetiComponent } from "./pages/projects/rete-delle-reti/rete-delle-reti-component";
-import { Pesaro2024Component } from "./pages/pesaro2024/pesaro2024.component";
-import { ToolkitForMerchantComponent } from "./pages/toolkit-for-merchant/toolkit-for-merchant.component";
+import { Pesaro2024Component } from "./pesaro2024-section/pesaro2024/pesaro2024.component";
+import { ToolkitForMerchantComponent } from "./pesaro2024-section/toolkit-for-merchant/toolkit-for-merchant.component";
 import { QrStoreLogoComponent } from "./components/store-logos/qr-store-logo/qr-store-logo.component";
+import { Pesaro2024SectionComponent } from "./pesaro2024-section/pesaro2024-section.component";
 
 // AoT requires an exported function for factories
 export const createTranslateLoader = (http: HttpClient) =>
@@ -109,11 +110,6 @@ export const isMock = environment.mock;
 
 @NgModule({
   declarations: [
-    DialogConfirmCancelComponent,
-    DialogConfirmComponent,
-    StoreLogoComponent,
-    PdfViewerContainerComponent,
-    StoreLogosComponent,
     AboutComponent,
     AboutSectionComponent,
     AppComponent,
@@ -131,6 +127,8 @@ export const isMock = environment.mock;
     BreadcrumbsComponent,
     ContactFormComponent,
     ContactsComponent,
+    DialogConfirmCancelComponent,
+    DialogConfirmComponent,
     FanoComponent,
     FooterComponent,
     HomeComponent,
@@ -143,6 +141,8 @@ export const isMock = environment.mock;
     MerchantSignUpComponent,
     NavComponent,
     PageNotFoundComponent,
+    PdfViewerContainerComponent,
+    Pesaro2024Component,
     PrivacyComponent,
     PrivacyInstrumentComponent,
     PrivacyOverviewComponent,
@@ -151,16 +151,18 @@ export const isMock = environment.mock;
     PrivacyStepcounterComponent,
     PrivacyWebsiteComponent,
     ProgressSpinnerComponent,
+    QrStoreLogoComponent,
     RequestNewPasswordComponent,
-    ReteDelleRetiComponent,
     ResetPasswordComponent,
+    ReteDelleRetiComponent,
     SignInComponent,
+    StoreLogoComponent,
+    StoreLogosComponent,
+    ToolkitForMerchantComponent,
     UrbinoComponent,
     UserFormComponent,
     VolunteerComponent,
-    Pesaro2024Component,
-    ToolkitForMerchantComponent,
-    QrStoreLogoComponent,
+    Pesaro2024SectionComponent,
   ],
   exports: [],
   imports: [

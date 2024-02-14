@@ -32,8 +32,9 @@ import { SignInComponent } from "./authentication/signin/signin.component";
 import { UrbinoComponent } from "./pages/about/urbino/urbino.component";
 import { VolunteerComponent } from "./pages/volunteers/volunteer/volunteer.component";
 import { ReteDelleRetiComponent } from "./pages/projects/rete-delle-reti/rete-delle-reti-component";
-import { Pesaro2024Component } from "./pages/pesaro2024/pesaro2024.component";
-import { ToolkitForMerchantComponent } from "./pages/toolkit-for-merchant/toolkit-for-merchant.component";
+import { Pesaro2024Component } from "./pesaro2024-section/pesaro2024/pesaro2024.component";
+import { ToolkitForMerchantComponent } from "./pesaro2024-section/toolkit-for-merchant/toolkit-for-merchant.component";
+import { Pesaro2024SectionComponent } from "./pesaro2024-section/pesaro2024-section.component";
 
 const routes: Routes = [
   {
@@ -94,20 +95,41 @@ const routes: Routes = [
       },
       {
         path: "pesaro2024",
-        component: Pesaro2024Component,
-        pathMatch: "full",
+        component: Pesaro2024SectionComponent,
         data: {
-          breadcrumb: "BREADCRUMBS.PESARO2024",
+          breadcrumb: "BREADCRUMBS.PESARO2024.PESARO2024",
         },
+        children: [
+          {
+            path: "",
+            component: Pesaro2024Component,
+          },
+          {
+            path: "esercenti",
+            component: ToolkitForMerchantComponent,
+            data: {
+              breadcrumb: "BREADCRUMBS.PESARO2024.MERCHANTS",
+            },
+          },
+        ],
       },
-      {
-        path: "toolkit-for-merchant",
-        component: ToolkitForMerchantComponent,
-        pathMatch: "full",
-        data: {
-          breadcrumb: "BREADCRUMBS.TOOLKIT-FOR-MERCHANT",
-        },
-      },
+
+      // {
+      //   path: "pesaro2024",
+      //   component: Pesaro2024Component,
+      //   pathMatch: "full",
+      //   data: {
+      //     breadcrumb: "BREADCRUMBS.PESARO2024",
+      //   },
+      // },
+      // {
+      //   path: "toolkit-for-merchant",
+      //   component: ToolkitForMerchantComponent,
+      //   pathMatch: "full",
+      //   data: {
+      //     breadcrumb: "BREADCRUMBS.TOOLKIT-FOR-MERCHANT",
+      //   },
+      // },
       {
         path: "projects",
         component: ReteDelleRetiComponent,

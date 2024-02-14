@@ -21,10 +21,7 @@ export class ToolkitForMerchantComponent {
       isOpen: false,
       header: "Chi può utilizzare WOM?",
       content: [
-        `Tutti. WOM è una piattaforma di partecipazione attiva che riconosce il
-    valore sociale delle azioni individuali. Cittadini, turisti, studenti,
-    tutti possono scaricare l’applicazione gratuita WOM Pocket e guadagnare
-    WOM visitando i luoghi e partecipando agli eventi di Pesaro 20204.`,
+        `Tutti. WOM è una piattaforma di partecipazione attiva che riconosce il valore sociale delle azioni individuali. Cittadini, turisti, studenti, tutti possono scaricare l’applicazione gratuita WOM Pocket e guadagnare WOM visitando i luoghi e partecipando agli eventi di Pesaro 2024.`,
       ],
     },
     {
@@ -32,7 +29,7 @@ export class ToolkitForMerchantComponent {
       header: "C’è un costo di iscrizione?",
       content: [
         `No, l’iscrizione sul portale WOM è gratuita perchè è un’iniziativa di
-    CTE Square, la casa delle Tecnologie Emergenti di Pesaro.!`,
+    CTE Square, la casa delle Tecnologie Emergenti di Pesaro!`,
       ],
     },
     {
