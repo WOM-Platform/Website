@@ -5,3 +5,15 @@
 h2 {
   @apply text-[#2569FF];
 }
+
+.image-with-description {
+  @apply grid grid-cols-1 gap-2;
+}
+
+.image-with-description-image {
+  @apply flex items-center justify-center;
+}
+
+.image-description {
+  @apply blue-wom text-center font-semibold text-sm mb-0;
+}
