@@ -43,7 +43,8 @@
     },
     "PESARO2024": {
       "PESARO2024": "Pesaro2024",
-      "MERCHANTS": "Merchants"
+      "MERCHANTS": "Merchants",
+      "TOURISTS": "Tourists"
     },
     "VOLUNTEER": "Volunteers",
     "MERCHANT": "Merchant",
@@ -378,6 +379,12 @@
     },
     "FANO": {
       "TITLE": "WOM for Fano"
+    }
+  },
+  "PESARO2024": {
+    "TOURISTS": {
+      "WOM_FOR_PESARO2024": "WOM per Pesaro 2024",
+      "WOM_FOR_PESARO2024_DESCR": "  Il Comune di Pesaro, nell’ambito di <strong>Pesaro 2024</strong> e per iniziativa della Casa"
     }
   },
   "PROJECTS": {

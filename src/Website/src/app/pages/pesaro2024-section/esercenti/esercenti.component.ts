@@ -8,14 +8,14 @@ import {
 } from "@angular/animations";
 
 @Component({
-  selector: "app-toolkit-for-merchant",
-  templateUrl: "./toolkit-for-merchant.component.html",
-  styleUrls: ["./toolkit-for-merchant.component.css"],
+  selector: "app-esercenti",
+  templateUrl: "./esercenti.component.html",
+  styleUrls: ["./esercenti.component.css"],
   animations: [
     // animation triggers go here
   ],
 })
-export class ToolkitForMerchantComponent {
+export class EsercentiComponent {
   faqs = [
     {
       isOpen: false,

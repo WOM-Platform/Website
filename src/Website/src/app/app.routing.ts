@@ -32,9 +32,10 @@ import { SignInComponent } from "./authentication/signin/signin.component";
 import { UrbinoComponent } from "./pages/about/urbino/urbino.component";
 import { VolunteerComponent } from "./pages/volunteers/volunteer/volunteer.component";
 import { ReteDelleRetiComponent } from "./pages/projects/rete-delle-reti/rete-delle-reti-component";
-import { Pesaro2024Component } from "./pesaro2024-section/pesaro2024/pesaro2024.component";
-import { ToolkitForMerchantComponent } from "./pesaro2024-section/toolkit-for-merchant/toolkit-for-merchant.component";
-import { Pesaro2024SectionComponent } from "./pesaro2024-section/pesaro2024-section.component";
+import { Pesaro2024Component } from "./pages/pesaro2024-section/pesaro2024/pesaro2024.component";
+import { EsercentiComponent } from "./pages/pesaro2024-section/esercenti/esercenti.component";
+import { Pesaro2024SectionComponent } from "./pages/pesaro2024-section/pesaro2024-section.component";
+import { TuristiComponent } from "./pages/pesaro2024-section/turisti/turisti.component";
 
 const routes: Routes = [
   {
@@ -106,9 +107,16 @@ const routes: Routes = [
           },
           {
             path: "esercenti",
-            component: ToolkitForMerchantComponent,
+            component: EsercentiComponent,
             data: {
               breadcrumb: "BREADCRUMBS.PESARO2024.MERCHANTS",
+            },
+          },
+          {
+            path: "turisti",
+            component: TuristiComponent,
+            data: {
+              breadcrumb: "BREADCRUMBS.PESARO2024.TOURISTS",
             },
           },
         ],
