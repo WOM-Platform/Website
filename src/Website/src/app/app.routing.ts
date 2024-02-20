@@ -36,6 +36,7 @@ import { Pesaro2024Component } from "./pages/pesaro2024-section/pesaro2024/pesar
 import { EsercentiComponent } from "./pages/pesaro2024-section/esercenti/esercenti.component";
 import { Pesaro2024SectionComponent } from "./pages/pesaro2024-section/pesaro2024-section.component";
 import { TuristiComponent } from "./pages/pesaro2024-section/turisti/turisti.component";
+import { CittadiniComponent } from "./pages/pesaro2024-section/cittadini/cittadini.component";
 
 const routes: Routes = [
   {
@@ -117,6 +118,13 @@ const routes: Routes = [
             component: TuristiComponent,
             data: {
               breadcrumb: "BREADCRUMBS.PESARO2024.TOURISTS",
+            },
+          },
+          {
+            path: "cittadini",
+            component: CittadiniComponent,
+            data: {
+              breadcrumb: "BREADCRUMBS.PESARO2024.CITIZENS",
             },
           },
         ],

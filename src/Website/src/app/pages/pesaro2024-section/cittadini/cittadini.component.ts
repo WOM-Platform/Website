@@ -3,11 +3,11 @@ import { DomSanitizer, SafeHtml } from "@angular/platform-browser";
 import { TranslateService } from "@ngx-translate/core";
 
 @Component({
-  selector: "app-turisti",
-  templateUrl: "./turisti.component.html",
-  styleUrls: ["./turisti.component.css"],
+  selector: "app-cittadini",
+  templateUrl: "./cittadini.component.html",
+  styleUrls: ["./cittadini.component.css"],
 })
-export class TuristiComponent implements OnInit {
+export class CittadiniComponent implements OnInit {
   faqs = [];
   translatedTitle = this.translate.instant("PESARO2024.TOURISTS.TITLE");
 

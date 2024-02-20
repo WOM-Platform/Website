@@ -88,6 +88,7 @@ import { EsercentiComponent } from "./pages/pesaro2024-section/esercenti/esercen
 import { QrStoreLogoComponent } from "./components/store-logos/qr-store-logo/qr-store-logo.component";
 import { Pesaro2024SectionComponent } from "./pages/pesaro2024-section/pesaro2024-section.component";
 import { TuristiComponent } from "./pages/pesaro2024-section/turisti/turisti.component";
+import { CittadiniComponent } from "./pages/pesaro2024-section/cittadini/cittadini.component";
 
 // AoT requires an exported function for factories
 export const createTranslateLoader = (http: HttpClient) =>
@@ -165,6 +166,7 @@ export const isMock = environment.mock;
     VolunteerComponent,
     Pesaro2024SectionComponent,
     TuristiComponent,
+    CittadiniComponent,
   ],
   exports: [],
   imports: [
