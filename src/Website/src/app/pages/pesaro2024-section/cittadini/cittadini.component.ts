@@ -15,7 +15,6 @@ export class CittadiniComponent implements OnInit {
     private translate: TranslateService,
     private sanitizer: DomSanitizer
   ) {
-    translate.setDefaultLang("it");
     translate.use(translate.getBrowserLang() || "it");
     translate
       .get([

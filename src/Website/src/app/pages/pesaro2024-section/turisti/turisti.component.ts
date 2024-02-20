@@ -15,7 +15,6 @@ export class TuristiComponent implements OnInit {
     private translate: TranslateService,
     private sanitizer: DomSanitizer
   ) {
-    translate.setDefaultLang("it");
     translate.use(translate.getBrowserLang() || "it");
     translate
       .get([
@@ -31,6 +30,8 @@ export class TuristiComponent implements OnInit {
         "PESARO2024.TOURISTS.SECTION_FAQ_5_R",
       ])
       .subscribe((translations) => {
+        console.log("la lingua è ", translate.getBrowserLang());
+        console.log(translations["PESARO2024.TOURISTS.SECTION_FAQ_1_R"]);
         this.faqs = [
           {
             isOpen: false,

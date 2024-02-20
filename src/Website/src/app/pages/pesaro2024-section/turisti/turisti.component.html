@@ -12,12 +12,10 @@
   <div class="container">
     <div class="mt-10 container justify-normal">
       <h1 class="text-center" style="color: black">
-        <span [innerHTML]="'PESARO2024.TOURISTS.TITLE_FOR' | translate"></span
-        >{{ " "
-        }}<span
-          style="color: #2569ff"
-          [innerHTML]="'PESARO2024.TOURISTS.TITLE' | translate"
-        ></span>
+        {{ "PESARO2024.TOURISTS.TITLE_FOR" | translate }}
+        <span class="text-[#2569ff]">{{
+          "PESARO2024.TOURISTS.TITLE" | translate
+        }}</span>
       </h1>
 
       <div class="mt-6">
@@ -414,7 +412,7 @@
                 <p
                   class="mb-0 px-6 py-2 border-b-2 border-l-2 border-r-2 border-black rounded-b-lg"
                 >
-                  {{ faq.content }}
+                  {{ faq.content | translate }}
                 </p>
               </div>
               <ng-template #moreElements>
@@ -425,7 +423,7 @@
                     class="mb-0"
                     *ngFor="let cont of faq.content; let i = index"
                   >
-                    {{ cont }}
+                    {{ cont | translate }}
                   </p>
                 </div>
               </ng-template>
