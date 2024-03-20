@@ -31,10 +31,11 @@ import {MatSnackBarModule} from "@angular/material/snack-bar";
 import { GoogleMapsModule } from '@angular/google-maps';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { HttpClient } from '@angular/common/http';
+import {AnimatedNumberComponent} from "../components/animated-number/animated-number.component";
 
 @NgModule({
   declarations: [
-
+    AnimatedNumberComponent,
   ],
   imports: [
     CommonModule,
@@ -77,6 +78,7 @@ import { HttpClient } from '@angular/common/http';
   }),
   ],
   exports: [
+    AnimatedNumberComponent,
     FormsModule,
     GoogleMapsModule,
     MatButtonModule,

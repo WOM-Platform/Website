@@ -98,7 +98,6 @@
           <mat-icon matListItemIcon>email</mat-icon>
           <span>{{ "NAV.CONTACTS" | translate }}</span>
         </mat-list-item>
-<!--
         <mat-list-item
           routerLink="user/home"
           (click)="drawer.toggle()"
@@ -117,14 +116,13 @@
           <mat-icon matListItemIcon>close</mat-icon>
           <span>{{ "NAV.SIGN_OUT" | translate }}</span>
         </mat-list-item>
-        -->
       </mat-accordion>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
     <mat-toolbar color="app-toolbar" class="flex justify-between items-center">
       <a class="h-20 w-auto items-center flex" routerLink="home">
-        <img src="../../../assets/images/wom-logo-bianco.png" />
+        <img src="../../../assets/images/wom-logo-bianco.png" alt="wom-logo"/>
       </a>
       <div class="flex flex-row align-items-center">
         <!-- begin menu pc -->
@@ -176,7 +174,6 @@
           <button mat-button class="nav-button" (click)="navigate('contacts')">
             <span>{{ "NAV.CONTACTS" | translate }}</span>
           </button>
-          <!--
           <button mat-button class="nav-button" (click)="navigate('user/home')">
             <span>{{ "NAV.PROFILE" | translate }}</span>
           </button>
@@ -189,7 +186,6 @@
           >
             <span>{{ "NAV.SIGN_OUT" | translate }}</span>
           </button>
-          -->
         </div>
         <mat-divider
           class="divider nav-button menu-pc"

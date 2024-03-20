@@ -30,9 +30,9 @@ import { SharedModule } from '../shared/shared.module';
     UserStatsComponent,
     UserVerifyComponent,],
   imports: [
-    CommonModule, 
+    CommonModule,
     AuthRoutingModule,
-    SharedModule
+    SharedModule,
   ]
 })
 export class AuthModule { }

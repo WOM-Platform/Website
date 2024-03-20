@@ -89,6 +89,7 @@ import { QrStoreLogoComponent } from "./components/store-logos/qr-store-logo/qr-
 import { Pesaro2024SectionComponent } from "./pages/pesaro2024-section/pesaro2024-section.component";
 import { TuristiComponent } from "./pages/pesaro2024-section/turisti/turisti.component";
 import { CittadiniComponent } from "./pages/pesaro2024-section/cittadini/cittadini.component";
+import { NgChartsModule } from 'ng2-charts';
 
 // AoT requires an exported function for factories
 export const createTranslateLoader = (http: HttpClient) =>
@@ -198,6 +199,7 @@ export const isMock = environment.mock;
     TranslateModule,
     TranslateModule,
     LayoutModule,
+    NgChartsModule,
   ],
   providers: [
     {

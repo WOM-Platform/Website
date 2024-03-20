@@ -1,48 +1,24 @@
-<div class="container">
-  <mat-form-field appearance="fill" class="example-form-field">
-    <mat-label>{{ "USER.STATS.DATE_SELECTOR.TITLE" | translate }}</mat-label>
-    <mat-date-range-input [rangePicker]="rangePicker">
-      <input
-        matStartDate
-        placeholder="{{ 'USER.STATS.DATE_SELECTOR.START' | translate }}"
-        (dateInput)="addEvent('start', $event)"
-      />
-      <input
-        matEndDate
-        placeholder="{{ 'USER.STATS.DATE_SELECTOR.END' | translate }}"
-        (dateInput)="addEvent('end', $event)"
-      />
-    </mat-date-range-input>
-    <mat-hint>{{ "USER.STATS.DATE_SELECTOR.HINT" | translate }}</mat-hint>
-    <mat-datepicker-toggle
-      matSuffix
-      [for]="rangePicker"
-    ></mat-datepicker-toggle>
-    <mat-date-range-picker #rangePicker>
-      <mat-date-range-picker-actions>
-        <button mat-button matDateRangePickerCancel>
-          {{ "USER.STATS.DATE_SELECTOR.CANCEL" | translate }}
-        </button>
-        <button mat-raised-button color="primary" matDateRangePickerApply>
-          {{ "USER.STATS.DATE_SELECTOR.APPLY" | translate }}
-        </button>
-      </mat-date-range-picker-actions>
-    </mat-date-range-picker>
-  </mat-form-field>
 
-  <mat-tab-group mat-align-tabs="center">
-    <mat-tab label="Overview">
-      <ng-container *ngIf="merchantData">
-        <app-merchant-stats
-          [merchants]="merchantData.merchants"
-        ></app-merchant-stats>
-      </ng-container>
-    </mat-tab>
-    <mat-tab label="Detail">
-      <button class="mat-elevation-z0" mat-fab (click)="convertToPDF()">
-        <mat-icon>picture_as_pdf</mat-icon>
-      </button>
-      <div id="toPrint">Content to print goes here</div>
-    </mat-tab>
-  </mat-tab-group>
+<div class="container">
+<h1 class="text-center">Statistiche Amministratore</h1>
+    <div class="flex justify-around">
+        <div class="flex flex-col justify-center items-center">
+            <h2>Totale WOM Generati</h2>
+            <p>{{ displayChartCreatedAmount }}</p>
+        </div>
+        <div class="flex flex-col justify-center items-center">
+        <h2>Totale WOM Consumati</h2>
+           <div *ngIf="totalConsumedAmount"> <app-animated-number [finalNumber]="totalConsumedAmount" [duration]="1000"/></div>
+        </div>
+    </div>
+
+    <h2>Wom divisi per AIM</h2>
+<ngx-charts-pie-chart
+        [view]="view"
+        [scheme]="colorScheme"
+        [results]="chartCreatedAmountByAim"
+        [legend]="true"
+        [labels]="true">
+</ngx-charts-pie-chart>
+<h2>WOM divisi per posizione</h2>
 </div>

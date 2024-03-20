@@ -9,9 +9,6 @@ import { ApplicationsLibrariesComponent } from "./pages/volunteers/applications/
 import { ApplicationsOverviewComponent } from "./pages/volunteers/applications/overview/overview.component";
 import { ApplicationsStepcounterComponent } from "./pages/volunteers/applications/stepcounter/stepcounter.component";
 import { ApplicationsUniversitiesComponent } from "./pages/volunteers/applications/universities/universities.component";
-import { BillingCancelComponent } from "./billing/cancel/cancel.component";
-import { BillingCheckoutComponent } from "./billing/checkout/checkout.component";
-import { BillingSuccessComponent } from "./billing/success/success.component";
 import { ContactsComponent } from "./pages/contacts/contacts.component";
 import { HomeComponent } from "./pages/home";
 import { InstrumentComponent } from "./pages/instrument/instrument.component";
@@ -197,7 +194,7 @@ const routes: Routes = [
           breadcrumb: "BREADCRUMBS.AUTHENTICATION.AUTHENTICATION",
         },
         children: [
-          /*{
+          {
             path: "signin",
             component: SignInComponent,
             data: {
@@ -210,7 +207,7 @@ const routes: Routes = [
             data: {
               breadcrumb: "BREADCRUMBS.AUTHENTICATION.SIGNUP",
             },
-          },*/
+          },
           {
             path: "reset-password",
             component: ResetPasswordComponent,
