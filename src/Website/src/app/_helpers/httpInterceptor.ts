@@ -20,7 +20,7 @@ export class TokenInterceptorService implements HttpInterceptor {
                 private userService: UserService,
                 private router: Router) {
     }
-    noAuthStrings: string[] = ['aims', 'aim', 'auth/key', 'user/login', 'user/verify', 'user/register', 'user/password-reset', 'sendinblue'];
+    noAuthStrings: string[] = ['/aims', '/aim', 'auth/key', 'user/login', 'user/verify', 'user/register', 'user/password-reset', 'sendinblue'];
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         // If true do nothing - auth header not needed
