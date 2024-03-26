@@ -10,10 +10,7 @@ import {
 import { OverlayRef } from "@angular/cdk/overlay";
 import { OverlayService, AppOverlayConfig } from "../_overlay/overlay.service";
 import { ThemePalette } from "@angular/material/core";
-import {
-  MatProgressSpinnerModule,
-  MatProgressSpinnerMode,
-} from "@angular/material/progress-spinner";
+import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 
 @Component({
   selector: "app-progress-spinner",
@@ -23,7 +20,7 @@ import {
 export class ProgressSpinnerComponent implements OnInit, DoCheck {
   @Input() color?: ThemePalette;
   @Input() diameter? = 100;
-  @Input() mode?: MatProgressSpinnerMode;
+  @Input() mode?: MatProgressSpinnerModule;
   @Input() strokeWidth?: number;
   @Input() value?: number;
   @Input() backdropEnabled = true;
