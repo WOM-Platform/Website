@@ -4,7 +4,7 @@ import { Router } from "@angular/router";
 import { UserLogin } from "../../_models";
 import { TranslateService } from "@ngx-translate/core";
 import { UserService } from "../../_services";
-import { AddMerchantDialogComponent } from "../../user/add-merchant/add-merchant.component";
+import { AddMerchantDialogComponent } from "../../user/merchant/add-merchant/add-merchant.component";
 import { first } from "rxjs/operators";
 import { menuItems } from "./menu-items";
 

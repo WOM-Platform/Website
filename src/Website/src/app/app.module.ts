@@ -91,6 +91,7 @@ import { TuristiComponent } from "./pages/pesaro2024-section/turisti/turisti.com
 import { CittadiniComponent } from "./pages/pesaro2024-section/cittadini/cittadini.component";
 import { NgChartsModule } from 'ng2-charts';
 
+
 // AoT requires an exported function for factories
 export const createTranslateLoader = (http: HttpClient) =>
   new TranslateHttpLoader(
@@ -168,8 +169,11 @@ export const isMock = environment.mock;
     Pesaro2024SectionComponent,
     TuristiComponent,
     CittadiniComponent,
+
   ],
-  exports: [],
+    exports: [
+
+    ],
   imports: [
     appRoutingModule,
     AuthModule,

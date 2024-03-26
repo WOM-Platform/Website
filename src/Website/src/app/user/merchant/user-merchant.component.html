@@ -1,27 +1,27 @@
 <div class="container">
-  <h3 class="welcome-greetings">
-    {{ "USER.MERCHANT.WELCOME" | translate }},
-    <span class="text-lime-500 font-semibold">{{ username }}</span>
-  </h3>
-  <mat-divider></mat-divider>
   <div>
-    <div class="grid justify-items-stretch mt-11">
-      <h2 class="merchant-title">
-        {{ "USER.MERCHANT.MERCHANT_TITLE" | translate }}
+      <div class="flex justify-between my-6">
+      <h2 class="merchant-title ">
+          {{ "USER.MERCHANT.MERCHANT_TITLE" | translate }}
       </h2>
-
       <button
-        class="justify-self-end"
-        mat-mini-fab
-        color="primary"
-        matTooltip="{{ 'USER.MERCHANT.ADD_MERCHANT_TOOLTIP' | translate }}"
-        (click)="addMerchant()"
+              class="justify-self-end"
+              mat-mini-fab
+              color="primary"
+              matTooltip="{{ 'USER.MERCHANT.ADD_MERCHANT_TOOLTIP' | translate }}"
+              (click)="addMerchant()"
       >
-        <mat-icon>add</mat-icon>
+          <mat-icon>add</mat-icon>
       </button>
+
+
+
+
     </div>
     <div class="mt-11">
-      <ng-container *ngIf="merchants">
+        <i class="fab fa-chart-line"></i>
+
+        <ng-container *ngIf="merchants">
         <mat-accordion class="merchant-mat-accordion">
           <ng-container *ngFor="let merchant of merchants.merchants">
             <mat-expansion-panel>

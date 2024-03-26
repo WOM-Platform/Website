@@ -25,10 +25,9 @@ export class UserStatsComponent implements OnInit, OnDestroy{
     merchantSubscription: Subscription;
 
     totalCreatedAmount: number;
+    totalCreatedAmountSub: Subscription;
     totalConsumedAmount: number = 0;
 
-    displayChartCreatedAmount: number = 0;
-    
     chartCreatedAmountByAim: PieChartData[] = [];
 
     view: [number, number] = [700, 400];
@@ -50,8 +49,8 @@ export class UserStatsComponent implements OnInit, OnDestroy{
     loadData(): any {
         // total amount of created wom
         this.statsService.getTotalAmountCreated().subscribe(data => {
+            console.log("Created ")
             this.totalCreatedAmount = data;
-            this.animateNumber()
         })
 
         // total amount of consumed wom
@@ -59,6 +58,7 @@ export class UserStatsComponent implements OnInit, OnDestroy{
             this.totalConsumedAmount = data;
         })
 
+        // amount of wom created divided by aim
         this.statsService.getCreatedAmountByAim().subscribe(data => {
             this.chartCreatedAmountByAim = data.map(item => ({
                 name: item.aimTextId,
@@ -68,31 +68,24 @@ export class UserStatsComponent implements OnInit, OnDestroy{
             console.log(data)
         });
 
-        this.merchantSubscription = this.authService.merchants().pipe().subscribe(
-            response =>
-            {
+        // amount of wom created divided by position
+        this.statsService.getCreatedAmountByPosition().subscribe(data => {
+            console.log(data)
+        })
+        this.merchantSubscription = this.authService.merchants().subscribe({
+            next:(response) => {
                 this.merchantData = response;
-            }, error => {
-                console.log('error downloading merchant data ', error);
-            });
+            },
+            error: (error) => {
+                console.log('Errore durante il download dei dati del merchant:', error);
+            }}
+        );
     }
 
     addEvent(type: string, event: MatDatepickerInputEvent<Date>) {
         console.log(`${type}: ${event.value}`);
     }
 
-    animateNumber() {
-        const duration = 500;
-        const intervalTime = 50
-        const steps = duration / intervalTime
-        const increment = this.totalCreatedAmount / steps;
-        
-        interval(intervalTime).pipe(
-            map(i => (i+1) * increment),
-            takeWhile(value => value <= this.totalCreatedAmount, true)
-        ).subscribe({next: (value) => this.displayChartCreatedAmount = value,
-        complete: () => this.displayChartCreatedAmount = this.totalCreatedAmount})
-    }
     public convertToPDF()
     {
         html2canvas(document.getElementById('toPrint')).then(canvas => {

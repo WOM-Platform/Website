@@ -1,9 +1,9 @@
 import {Component, Inject} from '@angular/core';
-import {Pos, PosRegistration} from '../../_models';
+import {Pos, PosRegistration} from '../../../_models';
 import {first} from 'rxjs/operators';
 import {UntypedFormGroup} from '@angular/forms';
-import {PosService} from '../../_services';
-import {StorageService} from "../../_services/storage.service";
+import {PosService} from '../../../_services';
+import {StorageService} from "../../../_services/storage.service";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 
 @Component({

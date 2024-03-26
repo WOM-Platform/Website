@@ -1,10 +1,10 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {UserService, MerchantService, AuthService} from '../../_services';
 import {Merchant, Merchants, Pos} from '../../_models';
-import {AddMerchantDialogComponent, MerchantDialogData} from '../add-merchant/add-merchant.component';
+import {AddMerchantDialogComponent, MerchantDialogData} from './add-merchant/add-merchant.component';
 import {TranslateService} from '@ngx-translate/core';
 import {first} from 'rxjs/operators';
-import {AddPosDialogComponent, PosDialogData} from '../add-pos/add-pos.component';
+import {AddPosDialogComponent, PosDialogData} from './add-pos/add-pos.component';
 import {DialogType} from '../../_models/dialogType';
 import {Subscription} from 'rxjs';
 import {EmailService} from "../../_services/email.service";
@@ -47,15 +47,15 @@ export class UserMerchantComponent implements OnInit, OnDestroy {
     }
 
     loadData(): any {
-        this.merchantSubscription = this.authService.merchants().pipe().subscribe(
-            response =>
+        this.merchantSubscription = this.authService.merchants().subscribe({
+            next:(response) =>
             {
                 this.merchants = response;
                 // console.log(response);
-            }, error => {
+            },error: (error) => {
                 // console.log(error);
                 console.log('error downloading merchant data');
-            });
+            }})
     }
 
     addPos(merchantId: string): any {

@@ -32,10 +32,12 @@ import { GoogleMapsModule } from '@angular/google-maps';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { HttpClient } from '@angular/common/http';
 import {AnimatedNumberComponent} from "../components/animated-number/animated-number.component";
+import { AvatarComponent } from '../components/avatar/avatar.component';
 
 @NgModule({
   declarations: [
     AnimatedNumberComponent,
+    AvatarComponent,
   ],
   imports: [
     CommonModule,
@@ -78,6 +80,7 @@ import {AnimatedNumberComponent} from "../components/animated-number/animated-nu
   }),
   ],
   exports: [
+    AvatarComponent,
     AnimatedNumberComponent,
     FormsModule,
     GoogleMapsModule,

@@ -7,14 +7,10 @@ p {
 }
 
 .merchant-title {
-    @apply uppercase font-bold text-center justify-self-center;
+    @apply uppercase font-bold text-left;
 }
 .pos-card {
     margin-top: 1em;
-}
-
-.welcome-greetings {
-    margin: 20px 0;
 }
 
 .btn-stats {

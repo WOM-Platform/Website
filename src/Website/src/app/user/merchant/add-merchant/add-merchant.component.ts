@@ -1,11 +1,11 @@
 import {ChangeDetectorRef, Component, Inject, OnInit} from '@angular/core';
-import {Merchant} from '../../_models';
+import {Merchant} from '../../../_models';
 import {first} from 'rxjs/operators';
 import {UntypedFormGroup} from '@angular/forms';
-import {MerchantService} from '../../_services';
-import {DialogType} from '../../_models/dialogType';
-import {StorageService} from "../../_services/storage.service";
-import {MerchantFormComponent} from "../../_forms/merchant/forms-merchant.directive";
+import {MerchantService} from '../../../_services';
+import {DialogType} from '../../../_models/dialogType';
+import {StorageService} from "../../../_services/storage.service";
+import {MerchantFormComponent} from "../../../_forms/merchant/forms-merchant.directive";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 
 @Component({

@@ -1,9 +1,10 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {UserService, } from '../../_services';
+import {AuthService, UserService,} from '../../_services';
 import {TranslateService} from '@ngx-translate/core';
 import {Router} from "@angular/router";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {MatDialog} from "@angular/material/dialog";
+import {Subscription} from "rxjs";
 
 @Component({
     selector: 'app-user-home',
@@ -12,12 +13,15 @@ import {MatDialog} from "@angular/material/dialog";
 })
 export class UserHomeComponent implements OnInit, OnDestroy {
     username: string;
+    userData : any;
+    userDataSubscription : Subscription;
 
-    constructor(public dialog: MatDialog,
-                private snackBar: MatSnackBar,
-                private userService: UserService,
-                private router: Router,
-                private translate: TranslateService) {
+    constructor(
+        public dialog: MatDialog,
+        private snackBar: MatSnackBar,
+        private userService: UserService,
+        private router: Router,
+        private translate: TranslateService) {
     }
 
     ngOnInit(): any {
@@ -26,9 +30,13 @@ export class UserHomeComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy(): any {
+        this.userDataSubscription.unsubscribe()
     }
 
     loadData(): any {
+        // check user instrument and merchant amount
+        this.userDataSubscription = this.userService.me().subscribe(data => this.userData = data)
+        console.log("User data ", this.userData)
 
     }
 

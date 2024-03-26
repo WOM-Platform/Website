@@ -196,7 +196,8 @@
   "USER": {
     "HOME": {
       "WELCOME": "Welcome",
-      "MERCHANT_TITLE": "Merchant"
+      "MERCHANT_TITLE": "Merchant",
+      "INSTRUMENT_TITLE":"Instrument"
     },
     "MERCHANT": {
       "ADD_MERCHANT_TOOLTIP": "Add a new Merchant",

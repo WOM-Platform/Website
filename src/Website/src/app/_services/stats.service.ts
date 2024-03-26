@@ -10,33 +10,25 @@ export class StatsService {
     localUrlV1 = environment.baseUrl + environment.v1 + 'stats/';
     localUrlV2 = environment.baseUrlStats;
 
-    totalAmountCreated: any = null;
-    totalAmountConsumed: any = null;
-
-    totalAmountCreatedByAim: any = null;
-
     /*localUrlV2 = environment.baseUrl + environment.v2 + 'stats/';*/
-
-
+    
     constructor(private http: HttpClient) {
     }
 
     getTotalAmountCreated(): Observable<any> {
-        return this.http.get(this.localUrlV2 + 'AdminDashboard/' + 'total-created').pipe(
-            tap(data => this.totalAmountCreated = data)
-        )
+        return this.http.get(this.localUrlV2 + 'AdminDashboard/' + 'total-created')
     }
 
     getTotalAmountConsumed(): Observable<any> {
-        return this.http.get(this.localUrlV2 + 'AdminDashboard/' + 'total-consumed').pipe(
-            tap(data => this.totalAmountConsumed = data)
-        )
+        return this.http.get(this.localUrlV2 + 'AdminDashboard/' + 'total-consumed')
     }
 
     getCreatedAmountByAim(): Observable<any> {
-        return this.http.get(this.localUrlV2 + 'AdminDashboard/'+'created-by-aim').pipe(
-            tap(data => this.totalAmountCreatedByAim = data)
-        )
+        return this.http.get(this.localUrlV2 + 'AdminDashboard/'+'created-by-aim')
+    }
+
+    getCreatedAmountByPosition(): Observable<any>{
+        return this.http.get(this.localUrlV2 + 'AdminDashboard/' + 'created-by-position')
     }
 
     getStatsList(): Observable<Stats> {

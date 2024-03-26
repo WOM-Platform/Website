@@ -183,5 +183,12 @@ export class UserService {
                 password
             }).pipe(map (response => response));
     }
+
+    me(): Observable<any> {
+        return this.http.get<any>(this.localUrlV1 + 'me').pipe(map(result => {
+            console.log("Dati ", result)
+            return result
+        }))
+    }
 }
 
