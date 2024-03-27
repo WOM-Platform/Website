@@ -15,8 +15,7 @@ import { MerchantStatsComponent } from './stats/merchant/merchant-stats.componen
 import { UserStatsComponent } from './stats/user-stats.component';
 import { MapComponent } from '../components/map/map.component';
 import { SharedModule } from '../shared/shared.module';
-import { InstrumentComponent } from './stats/instrument/instrument.component';
-import { AdminComponent } from './stats/admin/admin.component';
+
 import { UserAdminComponent } from './user-admin/user-admin.component';
 import { UserInstrumentComponent } from './user-instrument/user-instrument.component';
 
@@ -24,8 +23,6 @@ import { UserInstrumentComponent } from './user-instrument/user-instrument.compo
   declarations: [
     AddMerchantDialogComponent,
     AddPosDialogComponent,
-    AdminComponent,
-    InstrumentComponent,
     MapComponent,
     MerchantFormComponent,
     MerchantStatsComponent,

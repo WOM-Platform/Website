@@ -183,6 +183,6 @@ export class UserMerchantComponent implements OnInit, OnDestroy {
     }
 
     openStats() {
-        this.router.navigateByUrl("/user/user-stats")
+        this.router.navigateByUrl("/user/merchant-stats")
     }
 }

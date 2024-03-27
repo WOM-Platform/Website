@@ -8,6 +8,9 @@ import { UserMerchantComponent } from './merchant/user-merchant.component';
 import { UserNotVerifiedComponent } from './not-verified/user-not-verified.component';
 import { UserVerifyComponent } from './verify/user-verify.component';
 import { UserStatsComponent } from './stats/user-stats.component';
+import {MerchantStatsComponent} from "./stats/merchant/merchant-stats.component";
+import {AdminStatsComponent} from "./stats/admin-stats/admin-stats.component";
+import {InstrumentStatsComponent} from "./stats/instrument-stats/instrument-stats.component";
 
 const routes : Routes = [
     {
@@ -56,11 +59,27 @@ const routes : Routes = [
             }
           },
           {
-            path: 'user-stats',
-            component: UserStatsComponent,
+            path: 'admin-stats',
+            component: AdminStatsComponent,
+            canActivate: [AuthGuard],
+            data: {
+              breadcrumb: 'BREADCRUMBS.USER.ADMIN-STATS'
+            }
+          },
+          {
+            path: 'merchant-stats',
+            component: MerchantStatsComponent,
             canActivate: [AuthGuard],
             data: {
               breadcrumb: 'BREADCRUMBS.USER.MERCHANT-STATS'
+            }
+          },
+          {
+            path: 'instrument-stats',
+            component: InstrumentStatsComponent,
+            canActivate: [AuthGuard],
+            data: {
+              breadcrumb: 'BREADCRUMBS.USER.INSTRUMENT-STATS'
             }
           },
           {

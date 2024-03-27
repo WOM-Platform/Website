@@ -43,7 +43,7 @@
                           'USER.MERCHANT.ENABLED_MERCHANT_TOOLTIP' | translate
                         }}"
                       >
-                        <mat-icon class="green-icon">check_circle</mat-icon>
+                          <p class="text-sm">✅</p>
                       </button>
                       <p class="text-xl">{{ merchant.name }}</p>
                     </div>
@@ -58,7 +58,7 @@
                             | translate
                         }}"
                       >
-                        <mat-icon color="warn">remove_circle</mat-icon>
+                          <p class="text-sm">🚫</p>
                       </button>
                       <p class="text-xl">{{ merchant.name }}</p>
                     </div>
@@ -85,6 +85,7 @@
                       }}"
                       (click)="editMerchant(merchant)"
                     >
+
                       <mat-icon>edit</mat-icon>
                     </button>
                   </div>

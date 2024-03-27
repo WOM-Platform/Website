@@ -57,7 +57,9 @@
       "ERROR": "Not verified",
       "HOME": "Home",
       "VERIFY": "Verify",
-      "MERCHANT-STATS": "Statistics"
+      "ADMIN-STATS": "Admin Statistics",
+      "INSTRUMENT-STATS": "Instrument Statistics",
+      "MERCHANT-STATS": "Merchant Statistics"
     },
     "MANAGE": {
       "TITLE": "Manage",
