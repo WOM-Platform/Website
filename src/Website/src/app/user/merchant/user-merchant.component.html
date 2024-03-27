@@ -1,61 +1,72 @@
 <div class="container">
   <div>
-      <div class="flex justify-between my-6">
-      <h2 class="merchant-title ">
-          {{ "USER.MERCHANT.MERCHANT_TITLE" | translate }}
+    <div class="flex justify-between items center my-6">
+      <h2 class="merchant-title">
+        {{ "USER.MERCHANT.MERCHANT_TITLE" | translate }}
       </h2>
-      <button
-              class="justify-self-end"
-              mat-mini-fab
-              color="primary"
-              matTooltip="{{ 'USER.MERCHANT.ADD_MERCHANT_TOOLTIP' | translate }}"
-              (click)="addMerchant()"
-      >
-          <mat-icon>add</mat-icon>
-      </button>
-
-
-
-
-    </div>
-    <div class="mt-11">
-        <i class="fab fa-chart-line"></i>
-
+      <div class="flex gap-6 items-center">
         <ng-container *ngIf="merchants">
+          <div class="flex justify-start gap-2">
+            <button (click)="openStats()" class="btn-stats">
+              <mat-icon>bar_chart</mat-icon>
+              {{ "USER.MERCHANT.FIND_OUT_STATS" | translate }}
+            </button>
+          </div>
+        </ng-container>
+        <button
+          class="justify-self-end"
+          mat-mini-fab
+          color="primary"
+          matTooltip="{{ 'USER.MERCHANT.ADD_MERCHANT_TOOLTIP' | translate }}"
+          (click)="addMerchant()"
+        >
+          <mat-icon>add</mat-icon>
+        </button>
+      </div>
+    </div>
+    <div class="">
+      <ng-container *ngIf="merchants">
         <mat-accordion class="merchant-mat-accordion">
           <ng-container *ngFor="let merchant of merchants.merchants">
             <mat-expansion-panel>
               <mat-expansion-panel-header class="my-2">
-                <mat-panel-title>
+                <mat-panel-title class="flex justify-between items-center">
                   <ng-template
                     [ngIf]="merchant.enabled"
                     [ngIfElse]="not_enabled"
                   >
-                    <button
-                      mat-icon-button
-                      color="primary"
-                      matTooltip="{{
-                        'USER.MERCHANT.ENABLED_MERCHANT_TOOLTIP' | translate
-                      }}"
-                    >
-                      <mat-icon class="green-icon">check_circle</mat-icon>
-                    </button>
-                    {{ merchant.name }}
+                    <div class="flex items-center gap-1">
+                      <button
+                        mat-icon-button
+                        color="primary"
+                        matTooltip="{{
+                          'USER.MERCHANT.ENABLED_MERCHANT_TOOLTIP' | translate
+                        }}"
+                      >
+                        <mat-icon class="green-icon">check_circle</mat-icon>
+                      </button>
+                      <p class="text-xl">{{ merchant.name }}</p>
+                    </div>
                   </ng-template>
                   <ng-template #not_enabled>
-                    <button
-                      mat-icon-button
-                      color="primary"
-                      matTooltip="{{
-                        'USER.MERCHANT.NOT_ENABLED_MERCHANT_TOOLTIP' | translate
-                      }}"
-                    >
-                      <mat-icon color="warn">remove_circle</mat-icon>
-                    </button>
-                    <span style="margin-right: 5px">{{ merchant.name }}</span>
-                    <span>
+                    <div class="flex items-center gap-1">
                       <button
-                        mat-flat-button
+                        mat-icon-button
+                        color="primary"
+                        matTooltip="{{
+                          'USER.MERCHANT.NOT_ENABLED_MERCHANT_TOOLTIP'
+                            | translate
+                        }}"
+                      >
+                        <mat-icon color="warn">remove_circle</mat-icon>
+                      </button>
+                      <p class="text-xl">{{ merchant.name }}</p>
+                    </div>
+                  </ng-template>
+                  <div class="flex items-center">
+                    <div *ngIf="merchant && merchant.enabled == false">
+                      <button
+                        mat-stroked-button
                         color="warn"
                         (click)="requestEnabling(merchant)"
                       >
@@ -64,18 +75,19 @@
                             | translate
                         }}
                       </button>
-                    </span>
-                  </ng-template>
-                  <button
-                    mat-icon-button
-                    color="primary"
-                    matTooltip="{{
-                      'USER.MERCHANT.EDIT_MERCHANT_TOOLTIP' | translate
-                    }}"
-                    (click)="editMerchant(merchant)"
-                  >
-                    <mat-icon>edit</mat-icon>
-                  </button>
+                    </div>
+
+                    <button
+                      mat-icon-button
+                      color="primary"
+                      matTooltip="{{
+                        'USER.MERCHANT.EDIT_MERCHANT_TOOLTIP' | translate
+                      }}"
+                      (click)="editMerchant(merchant)"
+                    >
+                      <mat-icon>edit</mat-icon>
+                    </button>
+                  </div>
                 </mat-panel-title>
               </mat-expansion-panel-header>
               <mat-divider></mat-divider>
@@ -156,11 +168,6 @@
             </mat-expansion-panel>
           </ng-container>
         </mat-accordion>
-         <div class="flex justify-center margin-t-section">
-          <button (click)="openStats()" class="btn-stats">
-            {{ "USER.MERCHANT.FIND_OUT_STATS" | translate }}
-          </button>
-        </div>
       </ng-container>
     </div>
   </div>

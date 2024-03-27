@@ -50,11 +50,16 @@ export class TokenInterceptorService implements HttpInterceptor {
             }),
             catchError(error => {
                 if (error instanceof HttpErrorResponse) {
+
                     if(userLogin && error.status == 401) {
                         let ref = this.snackBar.open('Unauthorized.', 'close', { duration: 5000});
                         ref.afterDismissed().subscribe(res => {
                             this.userService.logout();
                             this.router.navigate(['/authentication/signin']);
+                        })
+                    } else if (error.status === 0) {
+                        let ref = this.snackBar.open('🛠️ Server error', 'close', { duration: 5000});
+                        ref.afterDismissed().subscribe(res => {
                         })
                     }
                 }
