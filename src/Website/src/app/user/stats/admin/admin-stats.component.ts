@@ -54,18 +54,18 @@ export class AdminStatsComponent {
 
   loadData(): any {
     // total amount of created wom
-    this.statsService.getTotalAmountCreated().subscribe(data => {
+    this.statsService.getAdminTotalAmountCreated().subscribe(data => {
       console.log("Created ")
       this.totalCreatedAmount = data;
     })
 
     // total amount of consumed wom
-    this.statsService.getTotalAmountConsumed().subscribe(data => {
+    this.statsService.getAdminTotalAmountConsumed().subscribe(data => {
       this.totalConsumedAmount = data;
     })
 
     // amount of wom created divided by aim
-    this.statsService.getCreatedAmountByAim().subscribe(data => {
+    this.statsService.getAdminCreatedAmountByAim().subscribe(data => {
       this.chartCreatedAmountByAim = data.map(item => ({
         name: item.aimTextId,
         value: item.amount
@@ -75,7 +75,7 @@ export class AdminStatsComponent {
     });
 
     // amount of wom created divided by position
-    this.statsService.getCreatedAmountByPosition().subscribe(data => {
+    this.statsService.getAdminCreatedAmountByPosition().subscribe(data => {
       console.log(data)
     })
     this.merchantSubscription = this.authService.merchants().subscribe({

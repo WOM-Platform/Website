@@ -83,6 +83,8 @@ export class UserService {
         // remove user from local storage to log user out
         localStorage.removeItem('currentUserLogin');
         localStorage.removeItem('currentUser');
+        localStorage.removeItem('merchantData')
+        localStorage.removeItem('instrumentData')
 
         this.currentUserLoginSubject.next(null);
         this.currentUserSubject.next(null);
@@ -122,7 +124,7 @@ export class UserService {
      */
     update(data: UserRegistrationPayload): Observable<User> {
         return this.http.post<User>(this.localUrlV1 + this.currentUserLoginSubject.value.id,
-            data).pipe(map (response => response));
+            data).pipe(map(response => response));
     }
 
     /**
@@ -131,7 +133,7 @@ export class UserService {
     verify(userId: string = null): Observable<any> {
         const id = userId != null ? userId : this.currentUserLoginSubject.value.id;
         return this.http.post<any>(this.localUrlV1 + id + '/verify', {})
-            .pipe(map (response => response));
+            .pipe(map(response => response));
     }
 
     /**
@@ -139,7 +141,7 @@ export class UserService {
      */
     sendVerification(userId: string, token: string): Observable<any> {
         return this.http.post<any>(this.localUrlV1 + userId + '/verify?token=' + token, {})
-            .pipe(map (response => response));
+            .pipe(map(response => response));
     }
 
     /**
@@ -148,7 +150,7 @@ export class UserService {
     requestVerificationEmailById(userId: string = null): Observable<any> {
         const id = userId != null ? userId : this.currentUserLoginSubject.value.id;
         return this.http.post<any>(this.localUrlV1 + id + '/request-verification', {})
-            .pipe(map (response => response));
+            .pipe(map(response => response));
     }
 
     /**
@@ -158,7 +160,7 @@ export class UserService {
         const e = email != null ? email : this.currentUserValue.email;
         return this.http.post<any>(this.localUrlV1 + 'request-verification', {
             email: e
-        }).pipe(map (response => response));
+        }).pipe(map(response => response));
     }
 
     /**
@@ -167,7 +169,7 @@ export class UserService {
      */
     passwordResetRequest(email: string): Observable<any> {
         return this.http.post<any>(this.localUrlV1 + 'password-reset',
-            {email}).pipe(map (response => response));
+            {email}).pipe(map(response => response));
     }
 
     /**
@@ -181,14 +183,16 @@ export class UserService {
             {
                 token,
                 password
-            }).pipe(map (response => response));
+            }).pipe(map(response => response));
     }
 
     me(): Observable<any> {
         return this.http.get<any>(this.localUrlV1 + 'me').pipe(map(result => {
-            console.log("Dati ", result)
+            localStorage.setItem('merchantData', JSON.stringify(result.merchants))
+            localStorage.setItem('instrumentData', JSON.stringify(result.sources))
             return result
         }))
     }
+
 }
 

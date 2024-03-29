@@ -16,8 +16,8 @@ import { UserStatsComponent } from './stats/user-stats.component';
 import { MapComponent } from '../components/map/map.component';
 import { SharedModule } from '../shared/shared.module';
 
-import { UserAdminComponent } from './user-admin/user-admin.component';
-import { UserInstrumentComponent } from './user-instrument/user-instrument.component';
+import { UserAdminComponent } from './admin/user-admin.component';
+import { UserInstrumentComponent } from './instrument/user-instrument.component';
 
 @NgModule({
   declarations: [

@@ -14,7 +14,7 @@ import {DialogConfirmCancelComponent} from "../../components/dialog-confirm-canc
 import {DialogConfirmComponent} from "../../components/dialog-confirm/dialog-confirm";
 import {MatDialog} from "@angular/material/dialog";
 import {MatSnackBar} from "@angular/material/snack-bar";
-import { Router } from '@angular/router';
+import {Router} from '@angular/router';
 
 @Component({
     selector: 'app-user-merchant',
@@ -28,17 +28,17 @@ export class UserMerchantComponent implements OnInit, OnDestroy {
 
     constructor(
         public dialog: MatDialog,
-                private authService: AuthService,
-                private emailService: EmailService,
-                private router: Router,
-                private snackBar: MatSnackBar,
-                private translate: TranslateService,
-                private userService: UserService,
-                ) {
+        private authService: AuthService,
+        private emailService: EmailService,
+        private router: Router,
+        private snackBar: MatSnackBar,
+        private translate: TranslateService,
+        private userService: UserService,
+    ) {
     }
 
     ngOnInit(): any {
-        this.username = this.userService.currentUserValue.name + ' ' +   this.userService.currentUserValue.surname;
+        this.username = this.userService.currentUserValue.name + ' ' + this.userService.currentUserValue.surname;
         this.loadData();
     }
 
@@ -48,14 +48,15 @@ export class UserMerchantComponent implements OnInit, OnDestroy {
 
     loadData(): any {
         this.merchantSubscription = this.authService.merchants().subscribe({
-            next:(response) =>
-            {
+            next: (response) => {
+
                 this.merchants = response;
                 // console.log(response);
-            },error: (error) => {
+            }, error: (error) => {
                 // console.log(error);
                 console.log('error downloading merchant data');
-            }})
+            }
+        })
     }
 
     addPos(merchantId: string): any {
@@ -84,10 +85,9 @@ export class UserMerchantComponent implements OnInit, OnDestroy {
             if (result) {
                 this.loadData();
                 let successString;
-                if(posData.isEdit) {
+                if (posData.isEdit) {
                     successString = 'USER.EDIT_POS.SUCCESS';
-                }
-                else {
+                } else {
                     successString = 'USER.ADD_POS.SUCCESS';
                 }
                 this.translate.get(successString).pipe(first()).subscribe(
@@ -158,20 +158,20 @@ export class UserMerchantComponent implements OnInit, OnDestroy {
                     + "<br><b>fiscal code:</b> " + merchant.fiscalCode;
 
                 this.emailService.sendEmail(emailData).subscribe(res => {
-                    this.openSnackBar(this.translate.instant('USER.MERCHANT.MERCHANT.SEND_ACTIVATION_REQUEST_CONFIRM'));
-                },
-                error => {
-                    console.log(error);
-                    const dialogRefErr = this.dialog.open(DialogConfirmComponent, {
-                        data: {
-                            'title': this.translate.instant('USER.MERCHANT.MERCHANT.ACTIVATION_ERROR.TITLE'),
-                            'message': this.translate.instant('USER.MERCHANT.MERCHANT.ACTIVATION_ERROR.MESSAGE'),
-                            'confirm': this.translate.instant('USER.MERCHANT.MERCHANT.ACTIVATION_ERROR.CONFIRM'),
-                        }
+                        this.openSnackBar(this.translate.instant('USER.MERCHANT.MERCHANT.SEND_ACTIVATION_REQUEST_CONFIRM'));
+                    },
+                    error => {
+                        console.log(error);
+                        const dialogRefErr = this.dialog.open(DialogConfirmComponent, {
+                            data: {
+                                'title': this.translate.instant('USER.MERCHANT.MERCHANT.ACTIVATION_ERROR.TITLE'),
+                                'message': this.translate.instant('USER.MERCHANT.MERCHANT.ACTIVATION_ERROR.MESSAGE'),
+                                'confirm': this.translate.instant('USER.MERCHANT.MERCHANT.ACTIVATION_ERROR.CONFIRM'),
+                            }
+                        });
+                        dialogRefErr.afterClosed().subscribe(result => {
+                        });
                     });
-                    dialogRefErr.afterClosed().subscribe(result => {
-                    });
-                });
             }
         });
     }
@@ -182,7 +182,7 @@ export class UserMerchantComponent implements OnInit, OnDestroy {
         });
     }
 
-    openStats() {
-        this.router.navigateByUrl("/user/merchant-stats")
+    openStats(id: any) {
+        this.router.navigateByUrl(`/user/stats/merchant/${id}`)
     }
 }

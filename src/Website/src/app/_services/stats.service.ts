@@ -11,24 +11,28 @@ export class StatsService {
     localUrlV2 = environment.baseUrlStats;
 
     /*localUrlV2 = environment.baseUrl + environment.v2 + 'stats/';*/
-    
+
     constructor(private http: HttpClient) {
     }
 
-    getTotalAmountCreated(): Observable<any> {
+    getAdminTotalAmountCreated(): Observable<any> {
         return this.http.get(this.localUrlV2 + 'AdminDashboard/' + 'total-created')
     }
 
-    getTotalAmountConsumed(): Observable<any> {
+    getAdminTotalAmountConsumed(): Observable<any> {
         return this.http.get(this.localUrlV2 + 'AdminDashboard/' + 'total-consumed')
     }
 
-    getCreatedAmountByAim(): Observable<any> {
-        return this.http.get(this.localUrlV2 + 'AdminDashboard/'+'created-by-aim')
+    getAdminCreatedAmountByAim(): Observable<any> {
+        return this.http.get(this.localUrlV2 + 'AdminDashboard/' + 'created-by-aim')
     }
 
-    getCreatedAmountByPosition(): Observable<any>{
-        return this.http.get(this.localUrlV2 + 'AdminDashboard/' + 'created-by-position')
+    getAdminCreatedAmountByPosition(): Observable<any> {
+        return this.http.get(`${this.localUrlV2}AdminDashboard/created-by-position`)
+    }
+
+    getMerchTotalAmount(id: string): Observable<any> {
+        return this.http.get(`${this.localUrlV2}MerchantDashboard/total-amount/${id}`)
     }
 
     getStatsList(): Observable<Stats> {

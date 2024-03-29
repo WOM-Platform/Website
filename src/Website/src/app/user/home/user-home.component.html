@@ -1,6 +1,6 @@
 <div class="container">
     <div class="flex justify-between my-6 ">
-        <h1>La tua Dashboard</h1>
+        <h1>{{ "USER.HOME.DASHBOARD" | translate }}</h1>
         <div class="flex justify-end items-center gap-2 ">
         <app-avatar [startingLetter]="username.charAt(0)"></app-avatar>
         <h3>{{ username }}</h3>
@@ -8,18 +8,23 @@
     </div>
     <mat-divider></mat-divider>
     <!-- Admin dashboard-->
-    <div *ngIf="userData && userData.admin && userData.admin.length > 0">
-        <h1>ADMIN</h1>
+    <!--<div *ngIf="userData && userData.admin && userData.admin.length > 0">-->
+    <div>
+        <h2 class="uppercase">Admin</h2>
+        <app-user-admin/>
+    </div>
+    <!-- Instrument dashboard-->
+    <!--<div *ngIf="userData && userData.sources && userData.sources.length > 0">-->
+    <div>
+        <h2 class="uppercase">Instrument</h2>
+        <app-user-instrument/>
     </div>
     <!-- Merchant dashboard-->
     <div *ngIf="userData &&  userData.merchants && userData.merchants.length > 0">
         <app-user-merchant/>
     </div>
 
-    <!-- Instrument dashboard-->
-    <div *ngIf="userData && userData.sources && userData.sources.length > 0">
-        <app-user-instrument/>
-    </div>
+
   <!--<div class="mat-card">
     <h2>{{ "USER.HOME.WELCOME" | translate }}, {{ username }}</h2>
     <mat-divider></mat-divider>

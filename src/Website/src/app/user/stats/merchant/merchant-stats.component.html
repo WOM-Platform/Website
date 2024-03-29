@@ -1,1 +1,7 @@
-<p>uihiuhi</p>
+<h1>WOM consumati totale</h1>
+<div *ngIf="totalAmount">
+    <p>{{ totalAmount }}</p>
+</div>
+<ng-template *ngIf="totalAmount">
+    <p>{{ totalAmount }}</p>
+</ng-template>
