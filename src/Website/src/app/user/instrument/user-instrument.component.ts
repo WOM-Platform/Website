@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-user-instrument',
@@ -6,5 +7,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./user-instrument.component.css']
 })
 export class UserInstrumentComponent {
-
+  constructor(private router: Router) {
+  }
+  openStats() {
+    this.router.navigateByUrl("user/stats/instrument")
+  }
 }
