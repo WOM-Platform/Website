@@ -45,7 +45,8 @@
       "PESARO2024": "Pesaro2024",
       "MERCHANTS": "Merchants",
       "TOURISTS": "Tourists",
-      "CITIZENS": "Citizens"
+      "CITIZENS": "Citizens",
+      "VOLUNTEERS": "Volunteers"
     },
     "VOLUNTEER": "Volunteers",
     "MERCHANT": "Merchant",
@@ -197,7 +198,7 @@
     "HOME": {
       "WELCOME": "Welcome",
       "MERCHANT_TITLE": "Merchant",
-      "INSTRUMENT_TITLE":"Instrument"
+      "INSTRUMENT_TITLE": "Instrument"
     },
     "MERCHANT": {
       "ADD_MERCHANT_TOOLTIP": "Add a new Merchant",

@@ -37,6 +37,7 @@ import {EsercentiComponent} from "./pages/pesaro2024-section/esercenti/esercenti
 import {Pesaro2024SectionComponent} from "./pages/pesaro2024-section/pesaro2024-section.component";
 import {TuristiComponent} from "./pages/pesaro2024-section/turisti/turisti.component";
 import {CittadiniComponent} from "./pages/pesaro2024-section/cittadini/cittadini.component";
+import {VolontarxComponent} from "./pages/pesaro2024-section/volontarx/volontarx.component";
 
 const routes: Routes = [
     {
@@ -127,6 +128,14 @@ const routes: Routes = [
                             breadcrumb: "BREADCRUMBS.PESARO2024.CITIZENS",
                         },
                     },
+                    {
+                        path: "volontarx",
+                        component: VolontarxComponent,
+                        data: {
+                            breadcrumb: "BREADCRUMBS.PESARO2024.VOLUNTEERS",
+                        },
+                    },
+
                 ],
             },
 

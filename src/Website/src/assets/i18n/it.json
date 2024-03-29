@@ -42,7 +42,8 @@
       "PESARO2024": "Pesaro2024",
       "MERCHANTS": "Esercenti",
       "TOURISTS": "Turisti",
-      "CITIZENS": "Cittadini"
+      "CITIZENS": "Cittadini",
+      "VOLUNTEERS": "Volunteers"
     },
     "PROJECTS": {
       "RETE-DELLE-RETI": "Rete delle Reti"
@@ -197,7 +198,7 @@
     "HOME": {
       "WELCOME": "Benvenuto",
       "MERCHANT_TITLE": "Merchant",
-      "INSTRUMENT_TITLE":"Instrument"
+      "INSTRUMENT_TITLE": "Instrument"
     },
     "MERCHANT": {
       "ADD_MERCHANT_TOOLTIP": "Aggiungi un nuovo Merchant",
@@ -539,6 +540,10 @@
       "SECTION_FAQ_5_D": "Posso usare WOM solo a Pesaro?",
       "SECTION_FAQ_5_R": "No, puoi cercare altre città in cui ci sono esercenti convenzionati, o proporre tu stessa/o di utilizzare WOM in altre città.",
       "CONTACTS_DESCR": "Rimani aggiornato sul progetto e seguici su <strong>Instagram</strong> e <strong>Facebook!</strong>"
+    },
+    "VOLUNTEERS": {
+      "TITLE_FOR": "TOOLKIT PER",
+      "TITLE": "VOLONTARXPS24"
     }
   },
   "PROJECTS": {
