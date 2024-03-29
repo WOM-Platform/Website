@@ -24,7 +24,7 @@ import {Router} from '@angular/router';
 export class UserMerchantComponent implements OnInit, OnDestroy {
     username: string;
     merchants: Merchants;
-    merchantSubscription: Subscription;
+
 
     constructor(
         public dialog: MatDialog,
@@ -43,20 +43,11 @@ export class UserMerchantComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy(): any {
-        this.merchantSubscription.unsubscribe();
+
     }
 
     loadData(): any {
-        this.merchantSubscription = this.authService.merchants().subscribe({
-            next: (response) => {
-
-                this.merchants = response;
-                // console.log(response);
-            }, error: (error) => {
-                // console.log(error);
-                console.log('error downloading merchant data');
-            }
-        })
+        this.merchants = JSON.parse(localStorage.getItem("merchantData"))
     }
 
     addPos(merchantId: string): any {

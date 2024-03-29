@@ -31,14 +31,26 @@ export class StatsService {
         return this.http.get(`${this.localUrlV2}AdminDashboard/created-by-position`)
     }
 
-    getMerchTotalAmount(id: string): Observable<any> {
+    getPosTotalAmount(id: string): Observable<any> {
         return this.http.get(`${this.localUrlV2}MerchantDashboard/total-amount/${id}`)
     }
 
+    getPosOffers(id: string): Observable<any> {
+        return this.http.get(`${this.localUrlV2}MerchantDashboard/pos-offers/${id}`)
+    }
+
+    getPosBestOffer(id: string): Observable<any> {
+        return this.http.get(`${this.localUrlV2}MerchantDashboard/best-offer/${id}`)
+    }
+
     getStatsList(): Observable<Stats> {
-        console.log("get stats list ", this.localUrlV2)
         return this.http.get<Stats>(this.localUrlV1 + 'vouchers').pipe(
             map(values => Stats.fromJson(values))
         );
     }
+
+    getScorePos(id: string): Observable<any> {
+        return this.http.get(`${this.localUrlV2}MerchantDashboard/score/${id}`)
+    }
+
 }

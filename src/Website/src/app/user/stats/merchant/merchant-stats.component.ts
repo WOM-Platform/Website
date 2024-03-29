@@ -10,6 +10,10 @@ import {ActivatedRoute} from "@angular/router";
 })
 export class MerchantStatsComponent implements OnInit {
     merchants: MerchantContainer[];
+    posScore: number;
+    selectedMerchant: MerchantContainer;
+    offers: { 'amount': number, 'offerId': number, 'offerName': string }[]
+    bestOffer: { 'amount': number, 'offerId': number, 'offerName': string };
     totalAmount: number = 0;
     idMerchant: string;
 
@@ -25,16 +29,34 @@ export class MerchantStatsComponent implements OnInit {
 
     loadData() {
         this.merchants = JSON.parse(localStorage.getItem('merchantData'))
-        console.log(this.merchants)
 
         if (this.merchants && this.idMerchant) {
-            const selectedMerchant = this.merchants.find(merch => merch.id === this.idMerchant)
-            console.log("selectedMerchant")
-            console.log(selectedMerchant)
+            this.selectedMerchant = this.merchants.find(merch => merch.id === this.idMerchant)
+
+            for (const pos of this.selectedMerchant.pos) {
+                // FAKE API: amount of WOM
+                this.statsService.getPosTotalAmount("924ebd20590ef1br325a6ecd").subscribe(res => {
+                    this.totalAmount += res
+                })
+
+                this.statsService.getPosOffers("924ebd20590ef1br325a6ecd").subscribe(res => {
+                    this.offers = res
+                })
+
+                if (this.offers && this.offers.length > 1) {
+                    this.statsService.getPosBestOffer("924ebd20590ef1br325a6ecd").subscribe(res => {
+                        this.bestOffer = res
+                    })
+                }
+
+                this.statsService.getScorePos("924ebd20590ef1br325a6ecd").subscribe(res => {
+                    this.posScore = res
+                })
+            }
+
         }
-        /* this.statsService.getMerchTotalAmount().subscribe(data => {
-             console.log("Console log ", data);
-             this.totalAmount = data;
-         }); */
+
     }
+
+
 }
