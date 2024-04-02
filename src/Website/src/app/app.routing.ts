@@ -206,20 +206,20 @@ const routes: Routes = [
                     breadcrumb: "BREADCRUMBS.AUTHENTICATION.AUTHENTICATION",
                 },
                 children: [
-                    /*{
-                      path: "signin",
-                      component: SignInComponent,
-                      data: {
-                        breadcrumb: "BREADCRUMBS.AUTHENTICATION.SIGNIN",
-                      },
+                    {
+                        path: "signin",
+                        component: SignInComponent,
+                        data: {
+                            breadcrumb: "BREADCRUMBS.AUTHENTICATION.SIGNIN",
+                        },
                     },
                     {
-                      path: "signup",
-                      component: MerchantSignUpComponent,
-                      data: {
-                        breadcrumb: "BREADCRUMBS.AUTHENTICATION.SIGNUP",
-                      },
-                    },*/
+                        path: "signup",
+                        component: MerchantSignUpComponent,
+                        data: {
+                            breadcrumb: "BREADCRUMBS.AUTHENTICATION.SIGNUP",
+                        },
+                    },
                     {
                         path: "reset-password",
                         component: ResetPasswordComponent,
