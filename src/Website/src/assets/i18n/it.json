@@ -42,7 +42,8 @@
       "PESARO2024": "Pesaro2024",
       "MERCHANTS": "Esercenti",
       "TOURISTS": "Turisti",
-      "CITIZENS": "Cittadini"
+      "CITIZENS": "Cittadini",
+      "VOLUNTEERS": "Volontarx"
     },
     "PROJECTS": {
       "RETE-DELLE-RETI": "Rete delle Reti"
@@ -200,7 +201,7 @@
       "DASHBOARD": "La tua Dashboard",
       "WELCOME": "Benvenuto",
       "MERCHANT_TITLE": "Merchant",
-      "INSTRUMENT_TITLE":"Instrument"
+      "INSTRUMENT_TITLE": "Instrument"
     },
     "MERCHANT": {
       "ADD_MERCHANT_TOOLTIP": "Aggiungi un nuovo Merchant",
@@ -391,7 +392,7 @@
       "TITLE_FOR": "TOOLKIT PER",
       "TITLE": "CITTADINI",
       "PAGE_DESCR": " WOM è la piattaforma adottata da Pesaro Capitale Italiana della Cultura 2024 per riconoscere il valore della tua partecipazione.<br /><br /> Scopri come funziona e che opportunità ti offre",
-      "DOWNLOAD_GUIDE": "<a href='/assets/images/pesaro2024/tourists/WOMPesaroTuristi-it.pdf' target='_blank' ><strong><u>Scarica la guida in versione in PDF.</strong></u></a>",
+      "DOWNLOAD_GUIDE": "<a href='/assets/images/pesaro2024/tourists/WOMPesaroTuristi-it.pdf' target='_blank' ><strong><u>Scarica la guida in versione in PDF.</u></strong></a>",
       "SECTION_WOM_FOR_PESARO2024": "WOM per Pesaro 2024",
       "SECTION_WOM_FOR_PESARO2024_DESCR": "Il Comune di Pesaro, nell’ambito di <strong>Pesaro 2024</strong> e per iniziativa della <strong>Casa della Tecnologie Emergenti</strong>, ha adottato la piattaforma digitale <strong>WOM</strong>, per il coinvolgimento attivo di cittadini e turisti. Chiunque partecipi alle iniziative culturali o visiti i luoghi di Pesaro 2024 può guadagnare punti, detti WOM, che attestano il <strong>valore sociale generato dalla partecipazione</strong>.<br/><br/>Ogni WOM corrisponde a un minuto di impegno. I WOM non hanno controvalore monetario, ma vengono riconosciuti come <strong>voucher</strong> da chi intende premiare chi li ha conseguiti. <strong>Commercianti, esercenti, enti pubblici</strong> e <strong>privati</strong> possono liberamente decidere di concedere sconti o agevolazioni su beni e servizi a chi è in possesso di WOM. L’entità dello sconto praticato e il numero di WOM necessari a ottenerlo sono a totale discrezione di ogni esercente, che può impostare le offerte e renderle immediatamente visibili sull’applicazione WOM Pocket. Presso i <strong>Musei Civici</strong> e <strong>Casa Rossini</strong> puoi anche avere riduzioni e gratuità sulla <strong>Card Pesaro Capitale</strong>.<br/><br/> L’uso diffuso dei WOM favorisce la <strong>coesione sociale</strong>, la <strong>partecipazione attiva</strong> in azioni di interesse collettivo, e la <strong>consapevolezza</strong> del valore delle proprie azioni.",
       "SECTION_WOM_POCKET": "WOM Pocket (l'app per collezionare e usare WOM)",
@@ -417,7 +418,7 @@
       "SECTION_TUTORIAL2_B_1": "<strong>Cerca</strong> un QRcode di Pesaro 2024 (come quello qui sotto)",
       "SECTION_TUTORIAL2_B_2": "<strong>Apri l'app</strong> WOM Pocket",
       "SECTION_TUTORIAL2_B_3": "<strong>Clicca</strong> sul pulsante \"Scansiona\"",
-      "SECTION_TUTORIAL2_B_4": "<strong>Inquadra</strong> il QRcode ",
+      "SECTION_TUTORIAL2_B_4": "<strong>Inquadra</strong> il QRcode",
       "SECTION_TUTORIAL2_B_5": "Vedrai comparire nella tua app <strong>i WOM che hai guadagnato</strong>",
       "SECTION_TUTORIAL2_B_6": "<strong>Scansiona subito</strong> questo <strong>QRcode di invito e guadagna i tuoi primi 15 WOM!</strong>",
       "SECTION_TUTORIAL3": "Tutorial 3: Utilizzare WOM",
@@ -425,9 +426,9 @@
       "SECTION_TUTORIAL3_2": "<strong>Clicca su \"Offerte\"</strong> per vedere le offerte attive in tua prossimità. Se non ci sono offerte attive dove ti trovi, potrai visualizzare le offerte presenti in altre città ",
       "SECTION_TUTORIAL3_3": "<strong>Clicca su \"Vedi mappa\"</strong> per accedere alla Mappa delle offerte presenti nel territorio",
       "SECTION_TUTORIAL3_4": "<strong>Recati presso un negozio</strong> convenzionato (potrai riconoscerlo grazie allo speciale adesivo \"QUI SI ACCETTANO WOM\")",
-      "SECTION_TUTORIAL3_5": "<strong>Chiedi</strong> di poter utilizzare WOM per accedere all'offerta prevista. L'esercente ti mostrerà il QRcode e il PIN dell'offerta (come mostrato in figura)  ",
+      "SECTION_TUTORIAL3_5": "<strong>Chiedi</strong> di poter utilizzare WOM per accedere all'offerta prevista. L'esercente ti mostrerà il QRcode e il PIN dell'offerta (come mostrato in figura)",
       "SECTION_TUTORIAL3_6": "<strong>Apri</strong> l'app <strong>WOM Pocket</strong> e clicca su <strong>\"Scansiona\"</strong>",
-      "SECTION_TUTORIAL3_7": "<strong>Inquadra</strong> il QRcode, inserisci il PIN e conferma la transazione ",
+      "SECTION_TUTORIAL3_7": "<strong>Inquadra</strong> il QRcode, inserisci il PIN e conferma la transazione",
       "SECTION_TUTORIAL3_8": "<strong>Mostra</strong> al negoziante lo schermo con la spunta verde di conferma",
       "SECTION_TUTORIAL3_9": "Ora hai diritto allo sconto!",
       "SECTION_TUTORIAL3_DESCR_IMG": "Fac-simile del QRcode che dovrai inquadrarecon l'app WOM Pocket per accedere all'offerta",
@@ -463,10 +464,10 @@
       "SUBTITLE": "Il valore della tua partecipazione alla Capitale della Cultura",
       "PAGE_DESCR": "Il Comune di Pesaro, per iniziativa della  <a target='_' href='https://ctesquare.it/'><strong><u>Casa della Tecnologie Emergenti</u></strong></a>, ha adottato la piattaforma WOM per riconoscere e premiare il valore della partecipazione attiva di cittadini e turisti alle iniziative culturali di <a target='_' href='https://pesaro2024.it/'><strong><u>Pesaro Capitale Italiana della Cultura 2024</u></strong></a>.",
       "SECTION_HOW_WORKS": "Come Funziona?",
-      "SECTION_HOW_WORKS_DESCR": "<strong>Guadagna WOM partecipando a eventi</strong>, <strong>visitando luoghi culturali</strong>, <strong>facendo azioni socialmente utili</strong> o <strong>adottando comportamenti sostenibili</strong>. Ogni <strong>WOM</strong> rappresenta <strong>un minuto di impegno</strong>. I WOM non hanno controvalore monetario, ma presso i <strong>Musei Civici</strong> e <strong>Casa Rossini</strong> valgono riduzioni e gratuità sulla <a target='_' href='https://pesaro2024.it/card/'><u><strong>Card Pesaro Capitale</strong></u></a> e vengono riconosciuti come voucher da <strong>artigiani</strong> ed <strong>esercenti</strong> che intendono premiare con <strong>sconti</strong> o <strong>agevolazioni</strong> chi contribuisce alla creazione di valore sociale.</br></br>WOM Pocket è l'app <strong>gratuita</strong> per Android e iOS che permette di collezionare e usare WOM garantendo <strong>l'anonimato</strong> degli utenti. Consulta le guide complete per  <a href='https://wom.social/pesaro2024/turisti'><strong><u>turisti</u></strong></a> e  <a href='https://wom.social/pesaro2024/cittadini'><strong><u>cittadini</u></strong></a>.",
+      "SECTION_HOW_WORKS_DESCR": "<strong>Guadagna WOM partecipando a eventi</strong>, <strong>visitando luoghi culturali</strong>, <strong>facendo azioni socialmente utili</strong> o <strong>adottando comportamenti sostenibili</strong>. Ogni <strong>WOM</strong> rappresenta <strong>un minuto di impegno</strong>. I WOM non hanno controvalore monetario, ma presso i <strong>Musei Civici</strong> e <strong>Casa Rossini</strong> valgono riduzioni e gratuità sulla <a target='_' href='https://pesaro2024.it/card/'><u><strong>Card Pesaro Capitale</strong></u></a> e vengono riconosciuti come voucher da <strong>artigiani</strong> ed <strong>esercenti</strong> che intendono premiare con <strong>sconti</strong> o <strong>agevolazioni</strong> chi contribuisce alla creazione di valore sociale.</br></br>WOM Pocket è l'app <strong>gratuita</strong> per Android e iOS che permette di collezionare e usare WOM garantendo <strong>l'anonimato</strong> degli utenti. Consulta le guide complete per  <a href='https://wom.social/pesaro2024/turisti'><strong><u>turisti</u></strong></a> e  <a href='https://wom.social/pesaro2024/cittadini'><strong><u>cittadini</u></strong></a> e <a href='https://wom.social/pesaro2024/volontarx'><u><strong>volontari di Pesaro2024</strong></u></a>.",
       "SECTION_HOW_TO_EARN_WOM": "Come Guadagnare WOM?",
       "SECTION_HOW_TO_EARN_WOM_1_DESCR": "Nei luoghi e negli eventi di Pesaro 2024 sono <strong>esposti speciali QRcode</strong>, come quello di invito esposto qui sotto. <strong>Scansionali</strong> con WOM Pocket per guadagnare tanti WOM quanti sono i minuti necessari a seguire l'evento o a visitare il luogo. Il QRcode di invito vale 15 WOM, come riconoscimento del valore che stai creando nei minuti che dedichi a leggere questa pagina, a installare l'app e a sperimentarne il funzionamento. Ogni QRcode può essere scansionato una sola volta.",
-      "SECTION_HOW_TO_EARN_WOM_2_DESCR": " Consulta le guide per <a href='https://wom.social/pesaro2024/turisti'><u><strong>turisti</strong></u></a> e <a href='https://wom.social/pesaro2024/cittadini'><u><strong>cittadini</strong></u></a> per scoprire i tanti modi di guadagnare WOM.",
+      "SECTION_HOW_TO_EARN_WOM_2_DESCR": " Consulta le guide per <a href='https://wom.social/pesaro2024/turisti'><u><strong>turisti</strong></u></a>, <a href='https://wom.social/pesaro2024/cittadini'><u><strong>cittadini</strong></u></a> e <a href='https://wom.social/pesaro2024/volontarx'><u><strong>volontari di Pesaro2024</strong></u></a> per scoprire i tanti modi di guadagnare WOM.",
       "SECTION_VOLUNTEERS": "",
       "SECTION_VOLUNTEERS_DESCR": "",
       "SECTION_WHERE_TO_USE": "Dove puoi usare i tuoi WOM?",
@@ -476,7 +477,7 @@
     "TOURISTS": {
       "TITLE_FOR": "TOOLKIT PER",
       "TITLE": "TURISTI",
-      "PAGE_DESCR": " WOM è la piattaforma adottata da Pesaro Capitale Italiana della Cultura 2024 per riconoscere il valore della tua partecipazione.<br /><br /> Scopri come funziona e che opportunità ti offre",
+      "PAGE_DESCR": "WOM è la piattaforma adottata da Pesaro Capitale Italiana della Cultura 2024 per riconoscere il valore della tua partecipazione.<br /><br /> Scopri come funziona e che opportunità ti offre",
       "DOWNLOAD_GUIDE": "<a href='/assets/images/pesaro2024/tourists/WOMPesaroTuristi-it.pdf' target='_blank' ><strong><u>Scarica la guida in versione in PDF.</strong></u></a>",
       "SECTION_WOM_FOR_PESARO2024": "WOM per Pesaro 2024",
       "SECTION_WOM_FOR_PESARO2024_DESCR": "Il Comune di Pesaro, nell'ambito di <strong>Pesaro 2024</strong> e per iniziativa della <strong>Casa della Tecnologie Emergenti</strong>, ha adottato la piattaforma digitale <strong>WOM</strong>, per il coinvolgimento attivo di cittadini e turisti. Chiunque partecipi alle iniziative culturali o visiti i luoghi di Pesaro 2024 può guadagnare punti, detti WOM, che attestano il <strong>valore sociale generato dalla partecipazione</strong>. <br/><br/>Ogni WOM corrisponde a un minuto di impegno. I WOM non hanno controvalore monetario, ma vengono riconosciuti come <strong>voucher</strong> da chi intende premiare chi li ha conseguiti. <strong>Commercianti</strong>, <strong>esercenti</strong>,<strong> enti pubblici</strong> e <strong>privati</strong> possono liberamente decidere di concedere sconti o agevolazioni su beni e servizi a chi è in possesso di WOM. L'entità dello sconto praticato e il numero di WOM necessari a ottenerlo sono a totale discrezione di ogni esercente, che può impostare le offerte e renderle immediatamente visibili sull'applicazione WOM Pocket.<br/><br/>Presso i <strong>Musei Civici</strong> e <strong>Casa Rossini</strong> puoi anche avere riduzioni e gratuità sulla <strong>Card Pesaro Capitale</strong>.<br/><br/>L'uso diffuso dei WOM favorisce la <strong>coesione sociale</strong>, la <strong>partecipazione attiva</strong> in azioni di interesse collettivo, e la <strong>consapevolezza</strong> del valore delle proprie azioni.",
@@ -495,7 +496,7 @@
       "SECTION_TUTORIAL2": "Tutorial 2: Ottenere i WOM di Pesaro 2024",
       "SECTION_TUTORIAL2_DESCR_A": "Puoi ottenere WOM in tantissimi modi, dopo aver scaricato l'app:",
       "SECTION_TUTORIAL2_A_1": "<strong>Scansionando il QRcode di benvenuto</strong> - alberghi e infopoint di Pesaro ti danno il benvenuto con 15 WOM",
-      "SECTION_TUTORIAL2_A_2": "<strong>Visitando i luoghi di cultura</strong> di Pesaro 2024 - di fronte ai palazzi e ai monumenti di Pesaro sono affissi piccoli QRcode che valgono 15 WOM ",
+      "SECTION_TUTORIAL2_A_2": "<strong>Visitando i luoghi di cultura</strong> di Pesaro 2024 - di fronte ai palazzi e ai monumenti di Pesaro sono affissi piccoli QRcode che valgono 15 WOM",
       "SECTION_TUTORIAL2_A_3": "<strong>Visitando i musei</strong> di Pesaro - all'interno dei musei sono esposti QRcode che valgono 60 WOM",
       "SECTION_TUTORIAL2_A_4": "<strong>Partecipando agli eventi</strong> di Pesaro 2024 - a ogni evento è associato uno specifico QRcode che dà valore alla tua partecipazione",
       "SECTION_TUTORIAL2_A_5": "<strong>Camminando</strong> - segui il Tutorial 5 per scoprire come usare WOM contapassi",
@@ -542,6 +543,10 @@
       "SECTION_FAQ_5_D": "Posso usare WOM solo a Pesaro?",
       "SECTION_FAQ_5_R": "No, puoi cercare altre città in cui ci sono esercenti convenzionati, o proporre tu stessa/o di utilizzare WOM in altre città.",
       "CONTACTS_DESCR": "Rimani aggiornato sul progetto e seguici su <strong>Instagram</strong> e <strong>Facebook!</strong>"
+    },
+    "VOLUNTEERS": {
+      "TITLE_FOR": "TOOLKIT PER",
+      "TITLE": "VOLONTARXPS24"
     }
   },
   "PROJECTS": {
