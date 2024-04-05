@@ -13,7 +13,8 @@
                 </div>
                 <h3>Instruments List</h3>
                 <app-users-list [usersList]="instrumentsList"
-                                [usersTableColumns]="instrumentsTableColumns"></app-users-list>
+                                [usersTableColumns]="instrumentsTableColumns"
+                                (deleteSource)="onDeleteSource($event)"></app-users-list>
 
                 <div class="mt-11">
                     <app-pagination [currentPage]="currentPage"

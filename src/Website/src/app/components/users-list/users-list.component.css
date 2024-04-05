@@ -3,7 +3,9 @@
 
 }
 
-.tb-edit-cell {
-    width: 32px;
-    text-align: center;
+.tb-action-cell {
+    width: 100px;
+    height: auto;
+    display: flex;
+    align-items: center;
 }

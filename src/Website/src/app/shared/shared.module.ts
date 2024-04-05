@@ -37,16 +37,22 @@ import {MatTableModule} from "@angular/material/table";
 import {UsersListComponent} from "../components/users-list/users-list.component";
 import {MatPaginatorModule} from "@angular/material/paginator";
 import {PaginationComponent} from "../components/pagination/pagination.component";
+import {DialogConfirmCancelComponent} from "../components/dialog-confirm-cancel/dialog-confirm-cancel";
+import {DialogConfirmComponent} from "../components/dialog-confirm/dialog-confirm";
+
 
 @NgModule({
     declarations: [
         AnimatedNumberComponent,
         AvatarComponent,
+        DialogConfirmCancelComponent,
+        DialogConfirmComponent,
         UsersListComponent,
         PaginationComponent
     ],
     imports: [
         CommonModule,
+
         FormsModule,
         GoogleMapsModule,
         MatButtonModule,
@@ -91,6 +97,8 @@ import {PaginationComponent} from "../components/pagination/pagination.component
     exports: [
         AvatarComponent,
         AnimatedNumberComponent,
+        DialogConfirmCancelComponent,
+        DialogConfirmComponent,
         FormsModule,
         GoogleMapsModule,
         MatButtonModule,

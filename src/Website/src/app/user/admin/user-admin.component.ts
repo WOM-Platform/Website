@@ -3,6 +3,8 @@ import {Router} from "@angular/router";
 import {UserService} from "../../_services";
 import {SourceService} from "../../_services/source.service";
 import {Subscription} from "rxjs";
+import {MatDialog} from "@angular/material/dialog";
+import {CreateInstrumentDialogComponent} from "./create-instrument-dialog/create-instrument-dialog.component";
 
 @Component({
     selector: 'app-user-admin',
@@ -25,7 +27,7 @@ export class UserAdminComponent implements OnInit {
     totalItems: number;
 
 
-    constructor(private router: Router, private sourceService: SourceService) {
+    constructor(private router: Router, private sourceService: SourceService, private instrumentDialog: MatDialog) {
     }
 
     ngOnInit() {
@@ -110,7 +112,33 @@ export class UserAdminComponent implements OnInit {
     }
 
     onCreateInstrument() {
-        console.log("WE forte che mi hai cliccato Instru")
+        const dialogRef = this.instrumentDialog.open(CreateInstrumentDialogComponent, {
+            width: '500px',
+            data: {}
+        });
+
+        dialogRef.afterClosed().subscribe(result => {
+            if (result && result.name && result.url) {
+                this.sourceService.createInstrument(result).subscribe(
+                    res => {
+                        this.getListInstruments();
+                    },
+                    error => {
+                        console.error("Error creating instrument:", error);
+                    }
+                );
+            } else {
+                console.error("Invalid result received:", result);
+
+            }
+        });
+    }
+
+    onDeleteSource(userToDelete: any) {
+        // Delete service
+        this.sourceService.deleteInstrument(userToDelete.id).subscribe(res => {
+            this.getListInstruments();
+        })
     }
 
 }

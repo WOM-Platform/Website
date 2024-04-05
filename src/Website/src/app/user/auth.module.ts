@@ -18,11 +18,13 @@ import {SharedModule} from '../shared/shared.module';
 
 import {UserAdminComponent} from './admin/user-admin.component';
 import {UserInstrumentComponent} from './instrument/user-instrument.component';
+import {CreateInstrumentDialogComponent} from "./admin/create-instrument-dialog/create-instrument-dialog.component";
 
 @NgModule({
     declarations: [
         AddMerchantDialogComponent,
         AddPosDialogComponent,
+        CreateInstrumentDialogComponent,
         MapComponent,
         MerchantFormComponent,
         MerchantStatsComponent,

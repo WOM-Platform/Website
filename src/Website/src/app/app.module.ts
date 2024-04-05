@@ -75,8 +75,6 @@ import {ResetPasswordComponent} from "./authentication/reset-password/reset-pass
 import {TokenInterceptorService} from "./_helpers/httpInterceptor";
 import {UserFormComponent} from "./_forms/user/forms-user.directive";
 import {VolunteerComponent} from "./pages/volunteers/volunteer/volunteer.component";
-import {DialogConfirmCancelComponent} from "./components/dialog-confirm-cancel/dialog-confirm-cancel";
-import {DialogConfirmComponent} from "./components/dialog-confirm/dialog-confirm";
 import {StoreLogoComponent} from "./components/store-logos/store-logo/store-logo.component";
 import {PdfViewerContainerComponent} from "./components/pdf-viewer-container/pdf-viewer-container.component";
 import {StoreLogosComponent} from "./components/store-logos/store-logos.component";
@@ -134,8 +132,7 @@ export const isMock = environment.mock;
         BreadcrumbsComponent,
         ContactFormComponent,
         ContactsComponent,
-        DialogConfirmCancelComponent,
-        DialogConfirmComponent,
+
         FanoComponent,
         FooterComponent,
         HomeComponent,

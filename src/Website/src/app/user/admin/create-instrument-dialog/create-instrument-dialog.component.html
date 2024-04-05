@@ -1,0 +1,17 @@
+<h1 mat-dialog-title>Nuovo Instrument</h1>
+<div mat-dialog-content>
+    <p>Inserisci nome:</p>
+    <mat-form-field>
+        <input matInput [(ngModel)]="data.name">
+    </mat-form-field>
+</div>
+<div mat-dialog-content>
+    <p>Inserisci url:</p>
+    <mat-form-field>
+        <input matInput [(ngModel)]="data.url">
+    </mat-form-field>
+</div>
+<mat-dialog-actions align="end">
+    <button mat-button (click)="onNoClick()">Annulla</button>
+    <button color="primary" mat-button [mat-dialog-close]="data" cdkFocusInitial>Crea</button>
+</mat-dialog-actions>
