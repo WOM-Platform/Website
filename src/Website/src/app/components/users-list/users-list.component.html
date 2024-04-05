@@ -1,0 +1,23 @@
+<table class="mt-6 mat-elevation-z1 overflow-hidden rounded-lg" mat-table [dataSource]="usersList">
+    <!-- Define columns -->
+    <ng-container *ngFor="let column of usersTableColumns" [matColumnDef]="column">
+        <th class="tb-header" mat-header-cell *matHeaderCellDef>{{ column }}</th>
+        <td class="tb-row" mat-cell *matCellDef="let user">{{ user[column] }}</td>
+    </ng-container>
+
+    <!-- Extra column -->
+    <ng-container matColumnDef="extraColumn">
+        <th class="tb-header" mat-header-cell *matHeaderCellDef>Modifica</th>
+        <td class="tb-edit-cell" mat-cell *matCellDef="let user">
+            <button class="flex justify-center" mat-icon-button color="primary" (click)="editSource()">
+                <mat-icon>edit</mat-icon>
+            </button>
+        </td>
+    </ng-container>
+
+    <!-- Header row -->
+    <tr mat-header-row *matHeaderRowDef="usersTableColumns.concat('extraColumn')"></tr>
+
+    <!-- Data row -->
+    <tr mat-row *matRowDef="let row; columns: usersTableColumns.concat('extraColumn')"></tr>
+</table>

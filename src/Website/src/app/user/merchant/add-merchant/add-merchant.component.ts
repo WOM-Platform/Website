@@ -24,7 +24,8 @@ export class AddMerchantDialogComponent implements OnInit {
                 public dialogRef: MatDialogRef<AddMerchantDialogComponent>,
                 private merchantService: MerchantService,
                 private cd: ChangeDetectorRef,
-                private storageService: StorageService) {}
+                private storageService: StorageService) {
+    }
 
     ngOnInit(): any {
         this.merchantData = this.data.data;
@@ -32,24 +33,20 @@ export class AddMerchantDialogComponent implements OnInit {
     }
 
     onSubmit(): any {
-
-        console.log("TEST")
-        console.log(this.formMerchant)
-
         if (this.formMerchant.invalid) {
             for (const control of Object.keys(this.formMerchant.controls)) {
                 this.formMerchant.controls[control].markAsTouched();
-              }
+            }
         } else {
-        switch (this.data.type) {
-            case DialogType.create:
-                this.create();
-                break;
-            case DialogType.edit:
-                this.edit();
-                break;
+            switch (this.data.type) {
+                case DialogType.create:
+                    this.create();
+                    break;
+                case DialogType.edit:
+                    this.edit();
+                    break;
+            }
         }
-    }
     }
 
     onCancel(): any {

@@ -1,0 +1,9 @@
+.tb-header {
+    @apply font-semibold  capitalize border-b-4
+
+}
+
+.tb-edit-cell {
+    width: 32px;
+    text-align: center;
+}

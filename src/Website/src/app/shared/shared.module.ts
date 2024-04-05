@@ -1,5 +1,5 @@
 import {APP_INITIALIZER, NgModule} from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {CommonModule} from '@angular/common';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {TranslateLoader, TranslateModule, TranslateService} from '@ngx-translate/core';
 
@@ -19,7 +19,7 @@ import {MatNativeDateModule} from "@angular/material/core";
 import {MatSidenavModule} from "@angular/material/sidenav";
 import {MatStepperModule} from '@angular/material/stepper';
 import {MatToolbarModule} from '@angular/material/toolbar';
-import { PdfViewerModule } from 'ng2-pdf-viewer';
+import {PdfViewerModule} from 'ng2-pdf-viewer';
 import {MatTooltipModule} from "@angular/material/tooltip";
 import {MatListModule} from "@angular/material/list";
 import {MatTabsModule} from "@angular/material/tabs";
@@ -28,90 +28,104 @@ import {MatSlideToggleModule} from "@angular/material/slide-toggle";
 import {MatMenuModule} from "@angular/material/menu";
 import {MatSelectModule} from "@angular/material/select";
 import {MatSnackBarModule} from "@angular/material/snack-bar";
-import { GoogleMapsModule } from '@angular/google-maps';
-import { NgxChartsModule } from '@swimlane/ngx-charts';
-import { HttpClient } from '@angular/common/http';
+import {GoogleMapsModule} from '@angular/google-maps';
+import {NgxChartsModule} from '@swimlane/ngx-charts';
+import {HttpClient} from '@angular/common/http';
 import {AnimatedNumberComponent} from "../components/animated-number/animated-number.component";
-import { AvatarComponent } from '../components/avatar/avatar.component';
+import {AvatarComponent} from '../components/avatar/avatar.component';
+import {MatTableModule} from "@angular/material/table";
+import {UsersListComponent} from "../components/users-list/users-list.component";
+import {MatPaginatorModule} from "@angular/material/paginator";
+import {PaginationComponent} from "../components/pagination/pagination.component";
 
 @NgModule({
-  declarations: [
-    AnimatedNumberComponent,
-    AvatarComponent,
-  ],
-  imports: [
-    CommonModule,
-    FormsModule,
-    GoogleMapsModule,
-    MatButtonModule,
-    MatCardModule,
-    MatCheckboxModule,
-    MatDatepickerModule,
-    MatDialogModule,
-    MatDividerModule,
-    MatDividerModule,
-    MatExpansionModule,
-    MatGridListModule,
-    MatGridListModule,
-    MatIconModule,
-    MatInputModule,
-    MatListModule,
-    MatMenuModule,
-    MatNativeDateModule,
-    MatProgressSpinnerModule,
-    MatSelectModule,
-    MatSidenavModule,
-    MatSlideToggleModule,
-    MatSnackBarModule,
-    MatStepperModule,
-    MatTabsModule,
-    MatToolbarModule,
-    MatTooltipModule,
-    NgxChartsModule,
-    PdfViewerModule,
-    ReactiveFormsModule,
-    TranslateModule.forRoot({
-      defaultLanguage: 'it',
-      loader: {
-          provide: TranslateLoader,
-          useFactory: (TranslateLoader),
-          deps: [HttpClient]
-      }
-  }),
-  ],
-  exports: [
-    AvatarComponent,
-    AnimatedNumberComponent,
-    FormsModule,
-    GoogleMapsModule,
-    MatButtonModule,
-    MatCardModule,
-    MatCheckboxModule,
-    MatDatepickerModule,
-    MatDialogModule,
-    MatDividerModule,
-    MatDividerModule,
-    MatExpansionModule,
-    MatGridListModule,
-    MatGridListModule,
-    MatIconModule,
-    MatInputModule,
-    MatListModule,
-    MatMenuModule,
-    MatNativeDateModule,
-    MatProgressSpinnerModule,
-    MatSelectModule,
-    MatSidenavModule,
-    MatSlideToggleModule,
-    MatSnackBarModule,
-    MatStepperModule,
-    MatTabsModule,
-    MatToolbarModule,
-    MatTooltipModule,
-    NgxChartsModule,
-    PdfViewerModule,
-    ReactiveFormsModule,
-    TranslateModule,
-  ],
+    declarations: [
+        AnimatedNumberComponent,
+        AvatarComponent,
+        UsersListComponent,
+        PaginationComponent
+    ],
+    imports: [
+        CommonModule,
+        FormsModule,
+        GoogleMapsModule,
+        MatButtonModule,
+        MatCardModule,
+        MatCheckboxModule,
+        MatDatepickerModule,
+        MatDialogModule,
+        MatDividerModule,
+        MatDividerModule,
+        MatExpansionModule,
+        MatGridListModule,
+        MatGridListModule,
+        MatIconModule,
+        MatInputModule,
+        MatListModule,
+        MatMenuModule,
+        MatNativeDateModule,
+        MatPaginatorModule,
+        MatProgressSpinnerModule,
+        MatSelectModule,
+        MatSidenavModule,
+        MatSlideToggleModule,
+        MatSnackBarModule,
+        MatStepperModule,
+        MatTabsModule,
+        MatTableModule,
+        MatToolbarModule,
+        MatTooltipModule,
+        NgxChartsModule,
+        PdfViewerModule,
+        ReactiveFormsModule,
+        TranslateModule.forRoot({
+            defaultLanguage: 'it',
+            loader: {
+                provide: TranslateLoader,
+                useFactory: (TranslateLoader),
+                deps: [HttpClient]
+            }
+        }),
+
+    ],
+    exports: [
+        AvatarComponent,
+        AnimatedNumberComponent,
+        FormsModule,
+        GoogleMapsModule,
+        MatButtonModule,
+        MatCardModule,
+        MatCheckboxModule,
+        MatDatepickerModule,
+        MatDialogModule,
+        MatDividerModule,
+        MatDividerModule,
+        MatExpansionModule,
+        MatGridListModule,
+        MatGridListModule,
+        MatIconModule,
+        MatInputModule,
+        MatListModule,
+        MatMenuModule,
+        MatNativeDateModule,
+        MatPaginatorModule,
+        MatProgressSpinnerModule,
+        MatSelectModule,
+        MatSidenavModule,
+        MatSlideToggleModule,
+        MatSnackBarModule,
+        MatStepperModule,
+        MatTabsModule,
+        MatTableModule,
+        MatToolbarModule,
+        MatTooltipModule,
+        NgxChartsModule,
+        PaginationComponent,
+        PdfViewerModule,
+        ReactiveFormsModule,
+        TranslateModule,
+        UsersListComponent
+    ],
 })
-export class SharedModule { }
+export class SharedModule {
+}

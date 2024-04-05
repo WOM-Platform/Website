@@ -194,5 +194,9 @@ export class UserService {
         }))
     }
 
+
+    getMerchantList() {
+
+    }
 }
 

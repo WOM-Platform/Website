@@ -15,14 +15,11 @@ p {
 }
 
 .btn-stats {
+    @apply bg-[#B7CDFF] text-white p-2;
     display: flex;
     justify-content: center;
     align-items: center;
     border-radius: 20px;
-    padding: 9px 27px;
-    background-color: #fff;
-    box-shadow: 0 4px 12px -2px gray;
-    text-transform: uppercase;
 }
 
 .btn-stats:hover {

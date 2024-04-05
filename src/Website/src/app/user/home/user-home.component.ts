@@ -13,8 +13,9 @@ import {Subscription} from "rxjs";
 })
 export class UserHomeComponent implements OnInit, OnDestroy {
     username: string;
-    userData : any;
-    userDataSubscription : Subscription;
+    userData: any;
+    userDataSubscription: Subscription;
+    role: Set<string> = new Set<string>()
 
     constructor(
         public dialog: MatDialog,
@@ -25,7 +26,7 @@ export class UserHomeComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit(): any {
-        this.username = this.userService.currentUserValue.name + ' ' +   this.userService.currentUserValue.surname;
+        this.username = this.userService.currentUserValue.name + ' ' + this.userService.currentUserValue.surname;
         this.loadData();
     }
 
@@ -35,9 +36,17 @@ export class UserHomeComponent implements OnInit, OnDestroy {
 
     loadData(): any {
         // check user instrument and merchant amount
-        this.userDataSubscription = this.userService.me().subscribe(data => this.userData = data)
-        console.log("User data ", this.userData)
+        this.userDataSubscription = this.userService.me().subscribe(data => {
+            if (data) {
+                this.userData = data
 
+                console.log("me ", data)
+                if (data.role) {
+                    this.role.add(data.role)
+                }
+            }
+
+        })
     }
 
     async navigate(link: string): Promise<void> {

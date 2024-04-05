@@ -1,0 +1,4 @@
+.table-merch {
+    @apply rounded-lg;
+    overflow: hidden !important;
+}
