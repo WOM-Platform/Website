@@ -18,13 +18,17 @@ import {SharedModule} from '../shared/shared.module';
 
 import {UserAdminComponent} from './admin/user-admin.component';
 import {UserInstrumentComponent} from './instrument/user-instrument.component';
-import {CreateInstrumentDialogComponent} from "./admin/create-instrument-dialog/create-instrument-dialog.component";
+import {DataAccessComponent} from "./components/data-access/data-access.component";
+import {SearchSourceComponent} from "./components/search-source/search-source.component";
+import {UsersListComponent} from "./components/users-list/users-list.component";
+import {DialogViewUserComponent} from "./components/dialog-view-user/dialog-view-user.component";
 
 @NgModule({
     declarations: [
         AddMerchantDialogComponent,
         AddPosDialogComponent,
-        CreateInstrumentDialogComponent,
+        DataAccessComponent,
+        DialogViewUserComponent,
         MapComponent,
         MerchantFormComponent,
         MerchantStatsComponent,
@@ -32,15 +36,20 @@ import {CreateInstrumentDialogComponent} from "./admin/create-instrument-dialog/
         UserAdminComponent,
         UserHomeComponent,
         UserInstrumentComponent,
+        UsersListComponent,
         UserMerchantComponent,
         UserNotVerifiedComponent,
         UserStatsComponent,
         UserVerifyComponent,
     ],
+    exports: [
+        DataAccessComponent
+    ],
     imports: [
         CommonModule,
         AuthRouting,
         SharedModule,
+        SearchSourceComponent,
     ]
 })
 export class AuthModule {

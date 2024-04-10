@@ -1,6 +1,5 @@
 import {APP_INITIALIZER, NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {TranslateLoader, TranslateModule, TranslateService} from '@ngx-translate/core';
 
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
@@ -34,11 +33,11 @@ import {HttpClient} from '@angular/common/http';
 import {AnimatedNumberComponent} from "../components/animated-number/animated-number.component";
 import {AvatarComponent} from '../components/avatar/avatar.component';
 import {MatTableModule} from "@angular/material/table";
-import {UsersListComponent} from "../components/users-list/users-list.component";
 import {MatPaginatorModule} from "@angular/material/paginator";
 import {PaginationComponent} from "../components/pagination/pagination.component";
 import {DialogConfirmCancelComponent} from "../components/dialog-confirm-cancel/dialog-confirm-cancel";
 import {DialogConfirmComponent} from "../components/dialog-confirm/dialog-confirm";
+import {DialogViewUserComponent} from "../user/components/dialog-view-user/dialog-view-user.component";
 
 
 @NgModule({
@@ -47,12 +46,11 @@ import {DialogConfirmComponent} from "../components/dialog-confirm/dialog-confir
         AvatarComponent,
         DialogConfirmCancelComponent,
         DialogConfirmComponent,
-        UsersListComponent,
+
         PaginationComponent
     ],
     imports: [
         CommonModule,
-
         FormsModule,
         GoogleMapsModule,
         MatButtonModule,
@@ -132,7 +130,6 @@ import {DialogConfirmComponent} from "../components/dialog-confirm/dialog-confir
         PdfViewerModule,
         ReactiveFormsModule,
         TranslateModule,
-        UsersListComponent
     ],
 })
 export class SharedModule {

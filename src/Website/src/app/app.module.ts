@@ -89,6 +89,8 @@ import {TuristiComponent} from "./pages/pesaro2024-section/turisti/turisti.compo
 import {CittadiniComponent} from "./pages/pesaro2024-section/cittadini/cittadini.component";
 import {NgChartsModule} from 'ng2-charts';
 import {VolontarxComponent} from "./pages/pesaro2024-section/volontarx/volontarx.component";
+import {DialogCreateSourceComponent} from "./user/components/dialog-create-source/dialog-create-source.component";
+import {SearchSourceComponent} from "./user/components/search-source/search-source.component";
 
 
 // AoT requires an exported function for factories
@@ -132,7 +134,7 @@ export const isMock = environment.mock;
         BreadcrumbsComponent,
         ContactFormComponent,
         ContactsComponent,
-
+        DialogCreateSourceComponent,
         FanoComponent,
         FooterComponent,
         HomeComponent,
@@ -203,6 +205,7 @@ export const isMock = environment.mock;
         TranslateModule,
         LayoutModule,
         NgChartsModule,
+        SearchSourceComponent,
     ],
     providers: [
         {

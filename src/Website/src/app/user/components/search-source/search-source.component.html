@@ -1,0 +1,13 @@
+<form class="mt-6" [formGroup]="searchForm">
+    <p>Il gestore deve essere già stato registrato.<br/>Inserire il <strong>nome e cognome</strong> o
+        <strong>l'email</strong></p>
+
+    <div class="flex flex-col gap-2">
+        <div class="flex flex-row gap-4">
+            <input type="text" formControlName="name" placeholder="Nome" class="input-create">
+
+            <input type="text" formControlName="surname" placeholder="Cognome" class="input-create">
+        </div>
+        <input type="email" formControlName="email" placeholder="Email" class="input-create grow">
+    </div>
+</form>

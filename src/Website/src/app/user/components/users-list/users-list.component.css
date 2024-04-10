@@ -4,8 +4,8 @@
 }
 
 .tb-action-cell {
-    width: 100px;
-    height: auto;
+    width: 160px;
+    height: inherit;
     display: flex;
     align-items: center;
 }

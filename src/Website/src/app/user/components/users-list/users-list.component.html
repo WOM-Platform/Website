@@ -9,12 +9,17 @@
     <ng-container matColumnDef="extraColumn">
         <th class="tb-header" mat-header-cell *matHeaderCellDef>Azioni</th>
         <td class="tb-action-cell" mat-cell *matCellDef="let user">
-            <button class="flex justify-center" mat-icon-button color="primary" (click)="editSource()">
+            <button (click)="onViewUser(user)">
+                <mat-icon>visibility
+                </mat-icon>
+            </button>
+            <button mat-icon-button color="primary" (click)="onEditUser(user)">
                 <mat-icon>edit</mat-icon>
             </button>
-            <button class="flex justify-center text-red" mat-icon-button color="warn" (click)="onDeleteSource(user)">
+            <button mat-icon-button color="warn" (click)="onDeleteUser(user)">
                 <mat-icon>delete</mat-icon>
             </button>
+
         </td>
     </ng-container>
 

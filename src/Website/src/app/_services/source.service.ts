@@ -19,7 +19,7 @@ export class SourceService {
             .set('page', page.toString())
             .set('itemsPerPage', itemsPerPage.toString());
         return this.http.get(`${this.localUrlV1}`, {params}).pipe(map(res => {
-
+                    console.log("uhihiudshi", res)
                     return res
                 }
             )
@@ -27,12 +27,34 @@ export class SourceService {
     }
 
     createInstrument(body: any): Observable<any> {
-        console.log("Il body ")
-        console.log(body)
         return this.http.post(`${this.localUrlV1}`, {'name': body.name, 'url': body.url}).pipe(map(res => res))
     }
 
     deleteInstrument(sourceId: string): Observable<any> {
         return this.http.delete(`${this.localUrlV1}${sourceId}`).pipe(map(res => res))
+    }
+
+    getInstrumentAccessList(idInstrument) {
+        return this.http.get(`${this.localUrlV1}${idInstrument}/access`).pipe(map(res => {
+                    console.log("Gestori ", res)
+                    return res
+                }
+            )
+        )
+    }
+
+    addInstrumentAccess(idInstrument, userId) {
+        let tmpUserId = '5e59446fbca34d0001ae210b'
+        /*return this.http.post(`${this.localUrlV1}${idInstrument}/access/${userId}`, "")*/
+        console.log("/v1/source/{sourceId}/access")
+        console.log(`${this.localUrlV1}${idInstrument}/access`)
+        return this.http.post(`${this.localUrlV1}${idInstrument}/access?userId=${tmpUserId}`, {}).pipe(map(res => {
+            console.log("Inside")
+            return res
+        }))
+    }
+
+    deleteInstrumentAccess(idInstrument, userId) {
+        return this.http.delete(`${this.localUrlV1}${idInstrument}/access/${userId}`)
     }
 }

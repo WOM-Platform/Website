@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {AfterContentInit, Component, EventEmitter, Input, OnChanges, OnInit, Output} from '@angular/core';
 import {MatPaginator} from "@angular/material/paginator";
 
 @Component({
@@ -6,11 +6,27 @@ import {MatPaginator} from "@angular/material/paginator";
     templateUrl: './pagination.component.html',
     styleUrl: './pagination.component.css'
 })
-export class PaginationComponent {
+export class PaginationComponent implements OnInit {
     @Input() currentPage: number;
     @Input() itemsPerPage: number;
     @Input() totalItems: number;
     @Output() pageChanged: EventEmitter<number> = new EventEmitter();
+
+    totalPagesArray: number[] = []
+
+    constructor() {
+    }
+
+    ngOnInit() {
+        this.calculateTotalPages();
+    }
+
+    calculateTotalPages() {
+        const totPages = this.totalPages;
+        for (let i = 1; i <= totPages; i++) {
+            this.totalPagesArray.push(i);
+        }
+    }
 
     get totalPages(): number {
         return Math.ceil(this.totalItems / this.itemsPerPage);

@@ -1,15 +1,16 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, Component, Input, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
-import {UserService} from "../../_services";
 import {SourceService} from "../../_services/source.service";
 import {Subscription} from "rxjs";
-import {MatDialog} from "@angular/material/dialog";
-import {CreateInstrumentDialogComponent} from "./create-instrument-dialog/create-instrument-dialog.component";
+import {MatDialog, MatDialogRef} from "@angular/material/dialog";
+import {DialogViewUserComponent} from "../components/dialog-view-user/dialog-view-user.component";
+import {DialogCreateSourceComponent} from "../components/dialog-create-source/dialog-create-source.component";
 
 @Component({
     selector: 'app-user-admin',
     templateUrl: './user-admin.component.html',
-    styleUrls: ['./user-admin.component.css']
+    styleUrls: ['./user-admin.component.css'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class UserAdminComponent implements OnInit {
     @Input() user: any;
@@ -27,7 +28,7 @@ export class UserAdminComponent implements OnInit {
     totalItems: number;
 
 
-    constructor(private router: Router, private sourceService: SourceService, private instrumentDialog: MatDialog) {
+    constructor(private router: Router, private sourceService: SourceService, private matDialog: MatDialog) {
     }
 
     ngOnInit() {
@@ -35,10 +36,96 @@ export class UserAdminComponent implements OnInit {
         this.getListInstruments()
     }
 
-    openStats() {
-        this.router.navigateByUrl("user/stats/admin")
+    // BEGIN SOURCE FUNCTIONS
+    onCreateSource() {
+        const dialogRef = this.matDialog.open(DialogCreateSourceComponent, {
+            width: '800px',
+            panelClass: 'custom-dialog-backdrop',
+            data: {}
+        });
+
+        dialogRef.componentInstance.dialogRef.afterClosed().subscribe(result => {
+            if (result && result.name && result.url) {
+                this.sourceService.createInstrument(result).subscribe({
+                    next: (value) => {
+                        this.getListInstruments(); // Use arrow function to preserve the context of `this`
+                    },
+                    error: (err) => {
+                        console.error("Error creating instrument:", err);
+                    }
+                });
+            } else {
+                console.error("Invalid result received:", result);
+            }
+        });
     }
 
+    onViewSource(user: any) {
+        console.log("Dati invio ", user.id)
+        this.sourceService.getInstrumentAccessList(user.id).subscribe(res => {
+
+
+            const dialogRef = this.matDialog.open(DialogViewUserComponent, {
+                width: '800px',
+                data: {id: user.id, name: user.name, url: user.url, access: res["users"], action: "view"}
+            });
+            dialogRef.afterClosed().subscribe(res => {
+                console.log("View closed")
+            })
+
+        })
+    }
+
+    onEditSource(user: any) {
+        this.sourceService.getInstrumentAccessList(user.id).subscribe(res => {
+            const dialogRef = this.matDialog.open(DialogViewUserComponent, {
+                width: '800px',
+                data: {id: user.id, name: user.name, url: user.url, access: res["users"], action: "edit"}
+            });
+
+            dialogRef.componentInstance.newAccess.subscribe((accesss: any) => {
+                this.sourceService.addInstrumentAccess(user.id, accesss.userId).subscribe(res2 => {
+                    this.updateAccessList(user.id, dialogRef);
+                })
+            });
+
+            dialogRef.componentInstance.deleteAccess.subscribe((access: any) => {
+                this.sourceService.deleteInstrumentAccess(user.id, access.userId).subscribe(() => {
+                    this.updateAccessList(user.id, dialogRef);
+                });
+            });
+
+            dialogRef.afterClosed().subscribe(res => {
+                console.log("View closed");
+            });
+        });
+    }
+
+    updateAccessList(userId: any, dialogRef: MatDialogRef<DialogViewUserComponent>) {
+        this.sourceService.getInstrumentAccessList(userId).subscribe(res => {
+            dialogRef.componentInstance.data.access = [...res["users"]];
+            console.log("FFF  ", [...res["users"]])
+        });
+    }
+
+    onDeleteSource(userToDelete: any) {
+        this.sourceService.deleteInstrument(userToDelete.id).subscribe(res => {
+            this.getListInstruments();
+        });
+    }
+
+    getListInstruments() {
+        this.sourcesSubscription = this.sourceService.getInstrumentList(this.currentPage, this.itemsPerPage).subscribe(res => {
+            if (res && res["data"]) {
+                this.instrumentsList = res["data"]
+                this.totalItems = res.totalCount;
+            }
+        })
+    }
+
+    // END SOURCE FUNCTIONS
+
+    // BEGIN MERCHANT FUNCTIONS
     getListMerchants() {
         let mList = []
         console.log("GET LIST MERCHANTS")
@@ -66,79 +153,18 @@ export class UserAdminComponent implements OnInit {
         console.log("WE forte che mi hai cliccato")
     }
 
-    getListInstruments() {
-        this.sourcesSubscription = this.sourceService.getInstrumentList(this.currentPage, this.itemsPerPage).subscribe(res => {
-            if (res && res["data"]) {
-                this.instrumentsList = res["data"]
-                this.totalItems = res.totalCount;
-
-                console.log("Instruments  ", res)
-
-            }
-
-        })
-
-    }
-
-    get totalPages(): number {
-        return Math.ceil(this.totalItems / this.itemsPerPage);
-    }
-
     onPageChange(page: number): void {
         this.currentPage = page;
         this.getListInstruments();
     }
 
-    goToPreviousPage(): void {
-        if (this.currentPage > 1) {
-            this.currentPage--;
-            this.getListInstruments();
-        }
+    // END MERCHANT FUNCTIONS
+
+
+    // BEGIN STATS FUNCTIONS
+    openStats() {
+        this.router.navigateByUrl("user/stats/admin")
     }
 
-    goToNextPage(): void {
-        if (this.currentPage < this.totalPages) {
-            this.currentPage++;
-            this.getListInstruments();
-        }
-    }
-
-    goToPage(page: string): void {
-        const pageNumber = parseInt(page, 10);
-        if (pageNumber && pageNumber >= 1 && pageNumber <= this.totalPages && pageNumber !== this.currentPage) {
-            this.currentPage = pageNumber;
-            this.getListInstruments();
-        }
-    }
-
-    onCreateInstrument() {
-        const dialogRef = this.instrumentDialog.open(CreateInstrumentDialogComponent, {
-            width: '500px',
-            data: {}
-        });
-
-        dialogRef.afterClosed().subscribe(result => {
-            if (result && result.name && result.url) {
-                this.sourceService.createInstrument(result).subscribe(
-                    res => {
-                        this.getListInstruments();
-                    },
-                    error => {
-                        console.error("Error creating instrument:", error);
-                    }
-                );
-            } else {
-                console.error("Invalid result received:", result);
-
-            }
-        });
-    }
-
-    onDeleteSource(userToDelete: any) {
-        // Delete service
-        this.sourceService.deleteInstrument(userToDelete.id).subscribe(res => {
-            this.getListInstruments();
-        })
-    }
-
+    // END STATS FUNCTIONS
 }

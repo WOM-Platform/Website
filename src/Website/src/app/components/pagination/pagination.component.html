@@ -1,5 +1,23 @@
 <div class="pagination">
-    <button (click)="changePage(currentPage - 1)" [disabled]="currentPage === 1">Previous</button>
-    <span>Page {{ currentPage }} of {{ totalPages }}</span>
-    <button (click)="changePage(currentPage + 1)" [disabled]="currentPage === totalPages">Next</button>
+    <button *ngIf="!(1 == currentPage)" (click)="changePage(currentPage - 1)" [disabled]="currentPage === 1">Prev
+    </button>
+    <div *ngFor="let pageNumber of totalPagesArray">
+        <div *ngIf="currentPage > pageNumber;">
+            <button class="not-active-pageNumber" (click)="changePage(pageNumber)">{{ pageNumber }}</button>
+        </div>
+        <div *ngIf="currentPage === pageNumber">
+            <span class="text-black text-lg">{{ pageNumber }}</span>
+        </div>
+        <div *ngIf="currentPage < pageNumber">
+            <button class="not-active-pageNumber" (click)="changePage(pageNumber)">{{ pageNumber }}</button>
+        </div>
+
+    </div>
+    <button *ngIf="!(totalPages == currentPage)" (click)="changePage(currentPage + 1)"
+            [disabled]="currentPage === totalPages">Next
+    </button>
 </div>
+inviare ruolo direttamente come admin
+
+POST /v1/source/61ac84032c69b3b17893fe5d/access?userId=5e5e3aff00d98a60b7db8e40&role=Admin
+GET su /v1/user

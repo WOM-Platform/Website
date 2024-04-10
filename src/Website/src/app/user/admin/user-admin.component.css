@@ -2,3 +2,8 @@
     @apply rounded-lg;
     overflow: hidden !important;
 }
+
+.custom-dialog-backdrop {
+    background-color: #e5e5e5 !important;
+   
+}

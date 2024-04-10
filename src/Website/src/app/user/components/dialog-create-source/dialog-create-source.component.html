@@ -1,0 +1,30 @@
+<h2 class="text-center font-semibold mt-11">Nuovo Instrument</h2>
+
+<form class="flex flex-col gap-4 mx-10 mt-6" [formGroup]="newSource" (ngSubmit)="onSubmit()">
+    <div>
+        <input type="text" formControlName="name" placeholder="Nome" class="input-create">
+        <div *ngIf="newSource.get('name').invalid && newSource.get('name').touched">
+            Nome è richiesto
+        </div>
+    </div>
+    <div>
+        <input type="text" formControlName="url" placeholder="Url" class="input-create">
+        <div *ngIf="newSource.get('url').invalid && newSource.get('url').touched">
+            Url è richiesto
+        </div>
+    </div>
+</form>
+<div *ngIf="showAddAccessButton" class="mt-11 mx-10">
+    <app-data-access (selectedAccess)="handleAccessList()"></app-data-access>
+</div>
+<div class="flex justify-end gap-2 mt-11">
+    <button (click)="onNoClick()" class="btn-cancel">Annulla</button>
+    <button type="submit" [disabled]="newSource.invalid" (click)="onSubmit()"
+            class="text-gray-400 px-4 py-2 "
+            [ngClass]="{ 'btn-submit': !newSource.invalid }"
+            cdkFocusInitial
+    >
+        Crea
+    </button>
+</div>
+

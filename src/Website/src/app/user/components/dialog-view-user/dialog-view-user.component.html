@@ -1,0 +1,28 @@
+<div class="flex flex-col px-10 py-4">
+    <p class="text-center"><span class="font-semibold">{{ name }}</span></p>
+    <div class="flex justify-between">
+        <p class="mb-0"><span class="font-semibold">Id</span>: {{ id }}</p>
+        <p class="mb-0"><span class="font-semibold ">Url</span>: {{ url }}</p>
+    </div>
+    <div *ngIf="accessUsers && accessUsers.length > 0" class="mt-10">
+        <p class="font-semibold">Gestori:</p>
+        <ul class="access-list">
+            <li *ngFor="let access of accessUsers" class="access-item">
+                <div class="access-details">
+                    <span class="access-email">Email: {{ access.email }}</span>
+                    <span class="access-name">Name: {{ access.name }} {{ access.surname }}</span>
+                </div>
+                <ng-container *ngIf="action === 'edit'">
+                    <button class="delete-button" (click)="onDeleteAccess(access)">
+                        <mat-icon color="warn">delete</mat-icon>
+                    </button>
+                </ng-container>
+            </li>
+        </ul>
+    </div>
+    <div *ngIf="action === 'edit'">
+        <div *ngIf="!createNewAccess" class="mt-11">
+            <app-data-access (selectedAccess)="handleAccessList($event)"></app-data-access>
+        </div>
+    </div>
+</div>

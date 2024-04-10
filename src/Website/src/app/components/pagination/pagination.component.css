@@ -1,0 +1,7 @@
+.pagination {
+    @apply flex justify-center gap-6 items-center
+}
+
+.not-active-pageNumber {
+    @apply text-blue-400 text-lg
+}

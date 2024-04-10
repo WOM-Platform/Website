@@ -1,0 +1,7 @@
+.result-element {
+    @apply cursor-pointer
+}
+
+.result-element:hover {
+    @apply bg-gray-200
+}
