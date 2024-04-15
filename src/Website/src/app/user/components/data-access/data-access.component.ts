@@ -29,7 +29,9 @@ export class DataAccessComponent {
     onSearch(userToSearch: any) {
         this.userService.userSearch(userToSearch.firstName, userToSearch.email).subscribe(res => {
             this.listAccess = []
+            console.log("La lista ", this.listAccess)
             if (res.data && res.data.length > 0) {
+
                 res.data.map(data => {
                     this.listAccess.push(data)
                 })

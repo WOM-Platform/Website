@@ -1,13 +1,21 @@
 <form [formGroup]="searchForm">
-    <p>Il gestore deve essere già stato registrato.<br/>Inserire il <strong>nome e cognome</strong> o
-        <strong>l'email</strong></p>
+    <p>Inserire un minimo di <strong> 3 lettere</strong> per ricercare un
+        <strong>utente già registrato</strong></p>
 
     <div class="flex flex-col gap-2">
-        <div class="flex flex-row gap-4">
-            <input type="text" formControlName="name" placeholder="Nome" class="input-create">
-
-            <input type="text" formControlName="surname" placeholder="Cognome" class="input-create">
+        <div class="flex flex-row gap-6">
+            <div>
+                <label>Nome: </label>
+                <input type="text" formControlName="name" class="input-create">
+            </div>
+            <div>
+                <label>Cognome: </label>
+                <input type="text" formControlName="surname" placeholder="Cognome" class="input-create">
+            </div>
         </div>
-        <input type="email" formControlName="email" placeholder="Email" class="input-create grow">
+        <div>
+            <label>Email: </label>
+            <input type="email" formControlName="email" placeholder="Email" class="input-create grow">
+        </div>
     </div>
 </form>

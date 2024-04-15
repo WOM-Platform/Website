@@ -53,19 +53,20 @@ export class SearchSourceComponent implements OnInit, OnDestroy {
         const surname = this.searchForm.get('surname').value;
         const email = this.searchForm.get('email').value;
 
-        // Populate searchCriteria based on form values
-        if (name) {
-            searchCriteria['firstName'] = name;
+        if (name.length >= 3 || surname.length >= 3 || email.length >= 3) {
+            // Populate searchCriteria based on form values
+            if (name) {
+                searchCriteria['firstName'] = name;
+            }
+            if (surname) {
+                searchCriteria['lastName'] = surname;
+            }
+            if (email) {
+                searchCriteria['email'] = email;
+            }
 
+            this.searchSource.emit(searchCriteria);
         }
-        if (surname) {
-            searchCriteria['lastName'] = surname;
-        }
-        if (email) {
-            searchCriteria['email'] = email;
-        }
-
-        this.searchSource.emit(searchCriteria);
     }
 
     clearForm() {
