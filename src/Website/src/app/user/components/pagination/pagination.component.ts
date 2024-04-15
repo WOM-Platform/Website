@@ -1,4 +1,13 @@
-import {AfterContentInit, Component, EventEmitter, Input, OnChanges, OnInit, Output} from '@angular/core';
+import {
+    AfterContentInit,
+    Component,
+    EventEmitter,
+    Input,
+    OnChanges,
+    OnInit,
+    Output,
+    SimpleChanges
+} from '@angular/core';
 import {MatPaginator} from "@angular/material/paginator";
 
 @Component({
@@ -6,10 +15,11 @@ import {MatPaginator} from "@angular/material/paginator";
     templateUrl: './pagination.component.html',
     styleUrl: './pagination.component.css'
 })
-export class PaginationComponent implements OnInit {
+export class PaginationComponent implements OnInit, OnChanges {
     @Input() currentPage: number;
     @Input() itemsPerPage: number;
     @Input() totalItems: number;
+    @Input() pageCount: number;
     @Output() pageChanged: EventEmitter<number> = new EventEmitter();
 
     totalPagesArray: number[] = []
@@ -18,22 +28,24 @@ export class PaginationComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.calculateTotalPages();
+        this.updatePagination();
     }
 
-    calculateTotalPages() {
-        const totPages = this.totalPages;
-        for (let i = 1; i <= totPages; i++) {
+    updatePagination() {
+        this.totalPagesArray = [];
+        for (let i = 1; i <= this.pageCount; i++) {
             this.totalPagesArray.push(i);
         }
     }
 
-    get totalPages(): number {
-        return Math.ceil(this.totalItems / this.itemsPerPage);
+    ngOnChanges(changes: SimpleChanges) {
+        if (changes.itemsPerPage || changes.totalItems || changes.pageCount) {
+            this.updatePagination();
+        }
     }
 
     changePage(page: number): void {
-        if (page >= 1 && page <= this.totalPages) {
+        if (page >= 1 && page <= this.pageCount) {
             this.currentPage = page;
             this.pageChanged.emit(page);
         }

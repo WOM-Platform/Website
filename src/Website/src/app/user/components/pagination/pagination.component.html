@@ -1,5 +1,5 @@
-<div class="pagination">
-    <button *ngIf="!(1 == currentPage)" (click)="changePage(currentPage - 1)" [disabled]="currentPage === 1">Prev
+<div class="pagination" *ngIf="totalPagesArray.length > 1">
+    <button *ngIf="!(1 == currentPage)" (click)="changePage(currentPage - 1)" [disabled]="currentPage === 1">Prec
     </button>
     <div *ngFor="let pageNumber of totalPagesArray">
         <div *ngIf="currentPage > pageNumber;">
@@ -14,6 +14,6 @@
 
     </div>
     <button *ngIf="!(totalPages == currentPage)" (click)="changePage(currentPage + 1)"
-            [disabled]="currentPage === totalPages">Next
+            [disabled]="currentPage === totalPages">Succ
     </button>
 </div>

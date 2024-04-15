@@ -1,7 +1,8 @@
 import {ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
 import {SourceService} from "../../_services/source.service";
-import {delay, forkJoin, Subscription, throwError} from "rxjs";
+import {Subject, forkJoin, Subscription, throwError} from "rxjs";
+import {debounceTime} from 'rxjs/operators';
 import {MatDialog, MatDialogRef} from "@angular/material/dialog";
 import {DialogViewUserComponent} from "../components/dialog-view-user/dialog-view-user.component";
 import {DialogCreateSourceComponent} from "../components/dialog-create-source/dialog-create-source.component";
@@ -24,8 +25,12 @@ export class UserAdminComponent implements OnInit, OnDestroy {
 
     sourcesSubscription: Subscription;
 
+    searchParameters: string = ""
+    searchTerms = new Subject<string>();
+
     currentPage: number = 1;
     itemsPerPage: number = 10;
+    pageCount: number;
     totalItems: number;
 
     isLoading = false;
@@ -37,9 +42,20 @@ export class UserAdminComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
-        this.merchantsList = this.getListMerchants()
-        this.getListInstruments()
+        this.merchantsList = this.getListMerchants();
+        this.getListInstruments();
+
+        this.searchTerms.pipe(
+            debounceTime(300),
+        ).subscribe((term) => {
+            this.searchParameters = term.trim();
+            if (this.currentPage != 1) this.currentPage = 1
+            if (this.searchParameters.length >= 3 || this.searchParameters.length === 0) {
+                this.getListInstruments();
+            }
+        });
     }
+
 
     ngOnDestroy() {
         this.subscriptions.unsubscribe()
@@ -158,7 +174,7 @@ export class UserAdminComponent implements OnInit, OnDestroy {
         this.isLoading = true;
 
         this.subscriptions.add(
-            this.sourceService.getInstrumentList(this.currentPage, this.itemsPerPage)
+            this.sourceService.getInstrumentList(this.searchParameters, this.currentPage, this.itemsPerPage)
                 .pipe(
                     catchError(error => {
                         console.error('Error fetching instruments:', error);
@@ -166,9 +182,13 @@ export class UserAdminComponent implements OnInit, OnDestroy {
                         return throwError(() => error);
                     })
                 ).subscribe(res => {
-                if (res && res['data'] && res['data'].length > 0) {
-                    this.instrumentsList = res['data'];
+                if (res) {
+                    console.log("Res getInstrument ", res)
+
                     this.totalItems = res.totalCount;
+                    this.pageCount = res.pageCount;
+                    if (res['data'])
+                        this.instrumentsList = res['data'];
                 }
                 this.isLoading = false;
                 this.cd.markForCheck()

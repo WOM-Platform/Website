@@ -14,6 +14,16 @@
                     </button>
                 </div>
                 <h2>Lista Instrument</h2>
+
+
+                <div class="relative mt-6">
+                    <input [(ngModel)]="searchParameters" (ngModelChange)="searchTerms.next($event)"
+                           class="pl-10 pr-4 py-2 border rounded-full text-gray-700 leading-tight focus:outline-none focus:border-blue-500 transition duration-200 ease-in-out"
+                           placeholder="Ricerca...">
+                    <mat-icon class="absolute left-2 top-1/2 transform -translate-y-1/2 text-gray-500" color="primary">
+                        search
+                    </mat-icon>
+                </div>
                 <app-users-list [usersList]="instrumentsList"
                                 [usersTableColumns]="instrumentsTableColumns"
                                 (viewUser)="onViewSource($event)"
@@ -25,6 +35,7 @@
                     <app-pagination [currentPage]="currentPage"
                                     [itemsPerPage]="itemsPerPage"
                                     [totalItems]="totalItems"
+                                    [pageCount]="pageCount"
                                     (pageChanged)="onPageChange($event)"></app-pagination>
                 </div>
 
