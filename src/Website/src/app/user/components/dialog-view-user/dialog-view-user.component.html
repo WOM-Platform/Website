@@ -13,8 +13,8 @@
                     <span class="access-name">Name: {{ access.name }} {{ access.surname }}</span>
                 </div>
                 <ng-container *ngIf="action === 'edit'">
-                    <button class="delete-button" (click)="onDeleteAccess(access)">
-                        <mat-icon color="warn">delete</mat-icon>
+                    <button class="delete-button text-red" (click)="onDeleteAccess(access)">
+                        <mat-icon class="text-red">delete</mat-icon>
                     </button>
                 </ng-container>
             </li>
@@ -22,7 +22,7 @@
     </div>
     <div *ngIf="action === 'edit'">
         <div *ngIf="!createNewAccess" class="mt-11">
-            <app-data-access (selectedAccess)="handleAccessList($event)"></app-data-access>
+            <app-data-access (accessToAdd)="handleAccessList($event)"></app-data-access>
         </div>
     </div>
 </div>

@@ -39,8 +39,6 @@ export class UserHomeComponent implements OnInit, OnDestroy {
         this.userDataSubscription = this.userService.me().subscribe(data => {
             if (data) {
                 this.userData = data
-
-                console.log("me ", data)
                 if (data.role) {
                     this.role.add(data.role)
                 }

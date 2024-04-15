@@ -199,6 +199,7 @@
   "USER": {
     "HOME": {
       "DASHBOARD": "La tua Dashboard",
+      "DASHBOARD_ADMIN": "Dashboard Admin",
       "WELCOME": "Benvenuto",
       "MERCHANT_TITLE": "Merchant",
       "INSTRUMENT_TITLE": "Instrument"

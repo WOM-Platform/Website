@@ -1,5 +1,5 @@
 .input-create {
-    @apply bg-[#e5e5e5] w-full h-[3rem] rounded-xl px-6
+    @apply bg-[#e5e5e5] w-full h-[3rem] rounded-xl px-6 max-w-[500px]
 }
 
 .btn-cancel {
@@ -17,5 +17,3 @@
 .btn-submit:hover {
     @apply bg-blue-200 rounded-full
 }
-
-

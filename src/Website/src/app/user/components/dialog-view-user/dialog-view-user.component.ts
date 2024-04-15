@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Inject, Output, ChangeDetectionStrategy} from '@angular/core';
+import {Component, EventEmitter, Inject, Output, ChangeDetectionStrategy, ChangeDetectorRef} from '@angular/core';
 import {MAT_DIALOG_DATA} from "@angular/material/dialog";
 
 @Component({
@@ -18,7 +18,7 @@ export class DialogViewUserComponent {
     action: string;
     createNewAccess = false;
 
-    constructor(@Inject(MAT_DIALOG_DATA) public data: any) {
+    constructor(@Inject(MAT_DIALOG_DATA) public data: any, private cd: ChangeDetectorRef) {
         this.id = data.id;
         this.name = data.name;
         this.url = data.url;
@@ -27,20 +27,16 @@ export class DialogViewUserComponent {
     }
 
     onUpdateData(data: any): void {
-        this.id = data.id;
-        this.name = data.name;
-        this.url = data.url;
-        this.accessUsers = data.access || [];
-        this.action = data.action;
+        this.accessUsers = data || [];
+        this.action = "edit"
+        this.cd.markForCheck()
     }
 
     onDeleteAccess(access: any): void {
-        console.log("ACCESS ", access)
         this.deleteAccess.emit(access)
     }
 
     handleAccessList(access): void {
-        console.log("EMit from dialog view")
         this.newAccess.emit(access)
     }
 }

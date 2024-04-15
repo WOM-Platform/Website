@@ -1,5 +1,7 @@
-<h2 class="uppercase">Dashboard Admin</h2>
 <div class="flex flex-col justify-start gap-2">
+    <div class="loading-overlay" *ngIf="isLoading">
+        <img src="../../../assets/gif/loading.gif" alt="Caricamento..." class="loading-image">
+    </div>
 
     <div *ngIf="user">
         <mat-tab-group>
@@ -11,7 +13,7 @@
                         Nuovo Instrument
                     </button>
                 </div>
-                <h3>Instruments List</h3>
+                <h2>Lista Instrument</h2>
                 <app-users-list [usersList]="instrumentsList"
                                 [usersTableColumns]="instrumentsTableColumns"
                                 (viewUser)="onViewSource($event)"

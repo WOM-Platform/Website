@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {User, UserLogin, UserRegistrationPayload} from '../_models';
@@ -194,9 +194,18 @@ export class UserService {
         }))
     }
 
+    userSearch(name: string = "", email: string = ""): Observable<any> {
+        let page = 1
+        let pageSize = 10
+        const params: HttpParams = new HttpParams()
+            .set('name', name.toString())
+            .set('email', email.toString())
+            .set('page', page.toString())
+            .set('pageSize', pageSize.toString());
 
-    getMerchantList() {
-
+        return this.http.get<any>('https://dev.wom.social/api/v1/user', {params}).pipe(map(res => {
+            return res
+        }))
     }
 }
 

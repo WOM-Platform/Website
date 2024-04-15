@@ -19,7 +19,7 @@ import {SharedModule} from '../shared/shared.module';
 import {UserAdminComponent} from './admin/user-admin.component';
 import {UserInstrumentComponent} from './instrument/user-instrument.component';
 import {DataAccessComponent} from "./components/data-access/data-access.component";
-import {SearchSourceComponent} from "./components/search-source/search-source.component";
+import {SearchSourceComponent} from "./components/data-access/search-source/search-source.component";
 import {UsersListComponent} from "./components/users-list/users-list.component";
 import {DialogViewUserComponent} from "./components/dialog-view-user/dialog-view-user.component";
 

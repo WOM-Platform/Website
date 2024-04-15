@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
 import {environment} from "../../environments/environment";
-import {map} from "rxjs/operators";
+import {catchError, map} from "rxjs/operators";
 import {HttpClient, HttpParams} from "@angular/common/http";
-import {Observable} from "rxjs";
+import {Observable, throwError} from "rxjs";
 
 @Injectable({
     providedIn: 'root'
@@ -13,21 +13,31 @@ export class SourceService {
     constructor(private http: HttpClient) {
     }
 
-
+    /**
+     * Fetches the list of instruments with pagination.
+     * @param {number} page The current page of the pagination.
+     * @param {number} itemsPerPage Number of items per page.
+     * @returns {Observable<any>} An observable of the paginated instrument list.
+     */
     getInstrumentList(page: number, itemsPerPage: number): Observable<any> {
         const params = new HttpParams()
             .set('page', page.toString())
             .set('itemsPerPage', itemsPerPage.toString());
-        return this.http.get(`${this.localUrlV1}`, {params}).pipe(map(res => {
-                    console.log("uhihiudshi", res)
-                    return res
-                }
-            )
-        )
+        return this.http.get(`${this.localUrlV1}`, {params})
+            .pipe(
+                map(res => res),
+                catchError(err => {
+                    console.error("Error fetching instruments", err);
+                    return throwError(() => new Error("Failed to fetch instruments"));
+                })
+            );
     }
 
-    createInstrument(body: any): Observable<any> {
-        return this.http.post(`${this.localUrlV1}`, {'name': body.name, 'url': body.url}).pipe(map(res => res))
+    createInstrument(name: string, url: string): Observable<any> {
+        return this.http.post(`${this.localUrlV1}`, {
+            'name': name,
+            'url': url
+        }).pipe(map(res => res))
     }
 
     deleteInstrument(sourceId: string): Observable<any> {
@@ -43,16 +53,19 @@ export class SourceService {
         )
     }
 
-    addInstrumentAccess(idInstrument, userId) {
-        let tmpUserId = '5e59446fbca34d0001ae210b'
-        /*return this.http.post(`${this.localUrlV1}${idInstrument}/access/${userId}`, "")*/
-        console.log("/v1/source/{sourceId}/access")
-        console.log(`${this.localUrlV1}${idInstrument}/access`)
-        return this.http.post(`${this.localUrlV1}${idInstrument}/access?userId=${tmpUserId}`, {}).pipe(map(res => {
-            console.log("Inside")
-            return res
-        }))
+    addInstrumentAccess(idInstrument: string, userId: string): Observable<any> {
+        const url = `${this.localUrlV1}${idInstrument}/access?userId=${userId}`;  // Append parameters to URL
+        console.log("utente ", idInstrument);
+        console.log("access ", userId)
+        return this.http.post(url, {})
+            .pipe(
+                map(res => {
+                    console.log("Access added");
+                    return res;
+                })
+            );
     }
+
 
     deleteInstrumentAccess(idInstrument, userId) {
         return this.http.delete(`${this.localUrlV1}${idInstrument}/access/${userId}`)

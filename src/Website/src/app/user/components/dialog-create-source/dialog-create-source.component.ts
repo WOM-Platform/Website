@@ -1,6 +1,7 @@
-import {Component, Inject, OnInit, ViewChild} from '@angular/core';
+import {ChangeDetectorRef, Component, Inject, OnInit, ViewChild} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
+import {SourceService} from "../../../_services/source.service";
 
 @Component({
     selector: 'app-dialog-create-source',
@@ -10,10 +11,13 @@ import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 export class DialogCreateSourceComponent implements OnInit {
     newSource: FormGroup;
     showAddAccessButton = false
+    isLoading = false
 
     constructor(
         private fb: FormBuilder,
         public dialogRef: MatDialogRef<DialogCreateSourceComponent>,
+        private sourceService: SourceService,
+        private cd: ChangeDetectorRef,
         @Inject(MAT_DIALOG_DATA) public data: any,
     ) {
     }
@@ -21,7 +25,8 @@ export class DialogCreateSourceComponent implements OnInit {
     ngOnInit(): void {
         this.newSource = this.fb.group({
             name: ['', Validators.required],
-            url: ['', [Validators.required, Validators.pattern('^(https?|ftp)://[a-zA-Z0-9-.]+.[a-zA-Z]{2,}(?:/[^/|?|\'|&]*)?$')]],
+            url: ['', [Validators.required, Validators.pattern('^(https?:\\/\\/)?([\\da-z\\.-]+)\\.([a-z\\.]+)(:[0-9]{1,5})?(\\/[^\\s]*)?$')]],
+            access: [[]]
         })
 
         this.newSource.valueChanges.subscribe(() => {
@@ -40,7 +45,17 @@ export class DialogCreateSourceComponent implements OnInit {
         this.dialogRef.close();
     }
 
-    handleAccessList() {
+    handleAccessList(accessEl) {
+        const currentAccess = this.newSource.get('access').value;
+        this.newSource.get('access').setValue([...currentAccess, accessEl]);
+    }
 
+    updateAccessList(userId: any) {
+        this.isLoading = true;
+        this.sourceService.getInstrumentAccessList(userId).subscribe(res => {
+
+            this.isLoading = false;
+            this.cd.markForCheck(); // Trigger change detection since we are using OnPush strategy
+        });
     }
 }

@@ -27,8 +27,6 @@ export class SearchSourceComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
-        console.log("On init")
-
         this.searchForm = this.fb.group({
             name: ['',],
             surname: ['',],
@@ -39,7 +37,6 @@ export class SearchSourceComponent implements OnInit, OnDestroy {
             debounceTime(300),
             distinctUntilChanged()
         ).subscribe(() => {
-            console.log("SSubscription")
             this.search();
         });
     }
@@ -59,6 +56,7 @@ export class SearchSourceComponent implements OnInit, OnDestroy {
         // Populate searchCriteria based on form values
         if (name) {
             searchCriteria['firstName'] = name;
+
         }
         if (surname) {
             searchCriteria['lastName'] = surname;
@@ -67,7 +65,6 @@ export class SearchSourceComponent implements OnInit, OnDestroy {
             searchCriteria['email'] = email;
         }
 
-        console.log("Search Criteria: ", searchCriteria);
         this.searchSource.emit(searchCriteria);
     }
 

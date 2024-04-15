@@ -34,7 +34,7 @@ import {AnimatedNumberComponent} from "../components/animated-number/animated-nu
 import {AvatarComponent} from '../components/avatar/avatar.component';
 import {MatTableModule} from "@angular/material/table";
 import {MatPaginatorModule} from "@angular/material/paginator";
-import {PaginationComponent} from "../components/pagination/pagination.component";
+import {PaginationComponent} from "../user/components/pagination/pagination.component";
 import {DialogConfirmCancelComponent} from "../components/dialog-confirm-cancel/dialog-confirm-cancel";
 import {DialogConfirmComponent} from "../components/dialog-confirm/dialog-confirm";
 import {DialogViewUserComponent} from "../user/components/dialog-view-user/dialog-view-user.component";

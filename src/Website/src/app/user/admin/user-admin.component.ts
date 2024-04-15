@@ -1,10 +1,11 @@
-import {ChangeDetectionStrategy, Component, Input, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
 import {SourceService} from "../../_services/source.service";
-import {Subscription} from "rxjs";
+import {delay, forkJoin, Subscription, throwError} from "rxjs";
 import {MatDialog, MatDialogRef} from "@angular/material/dialog";
 import {DialogViewUserComponent} from "../components/dialog-view-user/dialog-view-user.component";
 import {DialogCreateSourceComponent} from "../components/dialog-create-source/dialog-create-source.component";
+import {catchError} from "rxjs/operators";
 
 @Component({
     selector: 'app-user-admin',
@@ -12,7 +13,7 @@ import {DialogCreateSourceComponent} from "../components/dialog-create-source/di
     styleUrls: ['./user-admin.component.css'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class UserAdminComponent implements OnInit {
+export class UserAdminComponent implements OnInit, OnDestroy {
     @Input() user: any;
 
     merchantsList: any[];
@@ -27,8 +28,12 @@ export class UserAdminComponent implements OnInit {
     itemsPerPage: number = 10;
     totalItems: number;
 
+    isLoading = false;
 
-    constructor(private router: Router, private sourceService: SourceService, private matDialog: MatDialog) {
+
+    private subscriptions: Subscription = new Subscription(); // To manage subscriptions
+
+    constructor(private router: Router, private sourceService: SourceService, private matDialog: MatDialog, private cd: ChangeDetectorRef) {
     }
 
     ngOnInit() {
@@ -36,41 +41,68 @@ export class UserAdminComponent implements OnInit {
         this.getListInstruments()
     }
 
+    ngOnDestroy() {
+        this.subscriptions.unsubscribe()
+    }
+
     // BEGIN SOURCE FUNCTIONS
+
     onCreateSource() {
         const dialogRef = this.matDialog.open(DialogCreateSourceComponent, {
-            width: '800px',
+            width: '900px',
             panelClass: 'custom-dialog-backdrop',
             data: {}
         });
 
-        dialogRef.componentInstance.dialogRef.afterClosed().subscribe(result => {
-            if (result && result.name && result.url) {
-                this.sourceService.createInstrument(result).subscribe({
-                    next: (value) => {
-                        this.getListInstruments(); // Use arrow function to preserve the context of `this`
+        dialogRef.afterClosed().subscribe(result => {
+            if (result && result.name) {
+                this.isLoading = true;
+                this.sourceService.createInstrument(result.name, result.url).subscribe({
+                    next: (user) => {
+                        if (result.access && result.access.length > 0) {
+                            const tasks = result.access.map(access =>
+
+                                this.sourceService.addInstrumentAccess(user.id, access.id));
+                            forkJoin(tasks).subscribe({
+                                next: () => {
+                                    console.log("All access rights added successfully.");
+                                },
+                                error: err => {
+                                    console.error("Error adding access rights:", err);
+                                },
+                                complete: () => {
+                                    this.getListInstruments();
+                                    this.isLoading = false;
+                                }
+                            });
+                        } else {
+                            this.getListInstruments();
+                            this.isLoading = false;
+                        }
                     },
                     error: (err) => {
                         console.error("Error creating instrument:", err);
+                        this.isLoading = false;
                     }
                 });
             } else {
                 console.error("Invalid result received:", result);
+                this.isLoading = false;
             }
         });
     }
 
     onViewSource(user: any) {
-        console.log("Dati invio ", user.id)
+        this.isLoading = true;
         this.sourceService.getInstrumentAccessList(user.id).subscribe(res => {
-
-
+            this.isLoading = false
             const dialogRef = this.matDialog.open(DialogViewUserComponent, {
-                width: '800px',
+                width: '900px',
                 data: {id: user.id, name: user.name, url: user.url, access: res["users"], action: "view"}
             });
             dialogRef.afterClosed().subscribe(res => {
-                console.log("View closed")
+                this.isLoading = false
+                this.cd.markForCheck()
             })
 
         })
@@ -79,12 +111,13 @@ export class UserAdminComponent implements OnInit {
     onEditSource(user: any) {
         this.sourceService.getInstrumentAccessList(user.id).subscribe(res => {
             const dialogRef = this.matDialog.open(DialogViewUserComponent, {
-                width: '800px',
+                width: '900px',
                 data: {id: user.id, name: user.name, url: user.url, access: res["users"], action: "edit"}
             });
 
-            dialogRef.componentInstance.newAccess.subscribe((accesss: any) => {
-                this.sourceService.addInstrumentAccess(user.id, accesss.userId).subscribe(res2 => {
+            dialogRef.componentInstance.newAccess.subscribe((access: any) => {
+
+                this.sourceService.addInstrumentAccess(user.id, access.id).subscribe(res2 => {
                     this.updateAccessList(user.id, dialogRef);
                 })
             });
@@ -96,17 +129,19 @@ export class UserAdminComponent implements OnInit {
             });
 
             dialogRef.afterClosed().subscribe(res => {
-                console.log("View closed");
+
             });
         });
     }
 
     updateAccessList(userId: any, dialogRef: MatDialogRef<DialogViewUserComponent>) {
         this.sourceService.getInstrumentAccessList(userId).subscribe(res => {
-            dialogRef.componentInstance.data.access = [...res["users"]];
-            console.log("FFF  ", [...res["users"]])
+            const accessList = res["users"]
+            dialogRef.componentInstance.onUpdateData(accessList)
+            this.cd.markForCheck()
         });
     }
+
 
     onDeleteSource(userToDelete: any) {
         this.sourceService.deleteInstrument(userToDelete.id).subscribe(res => {
@@ -114,13 +149,31 @@ export class UserAdminComponent implements OnInit {
         });
     }
 
+    onPageChange(page: number): void {
+        this.currentPage = page;
+        this.getListInstruments();
+    }
+
     getListInstruments() {
-        this.sourcesSubscription = this.sourceService.getInstrumentList(this.currentPage, this.itemsPerPage).subscribe(res => {
-            if (res && res["data"]) {
-                this.instrumentsList = res["data"]
-                this.totalItems = res.totalCount;
-            }
-        })
+        this.isLoading = true;
+
+        this.subscriptions.add(
+            this.sourceService.getInstrumentList(this.currentPage, this.itemsPerPage)
+                .pipe(
+                    catchError(error => {
+                        console.error('Error fetching instruments:', error);
+                        this.isLoading = false;
+                        return throwError(() => error);
+                    })
+                ).subscribe(res => {
+                if (res && res['data'] && res['data'].length > 0) {
+                    this.instrumentsList = res['data'];
+                    this.totalItems = res.totalCount;
+                }
+                this.isLoading = false;
+                this.cd.markForCheck()
+            })
+        );
     }
 
     // END SOURCE FUNCTIONS
@@ -150,13 +203,9 @@ export class UserAdminComponent implements OnInit {
     }
 
     onCreateMerchant() {
-        console.log("WE forte che mi hai cliccato")
+
     }
 
-    onPageChange(page: number): void {
-        this.currentPage = page;
-        this.getListInstruments();
-    }
 
     // END MERCHANT FUNCTIONS
 

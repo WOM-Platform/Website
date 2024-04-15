@@ -1,6 +1,6 @@
 <div class="container">
     <div class="flex justify-between my-6 ">
-        <h1>{{ "USER.HOME.DASHBOARD" | translate }}</h1>
+        <h1 *ngIf="role.has('Admin');">{{ "USER.HOME.DASHBOARD_ADMIN" | translate }}</h1>
         <div class="flex justify-end items-center gap-2 ">
             <app-avatar [startingLetter]="username.charAt(0)"></app-avatar>
             <h3>{{ username }}</h3>

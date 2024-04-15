@@ -22,7 +22,7 @@ export class UsersListComponent implements OnInit {
     }
 
     ngOnInit() {
-        console.log(this.usersTableColumns)
+
     }
 
     onViewUser(user: any) {

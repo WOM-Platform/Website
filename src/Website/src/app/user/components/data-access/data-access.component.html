@@ -1,23 +1,22 @@
-<div class="">
-    <button *ngIf="!addAccess" class="rounded-full border-2 border-black flex px-4 py-2 hover:bg-[#d3d3d3]"
-            (click)="onAddAccess()">
+<link rel="stylesheet" href="data-access.component.css">
+<div class="my-6">
+    <button *ngIf="!addAccess" (click)="onAddAccess()" class="btn-default">
         <mat-icon>add</mat-icon>
         Aggiungi gestore
     </button>
-    <button *ngIf="addAccess" class="rounded-full border-2 border-black flex px-4 py-2 hover:bg-[#d3d3d3]"
-            (click)="handleCancellationAccess()">
+    <button *ngIf="addAccess" (click)="handleCancellationAccess()" class="btn-default">
         <mat-icon>cancel</mat-icon>
         Annulla
     </button>
-    <div *ngIf="addAccess" class="flex flex-col gap-4 w-full mt-6 px-6 border-2 rounded-lg border-black">
-        <app-search-source (searchSource)="onSearch($event)"></app-search-source>
-        <ul class="mx-4 px-2 border-b-2 border-l-2 border-r-2 border-black">
-            <li *ngFor="let access of listAccess" (click)="handleSelection(access)"
-                class="result-element">{{ access.name }}
-            </li>
-        </ul>
-        <div class="flex justify-end">
-            <button class="border-black border-2">Conferma</button>
-        </div>
-    </div>
 </div>
+<div *ngIf="addAccess" class="add-access-container">
+    <app-search-source (searchSource)="onSearch($event)"></app-search-source>
+    <ul *ngIf="listAccess.length > 0" class="access-list">
+        <li class="access-element"
+            *ngFor="let access of listAccess; trackBy: trackByAccess"
+            (click)="handleSelection(access)">
+            <span class="font-semibold">Nome: </span>{{ access.name }} {{ access.surname }} <span class="font-semibold">Email: </span>{{ access.email }}
+        </li>
+    </ul>
+</div>
+
