@@ -27,7 +27,6 @@ import {MatSlideToggleModule} from "@angular/material/slide-toggle";
 import {MatMenuModule} from "@angular/material/menu";
 import {MatSelectModule} from "@angular/material/select";
 import {MatSnackBarModule} from "@angular/material/snack-bar";
-<<<<<<< HEAD
 import {GoogleMapsModule} from '@angular/google-maps';
 import {NgxChartsModule} from '@swimlane/ngx-charts';
 import {HttpClient} from '@angular/common/http';
@@ -132,93 +131,6 @@ import {DialogViewUserComponent} from "../user/components/dialog-view-user/dialo
         ReactiveFormsModule,
         TranslateModule,
     ],
-=======
-import { GoogleMapsModule } from '@angular/google-maps';
-import { NgxChartsModule } from '@swimlane/ngx-charts';
-import { HttpClient } from '@angular/common/http';
-import {AnimatedNumberComponent} from "../components/animated-number/animated-number.component";
-import { AvatarComponent } from '../components/avatar/avatar.component';
-
-@NgModule({
-  declarations: [
-    AnimatedNumberComponent,
-    AvatarComponent,
-  ],
-  imports: [
-    CommonModule,
-    FormsModule,
-    GoogleMapsModule,
-    MatButtonModule,
-    MatCardModule,
-    MatCheckboxModule,
-    MatDatepickerModule,
-    MatDialogModule,
-    MatDividerModule,
-    MatDividerModule,
-    MatExpansionModule,
-    MatGridListModule,
-    MatGridListModule,
-    MatIconModule,
-    MatInputModule,
-    MatListModule,
-    MatMenuModule,
-    MatNativeDateModule,
-    MatProgressSpinnerModule,
-    MatSelectModule,
-    MatSidenavModule,
-    MatSlideToggleModule,
-    MatSnackBarModule,
-    MatStepperModule,
-    MatTabsModule,
-    MatToolbarModule,
-    MatTooltipModule,
-    NgxChartsModule,
-    PdfViewerModule,
-    ReactiveFormsModule,
-    TranslateModule.forRoot({
-      defaultLanguage: 'it',
-      loader: {
-          provide: TranslateLoader,
-          useFactory: (TranslateLoader),
-          deps: [HttpClient]
-      }
-  }),
-  ],
-  exports: [
-    AvatarComponent,
-    AnimatedNumberComponent,
-    FormsModule,
-    GoogleMapsModule,
-    MatButtonModule,
-    MatCardModule,
-    MatCheckboxModule,
-    MatDatepickerModule,
-    MatDialogModule,
-    MatDividerModule,
-    MatDividerModule,
-    MatExpansionModule,
-    MatGridListModule,
-    MatGridListModule,
-    MatIconModule,
-    MatInputModule,
-    MatListModule,
-    MatMenuModule,
-    MatNativeDateModule,
-    MatProgressSpinnerModule,
-    MatSelectModule,
-    MatSidenavModule,
-    MatSlideToggleModule,
-    MatSnackBarModule,
-    MatStepperModule,
-    MatTabsModule,
-    MatToolbarModule,
-    MatTooltipModule,
-    NgxChartsModule,
-    PdfViewerModule,
-    ReactiveFormsModule,
-    TranslateModule,
-  ],
->>>>>>> origin/dev
 })
 export class SharedModule {
 }

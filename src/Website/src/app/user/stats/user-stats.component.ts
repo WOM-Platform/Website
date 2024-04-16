@@ -1,27 +1,13 @@
 import {Component, OnDestroy, OnInit} from "@angular/core";
 
 import {Subscription, interval} from "rxjs";
-<<<<<<< HEAD
 import {map, takeWhile} from "rxjs/operators";
-=======
-import { map, takeWhile } from "rxjs/operators";
->>>>>>> origin/dev
 import {MatDatepickerInputEvent} from "@angular/material/datepicker";
 
 import {jsPDF} from "jspdf";
 import html2canvas from 'html2canvas';
 import {AuthService, StatsService} from "src/app/_services";
-<<<<<<< HEAD
 import {Merchants} from "src/app/_models";
-
-
-interface PieChartData {
-    name: string;
-    value: number;
-}
-=======
-import { Merchants } from "src/app/_models";
->>>>>>> origin/dev
 
 
 interface PieChartData {
@@ -46,16 +32,10 @@ export class UserStatsComponent implements OnInit, OnDestroy {
 
     view: [number, number] = [700, 400];
 
-<<<<<<< HEAD
     colorScheme: any = {
         domain: ['#5AA454', '#C7B42C', '#7aa3e5']
     };
 
-=======
-    colorScheme : any = {
-        domain: ['#5AA454',  '#C7B42C', '#7aa3e5']
-    };
->>>>>>> origin/dev
     constructor(private authService: AuthService, private statsService: StatsService) {
     }
 
@@ -69,35 +49,21 @@ export class UserStatsComponent implements OnInit, OnDestroy {
 
     loadData(): any {
         // total amount of created wom
-<<<<<<< HEAD
         this.statsService.getAdminTotalAmountCreated().subscribe(data => {
-=======
-        this.statsService.getTotalAmountCreated().subscribe(data => {
-            console.log("Created ")
->>>>>>> origin/dev
             this.totalCreatedAmount = data;
         })
 
         // total amount of consumed wom
-<<<<<<< HEAD
         this.statsService.getAdminTotalAmountConsumed().subscribe(data => {
-=======
-        this.statsService.getTotalAmountConsumed().subscribe(data => {
->>>>>>> origin/dev
             this.totalConsumedAmount = data;
         })
 
         // amount of wom created divided by aim
-<<<<<<< HEAD
         this.statsService.getAdminCreatedAmountByAim().subscribe(data => {
-=======
-        this.statsService.getCreatedAmountByAim().subscribe(data => {
->>>>>>> origin/dev
             this.chartCreatedAmountByAim = data.map(item => ({
                 name: item.aimTextId,
                 value: item.amount
             }))
-<<<<<<< HEAD
         });
 
         // amount of wom created divided by position
@@ -112,23 +78,6 @@ export class UserStatsComponent implements OnInit, OnDestroy {
                     console.log('Errore durante il download dei dati del merchant:', error);
                 }
             }
-=======
-            console.log("Total amount of wom")
-            console.log(data)
-        });
-
-        // amount of wom created divided by position
-        this.statsService.getCreatedAmountByPosition().subscribe(data => {
-            console.log(data)
-        })
-        this.merchantSubscription = this.authService.merchants().subscribe({
-            next:(response) => {
-                this.merchantData = response;
-            },
-            error: (error) => {
-                console.log('Errore durante il download dei dati del merchant:', error);
-            }}
->>>>>>> origin/dev
         );
     }
 

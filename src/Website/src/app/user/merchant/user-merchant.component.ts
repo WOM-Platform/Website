@@ -47,19 +47,7 @@ export class UserMerchantComponent implements OnInit, OnDestroy {
     }
 
     loadData(): any {
-<<<<<<< HEAD
         this.merchants = JSON.parse(localStorage.getItem("merchantData"))
-=======
-        this.merchantSubscription = this.authService.merchants().subscribe({
-            next:(response) =>
-            {
-                this.merchants = response;
-                // console.log(response);
-            },error: (error) => {
-                // console.log(error);
-                console.log('error downloading merchant data');
-            }})
->>>>>>> origin/dev
     }
 
     addPos(merchantId: string): any {

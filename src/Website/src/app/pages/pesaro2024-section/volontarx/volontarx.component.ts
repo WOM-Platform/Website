@@ -31,11 +31,6 @@ export class VolontarxComponent {
                 "PESARO2024.TOURISTS.SECTION_FAQ_5_R",
             ])
             .subscribe((translations) => {
-<<<<<<< HEAD
-=======
-                console.log("la lingua è ", translate.getBrowserLang());
-                console.log(translations["PESARO2024.TOURISTS.SECTION_FAQ_1_R"]);
->>>>>>> origin/dev
                 this.faqs = [
                     {
                         isOpen: false,

@@ -206,7 +206,6 @@ const routes: Routes = [
                     breadcrumb: "BREADCRUMBS.AUTHENTICATION.AUTHENTICATION",
                 },
                 children: [
-<<<<<<< HEAD
                     {
                         path: "signin",
                         component: SignInComponent,
@@ -221,22 +220,6 @@ const routes: Routes = [
                             breadcrumb: "BREADCRUMBS.AUTHENTICATION.SIGNUP",
                         },
                     },
-=======
-                    /*{
-                      path: "signin",
-                      component: SignInComponent,
-                      data: {
-                        breadcrumb: "BREADCRUMBS.AUTHENTICATION.SIGNIN",
-                      },
-                    },
-                    {
-                      path: "signup",
-                      component: MerchantSignUpComponent,
-                      data: {
-                        breadcrumb: "BREADCRUMBS.AUTHENTICATION.SIGNUP",
-                      },
-                    },*/
->>>>>>> origin/dev
                     {
                         path: "reset-password",
                         component: ResetPasswordComponent,
