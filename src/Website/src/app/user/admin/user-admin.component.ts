@@ -34,6 +34,7 @@ export class UserAdminComponent implements OnInit, OnDestroy {
     totalItems: number;
 
     isLoading = false;
+    errorMessage: string = '';
 
 
     private subscriptions: Subscription = new Subscription(); // To manage subscriptions
@@ -43,15 +44,15 @@ export class UserAdminComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
         this.merchantsList = this.getListMerchants();
-        this.getListInstruments();
-
+        this.getSourcesList();
+        // on search
         this.searchTerms.pipe(
             debounceTime(300),
         ).subscribe((term) => {
             this.searchParameters = term.trim();
             if (this.currentPage != 1) this.currentPage = 1
             if (this.searchParameters.length >= 3 || this.searchParameters.length === 0) {
-                this.getListInstruments();
+                this.getSourcesList();
             }
         });
     }
@@ -69,49 +70,56 @@ export class UserAdminComponent implements OnInit, OnDestroy {
             panelClass: 'custom-dialog-backdrop',
             data: {}
         });
-        console.log("QUAHISHIOHOHIIOHo")
+
         dialogRef.afterClosed().subscribe(result => {
             if (result && result.name && result.url) {
                 this.isLoading = true;
-                this.sourceService.createInstrument(result.name, result.url).subscribe({
+                this.cd.markForCheck();
+                const createSub = this.sourceService.createInstrument(result.name, result.url).subscribe({
                     next: (user) => {
-                        if (result.access && result.access.length > 0) {
-                            console.log("Result access ", result.access);
-                            console.log("Result user ", user);
-                            // Using the new method to add access sequentially
-
-                            this.sourceService.addAccessSequentially(user.id, result.access).subscribe({
-                                next: () => {
-                                    console.log("All access rights added successfully.");
-                                },
-                                error: err => {
-                                    console.error("Error adding access rights:", err);
-                                },
-                                complete: () => {
-                                    this.getListInstruments();
-                                    this.isLoading = false;
-                                }
-                            });
-                        } else {
-                            this.getListInstruments();
-                            this.isLoading = false;
-                        }
+                        this.processAccess(user, result);
                     },
                     error: (err) => {
-                        console.error("Error creating instrument:", err);
+                        this.errorMessage = 'Failed to create instrument.';
                         this.isLoading = false;
+                        this.cd.markForCheck();
                     }
                 });
+                this.subscriptions.add(createSub);
             } else {
-                console.error("Invalid result received:", result);
+                this.errorMessage = 'Invalid input data.';
                 this.isLoading = false;
+                this.cd.markForCheck();
             }
         });
     }
 
+    private processAccess(user, result) {
+        if (result.access && result.access.length > 0) {
+            const accessSub = this.sourceService.addAccessSequentially(user.id, result.access).subscribe({
+                next: () => console.log("All access rights added successfully."),
+                error: err => {
+                    console.error("Error adding access rights:", err);
+                    this.isLoading = false;
+                    this.cd.markForCheck();
+                },
+                complete: () => {
+                    this.getSourcesList();
+                    this.isLoading = false;
+                    this.cd.markForCheck();
+                }
+            });
+            this.subscriptions.add(accessSub);
+        } else {
+            this.getSourcesList();
+            this.isLoading = false;
+            this.cd.markForCheck();
+        }
+    }
+
     onViewSource(user: any) {
         this.isLoading = true;
-        this.sourceService.getInstrumentAccessList(user.id).subscribe(res => {
+        const viewSub = this.sourceService.getInstrumentAccessList(user.id).subscribe(res => {
             this.isLoading = false
             const dialogRef = this.matDialog.open(DialogViewUserComponent, {
                 width: '900px',
@@ -121,56 +129,85 @@ export class UserAdminComponent implements OnInit, OnDestroy {
                 this.isLoading = false
                 this.cd.markForCheck()
             })
-
         })
+        this.subscriptions.add(viewSub)
     }
+
 
     onEditSource(user: any) {
-        this.sourceService.getInstrumentAccessList(user.id).subscribe(res => {
-            const dialogRef = this.matDialog.open(DialogViewUserComponent, {
-                width: '900px',
-                data: {id: user.id, name: user.name, url: user.url, access: res["users"], action: "edit"}
-            });
-
-            dialogRef.componentInstance.newAccess.subscribe((access: any) => {
-
-                this.sourceService.addInstrumentAccess(user.id, access.id).subscribe(res2 => {
-                    this.updateAccessList(user.id, dialogRef);
-                })
-            });
-
-            dialogRef.componentInstance.deleteAccess.subscribe((access: any) => {
-                this.sourceService.deleteInstrumentAccess(user.id, access.userId).subscribe(() => {
-                    this.updateAccessList(user.id, dialogRef);
+        const accessListSub = this.sourceService.getInstrumentAccessList(user.id).subscribe({
+            next: res => {
+                const dialogRef = this.matDialog.open(DialogViewUserComponent, {
+                    width: '900px',
+                    data: {id: user.id, name: user.name, url: user.url, access: res["users"], action: "edit"}
                 });
-            });
 
-            dialogRef.afterClosed().subscribe(res => {
-
-            });
+                this.handleDialogInteractions(dialogRef, user);
+            },
+            error: err => console.error('Failed to get instrument access list:', err)
         });
+        this.subscriptions.add(accessListSub);
     }
 
+    private handleDialogInteractions(dialogRef, user) {
+        const newAccessSub = dialogRef.componentInstance.newAccess.subscribe({
+            next: (access: any) => this.addAccess(user, access, dialogRef),
+            error: err => console.error('Failed to handle new access:', err)
+        });
+        this.subscriptions.add(newAccessSub);
+
+        const delAccessSub = dialogRef.componentInstance.deleteAccess.subscribe({
+            next: (access: any) => this.deleteAccess(user, access, dialogRef),
+            error: err => console.error('Failed to delete access:', err)
+        });
+        this.subscriptions.add(delAccessSub);
+
+        const afterCloseSub = dialogRef.afterClosed().subscribe({
+            error: err => console.error('Dialog closed with error:', err),
+            complete: () => console.log('Dialog closed')
+        });
+        this.subscriptions.add(afterCloseSub);
+    }
+
+    private addAccess(user, access, dialogRef) {
+        const addAccessSub = this.sourceService.addInstrumentAccess(user.id, access.id).subscribe({
+            next: () => this.updateAccessList(user.id, dialogRef),
+            error: err => console.error('Error adding new instrument access:', err)
+        });
+        this.subscriptions.add(addAccessSub);
+    }
+
+    private deleteAccess(user, access, dialogRef) {
+        const delAccessSub = this.sourceService.deleteInstrumentAccess(user.id, access.userId).subscribe({
+            next: () => this.updateAccessList(user.id, dialogRef),
+            error: err => console.error('Error deleting instrument access:', err)
+        });
+        this.subscriptions.add(delAccessSub);
+    }
+
+
     updateAccessList(userId: any, dialogRef: MatDialogRef<DialogViewUserComponent>) {
-        this.sourceService.getInstrumentAccessList(userId).subscribe(res => {
+        const accessSub = this.sourceService.getInstrumentAccessList(userId).subscribe(res => {
             const accessList = res["users"]
             dialogRef.componentInstance.onUpdateData(accessList)
             this.cd.markForCheck()
         });
+        this.subscriptions.add(accessSub)
     }
 
     onDeleteSource(userToDelete: any) {
-        this.sourceService.deleteInstrument(userToDelete.id).subscribe(res => {
-            this.getListInstruments();
+        const delSub = this.sourceService.deleteInstrument(userToDelete.id).subscribe(res => {
+            this.getSourcesList();
         });
+        this.subscriptions.add(delSub)
     }
 
     onPageChange(page: number): void {
         this.currentPage = page;
-        this.getListInstruments();
+        this.getSourcesList();
     }
 
-    getListInstruments() {
+    getSourcesList() {
         this.isLoading = true;
 
         this.subscriptions.add(
@@ -183,8 +220,6 @@ export class UserAdminComponent implements OnInit, OnDestroy {
                     })
                 ).subscribe(res => {
                 if (res) {
-                    console.log("Res getInstrument ", res)
-
                     this.totalItems = res.totalCount;
                     this.pageCount = res.pageCount;
                     if (res['data'])

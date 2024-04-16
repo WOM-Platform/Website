@@ -1,13 +1,13 @@
 import {Component, OnDestroy, OnInit} from "@angular/core";
 
 import {Subscription, interval} from "rxjs";
-import { map, takeWhile } from "rxjs/operators";
+import {map, takeWhile} from "rxjs/operators";
 import {MatDatepickerInputEvent} from "@angular/material/datepicker";
 
-import { jsPDF } from "jspdf";
+import {jsPDF} from "jspdf";
 import html2canvas from 'html2canvas';
 import {AuthService, StatsService} from "src/app/_services";
-import { Merchants } from "src/app/_models";
+import {Merchants} from "src/app/_models";
 
 
 interface PieChartData {
@@ -20,7 +20,7 @@ interface PieChartData {
     templateUrl: './user-stats.component.html',
     styleUrls: ['./user-stats.component.css']
 })
-export class UserStatsComponent implements OnInit, OnDestroy{
+export class UserStatsComponent implements OnInit, OnDestroy {
     merchantData: Merchants;
     merchantSubscription: Subscription;
 
@@ -32,9 +32,10 @@ export class UserStatsComponent implements OnInit, OnDestroy{
 
     view: [number, number] = [700, 400];
 
-    colorScheme : any = {
-        domain: ['#5AA454',  '#C7B42C', '#7aa3e5']
+    colorScheme: any = {
+        domain: ['#5AA454', '#C7B42C', '#7aa3e5']
     };
+
     constructor(private authService: AuthService, private statsService: StatsService) {
     }
 
@@ -49,7 +50,6 @@ export class UserStatsComponent implements OnInit, OnDestroy{
     loadData(): any {
         // total amount of created wom
         this.statsService.getAdminTotalAmountCreated().subscribe(data => {
-            console.log("Created ")
             this.totalCreatedAmount = data;
         })
 
@@ -64,8 +64,6 @@ export class UserStatsComponent implements OnInit, OnDestroy{
                 name: item.aimTextId,
                 value: item.amount
             }))
-            console.log("Total amount of wom")
-            console.log(data)
         });
 
         // amount of wom created divided by position
@@ -73,12 +71,13 @@ export class UserStatsComponent implements OnInit, OnDestroy{
             console.log(data)
         })
         this.merchantSubscription = this.authService.merchants().subscribe({
-            next:(response) => {
-                this.merchantData = response;
-            },
-            error: (error) => {
-                console.log('Errore durante il download dei dati del merchant:', error);
-            }}
+                next: (response) => {
+                    this.merchantData = response;
+                },
+                error: (error) => {
+                    console.log('Errore durante il download dei dati del merchant:', error);
+                }
+            }
         );
     }
 
@@ -86,8 +85,7 @@ export class UserStatsComponent implements OnInit, OnDestroy{
         console.log(`${type}: ${event.value}`);
     }
 
-    public convertToPDF()
-    {
+    public convertToPDF() {
         html2canvas(document.getElementById('toPrint')).then(canvas => {
             // Few necessary setting options
             const contentDataURL = canvas.toDataURL('image/png')

@@ -38,16 +38,19 @@ export class SourceService {
         return this.http.post(`${this.localUrlV1}`, {
             'name': name,
             'url': url
-        }).pipe(map(res => res))
+        }).pipe(map(res => res),
+            catchError(error => {
+                console.error('Error creating instrument:', error);
+                return throwError(() => new Error('Failed to create instrument'));
+            }))
     }
-
+    
     deleteInstrument(sourceId: string): Observable<any> {
         return this.http.delete(`${this.localUrlV1}${sourceId}`).pipe(map(res => res))
     }
 
     getInstrumentAccessList(idInstrument) {
         return this.http.get(`${this.localUrlV1}${idInstrument}/access`).pipe(map(res => {
-                    console.log("Gestori ", res)
                     return res
                 }
             )
@@ -56,8 +59,6 @@ export class SourceService {
 
     addInstrumentAccess(idInstrument: string, userId: string): Observable<any> {
         const url = `${this.localUrlV1}${idInstrument}/access?userId=${userId}`;  // Append parameters to URL
-        console.log("utente ", idInstrument);
-        console.log("access ", userId)
         return this.http.post(url, {})
             .pipe(
                 map(res => {
