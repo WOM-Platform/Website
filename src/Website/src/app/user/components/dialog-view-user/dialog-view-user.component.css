@@ -13,10 +13,6 @@
     flex-grow: 1;
 }
 
-.access-email {
-    font-weight: bold;
-    margin-right: 10px;
-}
 
 .delete-button {
     display: flex;

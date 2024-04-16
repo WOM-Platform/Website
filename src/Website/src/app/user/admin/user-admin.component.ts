@@ -69,17 +69,18 @@ export class UserAdminComponent implements OnInit, OnDestroy {
             panelClass: 'custom-dialog-backdrop',
             data: {}
         });
-
+        console.log("QUAHISHIOHOHIIOHo")
         dialogRef.afterClosed().subscribe(result => {
-            if (result && result.name) {
+            if (result && result.name && result.url) {
                 this.isLoading = true;
                 this.sourceService.createInstrument(result.name, result.url).subscribe({
                     next: (user) => {
                         if (result.access && result.access.length > 0) {
-                            const tasks = result.access.map(access =>
+                            console.log("Result access ", result.access);
+                            console.log("Result user ", user);
+                            // Using the new method to add access sequentially
 
-                                this.sourceService.addInstrumentAccess(user.id, access.id));
-                            forkJoin(tasks).subscribe({
+                            this.sourceService.addAccessSequentially(user.id, result.access).subscribe({
                                 next: () => {
                                     console.log("All access rights added successfully.");
                                 },
@@ -157,7 +158,6 @@ export class UserAdminComponent implements OnInit, OnDestroy {
             this.cd.markForCheck()
         });
     }
-
 
     onDeleteSource(userToDelete: any) {
         this.sourceService.deleteInstrument(userToDelete.id).subscribe(res => {

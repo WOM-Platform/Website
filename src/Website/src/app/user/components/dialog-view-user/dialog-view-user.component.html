@@ -9,8 +9,9 @@
         <ul class="access-list">
             <li *ngFor="let access of accessUsers" class="access-item">
                 <div class="access-details">
-                    <span class="access-email">Email: {{ access.email }}</span>
-                    <span class="access-name">Name: {{ access.name }} {{ access.surname }}</span>
+
+                    <strong>Name</strong>: {{ access.name }} {{ access.surname }}
+                    <span><strong>Email</strong>: {{ access.email }}</span>
                 </div>
                 <ng-container *ngIf="action === 'edit'">
                     <button class="delete-button text-red" (click)="onDeleteAccess(access)">

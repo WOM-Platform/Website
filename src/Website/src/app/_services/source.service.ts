@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
 import {environment} from "../../environments/environment";
-import {catchError, map} from "rxjs/operators";
+import {catchError, concatMap, delay, map} from "rxjs/operators";
 import {HttpClient, HttpParams} from "@angular/common/http";
-import {Observable, throwError} from "rxjs";
+import {from, Observable, of, throwError} from "rxjs";
 
 @Injectable({
     providedIn: 'root'
@@ -63,8 +63,26 @@ export class SourceService {
                 map(res => {
                     console.log("Access added");
                     return res;
+                }),
+                catchError(err => {
+                    console.error("Failed to add access:", err);
+                    return throwError(err);
                 })
             );
+    }
+
+    addAccessSequentially(userId: string, accessArray: any): Observable<any> {
+        return from(accessArray).pipe(
+            concatMap(access =>
+                this.addInstrumentAccess(userId, access["id"].toString()).pipe(
+                    delay(1000), // Delay of 1 second between each request
+                    catchError(err => {
+                        console.error('Error in access processing', err);
+                        return of('Error handled'); // Continue on error
+                    })
+                )
+            )
+        );
     }
 
 
