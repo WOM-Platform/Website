@@ -24,10 +24,10 @@
 
 .access-element {
     @apply px-2 ;
+}
 
-    &:hover {
-        @apply bg-[#e5e5e5]
-    }
+.access-element:hover {
+    @apply bg-[#e5e5e5]
 }
 
 .confirm-btn {
