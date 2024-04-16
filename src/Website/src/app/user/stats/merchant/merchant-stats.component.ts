@@ -1,81 +1,62 @@
-import {Component, Input, OnInit} from "@angular/core";
-import { BrowserModule } from '@angular/platform-browser';
-import { NgxChartsModule } from '@swimlane/ngx-charts';
-import { single } from './data';
-import { MerchantContainer } from "src/app/_models";
-
+import {Component, OnInit} from "@angular/core";
+import {MerchantContainer} from "src/app/_models";
+import {StatsService, UserService} from "../../../_services";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
     selector: 'app-merchant-stats',
     templateUrl: './merchant-stats.component.html',
     styleUrls: ['./merchant-stats.component.css']
 })
-export class MerchantStatsComponent implements OnInit{
-    @Input() merchants: MerchantContainer[];
+export class MerchantStatsComponent implements OnInit {
+    merchants: MerchantContainer[];
+    posScore: number;
+    selectedMerchant: MerchantContainer;
+    offers: { 'amount': number, 'offerId': number, 'offerName': string }[]
+    bestOffer: { 'amount': number, 'offerId': number, 'offerName': string };
+    totalAmount: number = 0;
+    idMerchant: string;
 
-    totComparison  : {name: string, value: number}[] = [{name: "total", value: 0}, {name: "average", value: 160000}]
-
-    viewAverage = [700, 200]
-    tot = 0
-    averageValue = 160000
-    units: string = 'WOM bruciati';
-
-    single: any[];
-    view: [number, number] = [1000, 400];
-    viewTotComparison : [number, number] = [400, 500]
-    autoScale: true;
-
-  // options
-  showXAxis = true;
-  showYAxis = true;
-  
-  
-  showXAxisLabel = true;
-  xAxisLabel = 'Country';
-  showYAxisLabel = true;
-  yAxisLabel = 'WOM consumati';
-
-    // options
-    tooltipDisabled: boolean = false;
-    animate: boolean = true;
-    gradient: boolean = false;
-    showLegend: boolean = true;
-    showLabels: boolean = true;
-    isDoughnut: boolean = false;
-
-    colorsTotComparison = {
-        domain: ['#464555','#FF566F']
-    }
-    colorsWOMConsumati = {
-        domain: ['#2A69FF', '#DD52DB', '#FF57A3', '#FF8A70', '#FFC457', '#F9F871']
-    };
-
-    constructor() {
-        Object.assign(this, { single });
+    constructor(private statsService: StatsService, private userService: UserService, private route: ActivatedRoute) {
     }
 
-    
-    ngOnInit(): void {
-        // Sum all the offerts to know how many WOM where consume
-        for(let i = 0; i < this.single.length; i++) {[0]
-            console.log(this.single[i].value)
-            this.totComparison[0].value = +this.single[i].value + this.totComparison[0].value
-            this.tot = +this.single[i].value + this.tot
+    ngOnInit() {
+        this.route.params.subscribe(params => {
+            this.idMerchant = params['id']
+        })
+        this.loadData();
+    }
+
+    loadData() {
+        this.merchants = JSON.parse(localStorage.getItem('merchantData'))
+
+        if (this.merchants && this.idMerchant) {
+            this.selectedMerchant = this.merchants.find(merch => merch.id === this.idMerchant)
+
+            for (const pos of this.selectedMerchant.pos) {
+                // FAKE API: amount of WOM
+                this.statsService.getPosTotalAmount("924ebd20590ef1br325a6ecd").subscribe(res => {
+                    this.totalAmount += res
+                })
+
+                this.statsService.getPosOffers("924ebd20590ef1br325a6ecd").subscribe(res => {
+                    this.offers = res
+                })
+
+                if (this.offers && this.offers.length > 1) {
+                    this.statsService.getPosBestOffer("924ebd20590ef1br325a6ecd").subscribe(res => {
+                        this.bestOffer = res
+                    })
+                }
+
+                this.statsService.getScorePos("924ebd20590ef1br325a6ecd").subscribe(res => {
+                    this.posScore = res
+                })
+            }
+
         }
-        console.log(this.totComparison)
+
     }
 
-    onSelect(data): void {
-        console.log('Item clicked', JSON.parse(JSON.stringify(data)));
-    }
 
-    onActivate(data): void {
-        console.log('Activate', JSON.parse(JSON.stringify(data)));
-    }
-
-    onDeactivate(data): void {
-        console.log('Deactivate', JSON.parse(JSON.stringify(data)));
-    }
 }
-
-

@@ -1,9 +1,10 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {UserService, } from '../../_services';
+import {AuthService, UserService,} from '../../_services';
 import {TranslateService} from '@ngx-translate/core';
 import {Router} from "@angular/router";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {MatDialog} from "@angular/material/dialog";
+import {Subscription} from "rxjs";
 
 @Component({
     selector: 'app-user-home',
@@ -12,24 +13,38 @@ import {MatDialog} from "@angular/material/dialog";
 })
 export class UserHomeComponent implements OnInit, OnDestroy {
     username: string;
+    userData: any;
+    userDataSubscription: Subscription;
+    role: Set<string> = new Set<string>()
 
-    constructor(public dialog: MatDialog,
-                private snackBar: MatSnackBar,
-                private userService: UserService,
-                private router: Router,
-                private translate: TranslateService) {
+    constructor(
+        public dialog: MatDialog,
+        private snackBar: MatSnackBar,
+        private userService: UserService,
+        private router: Router,
+        private translate: TranslateService) {
     }
 
     ngOnInit(): any {
-        this.username = this.userService.currentUserValue.name + ' ' +   this.userService.currentUserValue.surname;
+        this.username = this.userService.currentUserValue.name + ' ' + this.userService.currentUserValue.surname;
         this.loadData();
     }
 
     ngOnDestroy(): any {
+        this.userDataSubscription.unsubscribe()
     }
 
     loadData(): any {
+        // check user instrument and merchant amount
+        this.userDataSubscription = this.userService.me().subscribe(data => {
+            if (data) {
+                this.userData = data
+                if (data.role) {
+                    this.role.add(data.role)
+                }
+            }
 
+        })
     }
 
     async navigate(link: string): Promise<void> {

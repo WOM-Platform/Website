@@ -1,0 +1,98 @@
+<div class="container mt-10">
+  <div class="flex flex-wrap flex-row gap-4 lg:flex-row justify-between">
+    <img
+      class="h-[25px] w-auto md:h-[40px] lg:h-[50px]"
+      src="/assets/images/pesaro2024/logo-pesaro2024.png"
+      alt="pesaro2024"
+    />
+    <img
+      class="h-[25px] w-auto md:h-[40px] lg:h-[50px]"
+      src="/assets/images/pesaro2024/logo-cte-square.png"
+      alt="cte-square"
+    />
+  </div>
+  <div class="mt-10 text-center">
+    <h1 style="color: black">
+      <span [innerHTML]="'PESARO2024.PESARO2024.TITLE_FOR' | translate"></span
+      >{{ " "
+      }}<span
+        style="color: #2569ff"
+        [innerHTML]="'PESARO2024.PESARO2024.TITLE' | translate"
+      ></span>
+    </h1>
+    <h2
+      style="color: black"
+      [innerHTML]="'PESARO2024.PESARO2024.SUBTITLE' | translate"
+    ></h2>
+  </div>
+  <div class="mt-6">
+    <p [innerHTML]="'PESARO2024.PESARO2024.PAGE_DESCR' | translate"></p>
+  </div>
+  <div class="mt-6">
+    <h2
+      [innerHTML]="'PESARO2024.PESARO2024.SECTION_HOW_WORKS' | translate"
+    ></h2>
+    <p
+      class="mt-6"
+      [innerHTML]="'PESARO2024.PESARO2024.SECTION_HOW_WORKS_DESCR' | translate"
+    ></p>
+    <app-store-logos
+      [appName]="'WOM POCKET'"
+      [appleURL]="'https://apps.apple.com/it/app/wom-pocket/id1466969163'"
+      [appleQR]="'/assets/images/pesaro2024/tourists/qr-code-ios.png'"
+      [googleURL]="
+        'https://play.google.com/store/apps/details?id=social.wom.pocket'
+      "
+      [googleQR]="'/assets/images/pesaro2024/tourists/qr-code-android.png'"
+    ></app-store-logos>
+  </div>
+  <div class="mt-10">
+    <h2
+      [innerHTML]="'PESARO2024.PESARO2024.SECTION_HOW_TO_EARN_WOM' | translate"
+    ></h2>
+    <p
+      class="mt-6"
+      [innerHTML]="
+        'PESARO2024.PESARO2024.SECTION_HOW_TO_EARN_WOM_1_DESCR' | translate
+      "
+    ></p>
+    <div class="flex flex-col justify-center items-center mt-6">
+      <img
+        class="max-w-[300px] lg:max-w-[500px]"
+        src="/assets/images/toolkit-for-merchant/welcome.jpg"
+        alt="welcome"
+      />
+    </div>
+    <p
+      class="mt-6"
+      [innerHTML]="
+        'PESARO2024.PESARO2024.SECTION_HOW_TO_EARN_WOM_2_DESCR' | translate
+      "
+    ></p>
+  </div>
+  <div class="mt-10">
+    <h2
+      [innerHTML]="'PESARO2024.PESARO2024.SECTION_WHERE_TO_USE' | translate"
+    ></h2>
+    <ul>
+      <li></li>
+    </ul>
+    <p
+      class="mt-6"
+      [innerHTML]="
+        'PESARO2024.PESARO2024.SECTION_WHERE_TO_USE_DESCR' | translate
+      "
+    ></p>
+    <div class="flex flex-col items-center mt-6 gap-6">
+      <img
+        class="max-w-[300px] lg:max-w-[500px]"
+        src="/assets/images/toolkit-for-merchant/vetrofania.jpg"
+        alt="vetrofania"
+      />
+    </div>
+    <p
+      class="mt-6"
+      [innerHTML]="'PESARO2024.PESARO2024.SECTION_ENDING_TEXT' | translate"
+    ></p>
+  </div>
+</div>

@@ -1,0 +1,69 @@
+<div class="flex flex-col justify-start gap-2">
+    <div class="loading-overlay" *ngIf="isLoading">
+        <img src="../../../assets/gif/loading.gif" alt="Caricamento..." class="loading-image">
+    </div>
+
+    <div *ngIf="user">
+        <mat-tab-group>
+            <mat-tab label="Instruments">
+                <div class="flex justify-end mt-11">
+                    <button class="flex justify-center border-2 px-4 py-2 rounded-full border-blue-600 bg-blue-200 hover:bg-blue-400"
+                            (click)="onCreateSource()">
+                        <mat-icon>add</mat-icon>
+                        Nuovo Instrument
+                    </button>
+                </div>
+                <h2>Lista Instrument</h2>
+
+
+                <div class="relative mt-6">
+                    <input [(ngModel)]="searchParameters" (ngModelChange)="searchTerms.next($event)"
+                           class="pl-10 pr-4 py-2 border rounded-full text-gray-700 leading-tight focus:outline-none focus:border-blue-500 transition duration-200 ease-in-out"
+                           placeholder="Ricerca...">
+                    <mat-icon class="absolute left-2 top-1/2 transform -translate-y-1/2 text-gray-500" color="primary">
+                        search
+                    </mat-icon>
+                </div>
+                <app-users-list [usersList]="instrumentsList"
+                                [usersTableColumns]="instrumentsTableColumns"
+                                (viewUser)="onViewSource($event)"
+                                (deleteUser)="onDeleteSource($event)"
+                                (editUser)="onEditSource($event)"
+                ></app-users-list>
+
+                <div *ngIf="totalItems" class="mt-11">
+                    <app-pagination [currentPage]="currentPage"
+                                    [itemsPerPage]="itemsPerPage"
+                                    [totalItems]="totalItems"
+                                    [pageCount]="pageCount"
+                                    (pageChanged)="onPageChange($event)"></app-pagination>
+                </div>
+
+            </mat-tab>
+
+            <!--           <mat-tab label="Merchants">
+                           <div class="flex justify-end mt-11">
+                               <button class="flex justify-center border-2 px-4 py-2 rounded-full border-blue-600 bg-blue-200 hover:bg-blue-400"
+                                       (click)="onCreateMerchant()">
+                                   <mat-icon>add</mat-icon>
+                                   Nuovo Merchant
+                               </button>
+                           </div>
+                           <h3>Merchants List</h3>
+                           <app-users-list [usersTableColumns]="merchantsTableColumns"
+                                           [usersList]="merchantsList"></app-users-list>
+
+                       </mat-tab>
+                       <mat-tab label="Statistics">
+                           <button (click)="openStats()" class="btn-stats">
+                               <mat-icon>bar_chart</mat-icon>
+                               {{ "USER.MERCHANT.YOUR_STATS" | translate }}
+                           </button>
+                       </mat-tab>-->
+        </mat-tab-group>
+
+
+    </div>
+
+
+</div>

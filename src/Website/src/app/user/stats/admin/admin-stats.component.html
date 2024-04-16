@@ -1,0 +1,29 @@
+<div class="container">
+    <h1 class="text-center">Statistiche Amministratore</h1>
+    <div class="flex justify-around">
+        <div class="flex flex-col justify-center items-center">
+            <h2>Totale WOM Generati</h2>
+            <div *ngIf="totalCreatedAmount">
+                <app-animated-number [finalNumber]="totalCreatedAmount" [duration]="1000"/>
+            </div>
+        </div>
+        <div class="flex flex-col justify-center items-center">
+            <h2>Totale WOM Consumati</h2>
+            <div *ngIf="totalConsumedAmount">
+                <app-animated-number [finalNumber]="totalConsumedAmount" [duration]="1000"/>
+            </div>
+        </div>
+    </div>
+
+    <h2>Wom divisi per AIM</h2>
+    <ngx-charts-pie-chart
+            [view]="view"
+            [scheme]="colorScheme"
+            [results]="chartCreatedAmountByAim"
+            [legend]="true"
+            [labels]="true">
+    </ngx-charts-pie-chart>
+    <h2>WOM divisi per posizione</h2>
+
+
+</div>

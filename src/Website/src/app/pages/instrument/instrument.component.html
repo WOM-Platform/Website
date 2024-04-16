@@ -11,13 +11,13 @@
     </div>
   </div>
   <div class="justify-center flex">
-    <div class="rounded-container flex flex-col justify-center">
+    <div class="rounded-container flex flex-col justify-center h-[100px]">
       <p
         class="centered rounded-container-header px-2 py-1 m-0"
         [innerHTML]="'INSTRUMENT.STATS.AVAILABLE' | translate"
       ></p>
-      <p class="centered bold rounded-container-body px-2 py-1 m-0">
-        {{ stats.totalVouchersAvailable }}
+      <p *ngIf="stats.totalVouchersAvailable" class="centered bold rounded-container-body px-2 py-1 m-0">
+          <app-animated-number [finalNumber]="stats.totalVouchersAvailable" [duration]="2000"/>
       </p>
     </div>
   </div>

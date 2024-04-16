@@ -38,10 +38,12 @@
       "URBINO": "WOM per Urbino",
       "FANO": "WOM per Fano"
     },
-    "TOOLKIT-FOR-MERCHANT": "Toolkit per esercenti",
     "PESARO2024": {
       "PESARO2024": "Pesaro2024",
-      "MERCHANTS": "Esercenti"
+      "MERCHANTS": "Esercenti",
+      "TOURISTS": "Turisti",
+      "CITIZENS": "Cittadini",
+      "VOLUNTEERS": "Volontarx"
     },
     "PROJECTS": {
       "RETE-DELLE-RETI": "Rete delle Reti"
@@ -56,7 +58,9 @@
       "ERROR": "Non verificato",
       "HOME": "Home",
       "VERIFY": "Verifica",
-      "MERCHANT-STATS": "Statistiche"
+      "ADMIN-STATS": "Statistiche Admin",
+      "INSTRUMENT-STATS": "Statistiche Instrument",
+      "MERCHANT-STATS": "Statistiche Merchant"
     },
     "MANAGE": {
       "TITLE": "Gestione",
@@ -194,15 +198,18 @@
   },
   "USER": {
     "HOME": {
+      "DASHBOARD": "La tua Dashboard",
+      "DASHBOARD_ADMIN": "Dashboard Admin",
       "WELCOME": "Benvenuto",
-      "MERCHANT_TITLE": "Merchant"
+      "MERCHANT_TITLE": "Merchant",
+      "INSTRUMENT_TITLE": "Instrument"
     },
     "MERCHANT": {
       "ADD_MERCHANT_TOOLTIP": "Aggiungi un nuovo Merchant",
       "EDIT_MERCHANT_BTN": "Modifica",
       "EDIT_MERCHANT_TOOLTIP": "Modifica i dati di questo Merchant",
       "ENABLED_MERCHANT_TOOLTIP": "Questo merchant è pronto ad accettare WOM!",
-      "FIND_OUT_STATS": "Scopri le tue statistiche",
+      "YOUR_STATS": "Le tue statistiche",
       "MERCHANT_TITLE": "I tuoi Merchant",
       "NOT_ENABLED_MERCHANT_TOOLTIP": "Merchant non abilitato - clicca qui per avere ulteriori informazioni",
       "WELCOME": "Benvenuto",
@@ -214,7 +221,7 @@
         "URL": "Sito web",
         "POS_TITLE": "POS",
         "POS_SUBTITLE": "Lista dei POS",
-        "ADD_POS_TOOLTIP": "Aggiungi un nuovo punto di servizio “POS” per il Merchant",
+        "ADD_POS_TOOLTIP": "Aggiungi un nuovo punto di servizio \"POS\" per il Merchant",
         "SEND_ACTIVATION_REQUEST": "Richiedi abilitazione",
         "ACTIVATION_DIALOG": {
           "TITLE": "Richiesta abilitazione",
@@ -321,16 +328,16 @@
   "HOME": {
     "SECTION_INTRO": {
       "TITLE": "Introduzione",
-      "A": "<b>WOM - “Worth One Minute”</b> è una piattaforma di ricompensa general-purpose basata su un sistema di scambio di voucher.\nMolte azioni e attività compiute dagli individui hanno un valore sociale intrinseco, un effetto noto in economia come <b>“esternalità positiva”</b>.\nWOM mira a riconoscere tutte quelle azioni che costituiscono un contributo socialmente prezioso per un obiettivo comune, <b>premiando il tempo che le persone dedicano a queste attività</b> attraverso la generazione di voucher sociali digitali.\nI voucher WOM premiano ogni minuto di impegno sociale.",
+      "A": "<b>WOM - \"Worth One Minute\"</b> è una piattaforma di ricompensa general-purpose basata su un sistema di scambio di voucher.\nMolte azioni e attività compiute dagli individui hanno un valore sociale intrinseco, un effetto noto in economia come <b>\"esternalità positiva\"</b>.\nWOM mira a riconoscere tutte quelle azioni che costituiscono un contributo socialmente prezioso per un obiettivo comune, <b>premiando il tempo che le persone dedicano a queste attività</b> attraverso la generazione di voucher sociali digitali.\nI voucher WOM premiano ogni minuto di impegno sociale.",
       "B": "DIGIT srl è uno <b>spin-off dell’Università di Urbino</b> che ha come obiettivo <b>creare un valore sociale attraverso la consapevolezza digitale</b>. DIGIT srl è stata fondata sulla convinzione che alla base della tecnologia, delle piattaforme e dei software ci debbano essere gli interessi dell’uomo e della società e che innovazione sociale e digitale siano indissolubilmente legate."
     },
     "SECTION_VOL": {
       "TITLE": "Volontari",
-      "MESSAGE": "Compiendo azioni socialmente valide, ogni utente guadagna WOM e diventa un <b>Volontario</b>. I Volontari possono gestire i loro voucher WOM tramite un’app, <b>“WOM Pocket”</b>, che possono installare sul proprio dispositivo. L’applicazione consente ai Volontari di raccogliere i propri voucher, conservarli e spenderli."
+      "MESSAGE": "Compiendo azioni socialmente valide, ogni utente guadagna WOM e diventa un <b>Volontario</b>. I Volontari possono gestire i loro voucher WOM tramite un’app, <b>\"WOM Pocket\"</b>, che possono installare sul proprio dispositivo. L’applicazione consente ai Volontari di raccogliere i propri voucher, conservarli e spenderli."
     },
     "SECTION_MERCH": {
       "TITLE": "Merchant",
-      "MESSAGE": "I negozi locali possono partecipare al progetto diventando <b>Merchants</b>. I Merchants sono componenti di sistema che possono <b>creare istanze di pagamento</b>. Possono accettare i voucher WOM in cambio di servizi e sconti. I Merchants utilizzano un’applicazione diversa, il <b>“WOM POS”</b>, o un software di integrazione personalizzato. Questi componenti software consentono ai Merchants di creare nuove transazioni, applicando filtri ai voucher WOM raccolti."
+      "MESSAGE": "I negozi locali possono partecipare al progetto diventando <b>Merchants</b>. I Merchants sono componenti di sistema che possono <b>creare istanze di pagamento</b>. Possono accettare i voucher WOM in cambio di servizi e sconti. I Merchants utilizzano un’applicazione diversa, il <b>\"WOM POS\"</b>, o un software di integrazione personalizzato. Questi componenti software consentono ai Merchants di creare nuove transazioni, applicando filtri ai voucher WOM raccolti."
     },
     "SECTION_INSTR": {
       "TITLE": "Instrument",
@@ -352,8 +359,8 @@
   "ABOUT": {
     "TITLE": "La piattaforma WOM",
     "SECTION_A": {
-      "A": "WOM sta per <b>Worth One Minute</b>, cioè “Vale un minuto”. È una piattaforma di ricompensa general-purpose basata su un sistema di scambio di voucher che premia l’impatto positivo di azioni e attività svolte da persone che contribuiscono a un bene comune.",
-      "B": "Molte azioni hanno un <b>valore sociale intrinseco</b>, un effetto noto in economia come “esternalità positiva”. WOM riconosce l’impatto di queste azioni e fornisce uno strumento per premiare queste esternalità positive mediante <b>l’emissione di WOM.</b>"
+      "A": "WOM sta per <b>Worth One Minute</b>, cioè \"Vale un minuto\". È una piattaforma di ricompensa general-purpose basata su un sistema di scambio di voucher che premia l’impatto positivo di azioni e attività svolte da persone che contribuiscono a un bene comune.",
+      "B": "Molte azioni hanno un <b>valore sociale intrinseco</b>, un effetto noto in economia come \"esternalità positiva\". WOM riconosce l’impatto di queste azioni e fornisce uno strumento per premiare queste esternalità positive mediante <b>l’emissione di WOM.</b>"
     },
     "SECTION_A_2": {
       "TITLE": "Cosa sono i WOM?",
@@ -368,7 +375,7 @@
     },
     "SECTION_C": {
       "TITLE": "Come utilizzo i miei WOM?",
-      "A": "Imprenditori, negozianti, enti pubblici o qualsiasi altro privato cittadino (generalmente chiamato Merchants) possono liberamente decidere di fornire beni, servizi o sconti ai possessori di voucher WOM. Per fare ciò, creano un <b>“WOM payment”</b> che consente loro di scegliere quale tipo di sforzo premiare: i voucher WOM possono essere filtrati per scopo, luogo e tempo. Merci, servizi e sconti possono essere determinati liberamente dal Merchants."
+      "A": "Imprenditori, negozianti, enti pubblici o qualsiasi altro privato cittadino (generalmente chiamato Merchants) possono liberamente decidere di fornire beni, servizi o sconti ai possessori di voucher WOM. Per fare ciò, creano un <b>\"WOM payment\"</b> che consente loro di scegliere quale tipo di sforzo premiare: i voucher WOM possono essere filtrati per scopo, luogo e tempo. Merci, servizi e sconti possono essere determinati liberamente dal Merchants."
     },
     "URBINO": {
       "TITLE": "WOM per Urbino",
@@ -381,6 +388,168 @@
       "TITLE": "WOM per Fano"
     }
   },
+  "PESARO2024": {
+    "CITIZENS": {
+      "TITLE_FOR": "TOOLKIT PER",
+      "TITLE": "CITTADINI",
+      "PAGE_DESCR": " WOM è la piattaforma adottata da Pesaro Capitale Italiana della Cultura 2024 per riconoscere il valore della tua partecipazione.<br /><br /> Scopri come funziona e che opportunità ti offre",
+      "DOWNLOAD_GUIDE": "<a href='/assets/images/pesaro2024/tourists/WOMPesaroTuristi-it.pdf' target='_blank' ><strong><u>Scarica la guida in versione in PDF.</u></strong></a>",
+      "SECTION_WOM_FOR_PESARO2024": "WOM per Pesaro 2024",
+      "SECTION_WOM_FOR_PESARO2024_DESCR": "Il Comune di Pesaro, nell’ambito di <strong>Pesaro 2024</strong> e per iniziativa della <strong>Casa della Tecnologie Emergenti</strong>, ha adottato la piattaforma digitale <strong>WOM</strong>, per il coinvolgimento attivo di cittadini e turisti. Chiunque partecipi alle iniziative culturali o visiti i luoghi di Pesaro 2024 può guadagnare punti, detti WOM, che attestano il <strong>valore sociale generato dalla partecipazione</strong>.<br/><br/>Ogni WOM corrisponde a un minuto di impegno. I WOM non hanno controvalore monetario, ma vengono riconosciuti come <strong>voucher</strong> da chi intende premiare chi li ha conseguiti. <strong>Commercianti, esercenti, enti pubblici</strong> e <strong>privati</strong> possono liberamente decidere di concedere sconti o agevolazioni su beni e servizi a chi è in possesso di WOM. L’entità dello sconto praticato e il numero di WOM necessari a ottenerlo sono a totale discrezione di ogni esercente, che può impostare le offerte e renderle immediatamente visibili sull’applicazione WOM Pocket. Presso i <strong>Musei Civici</strong> e <strong>Casa Rossini</strong> puoi anche avere riduzioni e gratuità sulla <strong>Card Pesaro Capitale</strong>.<br/><br/> L’uso diffuso dei WOM favorisce la <strong>coesione sociale</strong>, la <strong>partecipazione attiva</strong> in azioni di interesse collettivo, e la <strong>consapevolezza</strong> del valore delle proprie azioni.",
+      "SECTION_WOM_POCKET": "WOM Pocket (l'app per collezionare e usare WOM)",
+      "SECTION_WOM_POCKET_DESCR": "WOM Pocket è <strong>un'app gratuita</strong> disponibile per Android e iOS che puoi installare liberamente senza alcuna forma di registrazione. L'applicazione ti <strong>consente di collezionare e utilizzare WOM</strong> scansionando specifici QRcode associati a luoghi, eventi o azioni che contribuiscono alla creazione di valore sociale.<br/><br/> L'applicazione non tratta dati personali e <strong>garantisce l'anonimato degli utenti</strong>. La collezione dei tuoi WOM è conservata esclusivamente sul tuo dispositivo. <br/><br/> Scaricando WOM Pocket hai la possibilità di guadagnare WOM visitando i musei e i luoghi della cultura, partecipando agli eventi di Pesaro 2024 e in tanti altri modi che avrai occasione di scoprire. Puoi utilizzare i tuoi WOM per <strong>godere di sconti e agevolazioni</strong> presso i negozi aderenti e per acquistare a prezzo ridotto la Card Pesaro Capitale!<br/><br/> Usare WOM Pocket è semplice. Nei tutorial seguenti trovi tutte le istruzioni per l'installazione e l'uso dell'app.",
+      "SECTION_TUTORIAL1": "Tutorial 1: Installare e aprire l'app WOM Pocket",
+      "SECTION_TUTORIAL1_1_DESCR": "<strong>Installa l'app WOM Pocket</strong> disponibile su App Store e Play Store",
+      "SECTION_TUTORIAL1_2_DESCR": "<strong>Fai scorrere le schermate</strong> del tutorial",
+      "SECTION_TUTORIAL1_3_DESCR": "Quando ti verrà chiesto, <strong>consenti</strong> all'applicazione di accedere alla <strong>geolocalizzazione</strong> (necessaria a posizionare i tuoi WOM sulla mappa) e alla <strong>fotocamera</strong> (necessaria a guadagnare e utilizzare WOM scansionando QRcode)",
+      "SECTION_INTERFACCIA_WOM_POCKET": "L'interfaccia dell'app WOM Pocket",
+      "SECTION_INTERFACCIA_WOM_POCKET_DESCR": "L'app presenta 4 sezioni, navigabili dalla barra in basso",
+      "SECTION_INTERFACCIA_WOM_POCKET_1": "<strong>Home</strong>, dove trovi il numero di WOM a tua disposizione, la mappa dei tuoi WOM, l'elenco delle ultime transazioni. Questa sezione è inizialmente vuota, ma presenta il pulsante <strong>Scansiona</strong>, che ti permette di guadagnare e usare WOM, come descritto nei prossimi tutorial.",
+      "SECTION_INTERFACCIA_WOM_POCKET_2": "<strong>Offerte</strong>, dove trovi tutte le offerte attive nei paraggi, in ordine di distanza. In alto a destra trovi un collegamento alla mappa delle offerte.",
+      "SECTION_INTERFACCIA_WOM_POCKET_3": "<strong>Scambio</strong>, che ti permette di donare fino a <strong>60 WOM al giorno</strong> per esprimere la tua gratitudine a chi compie azioni che ritieni utili per la collettività",
+      "SECTION_INTERFACCIA_WOM_POCKET_4": "<strong>Impostazioni</strong>, che per ora puoi non usare.",
+      "SECTION_TUTORIAL2": "Tutorial 2: Ottenere i WOM di Pesaro 2024",
+      "SECTION_TUTORIAL2_DESCR_A": "Puoi ottenere WOM in tantissimi modi, dopo aver scaricato l'app:",
+      "SECTION_TUTORIAL2_A_1": "<strong>Visitando i luoghi di cultura</strong> di Pesaro 2024 - di fronte ai palazzi e ai monumenti di Pesaro sono affissi piccoli QRcode che valgono 15 WOM ",
+      "SECTION_TUTORIAL2_A_2": "<strong>Visitando i musei</strong> di Pesaro - all'interno dei musei sono esposti QRcode che valgono 60 WOM",
+      "SECTION_TUTORIAL2_A_3": "<strong>Partecipando agli eventi</strong> di Pesaro 2024 - a ogni evento è associato uno specifico QRcode che dà valore alla tua partecipazione",
+      "SECTION_TUTORIAL2_A_4": "<strong>Camminando</strong> - segui il Tutorial 5 per scoprire come usare WOM contapassi",
+      "SECTION_TUTORIAL2_A_5": "In molti altri modi che scoprirai via via…",
+      "SECTION_TUTORIAL2_DESCR_B": "In tutte le occasione in cui puoi ottenere WOM:",
+      "SECTION_TUTORIAL2_B_1": "<strong>Cerca</strong> un QRcode di Pesaro 2024 (come quello qui sotto)",
+      "SECTION_TUTORIAL2_B_2": "<strong>Apri l'app</strong> WOM Pocket",
+      "SECTION_TUTORIAL2_B_3": "<strong>Clicca</strong> sul pulsante \"Scansiona\"",
+      "SECTION_TUTORIAL2_B_4": "<strong>Inquadra</strong> il QRcode",
+      "SECTION_TUTORIAL2_B_5": "Vedrai comparire nella tua app <strong>i WOM che hai guadagnato</strong>",
+      "SECTION_TUTORIAL2_B_6": "<strong>Scansiona subito</strong> questo <strong>QRcode di invito e guadagna i tuoi primi 15 WOM!</strong>",
+      "SECTION_TUTORIAL3": "Tutorial 3: Utilizzare WOM",
+      "SECTION_TUTORIAL3_1": "<strong>Accedi</strong> all'app WOM Pocket",
+      "SECTION_TUTORIAL3_2": "<strong>Clicca su \"Offerte\"</strong> per vedere le offerte attive in tua prossimità. Se non ci sono offerte attive dove ti trovi, potrai visualizzare le offerte presenti in altre città ",
+      "SECTION_TUTORIAL3_3": "<strong>Clicca su \"Vedi mappa\"</strong> per accedere alla Mappa delle offerte presenti nel territorio",
+      "SECTION_TUTORIAL3_4": "<strong>Recati presso un negozio</strong> convenzionato (potrai riconoscerlo grazie allo speciale adesivo \"QUI SI ACCETTANO WOM\")",
+      "SECTION_TUTORIAL3_5": "<strong>Chiedi</strong> di poter utilizzare WOM per accedere all'offerta prevista. L'esercente ti mostrerà il QRcode e il PIN dell'offerta (come mostrato in figura)",
+      "SECTION_TUTORIAL3_6": "<strong>Apri</strong> l'app <strong>WOM Pocket</strong> e clicca su <strong>\"Scansiona\"</strong>",
+      "SECTION_TUTORIAL3_7": "<strong>Inquadra</strong> il QRcode, inserisci il PIN e conferma la transazione",
+      "SECTION_TUTORIAL3_8": "<strong>Mostra</strong> al negoziante lo schermo con la spunta verde di conferma",
+      "SECTION_TUTORIAL3_9": "Ora hai diritto allo sconto!",
+      "SECTION_TUTORIAL3_DESCR_IMG": "Fac-simile del QRcode che dovrai inquadrarecon l'app WOM Pocket per accedere all'offerta",
+      "SECTION_STICKER_DESCR_IMG": "Adesivo che troverai sulle vetrine dei negozi convenzionati",
+      "SECTION_TUTORIAL4": "Tutorial 4: Ottieni WOM camminando",
+      "SECTION_TUTORIAL4_DESCR": "Grazie all'app <strong>WOM Contapassi</strong> puoi guadagnare WOM camminando, perché l'esercizio fisico serve a mantenersi in forma e il benessere individuale è un valore per la collettività.",
+      "SECTION_TUTORIAL4_1": "<strong>Scarica</strong> l'app WOM Contapassi disponibile su App Store e Play Store",
+      "SECTION_TUTORIAL4_2": "<strong>Consenti</strong> all'app di <strong>accedere ai dati</strong> di Google Fit o di Salute in caso di iOS",
+      "SECTION_TUTORIAL4_3": "<strong>Inizierai a guadagnare WOM</strong> una volta superati i <strong>3000 passi</strong>",
+      "SECTION_TUTORIAL4_4": "<strong>Riscuoti</strong> i tuoi WOM dal giorno successivo",
+      "SECTION_TUTORIAL5": "Tutorial 5: Riscuoti WOM dal Contapassi",
+      "SECTION_TUTORIAL5_1": "<strong>Apri</strong> WOM Contapassi e <strong>clicca</strong> su \"Vedi tutte\"",
+      "SECTION_TUTORIAL5_2": "Si aprirà la schermata di storico, <strong>clicca</strong> sull'icona grigia e <strong>aspetta</strong> che diventi verde",
+      "SECTION_TUTORIAL5_3": "<strong>Clicca</strong> sull'icona verde per visualizzare il QRcode e il PIN per ottenere i tuoi WOM",
+      "SECTION_TUTORIAL5_4": "Clicca sul <strong>QRcode</strong>, verrai reindirizzato all'app WOM Pocket",
+      "SECTION_TUTORIAL5_5": "<strong>Inserisci</strong> il PIN associato al QRcode e guadagna i tuoi WOM",
+      "SECTION_FAQ": "FAQ: Risposte alle domande frequenti",
+      "SECTION_FAQ_1_D": "Devo creare un account per accedere a WOM Pocket?",
+      "SECTION_FAQ_1_R": "No, la piattaforma WOM e l'app WOM Pocket sono completamente anonime. Per questo i tuoi WOM sono collezionati solo sul tuo dispositivo. Se disinstalli l'app senza trasferirli li perdi.",
+      "SECTION_FAQ_2_D": "Posso spostare i miei WOM da un dispositivo all'altro?",
+      "SECTION_FAQ_2_R": "Si, puoi trasferire i tuoi WOM accedendo alle impostazioni dell'app WOM Pocket e dando inizio al processo di esportazione",
+      "SECTION_FAQ_3_D": "I WOM hanno una scadenza?",
+      "SECTION_FAQ_3_R": "No, i WOM rimangono sempre validi e rimangono conservati nel tuo WOM Pocket. Alcuni esercenti, tuttavia, potrebbero impostare offerte valide solo per WOM recenti",
+      "SECTION_FAQ_4_D": "Quanto valgono i WOM?",
+      "SECTION_FAQ_4_R": "Ogni WOM è il riconoscimento del valore generato dal tuo impegno di 1 minuto. Non ha un controvalore monetario, ma Pesaro Musei e tanti negozianti ed esercenti offrono sconti e agevolazioni a chi ha WOM in segno di riconoscenza.",
+      "SECTION_FAQ_5_D": "Posso usare WOM solo a Pesaro?",
+      "SECTION_FAQ_5_R": "No, puoi cercare altre città in cui ci sono esercenti convenzionati, o proporre tu stessa/o di utilizzare WOM nella tua città.",
+      "CONTACTS_DESCR": "Rimani aggiornato sul progetto e seguici su <strong>Instagram</strong> e <strong>Facebook!</strong>"
+    },
+    "PESARO2024": {
+      "TITLE": "PESARO 2024",
+      "TITLE_FOR": "WOM PER",
+      "SUBTITLE": "Il valore della tua partecipazione alla Capitale della Cultura",
+      "PAGE_DESCR": "Il Comune di Pesaro, per iniziativa della  <a target='_' href='https://ctesquare.it/'><strong><u>Casa della Tecnologie Emergenti</u></strong></a>, ha adottato la piattaforma WOM per riconoscere e premiare il valore della partecipazione attiva di cittadini e turisti alle iniziative culturali di <a target='_' href='https://pesaro2024.it/'><strong><u>Pesaro Capitale Italiana della Cultura 2024</u></strong></a>.",
+      "SECTION_HOW_WORKS": "Come Funziona?",
+      "SECTION_HOW_WORKS_DESCR": "<strong>Guadagna WOM partecipando a eventi</strong>, <strong>visitando luoghi culturali</strong>, <strong>facendo azioni socialmente utili</strong> o <strong>adottando comportamenti sostenibili</strong>. Ogni <strong>WOM</strong> rappresenta <strong>un minuto di impegno</strong>. I WOM non hanno controvalore monetario, ma presso i <strong>Musei Civici</strong> e <strong>Casa Rossini</strong> valgono riduzioni e gratuità sulla <a target='_' href='https://pesaro2024.it/card/'><u><strong>Card Pesaro Capitale</strong></u></a> e vengono riconosciuti come voucher da <strong>artigiani</strong> ed <strong>esercenti</strong> che intendono premiare con <strong>sconti</strong> o <strong>agevolazioni</strong> chi contribuisce alla creazione di valore sociale.</br></br>WOM Pocket è l'app <strong>gratuita</strong> per Android e iOS che permette di collezionare e usare WOM garantendo <strong>l'anonimato</strong> degli utenti. Consulta le guide complete per  <a href='https://wom.social/pesaro2024/turisti'><strong><u>turisti</u></strong></a> e  <a href='https://wom.social/pesaro2024/cittadini'><strong><u>cittadini</u></strong></a> e <a href='https://wom.social/pesaro2024/volontarx'><u><strong>volontari di Pesaro2024</strong></u></a>.",
+      "SECTION_HOW_TO_EARN_WOM": "Come Guadagnare WOM?",
+      "SECTION_HOW_TO_EARN_WOM_1_DESCR": "Nei luoghi e negli eventi di Pesaro 2024 sono <strong>esposti speciali QRcode</strong>, come quello di invito esposto qui sotto. <strong>Scansionali</strong> con WOM Pocket per guadagnare tanti WOM quanti sono i minuti necessari a seguire l'evento o a visitare il luogo. Il QRcode di invito vale 15 WOM, come riconoscimento del valore che stai creando nei minuti che dedichi a leggere questa pagina, a installare l'app e a sperimentarne il funzionamento. Ogni QRcode può essere scansionato una sola volta.",
+      "SECTION_HOW_TO_EARN_WOM_2_DESCR": " Consulta le guide per <a href='https://wom.social/pesaro2024/turisti'><u><strong>turisti</strong></u></a>, <a href='https://wom.social/pesaro2024/cittadini'><u><strong>cittadini</strong></u></a> e <a href='https://wom.social/pesaro2024/volontarx'><u><strong>volontari di Pesaro2024</strong></u></a> per scoprire i tanti modi di guadagnare WOM.",
+      "SECTION_VOLUNTEERS": "",
+      "SECTION_VOLUNTEERS_DESCR": "",
+      "SECTION_WHERE_TO_USE": "Dove puoi usare i tuoi WOM?",
+      "SECTION_WHERE_TO_USE_DESCR": "<strong>I WOM</strong> hanno un importante valore simbolico: <strong>rappresentano il tuo contributo a Pesaro 2024</strong>.<br/>Ma a Pesaro è anche possibile utilizzare i WOM per accedere agli <strong>sconti</strong> e alle <strong>agevolazioni</strong> che commercianti, artigiani ed esercenti offrono spontaneamente a chi ne possiede, in segno di apprezzamento per il contributo dato a Pesaro 2024 con la propria presenza e la propria partecipazione. Presso i Musei Civici e Casa Rossini puoi anche avere <strong>riduzioni</strong> e <strong>gratuità</strong> sulla <a target='_' href='https://pesaro2024.it/card/'><strong><u>Card Pesaro Capitale</u></strong></a>. L'elenco delle offerte viene presentato nell’app WOM Pocket in ordine inverso di distanza dal luogo in cui ci si trova. Puoi riconoscere negozi che praticano offerte vedendo l'etichetta della piattaforma WOM esposta in vetrina.<br/><br/>Se sei esercente/artigiano/negoziante, consulta la <a href='https://wom.social/pesaro2024/esercenti'><u><strong>guida</strong></u></a> e partecipa anche tu al progetto!",
+      "SECTION_ENDING_TEXT": "La cultura è un fatto collettivo, che si nutre della partecipazione di tutti. WOM riconosce e premia il tuo contributo alla Capitale Italiane della Cultura 2024."
+    },
+    "TOURISTS": {
+      "TITLE_FOR": "TOOLKIT PER",
+      "TITLE": "TURISTI",
+      "PAGE_DESCR": "WOM è la piattaforma adottata da Pesaro Capitale Italiana della Cultura 2024 per riconoscere il valore della tua partecipazione.<br /><br /> Scopri come funziona e che opportunità ti offre",
+      "DOWNLOAD_GUIDE": "<a href='/assets/images/pesaro2024/tourists/WOMPesaroTuristi-it.pdf' target='_blank' ><strong><u>Scarica la guida in versione in PDF.</strong></u></a>",
+      "SECTION_WOM_FOR_PESARO2024": "WOM per Pesaro 2024",
+      "SECTION_WOM_FOR_PESARO2024_DESCR": "Il Comune di Pesaro, nell'ambito di <strong>Pesaro 2024</strong> e per iniziativa della <strong>Casa della Tecnologie Emergenti</strong>, ha adottato la piattaforma digitale <strong>WOM</strong>, per il coinvolgimento attivo di cittadini e turisti. Chiunque partecipi alle iniziative culturali o visiti i luoghi di Pesaro 2024 può guadagnare punti, detti WOM, che attestano il <strong>valore sociale generato dalla partecipazione</strong>. <br/><br/>Ogni WOM corrisponde a un minuto di impegno. I WOM non hanno controvalore monetario, ma vengono riconosciuti come <strong>voucher</strong> da chi intende premiare chi li ha conseguiti. <strong>Commercianti</strong>, <strong>esercenti</strong>,<strong> enti pubblici</strong> e <strong>privati</strong> possono liberamente decidere di concedere sconti o agevolazioni su beni e servizi a chi è in possesso di WOM. L'entità dello sconto praticato e il numero di WOM necessari a ottenerlo sono a totale discrezione di ogni esercente, che può impostare le offerte e renderle immediatamente visibili sull'applicazione WOM Pocket.<br/><br/>Presso i <strong>Musei Civici</strong> e <strong>Casa Rossini</strong> puoi anche avere riduzioni e gratuità sulla <strong>Card Pesaro Capitale</strong>.<br/><br/>L'uso diffuso dei WOM favorisce la <strong>coesione sociale</strong>, la <strong>partecipazione attiva</strong> in azioni di interesse collettivo, e la <strong>consapevolezza</strong> del valore delle proprie azioni.",
+      "SECTION_WOM_POCKET": "WOM Pocket (l'app per collezionare e usare WOM)",
+      "SECTION_WOM_POCKET_DESCR": "WOM Pocket è <strong>un'app gratuita</strong> disponibile per Android e iOS che puoi installare liberamente senza alcuna forma di registrazione. L'applicazione ti <strong>consente di collezionare e utilizzare WOM</strong> scansionando specifici QRcode associati a luoghi, eventi o azioni che contribuiscono alla creazione di valore sociale.<br/><br/> L'applicazione non tratta dati personali e <strong>garantisce l'anonimato degli utenti</strong>. La collezione dei tuoi WOM è conservata esclusivamente sul tuo dispositivo. <br/><br/> Scaricando WOM Pocket hai la possibilità di guadagnare WOM visitando i musei e i luoghi della cultura e partecipando agli eventi di Pesaro 2024. Puoi utilizzare i tuoi WOM per <strong>godere di sconti e agevolazioni</strong> presso i negozi aderenti e per acquistare a prezzo ridotto la Card Pesaro Capitale!<br/><br/> Usare WOM Pocket è semplice. Nei tutorial seguenti trovi tutte le istruzioni per l'installazione e l'uso dell'app.",
+      "SECTION_TUTORIAL1": "Tutorial 1: Installare e aprire l'app WOM Pocket",
+      "SECTION_TUTORIAL1_1_DESCR": "<strong>Installa l'app WOM Pocket</strong> disponibile su App Store e Play Store",
+      "SECTION_TUTORIAL1_2_DESCR": "<strong>Fai scorrere le schermate</strong> del tutorial",
+      "SECTION_TUTORIAL1_3_DESCR": "Quando ti verrà chiesto, <strong>consenti</strong> all'applicazione di accedere alla <strong>geolocalizzazione</strong> (necessaria a posizionare i tuoi WOM sulla mappa) e alla <strong>fotocamera</strong> (necessaria a guadagnare e utilizzare WOM scansionando QRcode)",
+      "SECTION_INTERFACCIA_WOM_POCKET": "L'interfaccia dell'app WOM Pocket",
+      "SECTION_INTERFACCIA_WOM_POCKET_DESCR": "L'app presenta 4 sezioni, navigabili dalla barra in basso",
+      "SECTION_INTERFACCIA_WOM_POCKET_1": "<strong>Home</strong>, dove trovi il numero di WOM a tua disposizione, la mappa dei tuoi WOM, l'elenco delle ultime transazioni. Questa sezione è inizialmente vuota, ma presenta il pulsante <strong>Scansiona</strong>, che ti permette di guadagnare e usare WOM, come descritto nei prossimi tutorial.",
+      "SECTION_INTERFACCIA_WOM_POCKET_2": "<strong>Offerte</strong>, dove trovi tutte le offerte attive nei paraggi, in ordine di distanza. In alto a destra trovi un collegamento alla mappa delle offerte.",
+      "SECTION_INTERFACCIA_WOM_POCKET_3": "<strong>Scambio</strong>, che ti permette di donare fino a <strong>60 WOM al giorno</strong> per esprimere la tua gratitudine a chi compie azioni che ritieni utili per la collettività",
+      "SECTION_INTERFACCIA_WOM_POCKET_4": "<strong>Impostazioni</strong>, che per ora puoi non usare.",
+      "SECTION_TUTORIAL2": "Tutorial 2: Ottenere i WOM di Pesaro 2024",
+      "SECTION_TUTORIAL2_DESCR_A": "Puoi ottenere WOM in tantissimi modi, dopo aver scaricato l'app:",
+      "SECTION_TUTORIAL2_A_1": "<strong>Scansionando il QRcode di benvenuto</strong> - alberghi e infopoint di Pesaro ti danno il benvenuto con 15 WOM",
+      "SECTION_TUTORIAL2_A_2": "<strong>Visitando i luoghi di cultura</strong> di Pesaro 2024 - di fronte ai palazzi e ai monumenti di Pesaro sono affissi piccoli QRcode che valgono 15 WOM",
+      "SECTION_TUTORIAL2_A_3": "<strong>Visitando i musei</strong> di Pesaro - all'interno dei musei sono esposti QRcode che valgono 60 WOM",
+      "SECTION_TUTORIAL2_A_4": "<strong>Partecipando agli eventi</strong> di Pesaro 2024 - a ogni evento è associato uno specifico QRcode che dà valore alla tua partecipazione",
+      "SECTION_TUTORIAL2_A_5": "<strong>Camminando</strong> - segui il Tutorial 5 per scoprire come usare WOM contapassi",
+      "SECTION_TUTORIAL2_DESCR_B": "In tutte le occasione in cui puoi ottenere WOM:",
+      "SECTION_TUTORIAL2_B_1": "<strong>Cerca</strong> un QRcode di Pesaro 2024 (come quello qui sotto)",
+      "SECTION_TUTORIAL2_B_2": "<strong>Apri l'app</strong> WOM Pocket",
+      "SECTION_TUTORIAL2_B_3": "<strong>Clicca</strong> sul pulsante \"Scansiona\"",
+      "SECTION_TUTORIAL2_B_4": "<strong>Inquadra</strong> il QRcode ",
+      "SECTION_TUTORIAL2_B_5": "Vedrai comparire nella tua app <strong>i WOM che hai guadagnato</strong>",
+      "SECTION_TUTORIAL2_B_6": "<strong>Scansiona subito</strong> questo <strong>QRcode di invito e guadagna i tuoi primi 15 WOM!</strong>",
+      "SECTION_TUTORIAL3": "Tutorial 3: Utilizzare WOM",
+      "SECTION_TUTORIAL3_1": "<strong>Accedi</strong> all'app WOM Pocket",
+      "SECTION_TUTORIAL3_2": "<strong>Clicca su \"Offerte\"</strong> per vedere le offerte attive in tua prossimità. Se non ci sono offerte attive dove ti trovi, potrai visualizzare le offerte presenti in altre città ",
+      "SECTION_TUTORIAL3_3": "<strong>Clicca su \"Vedi mappa\"</strong> per accedere alla Mappa delle offerte presenti nel territorio",
+      "SECTION_TUTORIAL3_4": "<strong>Recati presso un negozio</strong> convenzionato (potrai riconoscerlo grazie allo speciale adesivo \"QUI SI ACCETTANO WOM\")",
+      "SECTION_TUTORIAL3_5": "<strong>Chiedi</strong> di poter utilizzare WOM per accedere all'offerta prevista. L'esercente ti mostrerà il QRcode e il PIN dell'offerta (come mostrato in figura)  ",
+      "SECTION_TUTORIAL3_6": "<strong>Apri</strong> l'app <strong>WOM Pocket</strong> e clicca su <strong>\"Scansiona\"</strong>",
+      "SECTION_TUTORIAL3_7": "<strong>Inquadra</strong> il QRcode, inserisci il PIN e conferma la transazione ",
+      "SECTION_TUTORIAL3_8": "<strong>Mostra</strong> al negoziante lo schermo con la spunta verde di conferma",
+      "SECTION_TUTORIAL3_9": "Ora hai diritto allo sconto!",
+      "SECTION_TUTORIAL3_DESCR_IMG": "Fac-simile del QRcode che dovrai inquadrarecon l'app WOM Pocket per accedere all'offerta",
+      "SECTION_STICKER_DESCR_IMG": "Adesivo che troverai sulle vetrine dei negozi convenzionati",
+      "SECTION_TUTORIAL4": "Tutorial 4: Ottieni WOM camminando",
+      "SECTION_TUTORIAL4_DESCR": "Grazie all'app <strong>WOM Contapassi</strong> puoi guadagnare WOM camminando, perché l'esercizio fisico serve a mantenersi in forma e il benessere individuale è un valore per la collettività.",
+      "SECTION_TUTORIAL4_1": "<strong>Scarica</strong> l'app WOM Contapassi disponibile su App Store e Play Store",
+      "SECTION_TUTORIAL4_2": "<strong>Consenti</strong> all'app di <strong>accedere ai dati</strong> di Google Fit o di Salute in caso di iOS",
+      "SECTION_TUTORIAL4_3": "<strong>Inizierai a guadagnare WOM</strong> una volta superati i <strong>3000 passi</strong>",
+      "SECTION_TUTORIAL4_4": "<strong>Riscuoti</strong> i tuoi WOM dal giorno successivo",
+      "SECTION_TUTORIAL5": "Tutorial 5: Riscuoti WOM dal Contapassi",
+      "SECTION_TUTORIAL5_1": "<strong>Apri</strong> WOM Contapassi e <strong>clicca</strong> su \"Vedi tutte\"",
+      "SECTION_TUTORIAL5_2": "Si aprirà la schermata di storico, <strong>clicca</strong> sull'icona grigia e <strong>aspetta</strong> che diventi verde",
+      "SECTION_TUTORIAL5_3": "<strong>Clicca</strong> sull'icona verde per visualizzare il QRcode e il PIN per ottenere i tuoi WOM",
+      "SECTION_TUTORIAL5_4": "Clicca sul <strong>QRcode</strong>, verrai reindirizzato all'app WOM Pocket",
+      "SECTION_TUTORIAL5_5": "<strong>Inserisci</strong> il PIN associato al QRcode e guadagna i tuoi WOM",
+      "SECTION_FAQ": "FAQ: Risposte alle domande frequenti",
+      "SECTION_FAQ_1_D": "Devo creare un account per accedere a WOM Pocket?",
+      "SECTION_FAQ_1_R": "No, la piattaforma WOM e l'app WOM Pocket sono completamente anonime. Per questo i tuoi WOM sono collezionati solo sul tuo dispositivo. Se disinstalli l'app senza trasferirli li perdi.",
+      "SECTION_FAQ_2_D": "Posso spostare i miei WOM da un dispositivo all'altro?",
+      "SECTION_FAQ_2_R": "Si, puoi trasferire i tuoi WOM accedendo alle impostazioni dell'app WOM Pocket e dando inizio al processo di esportazione",
+      "SECTION_FAQ_3_D": "I WOM hanno una scadenza?",
+      "SECTION_FAQ_3_R": "No, i WOM rimangono sempre validi e rimangono conservati nel tuo WOM Pocket. Alcuni esercenti, tuttavia, potrebbero impostare offerte valide solo per WOM recenti",
+      "SECTION_FAQ_4_D": "Quanto valgono i WOM?",
+      "SECTION_FAQ_4_R": "Ogni WOM è il riconoscimento del valore generato dal tuo impegno di 1 minuto. Non ha un controvalore monetario, ma Pesaro Musei e tanti negozianti ed esercenti offrono sconti e agevolazioni a chi ha WOM in segno di riconoscenza.",
+      "SECTION_FAQ_5_D": "Posso usare WOM solo a Pesaro?",
+      "SECTION_FAQ_5_R": "No, puoi cercare altre città in cui ci sono esercenti convenzionati, o proporre tu stessa/o di utilizzare WOM in altre città.",
+      "CONTACTS_DESCR": "Rimani aggiornato sul progetto e seguici su <strong>Instagram</strong> e <strong>Facebook!</strong>"
+    },
+    "VOLUNTEERS": {
+      "TITLE_FOR": "TOOLKIT PER",
+      "TITLE": "VOLONTARXPS24"
+    }
+  },
   "PROJECTS": {
     "RETE-DELLE-RETI": {
       "TITLE": "Rete delle Reti",
@@ -391,11 +560,11 @@
     "TITLE": "Volontari",
     "SECTION_A": {
       "TITLE": "Come funziona per gli utenti?",
-      "A": "Molte azioni e attività compiute da un individuo contribuiscono a un bene comune e hanno un valore sociale intrinseco. Compiendo queste azioni socialmente preziose, ogni utente guadagna WOM e diventa un Volontario.\nI Volontari possono utilizzare i voucher WOM per ottenere servizi o beni forniti dai Merchants.\nOgni Volontario può collezionare tutti i voucher guadagnati sull’app <b>“WOM Pocket”</b>."
+      "A": "Molte azioni e attività compiute da un individuo contribuiscono a un bene comune e hanno un valore sociale intrinseco. Compiendo queste azioni socialmente preziose, ogni utente guadagna WOM e diventa un Volontario.\nI Volontari possono utilizzare i voucher WOM per ottenere servizi o beni forniti dai Merchants.\nOgni Volontario può collezionare tutti i voucher guadagnati sull’app <b>\"WOM Pocket\"</b>."
     },
     "SECTION_B": {
       "TITLE": "Pocket",
-      "A": "I Volontari possono gestire i loro voucher WOM tramite un’app mobile <b>“WOM Pocket”</b>. Questa app consente agli utenti di <b>raccogliere i voucher WOM guadagnati</b>, conservarli (come se fossero in un “portafoglio” virtuale) e spendere i loro voucher.\n\nLa piattaforma WOM non ha alcun costo per i Volontari che possono scaricare gratuitamente l’app <b>Pocket</b> dagli <b>store Android e iOS</b>."
+      "A": "I Volontari possono gestire i loro voucher WOM tramite un’app mobile <b>\"WOM Pocket\"</b>. Questa app consente agli utenti di <b>raccogliere i voucher WOM guadagnati</b>, conservarli (come se fossero in un \"portafoglio\" virtuale) e spendere i loro voucher.\n\nLa piattaforma WOM non ha alcun costo per i Volontari che possono scaricare gratuitamente l’app <b>Pocket</b> dagli <b>store Android e iOS</b>."
     }
   },
   "MERCHANT": {
@@ -415,7 +584,7 @@
     },
     "SECTION_B": {
       "TITLE": "POS",
-      "A": "Lo strumento che i Merchants possono utilizzare per accettare il pagamento WOM è l’app <b>“WOM POS” (Point of Sale)</b> o un software di integrazione personalizzato. Questi componenti software consentono ai Merchants di creare nuove transazioni, applicando filtri ai voucher WOM raccolti.",
+      "A": "Lo strumento che i Merchants possono utilizzare per accettare il pagamento WOM è l’app <b>\"WOM POS\" (Point of Sale)</b> o un software di integrazione personalizzato. Questi componenti software consentono ai Merchants di creare nuove transazioni, applicando filtri ai voucher WOM raccolti.",
       "B": "La piattaforma WOM </b>non ha alcun costo per il Merchant che vuole utilizzarla in modo <b>anonimo</b>. I Merchant possono scaricare gratuitamente l’app <b>POS</b> dagli <b>store Android e iOS</b>. Non ci sono costi di transazione.\nSe i Merchant vogliono rendere <b>più visibili le loro offerte</b> e avere <b>rapporti periodici</b> sul valore sociale che hanno contribuito a generare, possono acquistare dei servizi a pagamento."
     }
   },
@@ -473,7 +642,7 @@
     "WEBSITE": {
       "TITLE": "‘WOM Website’ privacy policy",
       "CONTENT": [
-        "<p>La presente informativa privacy è resa in conformità al Regolamento (UE) 2016/679 (“GDPR”) e alla normativa vigente in materia di protezione dei dati personali e contiene tutte le informazioni sul trattamento e sulla gestione dei dati personali che vengono raccolti quando si utilizza il <strong>sito Web WOM</strong> (di seguito “il sito Web”) sul proprio dispositivo.</p>",
+        "<p>La presente informativa privacy è resa in conformità al Regolamento (UE) 2016/679 (\"GDPR\") e alla normativa vigente in materia di protezione dei dati personali e contiene tutte le informazioni sul trattamento e sulla gestione dei dati personali che vengono raccolti quando si utilizza il <strong>sito Web WOM</strong> (di seguito \"il sito Web\") sul proprio dispositivo.</p>",
         "<h2>1. Titolare del trattamento</h2>",
         "<p>Il titolare del trattamento dei dati personali, cioè il soggetto che assume le decisioni in merito alle modalità e alle finalità del trattamento, è Digit s.r.l., con sede legale in Corso Giuseppe Garibaldi&nbsp;66, 61029, Urbino&nbsp;(PU), nella persona del suo legale rappresentante.</p>",
         "<h2>2. Dati oggetto del trattamento</h2>",
@@ -505,7 +674,7 @@
     "POCKET": {
       "TITLE": "‘WOM Pocket’ privacy policy",
       "CONTENT": [
-        "<p>La presente informativa privacy è resa in conformità al Regolamento (UE) 2016/679 (“GDPR”) e alla normativa vigente in materia di protezione dei dati personali e contiene tutte le informazioni sul trattamento e sulla gestione dei dati personali che vengono raccolti quando si utilizza l’<strong>applicazione WOM&nbsp;Pocket</strong> (di seguito “l’applicazione”) sul proprio dispositivo.</p>",
+        "<p>La presente informativa privacy è resa in conformità al Regolamento (UE) 2016/679 (\"GDPR\") e alla normativa vigente in materia di protezione dei dati personali e contiene tutte le informazioni sul trattamento e sulla gestione dei dati personali che vengono raccolti quando si utilizza l’<strong>applicazione WOM&nbsp;Pocket</strong> (di seguito \"l’applicazione\") sul proprio dispositivo.</p>",
         "<p>L’app permette agli utenti di riscattare, memorizzare ed utilizzare i propri WOM.</p>",
         "<p>Ogni WOM è il riconoscimento di un minuto di impegno dedicato ad azioni che contribuiscono alla creazione di valore sociale (adottare comportamenti sostenibili, partecipare a eventi culturali, studiare con impegno, fare esercizio fisico per mantenersi in salute, partecipare attivamente alla salvaguardia di beni pubblici, fare volontariato, ...). Ogni WOM ha tre attributi: la categoria di finalità sociale per cui è stato rilasciato, il luogo e il momento in cui è stato riscattato. I WOM non hanno controvalore monetario, ma, in\nvirtù del valore sociale delle azioni compiute per guadagnarli, terze parti possono spontaneamente decidere di offrire sconti e agevolazioni a chi ne possiede. Al momento del conferimento i WOM non costituiscono promessa di monetizzazione.</p>",
         "<h2>1. Titolare del trattamento</h2>",
@@ -537,7 +706,7 @@
     "POS": {
       "TITLE": "‘WOM Point of Service’ privacy policy",
       "CONTENT": [
-        "<p>La presente informativa privacy è resa in conformità al Regolamento (UE) 2016/679 (“GDPR”) e alla normativa vigente in materia di protezione dei dati personali e contiene tutte le informazioni sul trattamento e sulla gestione dei dati personali che vengono raccolti quando si utilizza l’<strong>applicazione WOM&nbsp;Point of Service</strong> (o anche “WOM&nbsp;POS”, di seguito “l’applicazione”) sul proprio dispositivo.</p>",
+        "<p>La presente informativa privacy è resa in conformità al Regolamento (UE) 2016/679 (\"GDPR\") e alla normativa vigente in materia di protezione dei dati personali e contiene tutte le informazioni sul trattamento e sulla gestione dei dati personali che vengono raccolti quando si utilizza l’<strong>applicazione WOM&nbsp;Point of Service</strong> (o anche \"WOM&nbsp;POS\", di seguito \"l’applicazione\") sul proprio dispositivo.</p>",
         "<p>L’app permette agli utenti del servizio WOM di accedere al proprio profilo da Merchant e di gestirlo, eventualmente pubblicando e modificando offerte.</p>",
         "<h2>1. Titolare del trattamento</h2>",
         "<p>Il titolare del trattamento dei dati personali, cioè il soggetto che assume le decisioni in merito alle modalità e alle finalità del trattamento, è Digit s.r.l., con sede legale in Corso Giuseppe Garibaldi&nbsp;66, 61029, Urbino&nbsp;(PU), nella persona del suo legale rappresentante.</p>",
@@ -577,7 +746,7 @@
     "INSTRUMENT": {
       "TITLE": "‘WOM Instrument’ privacy policy",
       "CONTENT": [
-        "<p>La presente informativa privacy è resa in conformità al Regolamento (UE) 2016/679 (“GDPR”) e alla normativa vigente in materia di protezione dei dati personali e contiene tutte le informazioni sul trattamento e sulla gestione dei dati personali che vengono raccolti quando si utilizza l’<strong>applicazione WOM&nbsp;Instrument</strong> (o anche “WOM&nbsp;Instrument Web”, di seguito “l’applicazione”) sul proprio dispositivo.</p>",
+        "<p>La presente informativa privacy è resa in conformità al Regolamento (UE) 2016/679 (\"GDPR\") e alla normativa vigente in materia di protezione dei dati personali e contiene tutte le informazioni sul trattamento e sulla gestione dei dati personali che vengono raccolti quando si utilizza l’<strong>applicazione WOM&nbsp;Instrument</strong> (o anche \"WOM&nbsp;Instrument Web\", di seguito \"l’applicazione\") sul proprio dispositivo.</p>",
         "<p>L’app permette agli utenti del servizio WOM di accedere al proprio profilo di gestore e decidere come verranno rilasciati i WOM da parte dell'instrument WOM ad esso associato.</p>",
         "<h2>1. Titolare del trattamento</h2>",
         "<p>Il titolare del trattamento dei dati personali, cioè il soggetto che assume le decisioni in merito alle modalità e alle finalità del trattamento, è Digit s.r.l., con sede legale in Corso Giuseppe Garibaldi&nbsp;66, 61029, Urbino&nbsp;(PU), nella persona del suo legale rappresentante.</p>",
@@ -617,11 +786,11 @@
     "STEPCOUNTER": {
       "TITLE": "Informativa sulla privacy ‘WOM Contapassi’",
       "CONTENT": [
-        "<p>La presente informativa privacy è resa in conformità al Regolamento (UE) 2016/679 (“GDPR”) e alla normativa vigente in materia di protezione dei dati personali e contiene tutte le informazioni sul trattamento e sulla gestione dei dati personali che vengono raccolti quando si installa l’applicazione <strong>WOM Contapassi</strong> (di seguito “applicazione”) sul proprio dispositivo mobile.</p>",
+        "<p>La presente informativa privacy è resa in conformità al Regolamento (UE) 2016/679 (\"GDPR\") e alla normativa vigente in materia di protezione dei dati personali e contiene tutte le informazioni sul trattamento e sulla gestione dei dati personali che vengono raccolti quando si installa l’applicazione <strong>WOM Contapassi</strong> (di seguito \"applicazione\") sul proprio dispositivo mobile.</p>",
         "<p>L’app WOM Contapassi permette di convertire l&#8217;impegno per la propria salute fisica in voucher anonimi, tramite la piattaforma WOM.</p>",
         "<h2>1. Titolare del trattamento</h2>",
         "<p>Il titolare del trattamento dei dati personali, cioè il soggetto che assume le decisioni in merito alle modalità e alle finalità del trattamento, è Digit s.r.l., con sede legale in Corso Giuseppe Garibaldi&nbsp;66, 61029, Urbino&nbsp;(PU), nella persona del suo legale rappresentante.</p>",
-        "<p>Digit s.r.l. è uno <em>spin-off</em> dell’Università degli Studi di Urbino “Carlo Bo”.</p>",
+        "<p>Digit s.r.l. è uno <em>spin-off</em> dell’Università degli Studi di Urbino \"Carlo Bo\".</p>",
         "<h2>2. Dati oggetto del trattamento</h2>",
         "<p>L’app WOM Contapassi raccoglie e tratta localmente i dati relativi alle attività di fitness dell’utente, così come sono esposte dalla piattaforma su cui l&#8217;applicazione è installata (Google Fitness su Android, Apple Healthkit su iOS).</p>",
         "<p>Non vi è una fase di registrazione e dunque non sono raccolte o altrimenti trattate informazioni personali dell’utente di tipo anagrafico o di contatto.</p>",
@@ -692,8 +861,8 @@
     "LIBRARIES": {
       "TITLE": "Biblioteche",
       "MAIN_CONTENT": "La piattaforma WOM premia le azioni che hanno un valore sociale intrinseco, passando attraverso l'arricchimento del volontari, il loro accrescimento culturale e la loro formazione. L’accesso ai libri e alla lettura è strumentale in questo e viene spesso garantito da biblioteche e librerie, che stimolano individualmente i cittadini e possono coinvolgerli in iniziative di gruppo, eventualmente coinvolgendo anche le scuole. La piattaforma WOM riconosce il valore della lettura, come veicolo per la crescita socio-culturale dell’individuo e della collettività.",
-      "SECOND_TITLE": "Biblioteche nella “città che legge” Fano",
-      "SECOND_CONTENT": "Nell’ambito del progetto “ReadSharing: la lettura condivisa”, finanziato dal bando “Città che legge 2020”, sono state lanciate una serie di attività per il coinvolgimento di ragazzi e ragazze delle scuole superiori, stimolando il loro avvicinamento alla lettura e rendendola un’esperienza di scambio e di gratificazione personale.<br/>La <a href='https://sistemabibliotecariofano.it'>Biblioteca Federiciana e la Mediateca Montanari di Fano</a> contribuiscono alla piattaforma WOM valorizzando le attività di lettura, la partecipazione a gruppi di lettura o ad eventi culturali, la pubblicazione di contenuti digitali e la partecipazione alle redazioni attive previste dal progetto e attivate tramite la scuole superiori di Fano."
+      "SECOND_TITLE": "Biblioteche nella \"città che legge\" Fano",
+      "SECOND_CONTENT": "Nell’ambito del progetto \"ReadSharing: la lettura condivisa\", finanziato dal bando \"Città che legge 2020\", sono state lanciate una serie di attività per il coinvolgimento di ragazzi e ragazze delle scuole superiori, stimolando il loro avvicinamento alla lettura e rendendola un’esperienza di scambio e di gratificazione personale.<br/>La <a href='https://sistemabibliotecariofano.it'>Biblioteca Federiciana e la Mediateca Montanari di Fano</a> contribuiscono alla piattaforma WOM valorizzando le attività di lettura, la partecipazione a gruppi di lettura o ad eventi culturali, la pubblicazione di contenuti digitali e la partecipazione alle redazioni attive previste dal progetto e attivate tramite la scuole superiori di Fano."
     },
     "UNIVERSITIES": {
       "TITLE": "Università",

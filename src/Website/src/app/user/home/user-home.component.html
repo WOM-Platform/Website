@@ -1,20 +1,37 @@
 <div class="container">
-  <div class="mat-card">
-    <h2>{{ "USER.HOME.WELCOME" | translate }}, {{ username }}</h2>
-    <mat-divider></mat-divider>
-    <div class="flex flex-wrap justify-center mt-6">
-      <div class="header-box-link text-center basis-full md:basis-1/2">
-        <a routerLink="/user/merchant">
-          <button
-            class="rounded-full border-4 border-sky-500 text-sky-500 px-12 py-4 text-2xl hover:border-sky-700 hover:text-sky-700"
-          >
-            {{ "USER.HOME.MERCHANT_TITLE" | translate }}
-          </button>
-          <!-- <div class="header-box-title">
-            <h1 [innerHTML]="'USER.HOME.MERCHANT_TITLE' | translate"></h1>
-          </div> -->
-        </a>
-      </div>
+    <div class="flex justify-between my-6 ">
+        <h1 *ngIf="role.has('Admin');">{{ "USER.HOME.DASHBOARD_ADMIN" | translate }}</h1>
+        <div class="flex justify-end items-center gap-2 ">
+            <app-avatar [startingLetter]="username.charAt(0)"></app-avatar>
+            <h3>{{ username }}</h3>
+        </div>
     </div>
-  </div>
+    <mat-divider></mat-divider>
+    <!-- Admin dashboard-->
+    <!--<div *ngIf="userData && userData.admin && userData.admin.length > 0">-->
+    <!-- Check if User is an admin -->
+    <ng-template [ngIf]="userData && role">
+        <div *ngIf=" role.has('Admin'); else elseBlock">
+            <app-user-admin [user]="userData"/>
+        </div>
+        <ng-template #elseBlock>
+            <div>
+                <app-user-instrument/>
+            </div>
+            <!-- Merchant dashboard-->
+            <div *ngIf="userData &&  userData.merchants && userData.merchants.length > 0">
+                <app-user-merchant/>
+            </div>
+        </ng-template>
+
+    </ng-template>
+
+
+    <ng-template [ngIf]="userData">
+
+    </ng-template>
+    <!-- Instrument dashboard-->
+    <!--<div *ngIf="userData && userData.sources && userData.sources.length > 0">-->
+
+
 </div>

@@ -1,4 +1,4 @@
-mat-panel-title{
+mat-panel-title {
     font-weight: bold;
 }
 
@@ -7,29 +7,23 @@ p {
 }
 
 .merchant-title {
-    @apply uppercase font-bold text-center justify-self-center;
+    @apply uppercase font-bold text-left;
 }
+
 .pos-card {
     margin-top: 1em;
 }
 
-.welcome-greetings {
-    margin: 20px 0;
+.btn-stats {
+    @apply bg-[#B7CDFF] text-white p-2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
 }
 
-.btn-stats {
-    display: flex;
-    color: #fff;
-    justify-content: center;
-    border-radius: 20px;
-    padding: 9px 27px;
-    background-image: linear-gradient(to right, #3CA55C 0%, #B5AC49 100%);
-    box-shadow: 0 4px 12px -2px gray;
-    text-transform: uppercase;
-}     
-
 .btn-stats:hover {
-  background-position: right center; /* change the direction of the change here */
-  color: #fff;
-  text-decoration: none;
+    background-position: right center;
+    color: #3498DB;
+    text-decoration: none;
 }

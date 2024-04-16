@@ -1,0 +1,35 @@
+.result-element {
+    @apply cursor-pointer
+}
+
+.result-element:hover {
+    @apply bg-gray-200
+}
+
+.btn-default {
+    @apply border-2 border-black px-4 py-2 rounded-full flex items-center gap-1 bg-white cursor-pointer;
+}
+
+.btn-default:hover {
+    @apply bg-gray-300;
+}
+
+.add-access-container {
+    @apply flex flex-col gap-4 p-6 border-2 border-black rounded-lg;
+}
+
+.access-list {
+    @apply py-2 border-2 border-black cursor-pointer overflow-y-scroll max-h-[200px];
+}
+
+.access-element {
+    @apply px-2 ;
+
+    &:hover {
+        @apply bg-[#e5e5e5]
+    }
+}
+
+.confirm-btn {
+    @apply border-2 border-black px-4 py-2;
+}

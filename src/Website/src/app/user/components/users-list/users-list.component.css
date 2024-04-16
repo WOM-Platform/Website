@@ -1,0 +1,11 @@
+.tb-header {
+    @apply font-semibold  capitalize border-b-4
+
+}
+
+.tb-action-cell {
+    width: 160px;
+    height: inherit;
+    display: flex;
+    align-items: center;
+}

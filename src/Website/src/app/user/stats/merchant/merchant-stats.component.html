@@ -1,95 +1,47 @@
-<div>
-  <div class="flex justify-center">
-    <ngx-charts-linear-gauge
-      [view]="viewAverage"
-      [scheme]="colorsTotComparison"
-      [value]="tot"
-      [previousValue]="averageValue"
-      [units]="units"
-    >
-    </ngx-charts-linear-gauge>
-  </div>
-  <!-- <ngx-charts-bar-vertical
-    [view]="viewTotComparison"
-    [scheme]="colorsTotComparison"
-    [results]="totComparison"
-    [gradient]="gradient"
-    [xAxis]="showXAxis"
-    [yAxis]="showYAxis"
-    [legend]="showLegend"
-    [showXAxisLabel]="showXAxisLabel" <ngx-charts-bar-vertical
-    [view]="viewTotComparison"
-    [scheme]="colorsTotComparison"
-    [results]="totComparison"
-    [gradient]="gradient"
-    [xAxis]="showXAxis"
-    [yAxis]="showYAxis"
-    [legend]="showLegend"
-    [showXAxisLabel]="showXAxisLabel"
-    [showYAxisLabel]="showYAxisLabel"
-    [xAxisLabel]="xAxisLabel"
-    [yAxisLabel]="yAxisLabel"
-    (select)="onSelect($event)"
-  >
-  </ngx-charts-bar-vertical>
-    [showYAxisLabel]="showYAxisLabel"
-    [xAxisLabel]="xAxisLabel"
-    [yAxisLabel]="yAxisLabel"
-    (select)="onSelect($event)"
-  >
-  </ngx-charts-bar-vertical> -->
+<div class="container">
+    <h1 class="text-center">Statistiche <span class="text-[#477DFD]">{{ selectedMerchant.name }}</span></h1>
+    <div class="flex justify-around">
 
-  <div class="flex justify-center flex-col items-center margin-t-section">
-    <ng-container *ngFor="let merchant of merchants">
-      <h2 class="text-center">
-        <span class="font-italic text-uppercase"
-          >{{ merchant.name }}: {{ " " }}</span
-        >Le Offerte attive
-      </h2>
-      <div>
-        <ngx-charts-bar-horizontal
-          [view]="view"
-          [scheme]="colorsWOMConsumati"
-          [results]="single"
-          [gradient]="gradient"
-          [xAxis]="showXAxis"
-          [yAxis]="showYAxis"
-          [legend]="showLegend"
-          [showXAxisLabel]="showXAxisLabel"
-          [showYAxisLabel]="showYAxisLabel"
-          [xAxisLabel]="xAxisLabel"
-          [yAxisLabel]="yAxisLabel"
-          (select)="onSelect($event)"
-        >
-        </ngx-charts-bar-horizontal>
-      </div>
-    </ng-container>
+        <div class="flex flex-col justify-center items-center mt-6">
+            <h2>Totale WOM Consumati</h2>
+            <div *ngIf="totalAmount">
+                <app-animated-number [finalNumber]="totalAmount" [duration]="1000"/>
+            </div>
+        </div>
 
-    <!-- <ng-container *ngFor="let merchant of merchants">
-      <div style="display: block">
-        <h2>{{ merchant.name }}</h2>
-        <ng-container *ngFor="let pos of merchant.pos">
-          <div class="chart-container">
-            <ngx-charts-advanced-pie-chart
-              [results]="single"
-              [label]="'WOM utilizzati per' + pos.name"
-              [animations]="animate"
-              [gradient]="gradient"
-              [tooltipDisabled]="tooltipDisabled"
-              (select)="onSelect($event)"
-              (activate)="onActivate($event)"
-              (deactivate)="onDeactivate($event)"
-            >
-            </ngx-charts-advanced-pie-chart>
-          </div>
-        </ng-container>
-      </div>
-    </ng-container> -->
-  </div>
-  <div class="margin-t-section">
-    <div class="map margin-t-section">
-      <h2 class="text-center">Mappa Transazioni</h2>
-      <app-map></app-map>
     </div>
-  </div>
+    <div class="flex flex-wrap justify-center gap-4">
+        <ng-container *ngFor="let pos of selectedMerchant.pos">
+
+            <div class="border-2 rounded-sm border-black py-2 px-4">
+                <div class="flex justify-between"><h2>{{ pos.name }}</h2>
+                    <p>{{ posScore }}</p></div>
+                <div>Offerte attive</div>
+                <ul>
+                    <ng-container *ngFor="let offer of offers">
+                        <li><em>{{ offer.offerName }}</em> | {{ offer.amount }}</li>
+                    </ng-container>
+                </ul>
+            </div>
+
+            <ng-container *ngIf="offers && offers.length > 1">
+                <h2>La migliore offerta è: {{ bestOffer.offerName }}</h2>
+            </ng-container>
+        </ng-container>
+    </div>
+
+
+    <!--
+        <h2>Wom divisi per AIM</h2>
+        <ngx-charts-pie-chart
+                [view]="view"
+                [scheme]="colorScheme"
+                [results]="chartCreatedAmountByAim"
+                [legend]="true"
+                [labels]="true">
+        </ngx-charts-pie-chart>
+        <h2>WOM divisi per posizione</h2>
+    -->
+
+
 </div>

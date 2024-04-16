@@ -7,6 +7,7 @@ export const environment = {
   mock: false,
   baseUrl: 'https://dev.wom.social/api/',
   baseBillingUrl: 'https://localhost:7284/billing',
+  baseUrlStats: 'http://localhost:5024/api/',
   v1: 'v1/',
   v2: 'v2/',
   i18n: '1.1.0',

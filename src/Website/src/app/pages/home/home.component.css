@@ -30,11 +30,13 @@
 }
 
 .image-overlay {
-  width: 23%;
+  display: flex;
+  gap: 10px;
+  width: 30%;
   min-width: 125px;
   position: absolute;
-  left: 7%;
-  top: 55%;
+  left: 20px;
+  bottom: 20px;
 }
 
 .header-box-title {
@@ -50,7 +52,6 @@
   background-color: #444558;
   color: white;
 }
-
 
 .header-box-title h1 {
   @apply px-4 py-2;

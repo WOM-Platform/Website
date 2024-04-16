@@ -2,7 +2,7 @@
   background-color: #444558;
 }
 button.mat-menu-item {
-  outline:none;
+  outline: none;
 }
 
 .example-spacer {
@@ -23,7 +23,8 @@ img {
 }
 
 .nav-button {
-  color: white;
+  color: white !important;
+  @apply font-light;
 }
 
 .nav-icon-button {
@@ -45,32 +46,29 @@ img {
   height: 80%;
 }
 
+/* ------------------------------------------------------------- */
+.toolbar-item-spacer {
+  flex: 1 1 auto;
+}
 
-
-/* ------------------------------------------------------------- */ 
-.toolbar-item-spacer { 
-  flex: 1 1 auto; 
-} 
- 
-.app-container { 
-  position: absolute; 
-  right: 0; 
-  height: 90%; 
-  margin: 0;  
-}   
-.app-sidenav { 
-  width: 230px; 
+.app-container {
+  position: absolute;
+  right: 0;
+  height: 90%;
+  margin: 0;
+}
+.app-sidenav {
+  width: 230px;
   border: 1px solid black;
   border-right: 0px;
   border-top: 0px;
-} 
-.app-sidenav-content { 
-  display: flex; 
-  height: 100%; 
-  align-items: center; 
-  justify-content: center; 
-} 
-
+}
+.app-sidenav-content {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+}
 
 .sidenav-container {
   height: 100%;
@@ -90,7 +88,6 @@ img {
   z-index: 1;
 }
 
-
 .menu-pc {
   display: none;
 }
@@ -106,7 +103,7 @@ mat-toolbar {
   background-color: #444558;
 }
 button.mat-menu-item {
-  outline:none;
+  outline: none;
 }
 
 .example-spacer {
@@ -142,8 +139,8 @@ img {
   height: 80%;
 }
 
-.item-mob{
-  @apply flex flex-row items-center bg-slate-500
+.item-mob {
+  @apply flex flex-row items-center bg-slate-500;
 }
 
 button.selected:active {
@@ -151,10 +148,9 @@ button.selected:active {
   color: white;
 }
 
-.mat-list-item{
-  @apply bg-red-400
+.mat-list-item {
+  @apply bg-red-400;
 }
-
 
 /* RESPONSIVE */
 @media screen and (max-width: 768px) {
@@ -163,7 +159,7 @@ button.selected:active {
   }
 
   .sidenav {
-    width: 300px
+    width: 300px;
   }
 
   .mat-expansion-panel-header .mat-content {
@@ -176,15 +172,15 @@ button.selected:active {
   }
 }
 
-@media(min-width: 767px) {
+@media (min-width: 767px) {
   .sidenav {
-    display: none
+    display: none;
   }
   .menu-pc {
     @apply flex items-center text-white;
   }
 
   .menu-pc button {
-    @apply font-semibold
+    @apply font-semibold;
   }
 }

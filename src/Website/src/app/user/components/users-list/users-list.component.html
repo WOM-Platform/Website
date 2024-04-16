@@ -1,0 +1,40 @@
+<div class="mt-6">
+    <ng-container *ngIf="usersList && usersList.length; else noDataTemplate">
+
+        <table class="mt-6 w-full shadow-lg bg-white rounded-lg overflow-hidden" mat-table [dataSource]="usersList">
+            <ng-container *ngFor="let column of usersTableColumns" [matColumnDef]="column">
+                <th class="p-3 text-left text-gray-700 bg-gray-100" mat-header-cell
+                    *matHeaderCellDef>{{ column | titlecase }}
+                </th>
+                <td class="p-3 text-gray-900" mat-cell *matCellDef="let user">{{ user[column] }}</td>
+            </ng-container>
+
+            <!-- Edit column -->
+            <ng-container matColumnDef="extraColumn">
+                <th class="p-3 bg-gray-100" mat-header-cell *matHeaderCellDef>Actions</th>
+                <td class="p-3 text-center space-x-2" mat-cell *matCellDef="let user">
+                    <button mat-icon-button (click)="onViewUser(user)">
+                        <mat-icon>visibility</mat-icon>
+                    </button>
+                    <button mat-icon-button color="primary" (click)="onEditUser(user)">
+                        <mat-icon>edit</mat-icon>
+                    </button>
+                    <button mat-icon-button color="warn" (click)="onDeleteUser(user)">
+                        <mat-icon>delete</mat-icon>
+                    </button>
+                </td>
+            </ng-container>
+
+
+            <tr mat-header-row *matHeaderRowDef="usersTableColumns.concat('extraColumn')"></tr>
+            <tr mat-row *matRowDef="let row; columns: usersTableColumns.concat('extraColumn')"
+                class="hover:bg-gray-200"></tr>
+        </table>
+    </ng-container>
+
+    <ng-template #noDataTemplate>
+        <div class="text-center py-10">
+            <p class="text-gray-500">Nessun risultato</p>
+        </div>
+    </ng-template>
+</div>

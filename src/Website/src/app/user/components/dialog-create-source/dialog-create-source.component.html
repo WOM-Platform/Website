@@ -1,0 +1,45 @@
+<div class="mx-10 my-4">
+    <h2 class="text-center font-semibold mt-4">Nuovo Instrument</h2>
+
+    <form class="flex flex-col gap-4 mt-6" [formGroup]="newSource" (ngSubmit)="onSubmit()">
+        <div class="flex flex-row justify-start gap-6 items-center">
+            <label class="w-20">Nome:</label>
+
+            <input type="text" formControlName="name" class="input-create">
+            <div class="text-red-600" *ngIf="newSource.get('name').invalid && newSource.get('name').touched">
+                Inserire il nome
+
+            </div>
+        </div>
+
+        <div class="flex flex-row justify-start gap-6 items-center">
+            <label class="w-20">URL:</label>
+            <input type="text" formControlName="url" class="input-create" placeholder="https://example.com">
+            <div class="text-red-600" *ngIf="newSource.get('url').invalid && newSource.get('url').touched">
+                Inserire l'url
+            </div>
+
+        </div>
+    </form>
+    <div *ngIf="newSource.get('access').value.length > 0">
+        <p class="font-semibold mb-0 my-6">Gestori da Aggiungere:</p>
+        <ul>
+            <li *ngFor="let toAdd of newSource.get('access').value">
+                <span class="font-semibold">Nome: </span>{{ toAdd["name"] }} {{ toAdd["surname"] }} <span
+                    class="font-semibold">Email: </span> {{ toAdd["email"] }}
+            </li>
+        </ul>
+    </div>
+    <div *ngIf="showAddAccessButton" class="mt-11">
+        <app-data-access (accessToAdd)="handleAccessList($event)"></app-data-access>
+    </div>
+    <div class="flex justify-end gap-2 mt-11">
+        <button (click)="onNoClick()" class="btn-cancel">Annulla</button>
+        <button type="submit" [disabled]="newSource.invalid" (click)="onSubmit()"
+                class="text-gray-400 px-4 py-2 "
+                [ngClass]="{ 'btn-submit': !newSource.invalid }"
+        >
+            Crea
+        </button>
+    </div>
+</div>

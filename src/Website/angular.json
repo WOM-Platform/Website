@@ -109,20 +109,20 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "src:build"
+            "buildTarget": "src:build"
           },
           "configurations": {
             "development-local": {
-              "browserTarget": "src:build:development-local"
+              "buildTarget": "src:build:development-local"
             },
             "development": {
-              "browserTarget": "src:build:development"
+              "buildTarget": "src:build:development"
             },
             "production": {
-              "browserTarget": "src:build:production"
+              "buildTarget": "src:build:production"
             },
             "mock": {
-              "browserTarget": "src:build:mock"
+              "buildTarget": "src:build:mock"
             }
           },
           "defaultConfiguration": "development"
@@ -130,7 +130,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "src:build"
+            "buildTarget": "src:build"
           }
         },
         "test": {
