@@ -176,6 +176,7 @@
                     <button mat-button class="nav-button" (click)="navigate('contacts')">
                         <span>{{ "NAV.CONTACTS" | translate }}</span>
                     </button>
+<<<<<<< HEAD
                     <!--          <button mat-button class="nav-button" (click)="navigate('user/home')">
                                   <span>{{ "NAV.PROFILE" | translate }}</span>
                               </button>-->
@@ -188,6 +189,22 @@
                     >
                         <span>{{ "NAV.SIGN_OUT" | translate }}</span>
                     </button>
+=======
+                    <!--
+                    <button mat-button class="nav-button" (click)="navigate('user/home')">
+                      <span>{{ "NAV.PROFILE" | translate }}</span>
+                    </button>
+
+                    <button
+                      mat-button
+                      class="nav-button"
+                      *ngIf="isLogged"
+                      (click)="logout()"
+                    >
+                      <span>{{ "NAV.SIGN_OUT" | translate }}</span>
+                    </button>
+                    -->
+>>>>>>> origin/dev
                 </div>
                 <mat-divider
                         class="divider nav-button menu-pc"

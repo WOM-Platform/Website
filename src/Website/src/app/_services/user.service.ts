@@ -207,5 +207,12 @@ export class UserService {
             return res
         }))
     }
+
+    me(): Observable<any> {
+        return this.http.get<any>(this.localUrlV1 + 'me').pipe(map(result => {
+            console.log("Dati ", result)
+            return result
+        }))
+    }
 }
 

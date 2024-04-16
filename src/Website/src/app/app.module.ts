@@ -75,6 +75,11 @@ import {ResetPasswordComponent} from "./authentication/reset-password/reset-pass
 import {TokenInterceptorService} from "./_helpers/httpInterceptor";
 import {UserFormComponent} from "./_forms/user/forms-user.directive";
 import {VolunteerComponent} from "./pages/volunteers/volunteer/volunteer.component";
+<<<<<<< HEAD
+=======
+import {DialogConfirmCancelComponent} from "./components/dialog-confirm-cancel/dialog-confirm-cancel";
+import {DialogConfirmComponent} from "./components/dialog-confirm/dialog-confirm";
+>>>>>>> origin/dev
 import {StoreLogoComponent} from "./components/store-logos/store-logo/store-logo.component";
 import {PdfViewerContainerComponent} from "./components/pdf-viewer-container/pdf-viewer-container.component";
 import {StoreLogosComponent} from "./components/store-logos/store-logos.component";
@@ -89,8 +94,11 @@ import {TuristiComponent} from "./pages/pesaro2024-section/turisti/turisti.compo
 import {CittadiniComponent} from "./pages/pesaro2024-section/cittadini/cittadini.component";
 import {NgChartsModule} from 'ng2-charts';
 import {VolontarxComponent} from "./pages/pesaro2024-section/volontarx/volontarx.component";
+<<<<<<< HEAD
 import {DialogCreateSourceComponent} from "./user/components/dialog-create-source/dialog-create-source.component";
 import {SearchSourceComponent} from "./user/components/data-access/search-source/search-source.component";
+=======
+>>>>>>> origin/dev
 
 
 // AoT requires an exported function for factories
@@ -134,7 +142,12 @@ export const isMock = environment.mock;
         BreadcrumbsComponent,
         ContactFormComponent,
         ContactsComponent,
+<<<<<<< HEAD
         DialogCreateSourceComponent,
+=======
+        DialogConfirmCancelComponent,
+        DialogConfirmComponent,
+>>>>>>> origin/dev
         FanoComponent,
         FooterComponent,
         HomeComponent,
@@ -205,7 +218,10 @@ export const isMock = environment.mock;
         TranslateModule,
         LayoutModule,
         NgChartsModule,
+<<<<<<< HEAD
         SearchSourceComponent,
+=======
+>>>>>>> origin/dev
     ],
     providers: [
         {
