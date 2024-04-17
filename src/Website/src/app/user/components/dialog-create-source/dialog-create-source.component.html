@@ -35,7 +35,7 @@
         </ul>
     </div>
     <div *ngIf="showAddAccessButton" class="mt-11">
-        <app-data-access (accessToAdd)="handleAccessList($event)"></app-data-access>
+        <app-source-access-list (accessToAdd)="handleAccessList($event)"></app-source-access-list>
     </div>
     <div class="flex justify-end gap-2 mt-11">
         <button (click)="onNoClick()" class="btn-cancel">Annulla</button>

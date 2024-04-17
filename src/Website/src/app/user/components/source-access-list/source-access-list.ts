@@ -5,9 +5,9 @@ import {animate, style, transition, trigger} from "@angular/animations";
 import {Subscription} from "rxjs";
 
 @Component({
-    selector: 'app-data-access',
-    templateUrl: './data-access.component.html',
-    styleUrl: './data-access.component.css',
+    selector: 'app-source-access-list',
+    templateUrl: './source-access-list.html',
+    styleUrl: './source-access-list.css',
     animations: [
         trigger('fadeInOut', [
             transition(':enter', [   // :enter is alias to 'void => *'
@@ -20,7 +20,7 @@ import {Subscription} from "rxjs";
         ])
     ]
 })
-export class DataAccessComponent implements OnDestroy{
+export class SourceAccessList implements OnDestroy {
     @Output() accessToAdd = new EventEmitter<any>()
     @ViewChild(SearchSourceComponent) searchSourceComponent: SearchSourceComponent;
 
@@ -29,7 +29,11 @@ export class DataAccessComponent implements OnDestroy{
 
     noResults: boolean = false;
 
-    subscriptions : Subscription = new Subscription()
+    subscriptions: Subscription = new Subscription()
+
+    isLoading = false;
+    errorMessage: string = '';
+
     constructor(private userService: UserService, private cd: ChangeDetectorRef) {
     }
 
@@ -47,10 +51,11 @@ export class DataAccessComponent implements OnDestroy{
     }
 
     onSearch(userToSearch: any) {
-        if (userToSearch.firstName.length < 3 && userToSearch.email.length < 3 && userToSearch.lastName.length < 3) {
+        if ((userToSearch.name && userToSearch.name.length < 3) && (userToSearch.email && userToSearch.email.length < 3)) {
             this.listAccess = []
+            this.cd.markForCheck()
         } else {
-           this.subscriptions = this.userService.userSearch(userToSearch.firstName, userToSearch.email).subscribe(res => {
+            this.subscriptions = this.userService.userSearch(userToSearch.name, userToSearch.email).subscribe(res => {
                 this.listAccess = [];
                 if (res.data && res.data.length > 0) {
                     this.noResults = false;
@@ -60,11 +65,28 @@ export class DataAccessComponent implements OnDestroy{
                 }
                 this.cd.markForCheck();
             })
-
         }
-        console.log("No results ", this.noResults)
-        this.cd.markForCheck()
+
     }
+
+    onCreateAccess(userToAdd: any) {
+        if (userToAdd.name && userToAdd.surname && userToAdd.email && userToAdd.password) {
+            this.isLoading = true
+            this.userService.userCreate(userToAdd.name, userToAdd.surname, userToAdd.email, userToAdd.password).subscribe({
+                next: (user) => {
+                    this.handleSelection(user);
+                    this.isLoading = false
+                    this.cd.markForCheck();
+                },
+                error: (err) => {
+                    this.errorMessage = 'Failed to create instrument.';
+                    this.isLoading = false;
+                    this.cd.markForCheck();
+                }
+            });
+        }
+    }
+
 
     handleSelection(access) {
         this.accessToAdd.emit(access)

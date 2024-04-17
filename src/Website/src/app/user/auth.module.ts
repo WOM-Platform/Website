@@ -18,16 +18,16 @@ import {SharedModule} from '../shared/shared.module';
 
 import {UserAdminComponent} from './admin/user-admin.component';
 import {UserInstrumentComponent} from './instrument/user-instrument.component';
-import {DataAccessComponent} from "./components/data-access/data-access.component";
-import {SearchSourceComponent} from "./components/data-access/search-source/search-source.component";
-import {UsersListComponent} from "./components/users-list/users-list.component";
+import {SourceAccessList} from "./components/source-access-list/source-access-list";
+import {SearchSourceComponent} from "./components/source-access-list/search-source/search-source.component";
+import {SourcesListComponent} from "./components/sources-list/sources-list.component";
 import {DialogViewUserComponent} from "./components/dialog-view-user/dialog-view-user.component";
 
 @NgModule({
     declarations: [
         AddMerchantDialogComponent,
         AddPosDialogComponent,
-        DataAccessComponent,
+        SourceAccessList,
         DialogViewUserComponent,
         MapComponent,
         MerchantFormComponent,
@@ -36,14 +36,14 @@ import {DialogViewUserComponent} from "./components/dialog-view-user/dialog-view
         UserAdminComponent,
         UserHomeComponent,
         UserInstrumentComponent,
-        UsersListComponent,
+        SourcesListComponent,
         UserMerchantComponent,
         UserNotVerifiedComponent,
         UserStatsComponent,
         UserVerifyComponent,
     ],
     exports: [
-        DataAccessComponent
+        SourceAccessList
     ],
     imports: [
         CommonModule,

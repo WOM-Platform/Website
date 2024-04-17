@@ -194,6 +194,23 @@ export class UserService {
         }))
     }
 
+    userCreate(name: string, surname: string, email: string, password: string): Observable<any> {
+        const body = {
+            name: name,
+            surname: surname,
+            email: email,
+            password: password,
+            verified: true,
+            role: 'User'
+        };
+
+        return this.http.post<any>(this.localUrlV1, body).pipe(
+            map(res => {
+                return res;
+            })
+        );
+    }
+
     userSearch(name: string = "", email: string = ""): Observable<any> {
         let page = 1
         let pageSize = 10
@@ -203,7 +220,7 @@ export class UserService {
             .set('page', page.toString())
             .set('pageSize', pageSize.toString());
 
-        return this.http.get<any>('https://dev.wom.social/api/v1/user', {params}).pipe(map(res => {
+        return this.http.get<any>(this.localUrlV1, {params}).pipe(map(res => {
             return res
         }))
     }

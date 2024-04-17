@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="data-access.component.css">
+<link rel="stylesheet" href="source-access-list.css">
 <div class="mt-6">
     <button *ngIf="!addAccess" (click)="onAddAccess()" class="btn-default">
         <mat-icon>add</mat-icon>
@@ -10,7 +10,7 @@
     </button>
 </div>
 <div *ngIf="addAccess" class="add-access-container" @fadeInOut>
-    <app-search-source (searchSource)="onSearch($event)"></app-search-source>
+    <app-search-source (createSource)="onCreateAccess($event)" (searchSource)="onSearch($event)"></app-search-source>
     <div *ngIf="listAccess.length > 0" @fadeInOut>
         <div @fadeInOut>
             <p class="mb-0 font-semibold">Risultati:</p>

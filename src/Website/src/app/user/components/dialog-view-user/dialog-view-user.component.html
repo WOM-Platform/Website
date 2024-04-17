@@ -24,7 +24,7 @@
     </div>
     <div *ngIf="action === 'edit'">
         <div *ngIf="!createNewAccess" class="mt-11">
-            <app-data-access (accessToAdd)="handleAccessList($event)"></app-data-access>
+            <app-source-access-list (accessToAdd)="handleAccessList($event)"></app-source-access-list>
         </div>
     </div>
 </div>
