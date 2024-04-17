@@ -66,6 +66,12 @@ export class SearchSourceComponent implements OnInit, OnDestroy {
             }
 
             this.searchSource.emit(searchCriteria);
+        } else {
+            searchCriteria['firstName'] = "";
+            searchCriteria['lastName'] = "";
+            searchCriteria['email'] = "";
+
+            this.searchSource.emit(searchCriteria);
         }
     }
 

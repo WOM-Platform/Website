@@ -1,5 +1,5 @@
 <link rel="stylesheet" href="data-access.component.css">
-<div class="my-6">
+<div class="mt-6">
     <button *ngIf="!addAccess" (click)="onAddAccess()" class="btn-default">
         <mat-icon>add</mat-icon>
         Aggiungi gestore
@@ -9,14 +9,21 @@
         Annulla
     </button>
 </div>
-<div *ngIf="addAccess" class="add-access-container">
+<div *ngIf="addAccess" class="add-access-container" @fadeInOut>
     <app-search-source (searchSource)="onSearch($event)"></app-search-source>
-    <ul *ngIf="listAccess.length > 0" class="access-list">
-        <li class="access-element"
-            *ngFor="let access of listAccess; trackBy: trackByAccess"
-            (click)="handleSelection(access)">
-            <span class="font-semibold">Nome: </span>{{ access.name }} {{ access.surname }} <span class="font-semibold">Email: </span>{{ access.email }}
-        </li>
-    </ul>
+    <div *ngIf="listAccess.length > 0" @fadeInOut>
+        <div @fadeInOut>
+            <p class="mb-0 font-semibold">Risultati:</p>
+            <ul class="access-list">
+                <li class="access-element"
+                    *ngFor="let access of listAccess; trackBy: trackByAccess"
+                    (click)="handleSelection(access)">
+                    <span class="font-semibold">Nome: </span>{{ access.name }} {{ access.surname }}
+                    <span class="font-semibold">Email: </span>{{ access.email }}
+                </li>
+            </ul>
+        </div>
+    </div>
 </div>
+
 

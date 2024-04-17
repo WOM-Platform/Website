@@ -38,6 +38,7 @@ import {PaginationComponent} from "../user/components/pagination/pagination.comp
 import {DialogConfirmCancelComponent} from "../components/dialog-confirm-cancel/dialog-confirm-cancel";
 import {DialogConfirmComponent} from "../components/dialog-confirm/dialog-confirm";
 import {DialogViewUserComponent} from "../user/components/dialog-view-user/dialog-view-user.component";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 
 
 @NgModule({
@@ -50,6 +51,7 @@ import {DialogViewUserComponent} from "../user/components/dialog-view-user/dialo
         PaginationComponent
     ],
     imports: [
+        BrowserAnimationsModule,
         CommonModule,
         FormsModule,
         GoogleMapsModule,
@@ -95,6 +97,7 @@ import {DialogViewUserComponent} from "../user/components/dialog-view-user/dialo
     exports: [
         AvatarComponent,
         AnimatedNumberComponent,
+        BrowserAnimationsModule,
         DialogConfirmCancelComponent,
         DialogConfirmComponent,
         FormsModule,

@@ -5,6 +5,7 @@ import {DialogConfirmCancelComponent} from "../../../components/dialog-confirm-c
 import {DialogViewUserComponent} from "../dialog-view-user/dialog-view-user.component";
 import {SourceService} from "../../../_services/source.service";
 
+
 @Component({
     selector: 'app-users-list',
     templateUrl: './users-list.component.html',
@@ -12,17 +13,23 @@ import {SourceService} from "../../../_services/source.service";
 })
 export class UsersListComponent implements OnInit {
     @Input() usersList: any[]
-    @Input() usersTableColumns: string[]
+    @Input() usersTableColumns: any[]
 
     @Output() deleteUser: EventEmitter<any> = new EventEmitter<any>();
     @Output() viewUser = new EventEmitter<any>();
     @Output() editUser = new EventEmitter<any>();
 
+    tests = [{'name':"uno"}, {'name':"due"}]
+    displayedColumns: string[] = []
     constructor(private matDialog: MatDialog, private sourceService: SourceService) {
     }
 
     ngOnInit() {
+    this.setupColumns()
+    }
 
+    setupColumns() {
+        this.displayedColumns = this.usersTableColumns.map(c => c['field']).concat('extraColumn')
     }
 
     onViewUser(user: any) {
@@ -50,4 +57,6 @@ export class UsersListComponent implements OnInit {
             }
         });
     }
+
+    protected readonly console = console;
 }

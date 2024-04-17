@@ -17,7 +17,6 @@ import {
 } from "@ngx-translate/core";
 import {JoinstringsPipe} from "src/app/_helpers/joinstringsPipe";
 
-import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {FooterComponent} from "./components/footer/footer.component";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {HomeComponent} from "./pages/home";
@@ -191,7 +190,6 @@ export const isMock = environment.mock;
         }),
         AppOverlayModule,
         BreadcrumbModule,
-        BrowserAnimationsModule,
         BrowserModule,
         CarouselModule,
         CommonModule,

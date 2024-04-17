@@ -11,7 +11,7 @@
     <!--<div *ngIf="userData && userData.admin && userData.admin.length > 0">-->
     <!-- Check if User is an admin -->
     <ng-template [ngIf]="userData && role">
-        <div *ngIf=" role.has('Admin'); else elseBlock">
+        <div *ngIf="role.has('Admin'); else elseBlock">
             <app-user-admin [user]="userData"/>
         </div>
         <ng-template #elseBlock>
