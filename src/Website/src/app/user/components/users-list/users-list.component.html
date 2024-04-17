@@ -2,33 +2,37 @@
     <ng-container *ngIf="usersList && usersList.length; else noDataTemplate">
 
         <table class="mt-6 w-full shadow-lg bg-white rounded-lg overflow-hidden" mat-table [dataSource]="usersList">
-            <ng-container *ngFor="let column of usersTableColumns" [matColumnDef]="column">
-                <th class="p-3 text-left text-gray-700 bg-gray-100" mat-header-cell
-                    *matHeaderCellDef>{{ column | titlecase }}
+
+            <ng-container *ngFor="let column of usersTableColumns" [matColumnDef]="column.field">
+                <th class="p-3 text-left text-gray-700 bg-gray-100" [ngClass]="{'hide-mb': column.hideOnMobile}" mat-header-cell
+                    *matHeaderCellDef>{{ column.field | titlecase }}
                 </th>
-                <td class="p-3 text-gray-900" mat-cell *matCellDef="let user">{{ user[column] }}</td>
+                <td class="action-cell" [ngClass]="{'hide-mb': column.hideOnMobile}" *matCellDef="let user"><p class="mb-0">{{ user[column.field] }}</p></td>
+
             </ng-container>
 
-            <!-- Edit column -->
+            <!-- Action column -->
             <ng-container matColumnDef="extraColumn">
                 <th class="p-3 bg-gray-100" mat-header-cell *matHeaderCellDef>Actions</th>
-                <td class="p-3 text-center space-x-2" mat-cell *matCellDef="let user">
-                    <button mat-icon-button (click)="onViewUser(user)">
+                <td class="table-cell" *matCellDef="let user">
+                    <div class="action-cell">
+                    <button class="icon-button-bg hover:bg-slate-300" (click)="onViewUser(user)">
                         <mat-icon>visibility</mat-icon>
                     </button>
-                    <button mat-icon-button color="primary" (click)="onEditUser(user)">
-                        <mat-icon>edit</mat-icon>
+                        <button class="icon-button-bg hover:bg-blue-200" (click)="onEditUser(user)">
+                            <mat-icon class="text-blue-500">edit</mat-icon>
+                        </button>
+                    <button  class="icon-button-bg hover:bg-red-200" (click)="onDeleteUser(user)">
+                        <mat-icon class="text-red-500">delete</mat-icon>
                     </button>
-                    <button mat-icon-button color="warn" (click)="onDeleteUser(user)">
-                        <mat-icon>delete</mat-icon>
-                    </button>
+                    </div>
                 </td>
             </ng-container>
 
 
-            <tr mat-header-row *matHeaderRowDef="usersTableColumns.concat('extraColumn')"></tr>
-            <tr mat-row *matRowDef="let row; columns: usersTableColumns.concat('extraColumn')"
-                class="hover:bg-gray-200"></tr>
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns"
+                class="border-b-2 border-[#0000001F] hover:bg-gray-200"></tr>
         </table>
     </ng-container>
 

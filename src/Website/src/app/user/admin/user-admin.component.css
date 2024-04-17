@@ -5,7 +5,8 @@
 
 .custom-dialog-backdrop {
     background-color: #e5e5e5 !important;
-
+    max-height: 90vh !important;
+    overflow-y: scroll !important;
 }
 
 .loading-overlay {

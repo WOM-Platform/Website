@@ -21,7 +21,8 @@ export class UserAdminComponent implements OnInit, OnDestroy {
     instrumentsList: any;
 
     merchantsTableColumns: string[] = ['name', 'email']
-    instrumentsTableColumns: string[] = ['name', 'url']
+
+    instrumentsTableColumns: any[] = [{field:'name', hideOnMobile:false}, {field:'url', hideOnMobile: true}]
 
     sourcesSubscription: Subscription;
 
@@ -57,16 +58,15 @@ export class UserAdminComponent implements OnInit, OnDestroy {
         });
     }
 
-
     ngOnDestroy() {
         this.subscriptions.unsubscribe()
     }
 
     // BEGIN SOURCE FUNCTIONS
-
     onCreateSource() {
         const dialogRef = this.matDialog.open(DialogCreateSourceComponent, {
             width: '900px',
+            maxHeight: '90vh',
             panelClass: 'custom-dialog-backdrop',
             data: {}
         });
@@ -139,6 +139,8 @@ export class UserAdminComponent implements OnInit, OnDestroy {
             next: res => {
                 const dialogRef = this.matDialog.open(DialogViewUserComponent, {
                     width: '900px',
+                    maxHeight: '90vh',
+                    panelClass: 'custom-dialog-backdrop',
                     data: {id: user.id, name: user.name, url: user.url, access: res["users"], action: "edit"}
                 });
 

@@ -1,5 +1,5 @@
-<div class="mx-10 my-4">
-    <h2 class="text-center font-semibold mt-4">Nuovo Instrument</h2>
+<div class="dialog-view">
+    <p class="font-semibold text-cyan-700 text-center">Nuovo Instrument</p>
 
     <form class="flex flex-col gap-4 mt-6" [formGroup]="newSource" (ngSubmit)="onSubmit()">
         <div class="flex flex-row justify-start gap-6 items-center">
@@ -7,8 +7,7 @@
 
             <input type="text" formControlName="name" class="input-create">
             <div class="text-red-600" *ngIf="newSource.get('name').invalid && newSource.get('name').touched">
-                Inserire il nome
-
+                Inserire il nome<br/>(min 4 caratteri)
             </div>
         </div>
 
@@ -21,12 +20,17 @@
 
         </div>
     </form>
-    <div *ngIf="newSource.get('access').value.length > 0">
-        <p class="font-semibold mb-0 my-6">Gestori da Aggiungere:</p>
-        <ul>
+
+    <div *ngIf="newSource.get('access').value.length > 0" class="mt-10">
+        <p class="font-semibold mb-0 ">Gestori da aggiungere:</p>
+        <ul class="access-list">
             <li *ngFor="let toAdd of newSource.get('access').value">
-                <span class="font-semibold">Nome: </span>{{ toAdd["name"] }} {{ toAdd["surname"] }} <span
-                    class="font-semibold">Email: </span> {{ toAdd["email"] }}
+                <div class="access-item">
+                    <div class="access-details">
+                        <div><span class="text-slate-600 font-semibold">Name</span>: {{ toAdd.name }} {{ toAdd.surname }}</div>
+                        <div><span class="text-slate-600 font-semibold">Email</span>: {{ toAdd.email }}</div>
+                    </div>
+                </div>
             </li>
         </ul>
     </div>
