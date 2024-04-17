@@ -1,5 +1,5 @@
 <div class="mt-6">
-    <ng-container *ngIf="usersList && usersList.length; else noDataTemplate">
+    <ng-container *ngIf="usersList && usersList.length > 0; else noDataTemplate">
 
         <table class="mt-6 w-full shadow-lg bg-white rounded-lg overflow-hidden" mat-table [dataSource]="usersList">
 

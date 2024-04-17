@@ -24,13 +24,13 @@
                         search
                     </mat-icon>
                 </div>
-                <div *ngIf="instrumentsList && instrumentsList.length > 0">
-                <app-users-list [usersList]="instrumentsList"
+                <div *ngIf="instrumentsList">
+                <app-sources-list [usersList]="instrumentsList"
                                 [usersTableColumns]="instrumentsTableColumns"
                                 (viewUser)="onViewSource($event)"
                                 (deleteUser)="onDeleteSource($event)"
                                 (editUser)="onEditSource($event)"
-                ></app-users-list>
+                ></app-sources-list>
                 </div>
                 <div *ngIf="totalItems" class="mt-11">
                     <app-pagination [currentPage]="currentPage"
@@ -51,8 +51,8 @@
                                </button>
                            </div>
                            <h3>Merchants List</h3>
-                           <app-users-list [usersTableColumns]="merchantsTableColumns"
-                                           [usersList]="merchantsList"></app-users-list>
+                           <app-sources-list [usersTableColumns]="merchantsTableColumns"
+                                           [usersList]="merchantsList"></app-sources-list>
 
                        </mat-tab>
                        <mat-tab label="Statistics">

@@ -24,11 +24,12 @@
 
 .access-element {
     @apply px-2 ;
-
-    &:hover {
-        @apply bg-[#e5e5e5]
-    }
 }
+
+.access-element:hover {
+    @apply bg-[#e5e5e5]
+}
+
 
 .confirm-btn {
     @apply border-2 border-black px-4 py-2;

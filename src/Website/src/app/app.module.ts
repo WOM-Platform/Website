@@ -89,7 +89,7 @@ import {CittadiniComponent} from "./pages/pesaro2024-section/cittadini/cittadini
 import {NgChartsModule} from 'ng2-charts';
 import {VolontarxComponent} from "./pages/pesaro2024-section/volontarx/volontarx.component";
 import {DialogCreateSourceComponent} from "./user/components/dialog-create-source/dialog-create-source.component";
-import {SearchSourceComponent} from "./user/components/data-access/search-source/search-source.component";
+import {SearchSourceComponent} from "./user/components/source-access-list/search-source/search-source.component";
 
 
 // AoT requires an exported function for factories
