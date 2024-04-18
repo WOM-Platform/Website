@@ -14,15 +14,15 @@
         <div *ngIf="role.has('Admin'); else elseBlock">
             <app-user-admin [user]="userData"/>
         </div>
-        <ng-template #elseBlock>
+        <!--<ng-template #elseBlock>
             <div>
                 <app-user-instrument/>
             </div>
-            <!-- Merchant dashboard-->
+            &lt;!&ndash; Merchant dashboard&ndash;&gt;
             <div *ngIf="userData &&  userData.merchants && userData.merchants.length > 0">
                 <app-user-merchant/>
             </div>
-        </ng-template>
+        </ng-template>-->
 
     </ng-template>
 
