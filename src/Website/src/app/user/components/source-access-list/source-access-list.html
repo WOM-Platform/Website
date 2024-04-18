@@ -10,7 +10,7 @@
     </button>
 </div>
 <div *ngIf="addAccess" class="add-access-container" @fadeInOut>
-    <app-search-source (createSource)="onCreateAccess($event)" (searchSource)="onSearch($event)"></app-search-source>
+    <app-search-source (createSource)="onCreateAccess($event)" (searchSource)="onSearch($event)" (clearFormEvent)="clearList()"></app-search-source>
     <div *ngIf="listAccess.length > 0" @fadeInOut>
         <div @fadeInOut>
             <p class="mb-0 font-semibold">Risultati:</p>

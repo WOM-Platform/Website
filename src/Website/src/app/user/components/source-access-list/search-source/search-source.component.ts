@@ -88,6 +88,12 @@ export class SearchSourceComponent implements OnInit, OnDestroy {
         }
     }
 
+    changeAccessAction () {
+        this.createNewUser = !this.createNewUser
+        this.clearForm()
+        this.clearFormEvent.emit()
+    }
+
     create() {
         const createCriteria = {};
         const name = this.createForm.get('nameCreate').value;
