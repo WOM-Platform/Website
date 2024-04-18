@@ -1,6 +1,6 @@
 <div class="flex justify-center relative">
     <div class="relative">
-        <button (click)="createNewUser = !createNewUser" [ngClass]="{'btn-access-action-active': !createNewUser}"
+        <button (click)="changeAccessAction()" [ngClass]="{'btn-access-action-active': !createNewUser}"
                 class="btn-access-action border-l-2 rounded-l-full">Ricerca
         </button>
         <mat-icon *ngIf="!createNewUser"
@@ -10,7 +10,7 @@
         </mat-icon>
     </div>
     <div class="relative">
-        <button (click)="createNewUser = !createNewUser" [ngClass]="{'btn-access-action-active': createNewUser}"
+        <button (click)="changeAccessAction()" [ngClass]="{'btn-access-action-active': createNewUser}"
                 class="btn-access-action border-r-2 rounded-r-full">Nuovo utente
         </button>
         <mat-icon *ngIf="createNewUser"
@@ -76,8 +76,7 @@
             </div>
         </div>
         <div class="flex justify-end gap-6 mt-6">
-            <button >Annulla</button>
-            <button [disabled]="createForm.invalid" class="text-slate-500" [ngClass]="{ 'text-blue-600': !createForm.invalid }" (click)="create()">Conferma</button>
+            <button [disabled]="createForm.invalid" [ngClass]="{'text-slate-500': createForm.invalid, 'text-blue-600': !createForm.invalid}" (click)="create()">Conferma</button>
         </div>
     </form>
 </ng-template>

@@ -47,6 +47,7 @@ export class SourceAccessList implements OnDestroy {
 
     handleCancellationAccess() {
         this.addAccess = !this.addAccess
+        this.clearList();
         this.searchSourceComponent.clearForm()
     }
 
@@ -97,6 +98,11 @@ export class SourceAccessList implements OnDestroy {
         } else {
             console.error('SearchSourceComponent is not yet available.');
         }
+    }
+
+    clearList() {
+        this.listAccess = []
+
     }
 
     trackByAccess(index, access) {

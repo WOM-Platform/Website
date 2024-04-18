@@ -3,7 +3,7 @@
 
     <form class="flex flex-col gap-4 mt-6" [formGroup]="newSource" (ngSubmit)="onSubmit()">
         <div class="flex flex-row justify-start gap-6 items-center">
-            <label class="w-20">Nome:</label>
+            <label class="w-20">Nome<span class="text-red-600">*</span>:</label>
 
             <input type="text" formControlName="name" class="input-create">
             <div class="text-red-600" *ngIf="newSource.get('name').invalid && newSource.get('name').touched">
@@ -12,7 +12,7 @@
         </div>
 
         <div class="flex flex-row justify-start gap-6 items-center">
-            <label class="w-20">URL:</label>
+            <label class="w-20">URL<span class="text-red-600">*</span>:</label>
             <input type="text" formControlName="url" class="input-create" placeholder="https://example.com">
             <div class="text-red-600" *ngIf="newSource.get('url').invalid && newSource.get('url').touched">
                 Inserire l'url

@@ -7,7 +7,7 @@
                 <th class="p-3 text-left text-gray-700 bg-gray-100" [ngClass]="{'hide-mb': column.hideOnMobile}" mat-header-cell
                     *matHeaderCellDef>{{ column.field | titlecase }}
                 </th>
-                <td class="action-cell" [ngClass]="{'hide-mb': column.hideOnMobile}" *matCellDef="let user"><p class="mb-0">{{ user[column.field] }}</p></td>
+                <td class="action-cell" [ngClass]="{'hide-mb': column.hideOnMobile}" *matCellDef="let user"><p class="mb-0 text-base sm:text-sm">{{ user[column.field] }}</p></td>
 
             </ng-container>
 
