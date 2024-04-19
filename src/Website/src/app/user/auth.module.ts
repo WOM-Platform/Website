@@ -22,9 +22,12 @@ import {SourceAccessList} from "./components/source-access-list/source-access-li
 import {SearchSourceComponent} from "./components/source-access-list/search-source/search-source.component";
 import {SourcesListComponent} from "./components/sources-list/sources-list.component";
 import {DialogViewUserComponent} from "./components/dialog-view-user/dialog-view-user.component";
+import {AimsComponent} from "./admin/aims/aims.component";
+import {AdminTableComponent} from "./components/admin-table/admin-table.component";
 
 @NgModule({
     declarations: [
+        AimsComponent,
         AddMerchantDialogComponent,
         AddPosDialogComponent,
         SourceAccessList,
@@ -50,6 +53,7 @@ import {DialogViewUserComponent} from "./components/dialog-view-user/dialog-view
         AuthRouting,
         SharedModule,
         SearchSourceComponent,
+        AdminTableComponent,
     ]
 })
 export class AuthModule {

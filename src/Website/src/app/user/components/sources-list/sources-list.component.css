@@ -11,7 +11,7 @@
 }
 
 .action-cell {
-    @apply p-3 space-x-2
+    @apply px-3 space-x-2
 }
 
 .icon-button-bg {

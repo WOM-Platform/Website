@@ -1,7 +1,7 @@
 export class Aim {
     code: string;
-    titles: Titles[];
-    order: number;
+    titles: Titles;
+    hidden: boolean;
 
     public static fromJson(json): any {
         if (json === null) {
