@@ -35,13 +35,26 @@ import {NgClass, NgForOf, NgIf, TitleCasePipe} from "@angular/common";
 export class AdminTableComponent implements OnInit {
     @Input() tableData;
     @Input() tableColumns
+    @Input() isActions;
 
-    @Output() deleteUser: EventEmitter<any> = new EventEmitter<any>();
-    @Output() viewUser = new EventEmitter<any>();
-    @Output() editUser = new EventEmitter<any>();
+    @Output() deleteItem: EventEmitter<any> = new EventEmitter<any>();
+    @Output() viewItem = new EventEmitter<any>();
+    @Output() editItem = new EventEmitter<any>();
 
 
     ngOnInit() {
 
+    }
+
+    onViewItem(item) {
+        this.viewItem.emit(item)
+    }
+
+    onEditItem(item) {
+        this.editItem.emit(item)
+    }
+
+    onDeleteItem(item) {
+        this.deleteItem.emit(item)
     }
 }
