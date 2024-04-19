@@ -8,21 +8,25 @@ import {Merchant} from "../_models";
 
 @Injectable({providedIn: 'root'})
 export class AimsService {
+    localUrlV1 = environment.baseUrl + environment.v1 + 'aims/';
+    localUrlV2 = environment.baseUrl + environment.v2 + 'aims/';
 
-    constructor(private http: HttpClient) {}
+    constructor(private http: HttpClient) {
+    }
 
     /**
      * List of all aims recognized by the WOM platform
      */
-    getAll(): Observable<Aim[]>{
-        return this.http.get<Aim[]>(environment.baseUrl + environment.v2 + 'aims') // can change with v1
+    getAll(): Observable<Aim[]> {
+        return this.http.get<Aim[]>(this.localUrlV2)
             .pipe(map(response => {
-                const data: Aim[] = [];
-                response.forEach((val: Aim) => {
-                    const prod = Aim.fromJson(val);
-                    data.push(prod);
-                });
-                return data;
+                /* const data: Aim[] = [];
+                 response.forEach((val: Aim) => {
+                     const prod = Aim.fromJson(val);
+                     data.push(prod);
+                 });
+                 return data;*/
+                return response['aims']
             }));
     }
 

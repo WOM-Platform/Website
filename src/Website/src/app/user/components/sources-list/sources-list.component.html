@@ -29,9 +29,8 @@
                 </td>
             </ng-container>
 
-
-            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-            <tr mat-row *matRowDef="let row; columns: displayedColumns"
+            <tr class="h-12" mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr class="h-12" mat-row *matRowDef="let row; columns: displayedColumns"
                 class="border-b-2 border-[#0000001F] hover:bg-gray-200"></tr>
         </table>
     </ng-container>
