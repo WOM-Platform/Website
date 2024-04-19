@@ -20,14 +20,14 @@ import {UserAdminComponent} from './admin/user-admin.component';
 import {UserInstrumentComponent} from './instrument/user-instrument.component';
 import {SourceAccessList} from "./components/source-access-list/source-access-list";
 import {SearchSourceComponent} from "./components/source-access-list/search-source/search-source.component";
-import {SourcesListComponent} from "./components/sources-list/sources-list.component";
 import {DialogViewUserComponent} from "./components/dialog-view-user/dialog-view-user.component";
-import {AimsComponent} from "./admin/aims/aims.component";
+import {AimsTabComponent} from "./admin/aims-tab/aims-tab.component";
 import {AdminTableComponent} from "./components/admin-table/admin-table.component";
+import {InstrumentsTabComponent} from "./admin/instruments-tab/instruments-tab.component";
 
 @NgModule({
     declarations: [
-        AimsComponent,
+        AimsTabComponent,
         AddMerchantDialogComponent,
         AddPosDialogComponent,
         SourceAccessList,
@@ -39,7 +39,6 @@ import {AdminTableComponent} from "./components/admin-table/admin-table.componen
         UserAdminComponent,
         UserHomeComponent,
         UserInstrumentComponent,
-        SourcesListComponent,
         UserMerchantComponent,
         UserNotVerifiedComponent,
         UserStatsComponent,
@@ -54,6 +53,7 @@ import {AdminTableComponent} from "./components/admin-table/admin-table.componen
         SharedModule,
         SearchSourceComponent,
         AdminTableComponent,
+        InstrumentsTabComponent,
     ]
 })
 export class AuthModule {

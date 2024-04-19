@@ -5,11 +5,11 @@ import {Aim, Titles} from "../../../_models";
 import {NgIf} from "@angular/common";
 
 @Component({
-    selector: 'app-aims',
-    templateUrl: './aims.component.html',
-    styleUrl: './aims.component.css'
+    selector: 'app-aims-tab',
+    templateUrl: './aims-tab.component.html',
+    styleUrl: './aims-tab.component.css'
 })
-export class AimsComponent implements OnInit {
+export class AimsTabComponent implements OnInit {
     aimsTableColumns: any[] = [
         {field: 'code', hideOnMobile: false},
         {field: 'it', hideOnMobile: false},

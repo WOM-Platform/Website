@@ -15,7 +15,7 @@ export class AimsService {
     }
 
     /**
-     * List of all aims recognized by the WOM platform
+     * List of all aims-tab recognized by the WOM platform
      */
     getAll(): Observable<Aim[]> {
         return this.http.get<Aim[]>(this.localUrlV2)
