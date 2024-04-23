@@ -1,7 +1,7 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {AddMerchantDialogComponent} from './merchant/add-merchant/add-merchant.component';
-import {AddPosDialogComponent} from './merchant/add-pos/add-pos.component';
+import {AddMerchantDialogComponent} from './components/dialog-create-merchant/dialog-create-merchant';
+import {AddPosDialogComponent} from './components/dialog-create-pos/add-pos.component';
 
 import {UserHomeComponent} from './home/user-home.component';
 import {UserMerchantComponent} from './merchant/user-merchant.component';
@@ -9,7 +9,7 @@ import {UserNotVerifiedComponent} from './not-verified/user-not-verified.compone
 import {UserVerifyComponent} from './verify/user-verify.component';
 import {AuthRouting} from './auth.routing';
 
-import {MerchantFormComponent} from '../_forms/merchant/forms-merchant.directive';
+import {FormMerchantComponent} from './components/dialog-create-merchant/form-merchant/form-merchant.component';
 import {PosFormComponent} from '../_forms/pos/forms-pos.directive';
 import {MerchantStatsComponent} from './stats/merchant/merchant-stats.component';
 import {UserStatsComponent} from './stats/user-stats.component';
@@ -24,6 +24,8 @@ import {DialogViewUserComponent} from "./components/dialog-view-user/dialog-view
 import {AimsTabComponent} from "./admin/aims-tab/aims-tab.component";
 import {AdminTableComponent} from "./components/admin-table/admin-table.component";
 import {InstrumentsTabComponent} from "./admin/instruments-tab/instruments-tab.component";
+import {UsersTabComponent} from "./admin/users-tab/users-tab.component";
+import {MerchantsTabComponent} from "./admin/merchants-tab/merchants-tab.component";
 
 @NgModule({
     declarations: [
@@ -33,7 +35,7 @@ import {InstrumentsTabComponent} from "./admin/instruments-tab/instruments-tab.c
         SourceAccessList,
         DialogViewUserComponent,
         MapComponent,
-        MerchantFormComponent,
+        FormMerchantComponent,
         MerchantStatsComponent,
         PosFormComponent,
         UserAdminComponent,
@@ -48,12 +50,14 @@ import {InstrumentsTabComponent} from "./admin/instruments-tab/instruments-tab.c
         SourceAccessList
     ],
     imports: [
-        CommonModule,
+        AdminTableComponent,
         AuthRouting,
+        CommonModule,
+        InstrumentsTabComponent,
         SharedModule,
         SearchSourceComponent,
-        AdminTableComponent,
-        InstrumentsTabComponent,
+        UsersTabComponent,
+        MerchantsTabComponent,
     ]
 })
 export class AuthModule {

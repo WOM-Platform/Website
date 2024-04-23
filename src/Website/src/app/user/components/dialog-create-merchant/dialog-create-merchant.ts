@@ -5,13 +5,12 @@ import {UntypedFormGroup} from '@angular/forms';
 import {MerchantService} from '../../../_services';
 import {DialogType} from '../../../_models/dialogType';
 import {StorageService} from "../../../_services/storage.service";
-import {MerchantFormComponent} from "../../../_forms/merchant/forms-merchant.directive";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 
 @Component({
-    selector: 'app-merchant-dialog',
-    templateUrl: 'add-merchant.component.html',
-    styleUrls: ['add-merchant.component.css']
+    selector: 'app-form-merchant-dialog',
+    templateUrl: 'dialog-create-merchant.html',
+    styleUrls: ['dialog-create-merchant.css']
 })
 export class AddMerchantDialogComponent implements OnInit {
     formMerchant: UntypedFormGroup;
@@ -55,6 +54,8 @@ export class AddMerchantDialogComponent implements OnInit {
 
     create(): any {
         const merchant = this.createMerchantDataStruct();
+
+        console.log("MERCHANT TO CERATE ", merchant)
         this.merchantService.register(merchant).pipe(first()).subscribe(
             result => {
                 this.dialogRef.close(true);
