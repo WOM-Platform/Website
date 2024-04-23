@@ -19,7 +19,7 @@
                 <app-user-instrument/>
             </div>
             <!-- Merchant dashboard-->
-            <div *ngIf="userData &&  userData.merchants && userData.merchants.length > 0">
+            <div *ngIf="userData.merchants && userData.merchants.length > 0">
                 <app-user-merchant/>
             </div>
         </ng-template>
