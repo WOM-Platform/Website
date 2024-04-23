@@ -46,7 +46,7 @@ export class SearchSourceComponent implements OnInit, OnDestroy {
         this.createForm = this.fb.group({
             nameCreate: ['', Validators.required],
             surnameCreate: ['', Validators.required,],
-            emailCreate: ['', [Validators.required,  Validators.email]],
+            emailCreate: ['', [Validators.required, Validators.email]],
             passwordCreate: ['', [Validators.required, Validators.minLength(8)]],
         })
         this.searchForm = this.fb.group({
@@ -72,7 +72,7 @@ export class SearchSourceComponent implements OnInit, OnDestroy {
         const name = this.searchForm.get('nameSearch').value;
         const email = this.searchForm.get('emailSearch').value;
 
-        if (name.length >= 3 || email.length >= 3) {
+        if ((name && name.length >= 3) || (email && email.length >= 3)) {
             if (name) {
                 searchCriteria['name'] = name;
             }
@@ -80,15 +80,12 @@ export class SearchSourceComponent implements OnInit, OnDestroy {
                 searchCriteria['email'] = email;
             }
             this.searchSource.emit(searchCriteria);
-        } else {
-            searchCriteria['name'] = "";
-            searchCriteria['email'] = "";
-
-            this.searchSource.emit(searchCriteria);
+        } else if ((name.length < 3) || (email.length < 3)) {
+            this.clearFormEvent.emit()
         }
     }
 
-    changeAccessAction () {
+    changeAccessAction() {
         this.createNewUser = !this.createNewUser
         this.clearForm()
         this.clearFormEvent.emit()
@@ -109,6 +106,7 @@ export class SearchSourceComponent implements OnInit, OnDestroy {
         this.createSource.emit(createCriteria)
 
     }
+
     clearForm() {
         this.searchForm.reset();
     }
