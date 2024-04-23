@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {AdminTableComponent} from "../../components/admin-table/admin-table.component";
 import {AimsService} from "../../../_services";
 import {Aim, Titles} from "../../../_models";
@@ -18,11 +18,14 @@ export class AimsTabComponent implements OnInit {
     ]
 
     aimsData: any[]
+    @Output() isLoading = new EventEmitter<boolean>()
 
     constructor(private aimsService: AimsService) {
     }
 
     ngOnInit() {
+        this.isLoading.emit(true);
+        
         this.aimsService.getAll().subscribe(res => {
             this.aimsData = res.map((aim: Aim) => {
                 let transformedAim = {
@@ -33,7 +36,9 @@ export class AimsTabComponent implements OnInit {
                 };
                 return transformedAim;
             });
+            this.isLoading.emit(false);
         });
     }
+
 }
 

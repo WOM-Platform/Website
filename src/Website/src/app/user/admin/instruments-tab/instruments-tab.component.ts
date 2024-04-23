@@ -27,7 +27,7 @@ import {DialogConfirmCancelComponent} from "../../../components/dialog-confirm-c
     styleUrl: './instruments-tab.component.css'
 })
 export class InstrumentsTabComponent implements OnInit, OnDestroy {
-    @Output() load = new EventEmitter<any>()
+    @Output() isLoading = new EventEmitter<any>()
     searchParameters: string = ""
     searchTerms = new Subject<string>();
 
@@ -75,8 +75,7 @@ export class InstrumentsTabComponent implements OnInit, OnDestroy {
 
         dialogRef.afterClosed().subscribe(result => {
             if (result && result.name && result.url) {
-
-                this.load.emit(true)
+                this.isLoading.emit(true)
                 this.cd.markForCheck();
                 const createSub = this.sourceService.createInstrument(result.name, result.url).subscribe({
                     next: (user) => {
@@ -84,14 +83,14 @@ export class InstrumentsTabComponent implements OnInit, OnDestroy {
                     },
                     error: (err) => {
                         this.errorMessage = 'Failed to create instrument.';
-                        this.load.emit(false)
+                        this.isLoading.emit(false)
                         this.cd.markForCheck();
                     }
                 });
                 this.subscriptions.add(createSub);
             } else {
                 this.errorMessage = 'Invalid input data.';
-                this.load.emit(false)
+                this.isLoading.emit(false)
                 this.cd.markForCheck();
             }
         });
@@ -103,34 +102,34 @@ export class InstrumentsTabComponent implements OnInit, OnDestroy {
                 next: () => console.log("All access rights added successfully."),
                 error: err => {
                     console.error("Error adding access rights:", err);
-                    this.load.emit(false)
+                    this.isLoading.emit(false)
                     this.cd.markForCheck();
                 },
                 complete: () => {
                     this.getSourcesList();
-                    this.load.emit(false)
+                    this.isLoading.emit(false)
                     this.cd.markForCheck();
                 }
             });
             this.subscriptions.add(accessSub);
         } else {
             this.getSourcesList();
-            this.load.emit(false)
+            this.isLoading.emit(false)
             this.cd.markForCheck();
         }
     }
 
     onViewSource(user: any) {
-        this.load.emit(true)
+        this.isLoading.emit(true)
 
         const viewSub = this.sourceService.getInstrumentAccessList(user.id).subscribe(res => {
-            this.load.emit(false)
+            this.isLoading.emit(false)
             const dialogRef = this.matDialog.open(DialogViewUserComponent, {
                 width: '900px',
                 data: {id: user.id, name: user.name, url: user.url, access: res["users"], action: "view"}
             });
             dialogRef.afterClosed().subscribe(res => {
-                this.load.emit(false)
+                this.isLoading.emit(false)
                 this.cd.markForCheck()
             })
         })
@@ -242,14 +241,14 @@ export class InstrumentsTabComponent implements OnInit, OnDestroy {
     }
 
     getSourcesList() {
-        this.load.emit(true)
+        this.isLoading.emit(true)
 
         this.subscriptions.add(
             this.sourceService.getInstrumentList(this.searchParameters, this.currentPage, this.itemsPerPage)
                 .pipe(
                     catchError(error => {
                         console.error('Error fetching instruments:', error);
-                        this.load.emit(false)
+                        this.isLoading.emit(false)
                         return throwError(() => error);
                     })
                 ).subscribe(res => {
@@ -259,7 +258,7 @@ export class InstrumentsTabComponent implements OnInit, OnDestroy {
                     if (res['data'])
                         this.instrumentsList = res['data'];
                 }
-                this.load.emit(false)
+                this.isLoading.emit(false)
                 this.cd.markForCheck()
             })
         );
