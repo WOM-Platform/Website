@@ -32,7 +32,7 @@ export class InstrumentsTabComponent implements OnInit, OnDestroy {
     searchTerms = new Subject<string>();
 
     currentPage: number = 1;
-    itemsPerPage: number = 10;
+    itemsPerPage: string = '10';
     pageCount: number;
     totalItems: number;
 
@@ -240,11 +240,10 @@ export class InstrumentsTabComponent implements OnInit, OnDestroy {
         this.getSourcesList();
     }
 
-    getSourcesList() {
+    getSourcesList(itemsPerPage: string = '10') {
         this.isLoading.emit(true)
-
         this.subscriptions.add(
-            this.sourceService.getInstrumentList(this.searchParameters, this.currentPage, this.itemsPerPage)
+            this.sourceService.getInstrumentList(this.searchParameters, this.currentPage, itemsPerPage)
                 .pipe(
                     catchError(error => {
                         console.error('Error fetching instruments:', error);

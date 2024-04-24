@@ -19,11 +19,11 @@ export class SourceService {
      * @param {number} itemsPerPage Number of items per page.
      * @returns {Observable<any>} An observable of the paginated instrument list.
      */
-    getInstrumentList(search: string, page: number, itemsPerPage: number): Observable<any> {
+    getInstrumentList(search: string, page: number, itemsPerPage: string): Observable<any> {
         const params = new HttpParams()
             .set('search', search)
             .set('page', page.toString())
-            .set('itemsPerPage', itemsPerPage.toString());
+            .set('pageSize', itemsPerPage);
         return this.http.get(`${this.localUrlV1}`, {params})
             .pipe(
                 map(res => res),
@@ -44,7 +44,7 @@ export class SourceService {
                 return throwError(() => new Error('Failed to create instrument'));
             }))
     }
-    
+
     deleteInstrument(sourceId: string): Observable<any> {
         return this.http.delete(`${this.localUrlV1}${sourceId}`).pipe(map(res => res))
     }
