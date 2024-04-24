@@ -55,9 +55,13 @@ export class FormMerchantComponent implements OnInit, OnDestroy {
     private setupSubscriptions(): void {
         this.form.valueChanges.pipe(
             debounceTime(500),
-            switchMap(async (formValue) => this.storageService.save(formValue, this.storageService.merchantFormKey)),
+            /*switchMap(async (formValue) => this.storageService.save(formValue, this.storageService.merchantFormKey)),*/
             takeUntil(this.unsubscribe)
-        ).subscribe(() => this.formChange.emit(this.form));
+        ).subscribe(() => {
+            if (this.form.valid) {
+                this.formChange.emit(this.form)
+            }
+        });
 
         this.form.get('url').valueChanges.pipe(
             takeUntil(this.unsubscribe)

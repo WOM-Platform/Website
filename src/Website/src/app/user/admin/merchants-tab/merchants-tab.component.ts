@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Output} from '@angular/core';
 import {MatIcon} from "@angular/material/icon";
 import {
-    AddMerchantDialogComponent,
+    DialogCreateMerchant,
     MerchantDialogData
 } from "../../components/dialog-create-merchant/dialog-create-merchant";
 import {DialogType} from "../../../_models/dialogType";
@@ -27,7 +27,7 @@ export class MerchantsTabComponent {
         const merchantDialogData = new MerchantDialogData();
         merchantDialogData.data = null;
         merchantDialogData.type = DialogType.create;
-        const dialogRef = this.matDialog.open(AddMerchantDialogComponent, {
+        const dialogRef = this.matDialog.open(DialogCreateMerchant, {
             data: merchantDialogData
         });
         dialogRef.afterClosed().subscribe(result => {

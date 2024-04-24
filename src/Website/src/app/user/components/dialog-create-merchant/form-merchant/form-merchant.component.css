@@ -7,7 +7,7 @@ mat-divider.mat-divider-inset {
 }
 
 .input-create {
-    @apply bg-[#e5e5e5] h-[3rem] rounded-xl px-6
+    @apply bg-[#e5e5e5] py-2 rounded-xl px-6
 }
 
 .invalid-input {

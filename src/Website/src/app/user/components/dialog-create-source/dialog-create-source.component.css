@@ -1,9 +1,9 @@
-.dialog-view{
+.dialog-view {
     @apply flex flex-col px-10 py-8
 }
 
 .input-create {
-    @apply bg-[#e5e5e5] w-full h-[3rem] rounded-xl px-6 max-w-[500px]
+    @apply bg-[#e5e5e5] w-full rounded-xl px-6 py-2 max-w-[500px]
 }
 
 .btn-cancel {
@@ -26,7 +26,8 @@
     padding: 0;
     list-style-type: disc;
 }
-.access-list li{
+
+.access-list li {
     @apply ml-6
 }
 

@@ -1,6 +1,6 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {AddMerchantDialogComponent} from './components/dialog-create-merchant/dialog-create-merchant';
+import {DialogCreateMerchant} from './components/dialog-create-merchant/dialog-create-merchant';
 import {AddPosDialogComponent} from './components/dialog-create-pos/add-pos.component';
 
 import {UserHomeComponent} from './home/user-home.component';
@@ -30,7 +30,7 @@ import {MerchantsTabComponent} from "./admin/merchants-tab/merchants-tab.compone
 @NgModule({
     declarations: [
         AimsTabComponent,
-        AddMerchantDialogComponent,
+        DialogCreateMerchant,
         AddPosDialogComponent,
         SourceAccessList,
         DialogViewUserComponent,

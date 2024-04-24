@@ -12,7 +12,7 @@ import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
     templateUrl: 'dialog-create-merchant.html',
     styleUrls: ['dialog-create-merchant.css']
 })
-export class AddMerchantDialogComponent implements OnInit {
+export class DialogCreateMerchant implements OnInit {
     formMerchant: UntypedFormGroup;
     formInputError: boolean;
     formApiError: boolean;
@@ -20,7 +20,7 @@ export class AddMerchantDialogComponent implements OnInit {
     merchantData: Merchant;
 
     constructor(@Inject(MAT_DIALOG_DATA) public data: MerchantDialogData,
-                public dialogRef: MatDialogRef<AddMerchantDialogComponent>,
+                public dialogRef: MatDialogRef<DialogCreateMerchant>,
                 private merchantService: MerchantService,
                 private cd: ChangeDetectorRef,
                 private storageService: StorageService) {
