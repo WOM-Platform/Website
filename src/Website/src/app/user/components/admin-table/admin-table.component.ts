@@ -10,6 +10,7 @@ import {
 } from "@angular/material/table";
 import {MatIcon} from "@angular/material/icon";
 import {NgClass, NgForOf, NgIf, TitleCasePipe} from "@angular/common";
+import {SharedModule} from "../../../shared/shared.module";
 
 @Component({
     selector: 'app-admin-table',
@@ -27,7 +28,8 @@ import {NgClass, NgForOf, NgIf, TitleCasePipe} from "@angular/common";
         NgForOf,
         NgIf,
         TitleCasePipe,
-        NgClass
+        NgClass,
+        SharedModule
     ],
     templateUrl: './admin-table.component.html',
     styleUrl: './admin-table.component.css'
@@ -36,6 +38,11 @@ export class AdminTableComponent implements OnInit {
     @Input() tableData;
     @Input() tableColumns
     @Input() isActions;
+    @Input() currentPage: number;
+    @Input() itemsPerPage: string;
+    @Input() totalItems: number;
+    @Input() pageCount: number;
+    @Output() pageChanged: EventEmitter<number> = new EventEmitter();
 
     @Output() deleteItem: EventEmitter<any> = new EventEmitter<any>();
     @Output() viewItem = new EventEmitter<any>();
@@ -56,5 +63,9 @@ export class AdminTableComponent implements OnInit {
 
     onDeleteItem(item) {
         this.deleteItem.emit(item)
+    }
+
+    onPageChange(page: number) {
+        this.pageChanged.emit(page)
     }
 }

@@ -17,7 +17,7 @@ import {MatPaginator} from "@angular/material/paginator";
 })
 export class PaginationComponent implements OnInit, OnChanges {
     @Input() currentPage: number;
-    @Input() itemsPerPage: number;
+    @Input() itemsPerPage: string;
     @Input() totalItems: number;
     @Input() pageCount: number;
     @Output() pageChanged: EventEmitter<number> = new EventEmitter();

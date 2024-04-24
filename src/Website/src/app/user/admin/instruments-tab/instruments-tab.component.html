@@ -34,15 +34,13 @@
     <app-admin-table [tableData]="instrumentsList"
                      [tableColumns]="instrumentsTableColumns"
                      [isActions]="true"
+                     [currentPage]="currentPage"
+                     [itemsPerPage]="itemsPerPage"
+                     [totalItems]="totalItems"
+                     [pageCount]="pageCount"
                      (viewItem)="onViewSource($event)"
                      (deleteItem)="onDeleteSource($event)"
                      (editItem)="onEditSource($event)"
+                     (pageChanged)="onPageChange($event)"
     ></app-admin-table>
-</div>
-<div *ngIf="totalItems" class="mt-11">
-    <app-pagination [currentPage]="currentPage"
-                    [itemsPerPage]="itemsPerPage"
-                    [totalItems]="totalItems"
-                    [pageCount]="pageCount"
-                    (pageChanged)="onPageChange($event)"></app-pagination>
 </div>
