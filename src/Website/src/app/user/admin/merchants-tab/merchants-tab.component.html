@@ -5,4 +5,20 @@
         <mat-icon>add</mat-icon>
         Nuovo Merchant
     </button>
+    <div *ngIf="merchantsList">
+        <app-admin-table [tableData]="merchantsList"
+                         [tableColumns]="merchantsTableColumns"
+                         [isActions]="true"
+                         (viewItem)="onViewMerchant($event)"
+                         (deleteItem)="onDeleteMerchant($event)"
+                         (editItem)="onEditMerchant($event)"
+        ></app-admin-table>
+    </div>
+    <!--    <div *ngIf="totalItems" class="mt-11">
+            <app-pagination [currentPage]="currentPage"
+                            [itemsPerPage]="itemsPerPage"
+                            [totalItems]="totalItems"
+                            [pageCount]="pageCount"
+                            (pageChanged)="onPageChange($event)"></app-pagination>
+        </div>-->
 </div>

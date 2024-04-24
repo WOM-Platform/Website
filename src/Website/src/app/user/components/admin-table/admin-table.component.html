@@ -43,6 +43,13 @@
             <p class="text-gray-500">Nessun risultato</p>
         </div>
     </ng-template>
+    <div *ngIf="totalItems" class="mt-11">
+        <app-pagination [currentPage]="currentPage"
+                        [itemsPerPage]="itemsPerPage"
+                        [totalItems]="totalItems"
+                        [pageCount]="pageCount"
+                        (pageChanged)="onPageChange($event)"></app-pagination>
+    </div>
 </div>
 <!--<table class="mt-6 w-full shadow-lg bg-white rounded-lg overflow-hidden" mat-table [dataSource]="tableData">
 

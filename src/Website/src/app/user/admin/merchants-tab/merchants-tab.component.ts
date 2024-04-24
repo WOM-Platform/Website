@@ -7,18 +7,28 @@ import {
 import {DialogType} from "../../../_models/dialogType";
 import {first} from "rxjs/operators";
 import {MatDialog} from "@angular/material/dialog";
+import {AdminTableComponent} from "../../components/admin-table/admin-table.component";
+import {NgIf} from "@angular/common";
+import {SharedModule} from "../../../shared/shared.module";
+import {Merchant} from "../../../_models";
 
 @Component({
     selector: 'app-merchants-tab',
     standalone: true,
     imports: [
-        MatIcon
+        MatIcon,
+        AdminTableComponent,
+        NgIf,
+        SharedModule
     ],
     templateUrl: './merchants-tab.component.html',
     styleUrl: './merchants-tab.component.css'
 })
 export class MerchantsTabComponent {
     @Output() isLoading = new EventEmitter<boolean>()
+
+    merchantsList
+    merchantsTableColumns
 
     constructor(public matDialog: MatDialog,) {
     }
@@ -39,5 +49,14 @@ export class MerchantsTabComponent {
                       });*/
             }
         });
+    }
+
+    onViewMerchant(merchant: Merchant) {
+    }
+
+    onDeleteMerchant(merchant: Merchant) {
+    }
+
+    onEditMerchant(merchant: Merchant) {
     }
 }
