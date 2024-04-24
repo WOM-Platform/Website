@@ -96,6 +96,12 @@ export class InstrumentsTabComponent implements OnInit, OnDestroy {
         });
     }
 
+    onUpdateItemsPerPage(value: string) {
+        this.itemsPerPage = value
+
+        this.getSourcesList()
+    }
+
     private processAccess(user, result) {
         if (result.access && result.access.length > 0) {
             const accessSub = this.sourceService.addAccessSequentially(user.id, result.access).subscribe({
@@ -240,10 +246,11 @@ export class InstrumentsTabComponent implements OnInit, OnDestroy {
         this.getSourcesList();
     }
 
-    getSourcesList(itemsPerPage: string = '10') {
+    getSourcesList() {
         this.isLoading.emit(true)
+
         this.subscriptions.add(
-            this.sourceService.getInstrumentList(this.searchParameters, this.currentPage, itemsPerPage)
+            this.sourceService.getInstrumentList(this.searchParameters, this.currentPage, this.itemsPerPage)
                 .pipe(
                     catchError(error => {
                         console.error('Error fetching instruments:', error);

@@ -22,7 +22,7 @@
             Filtri:
         </p>
         <select [(ngModel)]="itemsPerPage" class="bg-white border-[1px] border-black rounded-lg py-0.5"
-                (change)="getSourcesList(itemsPerPage)">
+                (change)="onUpdateItemsPerPage(itemsPerPage)">
             <option>10</option>
             <option>15</option>
             <option>25</option>
