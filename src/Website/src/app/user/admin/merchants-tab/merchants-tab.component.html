@@ -9,16 +9,14 @@
         <app-admin-table [tableData]="merchantsList"
                          [tableColumns]="merchantsTableColumns"
                          [isActions]="true"
+                         [currentPage]="currentPage"
+                         [itemsPerPage]="itemsPerPage"
+                         [totalItems]="totalItems"
+                         [pageCount]="pageCount"
                          (viewItem)="onViewMerchant($event)"
                          (deleteItem)="onDeleteMerchant($event)"
                          (editItem)="onEditMerchant($event)"
+                         (pageChanged)="onPageChange($event)"
         ></app-admin-table>
     </div>
-    <!--    <div *ngIf="totalItems" class="mt-11">
-            <app-pagination [currentPage]="currentPage"
-                            [itemsPerPage]="itemsPerPage"
-                            [totalItems]="totalItems"
-                            [pageCount]="pageCount"
-                            (pageChanged)="onPageChange($event)"></app-pagination>
-        </div>-->
 </div>
