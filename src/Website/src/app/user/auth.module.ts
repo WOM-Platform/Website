@@ -25,6 +25,7 @@ import {AdminTableComponent} from "./components/admin-table/admin-table.componen
 import {InstrumentsTabComponent} from "./admin/instruments-tab/instruments-tab.component";
 import {UsersTabComponent} from "./admin/users-tab/users-tab.component";
 import {MerchantsTabComponent} from "./admin/merchants-tab/merchants-tab.component";
+import {FiltersComponent} from "./components/filters/filters.component";
 
 @NgModule({
     declarations: [
@@ -54,6 +55,7 @@ import {MerchantsTabComponent} from "./admin/merchants-tab/merchants-tab.compone
         SearchSourceComponent,
         UsersTabComponent,
         MerchantsTabComponent,
+        FiltersComponent,
     ],
 })
 export class AuthModule {
