@@ -12,38 +12,7 @@
     </button>
 </div>
 
-<div class="flex justify-between items-center mt-6">
-    <div class="relative">
-        <input
-                [(ngModel)]="searchParameters"
-                (ngModelChange)="searchTerms.next($event)"
-                class="pl-10 pr-4 py-2 border rounded-full text-gray-700 leading-tight focus:outline-none focus:border-blue-500 transition duration-200 ease-in-out"
-                placeholder="Ricerca..."
-        />
-        <mat-icon
-                class="absolute left-2 top-1/2 transform -translate-y-1/2 text-gray-500"
-                color="primary"
-        >
-            search
-        </mat-icon>
-    </div>
-    <div class="flex gap-2">
-        <p class="mb-0">
-            <mat-icon>filter_list</mat-icon>
-            Filtri:
-        </p>
-        <select
-                [(ngModel)]="itemsPerPage"
-                class="bg-white border-[1px] border-black rounded-lg py-0.5"
-                (change)="onUpdateItemsPerPage(itemsPerPage)"
-        >
-            <option>10</option>
-            <option>15</option>
-            <option>25</option>
-            <option>50</option>
-        </select>
-    </div>
-</div>
+<app-filters (filterEmit)="filterUpdate($event)"/>
 <div *ngIf="instrumentsList">
     <app-admin-table
             [tableData]="instrumentsList"
