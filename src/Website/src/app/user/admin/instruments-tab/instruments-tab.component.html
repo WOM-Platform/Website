@@ -1,18 +1,29 @@
+<div class="my-6">
+    <app-user-instrument/>
+</div>
 <div class="flex justify-between mt-6">
     <h2>Lista Instruments</h2>
-    <button class="flex justify-center border-2 px-4 py-2 rounded-full border-blue-600 bg-blue-200 hover:bg-blue-400"
-            (click)="onCreateSource()">
+    <button
+            class="flex justify-center border-2 px-4 py-2 rounded-full border-blue-600 bg-blue-200 hover:bg-blue-400"
+            (click)="onCreateSource()"
+    >
         <mat-icon>add</mat-icon>
         Nuovo Instrument
     </button>
 </div>
 
 <div class="flex justify-between items-center mt-6">
-    <div class="relative ">
-        <input [(ngModel)]="searchParameters" (ngModelChange)="searchTerms.next($event)"
-               class="pl-10 pr-4 py-2 border rounded-full text-gray-700 leading-tight focus:outline-none focus:border-blue-500 transition duration-200 ease-in-out"
-               placeholder="Ricerca...">
-        <mat-icon class="absolute left-2 top-1/2 transform -translate-y-1/2 text-gray-500" color="primary">
+    <div class="relative">
+        <input
+                [(ngModel)]="searchParameters"
+                (ngModelChange)="searchTerms.next($event)"
+                class="pl-10 pr-4 py-2 border rounded-full text-gray-700 leading-tight focus:outline-none focus:border-blue-500 transition duration-200 ease-in-out"
+                placeholder="Ricerca..."
+        />
+        <mat-icon
+                class="absolute left-2 top-1/2 transform -translate-y-1/2 text-gray-500"
+                color="primary"
+        >
             search
         </mat-icon>
     </div>
@@ -21,8 +32,11 @@
             <mat-icon>filter_list</mat-icon>
             Filtri:
         </p>
-        <select [(ngModel)]="itemsPerPage" class="bg-white border-[1px] border-black rounded-lg py-0.5"
-                (change)="onUpdateItemsPerPage(itemsPerPage)">
+        <select
+                [(ngModel)]="itemsPerPage"
+                class="bg-white border-[1px] border-black rounded-lg py-0.5"
+                (change)="onUpdateItemsPerPage(itemsPerPage)"
+        >
             <option>10</option>
             <option>15</option>
             <option>25</option>
@@ -31,16 +45,17 @@
     </div>
 </div>
 <div *ngIf="instrumentsList">
-    <app-admin-table [tableData]="instrumentsList"
-                     [tableColumns]="instrumentsTableColumns"
-                     [isActions]="true"
-                     [currentPage]="currentPage"
-                     [itemsPerPage]="itemsPerPage"
-                     [totalItems]="totalItems"
-                     [pageCount]="pageCount"
-                     (viewItem)="onViewSource($event)"
-                     (deleteItem)="onDeleteSource($event)"
-                     (editItem)="onEditSource($event)"
-                     (pageChanged)="onPageChange($event)"
+    <app-admin-table
+            [tableData]="instrumentsList"
+            [tableColumns]="instrumentsTableColumns"
+            [isActions]="true"
+            [currentPage]="currentPage"
+            [itemsPerPage]="itemsPerPage"
+            [totalItems]="totalItems"
+            [pageCount]="pageCount"
+            (viewItem)="onViewSource($event)"
+            (deleteItem)="onDeleteSource($event)"
+            (editItem)="onEditSource($event)"
+            (pageChanged)="onPageChange($event)"
     ></app-admin-table>
 </div>

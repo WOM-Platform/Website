@@ -21,9 +21,24 @@ import {DialogConfirmComponent} from "../../components/dialog-confirm/dialog-con
 import {MatDialog} from "@angular/material/dialog";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {Router} from "@angular/router";
+import {MatIcon} from "@angular/material/icon";
+import {MatAccordion, MatExpansionPanel, MatExpansionPanelTitle} from "@angular/material/expansion";
+import {NgIf} from "@angular/common";
+import {MatTooltip} from "@angular/material/tooltip";
+import {SharedModule} from "../../shared/shared.module";
 
 @Component({
     selector: "app-user-merchant",
+    standalone: true,
+    imports: [
+        MatIcon,
+        MatAccordion,
+        MatExpansionPanel,
+        MatExpansionPanelTitle,
+        NgIf,
+        MatTooltip,
+        SharedModule
+    ],
     templateUrl: "./user-merchant.component.html",
     styleUrls: ["./user-merchant.component.css"],
 })
