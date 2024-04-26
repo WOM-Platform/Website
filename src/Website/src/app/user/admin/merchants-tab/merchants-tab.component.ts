@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Output} from '@angular/core';
+import {ChangeDetectorRef, Component, EventEmitter, Output} from '@angular/core';
 import {MatIcon} from "@angular/material/icon";
 import {
     DialogCreateMerchant,
@@ -11,6 +11,9 @@ import {AdminTableComponent} from "../../components/admin-table/admin-table.comp
 import {NgIf} from "@angular/common";
 import {SharedModule} from "../../../shared/shared.module";
 import {Merchant} from "../../../_models";
+import {MerchantService} from "../../../_services";
+import {StorageService} from "../../../_services/storage.service";
+import {UserMerchantComponent} from "../../merchant/user-merchant.component";
 
 @Component({
     selector: 'app-merchants-tab',
@@ -18,6 +21,7 @@ import {Merchant} from "../../../_models";
     imports: [
         MatIcon,
         AdminTableComponent,
+        UserMerchantComponent,
         NgIf,
         SharedModule
     ],
@@ -30,7 +34,20 @@ export class MerchantsTabComponent {
     merchantsList
     merchantsTableColumns
 
-    constructor(public matDialog: MatDialog,) {
+    currentPage: number = 1;
+    itemsPerPage: string = '10';
+    pageCount: number;
+    totalItems: number;
+
+    formApiError: boolean;
+
+    constructor(public matDialog: MatDialog,
+                private merchantService: MerchantService,
+                private cd: ChangeDetectorRef,
+                private storageService: StorageService) {
+    }
+
+    getMerchantsList() {
     }
 
     onCreateMerchant() {
@@ -40,8 +57,16 @@ export class MerchantsTabComponent {
         const dialogRef = this.matDialog.open(DialogCreateMerchant, {
             data: merchantDialogData
         });
-        dialogRef.afterClosed().subscribe(result => {
-            if (result) {
+        dialogRef.afterClosed().subscribe(merchant => {
+            console.log("create close ", merchant)
+            if (merchant) {
+                this.merchantService.register(merchant).pipe(first()).subscribe(
+                    result => {
+                        this.storageService.clear(this.storageService.merchantFormKey);
+                    }, error => {
+                        this.formApiError = true;
+                        console.log(error);
+                    });
                 /*  this.loadData();
                   this.translate.get('USER.ADD_MERCHANT.SUCCESS').pipe(first()).subscribe(
                       response => {
@@ -58,5 +83,17 @@ export class MerchantsTabComponent {
     }
 
     onEditMerchant(merchant: Merchant) {
+        /*    this.merchantService.update(merchant).pipe(first()).subscribe(
+                result => {
+                    this.storageService.clear(this.storageService.merchantFormKey);
+                }, error => {
+                    this.formApiError = true;
+                    console.log(error);
+                });*/
+    }
+
+    onPageChange(page: number): void {
+        this.currentPage = page;
+        this.getMerchantsList();
     }
 }

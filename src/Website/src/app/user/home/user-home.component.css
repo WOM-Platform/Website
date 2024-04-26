@@ -3,7 +3,7 @@
     margin-right: 0;
 }
 
-mat-panel-title{
+mat-panel-title {
     font-weight: bold;
 }
 
@@ -13,4 +13,23 @@ p {
 
 .pos-card {
     margin-top: 1em;
+}
+
+
+.loading-overlay {
+    position: fixed; /* or 'absolute' if only within a specific container */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(128, 128, 128, 0.5); /* Gray background with transparency */
+    z-index: 1000; /* Ensure it covers other content */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.loading-image {
+    width: 100px; /* Adjust size as necessary */
+    height: auto;
 }

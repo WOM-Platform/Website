@@ -1,23 +1,22 @@
-import {NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common';
-import {DialogCreateMerchant} from './components/dialog-create-merchant/dialog-create-merchant';
-import {AddPosDialogComponent} from './components/dialog-create-pos/add-pos.component';
+import {NgModule} from "@angular/core";
+import {CommonModule} from "@angular/common";
+import {DialogCreateMerchant} from "./components/dialog-create-merchant/dialog-create-merchant";
+import {AddPosDialogComponent} from "./components/dialog-create-pos/add-pos.component";
 
-import {UserHomeComponent} from './home/user-home.component';
-import {UserMerchantComponent} from './merchant/user-merchant.component';
-import {UserNotVerifiedComponent} from './not-verified/user-not-verified.component';
-import {UserVerifyComponent} from './verify/user-verify.component';
-import {AuthRouting} from './auth.routing';
+import {UserHomeComponent} from "./home/user-home.component";
+import {UserNotVerifiedComponent} from "./not-verified/user-not-verified.component";
+import {UserVerifyComponent} from "./verify/user-verify.component";
+import {AuthRouting} from "./auth.routing";
 
-import {FormMerchantComponent} from './components/dialog-create-merchant/form-merchant/form-merchant.component';
-import {PosFormComponent} from '../_forms/pos/forms-pos.directive';
-import {MerchantStatsComponent} from './stats/merchant/merchant-stats.component';
-import {UserStatsComponent} from './stats/user-stats.component';
-import {MapComponent} from '../components/map/map.component';
-import {SharedModule} from '../shared/shared.module';
+import {FormMerchantComponent} from "./components/dialog-create-merchant/form-merchant/form-merchant.component";
+import {PosFormComponent} from "../_forms/pos/forms-pos.directive";
+import {MerchantStatsComponent} from "./stats/merchant/merchant-stats.component";
+import {UserStatsComponent} from "./stats/user-stats.component";
+import {MapComponent} from "../components/map/map.component";
+import {SharedModule} from "../shared/shared.module";
 
-import {UserAdminComponent} from './admin/user-admin.component';
-import {UserInstrumentComponent} from './instrument/user-instrument.component';
+import {UserAdminComponent} from "./admin/user-admin.component";
+import {UserInstrumentComponent} from "./instrument/user-instrument.component";
 import {SourceAccessList} from "./components/source-access-list/source-access-list";
 import {SearchSourceComponent} from "./components/source-access-list/search-source/search-source.component";
 import {DialogViewUserComponent} from "./components/dialog-view-user/dialog-view-user.component";
@@ -34,6 +33,7 @@ import {MerchantsTabComponent} from "./admin/merchants-tab/merchants-tab.compone
         AddPosDialogComponent,
         SourceAccessList,
         DialogViewUserComponent,
+        InstrumentsTabComponent,
         MapComponent,
         FormMerchantComponent,
         MerchantStatsComponent,
@@ -41,24 +41,20 @@ import {MerchantsTabComponent} from "./admin/merchants-tab/merchants-tab.compone
         UserAdminComponent,
         UserHomeComponent,
         UserInstrumentComponent,
-        UserMerchantComponent,
         UserNotVerifiedComponent,
         UserStatsComponent,
         UserVerifyComponent,
     ],
-    exports: [
-        SourceAccessList
-    ],
+    exports: [SourceAccessList],
     imports: [
         AdminTableComponent,
         AuthRouting,
         CommonModule,
-        InstrumentsTabComponent,
         SharedModule,
         SearchSourceComponent,
         UsersTabComponent,
         MerchantsTabComponent,
-    ]
+    ],
 })
 export class AuthModule {
 }
