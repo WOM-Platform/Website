@@ -1,4 +1,4 @@
-import {ChangeDetectorRef, Component, Inject, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, Inject, OnInit, Output} from '@angular/core';
 import {Merchant} from '../../../_models';
 import {first} from 'rxjs/operators';
 import {UntypedFormGroup} from '@angular/forms';
@@ -33,18 +33,10 @@ export class DialogCreateMerchant implements OnInit {
 
     onSubmit(): any {
         if (this.formMerchant.invalid) {
-            for (const control of Object.keys(this.formMerchant.controls)) {
-                this.formMerchant.controls[control].markAsTouched();
-            }
+            this.formMerchant.markAsTouched()
+            return
         } else {
-            switch (this.data.type) {
-                case DialogType.create:
-                    this.create();
-                    break;
-                case DialogType.edit:
-                    this.edit();
-                    break;
-            }
+            this.data.type === DialogType.create ? this.create() : this.edit()
         }
     }
 
@@ -54,21 +46,13 @@ export class DialogCreateMerchant implements OnInit {
 
     create(): any {
         const merchant = this.createMerchantDataStruct();
-
-        console.log("MERCHANT TO CERATE ", merchant)
-        this.merchantService.register(merchant).pipe(first()).subscribe(
-            result => {
-                this.dialogRef.close(true);
-                this.storageService.clear(this.storageService.merchantFormKey);
-            }, error => {
-                this.formApiError = true;
-                console.log(error);
-            });
+        this.dialogRef.close(merchant)
     }
 
     edit(): any {
         const merchant = this.createMerchantDataStruct();
         merchant.id = this.merchantData.id;
+        this.dialogRef.close(merchant)
         this.merchantService.update(merchant).pipe(first()).subscribe(
             result => {
                 this.dialogRef.close(true);
@@ -85,7 +69,7 @@ export class DialogCreateMerchant implements OnInit {
         merchant.fiscalCode = this.formMerchant.controls.fiscalCode.value;
         merchant.country = this.formMerchant.controls.country.value;
         merchant.city = this.formMerchant.controls.city.value;
-        merchant.zipCode = this.formMerchant.controls.cap.value;
+        merchant.zipCode = this.formMerchant.controls.zipCode.value;
         merchant.address = this.formMerchant.controls.address.value;
         merchant.primaryActivity = this.formMerchant.controls.primaryActivity.value;
         merchant.name = this.formMerchant.controls.name.value;

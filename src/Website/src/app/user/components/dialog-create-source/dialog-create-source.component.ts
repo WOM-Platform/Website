@@ -18,8 +18,6 @@ export class DialogCreateSourceComponent implements OnInit, OnDestroy {
     constructor(
         private fb: FormBuilder,
         public dialogRef: MatDialogRef<DialogCreateSourceComponent>,
-        private sourceService: SourceService,
-        private cd: ChangeDetectorRef,
         @Inject(MAT_DIALOG_DATA) public data: any,
     ) {
     }

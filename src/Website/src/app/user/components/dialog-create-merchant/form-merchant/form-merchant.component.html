@@ -12,8 +12,11 @@
         </div>
         <div class="flex flex-col justify-start gap-2 items-start">
             <label class="w-52">{{ 'SIGN_UP.MERCHANT.CF' | translate }}<span class="text-red-600">*</span>:</label>
-            <input #cf type="text" formControlName="fiscalCode" class="input-create w-96 uppercase"
-                   [ngClass]="{'invalid-input': isControlInvalidAndTouched('fiscalCode')}" maxlength="16">
+            <input #cf type="text" formControlName="fiscalCode"
+                   [ngClass]="{'invalid-input': isControlInvalidAndTouched('fiscalCode'), 'input-edit': merchant !== null, 'input-create': merchant === null}"
+                   class=" w-96 uppercase"
+
+                   maxlength="16">
             <mat-hint class="pl-4 text-xs">{{ cf.value.length }} / 16</mat-hint>
             <div class="text-red-600 text-xs pl-4" *ngIf="isControlInvalidAndTouched('fiscalCode')">
                 {{ 'SIGN_UP.MERCHANT.CF_ERROR' | translate }}
@@ -36,14 +39,14 @@
                 {{ 'SIGN_UP.MERCHANT.ADDRESS_ERROR' | translate }}
             </div>
         </div>
-       
+
         <div class="flex flex-col justify-start gap-2 items-start">
-            <label #cap class="w-52">{{ 'SIGN_UP.MERCHANT.CAP' | translate }}<span
+            <label class="w-52">{{ 'SIGN_UP.MERCHANT.CAP' | translate }}<span
                     class="text-red-600">*</span>:</label>
-            <input type="text" formControlName="cap" class="input-create w-32 uppercase" maxlength="5"
-                   [ngClass]="{'invalid-input': isControlInvalidAndTouched('cap')}">
-            <mat-hint>{{ form.get('cap').value.length }} / 5</mat-hint>
-            <div class="text-red-600 text-xs pl-4" *ngIf="isControlInvalidAndTouched('cap')">
+            <input type="text" formControlName="zipCode" class="input-create w-32 uppercase" maxlength="5"
+                   [ngClass]="{'invalid-input': isControlInvalidAndTouched('zipCode')}">
+            <mat-hint>{{ form.get('zipCode').value.length }} / 5</mat-hint>
+            <div class="text-red-600 text-xs pl-4" *ngIf="isControlInvalidAndTouched('zipCode')">
                 {{ 'SIGN_UP.MERCHANT.CAP_ERROR' | translate }}
             </div>
         </div>
@@ -76,7 +79,7 @@
             <label>{{ 'SIGN_UP.MERCHANT.BUSINESS' | translate }}<span
                     class="text-red-600">*</span>:</label>
             <mat-select formControlName="primaryActivity" class="input-create"
-                        [ngClass]="{'invalid-input':isControlInvalidAndTouched('primaryActivity')}">>
+                        [ngClass]="{'invalid-input':isControlInvalidAndTouched('primaryActivity')}">
                 <mat-option *ngFor="let business of businessList" [value]="business"
                 >{{ business }}
                 </mat-option

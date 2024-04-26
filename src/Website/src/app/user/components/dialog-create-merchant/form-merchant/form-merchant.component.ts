@@ -43,7 +43,7 @@ export class FormMerchantComponent implements OnInit, OnDestroy {
                 [Validators.required, Validators.minLength(11), Validators.maxLength(16)]
             ],
             address: ['', Validators.required],
-            cap: ['', Validators.required],
+            zipCode: ['', Validators.required],
             city: ['', Validators.required],
             country: ['', Validators.required],
             primaryActivity: ['', Validators.required],
@@ -58,6 +58,7 @@ export class FormMerchantComponent implements OnInit, OnDestroy {
             /*switchMap(async (formValue) => this.storageService.save(formValue, this.storageService.merchantFormKey)),*/
             takeUntil(this.unsubscribe)
         ).subscribe(() => {
+
             if (this.form.valid) {
                 this.formChange.emit(this.form)
             }
