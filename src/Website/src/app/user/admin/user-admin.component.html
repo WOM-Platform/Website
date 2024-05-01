@@ -7,7 +7,7 @@
         <mat-tab-group (selectedTabChange)="onTabChange($event.index)">
             <mat-tab label="Instruments">
                 <ng-container *ngIf="activeTabIndex === 0">
-                    <app-instruments-tab (isLoading)="onLoading($event)"></app-instruments-tab>
+                    <app-instruments-tab></app-instruments-tab>
                 </ng-container>
             </mat-tab>
             <mat-tab label="Merchants">
@@ -22,7 +22,7 @@
             </mat-tab>
             <mat-tab label="Aims">
                 <ng-container *ngIf="activeTabIndex === 3">
-                    <app-aims-tab (isLoading)="onLoading($event)"></app-aims-tab>
+                    <app-aims-tab></app-aims-tab>
                 </ng-container>
             </mat-tab>
         </mat-tab-group>

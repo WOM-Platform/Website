@@ -1,15 +1,16 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
-import {AdminTableComponent} from "../../components/admin-table/admin-table.component";
-import {AimsService} from "../../../_services";
-import {Aim, Titles} from "../../../_models";
+import {AdminTableComponent} from "../components/admin-table/admin-table.component";
+import {AimsService} from "../../_services";
+import {Aim, Titles} from "../../_models";
 import {NgIf} from "@angular/common";
+import {LoadingService} from "../../_services/loading.service";
 
 @Component({
     selector: 'app-aims-tab',
-    templateUrl: './aims-tab.component.html',
-    styleUrl: './aims-tab.component.css'
+    templateUrl: './user-aims.component.html',
+    styleUrl: './user-aims.component.css'
 })
-export class AimsTabComponent implements OnInit {
+export class UserAimsComponent implements OnInit {
     aimsTableColumns: any[] = [
         {field: 'code', hideOnMobile: false},
         {field: 'it', hideOnMobile: false},
@@ -18,14 +19,13 @@ export class AimsTabComponent implements OnInit {
     ]
 
     aimsData: any[]
-    @Output() isLoading = new EventEmitter<boolean>()
-
-    constructor(private aimsService: AimsService) {
+    
+    constructor(private aimsService: AimsService, private loadingService: LoadingService) {
     }
 
     ngOnInit() {
-        this.isLoading.emit(true);
-        
+        this.loadingService.show()
+
         this.aimsService.getAll().subscribe(res => {
             this.aimsData = res.map((aim: Aim) => {
                 let transformedAim = {
@@ -36,7 +36,7 @@ export class AimsTabComponent implements OnInit {
                 };
                 return transformedAim;
             });
-            this.isLoading.emit(false);
+            this.loadingService.hide()
         });
     }
 

@@ -12,7 +12,6 @@ import {
     PosDialogData,
 } from "../components/dialog-create-pos/add-pos.component";
 import {DialogType} from "../../_models/dialogType";
-import {Subscription} from "rxjs";
 import {EmailService} from "../../_services/email.service";
 import {EmailData} from "../../_models/emailData";
 import {environment} from "../../../environments/environment";
@@ -21,35 +20,23 @@ import {DialogConfirmComponent} from "../../components/dialog-confirm/dialog-con
 import {MatDialog} from "@angular/material/dialog";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {Router} from "@angular/router";
-import {MatIcon} from "@angular/material/icon";
-import {MatAccordion, MatExpansionPanel, MatExpansionPanelTitle} from "@angular/material/expansion";
-import {NgIf} from "@angular/common";
-import {MatTooltip} from "@angular/material/tooltip";
-import {SharedModule} from "../../shared/shared.module";
+import {StorageService} from "../../_services/storage.service";
 
 @Component({
     selector: "app-user-merchant",
-    standalone: true,
-    imports: [
-        MatIcon,
-        MatAccordion,
-        MatExpansionPanel,
-        MatExpansionPanelTitle,
-        NgIf,
-        MatTooltip,
-        SharedModule
-    ],
-    templateUrl: "./user-merchant.component.html",
-    styleUrls: ["./user-merchant.component.css"],
+    templateUrl: "./user-merchants.component.html",
+    styleUrls: ["./user-merchants.component.css"],
 })
-export class UserMerchantComponent implements OnInit, OnDestroy {
+export class UserMerchantsComponent implements OnInit, OnDestroy {
     username: string;
     merchants: Merchants;
+    currentUser: any;
 
     constructor(
         public dialog: MatDialog,
         private authService: AuthService,
         private emailService: EmailService,
+        private storageService: StorageService,
         private router: Router,
         private snackBar: MatSnackBar,
         private translate: TranslateService,
@@ -69,7 +56,8 @@ export class UserMerchantComponent implements OnInit, OnDestroy {
     }
 
     loadData(): any {
-        this.merchants = JSON.parse(localStorage.getItem("merchantData"));
+        this.merchants = this.storageService.load("merchantData")
+        this.currentUser = this.storageService.load("currentUser")
     }
 
     addPos(merchantId: string): any {

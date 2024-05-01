@@ -1,4 +1,12 @@
-import {Component, EventEmitter, Inject, Output, ChangeDetectionStrategy, ChangeDetectorRef} from '@angular/core';
+import {
+    Component,
+    EventEmitter,
+    Inject,
+    Output,
+    ChangeDetectionStrategy,
+    ChangeDetectorRef,
+    Input
+} from '@angular/core';
 import {MAT_DIALOG_DATA} from "@angular/material/dialog";
 
 @Component({
@@ -8,6 +16,7 @@ import {MAT_DIALOG_DATA} from "@angular/material/dialog";
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DialogViewUserComponent {
+
     @Output() deleteAccess = new EventEmitter<any>();
     @Output() newAccess = new EventEmitter<any>();
 
@@ -17,13 +26,19 @@ export class DialogViewUserComponent {
     accessUsers: any[];
     action: string;
     createNewAccess = false;
+    viewValues;
+    viewKeys;
 
     constructor(@Inject(MAT_DIALOG_DATA) public data: any, private cd: ChangeDetectorRef) {
+
         this.id = data.id;
         this.name = data.name;
         this.url = data.url;
         this.accessUsers = data.access || [];
         this.action = data.action;
+        this.viewKeys = data.viewKeys;
+        this.viewValues = data.viewValues;
+        console.log("values ", this.viewValues)
     }
 
     onUpdateData(data: any): void {

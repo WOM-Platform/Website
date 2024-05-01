@@ -1,23 +1,33 @@
 <div class="dialog-view">
     <p class="text-center"><span class="font-semibold text-cyan-700">{{ name }}</span></p>
     <div class="source-data">
-        <p class="mb-0"><span class="font-semibold">Id</span>: {{ id }}</p>
-        <p class="mb-0"><span class="font-semibold ">Url</span>: {{ url }}</p>
+        <div *ngFor="let key of viewKeys">
+            <div *ngIf="key.isList; else noList">
+
+            </div>
+            <ng-template #noList>
+                <p class="mb-0"><span class="font-semibold">{{ key.field }}</span>: {{ viewValues[key.field] }}</p>
+            </ng-template>
+
+
+        </div>
     </div>
     <div *ngIf="accessUsers && accessUsers.length > 0" class="mt-10">
         <p class="font-semibold mb-0 ">Gestori:</p>
         <ul class="access-list">
             <li *ngFor="let access of accessUsers" class="">
                 <div class="access-item">
-                <div class="access-details">
-                    <div><span class="text-slate-600 font-semibold">Name</span>: {{ access.name }} {{ access.surname }}</div>
-                    <div><span class="text-slate-600 font-semibold">Email</span>: {{ access.email }}</div>
-                </div>
-                <ng-container *ngIf="action === 'edit'">
-                    <button class="delete-button text-red" (click)="onDeleteAccess(access)">
-                        <mat-icon class="text-red">delete</mat-icon>
-                    </button>
-                </ng-container>
+                    <div class="access-details">
+                        <div><span
+                                class="text-slate-600 font-semibold">Name</span>: {{ access.name }} {{ access.surname }}
+                        </div>
+                        <div><span class="text-slate-600 font-semibold">Email</span>: {{ access.email }}</div>
+                    </div>
+                    <ng-container *ngIf="action === 'edit'">
+                        <button class="delete-button text-red" (click)="onDeleteAccess(access)">
+                            <mat-icon class="text-red">delete</mat-icon>
+                        </button>
+                    </ng-container>
                 </div>
             </li>
         </ul>

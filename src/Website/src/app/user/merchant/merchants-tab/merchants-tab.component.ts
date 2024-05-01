@@ -1,4 +1,4 @@
-import {ChangeDetectorRef, Component, EventEmitter, Output} from '@angular/core';
+import {ChangeDetectorRef, Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {MatIcon} from "@angular/material/icon";
 import {
     DialogCreateMerchant,
@@ -13,7 +13,10 @@ import {SharedModule} from "../../../shared/shared.module";
 import {Merchant} from "../../../_models";
 import {MerchantService} from "../../../_services";
 import {StorageService} from "../../../_services/storage.service";
-import {UserMerchantComponent} from "../../merchant/user-merchant.component";
+import {UserMerchantsComponent} from "../user-merchants.component";
+import {FiltersComponent} from "../../components/filters/filters.component";
+import {DialogViewUserComponent} from "../../components/dialog-view-user/dialog-view-user.component";
+import {Subscription} from "rxjs";
 
 @Component({
     selector: 'app-merchants-tab',
@@ -21,30 +24,39 @@ import {UserMerchantComponent} from "../../merchant/user-merchant.component";
     imports: [
         MatIcon,
         AdminTableComponent,
-        UserMerchantComponent,
         NgIf,
-        SharedModule
+        SharedModule,
+        FiltersComponent
     ],
     templateUrl: './merchants-tab.component.html',
     styleUrl: './merchants-tab.component.css'
 })
-export class MerchantsTabComponent {
+export class MerchantsTabComponent implements OnInit {
     @Output() isLoading = new EventEmitter<boolean>()
 
     merchantsList
-    merchantsTableColumns
+    merchantsTableColumns = [{field: "name", hideOnMobile: false}, {field: "primaryActivity", hideOnMobile: false},]
 
     currentPage: number = 1;
     itemsPerPage: string = '10';
     pageCount: number;
     totalItems: number;
 
+    searchParameters = ""
     formApiError: boolean;
+
+    subscriptions = new Subscription()
 
     constructor(public matDialog: MatDialog,
                 private merchantService: MerchantService,
                 private cd: ChangeDetectorRef,
                 private storageService: StorageService) {
+    }
+
+    ngOnInit() {
+        /* TEMPORARY SECTION */
+        this.merchantsList = JSON.parse(localStorage.getItem("merchantData"));
+        console.log(this.merchantsList)
     }
 
     getMerchantsList() {
@@ -77,6 +89,33 @@ export class MerchantsTabComponent {
     }
 
     onViewMerchant(merchant: Merchant) {
+        const viewKeys = [
+            {field: 'id', isList: false},
+            {field: 'fiscalCode', isList: false},
+            {field: 'pos', isList: true},
+            {field: 'primaryActivity', isList: false},
+            {field: 'addressDetails[formattedAddress]', isList: false}
+        ]
+        console.log("cooo")
+        console.log(merchant.address, merchant.zipCode, merchant.city, merchant.country)
+        const dialogRef = this.matDialog.open(DialogViewUserComponent, {
+            width: "900px",
+            data: {
+                viewValues: merchant,
+                viewKeys: viewKeys,
+                id: merchant.id,
+                name: merchant.name,
+                url: merchant.url,
+                access: merchant["pos"],
+                action: "view",
+            },
+        });
+        const viewSub = dialogRef.afterClosed().subscribe((res) => {
+            this.isLoading.emit(false);
+            this.cd.markForCheck();
+
+        });
+        this.subscriptions.add(viewSub);
     }
 
     onDeleteMerchant(merchant: Merchant) {
@@ -94,6 +133,15 @@ export class MerchantsTabComponent {
 
     onPageChange(page: number): void {
         this.currentPage = page;
+        this.getMerchantsList();
+    }
+
+    filterUpdate(filter) {
+        if (this.currentPage != 1) this.currentPage = 1;
+        this.itemsPerPage = filter.get('itemsPerPage').value
+        if (filter.get('search').value.length >= 3 || filter.get('search').value.length === 0) {
+            this.searchParameters = filter.get('search').value
+        }
         this.getMerchantsList();
     }
 }
