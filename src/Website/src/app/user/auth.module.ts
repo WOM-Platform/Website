@@ -16,20 +16,22 @@ import {MapComponent} from "../components/map/map.component";
 import {SharedModule} from "../shared/shared.module";
 
 import {UserAdminComponent} from "./admin/user-admin.component";
-import {UserInstrumentComponent} from "./instrument/user-instrument.component";
+import {UserInstrumentsComponent} from "./instruments/user-instruments.component";
 import {SourceAccessList} from "./components/source-access-list/source-access-list";
 import {SearchSourceComponent} from "./components/source-access-list/search-source/search-source.component";
 import {DialogViewUserComponent} from "./components/dialog-view-user/dialog-view-user.component";
-import {AimsTabComponent} from "./admin/aims-tab/aims-tab.component";
 import {AdminTableComponent} from "./components/admin-table/admin-table.component";
-import {InstrumentsTabComponent} from "./admin/instruments-tab/instruments-tab.component";
-import {UsersTabComponent} from "./admin/users-tab/users-tab.component";
-import {MerchantsTabComponent} from "./admin/merchants-tab/merchants-tab.component";
+import {InstrumentsTabComponent} from "./instruments/instruments-tab/instruments-tab.component";
+import {UserUsersComponent} from "./users/user-users.component";
+import {MerchantsTabComponent} from "./merchant/merchants-tab/merchants-tab.component";
 import {FiltersComponent} from "./components/filters/filters.component";
+import {UserComponent} from "./user.component";
+import {UserMerchantsComponent} from "./merchant/user-merchants.component";
+import {UserAimsComponent} from "./aims/user-aims.component";
 
 @NgModule({
     declarations: [
-        AimsTabComponent,
+        UserAimsComponent,
         DialogCreateMerchant,
         AddPosDialogComponent,
         SourceAccessList,
@@ -41,9 +43,12 @@ import {FiltersComponent} from "./components/filters/filters.component";
         PosFormComponent,
         UserAdminComponent,
         UserHomeComponent,
-        UserInstrumentComponent,
+        UserMerchantsComponent,
+        UserInstrumentsComponent,
         UserNotVerifiedComponent,
         UserStatsComponent,
+        UserComponent,
+        UserUsersComponent,
         UserVerifyComponent,
     ],
     exports: [SourceAccessList],
@@ -53,7 +58,6 @@ import {FiltersComponent} from "./components/filters/filters.component";
         CommonModule,
         SharedModule,
         SearchSourceComponent,
-        UsersTabComponent,
         MerchantsTabComponent,
         FiltersComponent,
     ],

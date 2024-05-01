@@ -1,19 +1,18 @@
 import {
     ChangeDetectorRef,
     Component,
-    EventEmitter,
     OnDestroy,
     OnInit,
-    Output,
 } from "@angular/core";
 import {Subject, Subscription, throwError} from "rxjs";
 import {DialogCreateSourceComponent} from "../../components/dialog-create-source/dialog-create-source.component";
 import {DialogViewUserComponent} from "../../components/dialog-view-user/dialog-view-user.component";
 import {MatDialog, MatDialogRef} from "@angular/material/dialog";
-import {catchError, debounceTime} from "rxjs/operators";
+import {catchError} from "rxjs/operators";
 import {Router} from "@angular/router";
 import {SourceService} from "../../../_services/source.service";
 import {DialogConfirmCancelComponent} from "../../../components/dialog-confirm-cancel/dialog-confirm-cancel";
+import {LoadingService} from "../../../_services/loading.service";
 
 @Component({
     selector: "app-instruments-tab",
@@ -21,7 +20,6 @@ import {DialogConfirmCancelComponent} from "../../../components/dialog-confirm-c
     styleUrl: "./instruments-tab.component.css",
 })
 export class InstrumentsTabComponent implements OnInit, OnDestroy {
-    @Output() isLoading = new EventEmitter<any>();
     searchParameters: string = "";
     searchTerms = new Subject<string>();
 
@@ -45,7 +43,8 @@ export class InstrumentsTabComponent implements OnInit, OnDestroy {
         private router: Router,
         private sourceService: SourceService,
         private matDialog: MatDialog,
-        private cd: ChangeDetectorRef
+        private cd: ChangeDetectorRef,
+        private loadingService: LoadingService
     ) {
     }
 
@@ -77,7 +76,7 @@ export class InstrumentsTabComponent implements OnInit, OnDestroy {
 
         dialogRef.afterClosed().subscribe((result) => {
             if (result && result.name && result.url) {
-                this.isLoading.emit(true);
+                this.loadingService.show()
                 this.cd.markForCheck();
                 const createSub = this.sourceService
                     .createInstrument(result.name, result.url)
@@ -87,14 +86,14 @@ export class InstrumentsTabComponent implements OnInit, OnDestroy {
                         },
                         error: (err) => {
                             this.errorMessage = "Failed to create instrument.";
-                            this.isLoading.emit(false);
+                            this.loadingService.hide()
                             this.cd.markForCheck();
                         },
                     });
                 this.subscriptions.add(createSub);
             } else {
                 this.errorMessage = "Invalid input data.";
-                this.isLoading.emit(false);
+                this.loadingService.hide()
                 this.cd.markForCheck();
             }
         });
@@ -114,30 +113,30 @@ export class InstrumentsTabComponent implements OnInit, OnDestroy {
                     next: () => console.log("All access rights added successfully."),
                     error: (err) => {
                         console.error("Error adding access rights:", err);
-                        this.isLoading.emit(false);
+                        this.loadingService.hide()
                         this.cd.markForCheck();
                     },
                     complete: () => {
                         this.getSourcesList();
-                        this.isLoading.emit(false);
+                        this.loadingService.hide()
                         this.cd.markForCheck();
                     },
                 });
             this.subscriptions.add(accessSub);
         } else {
             this.getSourcesList();
-            this.isLoading.emit(false);
+            this.loadingService.hide()
             this.cd.markForCheck();
         }
     }
 
     onViewSource(user: any) {
-        this.isLoading.emit(true);
+        this.loadingService.show()
 
         const viewSub = this.sourceService
             .getInstrumentAccessList(user.id)
             .subscribe((res) => {
-                this.isLoading.emit(false);
+                this.loadingService.hide()
                 const dialogRef = this.matDialog.open(DialogViewUserComponent, {
                     width: "900px",
                     data: {
@@ -149,7 +148,7 @@ export class InstrumentsTabComponent implements OnInit, OnDestroy {
                     },
                 });
                 dialogRef.afterClosed().subscribe((res) => {
-                    this.isLoading.emit(false);
+                    this.loadingService.hide()
                     this.cd.markForCheck();
                 });
             });
@@ -281,7 +280,7 @@ export class InstrumentsTabComponent implements OnInit, OnDestroy {
     }
 
     getSourcesList() {
-        this.isLoading.emit(true);
+        this.loadingService.show()
 
         this.subscriptions.add(
             this.sourceService
@@ -293,7 +292,7 @@ export class InstrumentsTabComponent implements OnInit, OnDestroy {
                 .pipe(
                     catchError((error) => {
                         console.error("Error fetching instruments:", error);
-                        this.isLoading.emit(false);
+                        this.loadingService.hide()
                         return throwError(() => error);
                     })
                 )
@@ -303,7 +302,7 @@ export class InstrumentsTabComponent implements OnInit, OnDestroy {
                         this.pageCount = res.pageCount;
                         if (res["data"]) this.instrumentsList = res["data"];
                     }
-                    this.isLoading.emit(false);
+                    this.loadingService.hide()
                     this.cd.markForCheck();
                 })
         );

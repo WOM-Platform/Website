@@ -1,20 +1,13 @@
-.button-container {
-    float: right;
-    margin-right: 0;
+
+.icon-sidenav {
+    @apply text-xs
 }
 
-mat-panel-title {
-    font-weight: bold;
+.active-link {
+    background-color: #E9EDF3; /* Light gray background for the active link */
+    color: #405DBD; /* Darker text color for better contrast */
+    border-left: 3px solid #405DBD; /* Add a blue bar to the left of the active link */
 }
-
-p {
-    margin: 2px;
-}
-
-.pos-card {
-    margin-top: 1em;
-}
-
 
 .loading-overlay {
     position: fixed; /* or 'absolute' if only within a specific container */

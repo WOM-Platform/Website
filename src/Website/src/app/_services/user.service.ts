@@ -187,10 +187,17 @@ export class UserService {
     }
 
     me(): Observable<any> {
-        return this.http.get<any>(this.localUrlV1 + 'me').pipe(map(result => {
-            localStorage.setItem('merchantData', JSON.stringify(result.merchants))
-            localStorage.setItem('instrumentData', JSON.stringify(result.sources))
-            return result
+        return this.http.get<any>(this.localUrlV1 + 'me').pipe(map(user => {
+
+            user = User.fromJson(user);
+
+            // store user details in local storage to save user data in between page refreshes
+            localStorage.setItem('currentUser', JSON.stringify(user));
+            this.currentUserSubject.next(user);
+
+            localStorage.setItem('merchantData', JSON.stringify(user.merchants))
+            localStorage.setItem('instrumentData', JSON.stringify(user.sources))
+            return user
         }))
     }
 
