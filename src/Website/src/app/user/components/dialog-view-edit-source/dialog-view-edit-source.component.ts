@@ -11,11 +11,11 @@ import {MAT_DIALOG_DATA} from "@angular/material/dialog";
 
 @Component({
     selector: 'app-dialog-view-user',
-    templateUrl: './dialog-view-user.component.html',
-    styleUrls: ['./dialog-view-user.component.css'],
+    templateUrl: './dialog-view-edit-source.component.html',
+    styleUrls: ['./dialog-view-edit-source.component.css'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class DialogViewUserComponent {
+export class DialogViewEditSourceComponent {
 
     @Output() deleteAccess = new EventEmitter<any>();
     @Output() newAccess = new EventEmitter<any>();

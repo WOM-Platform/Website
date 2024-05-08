@@ -19,14 +19,9 @@ export class AimsService {
      */
     getAll(): Observable<Aim[]> {
         return this.http.get<Aim[]>(this.localUrlV2)
-            .pipe(map(response => {
-                /* const data: Aim[] = [];
-                 response.forEach((val: Aim) => {
-                     const prod = Aim.fromJson(val);
-                     data.push(prod);
-                 });
-                 return data;*/
-                return response['aims']
+            .pipe(map((response: Aim[]) => {
+                if (response)
+                    return response['aims']
             }));
     }
 

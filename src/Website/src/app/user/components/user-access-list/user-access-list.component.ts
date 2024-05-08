@@ -1,13 +1,13 @@
-import {ChangeDetectorRef, Component, EventEmitter, OnDestroy, Output, ViewChild} from '@angular/core';
+import {ChangeDetectorRef, Component, EventEmitter, Input, OnDestroy, Output, ViewChild} from '@angular/core';
 import {SearchSourceComponent} from "./search-source/search-source.component";
 import {UserService} from "../../../_services";
 import {animate, style, transition, trigger} from "@angular/animations";
 import {Subscription} from "rxjs";
 
 @Component({
-    selector: 'app-source-access-list',
-    templateUrl: './source-access-list.html',
-    styleUrl: './source-access-list.css',
+    selector: 'app-user-access-list',
+    templateUrl: './user-access-list.component.html',
+    styleUrl: './user-access-list.component.css',
     animations: [
         trigger('fadeInOut', [
             transition(':enter', [   // :enter is alias to 'void => *'
@@ -20,7 +20,8 @@ import {Subscription} from "rxjs";
         ])
     ]
 })
-export class SourceAccessList implements OnDestroy {
+export class UserAccessListComponent implements OnDestroy {
+    @Input() isRoleRequired: boolean = false;
     @Output() accessToAdd = new EventEmitter<any>()
     @ViewChild(SearchSourceComponent) searchSourceComponent: SearchSourceComponent;
 
@@ -67,7 +68,6 @@ export class SourceAccessList implements OnDestroy {
                 this.cd.markForCheck();
             })
         }
-
     }
 
     onCreateAccess(userToAdd: any) {

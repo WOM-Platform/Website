@@ -6,67 +6,74 @@
 
 /* COLOR STYLES */
 .green-icon {
-  color: green;
+    color: green;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
 }
 
 html,
 body {
-  height: 100%;
-  background: #fbfbfb;
+    height: 100%;
+    background: #fbfbfb;
 }
 
 body {
-  margin: 0;
-  font-family: "Raleway", sans-serif !important;
+    margin: 0;
+    font-family: "Raleway", sans-serif !important;
 }
 
 .h2-margin-bottom {
-  @apply mb-3;
+    @apply mb-3;
 }
 
 .container {
-  @apply mx-auto max-w-screen-lg mb-20;
+    @apply mx-auto max-w-screen-lg mb-20;
 }
 
 .banner-width {
-  max-width: calc(1024px + 100px);
-  @apply mx-auto;
+    max-width: calc(1024px + 100px);
+    @apply mx-auto;
 }
 
 .margin-top-p {
-  @apply mt-12;
+    @apply mt-12;
 }
+
 /* This fixes pages with sidebar, which otherwise collapse */
 mat-sidenav-content {
-  min-height: 100vh;
+    min-height: 100vh;
 }
 
 .mat-card {
-  padding: 5px;
+    padding: 5px;
 }
 
 .mat-form-field-infix {
-  width: fit-content !important;
+    width: fit-content !important;
 }
 
 .map-container {
-  width: auto !important;
+    width: auto !important;
 }
 
 .page-title {
-  display: block;
-  color: #444558;
-  text-align: center;
-  margin: 4rem 0;
+    display: block;
+    color: #444558;
+    text-align: center;
+    margin: 4rem 0;
 }
 
 .page-secondary-title {
-  display: block;
-  font-size: 1.2rem;
-  font-weight: bold;
-  color: #444558;
-  text-align: left;
-  margin: auto;
+    display: block;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #444558;
+    text-align: left;
+    margin: auto;
 }
 
 /* p.content {
@@ -74,97 +81,99 @@ mat-sidenav-content {
 } */
 
 .section button {
-  background-color: #444558;
-  color: white;
+    background-color: #444558;
+    color: white;
 }
 
 .image,
 .image-header {
-  width: 100%;
-  align-content: center;
-  text-align: center;
-  vertical-align: middle;
-  object-fit: contain;
+    width: 100%;
+    align-content: center;
+    text-align: center;
+    vertical-align: middle;
+    object-fit: contain;
 }
 
 .image-header {
-  max-height: 600px;
-  object-fit: cover;
+    max-height: 600px;
+    object-fit: cover;
 }
 
 .section {
-  margin-top: 20px;
+    margin-top: 20px;
 }
 
 .rounded-container {
-  padding: 5px !important;
-  border-width: 1px;
-  border-style: solid;
-  border-color: #444558;
-  border-radius: 10px;
+    padding: 5px !important;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #444558;
+    border-radius: 10px;
 }
 
 .margin-t-section {
-  margin-top: 50px;
+    margin-top: 50px;
 }
 
 .rounded-container-body {
-  border-top: 1px solid #444558;
+    border-top: 1px solid #444558;
 }
+
 .bold {
-  font-weight: bold;
+    font-weight: bold;
 }
 
 mat-form-field label {
-  width: 100%;
+    width: 100%;
 }
 
 .font-notes {
-  font-size: 0.9rem;
+    font-size: 0.9rem;
 }
 
 @media only screen and (max-width: 1050px) {
-  .container {
-    @apply mx-auto max-w-screen-md px-2;
-  }
+    .container {
+        @apply mx-auto max-w-screen-md px-2;
+    }
 
-  .banner-width {
-    max-width: calc(768px + 50px);
-    @apply mx-auto;
-  }
+    .banner-width {
+        max-width: calc(768px + 50px);
+        @apply mx-auto;
+    }
 }
+
 @media only screen and (max-width: 768px) {
-  .mobile-only {
-    display: block;
-  }
+    .mobile-only {
+        display: block;
+    }
 
-  .desktop-only {
-    display: none;
-  }
+    .desktop-only {
+        display: none;
+    }
 
-  .page-title {
-    margin: 2.5rem 0;
-  }
+    .page-title {
+        margin: 2.5rem 0;
+    }
 
-  font-notes {
-    font-size: 0.9rem;
-  }
+    font-notes {
+        font-size: 0.9rem;
+    }
 
-  .font-notes {
-    font-size: 0.8rem;
-  }
+    .font-notes {
+        font-size: 0.8rem;
+    }
 
-  .container {
-    @apply mx-auto max-w-screen-sm px-5;
-  }
+    .container {
+        @apply mx-auto max-w-screen-sm px-5;
+    }
 }
 
 @media only screen and (min-width: 769px) {
-  .mobile-only {
-    display: none;
-  }
+    .mobile-only {
+        display: none;
+    }
 
-  .desktop-only {
-    display: inherit;
-  }
+    .desktop-only {
+        display: inherit;
+    }
 }

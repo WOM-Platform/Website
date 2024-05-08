@@ -1,5 +1,5 @@
-<link rel="stylesheet" href="source-access-list.css">
-<div class="mt-6">
+<link rel="stylesheet" href="user-access-list.component.css">
+<div class="">
     <button *ngIf="!addAccess" (click)="onAddAccess()" class="btn-default">
         <mat-icon>add</mat-icon>
         Aggiungi gestore
@@ -10,8 +10,17 @@
     </button>
 </div>
 <div *ngIf="addAccess" class="add-access-container" @fadeInOut>
-    <app-search-source (createSource)="onCreateAccess($event)" (searchSource)="onSearch($event)"
+    <app-search-source [isRoleRequired]=isRoleRequired (createSource)="onCreateAccess($event)"
+                       (searchSource)="onSearch($event)"
                        (clearFormEvent)="clearList()"></app-search-source>
+    <div class="px-6">
+        <label>Seleziona ruolo<span class="text-red-600">*</span>:</label>
+        <select>
+            <option value="">-- Seleziona un ruolo --</option>
+            <option value="Admin">Admin</option>
+            <option value="User">User</option>
+        </select>
+    </div>
     <div *ngIf="listAccess && listAccess.length > 0" @fadeInOut>
         <div @fadeInOut>
             <p class="mb-0 font-semibold">Risultati:</p>
@@ -25,6 +34,8 @@
             </ul>
         </div>
     </div>
+
+
 </div>
 
 

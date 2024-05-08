@@ -1,0 +1,81 @@
+<div class="dialog-view">
+    <p class="text-center"><span class="font-semibold text-cyan-700">{{ name }}</span></p>
+    <div class="source-data">
+        <p class="mb-0"><span class="text-slate-600 font-semibold">ID</span>: {{ data.id }}</p>
+        <p class="mb-0"><span class="text-slate-600 font-semibold">CF</span>: {{ data.fiscalCode }}</p>
+        <p class="mb-0"><span class="text-slate-600 font-semibold">WOM generati</span>: 1000000</p>
+        <p class="mb-0">
+            <span class="text-slate-600 font-semibold">Attività primaria</span>:
+            <ng-container *ngIf="!isEditing.primaryActivity; else primaryActivityInput">
+                {{ data.primaryActivity }}
+                <ng-container *ngIf="data.action === 'edit'">
+                    <button mat-icon-button (click)="startEditing('primaryActivity')">
+                        <mat-icon>edit</mat-icon>
+                    </button>
+                </ng-container>
+            </ng-container>
+            <ng-template #primaryActivityInput>
+                <input
+                        matInput
+                        [(ngModel)]="data.primaryActivity"
+                        name="primaryActivity"
+                        required
+                />
+                <button mat-icon-button (click)="stopEditing('primaryActivity')">
+                    <mat-icon>check</mat-icon>
+                </button>
+            </ng-template>
+        </p>
+
+        <p class="mb-0"><span class="text-slate-600 font-semibold">Indirizzo</span>: {{ data.address }}</p>
+        <p class="mb-0"><span class="text-slate-600 font-semibold">CAP</span>: {{ data.zipCode }}</p>
+        <p class="mb-0"><span class="text-slate-600 font-semibold">Paese</span>: {{ data.country }}</p>
+    </div>
+
+    <div *ngIf="accessList && accessList.length > 0" class="mt-6">
+        <p class="font-semibold mb-0 ">Gestori:</p>
+        <ul class="access-list">
+            <li *ngFor="let access of accessList" class="">
+                <div class="access-item">
+                    <div class="access-details">
+                        <div><span
+                                class="text-slate-600 font-semibold">Name</span>: {{ access.name }} {{ access.surname }}
+                        </div>
+                        <div><span class="text-slate-600 font-semibold">Email</span>: {{ access.email }}</div>
+                    </div>
+                    <ng-container *ngIf="action === 'edit'">
+                        <button class="delete-button text-red" (click)="onDeleteAccess(access)">
+                            <mat-icon class="text-red">delete</mat-icon>
+                        </button>
+                    </ng-container>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+    <div *ngIf="posList && posList.length > 0" class="mt-6">
+        <p class="font-semibold mb-0 ">POS:</p>
+        <ul class="access-list">
+            <li *ngFor="let pos of posList" class="">
+                <div class="access-item">
+                    <div class="access-details">
+                        <div><span
+                                class="text-slate-600 font-semibold">Name</span>: {{ pos.name }} {{ pos.surname }}
+                        </div>
+                        <div><span class="text-slate-600 font-semibold">Indirizzo</span>: {{ pos.address }}</div>
+                    </div>
+                    <ng-container *ngIf="action === 'edit'">
+                        <button class="delete-button text-red" (click)="onDeletePos(pos)">
+                            <mat-icon class="text-red">delete</mat-icon>
+                        </button>
+                    </ng-container>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div *ngIf="action === 'edit'">
+        <div *ngIf="!createNewAccess" class="mt-6">
+            <app-user-access-list [isRoleRequired]=true (accessToAdd)="handleAccessList($event)"></app-user-access-list>
+        </div>
+    </div>
+</div>

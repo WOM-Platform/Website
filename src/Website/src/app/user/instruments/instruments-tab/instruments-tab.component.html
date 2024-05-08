@@ -9,7 +9,7 @@
     </button>
 </div>
 
-<app-filters (filterEmit)="filterUpdate($event)"/>
+<app-filters [itemsPage]="itemsPerPage ? itemsPerPage : '10'" (filterEmit)="filterUpdate($event)"/>
 <div *ngIf="instrumentsList">
     <app-admin-table
             [tableData]="instrumentsList"

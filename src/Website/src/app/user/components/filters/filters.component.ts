@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
-import {Subscription} from "rxjs";
-import {debounceTime} from "rxjs/operators";
+import {Subject, Subscription} from "rxjs";
+import {debounceTime, takeUntil} from "rxjs/operators";
 import {MatIcon} from "@angular/material/icon";
 import {PaginatorModule} from "primeng/paginator";
 import {FormControl, FormGroup, ReactiveFormsModule} from "@angular/forms";
@@ -17,33 +17,39 @@ import {FormControl, FormGroup, ReactiveFormsModule} from "@angular/forms";
     styleUrl: './filters.component.css'
 })
 export class FiltersComponent implements OnInit, OnDestroy {
-    @Output() filterEmit = new EventEmitter<any>()
-    sub: Subscription
+    @Input() itemsPage: string = '10';
+    @Output() filterEmit = new EventEmitter<any>();
+    private destroy$ = new Subject<void>();
 
-
-    filterForm = new FormGroup({
-        search: new FormControl(''),
-        itemsPerPage: new FormControl('10'),
-    })
+    filterForm
 
     ngOnInit() {
-        this.sub = this.filterForm.get('itemsPerPage').valueChanges.pipe(debounceTime(300)).subscribe(newValue => {
-            this.filterEmit.emit(this.filterForm)
-        })
-        this.sub = this.filterForm.get('search').valueChanges.pipe(debounceTime(300)).subscribe(newValue => {
-            const searchValue = this.filterForm.get('search').value;
-            /*        this.filterForm.get('search').setValue(searchValue.trim())*/
+        this.filterForm = new FormGroup({
+            search: new FormControl(''),
+            itemsPerPage: new FormControl(this.itemsPage),
+        });
 
-            if (
-                searchValue.length >= 3 ||
-                searchValue.length === 0
-            ) {
-                this.filterEmit.emit(this.filterForm)
+        this.filterForm.get('itemsPerPage').valueChanges.pipe(
+            debounceTime(300),
+            takeUntil(this.destroy$)
+        ).subscribe(newValue => {
+            console.log("Items per page ", this.filterForm)
+            this.filterEmit.emit(this.filterForm);
+        });
+
+        this.filterForm.get('search').valueChanges.pipe(
+            debounceTime(300),
+            takeUntil(this.destroy$)
+        ).subscribe(newValue => {
+            const searchValue = this.filterForm.get('search').value;
+            if (searchValue.length >= 3 || searchValue.length === 0) {
+                this.filterEmit.emit(this.filterForm);
             }
-        })
+        });
     }
 
     ngOnDestroy() {
-        this.sub.unsubscribe()
+        this.destroy$.next();
+        this.destroy$.complete();
     }
 }

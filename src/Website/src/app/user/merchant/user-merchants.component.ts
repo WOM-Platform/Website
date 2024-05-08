@@ -21,6 +21,7 @@ import {MatDialog} from "@angular/material/dialog";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {Router} from "@angular/router";
 import {StorageService} from "../../_services/storage.service";
+import {Subscription} from "rxjs";
 
 @Component({
     selector: "app-user-merchant",
@@ -32,12 +33,16 @@ export class UserMerchantsComponent implements OnInit, OnDestroy {
     merchants: Merchants;
     currentUser: any;
 
+    subscriptions: Subscription;
+
     constructor(
         public dialog: MatDialog,
         private authService: AuthService,
         private emailService: EmailService,
         private storageService: StorageService,
         private router: Router,
+        private matDialog: MatDialog,
+        private merchantService: MerchantService,
         private snackBar: MatSnackBar,
         private translate: TranslateService,
         private userService: UserService
@@ -58,6 +63,13 @@ export class UserMerchantsComponent implements OnInit, OnDestroy {
     loadData(): any {
         this.merchants = this.storageService.load("merchantData")
         this.currentUser = this.storageService.load("currentUser")
+    }
+
+
+    updataMerchantsList() {
+        this.userService.me().subscribe(user => {
+            this.loadData()
+        })
     }
 
     addPos(merchantId: string): any {
@@ -116,6 +128,8 @@ export class UserMerchantsComponent implements OnInit, OnDestroy {
                     .subscribe((response) => {
                         this.openSnackBar(response);
                     });
+
+                this.updataMerchantsList()
             }
         });
     }
@@ -124,21 +138,51 @@ export class UserMerchantsComponent implements OnInit, OnDestroy {
         const merchantDialogData = new MerchantDialogData();
         merchantDialogData.data = merchant;
         merchantDialogData.type = DialogType.edit;
-        const dialogRef = this.dialog.open(DialogCreateMerchant, {
-            data: merchantDialogData,
+        const accessListSub = this.merchantService
+            .getAccessList(merchant.id)
+            .subscribe({
+                next: (res) => {
+                    const dialogRef = this.dialog.open(DialogCreateMerchant, {
+                        data: merchantDialogData,
+                    });
+                    dialogRef.afterClosed().subscribe((result) => {
+                        if (result) {
+                            this.loadData();
+                            this.translate
+                                .get("USER.EDIT_MERCHANT.SUCCESS")
+                                .pipe(first())
+                                .subscribe((response) => {
+                                    this.openSnackBar(response);
+                                });
+                        }
+                    });
+                }
+            })
+    }
+
+    onDeleteMerchant(merchant: Merchant) {
+        const dialogRef = this.matDialog.open(DialogConfirmCancelComponent, {
+            width: "500px",
+            data: {
+                title: "Conferma eliminazione",
+                message: "Sei sicuro di voler confermare l'eliminazione?",
+                confirm: "si",
+                cancel: "Annulla",
+            },
         });
+
         dialogRef.afterClosed().subscribe((result) => {
             if (result) {
-                this.loadData();
-                this.translate
-                    .get("USER.EDIT_MERCHANT.SUCCESS")
-                    .pipe(first())
-                    .subscribe((response) => {
-                        this.openSnackBar(response);
+                const delSub = this.merchantService
+                    .deleteMerchant(merchant.id)
+                    .subscribe((res) => {
+                        this.updataMerchantsList();
                     });
+                this.subscriptions.add(delSub);
             }
         });
     }
+
 
     requestEnabling(merchant: Merchant) {
         const dialogRef = this.dialog.open(DialogConfirmCancelComponent, {
