@@ -15,6 +15,10 @@ import {UserComponent} from "./user.component";
 import {UserInstrumentsComponent} from "./instruments/user-instruments.component";
 import {UserAimsComponent} from "./aims/user-aims.component";
 import {UserUsersComponent} from "./users/user-users.component";
+import {
+    DialogViewEditMerchantComponent
+} from "./components/dialog-view-edit-merchant/dialog-view-edit-merchant.component";
+import {MerchantDetailComponent} from "./merchant/merchant-detail/merchant-detail.component";
 
 const routes: Routes = [
     {
@@ -57,6 +61,14 @@ const routes: Routes = [
                 }
             },
             {
+                path: 'merchants/:id/:action',
+                component: MerchantDetailComponent,
+                canActivate: [AuthGuard],
+                data: {
+                    breadcrumb: 'BREADCRUMBS.USER.MERCHANT-DETAIL',
+                },
+            },
+            {
                 path: 'merchants',
                 component: UserMerchantsComponent,
                 canActivate: [AuthGuard],
@@ -64,6 +76,7 @@ const routes: Routes = [
                     breadcrumb: 'BREADCRUMBS.USER.MERCHANT'
                 }
             },
+
             {
                 path: 'instruments',
                 component: UserInstrumentsComponent,

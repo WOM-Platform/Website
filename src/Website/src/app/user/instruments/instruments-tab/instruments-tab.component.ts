@@ -4,15 +4,18 @@ import {
     OnDestroy,
     OnInit,
 } from "@angular/core";
-import {Subject, Subscription, throwError} from "rxjs";
+import {finalize, of, Subject, Subscription, throwError} from "rxjs";
 import {DialogCreateSourceComponent} from "../../components/dialog-create-source/dialog-create-source.component";
-import {DialogViewUserComponent} from "../../components/dialog-view-user/dialog-view-user.component";
+import {
+    DialogViewEditSourceComponent
+} from "../../components/dialog-view-edit-source/dialog-view-edit-source.component";
 import {MatDialog, MatDialogRef} from "@angular/material/dialog";
 import {catchError} from "rxjs/operators";
 import {Router} from "@angular/router";
 import {SourceService} from "../../../_services/source.service";
 import {DialogConfirmCancelComponent} from "../../../components/dialog-confirm-cancel/dialog-confirm-cancel";
 import {LoadingService} from "../../../_services/loading.service";
+import {StorageService} from "../../../_services/storage.service";
 
 @Component({
     selector: "app-instruments-tab",
@@ -24,7 +27,7 @@ export class InstrumentsTabComponent implements OnInit, OnDestroy {
     searchTerms = new Subject<string>();
 
     currentPage: number = 1;
-    itemsPerPage: string = "10";
+    itemsPerPage: string;
     pageCount: number;
     totalItems: number;
 
@@ -34,6 +37,7 @@ export class InstrumentsTabComponent implements OnInit, OnDestroy {
     instrumentsTableColumns: any[] = [
         {field: "name", hideOnMobile: false},
         {field: "url", hideOnMobile: true},
+        {field: "WOM generati", hideOnMobile: true}
     ];
 
     sourcesSubscription: Subscription;
@@ -44,7 +48,8 @@ export class InstrumentsTabComponent implements OnInit, OnDestroy {
         private sourceService: SourceService,
         private matDialog: MatDialog,
         private cd: ChangeDetectorRef,
-        private loadingService: LoadingService
+        private loadingService: LoadingService,
+        private storageService: StorageService
     ) {
     }
 
@@ -52,14 +57,43 @@ export class InstrumentsTabComponent implements OnInit, OnDestroy {
         this.getSourcesList();
     }
 
-    filterUpdate(filter) {
-        if (this.currentPage != 1) this.currentPage = 1;
-        this.itemsPerPage = filter.get('itemsPerPage').value
-        if (filter.get('search').value.length >= 3 || filter.get('search').value.length === 0) {
+    getSourcesList() {
+        this.loadingService.show();
 
-            this.searchParameters = filter.get('search').value
+        const cachedData = this.storageService.get("instrumentsList");
+        if (cachedData) {
+            this.assignInstrumentData(cachedData);
+            this.loadingService.hide();
+        } else {
+            this.subscriptions.add(
+                this.sourceService
+                    .getInstrumentList(this.searchParameters, this.currentPage, this.itemsPerPage)
+                    .pipe(
+                        catchError((error) => {
+                            console.error("Error fetching instruments:", error);
+                            return of(null);
+                        }),
+                        finalize(() => {
+                            this.loadingService.hide();
+                            this.cd.markForCheck();
+                        })
+                    )
+                    .subscribe(res => {
+                        if (res) {
+                            this.storageService.set("instrumentsList", res);
+                            this.assignInstrumentData(res);
+                        }
+                    })
+            );
         }
-        this.getSourcesList();
+    }
+
+    private assignInstrumentData(data) {
+        this.totalItems = data.totalCount;
+        this.pageCount = data.pageCount;
+        this.itemsPerPage = data.pageSize
+        this.instrumentsList = data.data || [];
+        this.currentPage = this.storageService.get('instrumentsCurrentPage') || this.currentPage
     }
 
     ngOnDestroy() {
@@ -100,6 +134,7 @@ export class InstrumentsTabComponent implements OnInit, OnDestroy {
     }
 
     onUpdateItemsPerPage(value: string) {
+        this.storageService.clearCache("instrumentsList")
         this.itemsPerPage = value;
 
         this.getSourcesList();
@@ -117,6 +152,7 @@ export class InstrumentsTabComponent implements OnInit, OnDestroy {
                         this.cd.markForCheck();
                     },
                     complete: () => {
+                        this.storageService.clearCache("instrumentsList")
                         this.getSourcesList();
                         this.loadingService.hide()
                         this.cd.markForCheck();
@@ -124,6 +160,7 @@ export class InstrumentsTabComponent implements OnInit, OnDestroy {
                 });
             this.subscriptions.add(accessSub);
         } else {
+            this.storageService.clearCache("instrumentsList")
             this.getSourcesList();
             this.loadingService.hide()
             this.cd.markForCheck();
@@ -133,11 +170,17 @@ export class InstrumentsTabComponent implements OnInit, OnDestroy {
     onViewSource(user: any) {
         this.loadingService.show()
 
+        const viewKeys = [
+            {field: 'id', isList: false},
+            {field: 'url', isList: false},
+
+        ]
+
         const viewSub = this.sourceService
             .getInstrumentAccessList(user.id)
             .subscribe((res) => {
                 this.loadingService.hide()
-                const dialogRef = this.matDialog.open(DialogViewUserComponent, {
+                const dialogRef = this.matDialog.open(DialogViewEditSourceComponent, {
                     width: "900px",
                     data: {
                         id: user.id,
@@ -160,7 +203,7 @@ export class InstrumentsTabComponent implements OnInit, OnDestroy {
             .getInstrumentAccessList(user.id)
             .subscribe({
                 next: (res) => {
-                    const dialogRef = this.matDialog.open(DialogViewUserComponent, {
+                    const dialogRef = this.matDialog.open(DialogViewEditSourceComponent, {
                         width: "900px",
                         maxHeight: "90vh",
                         panelClass: "custom-dialog-backdrop",
@@ -239,7 +282,7 @@ export class InstrumentsTabComponent implements OnInit, OnDestroy {
 
     updateAccessList(
         userId: any,
-        dialogRef: MatDialogRef<DialogViewUserComponent>
+        dialogRef: MatDialogRef<DialogViewEditSourceComponent>
     ) {
         const accessSub = this.sourceService
             .getInstrumentAccessList(userId)
@@ -267,6 +310,7 @@ export class InstrumentsTabComponent implements OnInit, OnDestroy {
                 const delSub = this.sourceService
                     .deleteInstrument(userToDelete.id)
                     .subscribe((res) => {
+                        this.storageService.clearCache("instrumentsList")
                         this.getSourcesList();
                     });
                 this.subscriptions.add(delSub);
@@ -275,36 +319,20 @@ export class InstrumentsTabComponent implements OnInit, OnDestroy {
     }
 
     onPageChange(page: number): void {
+        this.storageService.clearCache("instrumentsList")
         this.currentPage = page;
+        this.storageService.set('instrumentsCurrentPage', this.currentPage)
         this.getSourcesList();
     }
 
-    getSourcesList() {
-        this.loadingService.show()
-
-        this.subscriptions.add(
-            this.sourceService
-                .getInstrumentList(
-                    this.searchParameters,
-                    this.currentPage,
-                    this.itemsPerPage
-                )
-                .pipe(
-                    catchError((error) => {
-                        console.error("Error fetching instruments:", error);
-                        this.loadingService.hide()
-                        return throwError(() => error);
-                    })
-                )
-                .subscribe((res) => {
-                    if (res) {
-                        this.totalItems = res.totalCount;
-                        this.pageCount = res.pageCount;
-                        if (res["data"]) this.instrumentsList = res["data"];
-                    }
-                    this.loadingService.hide()
-                    this.cd.markForCheck();
-                })
-        );
+    filterUpdate(filter) {
+        this.storageService.clearCache("instrumentsList")
+        if (this.currentPage != 1) this.currentPage = 1;
+        this.itemsPerPage = filter.get('itemsPerPage').value
+        this.storageService.set('intrumentsItemsPerPage', this.itemsPerPage)
+        if (filter.get('search').value.length >= 3 || filter.get('search').value.length === 0) {
+            this.searchParameters = filter.get('search').value
+        }
+        this.getSourcesList();
     }
 }

@@ -37,9 +37,7 @@ import {MatPaginatorModule} from "@angular/material/paginator";
 import {PaginationComponent} from "../user/components/admin-table/pagination/pagination.component";
 import {DialogConfirmCancelComponent} from "../components/dialog-confirm-cancel/dialog-confirm-cancel";
 import {DialogConfirmComponent} from "../components/dialog-confirm/dialog-confirm";
-import {DialogViewUserComponent} from "../user/components/dialog-view-user/dialog-view-user.component";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
-
 
 @NgModule({
     declarations: [

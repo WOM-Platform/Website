@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnDestroy, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
 import {debounceTime, distinctUntilChanged} from "rxjs/operators";
 import {PaginatorModule} from "primeng/paginator";
@@ -25,6 +25,7 @@ import {TranslateModule} from "@ngx-translate/core";
     styleUrl: './search-source.component.css'
 })
 export class SearchSourceComponent implements OnInit, OnDestroy {
+    @Input() isRoleRequired: boolean = false
     @Output() searchSource = new EventEmitter<any>()
     @Output() clearFormEvent = new EventEmitter<void>();
     @Output() createSource = new EventEmitter<any>();
@@ -48,6 +49,7 @@ export class SearchSourceComponent implements OnInit, OnDestroy {
             surnameCreate: ['', Validators.required,],
             emailCreate: ['', [Validators.required, Validators.email]],
             passwordCreate: ['', [Validators.required, Validators.minLength(8)]],
+
         })
         this.searchForm = this.fb.group({
             nameSearch: ['',],
@@ -61,6 +63,7 @@ export class SearchSourceComponent implements OnInit, OnDestroy {
             this.search();
         });
     }
+
 
     ngOnDestroy() {
         this.searchSubscription.unsubscribe()
@@ -80,7 +83,7 @@ export class SearchSourceComponent implements OnInit, OnDestroy {
                 searchCriteria['email'] = email;
             }
             this.searchSource.emit(searchCriteria);
-        } else if ((name.length < 3) || (email.length < 3)) {
+        } else if ((name && name.length < 3) || (email && email.length < 3)) {
             this.clearFormEvent.emit()
         }
     }
@@ -92,6 +95,7 @@ export class SearchSourceComponent implements OnInit, OnDestroy {
     }
 
     create() {
+        /*if (!this.isRoleRequired || this.searchForm.get('roleCreate').valid) {*/
         const createCriteria = {};
         const name = this.createForm.get('nameCreate').value;
         const surname = this.createForm.get('surnameCreate').value;
@@ -104,7 +108,7 @@ export class SearchSourceComponent implements OnInit, OnDestroy {
         createCriteria['password'] = password
 
         this.createSource.emit(createCriteria)
-
+        /*}*/
     }
 
     clearForm() {

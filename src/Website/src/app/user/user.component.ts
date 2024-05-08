@@ -52,7 +52,6 @@ export class UserComponent implements OnInit, OnDestroy {
         // check user instrument and merchant amount
         this.userDataSubscription = this.userService.me().subscribe((data: UserMe) => {
             if (data) {
-                console.log("data sup ", data)
                 this.userData = data
                 if (data.role) {
                     this.role.add(data.role)

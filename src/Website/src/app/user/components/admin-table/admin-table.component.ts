@@ -34,7 +34,7 @@ import {SharedModule} from "../../../shared/shared.module";
     templateUrl: './admin-table.component.html',
     styleUrl: './admin-table.component.css'
 })
-export class AdminTableComponent implements OnInit {
+export class AdminTableComponent {
     @Input() tableData;
     @Input() tableColumns
     @Input() isActions;
@@ -48,10 +48,6 @@ export class AdminTableComponent implements OnInit {
     @Output() viewItem = new EventEmitter<any>();
     @Output() editItem = new EventEmitter<any>();
 
-
-    ngOnInit() {
-
-    }
 
     onViewItem(item) {
         this.viewItem.emit(item)

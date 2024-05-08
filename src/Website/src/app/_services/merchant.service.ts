@@ -1,9 +1,9 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
-import {Observable} from 'rxjs';
+import {HttpClient, HttpParams} from '@angular/common/http';
+import {Observable, throwError} from 'rxjs';
 import {Merchant} from '../_models';
 import {environment} from '../../environments/environment';
-import {map} from 'rxjs/operators';
+import {catchError, map} from 'rxjs/operators';
 import {StripePrice} from "../_models/billing";
 
 @Injectable({providedIn: 'root'})
@@ -11,30 +11,37 @@ export class MerchantService {
     localUrlV1 = environment.baseUrl + environment.v1 + 'merchant/';
     localUrlV2 = environment.baseUrl + environment.v2 + 'merchant/';
 
-    constructor(private http: HttpClient) {}
+    constructor(private http: HttpClient) {
+    }
 
     /**
      * Get merchant data from specific merchant id
      * @param id merchant id
      */
-    getMerchant(id: string): Observable<Merchant> {
+    getMerchantById(id: string): Observable<Merchant> {
         return this.http.get<Merchant>(this.localUrlV1 + id)
-            .pipe(map (response => response));
+            .pipe(map(response => response));
     }
 
     /**
      * Get merchant list
      */
-    getMerchants(): Observable<Merchant[]> {
-        return this.http.get<Merchant[]>(this.localUrlV1 + 'all')
-            .pipe(map(response => {
-                const data: Merchant[] = [];
-                response.forEach((val: Merchant) => {
-                    const prod = Merchant.fromJson(val);
-                    data.push(prod);
-                });
-                return data;
-            }));
+    getAllMerchants(search: string, page: number, itemsPerPage: string = '10'): Observable<any> {
+        const params = new HttpParams()
+            .set('search', search)
+            .set('page', page.toString())
+            .set('pageSize', itemsPerPage);
+        return this.http.get(`${this.localUrlV1}`, {params})
+            .pipe(
+                map(res => {
+                    return res;
+
+                }),
+                catchError(err => {
+                    console.error("Error fetching instruments", err);
+                    return throwError(() => new Error("Failed to fetch instruments"));
+                })
+            );
     }
 
     /**
@@ -54,7 +61,7 @@ export class MerchantService {
                 description: merchant.description,
                 url: merchant.url
             })
-            .pipe(map (response => response));
+            .pipe(map(response => response));
     }
 
     /**
@@ -74,6 +81,31 @@ export class MerchantService {
                 description: merchant.description,
                 url: merchant.url
             })
-            .pipe(map (response => response));
+            .pipe(map(response => response));
+    }
+
+    deleteMerchant(merchantId: string) {
+        return this.http.delete(`${this.localUrlV1}${merchantId}`).pipe(map(res => res))
+    }
+
+    getAccessList(idMerchant) {
+        return this.http.get(`${this.localUrlV1}${idMerchant}/access`).pipe(map(res => res))
+    }
+
+    addAccess(idMerchant: string, userId: string, role: string = 'Admin') {
+        const url = `${this.localUrlV1}${idMerchant}/access?userId=${userId}&role=${role}`;
+        return this.http.post(url, {}).pipe(
+            map(res => {
+                return res;
+            }),
+            catchError(err => {
+                console.error("Failed to add access:", err);
+                return throwError(err);
+            })
+        );
+    }
+
+    deleteAccess(idMerchant: string, userId: string) {
+        return this.http.delete(`${this.localUrlV1}${idMerchant}/access/${userId}`)
     }
 }

@@ -19,19 +19,24 @@ export class SourceService {
      * @param {number} itemsPerPage Number of items per page.
      * @returns {Observable<any>} An observable of the paginated instrument list.
      */
-    getInstrumentList(search: string, page: number, itemsPerPage: string): Observable<any> {
+    getInstrumentList(search: string, page: number, itemsPerPage: string = '10'): Observable<any> {
+
         const params = new HttpParams()
             .set('search', search)
             .set('page', page.toString())
             .set('pageSize', itemsPerPage);
         return this.http.get(`${this.localUrlV1}`, {params})
             .pipe(
-                map(res => res),
+                map(res => {
+                    return res;
+
+                }),
                 catchError(err => {
                     console.error("Error fetching instruments", err);
                     return throwError(() => new Error("Failed to fetch instruments"));
                 })
             );
+
     }
 
     createInstrument(name: string, url: string): Observable<any> {
@@ -58,11 +63,10 @@ export class SourceService {
     }
 
     addInstrumentAccess(idInstrument: string, userId: string): Observable<any> {
-        const url = `${this.localUrlV1}${idInstrument}/access?userId=${userId}`;  // Append parameters to URL
+        const url = `${this.localUrlV1}${idInstrument}/access?userId=${userId}`;
         return this.http.post(url, {})
             .pipe(
                 map(res => {
-                    console.log("Access added");
                     return res;
                 }),
                 catchError(err => {

@@ -3,14 +3,15 @@
     <div class="source-data">
         <div *ngFor="let key of viewKeys">
             <div *ngIf="key.isList; else noList">
-
             </div>
             <ng-template #noList>
                 <p class="mb-0"><span class="font-semibold">{{ key.field }}</span>: {{ viewValues[key.field] }}</p>
             </ng-template>
-
-
         </div>
+        <p class="mb-0"><span class="font-semibold">WOM generati</span>: 1000000</p>
+    </div>
+    <div *ngIf="accessUsers && accessUsers.length > 0" class="mt-10">
+        <p class="font-semibold mb-0 ">Aims:</p>
     </div>
     <div *ngIf="accessUsers && accessUsers.length > 0" class="mt-10">
         <p class="font-semibold mb-0 ">Gestori:</p>
@@ -34,7 +35,7 @@
     </div>
     <div *ngIf="action === 'edit'">
         <div *ngIf="!createNewAccess" class="mt-11">
-            <app-source-access-list (accessToAdd)="handleAccessList($event)"></app-source-access-list>
+            <app-user-access-list (accessToAdd)="handleAccessList($event)"></app-user-access-list>
         </div>
     </div>
 </div>
