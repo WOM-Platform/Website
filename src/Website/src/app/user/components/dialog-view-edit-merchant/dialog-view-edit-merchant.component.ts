@@ -7,9 +7,6 @@ import {
     Input,
     Output
 } from '@angular/core';
-import {AuthModule} from "../../auth.module";
-import {MatIcon} from "@angular/material/icon";
-import {NgForOf, NgIf} from "@angular/common";
 import {MAT_DIALOG_DATA} from "@angular/material/dialog";
 import {Pos, primaryActivityType} from "../../../_models";
 
@@ -52,8 +49,6 @@ export class DialogViewEditMerchantComponent {
         this.primaryActivity = data.primaryActivity;
         this.posList = data.posList || [];
         this.action = data.action;
-
-        console.log("JOIJOJJOIJJjoij")
     }
 
     startEditing(field: string): void {
@@ -77,7 +72,6 @@ export class DialogViewEditMerchantComponent {
     }
 
     onDeletePos(posId: string) {
-        console.log("delete pos ", posId)
         this.deletePos.emit(posId)
     }
 
