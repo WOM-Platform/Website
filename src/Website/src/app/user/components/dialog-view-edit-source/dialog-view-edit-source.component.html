@@ -1,6 +1,8 @@
 <div class="dialog-view">
     <p class="text-center"><span class="font-semibold text-cyan-700">{{ name }}</span></p>
     <div class="source-data">
+        <p class="mb-0"><span class="text-slate-600 font-semibold">ID</span>: {{ data.id }}</p>
+        <p class="mb-0"><span class="text-slate-600 font-semibold">CF</span>: {{ data.url }}</p>
         <div *ngFor="let key of viewKeys">
             <div *ngIf="key.isList; else noList">
             </div>
