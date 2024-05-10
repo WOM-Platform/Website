@@ -244,7 +244,11 @@ export class InstrumentsTabComponent implements OnInit, OnDestroy {
         this.subscriptions.add(afterCloseSub);
     }
 
-    private addAccess(user, access, dialogRef) {
+    
+    private addAccess(user, acc, dialogRef) {
+        const role = acc.role
+        const access = acc.access
+
         const addAccessSub = this.sourceService
             .addInstrumentAccess(user.id, access.id)
             .subscribe({

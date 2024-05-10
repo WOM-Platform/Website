@@ -35,6 +35,10 @@ export class UserAccessListComponent implements OnDestroy {
     isLoading = false;
     errorMessage: string = '';
 
+    userRole = "User"
+
+    selectedAccess: any | null = null;
+
     constructor(private userService: UserService, private cd: ChangeDetectorRef) {
     }
 
@@ -90,14 +94,25 @@ export class UserAccessListComponent implements OnDestroy {
 
 
     handleSelection(access) {
-        this.accessToAdd.emit(access)
-        this.addAccess = !this.addAccess
+    
         if (this.searchSourceComponent) {
             this.searchSourceComponent.clearForm();
             this.listAccess = []
         } else {
             console.error('SearchSourceComponent is not yet available.');
         }
+        if (!this.isRoleRequired) {
+            this.addUserToAccessList(access)
+        }
+        else {
+            this.selectedAccess = access;
+        }
+    }
+
+    addUserToAccessList(access, role = '') {  
+        this.addAccess = !this.addAccess
+        this.selectedAccess = ""
+        this.accessToAdd.emit({"access": access, "role":role })
     }
 
     clearList() {

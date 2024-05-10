@@ -52,6 +52,6 @@ export class DialogCreateSourceComponent implements OnInit, OnDestroy {
 
     handleAccessList(accessEl) {
         const currentAccess = this.newSource.get('access').value;
-        this.newSource.get('access').setValue([...currentAccess, accessEl]);
+        this.newSource.get('access').setValue([...currentAccess, accessEl.access]);
     }
 }

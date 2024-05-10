@@ -25,7 +25,6 @@ import {TranslateModule} from "@ngx-translate/core";
     styleUrl: './search-source.component.css'
 })
 export class SearchSourceComponent implements OnInit, OnDestroy {
-    @Input() isRoleRequired: boolean = false
     @Output() searchSource = new EventEmitter<any>()
     @Output() clearFormEvent = new EventEmitter<void>();
     @Output() createSource = new EventEmitter<any>();
@@ -95,7 +94,6 @@ export class SearchSourceComponent implements OnInit, OnDestroy {
     }
 
     create() {
-        /*if (!this.isRoleRequired || this.searchForm.get('roleCreate').valid) {*/
         const createCriteria = {};
         const name = this.createForm.get('nameCreate').value;
         const surname = this.createForm.get('surnameCreate').value;

@@ -149,6 +149,7 @@ export class MerchantsTabComponent implements OnInit {
                     console.log('merch ', merchant)
                     const dialogRef = this.matDialog.open(DialogViewEditMerchantComponent, {
                         width: "900px",
+                        panelClass: "overflow-auto",
                         data: {
                             ...merchant,
                             access: res['users'],
@@ -217,8 +218,11 @@ export class MerchantsTabComponent implements OnInit {
         this.subscriptions.add(afterCloseSub);
     }
 
-    private addAccess(user, access, dialogRef) {
-        const role = "User"
+    private addAccess(user, acc, dialogRef) {
+        console.log("acc ", acc)
+        const role = acc.role
+        const access = acc.access
+
         const addAccessSub = this.merchantService
             .addAccess(user.id, access.id, role)
             .subscribe({
