@@ -42,6 +42,7 @@
                                 class="text-slate-600 font-semibold">Name</span>: {{ access.name }} {{ access.surname }}
                         </div>
                         <div><span class="text-slate-600 font-semibold">Email</span>: {{ access.email }}</div>
+                        <div><span class="text-slate-600 font-semibold">Ruolo</span>: {{ access.role }}</div>
                     </div>
                     <ng-container *ngIf="action === 'edit'">
                         <button class="delete-button text-red" (click)="onDeleteAccess(access)">
