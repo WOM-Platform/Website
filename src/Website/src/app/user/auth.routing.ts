@@ -61,22 +61,30 @@ const routes: Routes = [
                 }
             },
             {
-                path: 'merchants/:id/:action',
-                component: MerchantDetailComponent,
-                canActivate: [AuthGuard],
-                data: {
-                    breadcrumb: 'BREADCRUMBS.USER.MERCHANT-DETAIL',
-                },
-            },
-            {
                 path: 'merchants',
-                component: UserMerchantsComponent,
                 canActivate: [AuthGuard],
                 data: {
-                    breadcrumb: 'BREADCRUMBS.USER.MERCHANT'
-                }
+                  breadcrumb: 'BREADCRUMBS.USER.MERCHANT'
+                },
+                children: [
+                    {
+                        path: '',
+                        component: UserMerchantsComponent,
+                        canActivate: [AuthGuard],
+                        data: {
+                            breadcrumb: 'BREADCRUMBS.USER.HOME'
+                        }
+                    },
+                  {
+                    path: ':id/:action',
+                    component: MerchantDetailComponent,
+                    canActivate: [AuthGuard],
+                    data: {
+                      breadcrumb: 'BREADCRUMBS.USER.MERCHANT-DETAIL'
+                    }
+                  }
+                ]
             },
-
             {
                 path: 'instruments',
                 component: UserInstrumentsComponent,

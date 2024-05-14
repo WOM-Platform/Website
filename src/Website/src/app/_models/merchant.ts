@@ -14,6 +14,7 @@ export class Merchant {
     description: string;
     url: string;
     enabled: boolean;
+    
 
     public static fromJson(json): any {
         if (json === null) {

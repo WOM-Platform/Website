@@ -38,6 +38,7 @@ import {PaginationComponent} from "../user/components/admin-table/pagination/pag
 import {DialogConfirmCancelComponent} from "../components/dialog-confirm-cancel/dialog-confirm-cancel";
 import {DialogConfirmComponent} from "../components/dialog-confirm/dialog-confirm";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import { EditableElementComponent } from '../user/components/editable-element/editable-element.component';
 
 @NgModule({
     declarations: [
@@ -45,7 +46,7 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
         AvatarComponent,
         DialogConfirmCancelComponent,
         DialogConfirmComponent,
-
+        EditableElementComponent,
         PaginationComponent
     ],
     imports: [
@@ -98,6 +99,7 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
         BrowserAnimationsModule,
         DialogConfirmCancelComponent,
         DialogConfirmComponent,
+        EditableElementComponent,
         FormsModule,
         GoogleMapsModule,
         MatButtonModule,
