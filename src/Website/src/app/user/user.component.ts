@@ -20,12 +20,12 @@ export class UserComponent implements OnInit, OnDestroy {
     isLoading = false
 
     navLinks = [
-        {path: '/user/home', text: 'Home', icon: 'fa-solid fa-house'},
-        {path: '/user/merchants', text: 'Merchants', icon: 'fa-solid fa-shop'},
-        {path: '/user/instruments', text: 'Instruments', icon: 'fa-solid fa-coins'},
-        {path: '/user/aims', text: 'Aims', icon: 'fa-solid fa-bullseye'},
-        {path: '/user/users', text: 'Users', icon: 'fas fa-users'},
-        {path: '/user/statistics', text: 'Statistics', icon: 'fa-solid fa-chart-simple'}
+            { path: '/user/home', text: 'Home', icon: 'fa-solid fa-house', isActive: false },
+            { path: '/user/merchants', text: 'Merchants', icon: 'fa-solid fa-shop', isActive: true },
+            { path: '/user/instruments', text: 'Instruments', icon: 'fa-solid fa-coins', isActive: true },
+            { path: '/user/aims', text: 'Aims', icon: 'fa-solid fa-bullseye', isActive: true },
+            { path: '/user/users', text: 'Users', icon: 'fas fa-users', isActive: false },
+            { path: '/user/statistics', text: 'Statistics', icon: 'fa-solid fa-chart-simple', isActive: false }        
     ];
 
     constructor(

@@ -7,13 +7,6 @@
     </button>
 
 </div>
-<ul>
-    <li *ngFor="let merchant of merchantsList">
-        <a (click)="openMerchantDetails(merchant, 'edit')">
-            {{ merchant.name }}
-        </a>
-    </li>
-</ul>
 <app-filters [itemsPage]="itemsPerPage ? itemsPerPage : '10'" (filterEmit)="filterUpdate($event)"/>
 <div *ngIf="merchantsList">
     <app-admin-table [tableData]="merchantsList"
