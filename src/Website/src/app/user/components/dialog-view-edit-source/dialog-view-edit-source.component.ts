@@ -10,6 +10,7 @@ import {
 import { MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { Aim } from "src/app/_models/aim";
 import { Access, Instrument } from "src/app/_models/instrument";
+import { AimsService } from "src/app/_services";
 import { SourceService } from "src/app/_services/source.service";
 
 @Component({
@@ -52,9 +53,33 @@ export class DialogViewEditSourceComponent {
       .update(updatedInstrument)
       .subscribe((res) => console.log(res));
   }
+  onDeleteAim(aimToRemove: Aim) {
+    // Find the index of the aim to be removed
+    const index = this.instrument.aims.findIndex(
+      (aim) => aim.code === aimToRemove.code
+    );
 
-  onDeleteAim(aim: Aim) {
-    console.log("delete no active");
+    if (index > -1) {
+      // Create a deep copy of the instrument to avoid mutating the original directly
+      const tmpInstrument: Instrument = JSON.parse(
+        JSON.stringify(this.instrument)
+      );
+      tmpInstrument.aims.splice(index, 1);
+
+      // Update the instrument
+      this.sourceService.update(tmpInstrument).subscribe({
+        next: (value) => {
+          // Update the local instrument only after the API call succeeds
+          this.instrument = tmpInstrument;
+          console.log("API call succeeded, instrument updated:", value);
+        },
+        error: (error) => {
+          console.error("API call failed:", error);
+        },
+      });
+    } else {
+      console.warn("Aim not found in the instrument.");
+    }
   }
 
   onDeleteAccess(access: Access): void {
@@ -62,7 +87,10 @@ export class DialogViewEditSourceComponent {
   }
 
   handleAccessList(access: Access): void {
-    console.log("access ", access);
     this.newAccess.emit(access);
+  }
+
+  handleAimsList(aim) {
+    console.log("jjj ", aim);
   }
 }
