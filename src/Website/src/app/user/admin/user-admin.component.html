@@ -12,7 +12,7 @@
             </mat-tab>
             <mat-tab label="Merchants">
                 <ng-container *ngIf="activeTabIndex === 1">
-                    <app-merchants-tab (isLoading)="onLoading($event)"></app-merchants-tab>
+                    <app-merchants-admin (isLoading)="onLoading($event)"></app-merchants-admin>
                 </ng-container>
             </mat-tab>
             <mat-tab label="Users">

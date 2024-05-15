@@ -9,16 +9,18 @@ export class EditableElementComponent implements OnInit {
   @Input() keyEl: string;
   @Input() valueEl: any;
   @Input() action: string;
-  @Input() typeEl: string;
-  @Input() options: any;
+  @Input() pattern: string; // for regex pattern validation
+  @Input() minLength: number; // for minimum length validation
+  @Input() maxLength: number; // for maximum length validation
 
   @Output() onChangeElement = new EventEmitter<any>();
 
-  isEditing: boolean = false; // Initialize to false
-
+  isEditing: boolean = false;
   isDirty: boolean = false;
+  isValid: boolean = true;
+  validationMessage: string = "";
   originalValue: any;
-  newValue;
+  newValue: any;
 
   ngOnInit() {
     this.originalValue = this.valueEl;
@@ -27,16 +29,17 @@ export class EditableElementComponent implements OnInit {
   startEditing(): void {
     this.isEditing = true;
     this.isDirty = false;
-    // this.originalValue = this.valueEl;
     this.newValue = this.valueEl;
   }
 
   stopEditing(): void {
-    this.isEditing = false;
-    // this.isDirty = this.valueEl !== this.originalValue;
-    this.isDirty = this.valueEl !== this.newValue;
-    this.onChangeElement.emit(this.newValue);
-    // this.onChangeElement.emit(this.valueEl);
+    this.validateValue();
+    if (this.isValid) {
+      this.isEditing = false;
+      if (this.isDirty) {
+        this.onChangeElement.emit(this.newValue);
+      }
+    }
   }
 
   cancelEditing() {
@@ -46,18 +49,32 @@ export class EditableElementComponent implements OnInit {
   }
 
   validateValue(): void {
-    console.log("Validate");
-    this.isDirty = this.valueEl !== this.originalValue;
-    switch (this.typeEl) {
-      case "number":
-        this.newValue = this.newValue.replace(/\D/g, "").substr(0, 5);
-        break;
+    this.isDirty = this.newValue !== this.originalValue;
+    this.isValid = true;
+    this.validationMessage = "";
 
-      case "list":
-        if (!this.options.includes(this.newValue)) {
-          this.newValue = this.originalValue;
-        }
-        break;
+    if (this.pattern) {
+      const regex = new RegExp(this.pattern);
+      if (!regex.test(this.newValue)) {
+        this.isValid = false;
+        this.validationMessage = "Invalid format.";
+        return;
+      }
     }
+
+    if (this.minLength && this.newValue.length < this.minLength) {
+      this.isValid = false;
+      this.validationMessage = `Minimum length is ${this.minLength}.`;
+      return;
+    }
+
+    if (this.maxLength && this.newValue.length > this.maxLength) {
+      this.isValid = false;
+      this.validationMessage = `Maximum length is ${this.maxLength}.`;
+      this.newValue = this.newValue.substr(0, this.maxLength);
+      return;
+    }
+
+    this.valueEl = this.newValue;
   }
 }

@@ -19,18 +19,27 @@
     <div class="my-4 merchant-data">
         <app-editable-element [keyEl]="'Attività primaria'" [valueEl]="primaryActivity" [action]="action" [typeEl]="'list'" [option]="primaryActivityOptions" (onChangeElement)="onUpdateMerchant('primaryActivity', $event)" class="merchant-element"></app-editable-element>
         <app-editable-element [keyEl]="'Indirizzo'" [valueEl]="address" [action]="action" [typeEl]="'string'" (onChangeElement)="onUpdateMerchant('address',$event)" class="merchant-element"></app-editable-element>
-        <app-editable-element [keyEl]="'CAP'" [valueEl]="zipCode" [action]="action" [typeEl]="'number'" (onChangeElement)="onUpdateMerchant('zipCode',$event)" class="merchant-element"></app-editable-element>
+        <app-editable-element 
+  [keyEl]="'CAP'" 
+  [valueEl]="zipCode" 
+  [action]="action" 
+  [pattern]="'^[0-9]{5}$'" 
+  (onChangeElement)="onUpdateMerchant('zipCode', $event)" class="merchant-element"/>
+  
+
         <app-editable-element [keyEl]="'Paese'" [valueEl]="country" [action]="action" [typeEl]="'list'" [option]="countryList" (onChangeElement)="onUpdateMerchant('country',$event)" class="merchant-element"></app-editable-element>
         
         <p class="flex items-center gap-2 mb-0 h-8">
             <span class="text-slate-600 font-semibold">Abilitato: </span>
-            <label class="switch">
-              <input [disabled]="action !== 'edit'" type="checkbox" [checked]="isEnabled" (click)="onCheckboxClick()">
+            <label *ngIf="action === 'edit'; else viewIsEnabled" class="switch">
+              <input type="checkbox" [checked]="isEnabled" (click)="onCheckboxClick()">
               <span class="slider round"></span>
             </label>
-          </p>     
-        
-        
+            <ng-template #viewIsEnabled>
+              <span *ngIf="isEnabled; else notEnable">Attivo</span>
+            </ng-template>
+            <ng-template #notEnable>Disattivato</ng-template>
+          </p>         
         <!-- <app-editable-element [keyEl]="'WOM generati'" [valueEl]="'1000000'" [action]="action" [typeEl]="string" class="merchant-element" (onChangeElement)="onUpdateMerchant('quantity',$event)"></app-editable-element> -->
     </div>
 

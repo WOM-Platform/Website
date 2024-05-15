@@ -1,64 +1,64 @@
-import {Merchant, Merchants} from "./merchant";
-import {Instrument} from "./instruments";
+import { Merchant, Merchants } from "./merchant";
+import { Instrument } from "./instrument";
 
 /**
  * User registration data request
  */
 export class UserRegistrationPayload {
-    email: string;
-    password: string;
-    name: string;
-    surname: string;
+  email: string;
+  password: string;
+  name: string;
+  surname: string;
 }
 
 export interface UserMe {
-    email: string;
-    id: string;
-    merchants: Merchant[];
-    name: string;
-    surname: string;
-    role: string;
-    instruments: Instrument[];
-    verified: boolean;
+  email: string;
+  id: string;
+  merchants: Merchant[];
+  name: string;
+  surname: string;
+  role: string;
+  instruments: Instrument[];
+  verified: boolean;
 }
 
 enum Roles {
-    Admin,
-    User
+  Admin,
+  User,
 }
 
 /**
  * User data response
  */
 export class User extends UserRegistrationPayload {
-    id: string;
+  id: string;
 
-    public static fromJson(json): any {
-        if (json === null) {
-            return null;
-        }
-        return Object.assign(new User(), json);
+  public static fromJson(json): any {
+    if (json === null) {
+      return null;
     }
+    return Object.assign(new User(), json);
+  }
 }
 
 /**
  * User Login data response
  */
 export class UserLogin {
-    id: string;
-    token: string;
-    verified: boolean;
+  id: string;
+  token: string;
+  verified: boolean;
 
-    constructor(id: string = '', token: string = '', verified: boolean = false) {
-        this.id = id;
-        this.token = token;
-        this.verified = verified;
-    }
+  constructor(id: string = "", token: string = "", verified: boolean = false) {
+    this.id = id;
+    this.token = token;
+    this.verified = verified;
+  }
 
-    public static fromJson(json): any {
-        if (json === null) {
-            return null;
-        }
-        return Object.assign(new UserLogin(), json);
+  public static fromJson(json): any {
+    if (json === null) {
+      return null;
     }
+    return Object.assign(new UserLogin(), json);
+  }
 }

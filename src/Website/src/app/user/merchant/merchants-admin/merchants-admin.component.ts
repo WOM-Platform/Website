@@ -27,13 +27,13 @@ import { LoadingService } from "../../../_services/loading.service";
 import { Router } from "@angular/router";
 
 @Component({
-  selector: "app-merchants-tab",
+  selector: "app-merchants-admin",
   standalone: true,
   imports: [MatIcon, AdminTableComponent, NgIf, SharedModule, FiltersComponent],
-  templateUrl: "./merchants-tab.component.html",
-  styleUrl: "./merchants-tab.component.css",
+  templateUrl: "./merchants-admin.component.html",
+  styleUrl: "./merchants-admin.component.css",
 })
-export class MerchantsTabComponent implements OnInit {
+export class MerchantsAdminComponent implements OnInit {
   @Output() isLoading = new EventEmitter<boolean>();
 
   merchantsList;
@@ -94,7 +94,6 @@ export class MerchantsTabComponent implements OnInit {
             }),
             finalize(() => {
               this.loadingService.hide();
-              console.log("mer ", this.merchantsList);
               this.cd.markForCheck();
             })
           )

@@ -1,26 +1,32 @@
 <p class="flex items-center gap-2 mb-0 h-8">
-    <span class="text-slate-600 font-semibold">{{ keyEl }}</span>:
-    <ng-container *ngIf="!isEditing; else primaryActivityInput">
-      {{ valueEl }}
-      <ng-container *ngIf="action === 'edit'">
-        <button (click)="startEditing()">
-            <i class="fas fa-edit text-slate-600 text-base"></i>
-        </button>        
-      </ng-container>
+  <span *ngIf="keyEl" class="text-slate-600 font-semibold">{{ keyEl }}:</span>
+  <ng-container *ngIf="!isEditing; else primaryActivityInput">
+    {{ valueEl }}
+    <ng-container *ngIf="action === 'edit'">
+      <button (click)="startEditing()">
+        <i class="fas fa-edit text-slate-600 text-base"></i>
+      </button>
     </ng-container>
-    <ng-template #primaryActivityInput>
-      <input
-        [(ngModel)]="newValue"
-        name="valueKey"
-        class="border-2 border-black rounded-lg px-2 min-w-24 w-fit"
-        (ngModelChange)="validateValue()"
-      />
-        <button (click)="stopEditing()" [disabled]="!isDirty" [ngClass]="{'text-green-600': isDirty, 'text-slate-400': !isDirty}">
-        <i class="fa-solid fa-check"></i>
-      </button>
-      <button (click)="cancelEditing()" class="text-red-600">
-        <i class="fa-solid fa-xmark"></i>
-      </button>
-    </ng-template>
-  </p>
-  
+  </ng-container>
+  <ng-template #primaryActivityInput>
+    <input
+      [(ngModel)]="newValue"
+      name="valueKey"
+      class="border-2 border-black rounded-lg px-2 min-w-24 w-fit"
+      (ngModelChange)="validateValue()"
+    />
+    <button
+      (click)="stopEditing()"
+      [disabled]="!isDirty"
+      [ngClass]="{ 'text-green-600': isDirty, 'text-slate-400': !isDirty }"
+    >
+      <i class="fa-solid fa-check"></i>
+    </button>
+    <button (click)="cancelEditing()" class="text-red-600">
+      <i class="fa-solid fa-xmark"></i>
+    </button>
+    <div *ngIf="!isValid" class="text-red-600 text-sm mt-1">
+      {{ validationMessage }}
+    </div>
+  </ng-template>
+</p>
