@@ -28,17 +28,17 @@ import { FiltersComponent } from "./components/filters/filters.component";
 import { UserComponent } from "./user.component";
 import { UserMerchantsComponent } from "./merchant/user-merchants.component";
 import { UserAimsComponent } from "./aims/user-aims.component";
-import { DialogViewEditMerchantComponent } from "./components/dialog-view-edit-merchant/dialog-view-edit-merchant.component";
 import { MerchantDetailComponent } from "./merchant/merchant-detail/merchant-detail.component";
+import { UserAimsListComponent } from "./components/user-aims-list/user-aims-list.component";
 
 @NgModule({
   declarations: [
     UserAimsComponent,
+    UserAimsListComponent,
     DialogCreateMerchant,
     AddPosDialogComponent,
     UserAccessListComponent,
     DialogViewEditSourceComponent,
-    DialogViewEditMerchantComponent,
     InstrumentsTabComponent,
     MapComponent,
     FormMerchantComponent,
