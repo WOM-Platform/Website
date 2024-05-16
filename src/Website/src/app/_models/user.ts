@@ -1,3 +1,6 @@
+import { Merchant, Merchants } from "./merchant";
+import { Instrument } from "./instrument";
+
 /**
  * User registration data request
  */
@@ -6,6 +9,22 @@ export class UserRegistrationPayload {
   password: string;
   name: string;
   surname: string;
+}
+
+export interface UserMe {
+  email: string;
+  id: string;
+  merchants: Merchant[];
+  name: string;
+  surname: string;
+  role: string;
+  instruments: Instrument[];
+  verified: boolean;
+}
+
+enum Roles {
+  Admin,
+  User,
 }
 
 /**
@@ -30,7 +49,7 @@ export class UserLogin {
   token: string;
   verified: boolean;
 
-  constructor(id: string = '', token: string = '', verified: boolean = false) {
+  constructor(id: string = "", token: string = "", verified: boolean = false) {
     this.id = id;
     this.token = token;
     this.verified = verified;

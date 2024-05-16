@@ -6,7 +6,7 @@ import {
     HttpRequest,
     HttpResponse
 } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {Observable, of, throwError} from 'rxjs';
 import {catchError, tap} from 'rxjs/operators';
 import {UserLogin} from '../_models';
@@ -20,7 +20,8 @@ export class TokenInterceptorService implements HttpInterceptor {
                 private userService: UserService,
                 private router: Router) {
     }
-    noAuthStrings: string[] = ['/aims', '/aim', 'auth/key', 'user/login', 'user/verify', 'user/register', 'user/password-reset', 'sendinblue'];
+
+    noAuthStrings: string[] = ['/aims-tab', '/aim', 'auth/key', 'user/login', 'user/verify', 'user/register', 'user/password-reset', 'sendinblue'];
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         // If true do nothing - auth header not needed
@@ -35,9 +36,11 @@ export class TokenInterceptorService implements HttpInterceptor {
 
         // Add auth to requests
         const user: UserLogin = JSON.parse(userLogin);
-        let duplicate = req.clone( {setHeaders: {
-            Authorization: 'Bearer ' + user.token
-        }});
+        let duplicate = req.clone({
+            setHeaders: {
+                Authorization: 'Bearer ' + user.token
+            }
+        });
 
         // TMP
         //if(req.url.includes('roles')) {
@@ -51,14 +54,14 @@ export class TokenInterceptorService implements HttpInterceptor {
             catchError(error => {
                 if (error instanceof HttpErrorResponse) {
 
-                    if(userLogin && error.status == 401) {
-                        let ref = this.snackBar.open('Unauthorized.', 'close', { duration: 5000});
+                    if (userLogin && error.status == 401) {
+                        let ref = this.snackBar.open('Unauthorized.', 'close', {duration: 5000});
                         ref.afterDismissed().subscribe(res => {
                             this.userService.logout();
                             this.router.navigate(['/authentication/signin']);
                         })
                     } else if (error.status === 0) {
-                        let ref = this.snackBar.open('🛠️ Server error', 'close', { duration: 5000});
+                        let ref = this.snackBar.open('🛠️ Server error', 'close', {duration: 5000});
                         ref.afterDismissed().subscribe(res => {
                         })
                     }

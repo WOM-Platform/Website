@@ -1,0 +1,59 @@
+mat-divider.mat-divider-inset {
+    margin-left: 0;
+}
+
+.dialog-view {
+    @apply flex flex-col px-10 py-8
+}
+
+.input-create {
+    @apply bg-white border-black border-[1px] py-2 rounded-xl px-6
+}
+
+.input-edit {
+    @apply border-black border-[1px] py-2 rounded-xl px-6 bg-[#e5e5e5]
+}
+
+.invalid-input {
+    @apply border-red-600 border-2;
+}
+
+.btn-cancel {
+    @apply font-light px-4 py-2 ;
+}
+
+.btn-cancel:hover {
+    @apply bg-[#e5e5e5] rounded-full
+}
+
+.btn-submit {
+    @apply text-blue-600 px-4 py-2 ;
+}
+
+.btn-submit:hover {
+    @apply bg-blue-200 rounded-full
+}
+
+.access-list {
+    padding: 0;
+    list-style-type: disc;
+}
+
+.access-list li {
+    @apply ml-6
+}
+
+.access-item {
+    @apply flex
+}
+
+.access-details {
+    @apply text-lg flex gap-4;
+    flex-grow: 1;
+}
+
+@media (max-width: 700px) {
+    .dialog-view {
+        @apply px-4 py-2
+    }
+}

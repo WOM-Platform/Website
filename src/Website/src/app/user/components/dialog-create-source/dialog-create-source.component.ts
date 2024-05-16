@@ -18,8 +18,6 @@ export class DialogCreateSourceComponent implements OnInit, OnDestroy {
     constructor(
         private fb: FormBuilder,
         public dialogRef: MatDialogRef<DialogCreateSourceComponent>,
-        private sourceService: SourceService,
-        private cd: ChangeDetectorRef,
         @Inject(MAT_DIALOG_DATA) public data: any,
     ) {
     }
@@ -54,6 +52,6 @@ export class DialogCreateSourceComponent implements OnInit, OnDestroy {
 
     handleAccessList(accessEl) {
         const currentAccess = this.newSource.get('access').value;
-        this.newSource.get('access').setValue([...currentAccess, accessEl]);
+        this.newSource.get('access').setValue([...currentAccess, accessEl.access]);
     }
 }

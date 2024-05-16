@@ -1,0 +1,16 @@
+<mat-tab-group *ngIf="currentUser" class="min-w-[800px]">
+    <mat-tab *ngIf="currentUser.role === 'Admin'" label="Lista Instruments">
+        <app-instruments-tab></app-instruments-tab>
+    </mat-tab>
+    <mat-tab *ngIf="currentUser.sources && currentUser.sources.length > 0" label="I miei Instruments">
+<div class="my-6" *ngFor="let instrument of instruments">
+    <div class="bg-white rounded-lg shadow-md p-6">
+        <h3 class="text-xl font-semibold">{{ instrument.name }}</h3>
+        <div class="mt-4">
+          <p>{{ instrument.data }}</p>
+          
+        </div>
+      </div>
+</div>
+    </mat-tab>
+</mat-tab-group>

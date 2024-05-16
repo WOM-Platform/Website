@@ -1,0 +1,24 @@
+<div class="flex justify-between mt-6">
+    <h2>Lista Merchants</h2>
+    <button class="flex justify-center border-2 px-4 py-2 rounded-full border-blue-600 bg-blue-200 hover:bg-blue-400"
+            (click)="onCreateMerchant()">
+        <mat-icon>add</mat-icon>
+        Nuovo Merchant
+    </button>
+
+</div>
+<app-filters [itemsPage]="itemsPerPage ? itemsPerPage : '10'" (filterEmit)="filterUpdate($event)"/>
+<div *ngIf="merchantsList">
+    <app-admin-table [tableData]="merchantsList"
+                     [tableColumns]="merchantsTableColumns"
+                     [isActions]="true"
+                     [currentPage]="currentPage"
+                     [itemsPerPage]="itemsPerPage"
+                     [totalItems]="totalItems"
+                     [pageCount]="pageCount"
+                     (viewItem)="onViewMerchant($event)"
+                     (deleteItem)="onDeleteMerchant($event)"
+                     (editItem)="onEditMerchant($event)"
+                     (pageChanged)="onPageChange($event)"
+    ></app-admin-table>
+</div>

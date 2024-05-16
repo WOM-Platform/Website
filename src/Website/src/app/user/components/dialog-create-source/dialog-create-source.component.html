@@ -17,7 +17,6 @@
             <div class="text-red-600" *ngIf="newSource.get('url').invalid && newSource.get('url').touched">
                 Inserire l'url
             </div>
-
         </div>
     </form>
 
@@ -27,7 +26,9 @@
             <li *ngFor="let toAdd of newSource.get('access').value">
                 <div class="access-item">
                     <div class="access-details">
-                        <div><span class="text-slate-600 font-semibold">Name</span>: {{ toAdd.name }} {{ toAdd.surname }}</div>
+                        <div><span
+                                class="text-slate-600 font-semibold">Name</span>: {{ toAdd.name }} {{ toAdd.surname }}
+                        </div>
                         <div><span class="text-slate-600 font-semibold">Email</span>: {{ toAdd.email }}</div>
                     </div>
                 </div>
@@ -35,7 +36,7 @@
         </ul>
     </div>
     <div *ngIf="showAddAccessButton" class="mt-11">
-        <app-source-access-list (accessToAdd)="handleAccessList($event)"></app-source-access-list>
+        <app-user-access-list (accessToAdd)="handleAccessList($event)"></app-user-access-list>
     </div>
     <div class="flex justify-end gap-2 mt-11">
         <button (click)="onNoClick()" class="btn-cancel">Annulla</button>

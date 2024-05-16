@@ -5,6 +5,7 @@ import {Router} from "@angular/router";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {MatDialog} from "@angular/material/dialog";
 import {Subscription} from "rxjs";
+import {UserMe} from "../../_models";
 
 @Component({
     selector: 'app-user-home',
@@ -36,7 +37,7 @@ export class UserHomeComponent implements OnInit, OnDestroy {
 
     loadData(): any {
         // check user instrument and merchant amount
-        this.userDataSubscription = this.userService.me().subscribe(data => {
+        this.userDataSubscription = this.userService.me().subscribe((data: UserMe) => {
             if (data) {
                 this.userData = data
                 if (data.role) {
@@ -56,4 +57,6 @@ export class UserHomeComponent implements OnInit, OnDestroy {
             duration: 5000
         });
     }
+
+
 }

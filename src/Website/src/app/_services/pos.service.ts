@@ -35,7 +35,7 @@ export class PosService {
                 url: pos.url,
                 isActive: pos.isActive
             })
-            .pipe(map (response => response));
+            .pipe(map(response => response));
     }
 
     /**
@@ -51,6 +51,10 @@ export class PosService {
                 longitude: pos.longitude,
                 url: pos.url
             })
-            .pipe(map (response => response));
+            .pipe(map(response => response));
+    }
+
+    delete(idPos: string) {
+        return this.http.delete(`${this.localUrlV1}${idPos}?dryRun=false`)
     }
 }
