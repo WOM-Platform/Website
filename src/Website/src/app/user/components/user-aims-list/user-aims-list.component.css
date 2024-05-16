@@ -1,0 +1,7 @@
+.btn-default {
+    @apply border-2 border-black px-4 py-2 rounded-full flex items-center gap-1 bg-white cursor-pointer;
+}
+
+.add-access-container {
+    @apply relative gap-4 p-6 border-2 border-black rounded-lg mt-6;
+}

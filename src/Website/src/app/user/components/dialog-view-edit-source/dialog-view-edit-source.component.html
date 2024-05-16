@@ -45,18 +45,18 @@
               {{ aim.titles["it"] }} | {{ aim.titles["en"] }}
             </div>
           </div>
-          <ng-container *ngIf="action === 'edit'">
-            <button class="delete-button text-red" (click)="onDeleteAim(aim)">
-              <mat-icon class="text-red">delete</mat-icon>
-            </button>
-          </ng-container>
         </div>
       </li>
     </ul>
   </div>
 
   <div *ngIf="action === 'edit'">
-    <div class="mt-11"><app-user-aims-list /></div>
+    <div class="mt-6">
+      <app-user-aims-list
+        [instrumentAims]="instrument.aims"
+        (aimsEmit)="onUpdateAim($event)"
+      />
+    </div>
   </div>
   <div *ngIf="instrument.access && instrument.access.length > 0" class="mt-10">
     <p class="font-semibold mb-0">Gestori:</p>
@@ -86,7 +86,7 @@
     </ul>
   </div>
   <div *ngIf="action === 'edit'">
-    <div *ngIf="!createNewAccess" class="mt-11">
+    <div *ngIf="!createNewAccess" class="mt-6">
       <app-user-access-list (accessToAdd)="handleAccessList($event)" />
     </div>
   </div>

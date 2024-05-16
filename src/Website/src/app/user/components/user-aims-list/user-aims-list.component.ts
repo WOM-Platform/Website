@@ -1,127 +1,89 @@
-import {
-  ChangeDetectorRef,
-  Component,
-  EventEmitter,
-  Input,
-  OnInit,
-  Output,
-  ViewChild,
-} from "@angular/core";
-import { SearchAimComponent } from "./search-aim/search-aim.component";
-import { Subscription } from "rxjs";
-import { UserService } from "src/app/_services";
+import { animate, style, transition, trigger } from "@angular/animations";
+import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
+import { Aim, AimWithChecked } from "src/app/_models";
+import { AimsService } from "src/app/_services";
 
 @Component({
   selector: "app-user-aims-list",
   templateUrl: "./user-aims-list.component.html",
-  styleUrl: "./user-aims-list.component.css",
+  styleUrls: ["./user-aims-list.component.css"],
+  animations: [
+    trigger("fadeInOut", [
+      transition(":enter", [
+        style({ opacity: 0 }),
+        animate("0.2s ease-out", style({ opacity: 1 })),
+      ]),
+      transition(":leave", [animate("0.2s ease-in", style({ opacity: 0 }))]),
+    ]),
+  ],
 })
 export class UserAimsListComponent implements OnInit {
+  @Input() instrumentAims: Aim[];
+  @Output() aimsEmit = new EventEmitter<Aim[]>();
+
+  addAim: boolean = false;
+  listAims: AimWithChecked[] = [];
+  selectedAims: AimWithChecked[] = [];
+  selectAll: boolean = false;
+
+  constructor(private aimsService: AimsService) {}
+
   ngOnInit() {
-    console.log("hhhhhhhhhhhh");
+    this.loadAims();
   }
-  // @Input() isRoleRequired: boolean = false;
-  // @Output() accessToAdd = new EventEmitter<any>();
-  // @ViewChild(SearchAimComponent)
-  // searchSourceComponent: SearchAimComponent;
-  // listAccess = [];
-  // addAccess: boolean = false;
-  // noResults: boolean = false;
-  // subscriptions: Subscription = new Subscription();
-  // isLoading = false;
-  // errorMessage: string = "";
-  // userRole = "User";
-  // selectedAccess: any | null = null;
-  // constructor(
-  //   private userService: UserService,
-  //   private cd: ChangeDetectorRef
-  // ) {}
-  // ngOnDestroy() {
-  //   this.subscriptions.unsubscribe();
-  // }
-  // onAddAccess() {
-  //   this.addAccess = true;
-  // }
-  // handleCancellationAccess() {
-  //   // this.addAccess = !this.addAccess;
-  //   // this.clearList();
-  //   // this.searchSourceComponent.clearForm();
-  // }
-  // onSearch(userToSearch: any) {
-  //   if (
-  //     userToSearch.name &&
-  //     userToSearch.name.length < 3 &&
-  //     userToSearch.email &&
-  //     userToSearch.email.length < 3
-  //   ) {
-  //     this.listAccess = [];
-  //     this.cd.markForCheck();
-  //   } else {
-  //     this.subscriptions = this.userService
-  //       .userSearch(userToSearch.name, userToSearch.email)
-  //       .subscribe((res) => {
-  //         this.listAccess = [];
-  //         if (res.data && res.data.length > 0) {
-  //           this.noResults = false;
-  //           this.listAccess = res.data;
-  //         } else {
-  //           this.noResults = true;
-  //         }
-  //         this.cd.markForCheck();
-  //       });
-  //   }
-  // }
-  // onCreateAccess(userToAdd: any) {
-  //   if (
-  //     userToAdd.name &&
-  //     userToAdd.surname &&
-  //     userToAdd.email &&
-  //     userToAdd.password
-  //   ) {
-  //     this.isLoading = true;
-  //     this.userService
-  //       .userCreate(
-  //         userToAdd.name,
-  //         userToAdd.surname,
-  //         userToAdd.email,
-  //         userToAdd.password
-  //       )
-  //       .subscribe({
-  //         next: (user) => {
-  //           this.handleSelection(user);
-  //           this.isLoading = false;
-  //           this.cd.markForCheck();
-  //         },
-  //         error: (err) => {
-  //           this.errorMessage = "Failed to create instrument.";
-  //           this.isLoading = false;
-  //           this.cd.markForCheck();
-  //         },
-  //       });
-  //   }
-  // }
-  // handleSelection(access) {
-  //   // if (this.searchSourceComponent) {
-  //   //   this.searchSourceComponent.clearForm();
-  //   //   this.listAccess = [];
-  //   // } else {
-  //   //   console.error("SearchSourceComponent is not yet available.");
-  //   // }
-  //   // if (!this.isRoleRequired) {
-  //   //   this.addUserToAccessList(access);
-  //   // } else {
-  //   //   this.selectedAccess = access;
-  //   // }
-  // }
-  // addUserToAccessList(access, role = "") {
-  //   this.addAccess = !this.addAccess;
-  //   this.selectedAccess = "";
-  //   this.accessToAdd.emit({ access: access, role: role });
-  // }
-  // clearList() {
-  //   this.listAccess = [];
-  // }
-  // trackByAccess(index, access) {
-  //   return access.id; // Assuming each access has a unique ID
-  // }
+
+  loadAims() {
+    this.aimsService.getAll().subscribe((aims: Aim[]) => {
+      this.listAims = aims.map((aim) => ({
+        ...aim,
+        isChecked: this.instrumentAims.some(
+          (instrumentAim) => instrumentAim.code === aim.code
+        ),
+      }));
+      this.updateSelectedAims();
+      this.selectAll = this.listAims.every((aim) => aim.isChecked);
+    });
+  }
+
+  onAddAim() {
+    this.addAim = true;
+  }
+
+  handleCancellationAim() {
+    this.addAim = false;
+    this.clearList();
+    this.loadAims();
+  }
+
+  toggleAll(event: any) {
+    this.listAims.forEach((aim) => (aim.isChecked = event.target.checked));
+    this.updateSelectedAims();
+  }
+
+  onAimChange() {
+    this.selectAll = this.listAims.every((aim) => aim.isChecked);
+    this.updateSelectedAims();
+  }
+
+  updateSelectedAims() {
+    this.selectedAims = this.listAims.filter((aim) => aim.isChecked);
+  }
+
+  clearList() {
+    this.listAims = [];
+  }
+
+  emitSelectedAims() {
+    const cleanedSelectedAims = this.selectedAims.map(
+      ({ isChecked, ...rest }) => rest
+    );
+    this.aimsEmit.emit(cleanedSelectedAims);
+    this.handleCancellationAim();
+  }
+
+  hasChanges() {
+    const selectedCodes = this.selectedAims.map((aim) => aim.code).sort();
+    const instrumentCodes = this.instrumentAims.map((aim) => aim.code).sort();
+    return JSON.stringify(selectedCodes) !== JSON.stringify(instrumentCodes);
+  }
 }

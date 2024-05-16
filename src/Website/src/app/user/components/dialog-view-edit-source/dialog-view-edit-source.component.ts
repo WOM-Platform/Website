@@ -82,6 +82,26 @@ export class DialogViewEditSourceComponent {
     }
   }
 
+  // Update the instrument aims
+  onUpdateAim(aimsList) {
+    console.log("aims list ", aimsList);
+    const tmpInstrument: Instrument = JSON.parse(
+      JSON.stringify(this.instrument)
+    );
+    tmpInstrument.aims = aimsList;
+
+    console.log("tmp ", tmpInstrument);
+    this.sourceService.update(tmpInstrument).subscribe({
+      next: (value) => {
+        this.instrument = aimsList;
+        console.log("API call succeeded, instrument updated:", value);
+      },
+      error: (error) => {
+        console.error("API call failed:", error);
+      },
+    });
+  }
+
   onDeleteAccess(access: Access): void {
     this.deleteAccess.emit(access);
   }
