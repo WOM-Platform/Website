@@ -55,6 +55,9 @@
     "USER": {
       "USER": "Your profile",
       "MERCHANT": "Merchant",
+      "MERCHANT-DETAIL":"Info",
+      "INSTRUMENT": "Instrument",
+      "AIM": "Aim",
       "ERROR": "Not verified",
       "HOME": "Home",
       "VERIFY": "Verify",

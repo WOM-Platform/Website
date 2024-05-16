@@ -11,6 +11,10 @@ export class Aim {
   }
 }
 
+export interface AimWithChecked extends Aim {
+  isChecked: boolean;
+}
+
 export class Titles {
   en: string;
   it: string;

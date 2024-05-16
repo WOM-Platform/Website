@@ -195,6 +195,7 @@ export class InstrumentsTabComponent implements OnInit, OnDestroy {
         const matchingAims = this.findMatchingCodes(re, aimsLetter);
         const dialogRef = this.matDialog.open(DialogViewEditSourceComponent, {
           width: "900px",
+          panelClass: "overflow-y-auto",
           data: {
             id: data.id,
             name: data.name,
