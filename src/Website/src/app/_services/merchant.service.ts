@@ -1,17 +1,21 @@
 import { Injectable } from "@angular/core";
 import { HttpClient, HttpParams } from "@angular/common/http";
-import { Observable, throwError } from "rxjs";
+import { Observable, of, throwError } from "rxjs";
 import { Merchant } from "../_models";
 import { environment } from "../../environments/environment";
-import { catchError, map } from "rxjs/operators";
+import { catchError, map, tap } from "rxjs/operators";
 import { StripePrice } from "../_models/billing";
+import { StorageService } from "./storage.service";
 
 @Injectable({ providedIn: "root" })
 export class MerchantService {
   localUrlV1 = environment.baseUrl + environment.v1 + "merchant/";
   localUrlV2 = environment.baseUrl + environment.v2 + "merchant/";
 
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    private storageService: StorageService
+  ) {}
 
   /**
    * Get merchant data from specific merchant id
@@ -31,19 +35,28 @@ export class MerchantService {
     page: number,
     itemsPerPage: string = "10"
   ): Observable<any> {
-    const params = new HttpParams()
-      .set("search", search)
-      .set("page", page.toString())
-      .set("pageSize", itemsPerPage);
-    return this.http.get(`${this.localUrlV1}`, { params }).pipe(
-      map((res) => {
-        return res;
-      }),
-      catchError((err) => {
-        console.error("Error fetching instruments", err);
-        return throwError(() => new Error("Failed to fetch instruments"));
-      })
-    );
+    const cachedMerchants = this.storageService.get("merchantsList");
+    if (cachedMerchants) {
+      return of(cachedMerchants);
+    } else {
+      const params = new HttpParams()
+        .set("search", search)
+        .set("page", page.toString())
+        .set("pageSize", itemsPerPage);
+      return this.http.get(`${this.localUrlV1}`, { params }).pipe(
+        tap({
+          next: (data) => this.storageService.set("merchantsList", data),
+          error: (err) => console.error("err ", err),
+        }),
+        map((res) => {
+          return res;
+        }),
+        catchError((err) => {
+          console.error("Error fetching instruments", err);
+          return throwError(() => new Error("Failed to fetch instruments"));
+        })
+      );
+    }
   }
 
   /**

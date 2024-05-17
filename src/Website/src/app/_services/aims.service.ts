@@ -27,23 +27,12 @@ export class AimsService {
     const cachedAims = this.storageService.get("aimsData");
     if (cachedAims) {
       return of(cachedAims);
-    }
-
-    // Check if data is in local storage
-    const storedAims = this.storageService.load("aimsData");
-    if (storedAims) {
-      // Set it to memory cache and return as observable
-      this.storageService.set("aimsData", storedAims);
-      return of(storedAims);
-    }
-
-    // If not cached, fetch from API and cache the result
-    if (!this.aimsCache) {
-      console.log("request");
+    } else {
       this.aimsCache = this.http.get<Aim[]>(this.localUrlV2).pipe(
-        tap((data) => {
-          this.storageService.set("aimsData", data["aims"]);
-          this.storageService.save(data["aims"], "aimsData");
+        tap({
+          next: (data) => this.storageService.set("aimsData", data["aims"]),
+          // this.storageService.save(data["aims"], "aimsData");
+          error: (err) => console.error("err"),
         }),
         shareReplay(1),
         catchError((error) => {
