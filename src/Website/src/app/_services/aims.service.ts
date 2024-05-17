@@ -22,27 +22,30 @@ export class AimsService {
   /**
    * List of all aims
    */
-  getAll(): Observable<any> {
-    // Check if data is in memory cache
+  getAll(): Observable<Aim[]> {
+    // Controlla se i dati sono nella cache in memoria
     const cachedAims = this.storageService.get("aimsData");
     if (cachedAims) {
       return of(cachedAims);
     } else {
-      this.aimsCache = this.http.get<Aim[]>(this.localUrlV2).pipe(
-        tap({
-          next: (data) => this.storageService.set("aimsData", data["aims"]),
-          // this.storageService.save(data["aims"], "aimsData");
-          error: (err) => console.error("err"),
-        }),
-        shareReplay(1),
-        catchError((error) => {
-          console.error("Error fetching aims data", error);
-          throw error;
-        })
-      );
+      console.log("second ");
+      if (!this.aimsCache) {
+        this.aimsCache = this.http.get<{ aims: Aim[] }>(this.localUrlV2).pipe(
+          tap({
+            next: (data) => this.storageService.set("aimsData", data.aims),
+            error: (err) =>
+              console.error("Error setting aims data in cache:", err),
+          }),
+          map((res) => res.aims),
+          shareReplay(1),
+          catchError((error) => {
+            console.error("Error fetching aims data", error);
+            throw error;
+          })
+        );
+      }
+      return this.aimsCache;
     }
-
-    return this.aimsCache;
   }
 
   /**
