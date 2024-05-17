@@ -17,7 +17,7 @@ import { DialogConfirmCancelComponent } from "../../../components/dialog-confirm
 import { LoadingService } from "../../../_services/loading.service";
 import { StorageService } from "../../../_services/storage.service";
 import { AimsService } from "src/app/_services";
-import { Aim, Titles } from "src/app/_models";
+import { Aim } from "src/app/_models";
 
 @Component({
   selector: "app-instruments-tab",
@@ -46,7 +46,6 @@ export class InstrumentsTabComponent implements OnInit, OnDestroy {
   private subscriptions: Subscription = new Subscription(); // To manage subscriptions
 
   constructor(
-    private router: Router,
     private aimsService: AimsService,
     private sourceService: SourceService,
     private matDialog: MatDialog,
@@ -239,7 +238,6 @@ export class InstrumentsTabComponent implements OnInit, OnDestroy {
 
     const afterCloseSub = dialogRef.afterClosed().subscribe({
       error: (err) => console.error("Dialog closed with error:", err),
-      complete: () => console.log("Dialog closed"),
     });
     this.subscriptions.add(afterCloseSub);
   }
