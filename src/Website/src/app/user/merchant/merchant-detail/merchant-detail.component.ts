@@ -100,8 +100,6 @@ export class MerchantDetailComponent implements OnInit, OnDestroy {
     const role = acc.role;
     const access = acc.access;
 
-    console.log(acc);
-
     const addAccessSub = this.merchantService
       .addAccess(user.id, access.id, role)
       .subscribe({

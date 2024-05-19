@@ -7,8 +7,8 @@ import {
   Subscription,
   throwError,
 } from "rxjs";
-import { DialogCreateSourceComponent } from "../../components/dialog-create-source/dialog-create-source.component";
-import { DialogViewEditSourceComponent } from "../../components/dialog-view-edit-source/dialog-view-edit-source.component";
+import { DialogCreateSourceComponent } from "../dialog-create-instrument/dialog-create-instrument.component";
+import { DialogViewEditInstrumentComponent } from "../dialog-view-edit-instrument/dialog-view-edit-instrument.component";
 import { MatDialog, MatDialogRef } from "@angular/material/dialog";
 import { catchError } from "rxjs/operators";
 import { Router } from "@angular/router";
@@ -20,11 +20,11 @@ import { AimsService } from "src/app/_services";
 import { Aim } from "src/app/_models";
 
 @Component({
-  selector: "app-instruments-tab",
-  templateUrl: "./instruments-tab.component.html",
-  styleUrl: "./instruments-tab.component.css",
+  selector: "app-admin-managment-instruments",
+  templateUrl: "./admin-managment-instruments.component.html",
+  styleUrl: "./admin-managment-instruments.component.css",
 })
-export class InstrumentsTabComponent implements OnInit, OnDestroy {
+export class AdminManagmentInstrumentsComponent implements OnInit, OnDestroy {
   searchParameters: string = "";
   searchTerms = new Subject<string>();
 
@@ -192,20 +192,21 @@ export class InstrumentsTabComponent implements OnInit, OnDestroy {
 
       this.aimsService.getAll().subscribe((re) => {
         const matchingAims = this.findMatchingCodes(re, aimsLetter);
-        const dialogRef = this.matDialog.open(DialogViewEditSourceComponent, {
-          width: "900px",
-          panelClass: "overflow-y-auto",
-          data: {
-            id: data.id,
-            name: data.name,
-            url: data.url,
-            access: res.accessInstrument["users"],
-            aims: matchingAims,
-            action: action,
-          },
-        });
-
-        this.handleDialogInteractions(dialogRef, user);
+        const dialogRef = this.matDialog.open(
+          DialogViewEditInstrumentComponent,
+          {
+            width: "900px",
+            panelClass: "overflow-y-auto",
+            data: {
+              id: data.id,
+              name: data.name,
+              url: data.url,
+              access: res.accessInstrument["users"],
+              aims: matchingAims,
+              action: action,
+            },
+          }
+        );
 
         dialogRef.afterClosed().subscribe((res) => {
           this.loadingService.hide();
@@ -223,78 +224,10 @@ export class InstrumentsTabComponent implements OnInit, OnDestroy {
     this.openDialogViewEdit(user, "edit");
   }
 
-  private handleDialogInteractions(dialogRef, user) {
-    const newAccessSub = dialogRef.componentInstance.newAccess.subscribe({
-      next: (access: any) => this.addAccess(user, access, dialogRef),
-      error: (err) => console.error("Failed to handle new access:", err),
-    });
-    this.subscriptions.add(newAccessSub);
-
-    const delAccessSub = dialogRef.componentInstance.deleteAccess.subscribe({
-      next: (access: any) => this.deleteAccess(user, access, dialogRef),
-      error: (err) => console.error("Failed to delete access:", err),
-    });
-    this.subscriptions.add(delAccessSub);
-
-    const afterCloseSub = dialogRef.afterClosed().subscribe({
-      error: (err) => console.error("Dialog closed with error:", err),
-    });
-    this.subscriptions.add(afterCloseSub);
-  }
-
-  private addAccess(user, acc, dialogRef) {
-    const role = acc.role;
-    const access = acc.access;
-
-    const addAccessSub = this.sourceService
-      .addInstrumentAccess(user.id, access.id)
-      .subscribe({
-        next: () => this.updateAccessList(user.id, dialogRef),
-        error: (err) =>
-          console.error("Error adding new instrument access:", err),
-      });
-
-    this.subscriptions.add(addAccessSub);
-  }
-
-  private deleteAccess(user, access, dialogRef) {
-    const dialogDeleteRef = this.matDialog.open(DialogConfirmCancelComponent, {
-      width: "500px",
-      data: {
-        title: "Conferma eliminazione",
-        message: "Sei sicuro di voler confermare l'eliminazione?",
-        confirm: "si",
-        cancel: "Annulla",
-      },
-    });
-
-    dialogDeleteRef.afterClosed().subscribe((result) => {
-      if (result) {
-        const delAccessSub = this.sourceService
-          .deleteInstrumentAccess(user.id, access.userId)
-          .subscribe({
-            next: () => this.updateAccessList(user.id, dialogRef),
-            error: (err) =>
-              console.error("Error deleting instrument access:", err),
-          });
-        this.subscriptions.add(delAccessSub);
-      }
-    });
-  }
-
   updateAccessList(
     userId: any,
-    dialogRef: MatDialogRef<DialogViewEditSourceComponent>
-  ) {
-    const accessSub = this.sourceService
-      .getInstrumentAccessList(userId)
-      .subscribe((res) => {
-        const accessList = res["users"];
-        dialogRef.componentInstance.onUpdateData(accessList);
-        this.cd.markForCheck();
-      });
-    this.subscriptions.add(accessSub);
-  }
+    dialogRef: MatDialogRef<DialogViewEditInstrumentComponent>
+  ) {}
 
   onDeleteSource(userToDelete: any) {
     const dialogRef = this.matDialog.open(DialogConfirmCancelComponent, {

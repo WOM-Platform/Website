@@ -9,6 +9,7 @@ export interface Instrument {
 }
 
 export interface Access {
+  id: string;
   name: string;
   email: string;
 }

@@ -19,9 +19,9 @@ import { UserAdminComponent } from "./admin/user-admin.component";
 import { UserInstrumentsComponent } from "./instruments/user-instruments.component";
 import { UserAccessListComponent } from "./components/user-access-list/user-access-list.component";
 import { SearchSourceComponent } from "./components/user-access-list/search-source/search-source.component";
-import { DialogViewEditSourceComponent } from "./components/dialog-view-edit-source/dialog-view-edit-source.component";
+import { DialogViewEditInstrumentComponent } from "./instruments/dialog-view-edit-instrument/dialog-view-edit-instrument.component";
 import { AdminTableComponent } from "./components/admin-table/admin-table.component";
-import { InstrumentsTabComponent } from "./instruments/instruments-tab/instruments-tab.component";
+import { AdminManagmentInstrumentsComponent } from "./instruments/admin-managment-instruments/admin-managment-instruments.component";
 import { UserUsersComponent } from "./users/user-users.component";
 import { MerchantsAdminComponent } from "./merchant/merchants-admin/merchants-admin.component";
 import { FiltersComponent } from "./components/filters/filters.component";
@@ -30,28 +30,30 @@ import { UserMerchantsComponent } from "./merchant/user-merchants.component";
 import { UserAimsComponent } from "./aims/user-aims.component";
 import { MerchantDetailComponent } from "./merchant/merchant-detail/merchant-detail.component";
 import { UserAimsListComponent } from "./components/user-aims-list/user-aims-list.component";
+import { MyInstrumentCollectionComponent } from "./instruments/my-instrument-collection-component/my-instrument-collection-component.component";
 
 @NgModule({
   declarations: [
-    UserAimsComponent,
-    UserAimsListComponent,
-    DialogCreateMerchant,
     AddPosDialogComponent,
-    UserAccessListComponent,
-    DialogViewEditSourceComponent,
-    InstrumentsTabComponent,
-    MapComponent,
+    AdminManagmentInstrumentsComponent,
+    DialogCreateMerchant,
+    DialogViewEditInstrumentComponent,
     FormMerchantComponent,
+    MapComponent,
     MerchantDetailComponent,
     MerchantStatsComponent,
+    MyInstrumentCollectionComponent,
     PosFormComponent,
+    UserAccessListComponent,
     UserAdminComponent,
+    UserAimsComponent,
+    UserAimsListComponent,
+    UserComponent,
     UserHomeComponent,
-    UserMerchantsComponent,
     UserInstrumentsComponent,
+    UserMerchantsComponent,
     UserNotVerifiedComponent,
     UserStatsComponent,
-    UserComponent,
     UserUsersComponent,
     UserVerifyComponent,
   ],

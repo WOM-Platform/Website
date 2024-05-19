@@ -28,7 +28,6 @@ export class AimsService {
     if (cachedAims) {
       return of(cachedAims);
     } else {
-      console.log("second ");
       if (!this.aimsCache) {
         this.aimsCache = this.http.get<{ aims: Aim[] }>(this.localUrlV2).pipe(
           tap({

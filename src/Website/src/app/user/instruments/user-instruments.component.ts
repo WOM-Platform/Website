@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
 import {UserService} from "../../_services";
 import {StorageService} from "../../_services/storage.service";
+import { Instrument } from 'src/app/_models/instrument';
 
 @Component({
     selector: 'app-user-instrument',
@@ -10,7 +11,7 @@ import {StorageService} from "../../_services/storage.service";
 })
 export class UserInstrumentsComponent implements OnInit {
     username: string;
-    instruments: any;
+    instruments: Instrument;
     currentUser: any;
 
     constructor(private router: Router, private userService: UserService, private storageService: StorageService) {

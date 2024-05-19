@@ -208,7 +208,6 @@ export class MerchantsAdminComponent implements OnInit {
   }
 
   filterUpdate(filter) {
-    console.log("Update");
     this.storageService.clearCache("merchantsList");
     this.itemsPerPage = filter.get("itemsPerPage").value;
 
