@@ -1,30 +1,36 @@
 <div class="flex flex-col justify-start gap-2">
-    <div class="loading-overlay" *ngIf="isLoading">
-        <img src="../../../assets/gif/loading.gif" alt="Caricamento..." class="loading-image">
-    </div>
+  <div class="loading-overlay" *ngIf="isLoading">
+    <img
+      src="../../../assets/gif/loading.gif"
+      alt="Caricamento..."
+      class="loading-image"
+    />
+  </div>
 
-    <div *ngIf="user">
-        <mat-tab-group (selectedTabChange)="onTabChange($event.index)">
-            <mat-tab label="Instruments">
-                <ng-container *ngIf="activeTabIndex === 0">
-                    <app-instruments-tab></app-instruments-tab>
-                </ng-container>
-            </mat-tab>
-            <mat-tab label="Merchants">
-                <ng-container *ngIf="activeTabIndex === 1">
-                    <app-merchants-admin (isLoading)="onLoading($event)"></app-merchants-admin>
-                </ng-container>
-            </mat-tab>
-            <mat-tab label="Users">
-                <ng-container *ngIf="activeTabIndex === 2">
-                    <app-users-tab></app-users-tab>
-                </ng-container>
-            </mat-tab>
-            <mat-tab label="Aims">
-                <ng-container *ngIf="activeTabIndex === 3">
-                    <app-aims-tab></app-aims-tab>
-                </ng-container>
-            </mat-tab>
-        </mat-tab-group>
-    </div>
+  <div *ngIf="user">
+    <mat-tab-group (selectedTabChange)="onTabChange($event.index)">
+      <mat-tab label="Instruments">
+        <ng-container *ngIf="activeTabIndex === 0">
+          <app-admin-managment-instruments></app-admin-managment-instruments>
+        </ng-container>
+      </mat-tab>
+      <mat-tab label="Merchants">
+        <ng-container *ngIf="activeTabIndex === 1">
+          <app-merchants-admin
+            (isLoading)="onLoading($event)"
+          ></app-merchants-admin>
+        </ng-container>
+      </mat-tab>
+      <mat-tab label="Users">
+        <ng-container *ngIf="activeTabIndex === 2">
+          <app-users-tab></app-users-tab>
+        </ng-container>
+      </mat-tab>
+      <mat-tab label="Aims">
+        <ng-container *ngIf="activeTabIndex === 3">
+          <app-aims-tab></app-aims-tab>
+        </ng-container>
+      </mat-tab>
+    </mat-tab-group>
+  </div>
 </div>

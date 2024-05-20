@@ -73,6 +73,25 @@ export class MerchantsAdminComponent implements OnInit {
 
   getMerchantsList() {
     this.loadingService.show();
+
+    this.merchantService
+      .getAllMerchants(
+        this.searchParameters,
+        this.currentPage,
+        this.itemsPerPage
+      )
+      .subscribe({
+        next: (res) => {
+          this.assignMerchantData(res);
+
+          this.cd.detectChanges();
+        },
+        error: (err) => console.error(err),
+        complete: () => {
+          this.loadingService.hide();
+        },
+      });
+
     const cachedData = this.storageService.get("merchantsList");
     if (cachedData) {
       this.assignMerchantData(cachedData);
@@ -189,7 +208,6 @@ export class MerchantsAdminComponent implements OnInit {
   }
 
   filterUpdate(filter) {
-    console.log("Update");
     this.storageService.clearCache("merchantsList");
     this.itemsPerPage = filter.get("itemsPerPage").value;
 

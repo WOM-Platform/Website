@@ -116,7 +116,7 @@ export class UserAccessListComponent implements OnDestroy {
             this.cd.markForCheck();
           },
           error: (err) => {
-            this.errorMessage = "Failed to create instrument.";
+            (this.errorMessage = "Failed to create instrument: "), err;
             this.isLoading = false;
             this.cd.markForCheck();
           },

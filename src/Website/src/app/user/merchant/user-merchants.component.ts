@@ -229,7 +229,7 @@ export class UserMerchantsComponent implements OnInit, OnDestroy {
             );
           },
           (error) => {
-            console.log(error);
+            console.error(error);
             const dialogRefErr = this.dialog.open(DialogConfirmComponent, {
               data: {
                 title: this.translate.instant(

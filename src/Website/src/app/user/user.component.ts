@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from "@angular/core";
+import { ChangeDetectorRef, Component, OnDestroy, OnInit } from "@angular/core";
 import { NavigationEnd, NavigationStart, Router } from "@angular/router";
 
 import { UserService } from "../_services";
@@ -60,17 +60,17 @@ export class UserComponent implements OnInit, OnDestroy {
 
   constructor(
     private userService: UserService,
-    private router: Router,
+    private cd: ChangeDetectorRef,
     private loadingService: LoadingService
-  ) {
+  ) {}
+
+  ngOnInit(): any {
     this.userDataSubscription = this.loadingService.loadingStatus.subscribe(
       (status) => {
         this.isLoading = status;
+        this.cd.detectChanges();
       }
     );
-  }
-
-  ngOnInit(): any {
     this.username =
       this.userService.currentUserValue.name +
       " " +
