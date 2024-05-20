@@ -1,10 +1,14 @@
 import { ChangeDetectorRef, Component, OnDestroy, OnInit } from "@angular/core";
 import { countryList, Merchant, primaryActivityType } from "../../../_models";
-import { MerchantService, PosService } from "src/app/_services";
+import { MerchantService, PosService, UserService } from "src/app/_services";
 import { ActivatedRoute } from "@angular/router";
 import { Subscription, forkJoin } from "rxjs";
 import { LoadingService } from "src/app/_services/loading.service";
 import { Location } from "@angular/common";
+import { StorageService } from "src/app/_services/storage.service";
+import { Access } from "src/app/_models/instrument";
+import { MatDialog } from "@angular/material/dialog";
+import { DialogConfirmCancelComponent } from "src/app/components/dialog-confirm-cancel/dialog-confirm-cancel";
 
 @Component({
   selector: "app-merchant-detail",
@@ -47,8 +51,11 @@ export class MerchantDetailComponent implements OnInit, OnDestroy {
     private cd: ChangeDetectorRef,
     private loadingService: LoadingService,
     private location: Location,
+    private matDialog: MatDialog,
     private merchantService: MerchantService,
     private posService: PosService,
+    private storageService: StorageService,
+    private userService: UserService,
     private route: ActivatedRoute
   ) {}
 
@@ -96,18 +103,41 @@ export class MerchantDetailComponent implements OnInit, OnDestroy {
     this.isEditing[field] = false;
   }
 
-  handleAccessList(user, acc): void {
-    const role = acc.role;
-    const access = acc.access;
+  handleAccessList(user): void {
+    const role = user.role;
+    const access = user.access;
 
     const addAccessSub = this.merchantService
-      .addAccess(user.id, access.id, role)
+      .addAccess(this.id, access.id, role)
       .subscribe({
-        next: () => this.updateAccessList(user.id),
+        next: () => {
+          this.checkAccessCurrentUser(access.userId);
+          this.updateAccessList();
+        },
         error: (err) =>
           console.error("Error adding new instrument access:", err),
       });
     // this.subscriptions.add(addAccessSub);
+  }
+
+  onDeleteAccess(access: Access) {
+    const dialogRef = this.matDialog.open(DialogConfirmCancelComponent, {
+      width: "500px",
+      data: {
+        title: "Conferma eliminazione",
+        message: "Sei sicuro di voler confermare l'eliminazione?",
+        confirm: "si",
+        cancel: "Annulla",
+      },
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      this.merchantService.deleteAccess(this.id, access.userId).subscribe({
+        next: () => {
+          this.updateAccessList();
+        },
+      });
+    });
   }
 
   onCheckboxClick(): void {
@@ -120,12 +150,10 @@ export class MerchantDetailComponent implements OnInit, OnDestroy {
 
     updatedMerchant[key] = value;
 
-    this.merchantService
-      .update(updatedMerchant)
-      .subscribe((res) => console.log(res));
+    this.merchantService.update(updatedMerchant).subscribe();
   }
 
-  updateAccessList(user) {
+  updateAccessList() {
     this.merchantService
       .getAccessList(this.merchantId)
       .subscribe((res) => (this.accessList = res["users"]));
@@ -141,5 +169,14 @@ export class MerchantDetailComponent implements OnInit, OnDestroy {
     this.posList = data || [];
     this.action = "edit";
     this.cd.markForCheck();
+  }
+
+  checkAccessCurrentUser(idAccess: string) {
+    const currentUser = this.storageService.load("currentUser");
+    if (idAccess === currentUser.id) {
+      this.userService
+        .me()
+        .subscribe((res) => this.userService.updateUserOwnership(res));
+    }
   }
 }

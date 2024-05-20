@@ -180,7 +180,7 @@ export class DialogViewEditInstrumentComponent implements OnInit, OnDestroy {
     this.cd.markForCheck();
   }
 
-  checkAccessCurrentUser(idAccess: string, isOwner: boolean = true) {
+  checkAccessCurrentUser(idAccess: string) {
     const currentUser = this.storageService.load("currentUser");
     console.log(idAccess);
     if (idAccess === currentUser.id) {

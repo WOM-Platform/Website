@@ -9,7 +9,9 @@ export interface Instrument {
 }
 
 export interface Access {
-  id: string;
+  userId: string;
   name: string;
+  surname: string;
   email: string;
+  role: string;
 }
