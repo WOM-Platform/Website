@@ -13,8 +13,9 @@ import { MAT_DIALOG_DATA, MatDialog } from "@angular/material/dialog";
 import { Subscription } from "rxjs";
 import { Aim } from "src/app/_models/aim";
 import { Access, Instrument } from "src/app/_models/instrument";
-import { AimsService } from "src/app/_services";
+import { AimsService, UserService } from "src/app/_services";
 import { SourceService } from "src/app/_services/source.service";
+import { StorageService } from "src/app/_services/storage.service";
 import { DialogConfirmCancelComponent } from "src/app/components/dialog-confirm-cancel/dialog-confirm-cancel";
 
 @Component({
@@ -38,7 +39,9 @@ export class DialogViewEditInstrumentComponent implements OnInit, OnDestroy {
     @Inject(MAT_DIALOG_DATA) public data: any,
     private cd: ChangeDetectorRef,
     private matDialog: MatDialog,
-    private sourceService: SourceService
+    private sourceService: SourceService,
+    private storageService: StorageService,
+    private userService: UserService
   ) {
     this.instrument = data;
     this.action = data.action;
@@ -47,6 +50,7 @@ export class DialogViewEditInstrumentComponent implements OnInit, OnDestroy {
   ngOnInit(): void {}
   ngOnDestroy(): void {}
 
+  // to update instrument field like name and url
   onUpdateSourceField(key: string, value: any) {
     const updatedInstrument = { ...this.instrument };
 
@@ -59,6 +63,7 @@ export class DialogViewEditInstrumentComponent implements OnInit, OnDestroy {
     });
   }
 
+  // to delete aim of an instrument
   onDeleteAim(aimToRemove: Aim) {
     // Find the index of the aim to be removed
     const index = this.instrument.aims.findIndex(
@@ -131,6 +136,7 @@ export class DialogViewEditInstrumentComponent implements OnInit, OnDestroy {
           .deleteInstrumentAccess(this.instrument.id, access.userId)
           .subscribe({
             next: () => {
+              this.checkAccessCurrentUser(access.userId);
               this.instrument.access = this.instrument.access.filter(
                 (a) => a["userId"] !== access.userId
               );
@@ -151,7 +157,9 @@ export class DialogViewEditInstrumentComponent implements OnInit, OnDestroy {
       .addInstrumentAccess(this.instrument.id, access.access.id)
       .subscribe({
         next: () => {
-          // this.instrument.access.push(access.access);
+          this.checkAccessCurrentUser(access.access.id);
+
+          this.instrument.access.push(access.access);
           this.sourceService
             .getInstrumentAccessList(this.instrument.id)
             .subscribe({
@@ -172,9 +180,21 @@ export class DialogViewEditInstrumentComponent implements OnInit, OnDestroy {
     this.cd.markForCheck();
   }
 
+  checkAccessCurrentUser(idAccess: string, isOwner: boolean = true) {
+    const currentUser = this.storageService.load("currentUser");
+    console.log(idAccess);
+    if (idAccess === currentUser.id) {
+      this.userService
+        .me()
+        .subscribe((res) => this.userService.updateUserOwnership(res));
+    }
+  }
+
   onUpdateData(data: any): void {
     this.instrument.access = data || [];
     this.action = "edit";
+
+    // send
     this.cd.markForCheck();
   }
 

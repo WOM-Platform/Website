@@ -63,8 +63,9 @@ export class UserMerchantsComponent implements OnInit, OnDestroy {
     this.currentUser = this.storageService.load("currentUser");
   }
 
-  updataMerchantsList() {
+  updateMerchantsList() {
     this.userService.me().subscribe((user) => {
+      console.log("I miei merchant ", user);
       this.loadData();
     });
   }
@@ -126,7 +127,7 @@ export class UserMerchantsComponent implements OnInit, OnDestroy {
             this.openSnackBar(response);
           });
 
-        this.updataMerchantsList();
+        this.updateMerchantsList();
       }
     });
   }
@@ -173,7 +174,7 @@ export class UserMerchantsComponent implements OnInit, OnDestroy {
         const delSub = this.merchantService
           .deleteMerchant(merchant.id)
           .subscribe((res) => {
-            this.updataMerchantsList();
+            this.updateMerchantsList();
           });
         this.subscriptions.add(delSub);
       }
