@@ -24,8 +24,7 @@ import { DialogConfirmCancelComponent } from "src/app/components/dialog-confirm-
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DialogViewEditInstrumentComponent implements OnInit, OnDestroy {
-  @Output() deleteAccess = new EventEmitter<any>();
-  @Output() newAccess = new EventEmitter<any>();
+  @Output() updatedField = new EventEmitter<string>();
 
   instrument: Instrument;
   accessUsers: Access[];
@@ -52,10 +51,12 @@ export class DialogViewEditInstrumentComponent implements OnInit, OnDestroy {
     const updatedInstrument = { ...this.instrument };
 
     updatedInstrument[key] = value;
-
-    this.sourceService
-      .update(updatedInstrument)
-      .subscribe((res) => console.log(res));
+    this.sourceService.update(updatedInstrument).subscribe({
+      next: () => {
+        this.updatedField.emit(key);
+      },
+      error: (err) => console.error(err),
+    });
   }
 
   onDeleteAim(aimToRemove: Aim) {

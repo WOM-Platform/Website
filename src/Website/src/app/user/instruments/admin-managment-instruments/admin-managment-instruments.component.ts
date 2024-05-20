@@ -33,6 +33,8 @@ export class AdminManagmentInstrumentsComponent implements OnInit, OnDestroy {
   pageCount: number;
   totalItems: number;
 
+  tableToUpdate: boolean = false;
+
   errorMessage: string = "";
 
   instrumentsList: any;
@@ -60,7 +62,6 @@ export class AdminManagmentInstrumentsComponent implements OnInit, OnDestroy {
 
   getSourcesList() {
     this.loadingService.show();
-
     const cachedData = this.storageService.get("instrumentsList");
     if (cachedData) {
       this.assignInstrumentData(cachedData);
@@ -208,7 +209,16 @@ export class AdminManagmentInstrumentsComponent implements OnInit, OnDestroy {
           }
         );
 
+        dialogRef.componentInstance.updatedField.subscribe((field) => {
+          this.tableToUpdate = true;
+        });
+
         dialogRef.afterClosed().subscribe((res) => {
+          if (this.tableToUpdate) {
+            this.storageService.clearCache("instrumentsList");
+            this.getSourcesList();
+            this.tableToUpdate = false;
+          }
           this.loadingService.hide();
           this.cd.markForCheck();
         });
@@ -223,11 +233,6 @@ export class AdminManagmentInstrumentsComponent implements OnInit, OnDestroy {
   onEditSource(user: any) {
     this.openDialogViewEdit(user, "edit");
   }
-
-  updateAccessList(
-    userId: any,
-    dialogRef: MatDialogRef<DialogViewEditInstrumentComponent>
-  ) {}
 
   onDeleteSource(userToDelete: any) {
     const dialogRef = this.matDialog.open(DialogConfirmCancelComponent, {
