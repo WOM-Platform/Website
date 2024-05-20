@@ -148,11 +148,16 @@ export class AdminManagmentInstrumentsComponent implements OnInit, OnDestroy {
   }
 
   private processAccess(user, result) {
+    console.log("User ", user);
+    console.log("Result ", result);
     if (result.access && result.access.length > 0) {
       const accessSub = this.sourceService
         .addAccessSequentially(user.id, result.access)
         .subscribe({
-          next: () => console.log("All access rights added successfully."),
+          next: () => {
+            result.access.some((element) => element === user);
+            console.log("All access rights added successfully.");
+          },
           error: (err) => {
             console.error("Error adding access rights:", err);
             this.loadingService.hide();

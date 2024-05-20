@@ -19,6 +19,16 @@ export class MyInstrumentCollectionComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+<<<<<<< HEAD
+=======
+    this.userService.userOwnershipStatus.subscribe({
+      next: (res) => {
+        console.log("Aggiorno collection ", res["sources"]);
+        this.instruments = res["sources"];
+      },
+    });
+
+>>>>>>> feature/dashboardInstrument
     this.username =
       this.userService.currentUserValue.name +
       " " +

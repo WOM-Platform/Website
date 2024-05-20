@@ -1,11 +1,18 @@
-import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  OnInit,
+  Output,
+} from "@angular/core";
 
 @Component({
   selector: "app-editable-element",
   templateUrl: "./editable-element.component.html",
   styleUrls: ["./editable-element.component.css"],
 })
-export class EditableElementComponent implements OnInit {
+export class EditableElementComponent implements OnChanges {
   @Input() keyEl: string;
   @Input() valueEl: any;
   @Input() action: string;
@@ -22,7 +29,7 @@ export class EditableElementComponent implements OnInit {
   originalValue: any;
   newValue: any;
 
-  ngOnInit() {
+  ngOnChanges() {
     this.originalValue = this.valueEl;
   }
 
@@ -43,6 +50,8 @@ export class EditableElementComponent implements OnInit {
   }
 
   cancelEditing() {
+    console.log("Value el ", this.valueEl);
+    console.log("Original value ", this.originalValue);
     this.valueEl = this.originalValue;
     this.newValue = this.originalValue;
     this.isEditing = false;
