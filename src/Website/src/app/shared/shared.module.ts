@@ -31,15 +31,14 @@ import {GoogleMapsModule} from '@angular/google-maps';
 import {NgxChartsModule} from '@swimlane/ngx-charts';
 import {HttpClient} from '@angular/common/http';
 import {AnimatedNumberComponent} from "../components/animated-number/animated-number.component";
-import {AvatarComponent} from '../components/avatar/avatar.component';
+import {AvatarComponent} from '../user/components/avatar/avatar.component';
 import {MatTableModule} from "@angular/material/table";
 import {MatPaginatorModule} from "@angular/material/paginator";
-import {PaginationComponent} from "../user/components/pagination/pagination.component";
+import {PaginationComponent} from "../user/components/admin-table/pagination/pagination.component";
 import {DialogConfirmCancelComponent} from "../components/dialog-confirm-cancel/dialog-confirm-cancel";
 import {DialogConfirmComponent} from "../components/dialog-confirm/dialog-confirm";
-import {DialogViewUserComponent} from "../user/components/dialog-view-user/dialog-view-user.component";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
-
+import { EditableElementComponent } from '../user/components/editable-element/editable-element.component';
 
 @NgModule({
     declarations: [
@@ -47,7 +46,7 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
         AvatarComponent,
         DialogConfirmCancelComponent,
         DialogConfirmComponent,
-
+        EditableElementComponent,
         PaginationComponent
     ],
     imports: [
@@ -100,6 +99,7 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
         BrowserAnimationsModule,
         DialogConfirmCancelComponent,
         DialogConfirmComponent,
+        EditableElementComponent,
         FormsModule,
         GoogleMapsModule,
         MatButtonModule,

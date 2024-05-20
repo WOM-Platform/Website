@@ -39,6 +39,7 @@
       "FANO": "WOM per Fano"
     },
     "PESARO2024": {
+      "HOTELIERS": "Albergatori",
       "PESARO2024": "Pesaro2024",
       "MERCHANTS": "Esercenti",
       "TOURISTS": "Turisti",
@@ -55,6 +56,9 @@
     "USER": {
       "USER": "Il tuo profilo",
       "MERCHANT": "Merchant",
+      "MERCHANT-DETAIL":"Info",
+      "INSTRUMENT": "Instrument",
+      "AIM": "Aim",
       "ERROR": "Non verificato",
       "HOME": "Home",
       "VERIFY": "Verifica",

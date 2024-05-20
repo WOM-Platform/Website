@@ -1,0 +1,99 @@
+<div class="dialog-view">
+  <div class="flex justify-center">
+    <div class="w-full">
+      <app-editable-element
+        [valueEl]="data.name"
+        [action]="action"
+        [minLength]="4"
+        [maxLength]="100"
+        (onChangeElement)="onUpdateSourceField('name', $event)"
+        class="font-semibold text-cyan-700"
+      />
+    </div>
+    <!-- <p class="text-center"><span class="font-semibold text-cyan-700">{{ instrument.name }}</span></p> -->
+    <div class="source-data mt-6">
+      <p class="mb-0">
+        <span class="text-slate-600 font-semibold">ID</span>:
+        {{ instrument.id }}
+      </p>
+      <app-editable-element
+        [keyEl]="'URL'"
+        [valueEl]="data.url"
+        [action]="action"
+        [pattern]="
+          '^(https?:\\/\\/)?([\\da-z\\.-]+)\\.([a-z\\.]+)(:[0-9]{1,5})?(\\/[^\\s]*)?$'
+        "
+        [minLength]="10"
+        [maxLength]="100"
+        (onChangeElement)="onUpdateSourceField('url', $event)"
+        class="merchant-element"
+      />
+
+      <!-- <p class="mb-0"><span class="text-slate-600 font-semibold">URL</span>: {{ instrument.url }}</p> -->
+      <!-- <p class="mb-0"><span class="font-semibold">WOM generati</span>: Tanti</p> -->
+    </div>
+    <div *ngIf="instrument.aims && instrument.aims.length > 0" class="mt-10">
+      <p class="font-semibold mb-0">Aims:</p>
+      <ul class="access-list">
+        <li *ngFor="let aim of instrument.aims" class="">
+          <div class="access-item">
+            <div class="access-details">
+              <div>
+                <span class="text-slate-600 font-semibold">Code</span>:
+                {{ aim.code }}
+              </div>
+              <div>
+                <span class="text-slate-600 font-semibold">Name</span>:
+                {{ aim.titles["it"] }} | {{ aim.titles["en"] }}
+              </div>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <div *ngIf="action === 'edit'">
+      <div class="mt-6">
+        <app-user-aims-list
+          [instrumentAims]="instrument.aims"
+          (aimsEmit)="onUpdateAim($event)"
+        />
+      </div>
+    </div>
+    <div
+      *ngIf="instrument.access && instrument.access.length > 0"
+      class="mt-10"
+    >
+      <p class="font-semibold mb-0">Gestori:</p>
+      <ul class="access-list">
+        <li *ngFor="let access of instrument.access" class="">
+          <div class="access-item">
+            <div class="access-details">
+              <div>
+                <span class="text-slate-600 font-semibold">Name</span>:
+                {{ access.name }} {{ access.surname }}
+              </div>
+              <div>
+                <span class="text-slate-600 font-semibold">Email</span>:
+                {{ access.email }}
+              </div>
+            </div>
+            <ng-container *ngIf="action === 'edit'">
+              <button
+                class="delete-button text-red"
+                (click)="onDeleteAccess(access)"
+              >
+                <mat-icon class="text-red">delete</mat-icon>
+              </button>
+            </ng-container>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <div *ngIf="action === 'edit'">
+      <div *ngIf="!createNewAccess" class="mt-6">
+        <app-user-access-list (accessToAdd)="handleAccessList($event)" />
+      </div>
+    </div>
+  </div>
+</div>

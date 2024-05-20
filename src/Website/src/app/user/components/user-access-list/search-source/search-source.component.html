@@ -1,0 +1,87 @@
+<div class="flex justify-center relative">
+    <div class="relative">
+        <button (click)="changeAccessAction()" [ngClass]="{'btn-access-action-active': !createNewUser}"
+                class="btn-access-action border-l-2 rounded-l-full">Ricerca
+        </button>
+        <mat-icon *ngIf="!createNewUser"
+                  class="absolute left-2 top-1/2 transform -translate-y-1/2 text-gray-500 duration-200 ease-in-out"
+                  color="primary">
+            search
+        </mat-icon>
+    </div>
+    <div class="relative">
+        <button (click)="changeAccessAction()" [ngClass]="{'btn-access-action-active': createNewUser}"
+                class="btn-access-action border-r-2 rounded-r-full">Nuovo utente
+        </button>
+        <mat-icon *ngIf="createNewUser"
+                  class="absolute left-2 top-1/2 transform -translate-y-1/2 text-gray-500  duration-200 ease-in-out"
+                  color="primary">
+            add
+        </mat-icon>
+    </div>
+</div>
+<div *ngIf="!createNewUser else newUser" class="flex flex-col gap-2 justify-center items-stretch mt-6">
+    <p>Inserire un minimo di <strong> 3 lettere</strong> per ricercare un
+        <strong>utente già registrato</strong></p>
+
+    <form [formGroup]="searchForm" class="flex flex-row justify-between px-6 gap-6">
+        <div>
+            <label>Nome: </label>
+            <input type="text" formControlName="nameSearch" class="input-create">
+        </div>
+        <div>
+            <label>Email: </label>
+            <input type="email" formControlName="emailSearch" class="input-create">
+        </div>
+
+
+    </form>
+</div>
+
+<ng-template #newUser>
+    <form [formGroup]="createForm" class="">
+        <div class="flex flex-col gap-2 justify-center items-center mt-6">
+            <div class="flex flex-row justify-between px-6 gap-6">
+                <div>
+                    <label>Nome<span class="text-red-600">*</span>: </label>
+                    <input type="text" formControlName="nameCreate" class="input-create">
+                    <div class="text-red-600"
+                         *ngIf="createForm.get('nameCreate').invalid && createForm.get('nameCreate').touched">
+                        Campo obbligatorio
+                    </div>
+                </div>
+                <div>
+                    <label>Cognome<span class="text-red-600">*</span>: </label>
+                    <input type="text" formControlName="surnameCreate" class="input-create">
+                    <div class="text-red-600"
+                         *ngIf="createForm.get('surnameCreate').invalid && createForm.get('surnameCreate').touched">
+                        Campo obbligatorio
+                    </div>
+                </div>
+            </div>
+            <div class="flex flex-row justify-between px-6 gap-6">
+                <div><label>Email: </label>
+                    <input type="email" formControlName="emailCreate" class="input-create grow">
+                    <div class="text-red-600"
+                         *ngIf="createForm.get('emailCreate').invalid && createForm.get('emailCreate').touched">
+                        Campo obbligatorio
+                    </div>
+                </div>
+                <div>
+                    <label>Password<span class="text-red-600">*</span><span class="text-red-600">*</span>: </label>
+                    <input type="password" formControlName="passwordCreate" class="input-create grow">
+                    <div class="text-red-600"
+                         *ngIf="createForm.get('passwordCreate').invalid && createForm.get('passwordCreate').touched">
+                        Campo obbligatorio
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="flex justify-end gap-6 mt-6">
+            <button [disabled]="createForm.invalid"
+                    [ngClass]="{'text-slate-500': createForm.invalid, 'text-blue-600': !createForm.invalid}"
+                    (click)="create()">Conferma
+            </button>
+        </div>
+    </form>
+</ng-template>

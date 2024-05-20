@@ -42,6 +42,7 @@
       "RETE-DELLE-RETI": "Rete delle Reti"
     },
     "PESARO2024": {
+      "HOTELIERS": "Hoteliers",
       "PESARO2024": "Pesaro2024",
       "MERCHANTS": "Merchants",
       "TOURISTS": "Tourists",
@@ -55,6 +56,9 @@
     "USER": {
       "USER": "Your profile",
       "MERCHANT": "Merchant",
+      "MERCHANT-DETAIL":"Info",
+      "INSTRUMENT": "Instrument",
+      "AIM": "Aim",
       "ERROR": "Not verified",
       "HOME": "Home",
       "VERIFY": "Verify",

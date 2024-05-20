@@ -1,228 +1,283 @@
-import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
-import {BehaviorSubject, Observable} from 'rxjs';
-import {map} from 'rxjs/operators';
-import {User, UserLogin, UserRegistrationPayload} from '../_models';
-import {environment} from '../../environments/environment';
+import { Injectable } from "@angular/core";
+import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
+import { BehaviorSubject, Observable } from "rxjs";
+import { map } from "rxjs/operators";
+import { User, UserLogin, UserRegistrationPayload } from "../_models";
+import { environment } from "../../environments/environment";
 
-@Injectable({providedIn: 'root'})
+@Injectable({ providedIn: "root" })
 export class UserService {
-    localUrlV1 = environment.baseUrl + environment.v1 + 'user/';
-    localUrlV2 = environment.baseUrl + environment.v2 + 'user/';
+  localUrlV1 = environment.baseUrl + environment.v1 + "user/";
+  localUrlV2 = environment.baseUrl + environment.v2 + "user/";
 
-    // Login data
-    public currentUserLogin: Observable<UserLogin>;
-    private currentUserLoginSubject: BehaviorSubject<UserLogin>;
+  // Login data
+  public currentUserLogin: Observable<UserLogin>;
+  private currentUserLoginSubject: BehaviorSubject<UserLogin>;
 
-    // User data
-    public currentUser: Observable<User>;
-    private currentUserSubject: BehaviorSubject<User>;
+  // User data
+  public currentUser: Observable<User>;
+  private currentUserSubject: BehaviorSubject<User>;
 
-    constructor(private http: HttpClient) {
-        const localStorageUserLogin = UserLogin.fromJson(JSON.parse(localStorage.getItem('currentUserLogin')));
-        this.currentUserLoginSubject = new BehaviorSubject<UserLogin>(localStorageUserLogin);
-        this.currentUserLogin = this.currentUserLoginSubject.asObservable();
+  private userOwnership: BehaviorSubject<any> = new BehaviorSubject<any>({});
 
-        const localStorageUser = User.fromJson(JSON.parse(localStorage.getItem('currentUser')));
-        this.currentUserSubject = new BehaviorSubject<User>(localStorageUser);
-        this.currentUser = this.currentUserSubject.asObservable();
-    }
+  public userOwnershipStatus = this.userOwnership.asObservable();
 
-    public get currentUserValue(): User {
-        return this.currentUserSubject.value;
-    }
+  constructor(private http: HttpClient) {
+    const localStorageUserLogin = UserLogin.fromJson(
+      JSON.parse(localStorage.getItem("currentUserLogin"))
+    );
+    this.currentUserLoginSubject = new BehaviorSubject<UserLogin>(
+      localStorageUserLogin
+    );
+    this.currentUserLogin = this.currentUserLoginSubject.asObservable();
 
-    public get currentUserLoginValue(): UserLogin {
-        return this.currentUserLoginSubject.value;
-    }
+    const localStorageUser = User.fromJson(
+      JSON.parse(localStorage.getItem("currentUser"))
+    );
+    this.currentUserSubject = new BehaviorSubject<User>(localStorageUser);
+    this.currentUser = this.currentUserSubject.asObservable();
+  }
 
-    async checkAuthenticated(): Promise<boolean> {
-        return this.currentUserSubject.getValue() !== null && this.currentUserSubject.getValue() !== undefined;
-    }
+  public get currentUserValue(): User {
+    return this.currentUserSubject.value;
+  }
 
-    /**
-     * Login and retrieve the user id and bearer token
-     * @param email username is always email
-     * @param password password associated for the username
-     */
-    login(email: string, password: string): Observable<any> {
-        return this.http.post<any>(this.localUrlV1 + 'login', {
-            /*
+  public get currentUserLoginValue(): UserLogin {
+    return this.currentUserLoginSubject.value;
+  }
+
+  async checkAuthenticated(): Promise<boolean> {
+    return (
+      this.currentUserSubject.getValue() !== null &&
+      this.currentUserSubject.getValue() !== undefined
+    );
+  }
+
+  /**
+   * Login and retrieve the user id and bearer token
+   * @param email username is always email
+   * @param password password associated for the username
+   */
+  login(email: string, password: string): Observable<any> {
+    return this.http
+      .post<any>(
+        this.localUrlV1 + "login",
+        {
+          /*
             email,
             password,
             clientName: '',
             persistent: true
             */
-        }, {
-            observe: 'response',
-            headers: {
-                Authorization: 'Basic ' + btoa(email + ':' + password)
-            }
+        },
+        {
+          observe: "response",
+          headers: {
+            Authorization: "Basic " + btoa(email + ":" + password),
+          },
+        }
+      )
+      .pipe(
+        map((response) => {
+          // login successful if there's a valid user in the response
+          if (response.body) {
+            const login = UserLogin.fromJson(response.body);
+            // store user details and jwt token in local storage to keep user logged in between page refreshes
+            localStorage.setItem("currentUserLogin", JSON.stringify(login));
+            this.currentUserLoginSubject.next(login);
+            return login;
+          }
         })
-            .pipe(map(response => {
-                // login successful if there's a valid user in the response
-                if (response.body) {
-                    const login = UserLogin.fromJson(response.body);
-                    // store user details and jwt token in local storage to keep user logged in between page refreshes
-                    localStorage.setItem('currentUserLogin', JSON.stringify(login));
-                    this.currentUserLoginSubject.next(login);
-                    return login;
-                }
-            }));
-    }
+      );
+  }
 
-    /**
-     * Notify the server that the user has logged out & remove local storage data
-     */
-    logout(): void {
-        this.http.post<any>(this.localUrlV1 + 'logout', {})
-            .pipe(map(value => {
-                console.log('logout: ' + value);
-            }));
+  /**
+   * Notify the server that the user has logged out & remove local storage data
+   */
+  logout(): void {
+    this.http.post<any>(this.localUrlV1 + "logout", {}).pipe(
+      map((value) => {
+        console.log("logout: " + value);
+      })
+    );
 
-        // remove user from local storage to log user out
-        localStorage.removeItem('currentUserLogin');
-        localStorage.removeItem('currentUser');
-        localStorage.removeItem('merchantData')
-        localStorage.removeItem('instrumentData')
+    // remove user from local storage to log user out
+    localStorage.removeItem("currentUserLogin");
+    localStorage.removeItem("currentUser");
+    localStorage.removeItem("merchantData");
+    localStorage.removeItem("instrumentData");
 
-        this.currentUserLoginSubject.next(null);
-        this.currentUserSubject.next(null);
-    }
+    this.currentUserLoginSubject.next(null);
+    this.currentUserSubject.next(null);
+  }
 
-    /**
-     * Get user data for current user id
-     */
-    getLoggedUser(): Observable<User> {
-        return this.http.get<User>(this.localUrlV1 + this.currentUserLoginSubject.value.id)
-            .pipe(map(user => {
-                // user id is correct if value is not null
-                if (user) {
-                    // hydrate a full User object from its JSON representation (to have its methods/logic)
-                    user = User.fromJson(user);
+  /**
+   * Get user data for current user id
+   */
+  getLoggedUser(): Observable<User> {
+    return this.http
+      .get<User>(this.localUrlV1 + this.currentUserLoginSubject.value.id)
+      .pipe(
+        map((user) => {
+          // user id is correct if value is not null
+          if (user) {
+            // hydrate a full User object from its JSON representation (to have its methods/logic)
+            user = User.fromJson(user);
 
-                    // store user details in local storage to save user data in between page refreshes
-                    localStorage.setItem('currentUser', JSON.stringify(user));
-                    this.currentUserSubject.next(user);
-                }
-                return user;
-            }));
-    }
+            // store user details in local storage to save user data in between page refreshes
+            localStorage.setItem("currentUser", JSON.stringify(user));
+            this.currentUserSubject.next(user);
+          }
+          return user;
+        })
+      );
+  }
 
-    /**
-     * Register a new user
-     * @param data user data
-     */
-    register(data: UserRegistrationPayload): Observable<User> {
-        return this.http.post<User>(this.localUrlV1 + 'register', data)
-            .pipe(map(response => response));
-    }
+  /**
+   * Register a new user
+   * @param data user data
+   */
+  register(data: UserRegistrationPayload): Observable<User> {
+    return this.http
+      .post<User>(this.localUrlV1 + "register", data)
+      .pipe(map((response) => response));
+  }
 
-    /**
-     * Update an existing user's data
-     * @param data user data
-     */
-    update(data: UserRegistrationPayload): Observable<User> {
-        return this.http.post<User>(this.localUrlV1 + this.currentUserLoginSubject.value.id,
-            data).pipe(map(response => response));
-    }
+  /**
+   * Update an existing user's data
+   * @param data user data
+   */
+  update(data: UserRegistrationPayload): Observable<User> {
+    return this.http
+      .post<User>(this.localUrlV1 + this.currentUserLoginSubject.value.id, data)
+      .pipe(map((response) => response));
+  }
 
-    /**
-     * verify status of user account
-     */
-    verify(userId: string = null): Observable<any> {
-        const id = userId != null ? userId : this.currentUserLoginSubject.value.id;
-        return this.http.post<any>(this.localUrlV1 + id + '/verify', {})
-            .pipe(map(response => response));
-    }
+  /**
+   * verify status of user account
+   */
+  verify(userId: string = null): Observable<any> {
+    const id = userId != null ? userId : this.currentUserLoginSubject.value.id;
+    return this.http
+      .post<any>(this.localUrlV1 + id + "/verify", {})
+      .pipe(map((response) => response));
+  }
 
-    /**
-     * verify status of user account
-     */
-    sendVerification(userId: string, token: string): Observable<any> {
-        return this.http.post<any>(this.localUrlV1 + userId + '/verify?token=' + token, {})
-            .pipe(map(response => response));
-    }
+  /**
+   * verify status of user account
+   */
+  sendVerification(userId: string, token: string): Observable<any> {
+    return this.http
+      .post<any>(this.localUrlV1 + userId + "/verify?token=" + token, {})
+      .pipe(map((response) => response));
+  }
 
-    /**
-     * request new verification email using user id
-     */
-    requestVerificationEmailById(userId: string = null): Observable<any> {
-        const id = userId != null ? userId : this.currentUserLoginSubject.value.id;
-        return this.http.post<any>(this.localUrlV1 + id + '/request-verification', {})
-            .pipe(map(response => response));
-    }
+  /**
+   * request new verification email using user id
+   */
+  requestVerificationEmailById(userId: string = null): Observable<any> {
+    const id = userId != null ? userId : this.currentUserLoginSubject.value.id;
+    return this.http
+      .post<any>(this.localUrlV1 + id + "/request-verification", {})
+      .pipe(map((response) => response));
+  }
 
-    /**
-     * request new verification using e-mail
-     */
-    requestVerificationEmailByEmail(email: string = null): Observable<any> {
-        const e = email != null ? email : this.currentUserValue.email;
-        return this.http.post<any>(this.localUrlV1 + 'request-verification', {
-            email: e
-        }).pipe(map(response => response));
-    }
+  /**
+   * request new verification using e-mail
+   */
+  requestVerificationEmailByEmail(email: string = null): Observable<any> {
+    const e = email != null ? email : this.currentUserValue.email;
+    return this.http
+      .post<any>(this.localUrlV1 + "request-verification", {
+        email: e,
+      })
+      .pipe(map((response) => response));
+  }
 
-    /**
-     * ask for password reset
-     * @param email registered user's email (username)
-     */
-    passwordResetRequest(email: string): Observable<any> {
-        return this.http.post<any>(this.localUrlV1 + 'password-reset',
-            {email}).pipe(map(response => response));
-    }
+  /**
+   * ask for password reset
+   * @param email registered user's email (username)
+   */
+  passwordResetRequest(email: string): Observable<any> {
+    return this.http
+      .post<any>(this.localUrlV1 + "password-reset", { email })
+      .pipe(map((response) => response));
+  }
 
-    /**
-     * Send new password
-     * @param userId user's id to reset password for
-     * @param token confirmation token
-     * @param password new password
-     */
-    passwordReset(userId: string, token: string, password: string): Observable<any> {
-        return this.http.post<any>(this.localUrlV1 + userId + '/password-reset',
-            {
-                token,
-                password
-            }).pipe(map(response => response));
-    }
+  /**
+   * Send new password
+   * @param userId user's id to reset password for
+   * @param token confirmation token
+   * @param password new password
+   */
+  passwordReset(
+    userId: string,
+    token: string,
+    password: string
+  ): Observable<any> {
+    return this.http
+      .post<any>(this.localUrlV1 + userId + "/password-reset", {
+        token,
+        password,
+      })
+      .pipe(map((response) => response));
+  }
 
-    me(): Observable<any> {
-        return this.http.get<any>(this.localUrlV1 + 'me').pipe(map(result => {
-            localStorage.setItem('merchantData', JSON.stringify(result.merchants))
-            localStorage.setItem('instrumentData', JSON.stringify(result.sources))
-            return result
-        }))
-    }
+  me(): Observable<any> {
+    return this.http.get<any>(this.localUrlV1 + "me").pipe(
+      map((user) => {
+        user = User.fromJson(user);
 
-    userCreate(name: string, surname: string, email: string, password: string): Observable<any> {
-        const body = {
-            name: name,
-            surname: surname,
-            email: email,
-            password: password,
-            verified: true,
-            role: 'User'
-        };
+        // store user details in local storage to save user data in between page refreshes
+        localStorage.setItem("currentUser", JSON.stringify(user));
+        this.currentUserSubject.next(user);
 
-        return this.http.post<any>(this.localUrlV1, body).pipe(
-            map(res => {
-                return res;
-            })
-        );
-    }
+        localStorage.setItem("merchantData", JSON.stringify(user.merchants));
+        localStorage.setItem("instrumentData", JSON.stringify(user.sources));
+        return user;
+      })
+    );
+  }
 
-    userSearch(name: string = "", email: string = ""): Observable<any> {
-        let page = 1
-        let pageSize = 10
-        const params: HttpParams = new HttpParams()
-            .set('name', name.toString())
-            .set('email', email.toString())
-            .set('page', page.toString())
-            .set('pageSize', pageSize.toString());
+  updateUserOwnership(data: any) {
+    this.userOwnership.next(data);
+  }
 
-        return this.http.get<any>(this.localUrlV1, {params}).pipe(map(res => {
-            return res
-        }))
-    }
+  userCreate(
+    name: string,
+    surname: string,
+    email: string,
+    password: string
+  ): Observable<any> {
+    const body = {
+      name: name,
+      surname: surname,
+      email: email,
+      password: password,
+      verified: true,
+      role: "User",
+    };
+
+    return this.http.post<any>(this.localUrlV1, body).pipe(
+      map((res) => {
+        return res;
+      })
+    );
+  }
+
+  userSearch(name: string = "", email: string = ""): Observable<any> {
+    let page = 1;
+    let pageSize = 10;
+    const params: HttpParams = new HttpParams()
+      .set("name", name.toString())
+      .set("email", email.toString())
+      .set("page", page.toString())
+      .set("pageSize", pageSize.toString());
+
+    return this.http.get<any>(this.localUrlV1, { params }).pipe(
+      map((res) => {
+        return res;
+      })
+    );
+  }
 }
-

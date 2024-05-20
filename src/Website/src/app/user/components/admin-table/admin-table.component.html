@@ -1,0 +1,55 @@
+<div class="my-6">
+    <ng-container *ngIf="tableData && tableData.length > 0; else noDataTemplate">
+        <table class="table-auto w-full">
+            <thead class="text-[13px] text-slate-500/70">
+            <tr>
+                <th class="px-5 py-2 first:pl-3 last:pr-3 bg-slate-100 first:rounded-l last:rounded-r last:pl-5 last:sticky last:right-0 capitalize"
+                    *ngFor="let column of tableColumns">
+                    <div class="font-medium text-left">{{ column.field }}
+                    </div>
+                </th>
+                <th *ngIf="isActions"
+                    class="px-5 py-2 first:pl-3 last:pr-3 bg-slate-100 capitalize">
+                    <div class="font-medium text-left">actions</div>
+                </th>
+            </tr>
+            </thead>
+            <tbody class="text-sm font-medium">
+            <tr *ngFor="let item of tableData" class="bg-white pl-3 pr-3 border-b border-slate-200 hover:bg-slate-200">
+                <td *ngFor="let tCol of tableColumns"
+                    class="px-5 py-3 last:to-[12px] last:pl-5 last:sticky last:right-0 ">
+                    <div class="flex items-center">
+                        <p class="mb-0 text-sm"
+                           [ngClass]="{'font-semibold': tCol.field === 'name' || tCol.field === 'code', 'text-[#727171] ': tCol.field !== 'name' || tCol.field === 'code'}">{{ item[tCol.field] }}</p>
+                    </div>
+                </td>
+                <td *ngIf="isActions">
+                    <div class="action-cell">
+                        <button class="icon-button-bg hover:bg-slate-300" (click)="onViewItem(item)">
+                            <mat-icon>visibility</mat-icon>
+                        </button>
+                        <button class="icon-button-bg hover:bg-blue-200" (click)="onEditItem(item)">
+                            <mat-icon class="text-blue-500">edit</mat-icon>
+                        </button>
+                        <button class="icon-button-bg hover:bg-red-200" (click)="onDeleteItem(item)">
+                            <mat-icon class="text-red-500">delete</mat-icon>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </ng-container>
+    <ng-template #noDataTemplate>
+        <div class="text-center py-10">
+            <p class="text-gray-500">Nessun risultato</p>
+        </div>
+    </ng-template>
+    <div *ngIf="totalItems" class="mt-11">
+        <app-pagination [currentPage]="currentPage"
+                        [itemsPerPage]="itemsPerPage"
+                        [totalItems]="totalItems"
+                        [pageCount]="pageCount"
+                        (pageChanged)="onPageChange($event)"></app-pagination>
+    </div>
+</div>
