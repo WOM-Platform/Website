@@ -47,6 +47,8 @@ export class MerchantDetailComponent implements OnInit, OnDestroy {
 
   primaryActivityOptions: string[] = primaryActivityType;
 
+  subscriptions = new Subscription();
+
   constructor(
     private cd: ChangeDetectorRef,
     private loadingService: LoadingService,
@@ -97,6 +99,10 @@ export class MerchantDetailComponent implements OnInit, OnDestroy {
   }
   startEditing(field: string): void {
     this.isEditing[field] = true;
+
+    this.userService
+      .me()
+      .subscribe((res) => this.userService.updateUserOwnership(res));
   }
 
   stopEditing(field: string): void {
@@ -111,13 +117,13 @@ export class MerchantDetailComponent implements OnInit, OnDestroy {
       .addAccess(this.id, access.id, role)
       .subscribe({
         next: () => {
-          this.checkAccessCurrentUser(access.userId);
+          this.checkAccessCurrentUser(access.id);
           this.updateAccessList();
         },
         error: (err) =>
           console.error("Error adding new instrument access:", err),
       });
-    // this.subscriptions.add(addAccessSub);
+    this.subscriptions.add(addAccessSub);
   }
 
   onDeleteAccess(access: Access) {
@@ -134,6 +140,7 @@ export class MerchantDetailComponent implements OnInit, OnDestroy {
     dialogRef.afterClosed().subscribe((result) => {
       this.merchantService.deleteAccess(this.id, access.userId).subscribe({
         next: () => {
+          this.checkAccessCurrentUser(access.userId);
           this.updateAccessList();
         },
       });
