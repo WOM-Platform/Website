@@ -97,17 +97,6 @@ export class MerchantDetailComponent implements OnInit, OnDestroy {
   goBack(): void {
     this.location.back();
   }
-  startEditing(field: string): void {
-    this.isEditing[field] = true;
-
-    this.userService
-      .me()
-      .subscribe((res) => this.userService.updateUserOwnership(res));
-  }
-
-  stopEditing(field: string): void {
-    this.isEditing[field] = false;
-  }
 
   handleAccessList(user): void {
     const role = user.role;
@@ -157,7 +146,13 @@ export class MerchantDetailComponent implements OnInit, OnDestroy {
 
     updatedMerchant[key] = value;
 
-    this.merchantService.update(updatedMerchant).subscribe();
+    this.merchantService
+      .update(updatedMerchant)
+      .subscribe(() =>
+        this.userService
+          .me()
+          .subscribe((res) => this.userService.updateUserOwnership(res))
+      );
   }
 
   updateAccessList() {
