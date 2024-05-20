@@ -90,6 +90,7 @@ import { NgChartsModule } from "ng2-charts";
 import { VolontarxComponent } from "./pages/pesaro2024-section/volontarx/volontarx.component";
 import { DialogCreateSourceComponent } from "./user/instruments/dialog-create-instrument/dialog-create-instrument.component";
 import { SearchSourceComponent } from "./user/components/user-access-list/search-source/search-source.component";
+import { AlbergatoriComponent } from "./pages/pesaro2024-section/albergatori/albergatori.component";
 
 // AoT requires an exported function for factories
 export const createTranslateLoader = (http: HttpClient) =>
@@ -117,6 +118,7 @@ export const isMock = environment.mock;
   declarations: [
     AboutComponent,
     AboutSectionComponent,
+    AlbergatoriComponent,
     AppComponent,
     ApplicationsAworldComponent,
     ApplicationsBalanceComponent,

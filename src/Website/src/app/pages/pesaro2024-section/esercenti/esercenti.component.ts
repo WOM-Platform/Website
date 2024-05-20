@@ -1,19 +1,10 @@
 import { Component, HostBinding } from "@angular/core";
-import {
-  trigger,
-  state,
-  style,
-  animate,
-  transition,
-} from "@angular/animations";
 
 @Component({
   selector: "app-esercenti",
   templateUrl: "./esercenti.component.html",
   styleUrls: ["./esercenti.component.css"],
-  animations: [
-    // animation triggers go here
-  ],
+  animations: [],
 })
 export class EsercentiComponent {
   faqs = [
