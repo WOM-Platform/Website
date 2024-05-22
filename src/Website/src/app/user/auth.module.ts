@@ -1,14 +1,13 @@
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
-import { DialogCreateMerchant } from "./components/dialog-create-merchant/dialog-create-merchant";
-import { AddPosDialogComponent } from "./components/dialog-create-pos/add-pos.component";
+import { AddPosDialogComponent } from "./merchant/dialog-create-pos/add-pos.component";
 
 import { UserHomeComponent } from "./home/user-home.component";
 import { UserNotVerifiedComponent } from "./not-verified/user-not-verified.component";
 import { UserVerifyComponent } from "./verify/user-verify.component";
 import { AuthRouting } from "./auth.routing";
 
-import { FormMerchantComponent } from "./components/dialog-create-merchant/form-merchant/form-merchant.component";
+import { FormMerchantComponent } from "./merchant/dialog-create-merchant/form-merchant/form-merchant.component";
 import { PosFormComponent } from "../_forms/pos/forms-pos.directive";
 import { MerchantStatsComponent } from "./stats/merchant/merchant-stats.component";
 import { UserStatsComponent } from "./stats/user-stats.component";
@@ -30,7 +29,9 @@ import { UserMerchantsComponent } from "./merchant/user-merchants.component";
 import { UserAimsComponent } from "./aims/user-aims.component";
 import { MerchantDetailComponent } from "./merchant/merchant-detail/merchant-detail.component";
 import { UserAimsListComponent } from "./components/user-aims-list/user-aims-list.component";
-import { MyInstrumentCollectionComponent } from "./instruments/my-instrument-collection-component/my-instrument-collection-component.component";
+import { MyInstrumentsCollectionComponent } from "./instruments/my-instruments-collection/my-instruments-collection.component";
+import { DialogCreateMerchant } from "./merchant/dialog-create-merchant/dialog-create-merchant";
+import { MyMerchantsCollectionComponent } from "./merchant/my-merchants-collection/my-merchants-collection.component";
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { MyInstrumentCollectionComponent } from "./instruments/my-instrument-col
     MapComponent,
     MerchantDetailComponent,
     MerchantStatsComponent,
-    MyInstrumentCollectionComponent,
+    MyInstrumentsCollectionComponent,
+    MyMerchantsCollectionComponent,
     PosFormComponent,
     UserAccessListComponent,
     UserAdminComponent,

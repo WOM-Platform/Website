@@ -3,6 +3,7 @@ import { environment } from "../../environments/environment";
 import { catchError, concatMap, delay, map } from "rxjs/operators";
 import { HttpClient, HttpParams } from "@angular/common/http";
 import { from, Observable, of, throwError } from "rxjs";
+import { Aim } from "../_models";
 
 @Injectable({
   providedIn: "root",
@@ -60,18 +61,18 @@ export class SourceService {
   }
 
   update(source: any): Observable<any> {
+    const aims = {
+      enabled: "",
+      enableAll: false,
+    };
+
+    aims.enabled = source.aims.map((aim: Aim) => aim.code);
+
     return this.http
       .put<any>(this.localUrlV1 + source.id, {
         name: source.name,
-        fiscalCode: source.fiscalCode,
-        primaryActivity: source.primaryActivity,
-        address: source.address,
-        enabled: source.enabled,
-        zipCode: source.zipCode,
-        city: source.city,
-        country: source.country,
-        description: source.description,
         url: source.url,
+        aims: aims,
       })
       .pipe(map((response) => response));
   }

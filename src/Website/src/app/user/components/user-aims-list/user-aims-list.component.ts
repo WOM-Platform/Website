@@ -1,5 +1,12 @@
 import { animate, style, transition, trigger } from "@angular/animations";
-import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
+import {
+  ChangeDetectorRef,
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+} from "@angular/core";
 import { Aim, AimWithChecked } from "src/app/_models";
 import { AimsService } from "src/app/_services";
 
@@ -29,6 +36,10 @@ export class UserAimsListComponent implements OnInit {
   constructor(private aimsService: AimsService) {}
 
   ngOnInit() {
+    this.loadAims();
+  }
+
+  ngOnChanges() {
     this.loadAims();
   }
 
@@ -79,6 +90,7 @@ export class UserAimsListComponent implements OnInit {
     );
     this.aimsEmit.emit(cleanedSelectedAims);
     this.handleCancellationAim();
+    this.loadAims();
   }
 
   hasChanges() {

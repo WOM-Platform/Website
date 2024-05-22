@@ -4,11 +4,11 @@ import { UserService } from "src/app/_services";
 import { StorageService } from "src/app/_services/storage.service";
 
 @Component({
-  selector: "app-my-instrument-collection",
-  templateUrl: "./my-instrument-collection-component.component.html",
-  styleUrl: "./my-instrument-collection-component.component.css",
+  selector: "app-my-instruments-collection",
+  templateUrl: "./my-instruments-collection.component.html",
+  styleUrl: "./my-instruments-collection.component.css",
 })
-export class MyInstrumentCollectionComponent implements OnInit {
+export class MyInstrumentsCollectionComponent implements OnInit {
   username: string;
   instruments: Instrument;
   currentUser: any;

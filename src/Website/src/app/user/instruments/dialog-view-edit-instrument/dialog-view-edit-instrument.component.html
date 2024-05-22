@@ -6,7 +6,7 @@
         [action]="action"
         [minLength]="4"
         [maxLength]="100"
-        (onChangeElement)="onUpdateSourceField('name', $event)"
+        (onChangeElement)="onUpdateSourceField('name', $event, true)"
         class="font-semibold text-cyan-700"
       />
     </div>
@@ -25,7 +25,7 @@
         "
         [minLength]="10"
         [maxLength]="100"
-        (onChangeElement)="onUpdateSourceField('url', $event)"
+        (onChangeElement)="onUpdateSourceField('url', $event, true)"
         class="merchant-element"
       />
 
@@ -56,7 +56,7 @@
       <div class="mt-6">
         <app-user-aims-list
           [instrumentAims]="instrument.aims"
-          (aimsEmit)="onUpdateAim($event)"
+          (aimsEmit)="onUpdateSourceField('aims', $event, false)"
         />
       </div>
     </div>

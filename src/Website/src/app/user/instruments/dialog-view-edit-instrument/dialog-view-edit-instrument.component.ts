@@ -50,61 +50,18 @@ export class DialogViewEditInstrumentComponent implements OnInit, OnDestroy {
   ngOnInit(): void {}
   ngOnDestroy(): void {}
 
-  // to update instrument field like name and url
-  onUpdateSourceField(key: string, value: any) {
+  // to update instrument field like name, url and aims
+  onUpdateSourceField(key: string, value: any, isTableToUpdate: boolean) {
     const updatedInstrument = { ...this.instrument };
 
     updatedInstrument[key] = value;
     this.sourceService.update(updatedInstrument).subscribe({
       next: () => {
-        this.updatedField.emit(key);
+        if (isTableToUpdate) this.updatedField.emit(key);
+        this.instrument = updatedInstrument;
+        this.cd.detectChanges();
       },
       error: (err) => console.error(err),
-    });
-  }
-
-  // to delete aim of an instrument
-  onDeleteAim(aimToRemove: Aim) {
-    // Find the index of the aim to be removed
-    const index = this.instrument.aims.findIndex(
-      (aim) => aim.code === aimToRemove.code
-    );
-
-    if (index > -1) {
-      // Create a deep copy of the instrument to avoid mutating the original directly
-      const tmpInstrument: Instrument = JSON.parse(
-        JSON.stringify(this.instrument)
-      );
-      tmpInstrument.aims.splice(index, 1);
-
-      // Update the instrument
-      this.sourceService.update(tmpInstrument).subscribe({
-        next: (value) => {
-          // Update the local instrument only after the API call succeeds
-          this.instrument = tmpInstrument;
-        },
-        error: (error) => {
-          console.error("API call failed:", error);
-        },
-      });
-    } else {
-      console.warn("Aim not found in the instrument.");
-    }
-  }
-
-  // Update the instrument aims
-  onUpdateAim(aimsList) {
-    const tmpInstrument: Instrument = JSON.parse(
-      JSON.stringify(this.instrument)
-    );
-    tmpInstrument.aims = aimsList;
-    this.sourceService.update(tmpInstrument).subscribe({
-      next: (value) => {
-        this.instrument = aimsList;
-      },
-      error: (error) => {
-        console.error("API call failed:", error);
-      },
     });
   }
 
@@ -176,13 +133,11 @@ export class DialogViewEditInstrumentComponent implements OnInit, OnDestroy {
       });
 
     this.subscriptions.add(accessSub);
-
     this.cd.markForCheck();
   }
 
   checkAccessCurrentUser(idAccess: string) {
     const currentUser = this.storageService.load("currentUser");
-    console.log(idAccess);
     if (idAccess === currentUser.id) {
       this.userService
         .me()
@@ -196,9 +151,5 @@ export class DialogViewEditInstrumentComponent implements OnInit, OnDestroy {
 
     // send
     this.cd.markForCheck();
-  }
-
-  handleAimsList(aim) {
-    console.log("jjj ", aim);
   }
 }
