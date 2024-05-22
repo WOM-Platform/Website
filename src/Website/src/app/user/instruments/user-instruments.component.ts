@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnChanges, OnDestroy, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 import { UserService } from "../../_services";
 import { StorageService } from "../../_services/storage.service";
@@ -9,7 +9,7 @@ import { Instrument } from "src/app/_models/instrument";
   templateUrl: "./user-instruments.component.html",
   styleUrls: ["./user-instruments.component.css"],
 })
-export class UserInstrumentsComponent implements OnInit {
+export class UserInstrumentsComponent implements OnInit, OnDestroy {
   username: string;
   instruments: Instrument;
   currentUser: any;
@@ -20,7 +20,13 @@ export class UserInstrumentsComponent implements OnInit {
     private storageService: StorageService
   ) {}
 
-  ngOnInit(): any {
+  ngOnInit() {
+    this.userService.userOwnershipStatus.subscribe({
+      next: (res) => {
+        this.instruments = res["sources"];
+      },
+    });
+
     this.username =
       this.userService.currentUserValue.name +
       " " +
@@ -28,7 +34,7 @@ export class UserInstrumentsComponent implements OnInit {
     this.loadData();
   }
 
-  ngOnDestroy(): any {}
+  ngOnDestroy(): void {}
 
   loadData(): any {
     this.instruments = this.storageService.load("instrumentData");

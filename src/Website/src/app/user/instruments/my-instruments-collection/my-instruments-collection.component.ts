@@ -10,7 +10,7 @@ import { StorageService } from "src/app/_services/storage.service";
 })
 export class MyInstrumentsCollectionComponent implements OnInit {
   username: string;
-  instruments: Instrument;
+  instruments: Instrument[];
   currentUser: any;
 
   constructor(

@@ -16,7 +16,7 @@ import { SourceService } from "../../../_services/source.service";
 import { DialogConfirmCancelComponent } from "../../../components/dialog-confirm-cancel/dialog-confirm-cancel";
 import { LoadingService } from "../../../_services/loading.service";
 import { StorageService } from "../../../_services/storage.service";
-import { AimsService } from "src/app/_services";
+import { AimsService, UserService } from "src/app/_services";
 import { Aim } from "src/app/_models";
 
 @Component({
@@ -53,7 +53,8 @@ export class AdminManagmentInstrumentsComponent implements OnInit, OnDestroy {
     private matDialog: MatDialog,
     private cd: ChangeDetectorRef,
     private loadingService: LoadingService,
-    private storageService: StorageService
+    private storageService: StorageService,
+    private userService: UserService
   ) {}
 
   ngOnInit() {
@@ -257,6 +258,8 @@ export class AdminManagmentInstrumentsComponent implements OnInit, OnDestroy {
           .subscribe((res) => {
             this.storageService.clearCache("instrumentsList");
             this.getSourcesList();
+            // update list of my instruments in case the one deleted was one of yours
+            this.userService.me();
           });
         this.subscriptions.add(delSub);
       }
