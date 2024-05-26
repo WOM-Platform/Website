@@ -72,37 +72,12 @@
       <!-- <app-editable-element [keyEl]="'WOM generati'" [valueEl]="'1000000'" [action]="action" [typeEl]="string" class="merchant-element" (onChangeElement)="onUpdateMerchant('quantity',$event)"></app-editable-element> -->
     </div>
 
-    <div *ngIf="accessList && accessList.length > 0" class="mt-6">
-      <p class="font-semibold mb-0">Gestori:</p>
-      <ul class="access-list">
-        <li *ngFor="let access of accessList" class="">
-          <div class="access-item">
-            <div class="access-details">
-              <div>
-                <span class="text-slate-600 font-semibold">Name</span>:
-                {{ access.name }} {{ access.surname }}
-              </div>
-              <div>
-                <span class="text-slate-600 font-semibold">Email</span>:
-                {{ access.email }}
-              </div>
-              <div>
-                <span class="text-slate-600 font-semibold">Ruolo</span>:
-                {{ access.role }}
-              </div>
-            </div>
-            <ng-container *ngIf="action === 'edit'">
-              <button
-                class="delete-button text-red"
-                (click)="onDeleteAccess(access)"
-              >
-                <mat-icon class="text-red">delete</mat-icon>
-              </button>
-            </ng-container>
-          </div>
-        </li>
-      </ul>
-    </div>
+    <app-access-list
+      [accessList]="accessList"
+      [action]="action"
+      [showRole]="'true'"
+      (deleteAccess)="onDeleteAccess($event)"
+    />
 
     <div *ngIf="action === 'edit'">
       <div *ngIf="!createNewAccess" class="mt-6">

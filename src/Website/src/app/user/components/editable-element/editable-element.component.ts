@@ -1,3 +1,4 @@
+import { NgIf, NgFor } from "@angular/common";
 import {
   Component,
   EventEmitter,
@@ -9,6 +10,8 @@ import {
 
 @Component({
   selector: "app-editable-element",
+  standalone: true,
+  imports: [NgIf, NgFor],
   templateUrl: "./editable-element.component.html",
   styleUrls: ["./editable-element.component.css"],
 })

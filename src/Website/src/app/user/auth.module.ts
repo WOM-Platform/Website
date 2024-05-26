@@ -32,12 +32,18 @@ import { UserAimsListComponent } from "./components/user-aims-list/user-aims-lis
 import { MyInstrumentsCollectionComponent } from "./instruments/my-instruments-collection/my-instruments-collection.component";
 import { DialogCreateMerchant } from "./merchant/dialog-create-merchant/dialog-create-merchant";
 import { MyMerchantsCollectionComponent } from "./merchant/my-merchants-collection/my-merchants-collection.component";
+import { ExpandableCardComponent } from "./components/expandable-card/expandable-card.component";
+import { EditableElementComponent } from "./components/editable-element/editable-element.component";
+import { DialogCreateSourceComponent } from "./instruments/dialog-create-instrument/dialog-create-instrument.component";
+import { AccessListComponent } from "./components/access-list/access-list.component";
+import { AimsListComponent } from "./components/aims-list/aims-list.component";
 
 @NgModule({
   declarations: [
     AddPosDialogComponent,
     AdminManagmentInstrumentsComponent,
     DialogCreateMerchant,
+    DialogCreateSourceComponent,
     DialogViewEditInstrumentComponent,
     FormMerchantComponent,
     MapComponent,
@@ -61,9 +67,13 @@ import { MyMerchantsCollectionComponent } from "./merchant/my-merchants-collecti
   ],
   exports: [UserAccessListComponent],
   imports: [
+    AccessListComponent,
     AdminTableComponent,
+    AimsListComponent,
     AuthRouting,
     CommonModule,
+    EditableElementComponent,
+    ExpandableCardComponent,
     SharedModule,
     SearchSourceComponent,
     MerchantsAdminComponent,

@@ -39,6 +39,15 @@ export class SourceService {
     );
   }
 
+  getInstrument(idInstrument): Observable<any> {
+    const url = `${this.localUrlV1}${idInstrument}/details`;
+    return this.http.get(url).pipe(
+      map((res) => {
+        return res;
+      })
+    );
+  }
+
   createInstrument(name: string, url: string): Observable<any> {
     return this.http
       .post(`${this.localUrlV1}`, {
@@ -113,15 +122,6 @@ export class SourceService {
           })
         )
       )
-    );
-  }
-
-  details(idInstrument): Observable<any> {
-    const url = `${this.localUrlV1}${idInstrument}/details`;
-    return this.http.get(url).pipe(
-      map((res) => {
-        return res;
-      })
     );
   }
 

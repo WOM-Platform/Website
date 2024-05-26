@@ -47,9 +47,12 @@ export class UserAimsListComponent implements OnInit {
     this.aimsService.getAll().subscribe((aims: Aim[]) => {
       this.listAims = aims.map((aim) => ({
         ...aim,
-        isChecked: this.instrumentAims.some(
-          (instrumentAim) => instrumentAim.code === aim.code
-        ),
+        isChecked:
+          this.instrumentAims &&
+          this.instrumentAims.length > 0 &&
+          this.instrumentAims.some(
+            (instrumentAim) => instrumentAim.code === aim.code
+          ),
       }));
       this.updateSelectedAims();
       this.selectAll = this.listAims.every((aim) => aim.isChecked);
@@ -95,7 +98,8 @@ export class UserAimsListComponent implements OnInit {
 
   hasChanges() {
     const selectedCodes = this.selectedAims.map((aim) => aim.code).sort();
-    const instrumentCodes = this.instrumentAims.map((aim) => aim.code).sort();
+    const instrumentCodes =
+      this.instrumentAims && this.instrumentAims.map((aim) => aim.code).sort();
     return JSON.stringify(selectedCodes) !== JSON.stringify(instrumentCodes);
   }
 }

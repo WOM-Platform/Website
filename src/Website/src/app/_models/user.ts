@@ -9,6 +9,7 @@ export class UserRegistrationPayload {
   password: string;
   name: string;
   surname: string;
+  role: string;
 }
 
 export interface UserMe {

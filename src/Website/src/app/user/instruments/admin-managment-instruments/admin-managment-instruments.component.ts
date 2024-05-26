@@ -44,8 +44,7 @@ export class AdminManagmentInstrumentsComponent implements OnInit, OnDestroy {
     { field: "WOM generati", hideOnMobile: true },
   ];
 
-  sourcesSubscription: Subscription;
-  private subscriptions: Subscription = new Subscription(); // To manage subscriptions
+  private subscriptions: Subscription[] = [];
 
   constructor(
     private aimsService: AimsService,
@@ -61,6 +60,10 @@ export class AdminManagmentInstrumentsComponent implements OnInit, OnDestroy {
     this.getSourcesList();
   }
 
+  ngOnDestroy() {
+    this.subscriptions.map((subscribe) => subscribe.unsubscribe());
+  }
+
   getSourcesList() {
     this.loadingService.show();
     const cachedData = this.storageService.get("instrumentsList");
@@ -68,7 +71,7 @@ export class AdminManagmentInstrumentsComponent implements OnInit, OnDestroy {
       this.assignInstrumentData(cachedData);
       this.loadingService.hide();
     } else {
-      this.subscriptions.add(
+      this.subscriptions.push(
         this.sourceService
           .getInstrumentList(
             this.searchParameters,
@@ -104,10 +107,6 @@ export class AdminManagmentInstrumentsComponent implements OnInit, OnDestroy {
       this.storageService.get("instrumentsCurrentPage") || this.currentPage;
   }
 
-  ngOnDestroy() {
-    this.subscriptions.unsubscribe();
-  }
-
   onCreateSource() {
     const dialogRef = this.matDialog.open(DialogCreateSourceComponent, {
       width: "900px",
@@ -120,19 +119,20 @@ export class AdminManagmentInstrumentsComponent implements OnInit, OnDestroy {
       if (result && result.name && result.url) {
         this.loadingService.show();
         this.cd.markForCheck();
-        const createSub = this.sourceService
-          .createInstrument(result.name, result.url)
-          .subscribe({
-            next: (user) => {
-              this.processAccess(user, result);
-            },
-            error: (err) => {
-              this.errorMessage = "Failed to create instrument.";
-              this.loadingService.hide();
-              this.cd.markForCheck();
-            },
-          });
-        this.subscriptions.add(createSub);
+        this.subscriptions.push(
+          this.sourceService
+            .createInstrument(result.name, result.url)
+            .subscribe({
+              next: (user) => {
+                this.processAccess(user, result);
+              },
+              error: (err) => {
+                this.errorMessage = "Failed to create instrument.";
+                this.loadingService.hide();
+                this.cd.markForCheck();
+              },
+            })
+        );
       } else {
         this.errorMessage = "Invalid input data.";
         this.loadingService.hide();
@@ -149,29 +149,28 @@ export class AdminManagmentInstrumentsComponent implements OnInit, OnDestroy {
   }
 
   private processAccess(user, result) {
-    console.log("User ", user);
-    console.log("Result ", result);
     if (result.access && result.access.length > 0) {
-      const accessSub = this.sourceService
-        .addAccessSequentially(user.id, result.access)
-        .subscribe({
-          next: () => {
-            result.access.some((element) => element === user);
-            console.log("All access rights added successfully.");
-          },
-          error: (err) => {
-            console.error("Error adding access rights:", err);
-            this.loadingService.hide();
-            this.cd.markForCheck();
-          },
-          complete: () => {
-            this.storageService.clearCache("instrumentsList");
-            this.getSourcesList();
-            this.loadingService.hide();
-            this.cd.markForCheck();
-          },
-        });
-      this.subscriptions.add(accessSub);
+      this.subscriptions.push(
+        this.sourceService
+          .addAccessSequentially(user.id, result.access)
+          .subscribe({
+            next: () => {
+              result.access.some((element) => element === user);
+              console.log("All access rights added successfully.");
+            },
+            error: (err) => {
+              console.error("Error adding access rights:", err);
+              this.loadingService.hide();
+              this.cd.markForCheck();
+            },
+            complete: () => {
+              this.storageService.clearCache("instrumentsList");
+              this.getSourcesList();
+              this.loadingService.hide();
+              this.cd.markForCheck();
+            },
+          })
+      );
     } else {
       this.storageService.clearCache("instrumentsList");
       this.getSourcesList();
@@ -182,7 +181,7 @@ export class AdminManagmentInstrumentsComponent implements OnInit, OnDestroy {
 
   onViewSource(user: any) {
     this.openDialogViewEdit(user, "view");
-    // this.subscriptions.add(viewSub);
+    // this.subscriptions.push(viewSub);
   }
 
   openDialogViewEdit(user, action: string) {
@@ -190,45 +189,46 @@ export class AdminManagmentInstrumentsComponent implements OnInit, OnDestroy {
 
     forkJoin({
       accessInstrument: this.sourceService.getInstrumentAccessList(user.id),
-      datainstrument: this.sourceService.details(user.id),
+      datainstrument: this.sourceService.getInstrument(user.id),
     }).subscribe((res) => {
       this.loadingService.hide();
 
       const data = res.datainstrument;
       const aimsLetter = data["aims"]["enabled"];
+      this.subscriptions.push(
+        this.aimsService.getAll().subscribe((re) => {
+          const matchingAims = this.findMatchingCodes(re, aimsLetter);
+          const dialogRef = this.matDialog.open(
+            DialogViewEditInstrumentComponent,
+            {
+              width: "900px",
+              panelClass: "overflow-y-auto",
+              data: {
+                id: data.id,
+                name: data.name,
+                url: data.url,
+                access: res.accessInstrument["users"],
+                aims: matchingAims,
+                action: action,
+              },
+            }
+          );
 
-      this.aimsService.getAll().subscribe((re) => {
-        const matchingAims = this.findMatchingCodes(re, aimsLetter);
-        const dialogRef = this.matDialog.open(
-          DialogViewEditInstrumentComponent,
-          {
-            width: "900px",
-            panelClass: "overflow-y-auto",
-            data: {
-              id: data.id,
-              name: data.name,
-              url: data.url,
-              access: res.accessInstrument["users"],
-              aims: matchingAims,
-              action: action,
-            },
-          }
-        );
+          dialogRef.componentInstance.updatedField.subscribe((field) => {
+            this.tableToUpdate = true;
+          });
 
-        dialogRef.componentInstance.updatedField.subscribe((field) => {
-          this.tableToUpdate = true;
-        });
-
-        dialogRef.afterClosed().subscribe((res) => {
-          if (this.tableToUpdate) {
-            this.storageService.clearCache("instrumentsList");
-            this.getSourcesList();
-            this.tableToUpdate = false;
-          }
-          this.loadingService.hide();
-          this.cd.markForCheck();
-        });
-      });
+          dialogRef.afterClosed().subscribe((res) => {
+            if (this.tableToUpdate) {
+              this.storageService.clearCache("instrumentsList");
+              this.getSourcesList();
+              this.tableToUpdate = false;
+            }
+            this.loadingService.hide();
+            this.cd.markForCheck();
+          });
+        })
+      );
     });
   }
 
@@ -261,7 +261,7 @@ export class AdminManagmentInstrumentsComponent implements OnInit, OnDestroy {
             // update list of my instruments in case the one deleted was one of yours
             this.userService.me();
           });
-        this.subscriptions.add(delSub);
+        this.subscriptions.push(delSub);
       }
     });
   }
