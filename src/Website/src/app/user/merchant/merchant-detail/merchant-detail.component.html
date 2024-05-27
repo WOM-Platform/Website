@@ -43,7 +43,7 @@
         [valueEl]="primaryActivity"
         [action]="action"
         [typeEl]="'list'"
-        [option]="primaryActivityOptions"
+        [option]="businessList"
         (onChangeElement)="onUpdateMerchant('primaryActivity', $event)"
         class="merchant-element"
       ></app-editable-element>
@@ -67,6 +67,8 @@
         [keyEl]="'Paese'"
         [valueEl]="country"
         [action]="action"
+        [typeEl]="'list'"
+        [option]="countryList"
         (onChangeElement)="onUpdateMerchant('country', $event)"
         class="merchant-element"
       ></app-editable-element>

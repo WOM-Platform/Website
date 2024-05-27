@@ -114,7 +114,6 @@ export class MyMerchantsCollectionComponent implements OnInit {
 
   updateMerchantsList() {
     this.userService.me().subscribe((user) => {
-      console.log("I miei merchant ", user);
       this.loadData();
     });
   }

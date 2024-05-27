@@ -152,7 +152,6 @@ export class MerchantsAdminComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe((merchant) => {
       if (merchant) {
-        console.log("La creazione e ", merchant);
         this.merchantService
           .register(merchant)
           .pipe(first())

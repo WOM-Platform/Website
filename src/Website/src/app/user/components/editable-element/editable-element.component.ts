@@ -1,23 +1,26 @@
 import { NgIf, NgFor } from "@angular/common";
 import {
+  ChangeDetectorRef,
   Component,
   EventEmitter,
   Input,
   OnChanges,
-  OnInit,
   Output,
 } from "@angular/core";
+import { FormsModule } from "@angular/forms";
 
 @Component({
   selector: "app-editable-element",
   standalone: true,
-  imports: [NgIf, NgFor],
+  imports: [NgIf, NgFor, FormsModule],
   templateUrl: "./editable-element.component.html",
   styleUrls: ["./editable-element.component.css"],
 })
 export class EditableElementComponent implements OnChanges {
   @Input() keyEl: string;
   @Input() valueEl: any;
+  @Input() typeEl: any;
+  @Input() option: any;
   @Input() action: string;
   @Input() pattern: string; // for regex pattern validation
   @Input() minLength: number; // for minimum length validation
@@ -32,14 +35,17 @@ export class EditableElementComponent implements OnChanges {
   originalValue: any;
   newValue: any;
 
+  constructor(private cd: ChangeDetectorRef) {}
+
   ngOnChanges() {
     this.originalValue = this.valueEl;
+    this.newValue = this.valueEl; // Initialize newValue
   }
 
   startEditing(): void {
     this.isEditing = true;
     this.isDirty = false;
-    this.newValue = this.valueEl;
+    this.newValue = this.valueEl; // Ensure newValue is set
   }
 
   stopEditing(): void {
@@ -50,14 +56,14 @@ export class EditableElementComponent implements OnChanges {
         this.onChangeElement.emit(this.newValue);
       }
     }
+    this.cd.detectChanges();
   }
 
   cancelEditing() {
-    console.log("Value el ", this.valueEl);
-    console.log("Original value ", this.originalValue);
     this.valueEl = this.originalValue;
     this.newValue = this.originalValue;
     this.isEditing = false;
+    this.cd.detectChanges();
   }
 
   validateValue(): void {
