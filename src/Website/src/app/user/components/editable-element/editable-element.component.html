@@ -22,11 +22,12 @@
           {{ business }}
         </option>
       </select>
-      <button (click)="stopEditing()" [disabled]="!isDirty">
-        <i
-          [style.color]="isDirty ? 'green' : 'slategray'"
-          class="fa-solid fa-check"
-        ></i>
+      <button
+        (click)="stopEditing()"
+        [disabled]="!isDirty"
+        [style.color]="isDirty ? 'green' : 'slategray'"
+      >
+        <i class="fa-solid fa-check"></i>
       </button>
       <button (click)="cancelEditing()" class="text-red-600">
         <i class="fa-solid fa-xmark"></i>

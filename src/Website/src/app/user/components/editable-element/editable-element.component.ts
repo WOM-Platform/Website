@@ -39,13 +39,13 @@ export class EditableElementComponent implements OnChanges {
 
   ngOnChanges() {
     this.originalValue = this.valueEl;
-    this.newValue = this.valueEl; // Initialize newValue
+    this.newValue = this.valueEl;
   }
 
   startEditing(): void {
     this.isEditing = true;
     this.isDirty = false;
-    this.newValue = this.valueEl; // Ensure newValue is set
+    this.newValue = this.valueEl;
   }
 
   stopEditing(): void {
