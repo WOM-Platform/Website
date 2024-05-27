@@ -1,14 +1,25 @@
 import { ChangeDetectorRef, Component, OnDestroy, OnInit } from "@angular/core";
-import { countryList, Merchant, primaryActivityType } from "../../../_models";
+import {
+  countryList,
+  Merchant,
+  Pos,
+  primaryActivityType,
+} from "../../../_models";
 import { MerchantService, PosService, UserService } from "src/app/_services";
 import { ActivatedRoute } from "@angular/router";
-import { Subscription, forkJoin } from "rxjs";
+import { Subscription, first, forkJoin } from "rxjs";
 import { LoadingService } from "src/app/_services/loading.service";
 import { Location } from "@angular/common";
 import { StorageService } from "src/app/_services/storage.service";
 import { Access } from "src/app/_models/instrument";
 import { MatDialog } from "@angular/material/dialog";
 import { DialogConfirmCancelComponent } from "src/app/components/dialog-confirm-cancel/dialog-confirm-cancel";
+import {
+  AddPosDialogComponent,
+  PosDialogData,
+} from "../dialog-create-pos/add-pos.component";
+import { MatSnackBar } from "@angular/material/snack-bar";
+import { TranslateService } from "@ngx-translate/core";
 
 @Component({
   selector: "app-merchant-detail",
@@ -28,6 +39,7 @@ export class MerchantDetailComponent implements OnInit, OnDestroy {
   country: string;
   action: string;
   createNewAccess = false;
+  createNewPos = false;
 
   businessList: string[] = primaryActivityType;
 
@@ -55,8 +67,10 @@ export class MerchantDetailComponent implements OnInit, OnDestroy {
     private location: Location,
     private matDialog: MatDialog,
     private merchantService: MerchantService,
+    private snackBar: MatSnackBar,
     private posService: PosService,
     private storageService: StorageService,
+    private translate: TranslateService,
     private userService: UserService,
     private route: ActivatedRoute
   ) {}
@@ -69,8 +83,9 @@ export class MerchantDetailComponent implements OnInit, OnDestroy {
       this.subscription = forkJoin({
         merchantData: this.merchantService.getMerchantById(this.merchantId),
         accessData: this.merchantService.getAccessList(this.merchantId),
-        // posData: this.posService.(merchantId)
-      }).subscribe(({ merchantData, accessData }) => {
+        posData: this.merchantService.getMerchantPos(this.merchantId),
+      }).subscribe(({ merchantData, accessData, posData }) => {
+        console.log("pos data ", posData);
         this.merchant = merchantData;
         this.id = merchantData.id;
         this.name = merchantData.name;
@@ -81,7 +96,7 @@ export class MerchantDetailComponent implements OnInit, OnDestroy {
         this.zipCode = merchantData.zipCode;
         this.country = merchantData.country;
         this.accessList = accessData["users"] || [];
-        // this.posList = accessData.posList || [];
+        this.posList = posData["pos"] || [];
         this.loadingService.hide();
         this.cd.detectChanges();
       });
@@ -113,6 +128,69 @@ export class MerchantDetailComponent implements OnInit, OnDestroy {
           console.error("Error adding new instrument access:", err),
       });
     this.subscriptions.add(addAccessSub);
+  }
+
+  onEditPos(pos: Pos) {
+    const posData = new PosDialogData();
+    posData.merchantId = this.merchant.id;
+    posData.pos = pos;
+    posData.isEdit = true;
+
+    console.log("edit pos ");
+    const dialogRef = this.matDialog.open(AddPosDialogComponent, {
+      data: posData,
+    });
+  }
+  onAddPos() {
+    const posData = new PosDialogData();
+    posData.merchantId = this.merchant.id;
+    posData.pos = null;
+    posData.isEdit = false;
+
+    console.log("Add pos ");
+    const dialogRef = this.matDialog.open(AddPosDialogComponent, {
+      data: posData,
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        console.log("Result pos ", result);
+        // this.loadData();
+        let successString;
+        if (posData.isEdit) {
+          successString = "USER.EDIT_POS.SUCCESS";
+        } else {
+          successString = "USER.ADD_POS.SUCCESS";
+        }
+        this.translate
+          .get(successString)
+          .pipe(first())
+          .subscribe((response) => {
+            this.openSnackBar(response);
+          });
+      }
+    });
+  }
+
+  onDeletePos(pos: Pos) {
+    const dialogRef = this.matDialog.open(DialogConfirmCancelComponent, {
+      width: "500px",
+      data: {
+        title: "Conferma eliminazione",
+        message: "Sei sicuro di voler confermare l'eliminazione?",
+        confirm: "si",
+        cancel: "Annulla",
+      },
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log("Pos ", pos);
+      console.log("Result ", result);
+      // this.merchantService.deleteAccess(this.id, pos.id).subscribe({
+      //   next: () => {
+      //     this.checkAccessCurrentUser(pos.id);
+      //     this.updateAccessList();
+      //   },
+      // });
+    });
   }
 
   onDeleteAccess(access: Access) {
@@ -180,5 +258,11 @@ export class MerchantDetailComponent implements OnInit, OnDestroy {
         .me()
         .subscribe((res) => this.userService.updateUserOwnership(res));
     }
+  }
+
+  openSnackBar(message = "null"): any {
+    this.snackBar.open(message, null, {
+      duration: 5000,
+    });
   }
 }

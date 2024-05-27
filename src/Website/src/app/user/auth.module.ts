@@ -30,7 +30,7 @@ import { UserAimsComponent } from "./aims/user-aims.component";
 import { MerchantDetailComponent } from "./merchant/merchant-detail/merchant-detail.component";
 import { UserAimsListComponent } from "./components/user-aims-list/user-aims-list.component";
 import { MyInstrumentsCollectionComponent } from "./instruments/my-instruments-collection/my-instruments-collection.component";
-import { DialogCreateMerchant } from "./merchant/dialog-create-merchant/dialog-create-merchant";
+import { DialogCreateMerchant } from "./merchant/dialog-create-merchant/dialog-create-merchant.component";
 import { MyMerchantsCollectionComponent } from "./merchant/my-merchants-collection/my-merchants-collection.component";
 import { ExpandableCardComponent } from "./components/expandable-card/expandable-card.component";
 import { EditableElementComponent } from "./components/editable-element/editable-element.component";

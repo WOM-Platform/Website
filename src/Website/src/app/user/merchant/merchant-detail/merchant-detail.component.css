@@ -122,3 +122,12 @@
   .slider.round:before {
     border-radius: 50%;
   }
+
+  
+.btn-default {
+  @apply border-2 border-black px-4 py-2 rounded-full flex items-center gap-1 bg-white cursor-pointer;
+}
+
+.btn-default:hover {
+  @apply bg-gray-300;
+}

@@ -78,7 +78,7 @@
       [showRole]="'true'"
       (deleteAccess)="onDeleteAccess($event)"
     />
-
+    <!-- btn to create access -->
     <div *ngIf="action === 'edit'">
       <div *ngIf="!createNewAccess" class="mt-6">
         <app-user-access-list
@@ -96,14 +96,17 @@
             <div class="access-details">
               <div>
                 <span class="text-slate-600 font-semibold">Name</span>:
-                {{ pos.name }} {{ pos.surname }}
+                {{ pos.name }}
               </div>
-              <div>
+              <!-- <div>
                 <span class="text-slate-600 font-semibold">Indirizzo</span>:
-                {{ pos.address }}
-              </div>
+                {{ pos?.address?.formattedAddress || "" }}
+              </div> -->
             </div>
             <ng-container *ngIf="action === 'edit'">
+              <button class="text-blue-600" (click)="onEditPos(pos)">
+                <mat-icon class="text-blue-600">edit</mat-icon>
+              </button>
               <button class="delete-button text-red" (click)="onDeletePos(pos)">
                 <mat-icon class="text-red">delete</mat-icon>
               </button>
@@ -111,6 +114,29 @@
           </div>
         </li>
       </ul>
+    </div>
+    <!-- btn to create access -->
+    <div *ngIf="action === 'edit'">
+      <div *ngIf="!createNewPos" class="mt-6">
+        <div class="">
+          <button
+            *ngIf="!createNewPos"
+            (click)="onAddPos()"
+            class="btn-default"
+          >
+            <mat-icon>add</mat-icon>
+            Aggiungi POS
+          </button>
+          <button
+            *ngIf="createNewPos"
+            (click)="handleCancellationPos()"
+            class="btn-default"
+          >
+            <mat-icon>cancel</mat-icon>
+            Annulla
+          </button>
+        </div>
+      </div>
     </div>
   </div>
 </div>

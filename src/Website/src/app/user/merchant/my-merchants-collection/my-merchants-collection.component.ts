@@ -14,7 +14,7 @@ import { environment } from "src/environments/environment";
 import {
   MerchantDialogData,
   DialogCreateMerchant,
-} from "../dialog-create-merchant/dialog-create-merchant";
+} from "../dialog-create-merchant/dialog-create-merchant.component";
 import { MatDialog } from "@angular/material/dialog";
 import { TranslateService } from "@ngx-translate/core";
 import { MatSnackBar } from "@angular/material/snack-bar";

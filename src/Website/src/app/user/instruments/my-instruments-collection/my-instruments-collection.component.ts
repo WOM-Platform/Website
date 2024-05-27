@@ -42,15 +42,12 @@ export class MyInstrumentsCollectionComponent implements OnInit {
     this.instruments.map((instrument) => {
       const aimsLetter = instrument["aims"]["enabled"];
       if (aimsLetter) {
-        console.log("Aims letters ", aimsLetter);
         this.aimsService.getAll().subscribe((re) => {
           const matchingAims = this.findMatchingCodes(re, aimsLetter);
           instrument["aims"] = matchingAims;
         });
       }
     });
-    console.log("this.instruments ");
-    console.log(this.instruments);
   }
 
   loadData(): any {

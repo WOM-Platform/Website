@@ -9,7 +9,7 @@ import { MatIcon } from "@angular/material/icon";
 import {
   DialogCreateMerchant,
   MerchantDialogData,
-} from "../dialog-create-merchant/dialog-create-merchant";
+} from "../dialog-create-merchant/dialog-create-merchant.component";
 import { DialogType } from "../../../_models/dialogType";
 import { catchError, first } from "rxjs/operators";
 import { MatDialog, MatDialogRef } from "@angular/material/dialog";

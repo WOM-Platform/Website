@@ -18,9 +18,6 @@ export class ExpandableCardComponent implements OnInit {
   action = "view";
 
   ngOnInit(): void {
-    console.log("name ", this.data);
-    console.log("data ", this.data.access);
-    console.log("aims ", this.data.aims);
     if (this.role === "Admin") this.action = "edit";
   }
 

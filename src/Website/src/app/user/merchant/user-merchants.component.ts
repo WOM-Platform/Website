@@ -4,7 +4,7 @@ import { Merchant, Merchants, Pos } from "../../_models";
 import {
   DialogCreateMerchant,
   MerchantDialogData,
-} from "./dialog-create-merchant/dialog-create-merchant";
+} from "./dialog-create-merchant/dialog-create-merchant.component";
 import { TranslateService } from "@ngx-translate/core";
 import { first } from "rxjs/operators";
 import {

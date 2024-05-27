@@ -15,12 +15,9 @@ export class AccessListComponent implements OnInit {
   @Input() showRole: boolean = false;
   @Output() deleteAccess = new EventEmitter<Access>(); // Ensure to emit the correct type
 
-  ngOnInit(): void {
-    console.log("Action ", this.action);
-  }
+  ngOnInit(): void {}
 
   onDelete(access: Access) {
-    console.log("EWWEWEWEEWEWEW ", access);
     this.deleteAccess.emit(access);
   }
 }

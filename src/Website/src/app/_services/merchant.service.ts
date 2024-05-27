@@ -128,4 +128,11 @@ export class MerchantService {
   deleteAccess(idMerchant: string, userId: string) {
     return this.http.delete(`${this.localUrlV1}${idMerchant}/access/${userId}`);
   }
+
+  // get list of pos of a merchant
+  getMerchantPos(idMerchant: string) {
+    return this.http
+      .get(`${this.localUrlV1}${idMerchant}/pos`)
+      .pipe(map((res) => res));
+  }
 }
