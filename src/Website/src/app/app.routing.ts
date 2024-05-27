@@ -105,13 +105,13 @@ const routes: Routes = [
             path: "",
             component: Pesaro2024Component,
           },
-          // {
-          //   path: "albergatori",
-          //   component: AlbergatoriComponent,
-          //   data: {
-          //     breadcrumb: "BREADCRUMBS.PESARO2024.HOTELIERS",
-          //   },
-          // },
+          {
+            path: "albergatori",
+            component: AlbergatoriComponent,
+            data: {
+              breadcrumb: "BREADCRUMBS.PESARO2024.HOTELIERS",
+            },
+          },
           {
             path: "esercenti",
             component: EsercentiComponent,

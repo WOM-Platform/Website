@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from "@angular/core";
+import { Component, OnDestroy, OnInit, ViewChild } from "@angular/core";
 import { UserService, MerchantService, AuthService } from "../../_services";
 import { Merchant, Merchants, Pos } from "../../_models";
 import {
@@ -19,9 +19,10 @@ import { DialogConfirmCancelComponent } from "../../components/dialog-confirm-ca
 import { DialogConfirmComponent } from "../../components/dialog-confirm/dialog-confirm";
 import { MatDialog } from "@angular/material/dialog";
 import { MatSnackBar } from "@angular/material/snack-bar";
-import { Router } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { StorageService } from "../../_services/storage.service";
 import { Subscription } from "rxjs";
+import { MatTabGroup } from "@angular/material/tabs";
 
 @Component({
   selector: "app-user-merchant",
@@ -32,6 +33,7 @@ export class UserMerchantsComponent implements OnInit, OnDestroy {
   username: string;
 
   currentUser: any;
+  @ViewChild("tabGroup", { static: true }) tabGroup!: MatTabGroup;
 
   subscriptions: Subscription;
 
@@ -43,12 +45,20 @@ export class UserMerchantsComponent implements OnInit, OnDestroy {
     private router: Router,
     private matDialog: MatDialog,
     private merchantService: MerchantService,
+    private route: ActivatedRoute,
     private snackBar: MatSnackBar,
     private translate: TranslateService,
     private userService: UserService
   ) {}
 
   ngOnInit(): any {
+    this.route.queryParams.subscribe((params) => {
+      const selectedTabIndex = params["selectedTabIndex"];
+      if (selectedTabIndex !== undefined) {
+        this.tabGroup.selectedIndex = selectedTabIndex;
+      }
+    });
+
     this.username =
       this.userService.currentUserValue.name +
       " " +
@@ -60,6 +70,12 @@ export class UserMerchantsComponent implements OnInit, OnDestroy {
 
   loadData(): any {
     this.currentUser = this.storageService.load("currentUser");
+  }
+
+  async navigateToSecondTab(): Promise<void> {
+    if (this.tabGroup) {
+      this.tabGroup.selectedIndex = 1;
+    }
   }
 
   openSnackBar(message = "null"): any {
