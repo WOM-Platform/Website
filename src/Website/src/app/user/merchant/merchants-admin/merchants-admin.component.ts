@@ -142,13 +142,17 @@ export class MerchantsAdminComponent implements OnInit {
 
   onCreateMerchant() {
     const merchantDialogData = new MerchantDialogData();
+
     merchantDialogData.data = null;
     merchantDialogData.type = DialogType.create;
+    merchantDialogData.isAdmin = true;
+
     const dialogRef = this.matDialog.open(DialogCreateMerchant, {
       data: merchantDialogData,
     });
     dialogRef.afterClosed().subscribe((merchant) => {
       if (merchant) {
+        console.log("La creazione e ", merchant);
         this.merchantService
           .register(merchant)
           .pipe(first())
