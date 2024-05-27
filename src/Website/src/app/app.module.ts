@@ -88,7 +88,6 @@ import { TuristiComponent } from "./pages/pesaro2024-section/turisti/turisti.com
 import { CittadiniComponent } from "./pages/pesaro2024-section/cittadini/cittadini.component";
 import { NgChartsModule } from "ng2-charts";
 import { VolontarxComponent } from "./pages/pesaro2024-section/volontarx/volontarx.component";
-import { DialogCreateSourceComponent } from "./user/instruments/dialog-create-instrument/dialog-create-instrument.component";
 import { SearchSourceComponent } from "./user/components/user-access-list/search-source/search-source.component";
 import { AlbergatoriComponent } from "./pages/pesaro2024-section/albergatori/albergatori.component";
 
@@ -134,7 +133,6 @@ export const isMock = environment.mock;
     BreadcrumbsComponent,
     ContactFormComponent,
     ContactsComponent,
-    DialogCreateSourceComponent,
     FanoComponent,
     FooterComponent,
     HomeComponent,

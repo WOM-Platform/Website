@@ -41,6 +41,7 @@ export class DialogCreateSourceComponent implements OnInit, OnDestroy {
           Validators.minLength(10),
         ],
       ],
+      aims: this.fb.array([]),
       access: [[]],
     });
 
@@ -63,6 +64,14 @@ export class DialogCreateSourceComponent implements OnInit, OnDestroy {
 
   onNoClick(): void {
     this.dialogRef.close();
+  }
+
+  onUpdateSourceField(key: string, value: any, isTableToUpdate: boolean) {
+    console.log("Inutile ", key);
+    console.log("Inutile ", value);
+    this.newSource[key] = value;
+
+    console.log(this.newSource);
   }
 
   handleAccessList(accessEl) {

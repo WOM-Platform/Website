@@ -19,6 +19,23 @@
         <span class="text-slate-600 font-semibold">CF</span>: {{ fiscalCode }}
       </p>
     </div>
+    <div>
+      <p class="flex items-center gap-2 mb-0 h-8">
+        <span class="text-slate-600 font-semibold">Abilitato: </span>
+        <label *ngIf="action === 'edit'; else viewIsEnabled" class="switch">
+          <input
+            type="checkbox"
+            [checked]="isEnabled"
+            (click)="onCheckboxClick()"
+          />
+          <span class="slider round"></span>
+        </label>
+        <ng-template #viewIsEnabled>
+          <span *ngIf="isEnabled; else notEnable">Attivo</span>
+        </ng-template>
+        <ng-template #notEnable>Disattivato</ng-template>
+      </p>
+    </div>
 
     <div class="my-4 merchant-data">
       <app-editable-element
@@ -26,7 +43,7 @@
         [valueEl]="primaryActivity"
         [action]="action"
         [typeEl]="'list'"
-        [option]="primaryActivityOptions"
+        [option]="businessList"
         (onChangeElement)="onUpdateMerchant('primaryActivity', $event)"
         class="merchant-element"
       ></app-editable-element>
@@ -50,60 +67,22 @@
         [keyEl]="'Paese'"
         [valueEl]="country"
         [action]="action"
+        [typeEl]="'list'"
+        [option]="countryList"
         (onChangeElement)="onUpdateMerchant('country', $event)"
         class="merchant-element"
       ></app-editable-element>
 
-      <p class="flex items-center gap-2 mb-0 h-8">
-        <span class="text-slate-600 font-semibold">Abilitato: </span>
-        <label *ngIf="action === 'edit'; else viewIsEnabled" class="switch">
-          <input
-            type="checkbox"
-            [checked]="isEnabled"
-            (click)="onCheckboxClick()"
-          />
-          <span class="slider round"></span>
-        </label>
-        <ng-template #viewIsEnabled>
-          <span *ngIf="isEnabled; else notEnable">Attivo</span>
-        </ng-template>
-        <ng-template #notEnable>Disattivato</ng-template>
-      </p>
       <!-- <app-editable-element [keyEl]="'WOM generati'" [valueEl]="'1000000'" [action]="action" [typeEl]="string" class="merchant-element" (onChangeElement)="onUpdateMerchant('quantity',$event)"></app-editable-element> -->
     </div>
 
-    <div *ngIf="accessList && accessList.length > 0" class="mt-6">
-      <p class="font-semibold mb-0">Gestori:</p>
-      <ul class="access-list">
-        <li *ngFor="let access of accessList" class="">
-          <div class="access-item">
-            <div class="access-details">
-              <div>
-                <span class="text-slate-600 font-semibold">Name</span>:
-                {{ access.name }} {{ access.surname }}
-              </div>
-              <div>
-                <span class="text-slate-600 font-semibold">Email</span>:
-                {{ access.email }}
-              </div>
-              <div>
-                <span class="text-slate-600 font-semibold">Ruolo</span>:
-                {{ access.role }}
-              </div>
-            </div>
-            <ng-container *ngIf="action === 'edit'">
-              <button
-                class="delete-button text-red"
-                (click)="onDeleteAccess(access)"
-              >
-                <mat-icon class="text-red">delete</mat-icon>
-              </button>
-            </ng-container>
-          </div>
-        </li>
-      </ul>
-    </div>
-
+    <app-access-list
+      [accessList]="accessList"
+      [action]="action"
+      [showRole]="'true'"
+      (deleteAccess)="onDeleteAccess($event)"
+    />
+    <!-- btn to create access -->
     <div *ngIf="action === 'edit'">
       <div *ngIf="!createNewAccess" class="mt-6">
         <app-user-access-list
@@ -121,14 +100,17 @@
             <div class="access-details">
               <div>
                 <span class="text-slate-600 font-semibold">Name</span>:
-                {{ pos.name }} {{ pos.surname }}
+                {{ pos.name }}
               </div>
-              <div>
+              <!-- <div>
                 <span class="text-slate-600 font-semibold">Indirizzo</span>:
-                {{ pos.address }}
-              </div>
+                {{ pos?.address?.formattedAddress || "" }}
+              </div> -->
             </div>
             <ng-container *ngIf="action === 'edit'">
+              <button class="text-blue-600" (click)="onEditPos(pos)">
+                <mat-icon class="text-blue-600">edit</mat-icon>
+              </button>
               <button class="delete-button text-red" (click)="onDeletePos(pos)">
                 <mat-icon class="text-red">delete</mat-icon>
               </button>
@@ -136,6 +118,29 @@
           </div>
         </li>
       </ul>
+    </div>
+    <!-- btn to create access -->
+    <div *ngIf="action === 'edit'">
+      <div *ngIf="!createNewPos" class="mt-6">
+        <div class="">
+          <button
+            *ngIf="!createNewPos"
+            (click)="onAddPos()"
+            class="btn-default"
+          >
+            <mat-icon>add</mat-icon>
+            Aggiungi POS
+          </button>
+          <button
+            *ngIf="createNewPos"
+            (click)="handleCancellationPos()"
+            class="btn-default"
+          >
+            <mat-icon>cancel</mat-icon>
+            Annulla
+          </button>
+        </div>
+      </div>
     </div>
   </div>
 </div>

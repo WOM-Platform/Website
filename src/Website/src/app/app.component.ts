@@ -1,19 +1,32 @@
-import { Component } from '@angular/core';
-import {TranslateService} from '@ngx-translate/core';
+import { Component } from "@angular/core";
+import { TranslateService } from "@ngx-translate/core";
+import { NetworkService } from "./_services/network.service";
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  selector: "app-root",
+  templateUrl: "./app.component.html",
+  styleUrls: ["./app.component.css"],
 })
 export class AppComponent {
-  title = 'app';
+  title = "app";
+  isOnline: boolean;
 
-  constructor(translate: TranslateService) {
-    translate.addLangs(['en', 'it']);
-    translate.setDefaultLang('it');
+  constructor(
+    private networkService: NetworkService,
+    translate: TranslateService
+  ) {
+    translate.addLangs(["en", "it"]);
+    translate.setDefaultLang("it");
 
-    console.log('browser lang: ', translate.getBrowserLang());
+    networkService.isOnline.subscribe((online) => {
+      this.isOnline = online;
+
+      console.log(
+        "Network status in component:",
+        online ? "Online" : "Offline"
+      );
+    });
+
     if (translate.getBrowserLang()) {
       translate.use(translate.getBrowserLang());
     }

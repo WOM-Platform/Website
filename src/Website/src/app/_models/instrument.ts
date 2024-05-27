@@ -15,3 +15,7 @@ export interface Access {
   email: string;
   role: string;
 }
+
+export interface UIInstrument extends Instrument {
+  isOpen: boolean;
+}

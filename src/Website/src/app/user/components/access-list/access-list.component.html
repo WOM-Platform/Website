@@ -1,0 +1,30 @@
+<ul class="access-list">
+  <li *ngFor="let access of accessList">
+    <div class="access-item">
+      <div class="access-details">
+        <div>
+          <span class="text-slate-600 font-semibold">Name</span>:
+          {{ access.name }} {{ access.surname }}
+        </div>
+        <div>
+          <span class="text-slate-600 font-semibold">Email</span>:
+          {{ access.email }}
+        </div>
+        <div *ngIf="showRole">
+          <span class="text-slate-600 font-semibold">Ruolo</span>:
+          {{ access.role }}
+        </div>
+      </div>
+      <ng-container *ngIf="action === 'edit'">
+        <button
+          class="flex items-center justify-center p-0"
+          (click)="onDelete(access)"
+        >
+          <i
+            class="fas fa-trash text-red-500 text-base flex items-center justify-center w-8 h-8 hover:bg-red-100 hover:rounded-full"
+          ></i>
+        </button>
+      </ng-container>
+    </div>
+  </li>
+</ul>

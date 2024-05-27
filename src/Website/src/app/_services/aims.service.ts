@@ -51,9 +51,18 @@ export class AimsService {
    * Gets the information of a single aim
    * @param code Aim code, ex.: H
    */
-  get(code: string): Observable<Aim> {
-    return this.http
-      .get<Aim>(environment.baseUrl + environment.v1 + "aim/" + code)
-      .pipe(map((response) => response));
+  getByCode(code: string): Observable<Aim> {
+    const cachedAims = this.storageService.get("aimsData");
+    if (cachedAims) {
+      const aim = cachedAims.find((a) => a.code === code);
+      return aim;
+    } else {
+      this.getAll().pipe(
+        map((aims) => {
+          const aim = aims.find((a) => a.code === code);
+          return aim;
+        })
+      );
+    }
   }
 }

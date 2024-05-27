@@ -1,6 +1,6 @@
 <p class="flex items-center gap-2 mb-0 h-8 justify-start">
   <span *ngIf="keyEl" class="text-slate-600 font-semibold">{{ keyEl }}:</span>
-  <ng-container *ngIf="!isEditing; else primaryActivityInput">
+  <ng-container *ngIf="!isEditing; else editingField">
     {{ valueEl }}
     <ng-container *ngIf="action === 'edit'">
       <button (click)="startEditing()">
@@ -8,19 +8,24 @@
       </button>
     </ng-container>
   </ng-container>
-  <ng-template #primaryActivityInput>
-    <div class="flex items-center gap-2">
-      <input
+  <ng-template #editingField>
+    <div
+      *ngIf="typeEl === 'list'; else inputType"
+      class="flex items-center gap-2"
+    >
+      <select
+        class="border-2 border-black rounded-lg px-2 max-w-[250px]"
         [(ngModel)]="newValue"
-        name="valueKey"
-        class="border-2 border-black rounded-lg px-2"
-        [ngStyle]="{ width: newValue.length + 1 + 'ch' }"
         (ngModelChange)="validateValue()"
-      />
+      >
+        <option *ngFor="let business of option" [value]="business">
+          {{ business }}
+        </option>
+      </select>
       <button
         (click)="stopEditing()"
         [disabled]="!isDirty"
-        [ngClass]="{ 'text-green-600': isDirty, 'text-slate-400': !isDirty }"
+        [style.color]="isDirty ? 'green' : 'slategray'"
       >
         <i class="fa-solid fa-check"></i>
       </button>
@@ -28,6 +33,25 @@
         <i class="fa-solid fa-xmark"></i>
       </button>
     </div>
+    <ng-template #inputType class="flex items-center gap-2">
+      <input
+        [(ngModel)]="newValue"
+        name="valueKey"
+        class="border-2 border-black rounded-lg px-2 max-w-[200px]"
+        [ngStyle]="{ width: newValue.length + 1 + 'ch' }"
+        (ngModelChange)="validateValue()"
+      />
+      <button (click)="stopEditing()" [disabled]="!isDirty">
+        <i
+          [class.fa-solid]="true"
+          class="fa-check"
+          [style.color]="isDirty ? 'green' : 'slategray'"
+        ></i>
+      </button>
+      <button (click)="cancelEditing()" class="text-red-600">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    </ng-template>
     <div *ngIf="!isValid" class="text-red-600 text-sm mt-1">
       {{ validationMessage }}
     </div>

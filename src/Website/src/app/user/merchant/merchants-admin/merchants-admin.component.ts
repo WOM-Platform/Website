@@ -9,7 +9,7 @@ import { MatIcon } from "@angular/material/icon";
 import {
   DialogCreateMerchant,
   MerchantDialogData,
-} from "../../components/dialog-create-merchant/dialog-create-merchant";
+} from "../dialog-create-merchant/dialog-create-merchant.component";
 import { DialogType } from "../../../_models/dialogType";
 import { catchError, first } from "rxjs/operators";
 import { MatDialog, MatDialogRef } from "@angular/material/dialog";
@@ -142,8 +142,11 @@ export class MerchantsAdminComponent implements OnInit {
 
   onCreateMerchant() {
     const merchantDialogData = new MerchantDialogData();
+
     merchantDialogData.data = null;
     merchantDialogData.type = DialogType.create;
+    merchantDialogData.isAdmin = true;
+
     const dialogRef = this.matDialog.open(DialogCreateMerchant, {
       data: merchantDialogData,
     });

@@ -1,11 +1,11 @@
 <mat-tab-group *ngIf="currentUser" class="min-w-[800px]">
   <mat-tab *ngIf="currentUser.role === 'Admin'" label="Lista Instruments">
-    <app-admin-managment-instruments />
+    <app-admin-managment-instruments (instrumentsToUpdate)="loadData()" />
   </mat-tab>
   <mat-tab
-    *ngIf="currentUser.sources && currentUser.sources.length > 0"
+    *ngIf="instruments && instruments.length > 0"
     label="I miei Instruments"
   >
-    <app-my-instrument-collection />
+    <app-my-instruments-collection />
   </mat-tab>
 </mat-tab-group>

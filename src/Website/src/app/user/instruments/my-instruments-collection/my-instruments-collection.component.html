@@ -1,0 +1,32 @@
+<div *ngIf="instruments && instruments.length > 0; else noInstrument">
+  <div class="my-6" *ngFor="let instrument of instruments">
+    <div
+      class="bg-white rounded-lg shadow-md p-6 cursor-pointer"
+      *ngIf="instrument.access"
+      (click)="instrument.isOpen = !instrument.isOpen"
+    >
+      <app-expandable-card
+        [name]="instrument.name"
+        [role]="'Admin'"
+        [data]="instrument"
+        (updateInstrument)="onUpdateSourceField(instrument, $event)"
+      />
+      <div [@slideToggle]="instrument.isOpen ? 'open' : 'closed'">
+        <app-aims-list [aimList]="instrument.aims" />
+        <div
+          *ngIf="instrument.access && instrument.access.length > 0"
+          class="mt-10"
+        >
+          <p class="font-semibold mb-0">Gestori:</p>
+
+          <app-access-list [accessList]="instrument.access" />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<ng-template #noInstrument>
+  <div class="flex justify-center items-center">
+    <h2>No instrument</h2>
+  </div>
+</ng-template>
