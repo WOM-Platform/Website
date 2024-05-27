@@ -1,6 +1,13 @@
+import {
+  trigger,
+  state,
+  style,
+  transition,
+  animate,
+} from "@angular/animations";
 import { ChangeDetectorRef, Component, OnInit } from "@angular/core";
 import { Aim } from "src/app/_models";
-import { Instrument } from "src/app/_models/instrument";
+import { Instrument, UIInstrument } from "src/app/_models/instrument";
 import { AimsService, UserService } from "src/app/_services";
 import { SourceService } from "src/app/_services/source.service";
 import { StorageService } from "src/app/_services/storage.service";
@@ -9,10 +16,31 @@ import { StorageService } from "src/app/_services/storage.service";
   selector: "app-my-instruments-collection",
   templateUrl: "./my-instruments-collection.component.html",
   styleUrl: "./my-instruments-collection.component.css",
+  animations: [
+    trigger("slideToggle", [
+      state(
+        "open",
+        style({
+          height: "*",
+          opacity: 1,
+          overflow: "hidden",
+        })
+      ),
+      state(
+        "closed",
+        style({
+          height: "0px",
+          opacity: 0,
+          overflow: "hidden",
+        })
+      ),
+      transition("open <=> closed", [animate("300ms ease-in-out")]),
+    ]),
+  ],
 })
 export class MyInstrumentsCollectionComponent implements OnInit {
   username: string;
-  instruments: Instrument[];
+  instruments: UIInstrument[];
   currentUser: any;
 
   constructor(
@@ -51,7 +79,12 @@ export class MyInstrumentsCollectionComponent implements OnInit {
   }
 
   loadData(): any {
-    this.instruments = this.storageService.load("instrumentData");
+    this.instruments = this.storageService
+      .load("instrumentData")
+      .map((instrument: Instrument, index: number) => ({
+        ...instrument,
+        isOpen: index === 0,
+      }));
     this.currentUser = this.storageService.load("currentUser");
   }
 

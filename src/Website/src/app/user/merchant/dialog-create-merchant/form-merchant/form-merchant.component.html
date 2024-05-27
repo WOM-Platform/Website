@@ -1,123 +1,210 @@
 <!-- <h1 class="py-6">{{ 'SIGN_UP.MERCHANT.TITLE' | translate }}</h1> -->
 <form [formGroup]="form">
-    <!-- MERCHANT DATA -->
-    <div class="flex justify-between gap-4">
-        <div class="flex flex-col justify-start gap-2 items-start">
-            <label class="w-52">{{ 'SIGN_UP.MERCHANT.NAME' | translate }}<span class="text-red-600">*</span>:</label>
-            <input type="text" formControlName="name" class="input-create w-96"
-                   [ngClass]="{'invalid-input': isControlInvalidAndTouched('name')}">
-            <div class="text-red-600 text-xs pl-4" *ngIf="isControlInvalidAndTouched('name')">
-                {{ 'SIGN_UP.MERCHANT.NAME_ERROR' | translate }}
-            </div>
-        </div>
-        <div class="flex flex-col justify-start gap-2 items-start">
-            <label class="w-52">{{ 'SIGN_UP.MERCHANT.CF' | translate }}<span class="text-red-600">*</span>:</label>
-            <input #cf type="text" formControlName="fiscalCode"
-                   [ngClass]="{'invalid-input': isControlInvalidAndTouched('fiscalCode'), 'input-edit': merchant !== null, 'input-create': merchant === null}"
-                   class=" w-96 uppercase"
-
-                   maxlength="16">
-            <mat-hint class="pl-4 text-xs">{{ cf.value.length }} / 16</mat-hint>
-            <div class="text-red-600 text-xs pl-4" *ngIf="isControlInvalidAndTouched('fiscalCode')">
-                {{ 'SIGN_UP.MERCHANT.CF_ERROR' | translate }}
-            </div>
-        </div>
+  <!-- MERCHANT DATA -->
+  <div class="flex justify-between gap-4">
+    <div class="flex flex-col justify-start gap-2 items-start">
+      <label class="w-52"
+        >{{ "SIGN_UP.MERCHANT.NAME" | translate
+        }}<span class="text-red-600">*</span>:</label
+      >
+      <input
+        type="text"
+        formControlName="name"
+        class="input-create w-96"
+        [ngClass]="{ 'invalid-input': isControlInvalidAndTouched('name') }"
+      />
+      <div
+        class="text-red-600 text-xs pl-4"
+        *ngIf="isControlInvalidAndTouched('name')"
+      >
+        {{ "SIGN_UP.MERCHANT.NAME_ERROR" | translate }}
+      </div>
     </div>
-
-    <!-- OPTIONAL MERCHANT DATA -->
-    <hr class="my-6"/>
-    <p
-            class="description"
-            [innerHTML]="'SIGN_UP.MERCHANT.OPTIONAL_TEXT' | translate"
-    ></p>
-    <div class="flex flex-wrap justify-start gap-4">
-        <div class="flex flex-col justify-start gap-2 items-start">
-            <label class="w-52">{{ 'SIGN_UP.MERCHANT.ADDRESS' | translate }}<span class="text-red-600">*</span>:</label>
-            <input type="text" formControlName="address" class="input-create w-96 uppercase"
-                   [ngClass]="{'invalid-input': isControlInvalidAndTouched('address')}">
-            <div class="text-red-600 text-xs pl-4" *ngIf="isControlInvalidAndTouched('address')">
-                {{ 'SIGN_UP.MERCHANT.ADDRESS_ERROR' | translate }}
-            </div>
-        </div>
-
-        <div class="flex flex-col justify-start gap-2 items-start">
-            <label class="w-52">{{ 'SIGN_UP.MERCHANT.CAP' | translate }}<span
-                    class="text-red-600">*</span>:</label>
-            <input type="text" formControlName="zipCode" class="input-create w-32 uppercase" maxlength="5"
-                   [ngClass]="{'invalid-input': isControlInvalidAndTouched('zipCode')}">
-            <mat-hint>{{ form.get('zipCode').value.length }} / 5</mat-hint>
-            <div class="text-red-600 text-xs pl-4" *ngIf="isControlInvalidAndTouched('zipCode')">
-                {{ 'SIGN_UP.MERCHANT.CAP_ERROR' | translate }}
-            </div>
-        </div>
+    <div class="flex flex-col justify-start gap-2 items-start">
+      <label class="w-52"
+        >{{ "SIGN_UP.MERCHANT.CF" | translate
+        }}<span class="text-red-600">*</span>:</label
+      >
+      <input
+        #cf
+        type="text"
+        formControlName="fiscalCode"
+        [ngClass]="{
+          'invalid-input': isControlInvalidAndTouched('fiscalCode'),
+          'input-edit': merchant !== null,
+          'input-create': merchant === null
+        }"
+        class="w-96 uppercase"
+        maxlength="16"
+      />
+      <mat-hint class="pl-4 text-xs">{{ cf.value.length }} / 16</mat-hint>
+      <div
+        class="text-red-600 text-xs pl-4"
+        *ngIf="isControlInvalidAndTouched('fiscalCode')"
+      >
+        {{ "SIGN_UP.MERCHANT.CF_ERROR" | translate }}
+      </div>
     </div>
-    <div class="flex flex-wrap justify-start gap-4">
-        <div class="flex flex-col justify-start gap-2 items-start">
-            <label class="w-52">{{ 'SIGN_UP.MERCHANT.CITY' | translate }}<span
-                    class="text-red-600">*</span>:</label>
-            <input type="text" formControlName="city" class="input-create w-60"
-                   [ngClass]="{'invalid-input': isControlInvalidAndTouched('city')}">
-            <div class="text-red-600 text-xs pl-4" *ngIf="isControlInvalidAndTouched('city')">
-                Campo obbligatorio
-            </div>
-        </div>
-        <div class="flex flex-col justify-start gap-2 items-start w-80">
-            <label>{{ 'SIGN_UP.MERCHANT.SELECT_COUNTRY' | translate }}<span
-                    class="text-red-600">*</span>:</label>
-            <mat-select formControlName="country" class="input-create"
-                        [ngClass]="{'invalid-input':isControlInvalidAndTouched('country')}">
-                <mat-option #county *ngFor="let country of countryList" [value]="country"
-                >{{ country }}
-                </mat-option>
-            </mat-select>
-        </div>
-    </div>
-
-    <hr class="my-6"/>
-    <div class="flex flex-wrap justify-start gap-4">
-        <div class="flex flex-col justify-start gap-2 items-start w-80">
-            <label>{{ 'SIGN_UP.MERCHANT.BUSINESS' | translate }}<span
-                    class="text-red-600">*</span>:</label>
-            <mat-select formControlName="primaryActivity" class="input-create"
-                        [ngClass]="{'invalid-input':isControlInvalidAndTouched('primaryActivity')}">
-                <mat-option *ngFor="let business of businessList" [value]="business"
-                >{{ business }}
-                </mat-option
-                >
-            </mat-select>
-            <div class="text-red-600 text-xs pl-4" *ngIf="isControlInvalidAndTouched('primaryActivity')">
-                {{ 'SIGN_UP.MERCHANT.BUSINESS_ERROR' | translate }}
-            </div>
-        </div>
-        <div class="flex flex-col justify-start gap-2 items-start w-96">
-            <label [innerHTML]="'SIGN_UP.MERCHANT.OPTIONAL_WEBSITE_TEXT' | translate"></label>
-            <input
-                    type="text"
-                    formControlName="url"
-                    placeholder="{{ 'SIGN_UP.MERCHANT.WEBSITE' | translate }}"
-                    class="input-create w-full"
-            />
-            <mat-error *ngIf="isControlInvalidAndTouched('url')"> {{ 'SIGN_UP.MERCHANT.URL_ERROR' | translate }}
-            </mat-error>
-        </div>
-    </div>
-
-    <hr class="my-6"/>
-
-    <mat-form-field appearance="outline" class="example-full-width">
-        <label>
-      <textarea
-              matInput
-              placeholder="{{ 'SIGN_UP.MERCHANT.DESCRIPTION' | translate }}"
-              formControlName="description"
-      ></textarea>
+  </div>
+  <div>
+    <div *ngIf="isAdmin">
+      <p class="flex items-center gap-2 mb-0 h-8">
+        <span>Abilita: </span>
+        <label class="switch">
+          <input type="checkbox" formControlName="enabled" />
+          <span class="slider round"></span>
         </label>
-        <mat-error>
-            {{ 'SIGN_UP.MERCHANT.DESCRIPTION_ERROR' | translate }}
-        </mat-error>
-    </mat-form-field>
+        <ng-template #viewIsEnabled>
+          <span *ngIf="form.get('enabled').value; else notEnable">Attivo</span>
+        </ng-template>
+        <ng-template #notEnable>Disattivato</ng-template>
+      </p>
+    </div>
+  </div>
 
-    <p class="description">
-        {{ 'SIGN_UP.MERCHANT.DESCRIPTION_TEXT' | translate }}
-    </p>
+  <!-- OPTIONAL MERCHANT DATA -->
+  <hr class="my-6" />
+  <p
+    class="description"
+    [innerHTML]="'SIGN_UP.MERCHANT.OPTIONAL_TEXT' | translate"
+  ></p>
+  <div class="flex flex-wrap justify-start gap-4">
+    <div class="flex flex-col justify-start gap-2 items-start">
+      <label class="w-52"
+        >{{ "SIGN_UP.MERCHANT.ADDRESS" | translate
+        }}<span class="text-red-600">*</span>:</label
+      >
+      <input
+        type="text"
+        formControlName="address"
+        class="input-create w-96 uppercase"
+        [ngClass]="{ 'invalid-input': isControlInvalidAndTouched('address') }"
+      />
+      <div
+        class="text-red-600 text-xs pl-4"
+        *ngIf="isControlInvalidAndTouched('address')"
+      >
+        {{ "SIGN_UP.MERCHANT.ADDRESS_ERROR" | translate }}
+      </div>
+    </div>
+
+    <div class="flex flex-col justify-start gap-2 items-start">
+      <label class="w-52"
+        >{{ "SIGN_UP.MERCHANT.CAP" | translate
+        }}<span class="text-red-600">*</span>:</label
+      >
+      <input
+        type="text"
+        formControlName="zipCode"
+        class="input-create w-32 uppercase"
+        maxlength="5"
+        [ngClass]="{ 'invalid-input': isControlInvalidAndTouched('zipCode') }"
+      />
+      <mat-hint>{{ form.get("zipCode").value.length }} / 5</mat-hint>
+      <div
+        class="text-red-600 text-xs pl-4"
+        *ngIf="isControlInvalidAndTouched('zipCode')"
+      >
+        {{ "SIGN_UP.MERCHANT.CAP_ERROR" | translate }}
+      </div>
+    </div>
+  </div>
+  <div class="flex flex-wrap justify-start gap-4">
+    <div class="flex flex-col justify-start gap-2 items-start">
+      <label class="w-52"
+        >{{ "SIGN_UP.MERCHANT.CITY" | translate
+        }}<span class="text-red-600">*</span>:</label
+      >
+      <input
+        type="text"
+        formControlName="city"
+        class="input-create w-60"
+        [ngClass]="{ 'invalid-input': isControlInvalidAndTouched('city') }"
+      />
+      <div
+        class="text-red-600 text-xs pl-4"
+        *ngIf="isControlInvalidAndTouched('city')"
+      >
+        Campo obbligatorio
+      </div>
+    </div>
+    <div class="flex flex-col justify-start gap-2 items-start w-80">
+      <label
+        >{{ "SIGN_UP.MERCHANT.SELECT_COUNTRY" | translate
+        }}<span class="text-red-600">*</span>:</label
+      >
+      <mat-select
+        formControlName="country"
+        class="input-create"
+        [ngClass]="{ 'invalid-input': isControlInvalidAndTouched('country') }"
+      >
+        <mat-option
+          #county
+          *ngFor="let country of countryList"
+          [value]="country"
+          >{{ country }}
+        </mat-option>
+      </mat-select>
+    </div>
+  </div>
+
+  <hr class="my-6" />
+  <div class="flex flex-wrap justify-start gap-4">
+    <div class="flex flex-col justify-start gap-2 items-start w-80">
+      <label
+        >{{ "SIGN_UP.MERCHANT.BUSINESS" | translate
+        }}<span class="text-red-600">*</span>:</label
+      >
+      <mat-select
+        formControlName="primaryActivity"
+        class="input-create"
+        [ngClass]="{
+          'invalid-input': isControlInvalidAndTouched('primaryActivity')
+        }"
+      >
+        <mat-option *ngFor="let business of businessList" [value]="business"
+          >{{ business }}
+        </mat-option>
+      </mat-select>
+      <div
+        class="text-red-600 text-xs pl-4"
+        *ngIf="isControlInvalidAndTouched('primaryActivity')"
+      >
+        {{ "SIGN_UP.MERCHANT.BUSINESS_ERROR" | translate }}
+      </div>
+    </div>
+    <div class="flex flex-col justify-start gap-2 items-start w-96">
+      <label
+        [innerHTML]="'SIGN_UP.MERCHANT.OPTIONAL_WEBSITE_TEXT' | translate"
+      ></label>
+      <input
+        type="text"
+        formControlName="url"
+        placeholder="{{ 'SIGN_UP.MERCHANT.WEBSITE' | translate }}"
+        class="input-create w-full"
+      />
+      <mat-error *ngIf="isControlInvalidAndTouched('url')">
+        {{ "SIGN_UP.MERCHANT.URL_ERROR" | translate }}
+      </mat-error>
+    </div>
+  </div>
+
+  <hr class="my-6" />
+
+  <mat-form-field appearance="outline" class="example-full-width">
+    <label>
+      <textarea
+        matInput
+        placeholder="{{ 'SIGN_UP.MERCHANT.DESCRIPTION' | translate }}"
+        formControlName="description"
+      ></textarea>
+    </label>
+    <mat-error>
+      {{ "SIGN_UP.MERCHANT.DESCRIPTION_ERROR" | translate }}
+    </mat-error>
+  </mat-form-field>
+
+  <p class="description">
+    {{ "SIGN_UP.MERCHANT.DESCRIPTION_TEXT" | translate }}
+  </p>
 </form>

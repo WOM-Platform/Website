@@ -42,6 +42,7 @@ export class MerchantDetailComponent implements OnInit, OnDestroy {
   createNewPos = false;
 
   businessList: string[] = primaryActivityType;
+  countryList: string[] = countryList;
 
   subscription: Subscription;
 
@@ -85,7 +86,6 @@ export class MerchantDetailComponent implements OnInit, OnDestroy {
         accessData: this.merchantService.getAccessList(this.merchantId),
         posData: this.merchantService.getMerchantPos(this.merchantId),
       }).subscribe(({ merchantData, accessData, posData }) => {
-        console.log("pos data ", posData);
         this.merchant = merchantData;
         this.id = merchantData.id;
         this.name = merchantData.name;
@@ -136,7 +136,6 @@ export class MerchantDetailComponent implements OnInit, OnDestroy {
     posData.pos = pos;
     posData.isEdit = true;
 
-    console.log("edit pos ");
     const dialogRef = this.matDialog.open(AddPosDialogComponent, {
       data: posData,
     });
@@ -147,14 +146,12 @@ export class MerchantDetailComponent implements OnInit, OnDestroy {
     posData.pos = null;
     posData.isEdit = false;
 
-    console.log("Add pos ");
     const dialogRef = this.matDialog.open(AddPosDialogComponent, {
       data: posData,
     });
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
-        console.log("Result pos ", result);
-        // this.loadData();
+        this.updatePosList();
         let successString;
         if (posData.isEdit) {
           successString = "USER.EDIT_POS.SUCCESS";
@@ -182,14 +179,11 @@ export class MerchantDetailComponent implements OnInit, OnDestroy {
       },
     });
     dialogRef.afterClosed().subscribe((result) => {
-      console.log("Pos ", pos);
-      console.log("Result ", result);
-      // this.merchantService.deleteAccess(this.id, pos.id).subscribe({
-      //   next: () => {
-      //     this.checkAccessCurrentUser(pos.id);
-      //     this.updateAccessList();
-      //   },
-      // });
+      this.posService.delete(pos.id).subscribe({
+        next: () => {
+          this.updatePosList();
+        },
+      });
     });
   }
 
@@ -237,6 +231,12 @@ export class MerchantDetailComponent implements OnInit, OnDestroy {
     this.merchantService
       .getAccessList(this.merchantId)
       .subscribe((res) => (this.accessList = res["users"]));
+  }
+
+  updatePosList() {
+    this.merchantService
+      .getMerchantPos(this.merchantId)
+      .subscribe((res) => (this.posList = res["pos"]));
   }
 
   onUpdateDataAccess(data: any): void {

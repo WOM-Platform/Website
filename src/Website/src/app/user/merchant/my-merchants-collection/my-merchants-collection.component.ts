@@ -92,6 +92,8 @@ export class MyMerchantsCollectionComponent implements OnInit {
     const merchantDialogData = new MerchantDialogData();
     merchantDialogData.data = null;
     merchantDialogData.type = DialogType.create;
+    merchantDialogData.isAdmin = false;
+
     const dialogRef = this.matDialog.open(DialogCreateMerchant, {
       data: merchantDialogData,
     });
@@ -112,7 +114,6 @@ export class MyMerchantsCollectionComponent implements OnInit {
 
   updateMerchantsList() {
     this.userService.me().subscribe((user) => {
-      console.log("I miei merchant ", user);
       this.loadData();
     });
   }
