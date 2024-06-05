@@ -52,11 +52,12 @@ export class SourceService {
         );
     }
 
-    createInstrument(name: string, url: string): Observable<any> {
+    createInstrument(name: string, url: string, aims: AimEditing): Observable<any> {
         return this.http
             .post(`${this.localUrlV1}`, {
                 name: name,
                 url: url,
+                aims: aims
             })
             .pipe(
                 map((res) => res),
@@ -74,7 +75,6 @@ export class SourceService {
     }
 
     update(source: InstrumentEditing): Observable<InstrumentEditing> {
-        console.log("update instrument service ", source);
         return this.http
             .put<InstrumentEditing>(this.localUrlV1 + source.id, {
                 name: source.name,
@@ -83,7 +83,6 @@ export class SourceService {
             })
             .pipe(
                 map(response => {
-                    console.log('Response from update API:', response);
                     return response;
                 })
             );

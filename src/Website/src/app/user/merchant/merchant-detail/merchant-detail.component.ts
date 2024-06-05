@@ -270,4 +270,7 @@ export class MerchantDetailComponent implements OnInit, OnDestroy {
             duration: 5000,
         });
     }
+
+    handleCancellationPos() {
+    }
 }

@@ -181,7 +181,6 @@ export class DialogViewEditInstrumentComponent implements OnInit, OnDestroy {
     }
 
     refreshAccessData(data: any): void {
-        console.log("delete ")
         this.instrumentEditing.access = data || [];
         this.instrumentView.access = data || []
         this.action = "edit";

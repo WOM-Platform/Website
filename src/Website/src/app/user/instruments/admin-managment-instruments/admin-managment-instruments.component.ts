@@ -122,7 +122,7 @@ export class AdminManagmentInstrumentsComponent implements OnInit, OnDestroy {
                 this.cd.markForCheck();
                 this.subscriptions.push(
                     this.sourceService
-                        .createInstrument(result.name, result.url)
+                        .createInstrument(result.name, result.url, result.aims)
                         .subscribe({
                             next: (user) => {
                                 this.processAccess(user, result);
@@ -157,7 +157,6 @@ export class AdminManagmentInstrumentsComponent implements OnInit, OnDestroy {
                     .subscribe({
                         next: () => {
                             result.access.some((element) => element === user);
-                            console.log("All access rights added successfully.");
                         },
                         error: (err) => {
                             console.error("Error adding access rights:", err);
@@ -200,7 +199,6 @@ export class AdminManagmentInstrumentsComponent implements OnInit, OnDestroy {
 
             const data = res.dataInstrument;
 
-            console.log("dati admin ", data)
             const dialogRef = this.matDialog.open(
                 DialogViewEditInstrumentComponent,
                 {
