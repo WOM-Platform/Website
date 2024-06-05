@@ -1,146 +1,146 @@
 <div *ngIf="merchant">
-  <button
-    (click)="goBack()"
-    class="font-bold items-center flex gap-2 mt-6 hover:bg-stone-100 rounded-lg px-2"
-  >
-    <i class="fas fa-arrow-left"></i> Indietro
-  </button>
+    <button
+            (click)="goBack()"
+            class="font-bold items-center flex gap-2 mt-6 hover:bg-stone-100 rounded-lg px-2"
+    >
+        <i class="fas fa-arrow-left"></i> Indietro
+    </button>
 
-  <div *ngIf="merchant" class="bg-white w-[900px] px-4 py-6 my-6 rounded-lg">
-    <p class="text-left">
-      <span class="font-semibold text-cyan-700">{{ name }}</span>
-    </p>
+    <div *ngIf="merchant" class="bg-white w-[900px] px-4 py-6 my-6 rounded-lg">
+        <p class="text-left">
+            <span class="font-semibold text-cyan-700">{{ name }}</span>
+        </p>
 
-    <div class="merchant-data">
-      <p class="merchant-element">
-        <span class="text-slate-600 font-semibold">ID</span>: {{ id }}
-      </p>
-      <p class="merchant-element">
-        <span class="text-slate-600 font-semibold">CF</span>: {{ fiscalCode }}
-      </p>
-    </div>
-    <div>
-      <p class="flex items-center gap-2 mb-0 h-8">
-        <span class="text-slate-600 font-semibold">Abilitato: </span>
-        <label *ngIf="action === 'edit'; else viewIsEnabled" class="switch">
-          <input
-            type="checkbox"
-            [checked]="isEnabled"
-            (click)="onCheckboxClick()"
-          />
-          <span class="slider round"></span>
-        </label>
-        <ng-template #viewIsEnabled>
-          <span *ngIf="isEnabled; else notEnable">Attivo</span>
-        </ng-template>
-        <ng-template #notEnable>Disattivato</ng-template>
-      </p>
-    </div>
-
-    <div class="my-4 merchant-data">
-      <app-editable-element
-        [keyEl]="'Attività primaria'"
-        [valueEl]="primaryActivity"
-        [action]="action"
-        [typeEl]="'list'"
-        [option]="businessList"
-        (onChangeElement)="onUpdateMerchant('primaryActivity', $event)"
-        class="merchant-element"
-      ></app-editable-element>
-      <app-editable-element
-        [keyEl]="'Indirizzo'"
-        [valueEl]="address"
-        [action]="action"
-        [typeEl]="'string'"
-        (onChangeElement)="onUpdateMerchant('address', $event)"
-        class="merchant-element"
-      ></app-editable-element>
-      <app-editable-element
-        [keyEl]="'CAP'"
-        [valueEl]="zipCode"
-        [action]="action"
-        [pattern]="'^[0-9]{5}$'"
-        (onChangeElement)="onUpdateMerchant('zipCode', $event)"
-        class="merchant-element"
-      />
-      <app-editable-element
-        [keyEl]="'Paese'"
-        [valueEl]="country"
-        [action]="action"
-        [typeEl]="'list'"
-        [option]="countryList"
-        (onChangeElement)="onUpdateMerchant('country', $event)"
-        class="merchant-element"
-      ></app-editable-element>
-
-      <!-- <app-editable-element [keyEl]="'WOM generati'" [valueEl]="'1000000'" [action]="action" [typeEl]="string" class="merchant-element" (onChangeElement)="onUpdateMerchant('quantity',$event)"></app-editable-element> -->
-    </div>
-
-    <app-access-list
-      [accessList]="accessList"
-      [action]="action"
-      [showRole]="'true'"
-      (deleteAccess)="onDeleteAccess($event)"
-    />
-    <!-- btn to create access -->
-    <div *ngIf="action === 'edit'">
-      <div *ngIf="!createNewAccess" class="mt-6">
-        <app-user-access-list
-          [isRoleRequired]="true"
-          (accessToAdd)="handleAccessList($event)"
-        ></app-user-access-list>
-      </div>
-    </div>
-
-    <div *ngIf="posList && posList.length > 0" class="mt-6">
-      <p class="font-semibold mb-0">POS:</p>
-      <ul class="access-list">
-        <li *ngFor="let pos of posList" class="">
-          <div class="access-item">
-            <div class="access-details">
-              <div>
-                <span class="text-slate-600 font-semibold">Name</span>:
-                {{ pos.name }}
-              </div>
-              <!-- <div>
-                <span class="text-slate-600 font-semibold">Indirizzo</span>:
-                {{ pos?.address?.formattedAddress || "" }}
-              </div> -->
-            </div>
-            <ng-container *ngIf="action === 'edit'">
-              <button class="text-blue-600" (click)="onEditPos(pos)">
-                <mat-icon class="text-blue-600">edit</mat-icon>
-              </button>
-              <button class="delete-button text-red" (click)="onDeletePos(pos)">
-                <mat-icon class="text-red">delete</mat-icon>
-              </button>
-            </ng-container>
-          </div>
-        </li>
-      </ul>
-    </div>
-    <!-- btn to create access -->
-    <div *ngIf="action === 'edit'">
-      <div *ngIf="!createNewPos" class="mt-6">
-        <div class="">
-          <button
-            *ngIf="!createNewPos"
-            (click)="onAddPos()"
-            class="btn-default"
-          >
-            <mat-icon>add</mat-icon>
-            Aggiungi POS
-          </button>
-          <button
-            *ngIf="createNewPos"
-            (click)="handleCancellationPos()"
-            class="btn-default"
-          >
-            <mat-icon>cancel</mat-icon>
-            Annulla
-          </button>
+        <div class="merchant-data">
+            <p class="merchant-element">
+                <span class="text-slate-600 font-semibold">ID</span>: {{ id }}
+            </p>
+            <p class="merchant-element">
+                <span class="text-slate-600 font-semibold">CF</span>: {{ fiscalCode }}
+            </p>
         </div>
-      </div>
+        <div>
+            <p class="flex items-center gap-2 mb-0 h-8">
+                <span class="text-slate-600 font-semibold">Abilitato: </span>
+                <label *ngIf="action === 'edit'; else viewIsEnabled" class="switch">
+                    <input
+                            type="checkbox"
+                            [checked]="isEnabled"
+                            (click)="onCheckboxClick()"
+                    />
+                    <span class="slider round"></span>
+                </label>
+                <ng-template #viewIsEnabled>
+                    <span *ngIf="isEnabled; else notEnable">Attivo</span>
+                </ng-template>
+                <ng-template #notEnable>Disattivato</ng-template>
+            </p>
+        </div>
+
+        <div class="my-4 merchant-data">
+            <app-editable-element
+                    [keyEl]="'Attività primaria'"
+                    [valueEl]="merchant.primaryActivity"
+                    [action]="action"
+                    [typeEl]="'list'"
+                    [option]="businessList"
+                    (onChangeElement)="onUpdateMerchant('primaryActivity', $event)"
+                    class="merchant-element"
+            ></app-editable-element>
+            <app-editable-element
+                    [keyEl]="'Indirizzo'"
+                    [valueEl]="merchant.address"
+                    [action]="action"
+                    [typeEl]="'string'"
+                    (onChangeElement)="onUpdateMerchant('address', $event)"
+                    class="merchant-element"
+            ></app-editable-element>
+            <app-editable-element
+                    [keyEl]="'CAP'"
+                    [valueEl]="merchant.zipCode"
+                    [action]="action"
+                    [pattern]="'^[0-9]{5}$'"
+                    (onChangeElement)="onUpdateMerchant('zipCode', $event)"
+                    class="merchant-element"
+            />
+            <app-editable-element
+                    [keyEl]="'Paese'"
+                    [valueEl]="merchant.country"
+                    [action]="action"
+                    [typeEl]="'list'"
+                    [option]="countryList"
+                    (onChangeElement)="onUpdateMerchant('country', $event)"
+                    class="merchant-element"
+            ></app-editable-element>
+
+            <!-- <app-editable-element [keyEl]="'WOM generati'" [valueEl]="'1000000'" [action]="action" [typeEl]="string" class="merchant-element" (onChangeElement)="onUpdateMerchant('quantity',$event)"></app-editable-element> -->
+        </div>
+
+        <app-access-list
+                [accessList]="accessList"
+                [action]="action"
+                [showRole]="true"
+                (deleteAccess)="onDeleteAccess($event)"
+        />
+        <!-- btn to create access -->
+        <div *ngIf="action === 'edit'">
+            <div *ngIf="!createNewAccess" class="mt-6">
+                <app-user-access-list
+                        [isRoleRequired]="true"
+                        (accessToAdd)="handleAccessList($event)"
+                ></app-user-access-list>
+            </div>
+        </div>
+
+        <div *ngIf="posList && posList.length > 0" class="mt-6">
+            <p class="font-semibold mb-0">POS:</p>
+            <ul class="access-list">
+                <li *ngFor="let pos of posList" class="">
+                    <div class="access-item">
+                        <div class="access-details">
+                            <div>
+                                <span class="text-slate-600 font-semibold">Name</span>:
+                                {{ pos.name }}
+                            </div>
+                            <!-- <div>
+                              <span class="text-slate-600 font-semibold">Indirizzo</span>:
+                              {{ pos?.address?.formattedAddress || "" }}
+                            </div> -->
+                        </div>
+                        <ng-container *ngIf="action === 'edit'">
+                            <button class="text-blue-600" (click)="onEditPos(pos)">
+                                <mat-icon class="text-blue-600">edit</mat-icon>
+                            </button>
+                            <button class="delete-button text-red" (click)="onDeletePos(pos)">
+                                <mat-icon class="text-red">delete</mat-icon>
+                            </button>
+                        </ng-container>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <!-- btn to create access -->
+        <div *ngIf="action === 'edit'">
+            <div *ngIf="!createNewPos" class="mt-6">
+                <div class="">
+                    <button
+                            *ngIf="!createNewPos"
+                            (click)="onAddPos()"
+                            class="btn-default"
+                    >
+                        <mat-icon>add</mat-icon>
+                        Aggiungi POS
+                    </button>
+                    <button
+                            *ngIf="createNewPos"
+                            (click)="handleCancellationPos()"
+                            class="btn-default"
+                    >
+                        <mat-icon>cancel</mat-icon>
+                        Annulla
+                    </button>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
 </div>

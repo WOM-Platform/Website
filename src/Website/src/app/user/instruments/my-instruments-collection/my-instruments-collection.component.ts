@@ -7,10 +7,11 @@ import {
 } from "@angular/animations";
 import {ChangeDetectorRef, Component, OnInit} from "@angular/core";
 import {Aim} from "src/app/_models";
-import {Instrument, UIInstrument} from "src/app/_models/instrument";
+import {Instrument, InstrumentEditing, UIInstrument} from "src/app/_models/instrument";
 import {AimsService, UserService} from "src/app/_services";
 import {SourceService} from "src/app/_services/source.service";
 import {StorageService} from "src/app/_services/storage.service";
+import {Subscription} from "rxjs";
 
 @Component({
     selector: "app-my-instruments-collection",
@@ -40,8 +41,10 @@ import {StorageService} from "src/app/_services/storage.service";
 })
 export class MyInstrumentsCollectionComponent implements OnInit {
     username: string;
-    instruments: UIInstrument[];
+    instruments: InstrumentEditing[];
     currentUser: any;
+    instrumentsView: Instrument[] = []
+    private subscriptions: Subscription[] = [];
 
     constructor(
         private aimsService: AimsService,
@@ -55,8 +58,15 @@ export class MyInstrumentsCollectionComponent implements OnInit {
     ngOnInit() {
         this.userService.userOwnershipStatus.subscribe({
             next: (res) => {
-                this.instruments = res["sources"];
-            },
+                if (res && res["sources"]) {
+                    this.instruments = res["sources"];
+                    console.log("Instininin ", res)
+                    console.log("Instininin ", this.instruments)
+                    this.instruments.map((instrument) => {
+                        this.loadAims(instrument)
+                    })
+                }
+            }
         });
 
         this.username =
@@ -66,23 +76,36 @@ export class MyInstrumentsCollectionComponent implements OnInit {
         this.loadData();
 
         // save access list on the object
-        this.getAccessList(this.instruments);
+        /*this.getAccessList(this.instruments);*/
+    }
 
-        this.instruments.map((instrument) => {
-            const aimsLetter = instrument["aims"]["enabled"];
-            if (aimsLetter) {
-                this.aimsService.getAll().subscribe((aimsList) => {
-                    const matchingAims = this.aimsService.findMatchingCodes(aimsList, aimsLetter);
-                    instrument["aims"] = matchingAims;
-                });
-            }
-        });
+
+    loadAims(instrument: InstrumentEditing) {
+        const {id, url, name, access} = instrument;
+        console.log(instrument)
+        this.subscriptions.push(
+            this.aimsService.getAll().subscribe((aimList: Aim[]) => {
+                const matchingAims: Aim[] = this.aimsService.findMatchingCodes(aimList, instrument.aims.enabled);
+
+                const transformedInstrument: Instrument = {
+                    id,
+                    url,
+                    name,
+                    aims: matchingAims,
+                    access
+                };
+                this.instrumentsView.push(transformedInstrument);
+                console.log("Mathin ", matchingAims)
+                this.cd.detectChanges();
+            }))
+
     }
 
     loadData(): any {
         this.instruments = this.storageService
             .load("instrumentData")
             .map((instrument: Instrument, index: number) => ({
+
                 ...instrument,
                 isOpen: index === 0,
             }));
@@ -103,14 +126,15 @@ export class MyInstrumentsCollectionComponent implements OnInit {
 
     // to update instrument field like name, url and aims
     onUpdateSourceField(
-        instrument: Instrument,
+        instrument: InstrumentEditing,
         data: { key: string; value: any; isTableToUpdate: boolean }
     ) {
         const {key, value, isTableToUpdate} = data;
         const updatedInstrument = {...instrument};
 
         updatedInstrument[key] = value;
-        updatedInstrument.aims = [];
+        /*TO FIXXXXXXX */
+        /*updatedInstrument.aims = [];*/
         this.sourceService.update(updatedInstrument).subscribe({
             next: () => {
                 // if (isTableToUpdate) this.updatedField.emit(key);

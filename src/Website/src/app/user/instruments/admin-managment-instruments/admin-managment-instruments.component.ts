@@ -185,6 +185,10 @@ export class AdminManagmentInstrumentsComponent implements OnInit, OnDestroy {
         // this.subscriptions.push(viewSub);
     }
 
+    onEditSource(user: any) {
+        this.openDialogViewEdit(user, "edit");
+    }
+
     openDialogViewEdit(user, action: string) {
         this.loadingService.show();
 
@@ -195,48 +199,39 @@ export class AdminManagmentInstrumentsComponent implements OnInit, OnDestroy {
             this.loadingService.hide();
 
             const data = res.dataInstrument;
-            const aimsLetter = data["aims"]["enabled"];
 
-            this.subscriptions.push(
-                this.aimsService.getAll().subscribe((aimList) => {
-                    const matchingAims = this.aimsService.findMatchingCodes(aimList, aimsLetter);
-                    const dialogRef = this.matDialog.open(
-                        DialogViewEditInstrumentComponent,
-                        {
-                            width: "900px",
-                            panelClass: "overflow-y-auto",
-                            data: {
-                                id: data.id,
-                                name: data.name,
-                                url: data.url,
-                                access: res.accessInstrument["users"],
-                                aims: matchingAims,
-                                action: action,
-                            },
-                        }
-                    );
+            console.log("dati admin ", data)
+            const dialogRef = this.matDialog.open(
+                DialogViewEditInstrumentComponent,
+                {
+                    width: "900px",
+                    panelClass: "overflow-y-auto",
+                    data: {
+                        id: data.id,
+                        name: data.name,
+                        url: data.url,
+                        access: res.accessInstrument["users"],
+                        aims: data.aims,
+                        action: action,
+                    },
+                }
+            );
 
-                    dialogRef.componentInstance.updatedField.subscribe((field) => {
-                        this.tableToUpdate = true;
+            dialogRef.componentInstance.updatedField.subscribe((field) => {
+                this.tableToUpdate = true;
 
+                dialogRef.afterClosed().subscribe((res) => {
+                    if (this.tableToUpdate) {
+                        this.storageService.clearCache("instrumentsList");
+                        this.getSourcesList();
+                        this.tableToUpdate = false;
+                    }
+                    this.loadingService.hide();
+                    this.cd.markForCheck();
+                });
+            })
 
-                        dialogRef.afterClosed().subscribe((res) => {
-                            if (this.tableToUpdate) {
-                                this.storageService.clearCache("instrumentsList");
-                                this.getSourcesList();
-                                this.tableToUpdate = false;
-                            }
-                            this.loadingService.hide();
-                            this.cd.markForCheck();
-                        });
-                    })
-                })
-            )
         });
-    }
-
-    onEditSource(user: any) {
-        this.openDialogViewEdit(user, "edit");
     }
 
     onDeleteSource(userToDelete: any) {

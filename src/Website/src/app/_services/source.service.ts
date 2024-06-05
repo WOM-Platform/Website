@@ -41,11 +41,13 @@ export class SourceService {
         );
     }
 
-    getInstrument(idInstrument): Observable<any> {
+    getInstrument(idInstrument: string): Observable<Instrument> {
         const url = `${this.localUrlV1}${idInstrument}/details`;
-        return this.http.get(url).pipe(
-            map((res) => {
-                return res;
+        return this.http.get<Instrument>(url).pipe(
+            map((res: Instrument) => res),
+            catchError((error) => {
+                console.error('Error in getInstrument:', error);
+                return throwError(error);
             })
         );
     }
@@ -71,21 +73,20 @@ export class SourceService {
             .pipe(map((res) => res));
     }
 
-    update(source: Instrument): Observable<any> {
-        /* const aims: AimEditing = {
-             enabled: [],
-             enableAll: false,
-         };*/
-
-        /*aims.enabled = source.aims.map((aim: Aim) => aim.code);*/
-
+    update(source: InstrumentEditing): Observable<InstrumentEditing> {
+        console.log("update instrument service ", source);
         return this.http
             .put<InstrumentEditing>(this.localUrlV1 + source.id, {
                 name: source.name,
                 url: source.url,
-                aims: source.aims,
+                aims: source.aims
             })
-            .pipe(map((response) => response));
+            .pipe(
+                map(response => {
+                    console.log('Response from update API:', response);
+                    return response;
+                })
+            );
     }
 
     getInstrumentAccessList(idInstrument) {
