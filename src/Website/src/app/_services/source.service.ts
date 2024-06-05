@@ -4,7 +4,7 @@ import {catchError, concatMap, delay, map} from "rxjs/operators";
 import {HttpClient, HttpParams} from "@angular/common/http";
 import {from, Observable, of, throwError} from "rxjs";
 import {Aim, AimEditing} from "../_models";
-import {Instrument, InstrumentEditing} from "../_models/instrument";
+import {Instrument, InstrumentEditing, UIInstrument} from "../_models/instrument";
 
 @Injectable({
     providedIn: "root",
