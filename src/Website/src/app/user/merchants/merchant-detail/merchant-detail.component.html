@@ -7,11 +7,16 @@
     </button>
 
     <div *ngIf="merchant" class="bg-white w-[900px] px-4 py-6 my-6 rounded-lg">
-        <p class="text-left">
-            <span class="font-semibold text-cyan-700">{{ name }}</span>
-        </p>
+        <app-editable-element
+                [valueEl]="merchant.name"
+                [action]="action"
+                [minLength]="8"
+                [maxLength]="100"
+                (onChangeElement)="onUpdateMerchant('name', $event, true)"
+                class="font-semibold text-cyan-700"
+        />
 
-        <div class="merchant-data">
+        <div class="merchant-data my-4">
             <p class="merchant-element">
                 <span class="text-slate-600 font-semibold">ID</span>: {{ id }}
             </p>
@@ -44,7 +49,7 @@
                     [action]="action"
                     [typeEl]="'list'"
                     [option]="businessList"
-                    (onChangeElement)="onUpdateMerchant('primaryActivity', $event)"
+                    (onChangeElement)="onUpdateMerchant('primaryActivity', $event, true)"
                     class="merchant-element"
             ></app-editable-element>
             <app-editable-element
@@ -52,7 +57,7 @@
                     [valueEl]="merchant.address"
                     [action]="action"
                     [typeEl]="'string'"
-                    (onChangeElement)="onUpdateMerchant('address', $event)"
+                    (onChangeElement)="onUpdateMerchant('address', $event, false)"
                     class="merchant-element"
             ></app-editable-element>
             <app-editable-element
@@ -60,7 +65,7 @@
                     [valueEl]="merchant.zipCode"
                     [action]="action"
                     [pattern]="'^[0-9]{5}$'"
-                    (onChangeElement)="onUpdateMerchant('zipCode', $event)"
+                    (onChangeElement)="onUpdateMerchant('zipCode', $event, false)"
                     class="merchant-element"
             />
             <app-editable-element
@@ -69,7 +74,7 @@
                     [action]="action"
                     [typeEl]="'list'"
                     [option]="countryList"
-                    (onChangeElement)="onUpdateMerchant('country', $event)"
+                    (onChangeElement)="onUpdateMerchant('country', $event, false)"
                     class="merchant-element"
             ></app-editable-element>
 

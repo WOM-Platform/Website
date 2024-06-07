@@ -68,16 +68,16 @@ export class DialogCreateMerchant implements OnInit {
         this.merchantService
             .update(merchant)
             .pipe(first())
-            .subscribe(
-                (result) => {
+            .subscribe({
+                next: (result) => {
                     this.dialogRef.close(true);
                     this.storageService.clear(this.storageService.merchantFormKey);
                 },
-                (error) => {
+                error: (error) => {
                     this.formApiError = true;
                     console.error(error);
                 }
-            );
+            });
     }
 
     createMerchantDataStruct(): Merchant {

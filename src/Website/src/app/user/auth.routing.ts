@@ -4,7 +4,7 @@ import {AuthGuard} from "../_helpers/auth.guard";
 import {ManageGuard} from "../_helpers/manage.guard";
 import {ManageComponent} from "../manage/manage/manage.component";
 import {UserHomeComponent} from "./home/user-home.component";
-import {UserMerchantsComponent} from "./merchant/user-merchants.component";
+import {UserMerchantsComponent} from "./merchants/user-merchants.component";
 import {UserNotVerifiedComponent} from "./not-verified/user-not-verified.component";
 import {UserVerifyComponent} from "./verify/user-verify.component";
 import {MerchantStatsComponent} from "./stats/merchant/merchant-stats.component";
@@ -14,7 +14,7 @@ import {UserComponent} from "./user.component";
 import {UserInstrumentsComponent} from "./instruments/user-instruments.component";
 import {UserAimsComponent} from "./aims/user-aims.component";
 import {UserUsersComponent} from "./users/user-users.component";
-import {MerchantDetailComponent} from "./merchant/merchant-detail/merchant-detail.component";
+import {MerchantDetailComponent} from "./merchants/merchant-detail/merchant-detail.component";
 
 const routes: Routes = [
     {

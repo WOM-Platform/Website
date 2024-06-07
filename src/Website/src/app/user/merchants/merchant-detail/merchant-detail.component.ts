@@ -50,16 +50,6 @@ export class MerchantDetailComponent implements OnInit, OnDestroy {
 
     merchant: Merchant = new Merchant();
 
-    isEditing = {
-        fiscalCode: false,
-        primaryActivity: false,
-        address: false,
-        zipCode: false,
-        country: false,
-    };
-
-    primaryActivityOptions: string[] = primaryActivityType;
-
     subscriptions = new Subscription();
 
     constructor(
@@ -129,6 +119,40 @@ export class MerchantDetailComponent implements OnInit, OnDestroy {
                     console.error("Error adding new instrument access:", err),
             });
         this.subscriptions.add(addAccessSub);
+    }
+
+    onUpdateMerchant(key: string, value: any, isTableToUpdate: boolean) {
+        const updatedMerchant = {...this.merchant};
+
+        updatedMerchant[key] = value;
+
+        this.merchantService
+            .update(updatedMerchant)
+            .subscribe({
+                next: () => {
+                    this.userService
+                        .me()
+                        .subscribe({
+                            next: (res) => {
+                                this.userService.updateUserOwnership(res)
+                                this.merchant = updatedMerchant
+                            },
+                            error: (err) => {
+                                console.error(err)
+
+                                let ref = this.snackBar.open("Errore durante l'aggiornamento dei dati", 'close', {duration: 5000});
+                                ref.afterDismissed().subscribe(res => {
+                                })
+                            }
+                        })
+                }, error: (err) => {
+                    console.error(err)
+
+                    let ref = this.snackBar.open("Errore durante la modifica", 'close', {duration: 5000});
+                    ref.afterDismissed().subscribe(res => {
+                    })
+                }
+            })
     }
 
     onEditPos(pos: Pos) {
@@ -212,25 +236,9 @@ export class MerchantDetailComponent implements OnInit, OnDestroy {
 
     onCheckboxClick(): void {
         this.isEnabled = !this.isEnabled;
-        this.onUpdateMerchant("enabled", this.isEnabled);
+        this.onUpdateMerchant("enabled", this.isEnabled, false);
     }
 
-    onUpdateMerchant(key: string, value: any) {
-        const updatedMerchant = {...this.merchant};
-
-        updatedMerchant[key] = value;
-
-        this.merchantService
-            .update(updatedMerchant)
-            .subscribe(() =>
-                this.userService
-                    .me()
-                    .subscribe((res) => {
-                        this.userService.updateUserOwnership(res)
-                        this.merchant = updatedMerchant
-                    })
-            );
-    }
 
     updateAccessList() {
         this.merchantService
