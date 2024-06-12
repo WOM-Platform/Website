@@ -37,6 +37,12 @@ import {Subscription} from "rxjs";
             ),
             transition("open <=> closed", [animate("300ms ease-in-out")]),
         ]),
+        trigger("rotateArrow", [
+            state("open", style({transform: 'rotate(180deg)'})),
+            state("close", style({transform: 'rotate(0deg)'})
+            ),
+            transition('open <=> closed', [animate("300ms ease-in-out")])
+        ])
     ],
 })
 export class MyInstrumentsCollectionComponent implements OnInit, OnDestroy {

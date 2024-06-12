@@ -10,6 +10,10 @@
                     [data]="instrument"
                     (updateInstrument)="updateInstrumentField(findEditingInstrumentById(instrument.id), $event)"
             ></app-expandable-card>
+            <div class="flex justify-end">
+                <i class="fa-solid fa-arrow-down p-4 rounded-full bg-blue-400 text-white font-semibold flex items-center justify-center"
+                   style="width: 40px; height: 40px;" [@rotateArrow]="instrument.isOpen ? 'open' : 'closed'"></i>
+            </div>
             <div [@slideToggle]="instrument.isOpen ? 'open' : 'closed'">
                 <app-aims-list [aimList]="instrument.aims"></app-aims-list>
                 <div *ngIf="instrument.access && instrument.access.length > 0" class="mt-10">
