@@ -25,13 +25,16 @@
                 </td>
                 <td *ngIf="isActions">
                     <div class="action-cell">
-                        <button class="icon-button-bg hover:bg-slate-300" (click)="onViewItem(item)">
+                        <button *ngIf="viewItem.observers.length > 0" class="icon-button-bg hover:bg-slate-300"
+                                (click)="onViewItem(item)">
                             <mat-icon>visibility</mat-icon>
                         </button>
-                        <button class="icon-button-bg hover:bg-blue-200" (click)="onEditItem(item)">
+                        <button *ngIf="editItem.observers.length > 0" class="icon-button-bg hover:bg-blue-200"
+                                (click)="onEditItem(item)">
                             <mat-icon class="text-blue-500">edit</mat-icon>
                         </button>
-                        <button class="icon-button-bg hover:bg-red-200" (click)="onDeleteItem(item)">
+                        <button *ngIf="deleteItem.observers.length > 0" class="icon-button-bg hover:bg-red-200"
+                                (click)="onDeleteItem(item)">
                             <mat-icon class="text-red-500">delete</mat-icon>
                         </button>
                     </div>
