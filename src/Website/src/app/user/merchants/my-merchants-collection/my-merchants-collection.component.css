@@ -1,0 +1,7 @@
+.merchant-data {
+    @apply flex justify-between flex-wrap
+}
+
+.merchant-element {
+    @apply mb-0 w-1/2
+}
