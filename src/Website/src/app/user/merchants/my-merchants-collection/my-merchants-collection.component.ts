@@ -1,11 +1,7 @@
 import {ChangeDetectorRef, Component, OnInit} from "@angular/core";
-import {countryList, Merchant, Merchants, Pos, primaryActivityType, UIMerchant} from "src/app/_models";
+import {countryList, Merchant, primaryActivityType, UIMerchant} from "src/app/_models";
 import {StorageService} from "src/app/_services/storage.service";
-import {
-    AddPosDialogComponent,
-    PosDialogData,
-} from "../dialog-create-pos/add-pos.component";
-import {Subscription, first, forkJoin} from "rxjs";
+import {Subscription, first} from "rxjs";
 import {DialogType} from "src/app/_models/dialogType";
 import {EmailData} from "src/app/_models/emailData";
 import {DialogConfirmCancelComponent} from "src/app/components/dialog-confirm-cancel/dialog-confirm-cancel";
@@ -46,6 +42,12 @@ import {animate, state, style, transition, trigger} from "@angular/animations";
             ),
             transition("open <=> closed", [animate("300ms ease-in-out")]),
         ]),
+        trigger("rotateArrow", [
+            state("open", style({transform: 'rotate(180deg)'})),
+            state("close", style({transform: 'rotate(0deg)'})
+            ),
+            transition('open <=> closed', [animate("300ms ease-in-out")])
+        ])
     ],
 })
 export class MyMerchantsCollectionComponent implements OnInit {
@@ -97,11 +99,52 @@ export class MyMerchantsCollectionComponent implements OnInit {
         );
     }
 
-    addMerchant(): any {
+    onCreateMerchant() {
+        const merchantDialogData = new MerchantDialogData();
+
+        merchantDialogData.data = null;
+        merchantDialogData.type = DialogType.create;
+        merchantDialogData.isAdmin = false;
+
+        const dialogRef = this.matDialog.open(DialogCreateMerchant, {
+            data: merchantDialogData,
+        });
+        dialogRef.afterClosed().subscribe((merchant) => {
+            if (merchant) {
+                this.merchantService
+                    .register(merchant)
+                    .pipe(first())
+                    .subscribe({
+                            next: (result: Merchant) => {
+                                if (result) {
+                                    this.merchantService.addAccess(result.id, this.userService.currentUserValue.id)
+                                    this.loadData();
+                                    this.translate
+                                        .get("USER.ADD_MERCHANT.SUCCESS")
+                                        .pipe(first())
+                                        .subscribe((response) => {
+                                            this.openSnackBar(response);
+                                        });
+                                    this.storageService.clear(this.storageService.merchantFormKey);
+                                    this.updateMerchantsList();
+                                }
+                            },
+                            error: (error) => {
+
+                                console.error(error);
+                            }
+                        }
+                    );
+            }
+        });
+    }
+
+    /*addMerchant(): any {
         const merchantDialogData = new MerchantDialogData();
         merchantDialogData.data = null;
         merchantDialogData.type = DialogType.create;
         merchantDialogData.isAdmin = false;
+        merchantDialogData.accessToAdd
 
         const dialogRef = this.matDialog.open(DialogCreateMerchant, {
             data: merchantDialogData,
@@ -119,10 +162,10 @@ export class MyMerchantsCollectionComponent implements OnInit {
                 this.updateMerchantsList();
             }
         });
-    }
+    }*/
 
     updateMerchantsList() {
-        this.userService.me().subscribe((user) => {
+        this.userService.me().subscribe(() => {
             this.loadData();
         });
     }
@@ -134,7 +177,7 @@ export class MyMerchantsCollectionComponent implements OnInit {
         const accessListSub = this.merchantService
             .getAccessList(merchant.id)
             .subscribe({
-                next: (res) => {
+                next: () => {
                     const dialogRef = this.matDialog.open(DialogCreateMerchant, {
                         data: merchantDialogData,
                     });
@@ -153,7 +196,7 @@ export class MyMerchantsCollectionComponent implements OnInit {
             });
     }
 
-    onUpdateMerchant(index: number, key: string, value: any, isTableToUpdate: boolean) {
+    onUpdateMerchant(index: number, key: string, value: any) {
         const updatedMerchant = this.merchants[index];
 
         updatedMerchant[key] = value;

@@ -5,7 +5,7 @@ import {
     OnInit,
     Output,
 } from "@angular/core";
-import {Merchant} from "../../../_models";
+import {Merchant, User} from "../../../_models";
 import {first} from "rxjs/operators";
 import {UntypedFormGroup} from "@angular/forms";
 import {MerchantService} from "../../../_services";
