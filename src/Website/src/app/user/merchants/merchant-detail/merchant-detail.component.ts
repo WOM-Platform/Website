@@ -20,6 +20,7 @@ import {
 } from "../dialog-create-pos/add-pos.component";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {TranslateService} from "@ngx-translate/core";
+import {animate, state, style, transition, trigger} from "@angular/animations";
 
 @Component({
     selector: "app-merchant-detail",
@@ -250,18 +251,6 @@ export class MerchantDetailComponent implements OnInit, OnDestroy {
         this.merchantService
             .getMerchantPos(this.merchantId)
             .subscribe((res) => (this.posList = res["pos"]));
-    }
-
-    onUpdateDataAccess(data: any): void {
-        this.accessList = data || [];
-        this.action = "edit";
-        this.cd.markForCheck();
-    }
-
-    onUpdateDataPos(data: any): void {
-        this.posList = data || [];
-        this.action = "edit";
-        this.cd.markForCheck();
     }
 
     checkAccessCurrentUser(idAccess: string) {

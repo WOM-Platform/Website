@@ -1,4 +1,5 @@
 import {Pos} from './pos';
+import {Access} from "./instrument";
 
 export class Merchant {
     id: string;
@@ -7,14 +8,16 @@ export class Merchant {
     primaryActivity: string;
     address: string;
     addressDetails: AddressDetails;
+    pos: Pos[];
     access: string;
+    accessList: Access[];
     zipCode: string;
     city: string;
     country: string;
     description: string;
     url: string;
     enabled: boolean;
-    
+
 
     public static fromJson(json): any {
         if (json === null) {
@@ -22,6 +25,10 @@ export class Merchant {
         }
         return Object.assign(new Merchant(), json);
     }
+}
+
+export interface UIMerchant extends Merchant {
+    isOpen: boolean
 }
 
 export class AddressDetails {

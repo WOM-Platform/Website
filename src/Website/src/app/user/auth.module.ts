@@ -43,6 +43,7 @@ import {EditableElementComponent} from "./components/editable-element/editable-e
 import {DialogCreateSourceComponent} from "./instruments/dialog-create-instrument/dialog-create-instrument.component";
 import {AccessListComponent} from "./components/access-list/access-list.component";
 import {AimsListComponent} from "./components/aims-list/aims-list.component";
+import {UserPosListComponent} from "./merchants/user-pos-list/user-pos-list.component";
 
 @NgModule({
     declarations: [
@@ -84,6 +85,7 @@ import {AimsListComponent} from "./components/aims-list/aims-list.component";
         SearchSourceComponent,
         MerchantsAdminComponent,
         FiltersComponent,
+        UserPosListComponent,
     ],
 })
 export class AuthModule {

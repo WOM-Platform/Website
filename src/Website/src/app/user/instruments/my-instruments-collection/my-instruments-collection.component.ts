@@ -44,7 +44,7 @@ export class MyInstrumentsCollectionComponent implements OnInit, OnDestroy {
     editingInstruments: InstrumentEditing[] = [];
     uiInstruments: UIInstrument[] = [];
     currentUser: any;
-    viewInstruments: Instrument[] = [];
+
     private subscriptions: Subscription[] = [];
 
     constructor(

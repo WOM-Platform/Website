@@ -77,16 +77,29 @@
                     (onChangeElement)="onUpdateMerchant('country', $event, false)"
                     class="merchant-element"
             ></app-editable-element>
-
+            <app-editable-element
+                    [keyEl]="'URL'"
+                    [valueEl]="merchant.url"
+                    [action]="action"
+                    [pattern]="
+          '^(https?:\\/\\/)?([\\da-z\\.-]+)\\.([a-z\\.]+)(:[0-9]{1,5})?(\\/[^\\s]*)?$'
+        "
+                    [minLength]="10"
+                    [maxLength]="100"
+                    (onChangeElement)="onUpdateMerchant('url', $event, false)"
+                    class="merchant-element"
+            />
             <!-- <app-editable-element [keyEl]="'WOM generati'" [valueEl]="'1000000'" [action]="action" [typeEl]="string" class="merchant-element" (onChangeElement)="onUpdateMerchant('quantity',$event)"></app-editable-element> -->
         </div>
-
-        <app-access-list
-                [accessList]="accessList"
-                [action]="action"
-                [showRole]="true"
-                (deleteAccess)="onDeleteAccess($event)"
-        />
+        <div *ngIf="accessList && accessList.length > 0">
+            <p class="font-semibold mb-0">Gestori:</p>
+            <app-access-list
+                    [accessList]="accessList"
+                    [action]="action"
+                    [showRole]="true"
+                    (deleteAccess)="onDeleteAccess($event)"
+            />
+        </div>
         <!-- btn to create access -->
         <div *ngIf="action === 'edit'">
             <div *ngIf="!createNewAccess" class="mt-6">
@@ -96,34 +109,7 @@
                 ></app-user-access-list>
             </div>
         </div>
-
-        <div *ngIf="posList && posList.length > 0" class="mt-6">
-            <p class="font-semibold mb-0">POS:</p>
-            <ul class="access-list">
-                <li *ngFor="let pos of posList" class="">
-                    <div class="access-item">
-                        <div class="access-details">
-                            <div>
-                                <span class="text-slate-600 font-semibold">Name</span>:
-                                {{ pos.name }}
-                            </div>
-                            <!-- <div>
-                              <span class="text-slate-600 font-semibold">Indirizzo</span>:
-                              {{ pos?.address?.formattedAddress || "" }}
-                            </div> -->
-                        </div>
-                        <ng-container *ngIf="action === 'edit'">
-                            <button class="text-blue-600" (click)="onEditPos(pos)">
-                                <mat-icon class="text-blue-600">edit</mat-icon>
-                            </button>
-                            <button class="delete-button text-red" (click)="onDeletePos(pos)">
-                                <mat-icon class="text-red">delete</mat-icon>
-                            </button>
-                        </ng-container>
-                    </div>
-                </li>
-            </ul>
-        </div>
+        <app-user-pos-list [merchantId]="merchantId" [posList]="posList" [action]="action"/>
         <!-- btn to create access -->
         <div *ngIf="action === 'edit'">
             <div *ngIf="!createNewPos" class="mt-6">
