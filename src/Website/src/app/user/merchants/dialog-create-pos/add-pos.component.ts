@@ -62,7 +62,7 @@ export class AddPosDialogComponent {
             .update(this.data.pos)
             .pipe(first())
             .subscribe({
-                next: (result) => {
+                next: () => {
                     this.dialogRef.close(true);
                     this.storageService.clear(this.storageService.posFormKey);
                 },
@@ -89,7 +89,7 @@ export class AddPosDialogComponent {
             .register(pos)
             .pipe(first())
             .subscribe({
-                    next: (result) => {
+                    next: () => {
                         this.dialogRef.close(true);
                         this.storageService.clear(this.storageService.posFormKey);
                     },

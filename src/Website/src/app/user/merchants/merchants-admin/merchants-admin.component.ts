@@ -12,12 +12,12 @@ import {
 } from "../dialog-create-merchant/dialog-create-merchant.component";
 import {DialogType} from "../../../_models/dialogType";
 import {catchError, first} from "rxjs/operators";
-import {MatDialog, MatDialogRef} from "@angular/material/dialog";
+import {MatDialog} from "@angular/material/dialog";
 import {AdminTableComponent} from "../../components/admin-table/admin-table.component";
 import {NgIf} from "@angular/common";
 import {SharedModule} from "../../../shared/shared.module";
 import {Merchant} from "../../../_models";
-import {MerchantService, PosService, UserService} from "../../../_services";
+import {MerchantService, UserService} from "../../../_services";
 import {StorageService} from "../../../_services/storage.service";
 import {FiltersComponent} from "../../components/filters/filters.component";
 import {finalize, of, Subscription} from "rxjs";
@@ -136,7 +136,7 @@ export class MerchantsAdminComponent implements OnInit {
 
     updateMerchantsList() {
         this.storageService.clearCache("merchantsList");
-        this.userService.me().subscribe((user) => {
+        this.userService.me().subscribe(() => {
             this.getMerchantsList();
         });
     }
@@ -157,7 +157,7 @@ export class MerchantsAdminComponent implements OnInit {
                     .register(merchant)
                     .pipe(first())
                     .subscribe({
-                            next: (result) => {
+                            next: () => {
                                 this.storageService.clear(this.storageService.merchantFormKey);
                             },
                             error: (error) => {
@@ -197,7 +197,7 @@ export class MerchantsAdminComponent implements OnInit {
             if (result) {
                 const delSub = this.merchantService
                     .deleteMerchant(merchant.id)
-                    .subscribe((res) => {
+                    .subscribe(() => {
                         this.updateMerchantsList();
                     });
                 this.subscriptions.add(delSub);

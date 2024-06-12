@@ -32,7 +32,7 @@ export class UserPosListComponent {
         posData.pos = pos;
         posData.isEdit = true;
 
-        const dialogRef = this.matDialog.open(AddPosDialogComponent, {
+        this.matDialog.open(AddPosDialogComponent, {
             data: posData,
         });
     }
@@ -75,7 +75,7 @@ export class UserPosListComponent {
                 cancel: "Annulla",
             },
         });
-        dialogRef.afterClosed().subscribe((result) => {
+        dialogRef.afterClosed().subscribe(() => {
             this.posService.delete(pos.id).subscribe({
                 next: () => {
                     this.updatePosList();

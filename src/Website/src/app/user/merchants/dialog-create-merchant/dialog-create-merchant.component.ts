@@ -3,9 +3,8 @@ import {
     Component,
     Inject,
     OnInit,
-    Output,
 } from "@angular/core";
-import {Merchant, User} from "../../../_models";
+import {Merchant} from "../../../_models";
 import {first} from "rxjs/operators";
 import {UntypedFormGroup} from "@angular/forms";
 import {MerchantService} from "../../../_services";
@@ -69,7 +68,7 @@ export class DialogCreateMerchant implements OnInit {
             .update(merchant)
             .pipe(first())
             .subscribe({
-                next: (result) => {
+                next: () => {
                     this.dialogRef.close(true);
                     this.storageService.clear(this.storageService.merchantFormKey);
                 },

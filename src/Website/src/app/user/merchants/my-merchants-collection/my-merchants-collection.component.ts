@@ -80,7 +80,7 @@ export class MyMerchantsCollectionComponent implements OnInit {
         }));
 
 
-        const accessListObservables = this.merchants.map((merchant, idx) => {
+        this.merchants.map((merchant, idx) => {
 
                 this.merchantService.getAccessList(merchant.id).subscribe(
                     {
@@ -174,7 +174,7 @@ export class MyMerchantsCollectionComponent implements OnInit {
         const merchantDialogData = new MerchantDialogData();
         merchantDialogData.data = merchant;
         merchantDialogData.type = DialogType.edit;
-        const accessListSub = this.merchantService
+        this.merchantService
             .getAccessList(merchant.id)
             .subscribe({
                 next: () => {
@@ -216,7 +216,7 @@ export class MyMerchantsCollectionComponent implements OnInit {
                                 console.error(err)
 
                                 let ref = this.snackBar.open("Errore durante l'aggiornamento dei dati", 'close', {duration: 5000});
-                                ref.afterDismissed().subscribe(res => {
+                                ref.afterDismissed().subscribe(() => {
                                 })
                             }
                         })
@@ -224,7 +224,7 @@ export class MyMerchantsCollectionComponent implements OnInit {
                     console.error(err)
 
                     let ref = this.snackBar.open("Errore durante la modifica", 'close', {duration: 5000});
-                    ref.afterDismissed().subscribe(res => {
+                    ref.afterDismissed().subscribe(() => {
                     })
                 }
             })
@@ -245,7 +245,7 @@ export class MyMerchantsCollectionComponent implements OnInit {
             if (result) {
                 const delSub = this.merchantService
                     .deleteMerchant(merchant.id)
-                    .subscribe((res) => {
+                    .subscribe(() => {
                         this.updateMerchantsList();
                     });
                 this.subscriptions.add(delSub);
@@ -294,7 +294,7 @@ export class MyMerchantsCollectionComponent implements OnInit {
                     merchant.fiscalCode;
 
                 this.emailService.sendEmail(emailData).subscribe(
-                    (res) => {
+                    () => {
                         this.openSnackBar(
                             this.translate.instant(
                                 "USER.MERCHANT.MERCHANT.SEND_ACTIVATION_REQUEST_CONFIRM"
@@ -316,7 +316,7 @@ export class MyMerchantsCollectionComponent implements OnInit {
                                 ),
                             },
                         });
-                        dialogRefErr.afterClosed().subscribe((result) => {
+                        dialogRefErr.afterClosed().subscribe(() => {
                         });
                     }
                 );
