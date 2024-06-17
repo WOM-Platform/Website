@@ -24,5 +24,27 @@
             </div>
         </li>
     </ul>
+    <div *ngIf="action === 'edit'">
+        <div *ngIf="!createNewPos" class="mt-6">
+            <div class="">
+                <button
+                        *ngIf="!createNewPos"
+                        (click)="onAddPos()"
+                        class="btn-default"
+                >
+                    <mat-icon>add</mat-icon>
+                    Aggiungi POS
+                </button>
+                <button
+                        *ngIf="createNewPos"
+                        (click)="handleCancellationPos()"
+                        class="btn-default"
+                >
+                    <mat-icon>cancel</mat-icon>
+                    Annulla
+                </button>
+            </div>
+        </div>
+    </div>
 </div>
       

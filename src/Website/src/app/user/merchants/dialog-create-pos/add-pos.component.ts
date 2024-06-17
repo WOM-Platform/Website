@@ -1,27 +1,48 @@
-import {Component, Inject} from "@angular/core";
+import {Component, Inject, OnInit} from "@angular/core";
 import {Pos, PosRegistration} from "../../../_models";
 import {first} from "rxjs/operators";
 import {UntypedFormGroup} from "@angular/forms";
 import {PosService} from "../../../_services";
 import {StorageService} from "../../../_services/storage.service";
-import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
+import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material/dialog";
+import {decodeBlurHash} from "../../../utils/blurhash-utils";
+import {UploadImageComponent} from "../../../components/upload-image/upload-image.component";
+import {data} from "autoprefixer";
 
 @Component({
     selector: "app-pos-dialog",
     templateUrl: "add-pos.component.html",
     styleUrls: ["add-pos.component.css"],
 })
-export class AddPosDialogComponent {
+export class AddPosDialogComponent implements OnInit {
     formPos: UntypedFormGroup;
     formInputError: boolean;
     formApiError: boolean;
 
+    placeholderSrc: string
+    imageLoaded: boolean = false;
+
     constructor(
         @Inject(MAT_DIALOG_DATA) public data: PosDialogData,
         public dialogRef: MatDialogRef<AddPosDialogComponent>,
+        private matDialog: MatDialog,
         private posService: PosService,
         private storageService: StorageService
     ) {
+    }
+
+    ngOnInit() {
+        this.placeholderSrc = decodeBlurHash(this.data.pos.cover.blurHash, 32, 32);
+        this.preloadImage(this.data.pos.cover.fullSizeUrl);
+        console.log(this.data.pos.cover.fullSizeUrl)
+    }
+
+    preloadImage(url: string) {
+        const img = new Image();
+        img.src = url;
+        img.onload = () => {
+            this.imageLoaded = true;
+        };
     }
 
     onSubmit(): any {
@@ -100,6 +121,13 @@ export class AddPosDialogComponent {
                 }
             );
     }
+
+    editCoverImage() {
+        this.matDialog.open(UploadImageComponent, {
+            data: this.data.pos.id
+        })
+    }
+
 }
 
 export class PosDialogData {

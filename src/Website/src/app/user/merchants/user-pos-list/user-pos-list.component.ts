@@ -22,6 +22,8 @@ export class UserPosListComponent {
     @Input() action: string
     @Input() merchantId: string
 
+    createNewPos: boolean = false
+
     constructor(private snackBar: MatSnackBar, private matDialog: MatDialog, private merchantService: MerchantService, private posService: PosService,
                 private translate: TranslateService,) {
     }
@@ -32,6 +34,7 @@ export class UserPosListComponent {
         posData.pos = pos;
         posData.isEdit = true;
 
+        console.log("Pos dara ", posData)
         this.matDialog.open(AddPosDialogComponent, {
             data: posData,
         });
@@ -64,6 +67,10 @@ export class UserPosListComponent {
             }
         });
     }
+
+    handleCancellationPos() {
+    }
+
 
     onDeletePos(pos: Pos) {
         const dialogRef = this.matDialog.open(DialogConfirmCancelComponent, {
