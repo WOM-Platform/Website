@@ -38,8 +38,7 @@ export class MerchantDetailComponent implements OnInit, OnDestroy {
     zipCode: string;
     country: string;
     action: string;
-    createNewAccess = false;
-    createNewPos = false;
+
 
     businessList: string[] = primaryActivityType;
     countryList: string[] = countryList;
@@ -266,7 +265,7 @@ export class MerchantDetailComponent implements OnInit, OnDestroy {
             duration: 5000,
         });
     }
-    
+
     handleCancellationPos() {
     }
 }

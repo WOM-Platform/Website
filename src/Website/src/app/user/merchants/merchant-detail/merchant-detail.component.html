@@ -98,17 +98,11 @@
                     [action]="action"
                     [showRole]="true"
                     (deleteAccess)="onDeleteAccess($event)"
+                    (addAccess)="handleAccessList($event)"
             />
         </div>
         <!-- btn to create access -->
-        <div *ngIf="action === 'edit'">
-            <div *ngIf="!createNewAccess" class="mt-6">
-                <app-user-access-list
-                        [isRoleRequired]="true"
-                        (accessToAdd)="handleAccessList($event)"
-                ></app-user-access-list>
-            </div>
-        </div>
+
         <app-user-pos-list [merchantId]="merchantId" [posList]="posList" [action]="action"/>
     </div>
 </div>

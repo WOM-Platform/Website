@@ -17,6 +17,7 @@ import {MatSnackBar} from "@angular/material/snack-bar";
 import {MerchantService, UserService} from "src/app/_services";
 import {EmailService} from "src/app/_services/email.service";
 import {animate, state, style, transition, trigger} from "@angular/animations";
+import {Access} from "../../../_models/instrument";
 
 @Component({
     selector: "app-my-merchants-collection",
@@ -328,6 +329,62 @@ export class MyMerchantsCollectionComponent implements OnInit {
         this.snackBar.open(message, null, {
             duration: 5000,
         });
+    }
+
+    handleAccessList(user, merchantId, idx): void {
+        const role = user.role;
+        const access = user.access;
+
+        const addAccessSub = this.merchantService
+            .addAccess(merchantId, access.id, role)
+            .subscribe({
+                next: () => {
+                    this.checkAccessCurrentUser(access.id);
+                    this.updateAccessList(merchantId, idx);
+                },
+                error: (err) =>
+                    console.error("Error adding new instrument access:", err),
+            });
+        this.subscriptions.add(addAccessSub);
+    }
+
+
+    onDeleteAccess(access: Access, merchantId, idx) {
+        const dialogRef = this.matDialog.open(DialogConfirmCancelComponent, {
+            width: "500px",
+            data: {
+                title: "Conferma eliminazione",
+                message: "Sei sicuro di voler confermare l'eliminazione?",
+                confirm: "si",
+                cancel: "Annulla",
+            },
+        });
+
+        dialogRef.afterClosed().subscribe((result) => {
+            this.merchantService.deleteAccess(merchantId, access.userId).subscribe({
+                next: () => {
+                    this.checkAccessCurrentUser(access.userId);
+                    this.updateAccessList(merchantId, idx);
+                },
+            });
+        });
+    }
+
+
+    updateAccessList(merchantId, idx) {
+        this.merchantService
+            .getAccessList(merchantId)
+            .subscribe((res) => (this.merchants[idx].accessList = res["users"]));
+    }
+
+
+    checkAccessCurrentUser(idAccess: string) {
+        const currentUser = this.storageService.load("currentUser");
+        if (idAccess === currentUser.id) {
+            this.userService
+                .me()
+                .subscribe((res) => this.userService.updateUserOwnership(res));
+        }
     }
 
     protected readonly businessList = primaryActivityType;

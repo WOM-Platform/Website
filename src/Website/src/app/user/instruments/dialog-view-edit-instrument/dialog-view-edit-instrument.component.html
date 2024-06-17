@@ -52,12 +52,8 @@
                     [accessList]="instrumentView.access"
                     [action]="action"
                     (deleteAccess)="confirmAndDeleteAccess($event)"
+                    (addAccess)="addAccessAndUpdateList($event)"
             />
-        </div>
-        <div *ngIf="action === 'edit'">
-            <div *ngIf="!createNewAccess" class="mt-6">
-                <app-user-access-list (accessToAdd)="addAccessAndUpdateList($event)"/>
-            </div>
         </div>
     </div>
 </div>

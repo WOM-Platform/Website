@@ -30,13 +30,14 @@
                 </p>
             </div>
             <div>
+
+            </div>
+            <div class="flex justify-between">
                 <p class="flex items-center gap-2 mb-0 h-8">
                     <span class="text-slate-600 font-semibold">Abilitato: </span>
                     <span *ngIf="merchant.enabled; else notEnable">Attivo</span>
                     <ng-template #notEnable>Disattivato</ng-template>
                 </p>
-            </div>
-            <div class="flex justify-end">
                 <i class="fa-solid fa-arrow-down p-4 rounded-full bg-blue-400 text-white font-semibold flex items-center justify-center"
                    style="width: 40px; height: 40px;" [@rotateArrow]="merchant.isOpen ? 'open' : 'closed'"></i>
             </div>
@@ -98,12 +99,16 @@
 
                 <p class="font-semibold mb-0 mt-6">Gestori:</p>
                 <app-access-list [accessList]="merchant.accessList"
-                                 [action]="merchant.access === 'Admin' ? 'edit' : 'view'"
-                                 [showRole]="true"></app-access-list>
-
+                                 [action]="actions[i]"
+                                 (click)="$event.stopPropagation()"
+                                 [showRole]="true"
+                                 (addAccess)="handleAccessList($event, merchant.id, i)"
+                                 (deleteAccess)="onDeleteAccess($event, merchant.id, i)"
+                />
 
                 <app-user-pos-list [merchantId]="merchant.id" [posList]="merchant.pos"
-                                   [action]="actions[i]" class="mt-6"/>
+                                   [action]="actions[i]" class="mt-6"
+                                   (click)="$event.stopPropagation()"/>
             </div>
         </div>
     </div>

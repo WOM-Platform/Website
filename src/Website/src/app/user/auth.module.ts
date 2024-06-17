@@ -59,7 +59,6 @@ import {UserPosListComponent} from "./merchants/user-pos-list/user-pos-list.comp
         MyInstrumentsCollectionComponent,
         MyMerchantsCollectionComponent,
         PosFormComponent,
-        UserAccessListComponent,
         UserAdminComponent,
         UserAimsComponent,
         UserAimsListComponent,
@@ -72,7 +71,6 @@ import {UserPosListComponent} from "./merchants/user-pos-list/user-pos-list.comp
         UserUsersComponent,
         UserVerifyComponent,
     ],
-    exports: [UserAccessListComponent],
     imports: [
         AccessListComponent,
         AdminTableComponent,
@@ -86,6 +84,7 @@ import {UserPosListComponent} from "./merchants/user-pos-list/user-pos-list.comp
         MerchantsAdminComponent,
         FiltersComponent,
         UserPosListComponent,
+        UserAccessListComponent,
     ],
 })
 export class AuthModule {

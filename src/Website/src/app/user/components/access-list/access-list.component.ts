@@ -1,23 +1,36 @@
-import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
-import { NgFor, NgIf } from "@angular/common";
-import { Access } from "src/app/_models/instrument";
+import {Component, EventEmitter, Input, OnInit, Output} from "@angular/core";
+import {NgFor, NgIf} from "@angular/common";
+import {Access} from "src/app/_models/instrument";
+import {AuthModule} from "../../auth.module";
+import {UserAccessListComponent} from "../user-access-list/user-access-list.component";
+import {MatIcon} from "@angular/material/icon";
 
 @Component({
-  selector: "app-access-list",
-  standalone: true,
-  imports: [NgIf, NgFor],
-  templateUrl: "./access-list.component.html",
-  styleUrls: ["./access-list.component.css"], // Corrected to "styleUrls"
+    selector: "app-access-list",
+    standalone: true,
+    imports: [NgIf, NgFor, UserAccessListComponent, MatIcon],
+    templateUrl: "./access-list.component.html",
+    styleUrls: ["./access-list.component.css"],
 })
 export class AccessListComponent implements OnInit {
-  @Input() accessList: Access[];
-  @Input() action: string;
-  @Input() showRole: boolean = false;
-  @Output() deleteAccess = new EventEmitter<Access>(); // Ensure to emit the correct type
+    @Input() accessList: Access[];
+    @Input() action: string;
+    @Input() showRole: boolean = false;
+    @Output() deleteAccess = new EventEmitter<Access>();
+    @Output() addAccess = new EventEmitter<Access>()
 
-  ngOnInit(): void {}
+    createNewAccess = false;
 
-  onDelete(access: Access) {
-    this.deleteAccess.emit(access);
-  }
+    ngOnInit(): void {
+        console.log("azione ", this.action)
+        console.log("access LIst ", this.accessList)
+    }
+
+    onDelete(access: Access) {
+        this.deleteAccess.emit(access);
+    }
+
+    handleAccessList(user) {
+        this.addAccess.emit(user)
+    }
 }
