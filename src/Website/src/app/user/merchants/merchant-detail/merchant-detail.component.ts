@@ -14,10 +14,6 @@ import {StorageService} from "src/app/_services/storage.service";
 import {Access} from "src/app/_models/instrument";
 import {MatDialog} from "@angular/material/dialog";
 import {DialogConfirmCancelComponent} from "src/app/components/dialog-confirm-cancel/dialog-confirm-cancel";
-import {
-    AddPosDialogComponent,
-    PosDialogData,
-} from "../dialog-create-pos/add-pos.component";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {TranslateService} from "@ngx-translate/core";
 
@@ -152,64 +148,6 @@ export class MerchantDetailComponent implements OnInit, OnDestroy {
                     })
                 }
             })
-    }
-
-    onEditPos(pos: Pos) {
-        const posData = new PosDialogData();
-        posData.merchantId = this.merchant.id;
-        posData.pos = pos;
-        posData.isEdit = true;
-
-        const dialogRef = this.matDialog.open(AddPosDialogComponent, {
-            data: posData,
-        });
-    }
-
-    onAddPos() {
-        const posData = new PosDialogData();
-        posData.merchantId = this.merchant.id;
-        posData.pos = null;
-        posData.isEdit = false;
-
-        const dialogRef = this.matDialog.open(AddPosDialogComponent, {
-            data: posData,
-        });
-        dialogRef.afterClosed().subscribe((result) => {
-            if (result) {
-                this.updatePosList();
-                let successString;
-                if (posData.isEdit) {
-                    successString = "USER.EDIT_POS.SUCCESS";
-                } else {
-                    successString = "USER.ADD_POS.SUCCESS";
-                }
-                this.translate
-                    .get(successString)
-                    .pipe(first())
-                    .subscribe((response) => {
-                        this.openSnackBar(response);
-                    });
-            }
-        });
-    }
-
-    onDeletePos(pos: Pos) {
-        const dialogRef = this.matDialog.open(DialogConfirmCancelComponent, {
-            width: "500px",
-            data: {
-                title: "Conferma eliminazione",
-                message: "Sei sicuro di voler confermare l'eliminazione?",
-                confirm: "si",
-                cancel: "Annulla",
-            },
-        });
-        dialogRef.afterClosed().subscribe((result) => {
-            this.posService.delete(pos.id).subscribe({
-                next: () => {
-                    this.updatePosList();
-                },
-            });
-        });
     }
 
     onDeleteAccess(access: Access) {

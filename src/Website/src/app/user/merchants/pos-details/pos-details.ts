@@ -1,40 +1,78 @@
-import {Component, Inject, OnInit} from "@angular/core";
+import {Component, OnInit} from "@angular/core";
 import {Pos, PosRegistration} from "../../../_models";
-import {first} from "rxjs/operators";
+import {first, map} from "rxjs/operators";
 import {UntypedFormGroup} from "@angular/forms";
 import {PosService} from "../../../_services";
 import {StorageService} from "../../../_services/storage.service";
-import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material/dialog";
+import {MatDialog, MatDialogModule} from "@angular/material/dialog";
 import {decodeBlurHash} from "../../../utils/blurhash-utils";
 import {UploadImageComponent} from "../../../components/upload-image/upload-image.component";
-import {data} from "autoprefixer";
+import {CommonModule, Location} from "@angular/common";
+import {MatButtonModule} from "@angular/material/button";
+import {MatIconModule} from "@angular/material/icon";
+import {TranslateModule} from "@ngx-translate/core";
+import {MatFormFieldModule} from "@angular/material/form-field";
+import {PosFormComponent} from "../../../_forms/pos/forms-pos.directive";
+import {ActivatedRoute} from "@angular/router";
+import {OffersComponent} from "./offers/offers.component";
+import {forkJoin} from "rxjs";
 
 @Component({
-    selector: "app-pos-dialog",
-    templateUrl: "add-pos.component.html",
-    styleUrls: ["add-pos.component.css"],
+    selector: "app-pos-details",
+    standalone: true,
+    imports: [CommonModule,
+        MatDialogModule,
+        MatButtonModule,
+        MatFormFieldModule,
+        MatIconModule,
+        TranslateModule, PosFormComponent, OffersComponent,
+    ],
+    templateUrl: "pos-details.html",
+    styleUrls: ["pos-details.css"],
 })
-export class AddPosDialogComponent implements OnInit {
+export class PosDetailsComponent implements OnInit {
     formPos: UntypedFormGroup;
     formInputError: boolean;
     formApiError: boolean;
+
+    posId: string
+    pos: Pos
+    action: string
+
+    data
 
     placeholderSrc: string
     imageLoaded: boolean = false;
 
     constructor(
-        @Inject(MAT_DIALOG_DATA) public data: PosDialogData,
-        public dialogRef: MatDialogRef<AddPosDialogComponent>,
+        private location: Location,
         private matDialog: MatDialog,
         private posService: PosService,
+        private route: ActivatedRoute,
         private storageService: StorageService
     ) {
     }
 
     ngOnInit() {
-        this.placeholderSrc = decodeBlurHash(this.data.pos.cover.blurHash, 32, 32);
-        this.preloadImage(this.data.pos.cover.fullSizeUrl);
-        console.log(this.data.pos.cover.fullSizeUrl)
+        this.loadData()
+    }
+
+    loadData() {
+        this.route.paramMap.subscribe(params => {
+            this.posId = params.get("posId");
+            this.action = params.get("posAction");
+
+            this.posService.get(this.posId).subscribe({
+                next: (pos: Pos) => {
+                    this.pos = pos;
+                    this.placeholderSrc = decodeBlurHash(this.pos.cover.blurHash, 32, 32);
+                    this.preloadImage(this.pos.cover.fullSizeUrl);
+                },
+                error: (err) => {
+                    console.error('Error fetching data', err);
+                }
+            });
+        });
     }
 
     preloadImage(url: string) {
@@ -56,7 +94,7 @@ export class AddPosDialogComponent implements OnInit {
                 this.formInputError = true;
                 return;
             }
-            if (this.data.isEdit) {
+            if (this.action === 'edit') {
                 this.edit();
             } else {
                 this.create();
@@ -68,23 +106,27 @@ export class AddPosDialogComponent implements OnInit {
         this.storageService.clear(this.storageService.merchantFormKey);
     }
 
+    goBack(): void {
+        this.location.back();
+    }
+
     edit() {
-        this.data.pos.longitude = this.formPos.controls.longitude.value;
-        this.data.pos.latitude = this.formPos.controls.latitude.value;
-        this.data.pos.name = this.formPos.controls.name.value;
-        this.data.pos.isActive = this.formPos.controls.isActive.value;
+        this.pos.longitude = this.formPos.controls.longitude.value;
+        this.pos.latitude = this.formPos.controls.latitude.value;
+        this.pos.name = this.formPos.controls.name.value;
+        this.pos.isActive = this.formPos.controls.isActive.value;
 
         // Optional values
         if (this.formPos.controls.url.value !== "") {
-            this.data.pos.url = this.formPos.controls.url.value;
+            this.pos.url = this.formPos.controls.url.value;
         }
 
         this.posService
-            .update(this.data.pos)
+            .update(this.pos)
             .pipe(first())
             .subscribe({
                 next: () => {
-                    this.dialogRef.close(true);
+                    /*this.dialogRef.close(true);*/
                     this.storageService.clear(this.storageService.posFormKey);
                 },
                 error: (error) => {
@@ -111,7 +153,7 @@ export class AddPosDialogComponent implements OnInit {
             .pipe(first())
             .subscribe({
                     next: () => {
-                        this.dialogRef.close(true);
+                        /*this.dialogRef.close(true);*/
                         this.storageService.clear(this.storageService.posFormKey);
                     },
                     error: (error) => {
@@ -123,8 +165,16 @@ export class AddPosDialogComponent implements OnInit {
     }
 
     editCoverImage() {
-        this.matDialog.open(UploadImageComponent, {
-            data: this.data.pos.id
+        const dialogRef = this.matDialog.open(UploadImageComponent, {
+            data: this.pos.id
+        })
+
+        dialogRef.afterClosed().subscribe({
+            next: (res) => {
+                if (res) {
+                    this.loadData()
+                }
+            }
         })
     }
 
@@ -135,3 +185,4 @@ export class PosDialogData {
     isEdit: boolean;
     pos: Pos;
 }
+

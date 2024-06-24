@@ -1,6 +1,5 @@
 import {NgModule} from "@angular/core";
 import {CommonModule} from "@angular/common";
-import {AddPosDialogComponent} from "./merchants/dialog-create-pos/add-pos.component";
 
 import {UserHomeComponent} from "./home/user-home.component";
 import {UserNotVerifiedComponent} from "./not-verified/user-not-verified.component";
@@ -11,7 +10,6 @@ import {FormMerchantComponent} from "./merchants/dialog-create-merchant/form-mer
 import {PosFormComponent} from "../_forms/pos/forms-pos.directive";
 import {MerchantStatsComponent} from "./stats/merchant/merchant-stats.component";
 import {UserStatsComponent} from "./stats/user-stats.component";
-import {MapComponent} from "../components/map/map.component";
 import {SharedModule} from "../shared/shared.module";
 
 import {UserAdminComponent} from "./admin/user-admin.component";
@@ -43,25 +41,22 @@ import {EditableElementComponent} from "./components/editable-element/editable-e
 import {DialogCreateSourceComponent} from "./instruments/dialog-create-instrument/dialog-create-instrument.component";
 import {AccessListComponent} from "./components/access-list/access-list.component";
 import {AimsListComponent} from "./components/aims-list/aims-list.component";
+import {PosDetailsComponent} from "./merchants/pos-details/pos-details";
 import {UserPosListComponent} from "./merchants/user-pos-list/user-pos-list.component";
 
 @NgModule({
     declarations: [
-        AddPosDialogComponent,
         AdminManagmentInstrumentsComponent,
         DialogCreateMerchant,
         DialogCreateSourceComponent,
         DialogViewEditInstrumentComponent,
         FormMerchantComponent,
-        MapComponent,
         MerchantDetailComponent,
         MerchantStatsComponent,
         MyInstrumentsCollectionComponent,
         MyMerchantsCollectionComponent,
-        PosFormComponent,
         UserAdminComponent,
         UserAimsComponent,
-        UserAimsListComponent,
         UserComponent,
         UserHomeComponent,
         UserInstrumentsComponent,
@@ -70,6 +65,7 @@ import {UserPosListComponent} from "./merchants/user-pos-list/user-pos-list.comp
         UserStatsComponent,
         UserUsersComponent,
         UserVerifyComponent,
+
     ],
     imports: [
         AccessListComponent,
@@ -80,12 +76,15 @@ import {UserPosListComponent} from "./merchants/user-pos-list/user-pos-list.comp
         EditableElementComponent,
         ExpandableCardComponent,
         SharedModule,
+        PosDetailsComponent,
+        PosFormComponent,
         SearchSourceComponent,
         MerchantsAdminComponent,
         FiltersComponent,
-        UserPosListComponent,
         UserAccessListComponent,
-    ],
+        UserPosListComponent,
+        UserAimsListComponent,
+    ]
 })
 export class AuthModule {
 }

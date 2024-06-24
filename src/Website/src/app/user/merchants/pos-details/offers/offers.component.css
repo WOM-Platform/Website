@@ -1,0 +1,5 @@
+.mat-dialog-container {
+    max-height: calc(100vh - 100px) !important;
+    overflow-y: scroll !important;
+    border-radius: 1.5rem !important;
+}

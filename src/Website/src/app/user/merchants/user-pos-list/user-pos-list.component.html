@@ -8,23 +8,24 @@
                         <span class="text-slate-600 font-semibold">Name</span>:
                         {{ pos.name }}
                     </div>
-                    <!-- <div>
-                      <span class="text-slate-600 font-semibold">Indirizzo</span>:
-                      {{ pos?.address?.formattedAddress || "" }}
-                    </div> -->
                 </div>
-                <ng-container *ngIf="action === 'edit'">
-                    <button class="text-blue-600" (click)="onEditPos(pos)">
-                        <mat-icon class="text-blue-600">edit</mat-icon>
+                <div class="flex gap-2">
+                    <button class="icon-button-bg hover:bg-slate-300" (click)="onEditPos(pos, 'view')">
+                        <i class="fa-solid fa-eye text-black"></i>
                     </button>
-                    <button class="delete-button text-red" (click)="onDeletePos(pos)">
-                        <mat-icon class="text-red">delete</mat-icon>
-                    </button>
-                </ng-container>
+                    <ng-container *ngIf="actionMerchant === 'edit'">
+                        <button class="icon-button-bg hover:bg-blue-200" (click)="onEditPos(pos, 'edit')">
+                            <i class="text-blue-500 fa-solid fa-pen"></i>
+                        </button>
+                        <button class="icon-button-bg hover:bg-red-200" (click)="onDeletePos(pos)">
+                            <i class="fa-solid fa-trash text-red-500"></i>
+                        </button>
+                    </ng-container>
+                </div>
             </div>
         </li>
     </ul>
-    <div *ngIf="action === 'edit'">
+    <div *ngIf="actionMerchant === 'edit'">
         <div *ngIf="!createNewPos" class="mt-6">
             <div class="">
                 <button

@@ -1,0 +1,20 @@
+<div class="border-2 border-black rounded-xl p-4">
+    <h2>Validità</h2>
+    <div class="flex flex-col">
+        <small class="text-gray-500">
+            Se impostato, accetti soltanto i voucher WOM più recenti, con un'età pari o
+            inferiore al valore impostato (espresso in giorni)
+        </small>
+        <mat-slider
+                min="0"
+                max="6"
+                step="1"
+                tickInterval="1"
+                showTickMarks
+                discrete
+                [displayWith]="formatLabel"
+                (input)="onSliderChange($event)">
+            <input matSliderThumb>
+        </mat-slider>
+    </div>
+</div>

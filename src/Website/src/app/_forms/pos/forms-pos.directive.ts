@@ -10,20 +10,26 @@ import {
     ViewChild,
 } from "@angular/core";
 import {
+    ReactiveFormsModule,
     UntypedFormBuilder,
     UntypedFormGroup,
     Validators,
 } from "@angular/forms";
 import MapTypeId = google.maps.MapTypeId;
-import {GoogleMap} from "@angular/google-maps";
+import {GoogleMap, GoogleMapsModule} from "@angular/google-maps";
 import {LatLon, Pos} from "../../_models";
 import {debounceTime, switchMap, takeUntil} from "rxjs/operators";
 import {StorageService} from "../../_services/storage.service";
 import {Observable, Subject, Subscription} from "rxjs";
+import {TranslateModule} from "@ngx-translate/core";
+import {MatFormFieldModule} from "@angular/material/form-field";
+import {MatCheckboxModule} from "@angular/material/checkbox";
 
 @Component({
     selector: "app-forms-pos",
     templateUrl: "./forms-pos.directive.html",
+    standalone: true,
+    imports: [TranslateModule, MatFormFieldModule, ReactiveFormsModule, MatCheckboxModule, GoogleMapsModule],
     styleUrls: ["./forms-pos.directive.css", "../forms.directive.css"],
 })
 export class PosFormComponent implements OnInit, AfterViewInit, OnDestroy {
@@ -31,7 +37,7 @@ export class PosFormComponent implements OnInit, AfterViewInit, OnDestroy {
     @ViewChild("mapSearchField") searchField: ElementRef;
 
     unsubscribe = new Subject<void>();
-    observeChanges: Subscription;
+    
     posLon: string;
     posLat: string;
     isActive: boolean;

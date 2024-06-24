@@ -15,6 +15,7 @@ import {UserInstrumentsComponent} from "./instruments/user-instruments.component
 import {UserAimsComponent} from "./aims/user-aims.component";
 import {UserUsersComponent} from "./users/user-users.component";
 import {MerchantDetailComponent} from "./merchants/merchant-detail/merchant-detail.component";
+import {PosDetailsComponent} from "./merchants/pos-details/pos-details";
 
 const routes: Routes = [
     {
@@ -69,12 +70,20 @@ const routes: Routes = [
                         },
                     },
                     {
-                        path: ":id/:action",
-                        component: MerchantDetailComponent,
-                        canActivate: [AuthGuard],
+                        path: ':id/:action',
                         data: {
-                            breadcrumb: "BREADCRUMBS.USER.MERCHANT-DETAIL",
+                            breadcrumb: 'BREADCRUMBS.USER.MERCHANT-DETAIL',
                         },
+                        children: [
+                            {path: '', component: MerchantDetailComponent, pathMatch: 'full'},
+
+                            {
+                                path: 'pos/:posId/:posAction', component: PosDetailsComponent,
+                                data: {
+                                    breadcrumb: 'BREADCRUMBS.USER.POS-DETAIL',
+                                },
+                            }
+                        ]
                     },
                 ],
             },

@@ -12,7 +12,7 @@ import {MatIcon} from "@angular/material/icon";
     templateUrl: "./access-list.component.html",
     styleUrls: ["./access-list.component.css"],
 })
-export class AccessListComponent implements OnInit {
+export class AccessListComponent {
     @Input() accessList: Access[];
     @Input() action: string;
     @Input() showRole: boolean = false;
@@ -21,10 +21,6 @@ export class AccessListComponent implements OnInit {
 
     createNewAccess = false;
 
-    ngOnInit(): void {
-        console.log("azione ", this.action)
-        console.log("access LIst ", this.accessList)
-    }
 
     onDelete(access: Access) {
         this.deleteAccess.emit(access);

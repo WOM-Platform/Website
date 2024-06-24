@@ -64,12 +64,24 @@ li {
   text-justify: inter-word;
 }
 
+button:disabled {
+  @apply text-gray-400
+}
+
 .margin-0 {
   margin: 0;
 }
 
 .blue-wom {
   @apply text-[#2569FF];
+}
+
+.btn-rounded-outline {
+  @apply px-4 py-2 border-2 border-black rounded-full flex gap-2 items-center w-fit
+}
+
+.pointed-list {
+  @apply list-disc list-inside
 }
 
 @media (max-width: 767px) {

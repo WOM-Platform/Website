@@ -17,20 +17,8 @@
     flex-grow: 1;
 }
 
-.delete-button {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 5px;
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-    outline: none;
-}
-
-.delete-button:hover {
-    background-color: #fdd;
-    border-radius: 50%;
+.icon-button-bg {
+    @apply w-10 h-10  rounded-full transition duration-300 ease-in-out
 }
 
 .delete-button mat-icon {

@@ -2,11 +2,17 @@ import {animate, style, transition, trigger} from "@angular/animations";
 import {ChangeDetectorRef, Component, EventEmitter, Input, OnChanges, OnInit, Output} from "@angular/core";
 import {Aim, AimEditing, AimWithChecked} from "src/app/_models";
 import {AimsService} from "src/app/_services";
+import {MatIcon, MatIconModule} from "@angular/material/icon";
+import {FormsModule} from "@angular/forms";
+import {HttpClientModule} from "@angular/common/http";
+import {NgFor, NgIf} from "@angular/common";
 
 @Component({
     selector: "app-user-aims-list",
     templateUrl: "./user-aims-list.component.html",
     styleUrls: ["./user-aims-list.component.css"],
+    standalone: true,
+    imports: [NgIf, NgFor, FormsModule, HttpClientModule, MatIconModule],
     animations: [
         trigger("fadeInOut", [
             transition(":enter", [

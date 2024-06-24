@@ -1,0 +1,37 @@
+<div class="mt-2">
+    <div *ngIf="!newFilter; else cancelFilter">
+        <button (click)="newFilter = !newFilter" class="btn-rounded-outline"><i class="fa-solid fa-plus"></i> Aggiungi
+            filtro
+        </button>
+    </div>
+    <ng-template #cancelFilter>
+        <div class="">
+            <button (click)="newFilter = !newFilter" class="btn-rounded-outline"><i class="fa-solid fa-xmark"></i>
+                Annulla
+            </button>
+            <p class="mt-6 mb-0 font-semibold mb-4">Filtri</p>
+            <div class="flex flex-col gap-4">
+                <app-aims-select (aimCodeSelected)="aimsFiltered($event)"/>
+                <app-validity-slider (validitySelected)="validityFiltered($event)"/>
+                <div class="relative border-2 border-black rounded-xl p-4 flex flex-col">
+                    <h2>Area geografica</h2>
+                    <small class="text-gray-500 mb-4">Se impostato, accetterai solo i voucher WOM generati all'interno
+                        di
+                        quella specifica area geografica.</small>
+                    <div *ngIf="isFilteringMap; else mapSelection">
+                        <div class="flex flex-col gap-2">
+                            <button class="btn-rounded-outline" (click)="isFilteringMap = !isFilteringMap">Annulla
+                            </button>
+                            <app-map (bounds)="mapFiltered($event)"/>
+                        </div>
+                    </div>
+                    <ng-template #mapSelection>
+                        <button class="btn-rounded-outline" (click)="isFilteringMap = !isFilteringMap">Imposta</button>
+                    </ng-template>
+                </div>
+            </div>
+        </div>
+    </ng-template>
+
+</div>
+

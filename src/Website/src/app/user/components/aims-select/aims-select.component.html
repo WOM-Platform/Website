@@ -1,0 +1,24 @@
+<div class="flex flex-col border-2 border-black rounded-xl p-4">
+    <h2>Scopo</h2>
+    <small class="text-gray-500 mb-4 ">Se impostato accetterai soltanto i voucher WOM generati per lo specifico
+        ruolo
+        selezionato</small>
+    <!--<div *ngIf="isSelectiongAim; else noAimFilter">-->
+    <select name="cars" id="cars" (change)="onSelectAim($event)" class="w-[250px]">
+        <option value="all" selected>Tutti validi</option>
+        <option *ngFor="let aim of aimsList" [value]="aim.code">
+            {{ aim.titles.it }}
+        </option>
+    </select>
+    <!--</div>-->
+    <!--    <ng-template #noAimFilter>
+            &lt;!&ndash;  <div class="flex gap-2 items-center">
+                  <svg height="10" width="10">border-2 border-black rounded-xl p-4
+                      <circle cx="5" cy="5" r="5" fill="#000"/>
+                  </svg>
+              </div>&ndash;&gt;
+            <div>
+                <button class="" (click)="isSelectiongAim = !isSelectiongAim">S</button>
+            </div>
+        </ng-template>-->
+</div>

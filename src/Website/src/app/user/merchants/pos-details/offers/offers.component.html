@@ -1,0 +1,43 @@
+<div class="mt-11">
+    <h2>Offerte: </h2>
+    <div *ngIf="offers && offers.length > 0; else noOffers">
+        <ul *ngFor="let offer of offers">
+            <li class="flex justify-between items-center">
+                <div class="flex flex-col justify-center mt-4">
+                    <div class="flex gap-2"><span class="flex items-center gap-1"><span
+                            class="text-sm">- Titolo:</span> {{ offer.title }}</span>
+                        <span class="flex items-center gap-1"><span
+                                class="text-sm">Quantità:</span> {{ offer.cost }}</span>
+                        <app-active-badge [isActive]="!offer.deactivated"/>
+
+                    </div>
+                    <div class="ml-2" *ngIf="offer.imageString">
+                        <a
+                                class="underline text-sm"
+                                [href]="offer.imageString"
+                                [attr.download]="offer.title + '.jpg'"
+                                target="_blank"
+                        >
+                            Scarica QRcode</a
+                        >
+                    </div>
+                </div>
+                <div *ngIf="posAction=== 'edit'" class="flex gap-2">
+                    <div class="cursor-pointer" (click)="onEditOffer(offer.id)">
+                        <i class="fa-solid fa-edit text-sm text-blue-400"></i>
+                    </div>
+                    <div class="cursor-pointer" (click)="onDeleteOffer(offer.id)">
+                        <i class="fa-solid fa-trash text-sm text-red-400"></i>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <ng-template #noOffers>
+        <p>Nessuna offerta disponibile</p>
+    </ng-template>
+    <button (click)="addNewOffer()" class="btn-rounded-outline mt-6"><i
+            class="fa-solid fa-plus"></i>Nuova
+        Offerta
+    </button>
+</div>

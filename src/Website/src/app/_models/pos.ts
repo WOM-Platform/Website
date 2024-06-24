@@ -1,3 +1,5 @@
+import {Offer} from "./offer";
+
 export class Pos {
     id: string;
     name: string;
@@ -8,6 +10,7 @@ export class Pos {
     longitude: number;
     isActive: boolean;
     cover: ImageCover;
+    offers: Offer[] | '';
 
     public static fromJson(json): any {
         if (json === null) {
