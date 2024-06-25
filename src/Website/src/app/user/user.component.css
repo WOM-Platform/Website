@@ -3,26 +3,31 @@
     @apply text-xs
 }
 
+a {
+    @apply text-black
+}
+
+
 .active-link {
-    background-color: #E9EDF3; /* Light gray background for the active link */
-    color: #405DBD; /* Darker text color for better contrast */
-    border-left: 3px solid #405DBD; /* Add a blue bar to the left of the active link */
+    background-color: #E9EDF3;
+    color: #405DBD;
+    border-left: 3px solid #405DBD;
 }
 
 .loading-overlay {
-    position: fixed; /* or 'absolute' if only within a specific container */
+    position: fixed;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba(128, 128, 128, 0.5); /* Gray background with transparency */
-    z-index: 1000; /* Ensure it covers other content */
+    background-color: rgba(128, 128, 128, 0.5);
+    z-index: 1000;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
 .loading-image {
-    width: 100px; /* Adjust size as necessary */
+    width: 100px;
     height: auto;
 }
