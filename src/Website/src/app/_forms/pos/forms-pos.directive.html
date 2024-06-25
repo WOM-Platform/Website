@@ -1,98 +1,62 @@
-<form [formGroup]="form">
-  <h2 class="mt-2" [innerHTML]="'SIGN_UP.POS.TITLE' | translate"></h2>
+<form class="relative w-full" [formGroup]="form">
+    <h2 class="mt-2" [innerHTML]="'SIGN_UP.POS.TITLE' | translate"></h2>
+    <h3 [innerHTML]="'SIGN_UP.POS.SUBTITLE_A' | translate"></h3>
+    <p [innerHTML]="'SIGN_UP.POS.SUBTITLE_B' | translate"></p>
 
-  <h3 [innerHTML]="'SIGN_UP.POS.SUBTITLE_A' | translate"></h3>
+    <div class="flex flex-wrap gap-2.5">
+        <div class="w-full md:w-1/2">
+            <mat-form-field class="w-full">
+                <mat-label>{{ 'SIGN_UP.POS.NAME' | translate }}</mat-label>
+                <input matInput type="text" formControlName="name"/>
+                <mat-error>{{ 'SIGN_UP.POS.NAME_ERROR' | translate }}</mat-error>
+            </mat-form-field>
+        </div>
+        <div class="w-full">
+            <p class="description">{{ 'SIGN_UP.POS.NAME_TEXT' | translate }}</p>
+        </div>
 
-  <p [innerHTML]="'SIGN_UP.POS.SUBTITLE_B' | translate"></p>
-  <div class="flex flex-row flex-wrap full-width gap-2.5">
-    <div class="basis-full md:basis-1/2">
-      <mat-form-field>
-        <label>
-          <input
-            matInput
-            type="text"
-            placeholder="{{ 'SIGN_UP.POS.NAME' | translate }}"
-            formControlName="name"
-          />
-        </label>
-        <mat-error> {{'SIGN_UP.POS.NAME_ERROR' | translate}} </mat-error>
-      </mat-form-field>
-    </div>
-    <div class="basis-full">
-      <p class="description">{{ 'SIGN_UP.POS.NAME_TEXT' | translate }}</p>
-    </div>
-    <div class="basis-full md:basis-1/2" [hidden]="!pos">
-      <mat-checkbox
-        formControlName="isActive"
-        [(ngModel)]="isActive"
-        (change)="onIsActiveChanged($event)"
-      >
-        {{'SIGN_UP.POS.IS_ACTIVE_TEXT' | translate}}
-      </mat-checkbox>
-    </div>
-    <div class="basis-full">
-      <p class="font-semibold">{{'SIGN_UP.POS.MAP_SELECT' | translate }}:</p>
-    </div>
-    <div class="basis-full md:basis-1/2">
-      <input
-        #mapSearchField
-        placeholder="{{'MERCHANT.FILTERS.SEARCH.PLACEHOLDER' | translate}}"
-        type="text"
-        class="full-width"
-      />
-    </div>
+        <div class="w-full md:w-1/2" [hidden]="!pos">
+            <mat-checkbox formControlName="isActive" [(ngModel)]="isActive" (change)="onIsActiveChanged($event)">
+                {{ 'SIGN_UP.POS.IS_ACTIVE_TEXT' | translate }}
+            </mat-checkbox>
+        </div>
 
-    <div class="basis-full">
-      {{ 'SIGN_UP.POS.MAP_TITLE' | translate }}
-      <div>
-        <google-map [options]="options" (mapClick)="mapClick($event)">
-        </google-map>
-      </div>
-    </div>
+        <div class="w-full">
+            <p class="font-semibold">{{ 'SIGN_UP.POS.MAP_SELECT' | translate }}:</p>
+        </div>
+        <div class="w-full md:w-1/2">
+            <input #mapSearchField placeholder="{{ 'MERCHANT.FILTERS.SEARCH.PLACEHOLDER' | translate }}" type="text"
+                   class="w-full"/>
+        </div>
 
-    <div class="basis-full md:basis-1/2">
-      <mat-form-field class="example-full-width">
-        <mat-error> {{'SIGN_UP.POS.LAT_ERROR' | translate}} </mat-error>
-        <label>{{"SIGN_UP.POS.LAT" | translate}}</label>
-        <input
-          matInput
-          type="text"
-          placeholder="{{ 'SIGN_UP.POS.LAT' | translate }}"
-          [value]="posLat"
-          formControlName="latitude"
-        />
-      </mat-form-field>
+        <div class="w-full">
+            {{ 'SIGN_UP.POS.MAP_TITLE' | translate }}
+            <google-map [options]="options" (mapClick)="mapClick($event)"></google-map>
+        </div>
+
+        <div class="w-full md:w-1/2">
+            <mat-form-field class="w-full">
+                <mat-label>{{ 'SIGN_UP.POS.LAT' | translate }}</mat-label>
+                <input matInput type="text" [value]="posLat" formControlName="latitude"/>
+                <mat-error>{{ 'SIGN_UP.POS.LAT_ERROR' | translate }}</mat-error>
+            </mat-form-field>
+        </div>
+        <div class="w-full md:w-1/2">
+            <mat-form-field class="w-full">
+                <mat-label>{{ 'SIGN_UP.POS.LON' | translate }}</mat-label>
+                <input matInput type="text" [value]="posLon" formControlName="longitude"/>
+                <mat-error>{{ 'SIGN_UP.POS.LON_ERROR' | translate }}</mat-error>
+            </mat-form-field>
+        </div>
+
+        <div class="w-full">
+            <p class="description mb-0" [innerHTML]="'SIGN_UP.POS.URL_OPTIONAL_TEXT' | translate"></p>
+        </div>
+        <div class="w-full">
+            <mat-form-field class="w-full">
+                <mat-label>{{ 'SIGN_UP.POS.URL' | translate }}</mat-label>
+                <input matInput type="text" formControlName="url"/>
+            </mat-form-field>
+        </div>
     </div>
-    <div class="basis-full md:basis-1/2">
-      <mat-form-field class="example-full-width">
-        <mat-error> {{'SIGN_UP.POS.LON_ERROR' | translate}} </mat-error>
-        <label>{{"SIGN_UP.POS.LON" | translate}}</label>
-        <input
-          matInput
-          type="text"
-          placeholder="{{ 'SIGN_UP.POS.LON' | translate }}"
-          [value]="posLon"
-          formControlName="longitude"
-        />
-      </mat-form-field>
-    </div>
-    <div class="basis-full">
-      <p
-        class="description mb-0"
-        [innerHTML]="'SIGN_UP.POS.URL_OPTIONAL_TEXT' | translate"
-      ></p>
-    </div>
-    <div class="basis-full">
-      <mat-form-field class="example-full-width">
-        <label>
-          <input
-            matInput
-            type="text"
-            placeholder="{{ 'SIGN_UP.POS.URL' | translate }}"
-            formControlName="url"
-          />
-        </label>
-      </mat-form-field>
-    </div>
-  </div>
 </form>

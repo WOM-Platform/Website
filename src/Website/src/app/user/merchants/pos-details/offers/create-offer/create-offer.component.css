@@ -1,0 +1,7 @@
+.input-create {
+    @apply rounded-xl px-6
+}
+
+.input-and-description {
+    @apply flex flex-col justify-start items-start
+}

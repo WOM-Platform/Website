@@ -309,6 +309,10 @@
       "CANCEL": "Cancel",
       "API_ERROR": "There are errors in the form or there is a problem contacting the server. Check the data and try again.",
       "INPUT_ERROR": "Please fill out the form and make sure you have selected a location on the map."
+    },
+    "VIEW_POS": {
+      "ADD": "Edit",
+      "TITLE": "View your Point Of Service"
     }
   },
   "RESET_PASSWORD": {

@@ -1,3 +1,14 @@
-<div class="min-w-[800px]">
-    <p>users-tab works!</p>
+<app-filters [itemsPage]="itemsPerPage ? itemsPerPage : '10'" (filterEmit)="filterUpdate($event)"/>
+<div *ngIf="userList">
+    <app-admin-table [tableData]="userList"
+                     [tableColumns]="usersTableColumns"
+                     [isActions]="true"
+                     [currentPage]="currentPage"
+                     [itemsPerPage]="itemsPerPage"
+                     [totalItems]="totalItems"
+                     [pageCount]="pageCount"
+                     (deleteItem)="onDeleteUser($event)"
+
+                     (pageChanged)="onPageChange($event)"
+    ></app-admin-table>
 </div>

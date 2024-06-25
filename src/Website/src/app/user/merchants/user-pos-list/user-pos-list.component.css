@@ -1,0 +1,36 @@
+
+.access-list {
+    padding: 0;
+    list-style-type: disc;
+}
+
+.access-list li {
+    @apply ml-6
+}
+
+.access-item {
+    @apply flex
+}
+
+.access-details {
+    @apply text-lg flex gap-4;
+    flex-grow: 1;
+}
+
+.icon-button-bg {
+    @apply w-10 h-10  rounded-full transition duration-300 ease-in-out
+}
+
+.delete-button mat-icon {
+    font-size: 24px;
+    color: #f00;
+}
+
+
+.btn-default {
+    @apply border-2 border-black px-4 py-2 rounded-full flex items-center gap-1 bg-white cursor-pointer;
+}
+
+.btn-default:hover {
+    @apply bg-gray-300;
+}

@@ -309,6 +309,10 @@
       "CANCEL": "Annulla",
       "API_ERROR": "Ci sono alcuni errori nei dati o un problema di connessione con il server. Controlla i dati e riprova.",
       "INPUT_ERROR": "Compila i campi in rosso per continuare e assicurati di aver selezionato una posizione sulla mappa."
+    },
+    "VIEW_POS": {
+      "ADD": "Modifica",
+      "TITLE": "Visualizza POS"
     }
   },
   "RESET_PASSWORD": {

@@ -1,63 +1,59 @@
-<div class="dialog-view">
-  <div class="flex flex-col justify-center">
-    <div class="w-full">
-      <app-editable-element
-        [valueEl]="data.name"
-        [action]="action"
-        [minLength]="4"
-        [maxLength]="100"
-        (onChangeElement)="onUpdateSourceField('name', $event, true)"
-        class="font-semibold text-cyan-700"
-      />
-    </div>
-    <!-- <p class="text-center"><span class="font-semibold text-cyan-700">{{ instrument.name }}</span></p> -->
-    <div class="source-data mt-6">
-      <p class="mb-0">
-        <span class="text-slate-600 font-semibold">ID</span>:
-        {{ instrument.id }}
-      </p>
-      <app-editable-element
-        [keyEl]="'URL'"
-        [valueEl]="data.url"
-        [action]="action"
-        [pattern]="
+<div *ngIf="instrumentView" class="dialog-view">
+    <div class="flex flex-col justify-center">
+        <div class="w-full">
+            <app-editable-element
+                    [valueEl]="instrumentView.name"
+                    [action]="action"
+                    [minLength]="4"
+                    [maxLength]="100"
+                    (onChangeElement)="updateInstrumentField('name', $event, true)"
+                    class="font-semibold text-cyan-700"
+            />
+        </div>
+        <!-- <p class="text-center"><span class="font-semibold text-cyan-700">{{ instrument.name }}</span></p> -->
+        <div class="source-data mt-6">
+            <p class="mb-0">
+                <span class="text-slate-600 font-semibold">ID</span>:
+                {{ instrumentView.id }}
+            </p>
+            <app-editable-element
+                    [keyEl]="'URL'"
+                    [valueEl]="instrumentView.url"
+                    [action]="action"
+                    [pattern]="
           '^(https?:\\/\\/)?([\\da-z\\.-]+)\\.([a-z\\.]+)(:[0-9]{1,5})?(\\/[^\\s]*)?$'
         "
-        [minLength]="10"
-        [maxLength]="100"
-        (onChangeElement)="onUpdateSourceField('url', $event, true)"
-        class="merchant-element"
-      />
+                    [minLength]="10"
+                    [maxLength]="100"
+                    (onChangeElement)="updateInstrumentField('url', $event, true)"
+                    class="merchant-element"
+            />
 
-      <!-- <p class="mb-0"><span class="text-slate-600 font-semibold">URL</span>: {{ instrument.url }}</p> -->
-      <!-- <p class="mb-0"><span class="font-semibold">WOM generati</span>: Tanti</p> -->
-    </div>
-    <app-aims-list [aimList]="instrument.aims" />
+            <!-- <p class="mb-0"><span class="text-slate-600 font-semibold">URL</span>: {{ instrument.url }}</p> -->
+            <!-- <p class="mb-0"><span class="font-semibold">WOM generati</span>: Tanti</p> -->
+        </div>
+        <app-aims-list [aimList]="instrumentView.aims"/>
 
-    <div *ngIf="action === 'edit'">
-      <div class="mt-6">
-        <app-user-aims-list
-          [instrumentAims]="instrument.aims"
-          (aimsEmit)="onUpdateSourceField('aims', $event, false)"
-        />
-      </div>
-    </div>
-    <div
-      *ngIf="instrument.access && instrument.access.length > 0"
-      class="mt-10"
-    >
-      <p class="font-semibold mb-0">Gestori:</p>
+        <div *ngIf="action === 'edit'">
+            <div class="mt-6">
+                <app-user-aims-list
+                        [instrumentAims]="instrumentEditing.aims"
+                        (aimsEmit)="updateInstrumentField('aims', $event, false)"
+                />
+            </div>
+        </div>
+        <div
+                *ngIf="instrumentView.access && instrumentView.access.length > 0"
+                class="mt-10"
+        >
+            <p class="font-semibold mb-0">Gestori:</p>
 
-      <app-access-list
-        [accessList]="instrument.access"
-        [action]="action"
-        (deleteAccess)="onDeleteAccess($event)"
-      />
+            <app-access-list
+                    [accessList]="instrumentView.access"
+                    [action]="action"
+                    (deleteAccess)="confirmAndDeleteAccess($event)"
+                    (addAccess)="addAccessAndUpdateList($event)"
+            />
+        </div>
     </div>
-    <div *ngIf="action === 'edit'">
-      <div *ngIf="!createNewAccess" class="mt-6">
-        <app-user-access-list (accessToAdd)="handleAccessList($event)" />
-      </div>
-    </div>
-  </div>
 </div>

@@ -1,6 +1,6 @@
 <div class="flex w-full min-h-[84vh]">
     <div class="loading-overlay" *ngIf="isLoading">
-        <img src="../../../assets/gif/loading.gif" alt="Caricamento..." class="loading-image">
+        <img src="/assets/gif/loading.gif" alt="Caricamento..." class="loading-image">
     </div>
     <div class="flex flex-col justify-between bg-white min-w-[250px] px-6 py-4">
         <div class="flex flex-col">
@@ -9,18 +9,20 @@
                 <li *ngFor="let link of navLinks" routerLinkActive="active-link"
                     [routerLinkActiveOptions]="{exact: true}" class="px-2">
                     <div *ngIf="link.isActive; else notActive">
-                    <a [routerLink]="link.path" class="flex items-center space-x-2">
-                        <i [class]="link.icon" class="icon-sidenav"></i>
-                        <span>{{ link.text }}</span>
+                        <a [routerLink]="link.path" class="flex items-center space-x-2">
+                            <i [class]="link.icon" class="icon-sidenav"></i>
+                            <span>{{ link.text }}</span>
 
-                    </a>
-                </div>
-                <ng-template #notActive>      <p  class="flex items-center space-x-2 mb-0">
-                    <i class="fa-solid fa-ban icon-sidenav"></i>
-                    <i [class]="link.icon" class="icon-sidenav"></i>
-                    <span>{{ link.text }}</span>
+                        </a>
+                    </div>
+                    <ng-template #notActive>
+                        <p class="flex items-center space-x-2 mb-0">
+                            <i class="fa-solid fa-ban icon-sidenav"></i>
+                            <i [class]="link.icon" class="icon-sidenav"></i>
+                            <span>{{ link.text }}</span>
 
-                </p></ng-template>
+                        </p>
+                    </ng-template>
                 </li>
             </ul>
         </div>

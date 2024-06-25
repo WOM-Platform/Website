@@ -1,0 +1,120 @@
+<div class="flex justify-between mt-11">
+    <h2>I tuoi Merchant</h2>
+    <button class="flex justify-center border-2 px-4 py-2 rounded-full border-blue-600 bg-blue-200 hover:bg-blue-400"
+            (click)="onCreateMerchant()">
+        <mat-icon>add</mat-icon>
+        Nuovo Merchant
+    </button>
+</div>
+<div *ngIf="merchants && merchants.length > 0; else noMerchant">
+    <div class="my-6" *ngFor="let merchant of merchants; let i= index">
+        <div
+                class="bg-white rounded-lg shadow-md p-6 cursor-pointer"
+                (click)="merchant.isOpen = !merchant.isOpen"
+        >
+            <app-editable-element
+                    [valueEl]="merchant.name"
+                    [action]="actions[i]"
+                    [minLength]="8"
+                    [maxLength]="100"
+                    (onChangeElement)="onUpdateMerchant(i,'name', $event)"
+                    (click)="$event.stopPropagation()"
+                    class="font-semibold text-cyan-700"
+            />
+            <div class="merchant-data my-4">
+                <p class="merchant-element">
+                    <span class="text-slate-600 font-semibold">ID</span>: {{ merchant.id }}
+                </p>
+                <p class="merchant-element">
+                    <span class="text-slate-600 font-semibold">CF</span>: {{ merchant.fiscalCode }}
+                </p>
+            </div>
+            <div>
+
+            </div>
+            <div class="flex justify-between">
+                <p class="flex items-center gap-2 mb-0 h-8">
+                    <span class="text-slate-600 font-semibold">Abilitato: </span>
+                    <span *ngIf="merchant.enabled; else notEnable">Attivo</span>
+                    <ng-template #notEnable>Disattivato</ng-template>
+                </p>
+                <i class="fa-solid fa-arrow-down p-4 rounded-full bg-blue-400 text-white font-semibold flex items-center justify-center"
+                   style="width: 40px; height: 40px;" [@rotateArrow]="merchant.isOpen ? 'open' : 'closed'"></i>
+            </div>
+
+            <div [@slideToggle]="merchant.isOpen ? 'open' : 'closed'">
+                <div class="my-4 merchant-data">
+                    <app-editable-element
+                            [keyEl]="'Attività primaria'"
+                            [valueEl]="merchant.primaryActivity"
+                            [action]="actions[i]"
+                            [typeEl]="'list'"
+                            [option]="businessList"
+                            (onChangeElement)="onUpdateMerchant(i,'primaryActivity', $event)"
+                            (click)="$event.stopPropagation()"
+                            class="merchant-element"
+                    ></app-editable-element>
+                    <app-editable-element
+                            [keyEl]="'Indirizzo'"
+                            [valueEl]="merchant.address"
+                            [action]="actions[i]"
+                            [typeEl]="'string'"
+                            (onChangeElement)="onUpdateMerchant(i,'address', $event)"
+                            (click)="$event.stopPropagation()"
+                            class="merchant-element"
+                    ></app-editable-element>
+                    <app-editable-element
+                            [keyEl]="'CAP'"
+                            [valueEl]="merchant.zipCode"
+                            [action]="actions[i]"
+                            [pattern]="'^[0-9]{5}$'"
+                            (onChangeElement)="onUpdateMerchant(i,'zipCode', $event)"
+                            (click)="$event.stopPropagation()"
+                            class="merchant-element"
+                    />
+                    <app-editable-element
+                            [keyEl]="'Paese'"
+                            [valueEl]="merchant.country"
+                            [action]="actions[i]"
+                            [typeEl]="'list'"
+                            [option]="countryList"
+                            (onChangeElement)="onUpdateMerchant(i,'country', $event)"
+                            (click)="$event.stopPropagation()"
+                            class="merchant-element"
+                    ></app-editable-element>
+                    <app-editable-element
+                            [keyEl]="'URL'"
+                            [valueEl]="merchant.url"
+                            [action]="actions[i]"
+                            [pattern]="
+          '^(https?:\\/\\/)?([\\da-z\\.-]+)\\.([a-z\\.]+)(:[0-9]{1,5})?(\\/[^\\s]*)?$'
+        "
+                            [minLength]="10"
+                            [maxLength]="100"
+                            (onChangeElement)="onUpdateMerchant(i,'url', $event)"
+                            (click)="$event.stopPropagation()"
+                            class="merchant-element"
+                    />
+                </div>
+
+                <p class="font-semibold mb-0 mt-6">Gestori:</p>
+                <app-access-list [accessList]="merchant.accessList"
+                                 [action]="actions[i]"
+                                 (click)="$event.stopPropagation()"
+                                 [showRole]="true"
+                                 (addAccess)="handleAccessList($event, merchant.id, i)"
+                                 (deleteAccess)="onDeleteAccess($event, merchant.id, i)"
+                />
+
+                <app-user-pos-list [merchantId]="merchant.id" [posList]="merchant.pos"
+                                   [actionMerchant]="actions[i]" class="mt-6"
+                                   (click)="$event.stopPropagation()"/>
+            </div>
+        </div>
+    </div>
+</div>
+<ng-template #noMerchant>
+    <div class="flex justify-center items-center">
+        <h2>No merchant</h2>
+    </div>
+</ng-template>

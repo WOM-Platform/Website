@@ -1,0 +1,51 @@
+<div *ngIf="posList && posList.length > 0" class="mt-6">
+    <p class="font-semibold mb-0">POS:</p>
+    <ul class="access-list">
+        <li *ngFor="let pos of posList" class="">
+            <div class="access-item">
+                <div class="access-details">
+                    <div>
+                        <span class="text-slate-600 font-semibold">Name</span>:
+                        {{ pos.name }}
+                    </div>
+                </div>
+                <div class="flex gap-2">
+                    <button class="icon-button-bg hover:bg-slate-300" (click)="onEditPos(pos, 'view')">
+                        <i class="fa-solid fa-eye text-black"></i>
+                    </button>
+                    <ng-container *ngIf="actionMerchant === 'edit'">
+                        <button class="icon-button-bg hover:bg-blue-200" (click)="onEditPos(pos, 'edit')">
+                            <i class="text-blue-500 fa-solid fa-pen"></i>
+                        </button>
+                        <button class="icon-button-bg hover:bg-red-200" (click)="onDeletePos(pos)">
+                            <i class="fa-solid fa-trash text-red-500"></i>
+                        </button>
+                    </ng-container>
+                </div>
+            </div>
+        </li>
+    </ul>
+    <div *ngIf="actionMerchant === 'edit'">
+        <div *ngIf="!createNewPos" class="mt-6">
+            <div class="">
+                <button
+                        *ngIf="!createNewPos"
+                        (click)="onAddPos()"
+                        class="btn-default"
+                >
+                    <mat-icon>add</mat-icon>
+                    Aggiungi POS
+                </button>
+                <button
+                        *ngIf="createNewPos"
+                        (click)="handleCancellationPos()"
+                        class="btn-default"
+                >
+                    <mat-icon>cancel</mat-icon>
+                    Annulla
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+      

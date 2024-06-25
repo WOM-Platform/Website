@@ -1,52 +1,55 @@
 <div class="">
-  <button *ngIf="!addAccess" (click)="onAddAccess()" class="btn-default">
-    <mat-icon>add</mat-icon>
-    Aggiungi gestore
-  </button>
-  <button *ngIf="addAccess" (click)="handleCancellationAccess()" class="btn-default">
-    <mat-icon>cancel</mat-icon>
-    Annulla
-  </button>
+    <button *ngIf="!addAccess" (click)="onAddAccess()" class="btn-default">
+        <mat-icon>add</mat-icon>
+        Aggiungi gestore
+    </button>
+    <button *ngIf="addAccess" (click)="handleCancellationAccess()" class="btn-default">
+        <mat-icon>cancel</mat-icon>
+        Annulla
+    </button>
 </div>
 <div *ngIf="addAccess" class="add-access-container" @fadeInOut>
-  <app-search-source (createSource)="onCreateAccess($event)"
-                     (searchSource)="onSearch($event)"
-                     (clearFormEvent)="clearList()"></app-search-source>
+    <app-search-source (createSource)="onCreateAccess($event)"
+                       (searchSource)="onSearch($event)"
+                       (clearFormEvent)="clearList()"></app-search-source>
 
-  <div *ngIf="listAccess && listAccess.length > 0" @fadeInOut>
-    <div @fadeInOut>
-      <p class="mb-0 font-semibold">Risultati:</p>
-      <ul class="access-list">
-        <li class="access-element"
-            *ngFor="let access of listAccess; trackBy: trackByAccess"
-            (click)="handleSelection(access)">
-          <span class="font-semibold">Nome: </span>{{ access.name }} {{ access.surname }}
-          <span class="font-semibold">Email: </span>{{ access.email }}
-        </li>
-      </ul>
+    <div *ngIf="listAccess && listAccess.length > 0" @fadeInOut>
+        <div @fadeInOut>
+            <p class="mb-0 font-semibold">Risultati:</p>
+            <ul class="access-list">
+                <li class="access-element"
+                    *ngFor="let access of listAccess; trackBy: trackByAccess"
+                    (click)="handleSelection(access)">
+                    <span class="font-semibold">Nome: </span>{{ access.name }} {{ access.surname }}
+                    <span class="font-semibold">Email: </span>{{ access.email }}
+                </li>
+            </ul>
+        </div>
     </div>
-  </div>
 
-  <div *ngIf="selectedAccess" @fadeInOut>
-    <div class="flex items-center">
-        
+    <div *ngIf="selectedAccess" @fadeInOut>
+        <div class="flex items-center">
+
             <div><span
                     class="text-slate-600 font-semibold">Name</span>: {{ selectedAccess.name }} {{ selectedAccess.surname }}
             </div>
             <div><span class="text-slate-600 font-semibold">Email</span>: {{ selectedAccess.email }}</div>
-      
-      <div class="px-6" *ngIf="isRoleRequired">
-        <label>Seleziona ruolo<span class="text-red-600">*</span>:</label>
-        <select [(ngModel)]="userRole" name="role" #role="ngModel" required>
-          <option value="Admin">Admin</option>
-          <option value="User">User</option>
-        </select>
-        <div *ngIf="role?.invalid && role?.touched" class="text-red-600">Please select a role</div>
-      </div>
+
+
+            <div class="px-6" *ngIf="isRoleRequired">
+                <label>Seleziona ruolo<span class="text-red-600">*</span>:</label>
+                <select [(ngModel)]="userRole" name="role" #role="ngModel" required>
+                    <option value="Admin">Admin</option>
+                    <option value="User">User</option>
+                </select>
+                <div *ngIf="role?.invalid && role?.touched" class="text-red-600">Please select a role</div>
+            </div>
+        </div>
+        <div class="flex justify-end">
+            <button class="px-2 border-2 border-black rounded-full"
+                    (click)="addUserToAccessList(selectedAccess, userRole)">Inserisci
+            </button>
+        </div>
     </div>
-    <div class="flex justify-end">
-    <button class="px-2 border-2 border-black rounded-full" (click)="addUserToAccessList(selectedAccess, userRole)" [disabled]="role?.invalid">Inserisci</button>
-  </div>
-</div>
-  
+
 </div>

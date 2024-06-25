@@ -1,55 +1,64 @@
-export class Pos {
-  id: string;
-  name: string;
-  url: string;
-  // privateKey: string;
-  // publicKey: string;
-  latitude: number;
-  longitude: number;
-  isActive: boolean;
+import {Offer} from "./offer";
 
-  public static fromJson(json): any {
-    if (json === null) {
-      return null;
+export class Pos {
+    id: string;
+    name: string;
+    url: string;
+    // privateKey: string;
+    // publicKey: string;
+    latitude: number;
+    longitude: number;
+    isActive: boolean;
+    cover: ImageCover;
+    offers: Offer[] | '';
+
+    public static fromJson(json): any {
+        if (json === null) {
+            return null;
+        }
+        return Object.assign(new Pos(), json);
     }
-    return Object.assign(new Pos(), json);
-  }
+}
+
+export interface ImageCover {
+    blurHash: string;
+    fullSizeUrl: string;
 }
 
 export class PosRegistration {
-  ownerMerchantId: string;
-  name: string;
-  latitude: number;
-  longitude: number;
-  url: string;
+    ownerMerchantId: string;
+    name: string;
+    latitude: number;
+    longitude: number;
+    url: string;
 
-  public static fromJson(json): any {
-    if (json === null) {
-      return null;
+    public static fromJson(json): any {
+        if (json === null) {
+            return null;
+        }
+        return Object.assign(new PosRegistration(), json);
     }
-    return Object.assign(new PosRegistration(), json);
-  }
 }
 
 export class PosMapContainer {
-  pos: PosMap[];
+    pos: PosMap[];
 
-  public static fromJson(json): any {
-    if (json === null) {
-      return null;
+    public static fromJson(json): any {
+        if (json === null) {
+            return null;
+        }
+        return Object.assign(new PosMapContainer(), json);
     }
-    return Object.assign(new PosMapContainer(), json);
-  }
 }
 
 export class PosMap {
-  id: string;
-  name: string;
-  position: LatLon;
-  url: string;
+    id: string;
+    name: string;
+    position: LatLon;
+    url: string;
 }
 
 export class LatLon {
-  latitude: number;
-  longitude: number;
+    latitude: number;
+    longitude: number;
 }

@@ -1,32 +1,33 @@
-<div *ngIf="instruments && instruments.length > 0; else noInstrument">
-  <div class="my-6" *ngFor="let instrument of instruments">
-    <div
-      class="bg-white rounded-lg shadow-md p-6 cursor-pointer"
-      *ngIf="instrument.access"
-      (click)="instrument.isOpen = !instrument.isOpen"
-    >
-      <app-expandable-card
-        [name]="instrument.name"
-        [role]="'Admin'"
-        [data]="instrument"
-        (updateInstrument)="onUpdateSourceField(instrument, $event)"
-      />
-      <div [@slideToggle]="instrument.isOpen ? 'open' : 'closed'">
-        <app-aims-list [aimList]="instrument.aims" />
+<div *ngIf="uiInstruments && uiInstruments.length > 0; else noInstrument">
+    <div class="my-6" *ngFor="let instrument of uiInstruments">
         <div
-          *ngIf="instrument.access && instrument.access.length > 0"
-          class="mt-10"
+                class="bg-white rounded-lg shadow-md p-6 cursor-pointer"
+                (click)="instrument.isOpen = !instrument.isOpen"
         >
-          <p class="font-semibold mb-0">Gestori:</p>
-
-          <app-access-list [accessList]="instrument.access" />
+            <app-expandable-card
+                    [name]="instrument.name"
+                    [role]="'Admin'"
+                    [data]="instrument"
+                    (updateInstrument)="updateInstrumentField(findEditingInstrumentById(instrument.id), $event)"
+                    (click)="$event.stopPropagation()"
+            ></app-expandable-card>
+            <div class="flex justify-end">
+                <i class="fa-solid fa-arrow-down p-4 rounded-full bg-blue-400 text-white font-semibold flex items-center justify-center"
+                   style="width: 40px; height: 40px;" [@rotateArrow]="instrument.isOpen ? 'open' : 'closed'"></i>
+            </div>
+            <div [@slideToggle]="instrument.isOpen ? 'open' : 'closed'">
+                <app-aims-list [aimList]="instrument.aims"></app-aims-list>
+                <div *ngIf="instrument.access && instrument.access.length > 0" class="mt-10">
+                    <p class="font-semibold mb-0">Gestori:</p>
+                    <app-access-list (click)="$event.stopPropagation()"
+                                     [accessList]="instrument.access"></app-access-list>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
 </div>
 <ng-template #noInstrument>
-  <div class="flex justify-center items-center">
-    <h2>No instrument</h2>
-  </div>
+    <div class="flex justify-center items-center">
+        <h2>No instrument</h2>
+    </div>
 </ng-template>
