@@ -66,8 +66,9 @@
             </ng-template>
             [offers]="pos.offers"
         </mat-error>
-        <!--<app-forms-pos [(form)]="formPos" [pos]="pos"></app-forms-pos>-->
-        <app-offers [posAction]="action"/>
+        <div class="mt-6">
+            <app-forms-pos [(form)]="formPos" [pos]="pos"></app-forms-pos>
+        </div>
         <div class="flex justify-end">
             <button mat-button mat-dialog-close>
                 <ng-container *ngIf="action === 'edit'; else addPosCancel">
@@ -85,6 +86,9 @@
                     {{ "USER.ADD_POS.ADD" | translate }}
                 </ng-template>
             </button>
+        </div>
+        <div class="mb-6">
+            <app-offers [posAction]="action"/>
         </div>
     </div>
 </div>

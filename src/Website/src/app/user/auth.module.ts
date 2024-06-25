@@ -43,6 +43,7 @@ import {AccessListComponent} from "./components/access-list/access-list.componen
 import {AimsListComponent} from "./components/aims-list/aims-list.component";
 import {PosDetailsComponent} from "./merchants/pos-details/pos-details";
 import {UserPosListComponent} from "./merchants/user-pos-list/user-pos-list.component";
+import {PosCreateDialogComponent} from "./merchants/pos-create-dialog/pos-create-dialog.component";
 
 @NgModule({
     declarations: [
@@ -53,6 +54,7 @@ import {UserPosListComponent} from "./merchants/user-pos-list/user-pos-list.comp
         FormMerchantComponent,
         MerchantDetailComponent,
         MerchantStatsComponent,
+        PosCreateDialogComponent,
         MyInstrumentsCollectionComponent,
         MyMerchantsCollectionComponent,
         UserAdminComponent,

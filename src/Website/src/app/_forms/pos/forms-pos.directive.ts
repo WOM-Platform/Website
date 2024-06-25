@@ -24,12 +24,13 @@ import {Observable, Subject, Subscription} from "rxjs";
 import {TranslateModule} from "@ngx-translate/core";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatCheckboxModule} from "@angular/material/checkbox";
+import {MatInput} from "@angular/material/input";
 
 @Component({
     selector: "app-forms-pos",
     templateUrl: "./forms-pos.directive.html",
     standalone: true,
-    imports: [TranslateModule, MatFormFieldModule, ReactiveFormsModule, MatCheckboxModule, GoogleMapsModule],
+    imports: [TranslateModule, MatFormFieldModule, ReactiveFormsModule, MatCheckboxModule, GoogleMapsModule, MatInput],
     styleUrls: ["./forms-pos.directive.css", "../forms.directive.css"],
 })
 export class PosFormComponent implements OnInit, AfterViewInit, OnDestroy {
@@ -37,7 +38,7 @@ export class PosFormComponent implements OnInit, AfterViewInit, OnDestroy {
     @ViewChild("mapSearchField") searchField: ElementRef;
 
     unsubscribe = new Subject<void>();
-    
+
     posLon: string;
     posLat: string;
     isActive: boolean;

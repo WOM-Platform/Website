@@ -90,6 +90,24 @@ export class PosService {
             }))
     }
 
+    // create a new offer
+    createOffer(posId, data): Observable<any> {
+        return this.http.post(`${this.localUrlV1}${posId}/offers`, data)
+    }
+
+    // to edit title and description
+    editOfferTitle(posId: string, offerEdited: Offer): Observable<any> {
+        return this.http.put(`${this.localUrlV1}${posId}/offers/${offerEdited.id}`, offerEdited)
+    }
+
+    // to activate or deactivate offer
+
+
+    // to delete offer
+    deleteOffer(posId: string, offerId) {
+        return this.http.delete(`${this.localUrlV1}${posId}/offers/${offerId}`)
+    }
+
     getOfferQrCode(offer: Offer): Observable<any> {
         return this.http.get(`https://dev.wom.social/api/render/offer/${offer.id}`, {responseType: 'blob'}).pipe(
             map((offerDetails: any) => {
@@ -106,15 +124,8 @@ export class PosService {
         )
     }
 
-    // create a new offer
-    createOffer(posId, data): Observable<any> {
-        console.log("Create offer")
-        return this.http.post(`${this.localUrlV1}${posId}/offers`, data)
-    }
-
-    // to delete offer
-    deleteOffer(posId: string, offerId) {
-        return this.http.delete(`${this.localUrlV1}${posId}/offers/${offerId}`)
+    updateOfferStatus(posId: string, offerId: string, deactivatedValue: boolean) {
+        return this.http.put(`${this.localUrlV1}${posId}/offers/${offerId}/deactivation`, {"deactivated": deactivatedValue})
     }
 
     // TO MOVE IN UTILS

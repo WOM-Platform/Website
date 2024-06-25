@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
 import {NgIf} from "@angular/common";
 import {PaginatorModule} from "primeng/paginator";
 import {
@@ -10,7 +10,7 @@ import {
     Validators
 } from "@angular/forms";
 import {Offer} from "../../../../../_models/offer";
-import {MatDialogRef} from "@angular/material/dialog";
+import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {OfferFiltersComponent} from "./offer-filters/offer-filters.component";
 import {Filter} from "../../../../../_models/filter";
 
@@ -28,25 +28,40 @@ import {Filter} from "../../../../../_models/filter";
     styleUrl: './create-offer.component.css'
 })
 export class CreateOfferComponent implements OnInit {
-    @Output() offerToAdd = new EventEmitter<Offer>()
-
     newOffer: FormGroup
+    isEditMode: boolean;
 
-    constructor(private dialogRef: MatDialogRef<CreateOfferComponent>, private fb: FormBuilder) {
+    constructor(private dialogRef: MatDialogRef<CreateOfferComponent>, private fb: FormBuilder, @Inject(MAT_DIALOG_DATA) public data: any,) {
     }
 
     ngOnInit() {
-        this.newOffer = this.fb.group({
-            title: ["", [Validators.minLength(6), Validators.required]],
-            description: [null],
-            cost: [null, Validators.required],
-            /*deactivated: [true, [this.booleanValidator()]],*/
-            filter: []
-        })
+        this.isEditMode = !!this.data?.offer;
+
+        if (!this.isEditMode) {
+            this.newOffer = this.fb.group({
+                title: ["", [Validators.minLength(6), Validators.required]],
+                description: [null],
+                cost: [null, Validators.required],
+                /*deactivated: [true, [this.booleanValidator()]],*/
+                filter: []
+            })
+        } else {
+            this.newOffer = this.fb.group({
+                id: [this.data?.offer.id],
+                title: [this.data?.offer.title || "", [Validators.minLength(6), Validators.required]],
+                description: [this.data?.offer.description || null],
+                cost: [this.data?.offer.cost, Validators.required],
+                deactivated: [this.data?.offer.deactivated || null],
+                filter: [this.data?.offer.filter || null]
+            })
+
+            this.newOffer.get('cost').disable();
+        }
     }
 
     onSubmit() {
         if (this.newOffer.valid) {
+            this.newOffer.get('cost').enable();
             const formValue = this.newOffer.value;
 
             // Mapping form values to Offer type
@@ -73,6 +88,6 @@ export class CreateOfferComponent implements OnInit {
 
     addFilter(filters: Filter) {
         this.newOffer.patchValue({filter: filters});
-        console.log("Filters updated: ", filters);
+        /*console.log("Filters updated: ", filters);*/
     }
 }

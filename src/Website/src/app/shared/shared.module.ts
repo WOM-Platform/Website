@@ -43,7 +43,7 @@ import {DialogConfirmCancelComponent} from "../components/dialog-confirm-cancel/
 import {DialogConfirmComponent} from "../components/dialog-confirm/dialog-confirm";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {NgxFileDropModule} from "ngx-file-drop";
-import {ActiveBadgeComponent} from "../components/active-badge/active-badge.component";
+import {BadgeComponent} from "../components/badge/badge.component";
 
 @NgModule({
     declarations: [
@@ -55,7 +55,7 @@ import {ActiveBadgeComponent} from "../components/active-badge/active-badge.comp
         PaginationComponent,
     ],
     imports: [
-        ActiveBadgeComponent,
+        BadgeComponent,
         BrowserAnimationsModule,
         CommonModule,
         FormsModule,

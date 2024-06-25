@@ -1,26 +1,41 @@
-import {Component, EventEmitter, Output} from '@angular/core';
-import {FormBuilder, FormGroup} from "@angular/forms";
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {FormBuilder, FormGroup, FormsModule} from "@angular/forms";
 import {MatSliderModule} from "@angular/material/slider";
 
 @Component({
     selector: 'app-validity-slider',
     standalone: true,
     imports: [
-        MatSliderModule
+        MatSliderModule,
+        FormsModule
     ],
     templateUrl: './validity-slider.component.html',
-    styleUrls: ['./validity-slider.component.css'] // fixed typo styleUrl to styleUrls
+    styleUrls: ['./validity-slider.component.css']
 })
-export class ValiditySliderComponent {
+export class ValiditySliderComponent implements OnInit {
+    @Input() selectedValidity: number = -1;
     @Output() validitySelected = new EventEmitter<number>();
     validityForm: FormGroup;
 
-    qntDays: number = -1; // to save the number of WOM days validity to retrive to the API
+    qntDays: number = -1; // to save the number of WOM days validity to retrieve to the API
+
+    sliderValueSave
 
     constructor(private fb: FormBuilder) {
         this.validityForm = this.fb.group({
             validity: [0]
         });
+    }
+
+    ngOnInit() {
+        if (this.selectedValidity !== -1) {
+            const sliderValue = this.calculateSliderValue(this.selectedValidity);
+            this.sliderValueSave = sliderValue
+            console.log("calcilation ", sliderValue)
+            this.validityForm.patchValue({validity: sliderValue});
+            this.qntDays = this.selectedValidity;
+            this.validitySelected.emit(this.qntDays);
+        }
     }
 
     onSliderChange(event: any) {
@@ -68,6 +83,27 @@ export class ValiditySliderComponent {
                 return 7;
             default:
                 return -1;
+        }
+    }
+
+    calculateSliderValue(days: number): number {
+        switch (days) {
+            case -1:
+                return 0;
+            case 365:
+                return 1;
+            case 183:
+                return 2;
+            case 91:
+                return 3;
+            case 31:
+                return 4;
+            case 14:
+                return 5;
+            case 7:
+                return 6;
+            default:
+                return 0;
         }
     }
 }

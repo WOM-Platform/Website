@@ -3,11 +3,10 @@ import {Offer} from "../../../../_models/offer";
 import {NgForOf, NgIf} from "@angular/common";
 import {MatDialog, MatDialogConfig, MatDialogModule} from "@angular/material/dialog";
 import {CreateOfferComponent} from "./create-offer/create-offer.component";
-import {ActiveBadgeComponent} from "../../../../components/active-badge/active-badge.component";
+import {BadgeComponent} from "../../../../components/badge/badge.component";
 import {ActivatedRoute} from "@angular/router";
 import {PosService} from "../../../../_services";
 import {DialogConfirmCancelComponent} from "../../../../components/dialog-confirm-cancel/dialog-confirm-cancel";
-import {Merchant} from "../../../../_models";
 import {SnackBarService} from "../../../../_services/snack-bar.service";
 
 @Component({
@@ -17,7 +16,7 @@ import {SnackBarService} from "../../../../_services/snack-bar.service";
         NgForOf,
         NgIf,
         MatDialogModule,
-        ActiveBadgeComponent
+        BadgeComponent
     ],
     templateUrl: './offers.component.html',
     styleUrl: './offers.component.css'
@@ -42,6 +41,7 @@ export class OffersComponent implements OnInit {
 
             this.posService.getOffers(this.posId).subscribe({
                 next: (offers) => {
+                    console.log(offers)
                     offers.map(offer => {
                         this.posService.convertBlobToBase64(offer.imageBlob).subscribe(base64 => {
                             offer.imageString = base64
@@ -89,37 +89,59 @@ export class OffersComponent implements OnInit {
         })
     }
 
-    onEditOffer(offerId: string) {
+    onEditOffer(offer: Offer) {
+        // Create a deep copy of the offer to avoid accidental modifications
+        const originalOffer: Offer = {...offer};
+
         const dialogRef = this.dialog.open(CreateOfferComponent,
             {
                 width: "900px",
                 maxHeight: "90vh",
-                data: {},
-            })
-        dialogRef.afterClosed().subscribe((newOffer) => {
-            if (newOffer) {
-                this.posService.createOffer(this.posId, newOffer).subscribe({
-                    next: (newOffer) => {
-                        if (newOffer) {
-                            console.log("new offer ", newOffer)
-                            this.snackBarService.openSnackBar("Offerta creata correttamente")
-                            this.posService.getOfferQrCode(newOffer).subscribe({
-                                next: (offer) => {
-                                    this.posService.convertBlobToBase64(offer.imageBlob).subscribe(base64 => {
-                                        offer.imageString = base64
-                                    })
-                                    this.offers.push(offer)
-                                }
-                            })
+                data: {offer: originalOffer}, // Pass the deep copy
+            });
+
+        dialogRef.afterClosed().subscribe((editedOffer) => {
+            if (editedOffer) {
+                // Check if the offer's main fields are edited
+                const isEdited = originalOffer.title !== editedOffer.title ||
+                    originalOffer.description !== editedOffer.description ||
+                    originalOffer.cost !== editedOffer.cost || originalOffer.filter !== editedOffer.filter
+
+                // Check if the deactivated status is edited
+                const isDeactivatedEdited = originalOffer.deactivated !== editedOffer.deactivated;
+
+
+                if (isEdited) {
+                    this.posService.editOfferTitle(this.posId, editedOffer).subscribe({
+                        next: (edited) => {
+                            const index = this.offers.findIndex(o => o.id === edited.id);
+                            if (index !== -1) {
+                                this.offers[index] = edited;
+                            }
+                        },
+                        error: (err) => {
+                            console.error(err);
+                            this.snackBarService.openSnackBar("Errore nella modifica dell'offerta");
                         }
-                    },
-                    error: (err) => {
-                        console.error(err)
-                        this.snackBarService.openSnackBar("Errore nella creazione dell'offerta")
-                    }
-                })
+                    });
+                }
+
+                if (isDeactivatedEdited) {
+                    this.posService.updateOfferStatus(this.posId, editedOffer.id, editedOffer.deactivated).subscribe({
+                        next: (updated: Offer) => {
+                            const index = this.offers.findIndex(o => o.id === updated.id);
+                            if (index !== -1) {
+                                this.offers[index].deactivated = updated.deactivated;
+                            }
+                        },
+                        error: (err) => {
+                            console.error(err);
+                            this.snackBarService.openSnackBar("Errore nella modifica dello stato dell'offerta");
+                        }
+                    });
+                }
             }
-        })
+        });
     }
 
     onDeleteOffer(offerId: string) {
@@ -138,7 +160,7 @@ export class OffersComponent implements OnInit {
             if (result) {
                 this.posService.deleteOffer(this.posId, offerId).subscribe({
                     next: () => {
-                        this.offers.splice(this.offers.findIndex(offer => offer.id === offerId))
+                        this.offers.splice(this.offers.findIndex(offer => offer.id === offerId), 1)
                         this.snackBarService.openSnackBar("Offerta cancellata correttamente")
                     },
                     error: () => {

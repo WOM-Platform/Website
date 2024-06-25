@@ -1,5 +1,5 @@
-import {Component, OnInit, AfterViewInit, Output, EventEmitter} from '@angular/core';
-import * as L from "leaflet"
+import {Component, OnInit, AfterViewInit, Output, EventEmitter, Input, SimpleChanges, OnChanges} from '@angular/core';
+import * as L from 'leaflet';
 import {Observable, Subscriber} from 'rxjs';
 
 @Component({
@@ -9,20 +9,26 @@ import {Observable, Subscriber} from 'rxjs';
     standalone: true,
     imports: []
 })
-export class MapComponent implements AfterViewInit {
-    @Output() bounds = new EventEmitter<any>()
+export class MapComponent implements AfterViewInit, OnChanges {
+    @Input() selectedBounds: any;
+    @Output() bounds = new EventEmitter<any>();
     private map;
 
     constructor() {
     }
 
     ngAfterViewInit(): void {
-        // first layer map: openStreetMap
-        this.initOpenStreetMap()
-        // second layer map: transactionMap
-        this.initTransactionMap()
+        // First layer map: OpenStreetMap
+        this.initOpenStreetMap();
+        // Second layer map: TransactionMap
+        this.initTransactionMap();
     }
 
+    ngOnChanges(changes: SimpleChanges): void {
+        if (changes.selectedBounds && this.map) {
+            this.setMapBounds(this.selectedBounds);
+        }
+    }
 
     private initOpenStreetMap(): void {
         const tiles = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -32,43 +38,44 @@ export class MapComponent implements AfterViewInit {
         });
 
         this.getPosition().subscribe((position: any) => {
-            console.log("la posizione ", position)
             if (position) {
                 this.map = L.map('map', {
                     center: [position.latitude, position.longitude],
                     zoom: 13
                 });
                 this.map.on('moveend', this.onBoundsChanged.bind(this));
-            }
+                tiles.addTo(this.map);
 
-            tiles.addTo(this.map);
-        })
+                // Set initial bounds if provided
+                if (this.selectedBounds) {
+                    this.setMapBounds(this.selectedBounds);
+                }
+            }
+        });
     }
 
-    private emitBounds() {
+    private emitBounds(): void {
         const bounds = this.map.getBounds();
         const leftTop: [number, number] = [bounds.getNorthWest().lat, bounds.getNorthWest().lng];
         const rightBottom: [number, number] = [bounds.getSouthEast().lat, bounds.getSouthEast().lng];
         this.bounds.emit({leftTop, rightBottom});
     }
 
-    private onBoundsChanged() {
-        const bounds = this.map.getBounds();
-
-        const leftTop = [bounds.getNorthWest().lat, bounds.getNorthWest().lng];
-        const rightBottom = [bounds.getSouthEast().lat, bounds.getSouthEast().lng];
-
-        this.bounds.emit({leftTop, rightBottom});
+    private onBoundsChanged(): void {
+        this.emitBounds();
     }
 
-    //
-    private initTransactionMap() {
+    private setMapBounds(bounds): void {
+        const latLngBounds = L.latLngBounds(bounds.leftTop, bounds.rightBottom);
+        this.map.fitBounds(latLngBounds);
+    }
+
+    private initTransactionMap(): void {
         const TM_TILES_URL = 'URL_OF_SERVER_TILES';
-
-        L.tileLayer(TM_TILES_URL).addTo(this.map)
+        L.tileLayer(TM_TILES_URL).addTo(this.map);
     }
 
-    private getPosition(): any {
+    private getPosition(): Observable<any> {
         return new Observable((observer: Subscriber<any>) => {
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition((position: any) => {
@@ -83,6 +90,4 @@ export class MapComponent implements AfterViewInit {
             }
         });
     }
-
-
 }

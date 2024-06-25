@@ -39,25 +39,29 @@
                 ></textarea>
             </div>
 
-            <!--   <div class="flex flex-col">
-                   <div class="flex justify-start gap-2">
-                       <label class="">Attiva:</label>
-                       <input type="checkbox" formControlName="deactivated"/>
-                   </div>
-                   <small class="text-gray-500">Scegli se rendere visibile e attiva l'offerta per gli utenti</small>
-               </div>-->
+            <div *ngIf="isEditMode" class="flex flex-col">
+                <div class="flex justify-start gap-2">
+                    <label class="">Disattivata:</label>
+                    <input type="checkbox" formControlName="deactivated"/>
+                </div>
+                <small class="text-gray-500">Scegli se rendere visibile e attiva l'offerta per gli utenti</small>
+            </div>
         </div>
 
         <div class="bg-white rounded-xl flex flex-col gap-4 mt-6">
             <div>
                 <small class="text-gray-500 text-xs">Se vuoi limitare l'uso di questa offerta a degli specifici WOM puoi
                     aggiungere i filtri.<br/> Questa azione non è consigliata per i nuovi utenti</small>
-                <app-offer-filters (filteredEmit)="addFilter($event)"></app-offer-filters>
+                <app-offer-filters [filters]="isEditMode && data?.offer.filter"
+                                   (filteredEmit)="addFilter($event)"></app-offer-filters>
             </div>
+
 
             <div class="flex justify-end gap-4">
                 <button type="button" class="text-gray-600" (click)="onCancellation()">Annulla</button>
-                <button type="submit" class="blue-wom" [disabled]="newOffer.invalid">Crea</button>
+                <button *ngIf="!isEditMode" type="submit" class="blue-wom" [disabled]="newOffer.invalid">Crea</button>
+                <button *ngIf="isEditMode" type="submit" class="blue-wom" [disabled]="newOffer.invalid">Modifica
+                </button>
             </div>
         </div>
     </form>

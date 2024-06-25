@@ -10,6 +10,7 @@ import {MatSnackBar} from "@angular/material/snack-bar";
 import {NgFor, NgIf} from "@angular/common";
 import {MatIcon} from "@angular/material/icon";
 import {ActivatedRoute, Router} from "@angular/router";
+import {PosCreateDialogComponent} from "../pos-create-dialog/pos-create-dialog.component";
 
 @Component({
     selector: 'app-user-pos-list',
@@ -53,12 +54,13 @@ export class UserPosListComponent implements OnInit {
     }
 
     onAddPos() {
+
         const posData = new PosDialogData();
         posData.merchantId = this.merchantId;
         posData.pos = null;
         posData.isEdit = false;
 
-        const dialogRef = this.matDialog.open(PosDetailsComponent, {
+        const dialogRef = this.matDialog.open(PosCreateDialogComponent, {
             data: posData,
         });
         dialogRef.afterClosed().subscribe((result) => {

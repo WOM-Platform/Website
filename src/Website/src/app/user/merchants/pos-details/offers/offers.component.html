@@ -8,7 +8,12 @@
                             class="text-sm">- Titolo:</span> {{ offer.title }}</span>
                         <span class="flex items-center gap-1"><span
                                 class="text-sm">Quantità:</span> {{ offer.cost }}</span>
-                        <app-active-badge [isActive]="!offer.deactivated"/>
+                        <app-badge [text]="!offer.deactivated ? 'Attiva' : 'Disattivata'"
+                                   [textColor]="!offer.deactivated ? 'text-green-600' : 'text-red-600'"
+                                   [bgColor]="!offer.deactivated ? 'bg-green-200 ' : 'bg-red-200 '"/>
+                        <app-badge [text]="offer.filter ? 'Filtrata': ''"
+                                   [textColor]="offer.filter ? 'text-violet-600': ''"
+                                   [bgColor]="offer.filter ? 'bg-violet-200': ''"/>
 
                     </div>
                     <div class="ml-2" *ngIf="offer.imageString">
@@ -23,7 +28,7 @@
                     </div>
                 </div>
                 <div *ngIf="posAction=== 'edit'" class="flex gap-2">
-                    <div class="cursor-pointer" (click)="onEditOffer(offer.id)">
+                    <div class="cursor-pointer" (click)="onEditOffer(offer)">
                         <i class="fa-solid fa-edit text-sm text-blue-400"></i>
                     </div>
                     <div class="cursor-pointer" (click)="onDeleteOffer(offer.id)">

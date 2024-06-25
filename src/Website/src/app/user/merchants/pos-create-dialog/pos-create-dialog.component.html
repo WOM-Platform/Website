@@ -1,0 +1,45 @@
+<h2 mat-dialog-title>
+    <ng-container *ngIf="data.isEdit; else addPosTitle">
+        {{ "USER.EDIT_POS.TITLE" | translate }}
+    </ng-container>
+    <ng-template #addPosTitle>
+        {{ "USER.ADD_POS.TITLE" | translate }}
+    </ng-template>
+</h2>
+<mat-dialog-content>
+    <mat-error *ngIf="formInputError">
+        <ng-container *ngIf="data.isEdit; else addPosInputError">
+            {{ "USER.EDIT_POS.INPUT_ERROR" | translate }}
+        </ng-container>
+        <ng-template #addPosInputError>
+            {{ "USER.ADD_POS.INPUT_ERROR" | translate }}
+        </ng-template>
+    </mat-error>
+    <mat-error *ngIf="formApiError">
+        <ng-container *ngIf="data.isEdit; else addPosApiError">
+            {{ "USER.EDIT_POS.API_ERROR" | translate }}
+        </ng-container>
+        <ng-template #addPosApiError>
+            {{ "USER.ADD_POS.API_ERROR" | translate }}
+        </ng-template>
+    </mat-error>
+    <app-forms-pos [(form)]="formPos" [pos]="data.pos"></app-forms-pos>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>
+        <ng-container *ngIf="data.isEdit; else addPosCancel">
+            {{ "USER.EDIT_POS.CANCEL" | translate }}
+        </ng-container>
+        <ng-template #addPosCancel>
+            {{ "USER.ADD_POS.CANCEL" | translate }}
+        </ng-template>
+    </button>
+    <button mat-button (click)="onSubmit()" cdkFocusInitial>
+        <ng-container *ngIf="data.isEdit; else addPosAdd">
+            {{ "USER.EDIT_POS.ADD" | translate }}
+        </ng-container>
+        <ng-template #addPosAdd>
+            {{ "USER.ADD_POS.ADD" | translate }}
+        </ng-template>
+    </button>
+</mat-dialog-actions>
