@@ -9,7 +9,7 @@
                 <li *ngFor="let link of navLinks" routerLinkActive="active-link"
                     [routerLinkActiveOptions]="{exact: true}" class="px-2">
                     <div *ngIf="link.isActive; else notActive">
-                        <a [routerLink]="link.path" class="flex items-center space-x-2">
+                        <a [routerLink]="link.path" class="flex items-center space-x-2 blue-wom">
                             <i [class]="link.icon" class="icon-sidenav"></i>
                             <span>{{ link.text }}</span>
 
