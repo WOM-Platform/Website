@@ -21,7 +21,6 @@ import {Filter} from "../../../../../_models/filter";
         NgIf,
         PaginatorModule,
         ReactiveFormsModule,
-
         OfferFiltersComponent
     ],
     templateUrl: './create-offer.component.html',
@@ -51,19 +50,21 @@ export class CreateOfferComponent implements OnInit {
                 title: [this.data?.offer.title || "", [Validators.minLength(6), Validators.required]],
                 description: [this.data?.offer.description || null],
                 cost: [this.data?.offer.cost, Validators.required],
-                deactivated: [this.data?.offer.deactivated || null],
+                deactivated: [this.data?.offer.deactivated],
                 filter: [this.data?.offer.filter || null]
             })
-
             this.newOffer.get('cost').disable();
+            this.newOffer.get('filter').disable();
         }
     }
 
     onSubmit() {
         if (this.newOffer.valid) {
             this.newOffer.get('cost').enable();
-            const formValue = this.newOffer.value;
+            this.newOffer.get('filter').enable();
 
+            const formValue = this.newOffer.value;
+            
             // Mapping form values to Offer type
             const offer: Offer = formValue as Offer;
             this.dialogRef.close(offer);

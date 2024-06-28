@@ -92,7 +92,6 @@ export class DialogCreateSourceComponent implements OnInit, OnDestroy, AfterView
     }
 
     async onUpdateSourceField(key: string, value: any, isTableToUpdate: boolean) {
-        console.log("Il valore inviato è ", value);
         if (key === 'aims') {
             this.updateAimsArray(value.enabled);
             this.newSource.get("aims").get("enableAll").setValue(value.enableAll);

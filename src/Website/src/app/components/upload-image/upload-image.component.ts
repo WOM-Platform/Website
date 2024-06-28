@@ -27,7 +27,6 @@ export class UploadImageComponent implements OnInit {
         const input = event.target as HTMLInputElement;
         if (input.files && input.files.length > 0) {
             this.file = input.files[0];
-            console.log("I dati ", this.data)
             this.posService.uploadFile(this.data, this.file).subscribe({
                 next: (event: HttpEvent<any>) => {
                     switch (event.type) {

@@ -1,23 +1,35 @@
-<div class="mt-2">
+<div *ngIf="isEditing && !filters; else filtersSection"></div>
+<ng-template class="mt-2" #filtersSection>
+    <small class="text-gray-500 text-xs">Se vuoi limitare l'uso di questa offerta a degli specifici WOM puoi
+        aggiungere i filtri.<br/> Questa azione non è consigliata per i nuovi utenti</small>
     <div *ngIf="!newFilter; else cancelFilter">
-        <button (click)="newFilter = !newFilter" class="btn-rounded-outline"><i class="fa-solid fa-plus"></i> Aggiungi
+        <button (click)="newFilter = !newFilter" class="btn-rounded-outline"><i class="fa-solid fa-plus"></i>
+            Aggiungi
             filtro
         </button>
     </div>
     <ng-template #cancelFilter>
         <div class="">
-            <button (click)="newFilter = !newFilter" class="btn-rounded-outline"><i class="fa-solid fa-xmark"></i>
+            <button (click)="newFilter = !newFilter" class="btn-rounded-outline" [ngClass]="{'invisible': isEditing}"><i
+                    class="fa-solid fa-xmark"></i>
                 Annulla
             </button>
-            <p class="mt-6 mb-0 font-semibold mb-4">Filtri</p>
+            <p *ngIf="!isEditing; else editing" class="mt-6 mb-0 font-semibold mb-4">Filtri</p>
+            <ng-template #editing><p class="mt-6 mb-0 font-semibold mb-4">Filtri impostati</p></ng-template>
             <div class="flex flex-col gap-4">
                 <app-aims-select (aimCodeSelected)="aimsFiltered($event)"
-                                 [selectedAim]="filterForm.get('aim').value"></app-aims-select>
+                                 [selectedAim]="filterForm.get('aim').value"
+                                 [isEditing]="isEditing"
+                                 *ngIf="isEditing && filterForm.get('aim').value || !isEditing;"></app-aims-select>
                 <app-validity-slider (validitySelected)="validityFiltered($event)"
-                                     [selectedValidity]="filterForm.get('maxAge').value"></app-validity-slider>
-                <div class="relative border-2 border-black rounded-xl p-4 flex flex-col">
+                                     [selectedValidity]="filterForm.get('maxAge').value"
+                                     [isEditing]="isEditing"
+                                     *ngIf="isEditing && filterForm.get('maxAge').value || !isEditing;"></app-validity-slider>
+                <div *ngIf="isEditing && filterForm.get('bounds').value || !isEditing;"
+                     class="relative border-2 border-black rounded-xl p-4 flex flex-col">
                     <h2>Area geografica</h2>
-                    <small class="text-gray-500 mb-4">Se impostato, accetterai solo i voucher WOM generati all'interno
+                    <small class="text-gray-500 mb-4">Se impostato, accetterai solo i voucher WOM generati
+                        all'interno
                         di
                         quella specifica area geografica.</small>
                     <div *ngIf="isFilteringMap || filterForm.get('bounds').value; else mapSelection">
@@ -25,14 +37,17 @@
                             <button class="btn-rounded-outline" (click)="isFilteringMap = !isFilteringMap">Annulla
                             </button>
                             <app-map (bounds)="mapFiltered($event)"
-                                     [selectedBounds]="filterForm.get('bounds').value"></app-map>
+                                     [selectedBounds]="filterForm.get('bounds').value"
+                                     [isEditing]="isEditing"
+                            ></app-map>
                         </div>
                     </div>
                     <ng-template #mapSelection>
-                        <button class="btn-rounded-outline" (click)="isFilteringMap = !isFilteringMap">Imposta</button>
+                        <button class="btn-rounded-outline" (click)="isFilteringMap = !isFilteringMap">Imposta
+                        </button>
                     </ng-template>
                 </div>
             </div>
         </div>
     </ng-template>
-</div>
+</ng-template>

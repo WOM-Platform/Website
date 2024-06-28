@@ -33,7 +33,6 @@ export class FiltersComponent implements OnInit, OnDestroy {
             debounceTime(300),
             takeUntil(this.destroy$)
         ).subscribe(newValue => {
-            console.log("Items per page ", this.filterForm)
             this.filterEmit.emit(this.filterForm);
         });
 
