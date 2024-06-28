@@ -5,17 +5,16 @@
 $my-primary: mat.define-palette(mat.$indigo-palette, 500);
 $my-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
 
-
 $my-theme: mat.define-light-theme(
-                (
-                        color: (
-                                primary: $my-primary,
-                                accent: $my-accent,
-                                blue-wom: myBlueWom
-                        ),
-                        typography: mat.define-typography-config(),
-                        density: 0,
-                )
+  (
+    color: (
+      primary: $my-primary,
+      accent: $my-accent,
+      blue-wom: myBlueWom,
+    ),
+    typography: mat.define-typography-config(),
+    density: 0,
+  )
 );
 
 @include mat.all-component-themes($my-theme);
@@ -23,13 +22,17 @@ $my-theme: mat.define-light-theme(
 @font-face {
   font-family: "Roboto";
   src: local("Roboto"),
-  url(./assets/fonts/Roboto/Roboto-Light.ttf) format("truetype");
+    url(./assets/fonts/Roboto/Roboto-Light.ttf) format("truetype");
 }
 
 @font-face {
   font-family: "Raleway";
   src: local("Raleway"),
-  url(./assets/fonts/Raleway/Raleway-SemiBold.ttf) format("truetype");
+    url(./assets/fonts/Raleway/Raleway-SemiBold.ttf) format("truetype");
+}
+
+a {
+  @apply blue-wom;
 }
 
 .mat-h1,
@@ -47,7 +50,7 @@ $my-theme: mat.define-light-theme(
 .mat-typography .mat-title,
 .mat-typography h2 {
   font-family: "Raleway";
-  font-size: 1.5rem;
+  font-size: 1.6rem;
 }
 
 p {
