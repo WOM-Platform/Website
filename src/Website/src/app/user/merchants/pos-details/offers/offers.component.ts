@@ -90,33 +90,34 @@ export class OffersComponent implements OnInit {
     }
 
     onEditOffer(offer: Offer) {
-        // Create a deep copy of the offer to avoid accidental modifications
+        // Create a deep copy of the offer
         const originalOffer: Offer = {...offer};
 
         const dialogRef = this.dialog.open(CreateOfferComponent,
             {
                 width: "900px",
                 maxHeight: "90vh",
-                data: {offer: originalOffer}, // Pass the deep copy
+                data: {offer: originalOffer},
             });
 
         dialogRef.afterClosed().subscribe((editedOffer) => {
             if (editedOffer) {
                 // Check if the offer's main fields are edited
                 const isEdited = originalOffer.title !== editedOffer.title ||
-                    originalOffer.description !== editedOffer.description ||
-                    originalOffer.cost !== editedOffer.cost || originalOffer.filter !== editedOffer.filter
+                    originalOffer.description !== editedOffer.description
 
                 // Check if the deactivated status is edited
                 const isDeactivatedEdited = originalOffer.deactivated !== editedOffer.deactivated;
 
-
                 if (isEdited) {
-                    this.posService.editOfferTitle(this.posId, editedOffer).subscribe({
-                        next: (edited) => {
-                            const index = this.offers.findIndex(o => o.id === edited.id);
+                    this.posService.editOfferTitle(this.posId, editedOffer.id, {
+                        title: editedOffer.title,
+                        description: editedOffer.description
+                    }).subscribe({
+                        next: () => {
+                            const index = this.offers.findIndex(o => o.id === editedOffer.id);
                             if (index !== -1) {
-                                this.offers[index] = edited;
+                                this.offers[index] = editedOffer;
                             }
                         },
                         error: (err) => {

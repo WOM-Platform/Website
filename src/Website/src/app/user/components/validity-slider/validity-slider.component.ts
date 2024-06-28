@@ -1,19 +1,22 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FormBuilder, FormGroup, FormsModule} from "@angular/forms";
 import {MatSliderModule} from "@angular/material/slider";
+import {NgIf} from "@angular/common";
 
 @Component({
     selector: 'app-validity-slider',
     standalone: true,
     imports: [
         MatSliderModule,
-        FormsModule
+        FormsModule,
+        NgIf
     ],
     templateUrl: './validity-slider.component.html',
     styleUrls: ['./validity-slider.component.css']
 })
 export class ValiditySliderComponent implements OnInit {
     @Input() selectedValidity: number = -1;
+    @Input() isEditing: boolean = false
     @Output() validitySelected = new EventEmitter<number>();
     validityForm: FormGroup;
 
@@ -31,7 +34,6 @@ export class ValiditySliderComponent implements OnInit {
         if (this.selectedValidity !== -1) {
             const sliderValue = this.calculateSliderValue(this.selectedValidity);
             this.sliderValueSave = sliderValue
-            console.log("calcilation ", sliderValue)
             this.validityForm.patchValue({validity: sliderValue});
             this.qntDays = this.selectedValidity;
             this.validitySelected.emit(this.qntDays);

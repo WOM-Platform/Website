@@ -13,18 +13,21 @@ import {NgFor, NgIf} from "@angular/common";
 })
 export class AimsSelectComponent implements OnInit {
     @Input() selectedAim = "";
+    @Input() isEditing = false
     @Output() aimCodeSelected = new EventEmitter<string>();
 
     aimsList: Aim[] = [];
+
 
     constructor(private aimsService: AimsService, private snackBarService: SnackBarService) {
     }
 
     ngOnInit() {
+
         this.aimsService.getAll().subscribe({
             next: (aims) => {
                 this.aimsList = aims.filter(aim => !aim.hidden);
-                
+
                 if (this.selectedAim) {
                     this.emitSelectedAim(this.selectedAim);
                 }

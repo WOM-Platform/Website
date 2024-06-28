@@ -96,12 +96,12 @@ export class PosService {
     }
 
     // to edit title and description
-    editOfferTitle(posId: string, offerEdited: Offer): Observable<any> {
-        return this.http.put(`${this.localUrlV1}${posId}/offers/${offerEdited.id}`, offerEdited)
+    editOfferTitle(posId: string, offerId: string, offerEdited: {
+        title: string,
+        description: string
+    }): Observable<any> {
+        return this.http.put(`${this.localUrlV1}${posId}/offers/${offerId}/title`, offerEdited)
     }
-
-    // to activate or deactivate offer
-
 
     // to delete offer
     deleteOffer(posId: string, offerId) {
@@ -124,6 +124,7 @@ export class PosService {
         )
     }
 
+    // to activate or deactivate offer
     updateOfferStatus(posId: string, offerId: string, deactivatedValue: boolean) {
         return this.http.put(`${this.localUrlV1}${posId}/offers/${offerId}/deactivation`, {"deactivated": deactivatedValue})
     }

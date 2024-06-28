@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {NgIf} from "@angular/common";
+import {NgClass, NgIf} from "@angular/common";
 import {FormBuilder, FormGroup} from "@angular/forms";
 
 import {UserAimsListComponent} from "../../../../../components/user-aims-list/user-aims-list.component";
@@ -14,12 +14,13 @@ import {Filter} from "../../../../../../_models/filter";
 @Component({
     selector: 'app-offer-filters',
     standalone: true,
-    imports: [NgIf, MatSliderModule, UserAimsListComponent, ValiditySliderComponent, GoogleMap, TranslateModule, MapComponent, AimsSelectComponent],
+    imports: [NgIf, MatSliderModule, UserAimsListComponent, ValiditySliderComponent, GoogleMap, TranslateModule, MapComponent, AimsSelectComponent, NgClass],
     templateUrl: './offer-filters.component.html',
     styleUrl: './offer-filters.component.css'
 })
 export class OfferFiltersComponent implements OnInit {
     @Input() filters: Filter | null = null
+    @Input() isEditing: boolean = false
     @Output() filteredEmit = new EventEmitter<any>()
 
     newFilter: boolean = false
@@ -31,7 +32,9 @@ export class OfferFiltersComponent implements OnInit {
     }
 
     ngOnInit() {
+        console.log("I filtri ", this.filters)
         this.initializeForm();
+        // in case is editing open the filter section
         if (this.filters) {
             this.setFilterValues(this.filters);
         }

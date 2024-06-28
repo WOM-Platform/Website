@@ -11,6 +11,7 @@ import {Observable, Subscriber} from 'rxjs';
 })
 export class MapComponent implements AfterViewInit, OnChanges {
     @Input() selectedBounds: any;
+    @Input() isEditing: boolean = false
     @Output() bounds = new EventEmitter<any>();
     private map;
 
@@ -55,10 +56,12 @@ export class MapComponent implements AfterViewInit, OnChanges {
     }
 
     private emitBounds(): void {
-        const bounds = this.map.getBounds();
-        const leftTop: [number, number] = [bounds.getNorthWest().lat, bounds.getNorthWest().lng];
-        const rightBottom: [number, number] = [bounds.getSouthEast().lat, bounds.getSouthEast().lng];
-        this.bounds.emit({leftTop, rightBottom});
+        if (!this.isEditing) {
+            const bounds = this.map.getBounds();
+            const leftTop: [number, number] = [bounds.getNorthWest().lat, bounds.getNorthWest().lng];
+            const rightBottom: [number, number] = [bounds.getSouthEast().lat, bounds.getSouthEast().lng];
+            this.bounds.emit({leftTop, rightBottom});
+        }
     }
 
     private onBoundsChanged(): void {
