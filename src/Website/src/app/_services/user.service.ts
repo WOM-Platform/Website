@@ -1,5 +1,5 @@
 import {Injectable} from "@angular/core";
-import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
+import {HttpClient, HttpParams} from "@angular/common/http";
 import {BehaviorSubject, Observable, of, throwError} from "rxjs";
 import {catchError, map, tap} from "rxjs/operators";
 import {User, UserLogin, UserRegistrationPayload} from "../_models";
@@ -24,18 +24,16 @@ export class UserService {
     public userOwnershipStatus = this.userOwnership.asObservable();
 
     constructor(private http: HttpClient, private storageService: StorageService) {
-        const localStorageUserLogin = UserLogin.fromJson(
-            JSON.parse(localStorage.getItem("currentUserLogin"))
-        );
+        const localStorageUserLogin = this.storageService.load("currentUserLogin");
         this.currentUserLoginSubject = new BehaviorSubject<UserLogin>(
-            localStorageUserLogin
+            localStorageUserLogin ? UserLogin.fromJson(localStorageUserLogin) : null
         );
         this.currentUserLogin = this.currentUserLoginSubject.asObservable();
 
-        const localStorageUser = User.fromJson(
-            JSON.parse(localStorage.getItem("currentUser"))
+        const localStorageUser = this.storageService.load("currentUser");
+        this.currentUserSubject = new BehaviorSubject<User>(
+            localStorageUser ? User.fromJson(localStorageUser) : null
         );
-        this.currentUserSubject = new BehaviorSubject<User>(localStorageUser);
         this.currentUser = this.currentUserSubject.asObservable();
     }
 
@@ -103,10 +101,7 @@ export class UserService {
         );
 
         // remove user from local storage to log user out
-        localStorage.removeItem("currentUserLogin");
-        localStorage.removeItem("currentUser");
-        localStorage.removeItem("merchantData");
-        localStorage.removeItem("instrumentData");
+        this.storageService.clearAllCacheAndLocalStorage()
 
         this.currentUserLoginSubject.next(null);
         this.currentUserSubject.next(null);
@@ -232,9 +227,9 @@ export class UserService {
                 // store user details in local storage to save user data in between page refreshes
                 localStorage.setItem("currentUser", JSON.stringify(user));
                 this.currentUserSubject.next(user);
-
-                localStorage.setItem("merchantData", JSON.stringify(user.merchants));
-                localStorage.setItem("instrumentData", JSON.stringify(user.sources));
+                /*
+                                localStorage.setItem("merchantData", JSON.stringify(user.merchants));
+                                localStorage.setItem("instrumentData", JSON.stringify(user.sources));*/
                 return user;
             })
         );
@@ -248,7 +243,8 @@ export class UserService {
         name: string,
         surname: string,
         email: string,
-        password: string
+        password: string,
+        role: string
     ): Observable<any> {
         const body = {
             name: name,
@@ -256,10 +252,21 @@ export class UserService {
             email: email,
             password: password,
             verified: true,
-            role: "User",
+            role: role,
         };
 
-        return this.http.post<any>(this.localUrlV1, body).pipe(
+        return this.http.post<any>(`${this.localUrlV1}`, body).pipe(
+            map((res) => {
+                return res;
+            })
+        );
+    }
+
+    userEdit(
+        id: string,
+        user: User): Observable<any> {
+
+        return this.http.put<any>(`${this.localUrlV1}${id}`, user).pipe(
             map((res) => {
                 return res;
             })
@@ -295,7 +302,10 @@ export class UserService {
                 .set("pageSize", itemsPerPage);
             return this.http.get(`${this.localUrlV1}`, {params}).pipe(
                 tap({
-                    next: (data) => this.storageService.set("usersList", data),
+                    next: (data) => {
+                        console.log("I dati che stiamo caricando sono ", data)
+                        this.storageService.set("usersList", data)
+                    },
                     error: (err) => console.error("err ", err),
                 }),
                 map((res) => {

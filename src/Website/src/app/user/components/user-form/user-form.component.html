@@ -1,0 +1,85 @@
+<form [formGroup]="userForm" class="">
+    <div class="flex flex-col gap-2 mt-6">
+        <div class="flex flex-row justify-between px-6 gap-6">
+            <div>
+                <label>Nome<span class="text-red-600">*</span>: </label>
+                <input type="text" formControlName="name" class="input-create" autocomplete="off">
+                <div class="text-red-600"
+                     *ngIf="userForm.get('name').invalid && userForm.get('name').touched">
+                    Campo obbligatorio
+                </div>
+            </div>
+            <div>
+                <label>Cognome<span class="text-red-600">*</span>: </label>
+                <input type="text" formControlName="surname" class="input-create" autocomplete="off">
+                <div class="text-red-600"
+                     *ngIf="userForm.get('surname').invalid && userForm.get('surname').touched">
+                    Campo obbligatorio
+                </div>
+            </div>
+        </div>
+        <div class="flex flex-row justify-between px-6 gap-6">
+            <div><label>Email: </label>
+                <input type="email" formControlName="email" class="input-create grow" autocomplete="off">
+                <div class="text-red-600"
+                     *ngIf="userForm.get('email').invalid && userForm.get('email').touched">
+                    Campo obbligatorio
+                </div>
+            </div>
+            <div>
+                <div *ngIf="!userToEdit; else editingPassword">
+                    <label>Password<span class="text-red-600">*</span>: </label>
+                    <input type="password" formControlName="password" class="input-create grow"
+                           autocomplete="new-password">
+                    <div class="text-red-600"
+                         *ngIf="userForm.get('password').invalid && userForm.get('password').touched">
+                        Campo obbligatorio
+                    </div>
+                </div>
+                <ng-template #editingPassword>
+                    <label>Modifica password: </label>
+                    <input type="password" formControlName="password" class="input-create grow"
+                           autocomplete="new-password">
+                    <div class="text-red-600"
+                         *ngIf="userForm.get('password').invalid && userForm.get('password').touched">
+                        La password deve essere lunga almento 8 caratteri
+                    </div>
+                </ng-template>
+            </div>
+        </div>
+        <div class="flex flex-row px-6 gap-6">
+            <!-- select to set user role if superuser or normal one -->
+            <div *ngIf="currentUser.role === 'Admin'">
+                <label>Ruolo Utente<span class="text-red-600">*</span>: </label>
+                <select formControlName="roleUser" class="input-create grow" autocomplete="off">
+                    <option value="Admin">Admin</option>
+                    <option value="User" [defaultSelected]="true">User</option>
+                </select>
+
+                <div class="text-red-600"
+                     *ngIf="userForm.get('roleUser').invalid && userForm.get('roleUser').touched">
+                    Campo obbligatorio
+                </div>
+            </div>
+            <!-- select to set user role has access of instrument or merchant -->
+            <div *ngIf="isRoleAccessRequired">
+                <label>Ruolo Gestore<span class="text-red-600">*</span>: </label>
+                <select formControlName="roleAccess" class="input-create grow" autocomplete="off">
+                    <option value="Admin">Admin</option>
+                    <option value="User" [defaultSelected]="true">User</option>
+                </select>
+
+                <div class="text-red-600"
+                     *ngIf="userForm.get('roleAccess').invalid && userForm.get('roleAccess').touched">
+                    Campo obbligatorio
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="flex justify-end gap-6 mt-6">
+        <button [disabled]="userForm.invalid"
+                [ngClass]="{'text-slate-500': userForm.invalid, 'text-blue-600': !userForm.invalid}"
+                (click)="onSave()">Conferma
+        </button>
+    </div>
+</form>

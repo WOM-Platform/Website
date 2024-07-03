@@ -1,0 +1,12 @@
+.input-create {
+    @apply bg-[#e5e5e5] w-full h-[3rem] rounded-xl px-6
+}
+
+.btn-access-action {
+    @apply border-y-2 py-2 px-2 w-52
+}
+
+.btn-access-action-active {
+    @apply border-blue-600 bg-blue-200 hover:bg-blue-400 focus:outline-none focus:border-blue-500 transition duration-200 ease-in-out
+}
+

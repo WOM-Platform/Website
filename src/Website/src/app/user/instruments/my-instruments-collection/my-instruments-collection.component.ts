@@ -7,11 +7,12 @@ import {
 } from "@angular/animations";
 import {ChangeDetectorRef, Component, OnInit, OnDestroy} from "@angular/core";
 import {Aim} from "src/app/_models";
-import {InstrumentEditing, UIInstrument} from "src/app/_models/instrument";
+import {Instrument, InstrumentEditing, UIInstrument} from "src/app/_models/instrument";
 import {AimsService, UserService} from "src/app/_services";
 import {SourceService} from "src/app/_services/source.service";
 import {StorageService} from "src/app/_services/storage.service";
-import {Subscription} from "rxjs";
+import {Observable, of, Subscription} from "rxjs";
+import {switchMap} from "rxjs/operators";
 
 @Component({
     selector: "app-my-instruments-collection",
@@ -51,6 +52,8 @@ export class MyInstrumentsCollectionComponent implements OnInit, OnDestroy {
     uiInstruments: UIInstrument[] = [];
     currentUser: any;
 
+    role = 'Admin'
+    action: string = 'view'
     private subscriptions: Subscription[] = [];
 
     constructor(
@@ -65,6 +68,9 @@ export class MyInstrumentsCollectionComponent implements OnInit, OnDestroy {
     ngOnInit() {
         this.username = `${this.userService.currentUserValue.name} ${this.userService.currentUserValue.surname}`;
         this.loadUserData();
+
+        if (this.role === "Admin") this.action = "edit";
+
         this.cd.detectChanges();
     }
 
@@ -72,7 +78,7 @@ export class MyInstrumentsCollectionComponent implements OnInit, OnDestroy {
         this.subscriptions.forEach(subscription => subscription.unsubscribe());
     }
 
-    fetchAimsForInstrument(instrument: InstrumentEditing) {
+    fetchAimsForInstrument(instrument: InstrumentEditing): Observable<Aim[]> {
         const {id} = instrument;
         this.subscriptions.push(
             this.aimsService.getAll().subscribe({
@@ -87,33 +93,23 @@ export class MyInstrumentsCollectionComponent implements OnInit, OnDestroy {
                 error: (err) => console.error(err),
             })
         );
+        return of([]); // returning an observable to comply with the method signature
     }
 
     loadUserData() {
-        this.subscriptions.push(
-            this.userService.userOwnershipStatus.subscribe({
-                next: (res) => {
-                    if (res && res["sources"]) {
-                        this.editingInstruments = res["sources"];
-                        this.editingInstruments.forEach((instrument) => {
-                            this.fetchAimsForInstrument(instrument);
-                            this.fetchAccessListForInstrument(instrument);
-                        });
-                    }
-                },
-                error: (err) => console.error(err),
-            })
-        );
+        this.currentUser = this.storageService.loadCurrentUser();
 
-        this.uiInstruments = this.storageService.load("instrumentData").map((instrument: InstrumentEditing, index: number) => {
-            this.fetchAimsForInstrument(instrument);
-            this.fetchAccessListForInstrument(instrument);
-            return {
-                ...instrument,
-                isOpen: index === 0,
-            };
-        });
-        this.currentUser = this.storageService.load("currentUser");
+        if (this.currentUser && this.currentUser.sources) {
+            this.editingInstruments = this.currentUser.sources;
+            this.uiInstruments = this.currentUser.sources.map((instrument: InstrumentEditing, index: number) => {
+                this.fetchAimsForInstrument(instrument);
+                this.fetchAccessListForInstrument(instrument);
+                return {
+                    ...instrument,
+                    isOpen: index === 0,
+                };
+            });
+        }
     }
 
     fetchAccessListForInstrument(instrument: InstrumentEditing) {
@@ -142,13 +138,38 @@ export class MyInstrumentsCollectionComponent implements OnInit, OnDestroy {
         this.sourceService.update(updatedInstrument).subscribe({
             next: () => {
                 instrument[key] = value;
+                this.updateUIInstrument(instrument.id, key, value);
                 this.cd.detectChanges();
             },
             error: (err) => console.error(err),
         });
     }
 
+    updateUIInstrument(instrumentId: string, key: string, value: any) {
+        const instrumentUI = this.uiInstruments.find(uiInstrument => uiInstrument.id === instrumentId);
+        if (instrumentUI) {
+            instrumentUI[key] = value;
+        }
+    }
+
+    refreshInstrumentView() {
+        this.editingInstruments.forEach(instrument => {
+            this.fetchAimsForInstrument(instrument).subscribe({
+                next: (aimsView) => {
+                    const instrumentUI = this.uiInstruments.find(uiInstrument => uiInstrument.id === instrument.id);
+                    if (instrumentUI) {
+                        instrumentUI.aims = aimsView;
+                    }
+                    this.cd.detectChanges();
+                },
+                error: (err) => console.error(err)
+            });
+        });
+    }
+
     findEditingInstrumentById(instrumentId: string) {
+        console.log("Id ", instrumentId);
+        console.log(this.editingInstruments);
         return this.editingInstruments.find(instrument => instrument.id === instrumentId);
     }
 }

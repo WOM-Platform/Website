@@ -10,7 +10,7 @@ import {
 } from "@angular/core";
 import {MAT_DIALOG_DATA, MatDialog} from "@angular/material/dialog";
 import {Observable, of, Subscription, Subject} from "rxjs";
-import {Aim, AimEditing} from "src/app/_models/aim";
+import {Aim} from "src/app/_models/aim";
 import {Access, Instrument, InstrumentEditing} from "src/app/_models/instrument";
 import {AimsService, UserService} from "src/app/_services";
 import {SourceService} from "src/app/_services/source.service";
@@ -30,10 +30,8 @@ export class DialogViewEditInstrumentComponent implements OnInit, OnDestroy {
 
     instrumentEditing: InstrumentEditing;
     instrumentView: Instrument;
-    accessUsers: Access[];
 
     action: string;
-    createNewAccess = false;
 
     private subscriptions: Subscription[] = [];
     private destroy$ = new Subject<void>();
@@ -94,7 +92,7 @@ export class DialogViewEditInstrumentComponent implements OnInit, OnDestroy {
                     this.aimsService.getAll().pipe(
                         takeUntil(this.destroy$)
                     ).subscribe((aimList) => {
-                        // Update aims if necessary
+
                     });
                 }
                 this.instrumentEditing = updatedInstrument;

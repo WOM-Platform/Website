@@ -4,6 +4,29 @@
                 class="bg-white rounded-lg shadow-md p-6 cursor-pointer"
                 (click)="instrument.isOpen = !instrument.isOpen"
         >
+            <app-editable-element
+                    [valueEl]="instrument.name"
+                    [action]="action"
+                    [minLength]="4"
+                    [maxLength]="100"
+                    (onChangeElement)="updateInstrumentField(findEditingInstrumentById(instrument.id), {key: 'name', value:$event, isTableToUpdate:true})"
+                    (click)="$event.stopPropagation()"
+                    class="font-semibold text-cyan-700"
+            />
+            <div class="mt-4">
+                <app-editable-element
+                        [keyEl]="'URL'"
+                        [valueEl]="instrument.url"
+                        [action]="action"
+                        [pattern]="'^(https?:\\/\\/)?([\\da-z\\.-]+)\\.([a-z\\.]+)(:[0-9]{1,5})?(\\/[^\\s]*)?$'"
+                        [minLength]="10"
+                        [maxLength]="100"
+                        (onChangeElement)="updateInstrumentField(findEditingInstrumentById(instrument.id), {key: 'url', value:$event, isTableToUpdate:true})"
+                        (click)="$event.stopPropagation()"
+                        class="merchant-element"
+                />
+            </div>
+
             <app-expandable-card
                     [name]="instrument.name"
                     [role]="'Admin'"

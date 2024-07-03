@@ -1,17 +1,21 @@
-import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {StorageService} from "../../_services/storage.service";
 import {UserService} from "../../_services";
 import {User} from "../../_models";
 import {LoadingService} from "../../_services/loading.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {SnackBarService} from "../../_services/snack-bar.service";
+import {MatDialog} from "@angular/material/dialog";
+import {UserFormComponent} from "../components/user-form/user-form.component";
+import {CreateEditUserDialogComponent} from "./create-edit-user-dialog/create-edit-user-dialog.component";
+import {DialogConfirmCancelComponent} from "../../components/dialog-confirm-cancel/dialog-confirm-cancel";
 
 @Component({
     selector: 'app-users-tab',
     templateUrl: './user-users.component.html',
     styleUrl: './user-users.component.css'
 })
-export class UserUsersComponent implements OnInit {
+export class UserUsersComponent implements OnInit, OnChanges {
     itemsPerPage: string;
     currentPage: number = 1
     searchParameters: string = ""
@@ -29,6 +33,7 @@ export class UserUsersComponent implements OnInit {
     ];
 
     constructor(private cd: ChangeDetectorRef,
+                private dialog: MatDialog,
                 private loadingService: LoadingService,
                 private snackBarService: SnackBarService,
                 private storageService: StorageService,
@@ -37,6 +42,11 @@ export class UserUsersComponent implements OnInit {
 
     ngOnInit() {
         this.getUsersList()
+    }
+
+    ngOnChanges(changes: SimpleChanges) {
+        console.log("changes ", changes)
+        console.log("changes ", this.userList)
     }
 
     getUsersList() {
@@ -78,16 +88,61 @@ export class UserUsersComponent implements OnInit {
             this.storageService.get("usersCurrentPage") || this.currentPage;
     }
 
-    onDeleteUser(user: User): void {
-        this.userService.delete(user.id).subscribe({
-            next: () => {
-                this.snackBarService.openSnackBar('User deleted successfully');
+    onCreateUser() {
+        const dialogRef = this.dialog.open(CreateEditUserDialogComponent, {})
+        dialogRef.afterClosed().subscribe({
+            next: (newUser) => {
+                if (newUser) {
+                    this.userList.push(newUser)
+                }
             },
             error: (err) => {
-                console.error('Error deleting user', err);
-                this.snackBarService.openSnackBar('Failed to delete user');
             }
-        });
+        })
+    }
+
+    onEditUser(user: User) {
+        console.log("Utente dati ", user)
+        const dialogRef = this.dialog.open(CreateEditUserDialogComponent, {
+            data: user
+        })
+
+        dialogRef.afterClosed().subscribe({
+            next: (newUser) => {
+
+            },
+            error: (err) => {
+            }
+        })
+    }
+
+    onDeleteUser(user: User): void {
+        const dialogRef = this.dialog.open(DialogConfirmCancelComponent, {
+            width: "500px",
+            data: {
+                title: "Conferma eliminazione",
+                message: "Sei sicuro di voler confermare l'eliminazione?",
+                confirm: "si",
+                cancel: "Annulla",
+            },
+        })
+        dialogRef.afterClosed().subscribe({
+            next: (res) => {
+                if (res) {
+                    this.userService.delete(user.id).subscribe({
+                        next: () => {
+                            this.snackBarService.openSnackBar('User deleted successfully');
+                        },
+                        error: (err) => {
+                            console.error('Error deleting user', err);
+                            this.snackBarService.openSnackBar('Failed to delete user');
+                        }
+                    });
+                }
+            },
+            error: (err) => {
+            }
+        })
     }
 
     onPageChange(page: number): void {

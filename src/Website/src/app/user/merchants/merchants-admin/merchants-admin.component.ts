@@ -75,6 +75,7 @@ export class MerchantsAdminComponent implements OnInit {
     getMerchantsList() {
         this.loadingService.show();
 
+        console.log('kklkllk ', this.storageService.getAll())
         this.merchantService
             .getAllMerchants(
                 this.searchParameters,
@@ -92,37 +93,6 @@ export class MerchantsAdminComponent implements OnInit {
                     this.loadingService.hide();
                 },
             });
-
-        const cachedData = this.storageService.get("merchantsList");
-        if (cachedData) {
-            this.assignMerchantData(cachedData);
-            this.loadingService.hide();
-        } else {
-            this.subscriptions.add(
-                this.merchantService
-                    .getAllMerchants(
-                        this.searchParameters,
-                        this.currentPage,
-                        this.itemsPerPage
-                    )
-                    .pipe(
-                        catchError((error) => {
-                            console.error("Error fetching instruments:", error);
-                            return of(null);
-                        }),
-                        finalize(() => {
-                            this.loadingService.hide();
-                            this.cd.markForCheck();
-                        })
-                    )
-                    .subscribe((res) => {
-                        if (res) {
-                            this.storageService.set("merchantsList", res);
-                            this.assignMerchantData(res);
-                        }
-                    })
-            );
-        }
     }
 
     private assignMerchantData(data) {

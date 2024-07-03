@@ -5,19 +5,17 @@ import {
     of,
     Subject,
     Subscription,
-    throwError,
 } from "rxjs";
 import {DialogCreateSourceComponent} from "../dialog-create-instrument/dialog-create-instrument.component";
 import {DialogViewEditInstrumentComponent} from "../dialog-view-edit-instrument/dialog-view-edit-instrument.component";
-import {MatDialog, MatDialogRef} from "@angular/material/dialog";
+import {MatDialog} from "@angular/material/dialog";
 import {catchError} from "rxjs/operators";
-import {Router} from "@angular/router";
 import {SourceService} from "../../../_services/source.service";
 import {DialogConfirmCancelComponent} from "../../../components/dialog-confirm-cancel/dialog-confirm-cancel";
 import {LoadingService} from "../../../_services/loading.service";
 import {StorageService} from "../../../_services/storage.service";
 import {AimsService, UserService} from "src/app/_services";
-import {Aim} from "src/app/_models";
+import {SnackBarService} from "../../../_services/snack-bar.service";
 
 @Component({
     selector: "app-admin-managment-instruments",
@@ -52,6 +50,7 @@ export class AdminManagmentInstrumentsComponent implements OnInit, OnDestroy {
         private matDialog: MatDialog,
         private cd: ChangeDetectorRef,
         private loadingService: LoadingService,
+        private snackBar: SnackBarService,
         private storageService: StorageService,
         private userService: UserService
     ) {
@@ -67,36 +66,40 @@ export class AdminManagmentInstrumentsComponent implements OnInit, OnDestroy {
 
     getSourcesList() {
         this.loadingService.show();
-        const cachedData = this.storageService.get("instrumentsList");
-        if (cachedData) {
-            this.assignInstrumentData(cachedData);
-            this.loadingService.hide();
-        } else {
-            this.subscriptions.push(
-                this.sourceService
-                    .getInstrumentList(
-                        this.searchParameters,
-                        this.currentPage,
-                        this.itemsPerPage
-                    )
-                    .pipe(
-                        catchError((error) => {
-                            console.error("Error fetching instruments:", error);
-                            return of(null);
-                        }),
-                        finalize(() => {
-                            this.loadingService.hide();
-                            this.cd.markForCheck();
-                        })
-                    )
-                    .subscribe((res) => {
-                        if (res) {
-                            this.storageService.set("instrumentsList", res);
-                            this.assignInstrumentData(res);
-                        }
+
+        this.subscriptions.push(
+            this.sourceService
+                .getAllInstruments(
+                    this.searchParameters,
+                    this.currentPage,
+                    this.itemsPerPage
+                )
+                .pipe(
+                    catchError((error) => {
+                        console.error("Error fetching instruments:", error);
+                        return of(null);
+                    }),
+                    finalize(() => {
+                        this.loadingService.hide();
+                        this.cd.markForCheck();
                     })
-            );
-        }
+                )
+                .subscribe({
+                    next:
+                        (res) => {
+                            this.assignInstrumentData(res);
+                            this.cd.detectChanges()
+                        },
+                    error: (err) => {
+                        console.error(err)
+                        this.snackBar.openSnackBar("Gli instrument non sono stati caricati correttamente")
+                    }, complete: () => {
+                        this.loadingService.hide();
+                    },
+                })
+        );
+
+
     }
 
     private assignInstrumentData(data) {
