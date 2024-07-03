@@ -5,6 +5,7 @@ import {UserService} from "../_services";
 import {UserMe} from "../_models";
 import {Subscription} from "rxjs";
 import {LoadingService} from "../_services/loading.service";
+import {Instrument} from "../_models/instrument";
 
 @Component({
     selector: "app-user",
@@ -13,11 +14,12 @@ import {LoadingService} from "../_services/loading.service";
 })
 export class UserComponent implements OnInit, OnDestroy {
     username: string;
-    role: Set<string> = new Set<string>();
+    role: string = ""
     userData: any;
 
     userDataSubscription: Subscription;
     isLoading = false;
+    instruments: Instrument[] = []
 
     navLinks = [
         {
@@ -25,38 +27,45 @@ export class UserComponent implements OnInit, OnDestroy {
             text: "Home",
             icon: "fa-solid fa-house",
             isActive: true,
+            adminOnly: false
         },
         {
             path: "/user/merchants",
             text: "Merchants",
             icon: "fa-solid fa-shop",
             isActive: true,
+            adminOnly: false
         },
         {
             path: "/user/instruments",
             text: "Instruments",
             icon: "fa-solid fa-coins",
             isActive: true,
+            adminOnly: false
         },
         {
             path: "/user/aims",
             text: "Aims",
             icon: "fa-solid fa-bullseye",
             isActive: true,
+            adminOnly: true
         },
         {
             path: "/user/users",
             text: "Users",
             icon: "fas fa-users",
             isActive: true,
+            adminOnly: true
         },
         {
             path: "/user/statistics",
             text: "Statistics",
             icon: "fa-solid fa-chart-simple",
             isActive: false,
+            adminOnly: false
         },
     ];
+    filteredNavLinks = [];
 
     constructor(
         private userService: UserService,
@@ -77,6 +86,7 @@ export class UserComponent implements OnInit, OnDestroy {
             " " +
             this.userService.currentUserValue.surname;
         this.loadData();
+
     }
 
     ngOnDestroy() {
@@ -90,11 +100,28 @@ export class UserComponent implements OnInit, OnDestroy {
             .subscribe((data: UserMe) => {
                 if (data) {
                     this.userData = data;
-                    if (data.role) {
-                        this.role.add(data.role);
-                    }
+                    this.role = data.role;
+                    this.filterNavLinks();
                 }
+
             });
+    }
+
+    // to filter navlink
+    filterNavLinks() {
+        this.filteredNavLinks = this.navLinks.filter(link => {
+            // if user is an admin or user
+            if (link.adminOnly && this.role !== 'Admin') {
+                return false;
+            }
+
+            // if user role is user than check if they are instrument
+            if (link.path === '/user/instruments' && (this.role === 'User' && this.userData.sources.length === 0)) {
+                return false;
+            }
+
+            return true;
+        });
     }
 
     onLoading(loading) {

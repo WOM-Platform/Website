@@ -1,58 +1,78 @@
-import { Injectable } from "@angular/core";
+import {Injectable} from "@angular/core";
 import {
-  Router,
-  ActivatedRouteSnapshot,
-  RouterStateSnapshot,
+    Router,
+    ActivatedRouteSnapshot,
+    RouterStateSnapshot,
 } from "@angular/router";
-import { AuthService, UserService } from "../_services";
+import {AuthService, UserService} from "../_services";
 
-@Injectable({ providedIn: "root" })
+@Injectable({providedIn: "root"})
 export class AuthGuard {
-  constructor(
-    private router: Router,
-    private authenticationService: AuthService,
-    private userService: UserService
-  ) {}
+    currentUser
 
-  canActivate(
-    route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot
-  ): boolean {
-    const currentUserLogin = this.userService.currentUserLoginValue;
+    constructor(
+        private router: Router,
+        private authenticationService: AuthService,
+        private userService: UserService
+    ) {
+    }
 
-    // User is logged
-    if (currentUserLogin) {
-      // check if user has validated email
-      const verified = currentUserLogin.verified;
+    canActivate(
+        route: ActivatedRouteSnapshot,
+        state: RouterStateSnapshot
+    ): boolean {
+        const currentUserLogin = this.userService.currentUserLoginValue;
+        this.userService.currentUser.subscribe({
+            next: (res) => this.currentUser = res
+        });
 
-      if (state.url.includes("not-verified")) {
-        if (verified) {
-          this.router.navigate(["user/home"]).then((r) => {});
+        // User is logged
+        if (currentUserLogin) {
+            // check if user has validated email
+            const verified = currentUserLogin.verified;
+
+            if (state.url.includes("not-verified")) {
+                if (verified) {
+                    this.router.navigate(["user/home"]).then((r) => {
+                    });
+                }
+            } else if (!verified) {
+                this.router
+                    .navigate(["/user/not-verified"], {
+                        queryParams: {returnUrl: state.url},
+                    })
+                    .then((r) => {
+                    });
+            }
+            // Check for admin access
+            const requiredRoles = route.data['roles'] as Array<string>;
+            if (requiredRoles && !requiredRoles.includes(this.currentUser.role)) {
+                // Role not authorised so redirect to home page
+                this.router.navigate(["/user/home"]).then((r) => {
+                });
+                return false;
+            }
+
+
+            return true;
         }
-      } else if (!verified) {
+
+        // User not logged - redirect to login
+        if (state.url === "/merchant" || state.url === "/user/home") {
+            this.router
+                .navigate(["/authentication/signin"], {
+                    queryParams: {returnUrl: state.url},
+                })
+                .then((r) => {
+                });
+            return false;
+        }
+
+        // not logged in so redirect to login page with the return url
         this.router
-          .navigate(["/user/not-verified"], {
-            queryParams: { returnUrl: state.url },
-          })
-          .then((r) => {});
-      }
-      return true;
+            .navigate(["/"], {queryParams: {returnUrl: state.url}})
+            .then((r) => {
+            });
+        return false;
     }
-
-    // User not logged - redirect to login
-    if (state.url === "/merchant" || state.url === "/user/home") {
-      this.router
-        .navigate(["/authentication/signin"], {
-          queryParams: { returnUrl: state.url },
-        })
-        .then((r) => {});
-      return false;
-    }
-
-    // not logged in so redirect to login page with the return url
-    this.router
-      .navigate(["/"], { queryParams: { returnUrl: state.url } })
-      .then((r) => {});
-    return false;
-  }
 }

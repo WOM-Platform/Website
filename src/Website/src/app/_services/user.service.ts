@@ -2,7 +2,7 @@ import {Injectable} from "@angular/core";
 import {HttpClient, HttpParams} from "@angular/common/http";
 import {BehaviorSubject, Observable, of, throwError} from "rxjs";
 import {catchError, map, tap} from "rxjs/operators";
-import {User, UserLogin, UserRegistrationPayload} from "../_models";
+import {User, UserLogin, UserMe, UserRegistrationPayload} from "../_models";
 import {environment} from "../../environments/environment";
 import {StorageService} from "./storage.service";
 
@@ -12,8 +12,8 @@ export class UserService {
     localUrlV2 = environment.baseUrl + environment.v2 + "user/";
 
     // Login data
-    public currentUserLogin: Observable<UserLogin>;
-    private currentUserLoginSubject: BehaviorSubject<UserLogin>;
+    public currentUserLogin: Observable<UserMe>;
+    private currentUserLoginSubject: BehaviorSubject<UserMe>;
 
     // User data
     public currentUser: Observable<User>;
@@ -25,7 +25,7 @@ export class UserService {
 
     constructor(private http: HttpClient, private storageService: StorageService) {
         const localStorageUserLogin = this.storageService.load("currentUserLogin");
-        this.currentUserLoginSubject = new BehaviorSubject<UserLogin>(
+        this.currentUserLoginSubject = new BehaviorSubject<UserMe>(
             localStorageUserLogin ? UserLogin.fromJson(localStorageUserLogin) : null
         );
         this.currentUserLogin = this.currentUserLoginSubject.asObservable();
@@ -41,7 +41,7 @@ export class UserService {
         return this.currentUserSubject.value;
     }
 
-    public get currentUserLoginValue(): UserLogin {
+    public get currentUserLoginValue(): UserMe {
         return this.currentUserLoginSubject.value;
     }
 
@@ -108,28 +108,6 @@ export class UserService {
     }
 
     /**
-     * Get user data for current user id
-     */
-    getLoggedUser(): Observable<User> {
-        return this.http
-            .get<User>(this.localUrlV1 + this.currentUserLoginSubject.value.id)
-            .pipe(
-                map((user) => {
-                    // user id is correct if value is not null
-                    if (user) {
-                        // hydrate a full User object from its JSON representation (to have its methods/logic)
-                        user = User.fromJson(user);
-
-                        // store user details in local storage to save user data in between page refreshes
-                        localStorage.setItem("currentUser", JSON.stringify(user));
-                        this.currentUserSubject.next(user);
-                    }
-                    return user;
-                })
-            );
-    }
-
-    /**
      * Register a new user
      * @param data user data
      */
@@ -137,6 +115,27 @@ export class UserService {
         return this.http
             .post<User>(this.localUrlV1 + "register", data)
             .pipe(map((response) => response));
+    }
+
+    me(): Observable<any> {
+        const storageUser = this.storageService.load("currentUser");
+        if (storageUser) {
+            return of(storageUser)
+        } else {
+            return this.http.get<any>(this.localUrlV1 + "me").pipe(
+                map((user) => {
+                    user = User.fromJson(user);
+
+                    // store user details in local storage to save user data in between page refreshes
+                    localStorage.setItem("currentUser", JSON.stringify(user));
+                    this.currentUserSubject.next(user);
+                    /*
+                                    localStorage.setItem("merchantData", JSON.stringify(user.merchants));
+                                    localStorage.setItem("instrumentData", JSON.stringify(user.sources));*/
+                    return user;
+                })
+            );
+        }
     }
 
     /**
@@ -217,22 +216,6 @@ export class UserService {
                 password,
             })
             .pipe(map((response) => response));
-    }
-
-    me(): Observable<any> {
-        return this.http.get<any>(this.localUrlV1 + "me").pipe(
-            map((user) => {
-                user = User.fromJson(user);
-
-                // store user details in local storage to save user data in between page refreshes
-                localStorage.setItem("currentUser", JSON.stringify(user));
-                this.currentUserSubject.next(user);
-                /*
-                                localStorage.setItem("merchantData", JSON.stringify(user.merchants));
-                                localStorage.setItem("instrumentData", JSON.stringify(user.sources));*/
-                return user;
-            })
-        );
     }
 
     updateUserOwnership(data: any) {
