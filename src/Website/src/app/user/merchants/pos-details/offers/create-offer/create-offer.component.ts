@@ -64,7 +64,7 @@ export class CreateOfferComponent implements OnInit {
             this.newOffer.get('filter').enable();
 
             const formValue = this.newOffer.value;
-            
+
             // Mapping form values to Offer type
             const offer: Offer = formValue as Offer;
             this.dialogRef.close(offer);
@@ -89,6 +89,5 @@ export class CreateOfferComponent implements OnInit {
 
     addFilter(filters: Filter) {
         this.newOffer.patchValue({filter: filters});
-        /*console.log("Filters updated: ", filters);*/
     }
 }

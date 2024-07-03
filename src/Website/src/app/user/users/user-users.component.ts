@@ -64,7 +64,6 @@ export class UserUsersComponent implements OnInit, OnChanges {
     }
 
     filterUpdate(filter) {
-        console.log("Filters ", filter)
         this.storageService.clearCache("usersList");
         this.itemsPerPage = filter.get("itemsPerPage").value;
 
