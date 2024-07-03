@@ -103,14 +103,15 @@ export class MerchantSignUpComponent implements OnInit {
             return;
         }
 
-        this.userService.register(userData).pipe(first()).subscribe(
-            result => {
-                if (result.id !== null) {
+        this.userService.register(userData).pipe(first()).subscribe({
+            next: (result) => {
+                if (result && result.id !== null) {
                     console.log(result);
                     this.userRegistered = true;
                     this.logIn(userData.email, userData.password);
                 }
-            }, error => {
+            },
+            error: (error) => {
                 if (error.status === 422) {
                     this.errorMessage = 'SIGN_UP.EMAIL_EXISTS_ERROR';
                 } else if (error.status === 400) {
@@ -122,7 +123,8 @@ export class MerchantSignUpComponent implements OnInit {
                 this.signupComplete = true;
                 this.displayProgressSpinner = false;
                 console.log(error);
-            });
+            }
+        })
     }
 
     registerMerchant(): any {

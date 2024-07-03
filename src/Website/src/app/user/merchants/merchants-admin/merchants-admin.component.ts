@@ -74,8 +74,6 @@ export class MerchantsAdminComponent implements OnInit {
 
     getMerchantsList() {
         this.loadingService.show();
-
-        console.log('kklkllk ', this.storageService.getAll())
         this.merchantService
             .getAllMerchants(
                 this.searchParameters,

@@ -280,13 +280,13 @@ export class UserService {
             return of(cachedUsers);
         } else {
             const params = new HttpParams()
-                .set("search", search)
+                .set("name", search)
+                .set("email", search)
                 .set("page", page.toString())
                 .set("pageSize", itemsPerPage);
             return this.http.get(`${this.localUrlV1}`, {params}).pipe(
                 tap({
                     next: (data) => {
-                        console.log("I dati che stiamo caricando sono ", data)
                         this.storageService.set("usersList", data)
                     },
                     error: (err) => console.error("err ", err),

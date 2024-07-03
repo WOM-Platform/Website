@@ -3,10 +3,8 @@ import {StorageService} from "../../_services/storage.service";
 import {UserService} from "../../_services";
 import {User} from "../../_models";
 import {LoadingService} from "../../_services/loading.service";
-import {MatSnackBar} from "@angular/material/snack-bar";
 import {SnackBarService} from "../../_services/snack-bar.service";
 import {MatDialog} from "@angular/material/dialog";
-import {UserFormComponent} from "../components/user-form/user-form.component";
 import {CreateEditUserDialogComponent} from "./create-edit-user-dialog/create-edit-user-dialog.component";
 import {DialogConfirmCancelComponent} from "../../components/dialog-confirm-cancel/dialog-confirm-cancel";
 
@@ -51,6 +49,7 @@ export class UserUsersComponent implements OnInit, OnChanges {
 
     getUsersList() {
         this.loadingService.show()
+
         this.userService.getAllUsers(this.searchParameters, this.currentPage, this.itemsPerPage).subscribe({
             next: (res) => {
                 this.assignUserData(res);
@@ -65,6 +64,7 @@ export class UserUsersComponent implements OnInit, OnChanges {
     }
 
     filterUpdate(filter) {
+        console.log("Filters ", filter)
         this.storageService.clearCache("usersList");
         this.itemsPerPage = filter.get("itemsPerPage").value;
 
