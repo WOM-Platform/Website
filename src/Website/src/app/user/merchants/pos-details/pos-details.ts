@@ -1,6 +1,6 @@
 import {Component, OnInit} from "@angular/core";
 import {Pos, PosRegistration} from "../../../_models";
-import {first, map} from "rxjs/operators";
+import {first} from "rxjs/operators";
 import {UntypedFormGroup} from "@angular/forms";
 import {PosService} from "../../../_services";
 import {StorageService} from "../../../_services/storage.service";
@@ -15,7 +15,6 @@ import {MatFormFieldModule} from "@angular/material/form-field";
 import {PosFormComponent} from "../../../_forms/pos/forms-pos.directive";
 import {ActivatedRoute} from "@angular/router";
 import {OffersComponent} from "./offers/offers.component";
-import {forkJoin} from "rxjs";
 import {SnackBarService} from "../../../_services/snack-bar.service";
 
 @Component({
@@ -91,7 +90,7 @@ export class PosDetailsComponent implements OnInit {
                 this.formPos.controls[control].markAsTouched();
             }
         } else {
-            this.formInputError = this.formPos === undefined;
+            this.formInputError = false;
             if (this.formPos.controls.latitude.value === 0) {
                 this.formInputError = true;
                 return;

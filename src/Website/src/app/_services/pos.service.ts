@@ -76,7 +76,7 @@ export class PosService {
                             }
                         }),
                         catchError(err => {
-                            console.error(`Error fetching image`)
+                            console.error(`Error fetching image `, err)
                             return of({...offer, image: null})
                         })
                     )
@@ -117,7 +117,7 @@ export class PosService {
                 }
             }),
             catchError(err => {
-                console.error(`Error fetching image`)
+                console.error(`Error fetching image `, err)
                 return of({...offer, image: null})
             })
         )

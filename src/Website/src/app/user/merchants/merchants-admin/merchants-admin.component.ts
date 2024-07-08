@@ -11,7 +11,7 @@ import {
     MerchantDialogData,
 } from "../dialog-create-merchant/dialog-create-merchant.component";
 import {DialogType} from "../../../_models/dialogType";
-import {catchError, first} from "rxjs/operators";
+import {first} from "rxjs/operators";
 import {MatDialog} from "@angular/material/dialog";
 import {AdminTableComponent} from "../../components/admin-table/admin-table.component";
 import {NgIf} from "@angular/common";
@@ -20,7 +20,7 @@ import {Merchant} from "../../../_models";
 import {MerchantService, UserService} from "../../../_services";
 import {StorageService} from "../../../_services/storage.service";
 import {FiltersComponent} from "../../components/filters/filters.component";
-import {finalize, of, Subscription} from "rxjs";
+import {Subscription} from "rxjs";
 import {DialogConfirmCancelComponent} from "../../../components/dialog-confirm-cancel/dialog-confirm-cancel";
 import {LoadingService} from "../../../_services/loading.service";
 import {Router} from "@angular/router";

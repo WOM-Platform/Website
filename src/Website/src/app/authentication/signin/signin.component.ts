@@ -51,9 +51,9 @@ export class SignInComponent implements OnInit {
                 this.userService.login(username, password)
                     .pipe(first())
                     .subscribe({
-                            next: (data) => {
+                            next: () => {
                                 this.userService.me().pipe().subscribe({
-                                    next: (user) => {
+                                    next: () => {
                                         this.router.navigate([this.returnUrl]);
                                     }, error: (error) => {
                                         console.error(error);

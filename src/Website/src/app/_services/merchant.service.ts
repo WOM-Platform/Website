@@ -4,9 +4,7 @@ import {Observable, of, throwError} from "rxjs";
 import {Merchant} from "../_models";
 import {environment} from "../../environments/environment";
 import {catchError, map, tap} from "rxjs/operators";
-import {StripePrice} from "../_models/billing";
 import {StorageService} from "./storage.service";
-import {Access} from "../_models/instrument";
 
 @Injectable({providedIn: "root"})
 export class MerchantService {

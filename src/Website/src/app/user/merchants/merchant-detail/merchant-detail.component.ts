@@ -16,6 +16,7 @@ import {DialogConfirmCancelComponent} from "src/app/components/dialog-confirm-ca
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {TranslateService} from "@ngx-translate/core";
 import {switchMap, tap} from "rxjs/operators";
+import {SnackBarService} from "../../../_services/snack-bar.service";
 
 @Component({
     selector: "app-merchant-detail",
@@ -53,7 +54,7 @@ export class MerchantDetailComponent implements OnInit, OnDestroy {
         private location: Location,
         private matDialog: MatDialog,
         private merchantService: MerchantService,
-        private snackBar: MatSnackBar,
+        private snackBarService: SnackBarService,
         private posService: PosService,
         private storageService: StorageService,
         private translate: TranslateService,
@@ -119,17 +120,13 @@ export class MerchantDetailComponent implements OnInit, OnDestroy {
                             error: (err) => {
                                 console.error(err)
 
-                                let ref = this.snackBar.open("Errore durante l'aggiornamento dei dati", 'close', {duration: 5000});
-                                ref.afterDismissed().subscribe(res => {
-                                })
+                                let ref = this.snackBarService.openSnackBar("Errore durante l'aggiornamento dei dati");
+                                ref.afterDismissed().subscribe()
                             }
                         })
                 }, error: (err) => {
                     console.error(err)
-
-                    let ref = this.snackBar.open("Errore durante la modifica", 'close', {duration: 5000});
-                    ref.afterDismissed().subscribe(res => {
-                    })
+                    this.snackBarService.openSnackBar("Errore durante la modifica",)
                 }
             })
     }
@@ -143,7 +140,7 @@ export class MerchantDetailComponent implements OnInit, OnDestroy {
                 switchMap(() => this.updateAccessList()) // Ensure the access list is updated
             )
             .subscribe({
-                next: (res) => {
+                next: () => {
                     // search for the access id to have the access type
                     const accessToCheck: Access = this.accessList.find(acc => acc.userId === access.id)
                     this.checkAccessCurrentUser(accessToCheck, 'update');
@@ -166,7 +163,7 @@ export class MerchantDetailComponent implements OnInit, OnDestroy {
             },
         });
 
-        dialogRef.afterClosed().subscribe((result) => {
+        dialogRef.afterClosed().subscribe(() => {
             this.merchantService.deleteAccess(this.id, access.userId).pipe(
                 switchMap(() => this.updateAccessList()) // Ensure the access list is updated
             ).subscribe({

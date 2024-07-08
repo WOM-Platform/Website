@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Offer} from "../../../../_models/offer";
 import {NgForOf, NgIf} from "@angular/common";
-import {MatDialog, MatDialogConfig, MatDialogModule} from "@angular/material/dialog";
+import {MatDialog, MatDialogModule} from "@angular/material/dialog";
 import {CreateOfferComponent} from "./create-offer/create-offer.component";
 import {BadgeComponent} from "../../../../components/badge/badge.component";
 import {ActivatedRoute} from "@angular/router";

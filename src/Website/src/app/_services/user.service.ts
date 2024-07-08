@@ -5,7 +5,6 @@ import {catchError, map, tap} from "rxjs/operators";
 import {User, UserLogin, UserMe, UserRegistrationPayload} from "../_models";
 import {environment} from "../../environments/environment";
 import {StorageService} from "./storage.service";
-import {Access} from "../_models/instrument";
 
 @Injectable({providedIn: "root"})
 export class UserService {

@@ -7,12 +7,11 @@ import {
 } from "@angular/animations";
 import {ChangeDetectorRef, Component, OnInit, OnDestroy} from "@angular/core";
 import {Aim} from "src/app/_models";
-import {Instrument, InstrumentEditing, UIInstrument} from "src/app/_models/instrument";
+import {InstrumentEditing, UIInstrument} from "src/app/_models/instrument";
 import {AimsService, UserService} from "src/app/_services";
 import {SourceService} from "src/app/_services/source.service";
 import {StorageService} from "src/app/_services/storage.service";
 import {Observable, of, Subscription} from "rxjs";
-import {switchMap} from "rxjs/operators";
 
 @Component({
     selector: "app-my-instruments-collection",

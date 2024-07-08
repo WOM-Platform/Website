@@ -6,6 +6,7 @@ import {MatSnackBar} from "@angular/material/snack-bar";
 import {MatDialog} from "@angular/material/dialog";
 import {Subscription} from "rxjs";
 import {UserMe} from "../../_models";
+import {SnackBarService} from "../../_services/snack-bar.service";
 
 @Component({
     selector: "app-user-home",
@@ -20,7 +21,7 @@ export class UserHomeComponent implements OnInit, OnDestroy {
     constructor(
         public dialog: MatDialog,
         private router: Router,
-        private snackBarService: MatSnackBar,
+        private snackBarService: SnackBarService,
         private translate: TranslateService,
         private userService: UserService,
     ) {
@@ -46,7 +47,7 @@ export class UserHomeComponent implements OnInit, OnDestroy {
                     }
 
                 }, error: (err) => {
-                    this.snackBarService.open("errore caricamento dati utente")
+                    this.snackBarService.openSnackBar("errore caricamento dati utente")
                     console.error(err)
                 }
             })

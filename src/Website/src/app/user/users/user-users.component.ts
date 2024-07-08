@@ -95,6 +95,7 @@ export class UserUsersComponent implements OnInit, OnChanges {
                 }
             },
             error: (err) => {
+                console.error(err)
             }
         })
     }
@@ -106,10 +107,10 @@ export class UserUsersComponent implements OnInit, OnChanges {
         })
 
         dialogRef.afterClosed().subscribe({
-            next: (newUser) => {
+            next: () => {
 
             },
-            error: (err) => {
+            error: () => {
             }
         })
     }
@@ -141,7 +142,7 @@ export class UserUsersComponent implements OnInit, OnChanges {
                     });
                 }
             },
-            error: (err) => {
+            error: () => {
             }
         })
     }
