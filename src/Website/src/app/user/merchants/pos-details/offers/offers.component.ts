@@ -41,7 +41,6 @@ export class OffersComponent implements OnInit {
 
             this.posService.getOffers(this.posId).subscribe({
                 next: (offers) => {
-                    console.log(offers)
                     offers.map(offer => {
                         this.posService.convertBlobToBase64(offer.imageBlob).subscribe(base64 => {
                             offer.imageString = base64

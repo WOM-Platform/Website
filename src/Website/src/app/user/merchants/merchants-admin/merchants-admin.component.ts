@@ -24,6 +24,7 @@ import {finalize, of, Subscription} from "rxjs";
 import {DialogConfirmCancelComponent} from "../../../components/dialog-confirm-cancel/dialog-confirm-cancel";
 import {LoadingService} from "../../../_services/loading.service";
 import {Router} from "@angular/router";
+import {SnackBarService} from "../../../_services/snack-bar.service";
 
 @Component({
     selector: "app-merchants-admin",
@@ -63,6 +64,7 @@ export class MerchantsAdminComponent implements OnInit {
         private cd: ChangeDetectorRef,
         private loadingService: LoadingService,
         private router: Router,
+        private snackBarService: SnackBarService,
         private storageService: StorageService,
         private userService: UserService
     ) {
@@ -83,6 +85,8 @@ export class MerchantsAdminComponent implements OnInit {
             .subscribe({
                 next: (res) => {
                     this.assignMerchantData(res);
+                    console.log("RISULTATO GET  ", res)
+                    this.merchantsList = res.data
 
                     this.cd.detectChanges();
                 },
@@ -127,6 +131,8 @@ export class MerchantsAdminComponent implements OnInit {
                     .subscribe({
                             next: () => {
                                 this.storageService.clear(this.storageService.merchantFormKey);
+                                this.storageService.clearCache("merchantsList")
+                                this.getMerchantsList()
                             },
                             error: (error) => {
                                 this.formApiError = true;
@@ -163,14 +169,58 @@ export class MerchantsAdminComponent implements OnInit {
 
         dialogRef.afterClosed().subscribe((result) => {
             if (result) {
-                const delSub = this.merchantService
-                    .deleteMerchant(merchant.id)
-                    .subscribe(() => {
-                        this.updateMerchantsList();
-                    });
-                this.subscriptions.add(delSub);
+                this.loadingService.show();
+                this.merchantService.getAccessList(merchant.id).subscribe({
+                    next: (res) => {
+                        const accessList = res.users;
+                        let isMyMerchantUpdate: boolean = false;
+
+                        // Check if the current user is in the access list
+                        const currentUser = this.storageService.load('currentUser');
+                        if (accessList.find(acc => acc.userId === currentUser.id)) {
+                            isMyMerchantUpdate = true;
+                        }
+
+                        // Delete the merchant
+                        this.merchantService.deleteMerchant(merchant.id).subscribe({
+                            next: () => {
+                                // Update user access if necessary
+                                if (isMyMerchantUpdate) {
+                                    this.checkAccessCurrentUser();
+                                }
+                                this.storageService.clearCache("merchantsList")
+                                // Refresh the merchants list
+                                this.getMerchantsList();
+                                this.snackBarService.openSnackBar("Merchant deleted successfully")
+                            },
+                            error: (err) => {
+                                console.error("Error deleting merchant:", err);
+                                this.snackBarService.openSnackBar("Error deleting merchant");
+                            },
+                            complete: () => {
+                                this.loadingService.hide();
+                            }
+                        });
+                    },
+                    error: (err) => {
+                        console.error("Error fetching access list:", err);
+                        this.snackBarService.openSnackBar("Error checking merchant access")
+                        this.loadingService.hide();
+                    }
+                });
             }
         });
+    }
+
+    checkAccessCurrentUser() {
+        this.storageService.clear('currentUser')
+        this.userService
+            .me()
+            .subscribe((res) => {
+                this.userService.updateUserOwnership(res)
+            });
+
+
     }
 
     onPageChange(page: number): void {

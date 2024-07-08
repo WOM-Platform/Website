@@ -77,6 +77,13 @@ export class MyMerchantsCollectionComponent implements OnInit {
     loadData(): any {
         this.currentUser = this.storageService.loadCurrentUser()
 
+        this.userService.userOwnershipStatus.subscribe({
+            next: (res) => {
+                console.log("user ownership status", res);
+                this.storageService.save(res, 'merchants')
+                this.merchants = res["merchants"];
+            },
+        });
         this.merchants = this.currentUser.merchants.map((merchant: Merchant, idx: number) => ({
             ...merchant,
             isOpen: idx === 0

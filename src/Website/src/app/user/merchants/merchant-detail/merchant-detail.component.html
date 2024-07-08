@@ -93,14 +93,15 @@
         </div>
         <div *ngIf="accessList && accessList.length > 0">
             <p class="font-semibold mb-0">Gestori:</p>
-            <app-access-list
-                    [accessList]="accessList"
-                    [action]="action"
-                    [showRole]="true"
-                    (deleteAccess)="onDeleteAccess($event)"
-                    (addAccess)="handleAccessList($event)"
-            />
         </div>
+        <app-access-list
+                [accessList]="accessList"
+                [action]="action"
+                [showRole]="true"
+                (deleteAccess)="onDeleteAccess($event)"
+                (addAccess)="handleAccessList($event)"
+        />
+
         <app-user-pos-list [merchantId]="merchantId" [posList]="posList" [actionMerchant]="action"/>
     </div>
 </div>

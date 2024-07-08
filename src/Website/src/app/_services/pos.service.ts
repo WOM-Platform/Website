@@ -70,7 +70,6 @@ export class PosService {
                 const offerDetailsRequests = offers.map(offer =>
                     this.http.get(`https://dev.wom.social/api/render/offer/${offer.id}`, {responseType: 'blob'}).pipe(
                         map((offerDetails: any) => {
-                            console.log("ouvrez les frontieres ", offerDetails)
                             return {
                                 ...offer,
                                 imageBlob: offerDetails

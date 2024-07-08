@@ -87,11 +87,12 @@ export class UserAccessListComponent implements OnDestroy {
             userToSearch.email.length < 3
         ) {
             this.listAccess = [];
-            this.cd.markForCheck();
+            this.cd.detectChanges();
         } else {
             this.subscriptions = this.userService
                 .userSearch(userToSearch.name, userToSearch.email)
                 .subscribe((res) => {
+                    console.log("cerchi.. ", res)
                     this.listAccess = [];
                     if (res.data && res.data.length > 0) {
                         this.noResults = false;
@@ -99,7 +100,7 @@ export class UserAccessListComponent implements OnDestroy {
                     } else {
                         this.noResults = true;
                     }
-                    this.cd.markForCheck();
+                    this.cd.detectChanges();
                 });
         }
     }
@@ -122,6 +123,7 @@ export class UserAccessListComponent implements OnDestroy {
         } else {
             this.selectedAccess = access;
         }
+        this.cd.detectChanges()
     }
 
     addUserToAccessList(access, role = "") {

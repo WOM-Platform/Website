@@ -168,8 +168,6 @@ export class MyInstrumentsCollectionComponent implements OnInit, OnDestroy {
     }
 
     findEditingInstrumentById(instrumentId: string) {
-        console.log("Id ", instrumentId);
-        console.log(this.editingInstruments);
         return this.editingInstruments.find(instrument => instrument.id === instrumentId);
     }
 }

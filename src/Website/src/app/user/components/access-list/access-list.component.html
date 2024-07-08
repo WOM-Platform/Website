@@ -32,7 +32,6 @@
     <div *ngIf="!createNewAccess" class="mt-6">
         <app-user-access-list
                 [isRoleAccessRequired]="showRole"
-
                 (accessToAdd)="handleAccessList($event)"
         ></app-user-access-list>
     </div>

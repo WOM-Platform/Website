@@ -63,6 +63,7 @@ export class SearchSourceComponent implements OnInit, OnDestroy {
     }
 
     search() {
+
         const searchCriteria = {};
         // Extract values from form controls
         const name = this.searchForm.get('nameSearch').value;

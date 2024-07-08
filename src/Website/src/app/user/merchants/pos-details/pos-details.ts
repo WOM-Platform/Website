@@ -16,6 +16,7 @@ import {PosFormComponent} from "../../../_forms/pos/forms-pos.directive";
 import {ActivatedRoute} from "@angular/router";
 import {OffersComponent} from "./offers/offers.component";
 import {forkJoin} from "rxjs";
+import {SnackBarService} from "../../../_services/snack-bar.service";
 
 @Component({
     selector: "app-pos-details",
@@ -49,6 +50,7 @@ export class PosDetailsComponent implements OnInit {
         private matDialog: MatDialog,
         private posService: PosService,
         private route: ActivatedRoute,
+        private snackBarService: SnackBarService,
         private storageService: StorageService
     ) {
     }
@@ -128,10 +130,12 @@ export class PosDetailsComponent implements OnInit {
                 next: () => {
                     /*this.dialogRef.close(true);*/
                     this.storageService.clear(this.storageService.posFormKey);
+                    this.snackBarService.openSnackBar("✔️ POS modificato correttamente")
                 },
                 error: (error) => {
                     this.formApiError = true;
-                    console.log(error);
+                    console.error(error);
+                    this.snackBarService.openSnackBar("❌ Errore durante la modifica del POS")
                 }
             });
     }

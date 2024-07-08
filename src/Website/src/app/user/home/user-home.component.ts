@@ -43,7 +43,6 @@ export class UserHomeComponent implements OnInit, OnDestroy {
                 next: (data: UserMe) => {
                     if (data) {
                         this.userData = data;
-                        console.log("I dati ", data)
                         this.role = data.role;
                     }
 

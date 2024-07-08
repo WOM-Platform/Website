@@ -43,8 +43,6 @@ export class UserUsersComponent implements OnInit, OnChanges {
     }
 
     ngOnChanges(changes: SimpleChanges) {
-        console.log("changes ", changes)
-        console.log("changes ", this.userList)
     }
 
     getUsersList() {
@@ -57,6 +55,7 @@ export class UserUsersComponent implements OnInit, OnChanges {
             }, error: (err) => {
                 console.error(err)
                 this.snackBarService.openSnackBar("Errore nel caricamento della lista degli utenti")
+                this.loadingService.hide();
             }, complete: () => {
                 this.loadingService.hide()
             }
@@ -131,6 +130,9 @@ export class UserUsersComponent implements OnInit, OnChanges {
                     this.userService.delete(user.id).subscribe({
                         next: () => {
                             this.snackBarService.openSnackBar('User deleted successfully');
+                            // update user list
+                            this.storageService.clearCache("usersList");
+                            this.getUsersList()
                         },
                         error: (err) => {
                             console.error('Error deleting user', err);

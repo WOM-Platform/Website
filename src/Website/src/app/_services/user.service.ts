@@ -5,6 +5,7 @@ import {catchError, map, tap} from "rxjs/operators";
 import {User, UserLogin, UserMe, UserRegistrationPayload} from "../_models";
 import {environment} from "../../environments/environment";
 import {StorageService} from "./storage.service";
+import {Access} from "../_models/instrument";
 
 @Injectable({providedIn: "root"})
 export class UserService {
@@ -23,6 +24,15 @@ export class UserService {
 
     public userOwnershipStatus = this.userOwnership.asObservable();
 
+    // Merchants and Sources cache
+    private merchantsCacheSubject: BehaviorSubject<any[]>;
+    public merchantsCache$: Observable<any[]>;
+
+    private sourcesCacheSubject: BehaviorSubject<any[]>;
+    public sourcesCache$: Observable<any[]>;
+
+    currentUserData: Partial<UserMe>
+
     constructor(private http: HttpClient, private storageService: StorageService) {
         const localStorageUserLogin = this.storageService.load("currentUserLogin");
         this.currentUserLoginSubject = new BehaviorSubject<UserMe>(
@@ -35,6 +45,18 @@ export class UserService {
             localStorageUser ? User.fromJson(localStorageUser) : null
         );
         this.currentUser = this.currentUserSubject.asObservable();
+
+        const localStorageMerchants = this.storageService.get("myMerchantData");
+        this.merchantsCacheSubject = new BehaviorSubject<any[]>(
+            localStorageMerchants ? JSON.parse(localStorageMerchants) : []
+        );
+        this.merchantsCache$ = this.merchantsCacheSubject.asObservable();
+
+        const localStorageSources = this.storageService.get("myInstrumentData");
+        this.sourcesCacheSubject = new BehaviorSubject<any[]>(
+            localStorageSources ? JSON.parse(localStorageSources) : []
+        );
+        this.sourcesCache$ = this.sourcesCacheSubject.asObservable();
     }
 
     public get currentUserValue(): User {
@@ -124,19 +146,62 @@ export class UserService {
         } else {
             return this.http.get<any>(this.localUrlV1 + "me").pipe(
                 map((user) => {
+                    this.currentUserData = {
+                        id: user.id,
+                        name: user.name,
+                        surname: user.surname,
+                        email: user.email,
+                        role: user.role,
+                        verified: user.verified,
+                        merchants: user.merchants,
+                        sources: user.sources
+                    };
+                    // store user details in local storage to save user data in between page refreshes
+                    this.storageService.save(this.currentUserData, "currentUser")
+
                     user = User.fromJson(user);
 
-                    // store user details in local storage to save user data in between page refreshes
-                    localStorage.setItem("currentUser", JSON.stringify(user));
                     this.currentUserSubject.next(user);
-                    /*
-                                    localStorage.setItem("merchantData", JSON.stringify(user.merchants));
-                                    localStorage.setItem("instrumentData", JSON.stringify(user.sources));*/
+
+                    // save user's merchant and instrument on cache
+                    this.storageService.set("myMerchantData", JSON.stringify(user.merchants));
+                    this.merchantsCacheSubject.next(user.merchants);
+                    this.storageService.set("myInstrumentData", JSON.stringify(user.sources));
+                    this.sourcesCacheSubject.next(user.sources);
+
                     return user;
                 })
             );
         }
     }
+
+    getMerchants(): Observable<any[]> {
+        return this.merchantsCache$;
+    }
+
+    getSources(): Observable<any[]> {
+        return this.sourcesCache$;
+    }
+
+    /*    updateMyMerchants(myMerchant: any[], actionOn: string): void {
+    
+            this.storageService.set("myMerchantData", JSON.stringify(myMerchant));
+            this.merchantsCacheSubject.next(myMerchant);
+        }*/
+
+    updateMySources(newSources: any[]): void {
+        this.storageService.set("myInstrumentData", JSON.stringify(newSources));
+        this.sourcesCacheSubject.next(newSources);
+    }
+
+    invalidateCache(): void {
+        this.storageService.clearCache("myMerchantData");
+        this.storageService.clearCache("myInstrumentData");
+
+        this.merchantsCacheSubject.next([]);
+        this.sourcesCacheSubject.next([]);
+    }
+
 
     /**
      * Update an existing user's data

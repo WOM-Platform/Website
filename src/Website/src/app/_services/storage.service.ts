@@ -1,4 +1,6 @@
 import {Injectable} from "@angular/core";
+import {UserMe} from "../_models";
+import {Access} from "../_models/instrument";
 
 @Injectable({providedIn: 'root'})
 export class StorageService {
@@ -67,6 +69,37 @@ export class StorageService {
         return data;
     }
 
+    addToCache(key: string, element: any): void {
+        const cached = this.cache.get(key);
+        if (cached) {
+            const {data, expiry} = cached;
+            if (Array.isArray(data)) {
+                data.push(element);
+                this.cache.set(key, {data, expiry});
+            } else {
+                console.error(`Cache data under key "${key}" is not an array.`);
+            }
+        } else {
+            this.cache.set(key, {data: [element], expiry: Date.now() + 300000});
+        }
+    }
+
+    removeFromCache(key: string, element: any, compareFn: (a: any, b: any) => boolean): void {
+        const cached = this.cache.get(key);
+        if (cached) {
+            const {data, expiry} = cached;
+            if (Array.isArray(data)) {
+                const index = data.findIndex((item) => compareFn(item, element));
+                if (index > -1) {
+                    data.splice(index, 1);
+                    this.cache.set(key, {data, expiry});
+                }
+            } else {
+                console.error(`Cache data under key "${key}" is not an array.`);
+            }
+        }
+    }
+
     clearCache(key: string): void {
         this.cache.delete(key);
     }
@@ -75,6 +108,4 @@ export class StorageService {
         localStorage.clear()
         this.cache.clear();
     }
-
-
 }

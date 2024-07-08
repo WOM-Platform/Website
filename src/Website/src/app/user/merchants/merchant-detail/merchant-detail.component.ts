@@ -7,7 +7,7 @@ import {
 } from "../../../_models";
 import {MerchantService, PosService, UserService} from "src/app/_services";
 import {ActivatedRoute} from "@angular/router";
-import {Subscription, first, forkJoin} from "rxjs";
+import {Subscription, first, forkJoin, Observable} from "rxjs";
 import {LoadingService} from "src/app/_services/loading.service";
 import {Location} from "@angular/common";
 import {StorageService} from "src/app/_services/storage.service";
@@ -16,6 +16,7 @@ import {MatDialog} from "@angular/material/dialog";
 import {DialogConfirmCancelComponent} from "src/app/components/dialog-confirm-cancel/dialog-confirm-cancel";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {TranslateService} from "@ngx-translate/core";
+import {switchMap, tap} from "rxjs/operators";
 
 @Component({
     selector: "app-merchant-detail",
@@ -28,7 +29,7 @@ export class MerchantDetailComponent implements OnInit, OnDestroy {
     fiscalCode: string;
     primaryActivity: string;
     posList: any[] = [];
-    accessList: any[] = [];
+    accessList: Access[] = [];
     address: string;
     isEnabled: boolean;
     zipCode: string;
@@ -67,11 +68,12 @@ export class MerchantDetailComponent implements OnInit, OnDestroy {
             this.merchantId = params["id"];
             this.action = params["action"];
             this.loadingService.show();
-            this.subscription = forkJoin({
+            const observable = forkJoin({
                 merchantData: this.merchantService.getMerchantById(this.merchantId),
                 accessData: this.merchantService.getAccessList(this.merchantId),
                 posData: this.merchantService.getMerchantPos(this.merchantId),
-            }).subscribe(({merchantData, accessData, posData}) => {
+            })
+            observable.subscribe(({merchantData, accessData, posData}) => {
                 this.merchant = merchantData;
                 this.id = merchantData.id;
                 this.name = merchantData.name;
@@ -97,23 +99,6 @@ export class MerchantDetailComponent implements OnInit, OnDestroy {
 
     goBack(): void {
         this.location.back();
-    }
-
-    handleAccessList(user): void {
-        const role = user.role;
-        const access = user.access;
-
-        const addAccessSub = this.merchantService
-            .addAccess(this.id, access.id, role)
-            .subscribe({
-                next: () => {
-                    this.checkAccessCurrentUser(access.id);
-                    this.updateAccessList();
-                },
-                error: (err) =>
-                    console.error("Error adding new instrument access:", err),
-            });
-        this.subscriptions.add(addAccessSub);
     }
 
     onUpdateMerchant(key: string, value: any, isTableToUpdate: boolean) {
@@ -150,6 +135,27 @@ export class MerchantDetailComponent implements OnInit, OnDestroy {
             })
     }
 
+    handleAccessList(user): void {
+        const role = user.role;
+        const access = user.access;
+
+        const addAccessSub = this.merchantService
+            .addAccess(this.id, access.id, role).pipe(
+                switchMap(() => this.updateAccessList()) // Ensure the access list is updated
+            )
+            .subscribe({
+                next: (res) => {
+                    // search for the access id to have the access type
+                    const accessToCheck: Access = this.accessList.find(acc => acc.userId === access.id)
+                    this.checkAccessCurrentUser(accessToCheck, 'update');
+                },
+                error: (err) =>
+                    console.error("Error adding new instrument access:", err),
+            });
+        this.subscriptions.add(addAccessSub);
+    }
+
+    // to delete an access from the list
     onDeleteAccess(access: Access) {
         const dialogRef = this.matDialog.open(DialogConfirmCancelComponent, {
             width: "500px",
@@ -162,10 +168,13 @@ export class MerchantDetailComponent implements OnInit, OnDestroy {
         });
 
         dialogRef.afterClosed().subscribe((result) => {
-            this.merchantService.deleteAccess(this.id, access.userId).subscribe({
+            this.merchantService.deleteAccess(this.id, access.userId).pipe(
+                switchMap(() => this.updateAccessList()) // Ensure the access list is updated
+            ).subscribe({
                 next: () => {
-                    this.checkAccessCurrentUser(access.userId);
+                    // Check if we need to
                     this.updateAccessList();
+                    this.checkAccessCurrentUser(access, 'delete');
                 },
             });
         });
@@ -177,10 +186,12 @@ export class MerchantDetailComponent implements OnInit, OnDestroy {
     }
 
 
-    updateAccessList() {
-        this.merchantService
+    updateAccessList(): Observable<any> {
+        return this.merchantService
             .getAccessList(this.merchantId)
-            .subscribe((res) => (this.accessList = res["users"]));
+            .pipe(tap((res) => {
+                this.accessList = res["users"]
+            }))
     }
 
     updatePosList() {
@@ -189,21 +200,17 @@ export class MerchantDetailComponent implements OnInit, OnDestroy {
             .subscribe((res) => (this.posList = res["pos"]));
     }
 
-    checkAccessCurrentUser(idAccess: string) {
+    checkAccessCurrentUser(access: Access, actionOnUser: string) {
         const currentUser = this.storageService.load("currentUser");
-        if (idAccess === currentUser.id) {
+
+        if (access.userId === currentUser.id) {
+            /*this.userService.updateCurrentUser(access, actionOnUser)*/
+            this.storageService.clear('currentUser')
             this.userService
                 .me()
-                .subscribe((res) => this.userService.updateUserOwnership(res));
+                .subscribe((res) => {
+                    this.userService.updateUserOwnership(res)
+                });
         }
-    }
-
-    openSnackBar(message = "null"): any {
-        this.snackBar.open(message, null, {
-            duration: 5000,
-        });
-    }
-
-    handleCancellationPos() {
     }
 }

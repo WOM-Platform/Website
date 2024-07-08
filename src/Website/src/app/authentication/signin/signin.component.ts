@@ -50,27 +50,31 @@ export class SignInComponent implements OnInit {
                 const password = this.form.get('password').value.trim();
                 this.userService.login(username, password)
                     .pipe(first())
-                    .subscribe(
-                        data => {
-                            this.userService.me().pipe().subscribe(
-                                user => {
-                                    this.router.navigate([this.returnUrl]);
-                                }, error => {
-                                    console.log(error);
-                                    this.error = error;
+                    .subscribe({
+                            next: (data) => {
+                                this.userService.me().pipe().subscribe({
+                                    next: (user) => {
+                                        this.router.navigate([this.returnUrl]);
+                                    }, error: (error) => {
+                                        console.error(error);
+                                        this.error = error;
+                                    }
                                 });
-                        },
-                        error => {
-                            console.log(error);
-                            this.translate.get(['SIGN_IN.ERR.LOGIN', 'SIGN_IN.ERR.LOGIN']).subscribe(res => {
-                                if (error.status === 403) {
-                                    this.error = res['SIGN_IN.ERR.LOGIN'];
-                                } else {
-                                    this.error = res['SIGN_IN.ERR.LOGIN'];
-                                }
-                                this.loginInvalid = true;
-                            });
-                        });
+                            }
+                            ,
+                            error: (error) => {
+                                console.log(error);
+                                this.translate.get(['SIGN_IN.ERR.LOGIN', 'SIGN_IN.ERR.LOGIN']).subscribe(res => {
+                                    if (error.status === 403) {
+                                        this.error = res['SIGN_IN.ERR.LOGIN'];
+                                    } else {
+                                        this.error = res['SIGN_IN.ERR.LOGIN'];
+                                    }
+                                    this.loginInvalid = true;
+                                });
+                            }
+                        }
+                    );
             } catch (err) {
                 console.log(err);
                 this.loginInvalid = true;

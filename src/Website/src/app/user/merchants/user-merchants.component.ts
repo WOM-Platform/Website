@@ -40,7 +40,6 @@ export class UserMerchantsComponent implements OnInit, OnDestroy {
     ngOnInit(): any {
         this.route.queryParams.subscribe((params) => {
             const selectedTabIndex = params["selectedTabIndex"];
-            console.log("params ", params);
             if (selectedTabIndex !== undefined) {
                 this.tabGroup.selectedIndex = selectedTabIndex;
             }
@@ -58,7 +57,6 @@ export class UserMerchantsComponent implements OnInit, OnDestroy {
 
     loadData(): any {
         this.currentUser = this.storageService.load("currentUser");
-        console.log("Current user ", this.currentUser)
     }
 
     async navigateToSecondTab(): Promise<void> {

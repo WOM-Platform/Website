@@ -6,6 +6,7 @@ import {UserMe} from "../_models";
 import {Subscription} from "rxjs";
 import {LoadingService} from "../_services/loading.service";
 import {Instrument} from "../_models/instrument";
+import {StorageService} from "../_services/storage.service";
 
 @Component({
     selector: "app-user",
@@ -70,7 +71,8 @@ export class UserComponent implements OnInit, OnDestroy {
     constructor(
         private userService: UserService,
         private cd: ChangeDetectorRef,
-        private loadingService: LoadingService
+        private loadingService: LoadingService,
+        private storageService: StorageService
     ) {
     }
 
@@ -81,10 +83,13 @@ export class UserComponent implements OnInit, OnDestroy {
                 this.cd.detectChanges();
             }
         );
-        this.username =
-            this.userService.currentUserValue.name +
-            " " +
-            this.userService.currentUserValue.surname;
+        
+        const correntUser = this.storageService.load('currentUser')
+        this.userData = `${correntUser.name} ${correntUser.surname}`;
+        /*  this.username =
+              this.userService.currentUserValue.name +
+              " " +
+              this.userService.currentUserValue.surname;*/
         this.loadData();
 
     }
