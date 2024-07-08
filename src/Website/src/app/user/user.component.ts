@@ -84,10 +84,10 @@ export class UserComponent implements OnInit, OnDestroy {
 
         const correntUser = this.storageService.load('currentUser')
         this.userData = `${correntUser.name} ${correntUser.surname}`;
-        /*  this.username =
-              this.userService.currentUserValue.name +
-              " " +
-              this.userService.currentUserValue.surname;*/
+        this.username =
+            this.userService.currentUserValue.name +
+            " " +
+            this.userService.currentUserValue.surname;
         this.loadData();
 
     }

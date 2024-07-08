@@ -7,7 +7,7 @@
                     [minLength]="4"
                     [maxLength]="100"
                     (onChangeElement)="updateInstrumentField('name', $event, true)"
-                    class="font-semibold text-cyan-700"
+                    class="font-semibold text-cyan-700 text-2xl"
             />
         </div>
         <!-- <p class="text-center"><span class="font-semibold text-cyan-700">{{ instrument.name }}</span></p> -->
@@ -16,6 +16,7 @@
                 <span class="text-slate-600 font-semibold">ID</span>:
                 {{ instrumentView.id }}
             </p>
+
             <app-editable-element
                     [keyEl]="'URL'"
                     [valueEl]="instrumentView.url"
@@ -28,7 +29,6 @@
                     (onChangeElement)="updateInstrumentField('url', $event, true)"
                     class="merchant-element"
             />
-
             <!-- <p class="mb-0"><span class="text-slate-600 font-semibold">URL</span>: {{ instrument.url }}</p> -->
             <!-- <p class="mb-0"><span class="font-semibold">WOM generati</span>: Tanti</p> -->
         </div>

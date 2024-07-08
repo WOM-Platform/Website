@@ -18,7 +18,7 @@
 }
 
 .icon-button-bg {
-    @apply w-10 h-10  rounded-full transition duration-300 ease-in-out
+    @apply w-8 h-8  rounded-full transition duration-300 ease-in-out
 }
 
 .delete-button mat-icon {

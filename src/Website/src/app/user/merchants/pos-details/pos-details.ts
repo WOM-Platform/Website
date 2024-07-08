@@ -12,7 +12,7 @@ import {MatButtonModule} from "@angular/material/button";
 import {MatIconModule} from "@angular/material/icon";
 import {TranslateModule} from "@ngx-translate/core";
 import {MatFormFieldModule} from "@angular/material/form-field";
-import {PosFormComponent} from "../../../_forms/pos/forms-pos.directive";
+import {PosFormComponent} from "./pos/forms-pos.component";
 import {ActivatedRoute} from "@angular/router";
 import {OffersComponent} from "./offers/offers.component";
 import {SnackBarService} from "../../../_services/snack-bar.service";

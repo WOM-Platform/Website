@@ -36,7 +36,6 @@ export class UserInstrumentsComponent
     ngOnInit() {
         this.userService.userOwnershipStatus.subscribe({
             next: (res) => {
-                console.log("user ownership status", res);
                 this.myInstruments = res["sources"];
             },
         });

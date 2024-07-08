@@ -11,9 +11,9 @@
                     [maxLength]="100"
                     (onChangeElement)="updateInstrumentField(findEditingInstrumentById(instrument.id), {key: 'name', value:$event, isTableToUpdate:true})"
                     (click)="$event.stopPropagation()"
-                    class="font-semibold text-cyan-700"
+                    class="font-semibold text-cyan-700 text-2xl"
             />
-            <div class="mt-4">
+            <div class="mt-4 flex justify-between">
                 <app-editable-element
                         [keyEl]="'URL'"
                         [valueEl]="instrument.url"
@@ -25,19 +25,20 @@
                         (click)="$event.stopPropagation()"
                         class="merchant-element"
                 />
+                <div class="flex justify-end">
+                    <i class="fa-solid fa-arrow-down p-4 rounded-full bg-blue-400 text-white font-semibold flex items-center justify-center"
+                       style="width: 40px; height: 40px;" [@rotateArrow]="instrument.isOpen ? 'open' : 'closed'"></i>
+                </div>
             </div>
 
-            <app-expandable-card
-                    [name]="instrument.name"
-                    [role]="'Admin'"
-                    [data]="instrument"
-                    (updateInstrument)="updateInstrumentField(findEditingInstrumentById(instrument.id), $event)"
-                    (click)="$event.stopPropagation()"
-            ></app-expandable-card>
-            <div class="flex justify-end">
-                <i class="fa-solid fa-arrow-down p-4 rounded-full bg-blue-400 text-white font-semibold flex items-center justify-center"
-                   style="width: 40px; height: 40px;" [@rotateArrow]="instrument.isOpen ? 'open' : 'closed'"></i>
-            </div>
+            <!--       <app-expandable-card
+                           [name]="instrument.name"
+                           [role]="'Admin'"
+                           [data]="instrument"
+                           (updateInstrument)="updateInstrumentField(findEditingInstrumentById(instrument.id), $event)"
+                           (click)="$event.stopPropagation()"
+                   ></app-expandable-card>-->
+
             <div [@slideToggle]="instrument.isOpen ? 'open' : 'closed'">
                 <app-aims-list [aimList]="instrument.aims"></app-aims-list>
                 <div *ngIf="instrument.access && instrument.access.length > 0" class="mt-10">

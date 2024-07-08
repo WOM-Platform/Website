@@ -1,0 +1,8 @@
+mat-divider.mat-divider-inset {
+    margin-left: 0;
+}
+
+
+.my-custom-tooltip {
+    max-width: unset !important;
+}

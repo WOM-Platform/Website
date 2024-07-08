@@ -1,59 +1,70 @@
-<p class="flex items-center gap-2 mb-0 h-8 justify-start">
-  <span *ngIf="keyEl" class="text-slate-600 font-semibold">{{ keyEl }}:</span>
-  <ng-container *ngIf="!isEditing; else editingField">
-    {{ valueEl }}
-    <ng-container *ngIf="action === 'edit'">
-      <button (click)="startEditing()">
-        <i class="fas fa-edit text-slate-600 text-base"></i>
-      </button>
-    </ng-container>
-  </ng-container>
-  <ng-template #editingField>
-    <div
-      *ngIf="typeEl === 'list'; else inputType"
-      class="flex items-center gap-2"
-    >
-      <select
-        class="border-2 border-black rounded-lg px-2 max-w-[250px]"
-        [(ngModel)]="newValue"
-        (ngModelChange)="validateValue()"
-      >
-        <option *ngFor="let business of option" [value]="business">
-          {{ business }}
-        </option>
-      </select>
-      <button
-        (click)="stopEditing()"
-        [disabled]="!isDirty"
-        [style.color]="isDirty ? 'green' : 'slategray'"
-      >
-        <i class="fa-solid fa-check"></i>
-      </button>
-      <button (click)="cancelEditing()" class="text-red-600">
-        <i class="fa-solid fa-xmark"></i>
-      </button>
+<div class="flex items-center gap-2 mb-0 h-8 justify-start">
+    <!--In case we have a field with tootltip show the icon with the key-->
+    <div *ngIf="tooltipText; else noTooltipText">
+        <button class="flex justify-center items-center gap-2 cursor-default text-slate-600 text-base"
+                [matTooltip]="tooltipText">{{ keyEl }}
+            <i class="fa-solid fa-info text-[0.5rem] rounded-full border-black border-[1px] w-4 h-4 p-0.5"></i>
+        </button>
     </div>
-    <ng-template #inputType class="flex items-center gap-2">
-      <input
-        [(ngModel)]="newValue"
-        name="valueKey"
-        class="border-2 border-black rounded-lg px-2 max-w-[200px]"
-        [ngStyle]="{ width: newValue.length + 1 + 'ch' }"
-        (ngModelChange)="validateValue()"
-      />
-      <button (click)="stopEditing()" [disabled]="!isDirty">
-        <i
-          [class.fa-solid]="true"
-          class="fa-check"
-          [style.color]="isDirty ? 'green' : 'slategray'"
-        ></i>
-      </button>
-      <button (click)="cancelEditing()" class="text-red-600">
-        <i class="fa-solid fa-xmark"></i>
-      </button>
+    <ng-template #noTooltipText>
+        <p *ngIf="keyEl" class="text-slate-600 font-semibold mb-0">{{ keyEl }}:</p>
     </ng-template>
-    <div *ngIf="!isValid" class="text-red-600 text-sm mt-1">
-      {{ validationMessage }}
-    </div>
-  </ng-template>
-</p>
+    <ng-container *ngIf="!isEditing; else fieldIsEditing">
+        <a *ngIf="keyEl=== 'URL'; else noUrl" target="_blank" [href]="valueEl">
+            <span class="mb-0 text-base"> {{ valueEl }}</span>
+        </a>
+        <ng-template #noUrl>
+            <span class="mb-0"> {{ valueEl }}</span>
+        </ng-template>
+        <ng-container *ngIf="action === 'edit'">
+            <button (click)="startEditing()">
+                <i class="fas fa-edit text-slate-600 text-base"></i>
+            </button>
+        </ng-container>
+    </ng-container>
+    <ng-template #fieldIsEditing>
+        <div *ngIf="typeEl === 'list'; else inputType" class="flex items-center gap-2">
+            <select
+                    class="border-2 border-black rounded-lg px-2 max-w-[250px]"
+                    [(ngModel)]="newValue"
+                    (ngModelChange)="validateValue()"
+            >
+                <option *ngFor="let business of option" [value]="business">
+                    {{ business }}
+                </option>
+            </select>
+            <button
+                    (click)="stopEditing()"
+                    [disabled]="!isDirty"
+                    [style.color]="isDirty ? 'green' : 'slategray'"
+            >
+                <i class="fa-solid fa-check"></i>
+            </button>
+            <button (click)="cancelEditing()" class="text-red-600">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+        <ng-template #inputType class="flex items-center gap-2">
+            <input
+                    [(ngModel)]="newValue"
+                    name="valueKey"
+                    class="border-2 border-black rounded-lg px-2 max-w-[200px]"
+                    [ngStyle]="{ width: newValue.length + 1 + 'ch' }"
+                    (ngModelChange)="validateValue()"
+            />
+            <button (click)="stopEditing()" [disabled]="!isDirty">
+                <i
+                        [class.fa-solid]="true"
+                        class="fa-check"
+                        [style.color]="isDirty ? 'green' : 'slategray'"
+                ></i>
+            </button>
+            <button (click)="cancelEditing()" class="text-red-600">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </ng-template>
+        <div *ngIf="!isValid" class="text-red-600 text-sm mt-1">
+            {{ validationMessage }}
+        </div>
+    </ng-template>
+</div>

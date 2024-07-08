@@ -27,6 +27,9 @@
             </ul>
         </div>
     </div>
+    <div *ngIf="noResults">
+        <p class="mb-0 access-element">Nessun risultato</p>
+    </div>
     <!-- select access role for merchant for searched users-->
     <div *ngIf="selectedAccess && !createUserAccess" @fadeInOut>
         <div class="flex items-center">

@@ -54,7 +54,6 @@ export class UserPosListComponent implements OnInit {
     }
 
     onAddPos() {
-
         const posData = new PosDialogData();
         posData.merchantId = this.merchantId;
         posData.pos = null;

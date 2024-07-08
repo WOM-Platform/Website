@@ -79,7 +79,6 @@ export class MyMerchantsCollectionComponent implements OnInit {
 
         this.userService.userOwnershipStatus.subscribe({
             next: (res) => {
-                console.log("user ownership status", res);
                 this.storageService.save(res, 'merchants')
                 this.merchants = res["merchants"];
             },
