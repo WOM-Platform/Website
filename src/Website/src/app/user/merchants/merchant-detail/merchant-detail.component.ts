@@ -106,6 +106,7 @@ export class MerchantDetailComponent implements OnInit, OnDestroy {
 
         updatedMerchant[key] = value;
 
+        console.log("is table to update ", isTableToUpdate)
         this.merchantService
             .update(updatedMerchant)
             .subscribe({
@@ -114,6 +115,9 @@ export class MerchantDetailComponent implements OnInit, OnDestroy {
                         .me()
                         .subscribe({
                             next: (res) => {
+                                // update admin table if a field of the one shown is edited
+                                if (isTableToUpdate) this.storageService.clearCache('merchantsList')
+                                
                                 this.userService.updateUserOwnership(res)
                                 this.merchant = updatedMerchant
                             },
