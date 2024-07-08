@@ -76,6 +76,7 @@ export class MerchantsAdminComponent implements OnInit {
 
     getMerchantsList() {
         this.loadingService.show();
+
         this.merchantService
             .getAllMerchants(
                 this.searchParameters,
@@ -85,9 +86,6 @@ export class MerchantsAdminComponent implements OnInit {
             .subscribe({
                 next: (res) => {
                     this.assignMerchantData(res);
-                    console.log("RISULTATO GET  ", res)
-                    this.merchantsList = res.data
-
                     this.cd.detectChanges();
                 },
                 error: (err) => console.error(err),
@@ -170,32 +168,32 @@ export class MerchantsAdminComponent implements OnInit {
         dialogRef.afterClosed().subscribe((result) => {
             if (result) {
                 this.loadingService.show();
+                // Check if the current user is in the access list
                 this.merchantService.getAccessList(merchant.id).subscribe({
                     next: (res) => {
                         const accessList = res.users;
-                        let isMyMerchantUpdate: boolean = false;
+                        let isMyMerchantToUpdate: boolean = false;
 
-                        // Check if the current user is in the access list
                         const currentUser = this.storageService.load('currentUser');
                         if (accessList.find(acc => acc.userId === currentUser.id)) {
-                            isMyMerchantUpdate = true;
+                            isMyMerchantToUpdate = true;
                         }
 
                         // Delete the merchant
                         this.merchantService.deleteMerchant(merchant.id).subscribe({
                             next: () => {
                                 // Update user access if necessary
-                                if (isMyMerchantUpdate) {
+                                if (isMyMerchantToUpdate) {
                                     this.checkAccessCurrentUser();
                                 }
                                 this.storageService.clearCache("merchantsList")
                                 // Refresh the merchants list
                                 this.getMerchantsList();
-                                this.snackBarService.openSnackBar("Merchant deleted successfully")
+                                this.snackBarService.openSnackBar("Merchant cancellato correttamente")
                             },
                             error: (err) => {
                                 console.error("Error deleting merchant:", err);
-                                this.snackBarService.openSnackBar("Error deleting merchant");
+                                this.snackBarService.openSnackBar("Errore nella cancellazione. Riprova");
                             },
                             complete: () => {
                                 this.loadingService.hide();
@@ -219,8 +217,6 @@ export class MerchantsAdminComponent implements OnInit {
             .subscribe((res) => {
                 this.userService.updateUserOwnership(res)
             });
-
-
     }
 
     onPageChange(page: number): void {

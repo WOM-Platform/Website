@@ -2,12 +2,11 @@ import {ChangeDetectorRef, Component, OnDestroy, OnInit} from "@angular/core";
 import {
     countryList,
     Merchant,
-    Pos,
     primaryActivityType,
 } from "../../../_models";
 import {MerchantService, PosService, UserService} from "src/app/_services";
 import {ActivatedRoute} from "@angular/router";
-import {Subscription, first, forkJoin, Observable} from "rxjs";
+import {Subscription, forkJoin, Observable} from "rxjs";
 import {LoadingService} from "src/app/_services/loading.service";
 import {Location} from "@angular/common";
 import {StorageService} from "src/app/_services/storage.service";

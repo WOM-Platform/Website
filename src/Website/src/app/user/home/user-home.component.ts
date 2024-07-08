@@ -1,12 +1,11 @@
 import {Component, OnDestroy, OnInit} from "@angular/core";
-import {AuthService, UserService} from "../../_services";
+import {UserService} from "../../_services";
 import {TranslateService} from "@ngx-translate/core";
 import {NavigationExtras, Router} from "@angular/router";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {MatDialog} from "@angular/material/dialog";
 import {Subscription} from "rxjs";
 import {UserMe} from "../../_models";
-import {SnackBarService} from "../../_services/snack-bar.service";
 
 @Component({
     selector: "app-user-home",
@@ -48,6 +47,7 @@ export class UserHomeComponent implements OnInit, OnDestroy {
 
                 }, error: (err) => {
                     this.snackBarService.open("errore caricamento dati utente")
+                    console.error(err)
                 }
             })
     }

@@ -1,6 +1,4 @@
 import {Injectable} from "@angular/core";
-import {UserMe} from "../_models";
-import {Access} from "../_models/instrument";
 
 @Injectable({providedIn: 'root'})
 export class StorageService {
@@ -21,8 +19,7 @@ export class StorageService {
     loadCurrentUser(): any {
         const currentUserJson = localStorage.getItem('currentUser');
         if (currentUserJson) {
-            const currentUser = JSON.parse(currentUserJson) as any;
-            return currentUser;
+            return JSON.parse(currentUserJson) as any;
         }
         return null;
     }

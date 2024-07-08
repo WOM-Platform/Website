@@ -1,6 +1,4 @@
 import {ChangeDetectorRef, Component, OnDestroy, OnInit} from "@angular/core";
-import {NavigationEnd, NavigationStart, Router} from "@angular/router";
-
 import {UserService} from "../_services";
 import {UserMe} from "../_models";
 import {Subscription} from "rxjs";
@@ -83,7 +81,7 @@ export class UserComponent implements OnInit, OnDestroy {
                 this.cd.detectChanges();
             }
         );
-        
+
         const correntUser = this.storageService.load('currentUser')
         this.userData = `${correntUser.name} ${correntUser.surname}`;
         /*  this.username =
@@ -119,13 +117,8 @@ export class UserComponent implements OnInit, OnDestroy {
             if (link.adminOnly && this.role !== 'Admin') {
                 return false;
             }
-
             // if user role is user than check if they are instrument
-            if (link.path === '/user/instruments' && (this.role === 'User' && this.userData.sources.length === 0)) {
-                return false;
-            }
-
-            return true;
+            return !(link.path === '/user/instruments' && (this.role === 'User' && this.userData.sources.length === 0));
         });
     }
 
