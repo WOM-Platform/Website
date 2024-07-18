@@ -27,7 +27,7 @@
                         >
                     </div>
                 </div>
-                <div *ngIf="posAction=== 'edit'" class="flex gap-2">
+                <div *ngIf="posAction === 'edit'" class="flex gap-2">
                     <div class="cursor-pointer" (click)="onEditOffer(offer)">
                         <i class="fa-solid fa-edit text-sm text-blue-400"></i>
                     </div>
@@ -41,7 +41,7 @@
     <ng-template #noOffers>
         <p>Nessuna offerta disponibile</p>
     </ng-template>
-    <button (click)="addNewOffer()" class="btn-rounded-outline mt-6"><i
+    <button *ngIf="posAction === 'edit'" (click)="addNewOffer()" class="btn-rounded-outline mt-6"><i
             class="fa-solid fa-plus"></i>Nuova
         Offerta
     </button>
