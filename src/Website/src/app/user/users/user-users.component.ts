@@ -98,7 +98,8 @@ export class UserUsersComponent implements OnInit, OnChanges {
         dialogRef.afterClosed().subscribe({
             next: (newUser) => {
                 if (newUser) {
-                    this.userList.push(newUser)
+                    this.storageService.clearCache('usersList')
+                    this.getUsersList()
                 }
             },
             error: (err) => {
@@ -114,8 +115,11 @@ export class UserUsersComponent implements OnInit, OnChanges {
         })
 
         dialogRef.afterClosed().subscribe({
-            next: () => {
-
+            next: (editedUser) => {
+                if (editedUser) {
+                    this.storageService.clearCache('usersList')
+                    this.getUsersList()
+                }
             },
             error: () => {
             }

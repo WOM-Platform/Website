@@ -51,7 +51,6 @@ export class UserFormComponent implements OnInit {
         }
         if (!this.userToEdit) {
             this.userForm.get('password')?.setValidators([Validators.required, Validators.minLength(8)]);
-
         } else {
             this.userForm.patchValue({
                 name: this.userToEdit.name,
@@ -72,6 +71,7 @@ export class UserFormComponent implements OnInit {
 
 
     onSave() {
+
         if (this.userForm.valid) {
             this.isLoading = true;
             const user: User = {
@@ -79,8 +79,10 @@ export class UserFormComponent implements OnInit {
                 id: this.userToEdit ? this.userToEdit.id : ''
             };
 
+            const changedValues = this.getChangedValues(this.userToEdit, this.userForm.value);
+
             const request$ = this.userToEdit
-                ? this.userService.userEdit(user.id, user)
+                ? this.userService.userEdit(user.id, changedValues)
                 : this.userService.userCreate(user.name, user.surname, user.email, user.password, user.role);
 
             request$.subscribe({
@@ -95,5 +97,16 @@ export class UserFormComponent implements OnInit {
                 }
             });
         }
+    }
+
+    getChangedValues(initialValues: any, currentValues: any): any {
+        const changedValues: any = {};
+
+        for (const key in currentValues) {
+            if (initialValues[key] !== currentValues[key]) {
+                changedValues[key] = currentValues[key];
+            }
+        }
+        return changedValues;
     }
 }

@@ -1,5 +1,5 @@
-import {AfterViewInit, Component, OnInit} from '@angular/core';
-import {GeoSearchControl, OpenStreetMapProvider} from "leaflet-geosearch";
+import {AfterViewInit, Component} from '@angular/core';
+import {OpenStreetMapProvider} from "leaflet-geosearch";
 import * as L from 'leaflet';
 
 @Component({
@@ -23,7 +23,7 @@ export class AddressSelectorMapComponent implements AfterViewInit {
     }
 
     private initMap(): void {
-        
+
         // check for user location
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition((position) => {
