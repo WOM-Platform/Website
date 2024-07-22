@@ -81,7 +81,7 @@ export class MyInstrumentsCollectionComponent implements OnInit, OnDestroy {
         this.currentUser = this.storageService.loadCurrentUser();
 
         this.userService.userOwnershipStatus.subscribe({
-            next: (res) => {
+            next: () => {
                 if (this.currentUser && this.currentUser.sources) {
                     this.editingInstruments = this.currentUser.sources;
                     this.uiInstruments = this.currentUser.sources.map((instrument: InstrumentEditing, index: number) => {
@@ -99,7 +99,6 @@ export class MyInstrumentsCollectionComponent implements OnInit, OnDestroy {
 
 
     fetchAimsForInstrument(instrument: InstrumentEditing): Observable<Aim[]> {
-        const {id} = instrument;
         this.uiInstruments = this.currentUser.sources;
         this.subscriptions.push(
             this.aimsService.getAll().subscribe({
