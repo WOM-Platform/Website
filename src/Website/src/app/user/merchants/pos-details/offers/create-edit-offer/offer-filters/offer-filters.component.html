@@ -34,7 +34,8 @@
                         quella specifica area geografica.</small>
                     <div *ngIf="isFilteringMap || filterForm.get('bounds').value; else mapSelection">
                         <div class="flex flex-col gap-2">
-                            <button class="btn-rounded-outline" (click)="isFilteringMap = !isFilteringMap">Annulla
+                            <button *ngIf="!isEditing" class="btn-rounded-outline"
+                                    (click)="isFilteringMap = !isFilteringMap">Annulla
                             </button>
                             <app-map (bounds)="mapFiltered($event)"
                                      [selectedBounds]="filterForm.get('bounds').value"

@@ -2,7 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {Offer} from "../../../../_models/offer";
 import {NgForOf, NgIf} from "@angular/common";
 import {MatDialog, MatDialogModule} from "@angular/material/dialog";
-import {CreateOfferComponent} from "./create-offer/create-offer.component";
+import {CreateEditOfferComponent} from "./create-edit-offer/create-edit-offer.component";
 import {BadgeComponent} from "../../../../components/badge/badge.component";
 import {ActivatedRoute} from "@angular/router";
 import {PosService} from "../../../../_services";
@@ -56,7 +56,7 @@ export class OffersComponent implements OnInit {
     }
 
     addNewOffer() {
-        const dialogRef = this.dialog.open(CreateOfferComponent,
+        const dialogRef = this.dialog.open(CreateEditOfferComponent,
             {
                 width: "900px",
                 maxHeight: "90vh",
@@ -92,7 +92,7 @@ export class OffersComponent implements OnInit {
         // Create a deep copy of the offer
         const originalOffer: Offer = {...offer};
 
-        const dialogRef = this.dialog.open(CreateOfferComponent,
+        const dialogRef = this.dialog.open(CreateEditOfferComponent,
             {
                 width: "900px",
                 maxHeight: "90vh",

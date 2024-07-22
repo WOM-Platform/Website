@@ -23,14 +23,14 @@ import {Filter} from "../../../../../_models/filter";
         ReactiveFormsModule,
         OfferFiltersComponent
     ],
-    templateUrl: './create-offer.component.html',
-    styleUrl: './create-offer.component.css'
+    templateUrl: './create-edit-offer.component.html',
+    styleUrl: './create-edit-offer.component.css'
 })
-export class CreateOfferComponent implements OnInit {
+export class CreateEditOfferComponent implements OnInit {
     newOffer: FormGroup
     isEditMode: boolean;
 
-    constructor(private dialogRef: MatDialogRef<CreateOfferComponent>, private fb: FormBuilder, @Inject(MAT_DIALOG_DATA) public data: any,) {
+    constructor(private dialogRef: MatDialogRef<CreateEditOfferComponent>, private fb: FormBuilder, @Inject(MAT_DIALOG_DATA) public data: any,) {
     }
 
     ngOnInit() {

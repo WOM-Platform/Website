@@ -46,7 +46,7 @@ import {UserPosListComponent} from "./merchants/user-pos-list/user-pos-list.comp
 import {PosCreateDialogComponent} from "./merchants/pos-create-dialog/pos-create-dialog.component";
 import {MapComponent} from "../components/map/map.component";
 import {OffersComponent} from "./merchants/pos-details/offers/offers.component";
-import {CreateOfferComponent} from "./merchants/pos-details/offers/create-offer/create-offer.component";
+import {CreateEditOfferComponent} from "./merchants/pos-details/offers/create-edit-offer/create-edit-offer.component";
 import {AddressSelectorMapComponent} from "./components/address-selector-map/address-selector-map.component";
 
 @NgModule({
@@ -92,7 +92,7 @@ import {AddressSelectorMapComponent} from "./components/address-selector-map/add
         UserAimsListComponent,
         MapComponent,
         OffersComponent,
-        CreateOfferComponent,
+        CreateEditOfferComponent,
         AddressSelectorMapComponent,
     ]
 })
