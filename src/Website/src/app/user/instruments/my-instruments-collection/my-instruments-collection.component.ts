@@ -66,6 +66,11 @@ export class MyInstrumentsCollectionComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
         this.username = `${this.userService.currentUserValue.name} ${this.userService.currentUserValue.surname}`;
+        this.userService
+            .me()
+            .subscribe((res) => this.userService.updateUserOwnership(res));
+
+
         this.loadUserData();
 
         if (this.role === "Admin") this.action = "edit";
@@ -81,10 +86,11 @@ export class MyInstrumentsCollectionComponent implements OnInit, OnDestroy {
         this.currentUser = this.storageService.loadCurrentUser();
 
         this.userService.userOwnershipStatus.subscribe({
-            next: () => {
-                if (this.currentUser && this.currentUser.sources) {
-                    this.editingInstruments = this.currentUser.sources;
-                    this.uiInstruments = this.currentUser.sources.map((instrument: InstrumentEditing, index: number) => {
+            next: (res) => {
+                console.log("Editing  nextv ", res)
+                if (res && res.sources) {
+                    this.editingInstruments = res.sources;
+                    this.uiInstruments = res.sources.map((instrument: InstrumentEditing, index: number) => {
                         this.fetchAimsForInstrument(instrument);
                         this.fetchAccessListForInstrument(instrument);
                         return {
@@ -96,7 +102,6 @@ export class MyInstrumentsCollectionComponent implements OnInit, OnDestroy {
             },
         });
     }
-
 
     fetchAimsForInstrument(instrument: InstrumentEditing): Observable<Aim[]> {
         this.uiInstruments = this.currentUser.sources;

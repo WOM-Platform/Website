@@ -23,6 +23,7 @@ export class AddressSelectorMapComponent implements AfterViewInit {
     }
 
     private initMap(): void {
+        
         // check for user location
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition((position) => {
@@ -44,7 +45,7 @@ export class AddressSelectorMapComponent implements AfterViewInit {
             // If geolocation is not available, fall back to a default location
             this.initDefaultMap();
         }
-        
+
     }
 
     private initDefaultMap(): void {
