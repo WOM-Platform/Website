@@ -82,7 +82,6 @@ export class MyInstrumentsCollectionComponent implements OnInit, OnDestroy {
 
         this.userService.userOwnershipStatus.subscribe({
             next: (res) => {
-                console.log("entri qua")
                 if (this.currentUser && this.currentUser.sources) {
                     this.editingInstruments = this.currentUser.sources;
                     this.uiInstruments = this.currentUser.sources.map((instrument: InstrumentEditing, index: number) => {
@@ -96,18 +95,6 @@ export class MyInstrumentsCollectionComponent implements OnInit, OnDestroy {
                 }
             },
         });
-
-        if (this.currentUser && this.currentUser.sources) {
-            this.editingInstruments = this.currentUser.sources;
-            this.uiInstruments = this.currentUser.sources.map((instrument: InstrumentEditing, index: number) => {
-                this.fetchAimsForInstrument(instrument);
-                this.fetchAccessListForInstrument(instrument);
-                return {
-                    ...instrument,
-                    isOpen: index === 0,
-                };
-            });
-        }
     }
 
 
@@ -117,11 +104,14 @@ export class MyInstrumentsCollectionComponent implements OnInit, OnDestroy {
         this.subscriptions.push(
             this.aimsService.getAll().subscribe({
                 next: (aimList: Aim[]) => {
-                    const matchingAims: Aim[] = this.aimsService.findMatchingCodes(aimList, instrument.aims.enabled);
-                    const instrumentUI = this.uiInstruments.find(uiInstrument => uiInstrument.id === instrument.id);
-                    if (instrumentUI) {
-                        instrumentUI.aims = matchingAims;
-                        this.cd.detectChanges();
+                    if (instrument.aims.enabled) {
+                        const matchingAims: Aim[] = this.aimsService.findMatchingCodes(aimList, instrument.aims.enabled);
+
+                        const instrumentUI = this.uiInstruments.find(uiInstrument => uiInstrument.id === instrument.id);
+                        if (instrumentUI) {
+                            instrumentUI.aims = matchingAims;
+                            this.cd.detectChanges();
+                        }
                     }
                 },
                 error: (err) => console.error(err),
