@@ -74,6 +74,7 @@ export class UserAccessListComponent implements OnDestroy {
     }
 
     handleCancellationAccess() {
+        this.noResults = false;
         this.addAccess = !this.addAccess;
         this.clearList();
         this.searchSourceComponent.clearForm();

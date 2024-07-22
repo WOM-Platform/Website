@@ -79,7 +79,6 @@ export class MyMerchantsCollectionComponent implements OnInit {
 
         this.userService.userOwnershipStatus.subscribe({
             next: (res) => {
-                this.storageService.save(res, 'merchants')
                 this.merchants = res["merchants"];
             },
         });
@@ -214,6 +213,11 @@ export class MyMerchantsCollectionComponent implements OnInit {
             .update(updatedMerchant)
             .subscribe({
                 next: () => {
+                    // clear local storage info and merchant list
+                    this.storageService.clear('currentUser')
+                    this.storageService.clearCache('merchantsList')
+
+
                     this.userService
                         .me()
                         .subscribe({

@@ -27,8 +27,10 @@
             </ul>
         </div>
     </div>
-    <div *ngIf="noResults">
-        <p class="mb-0 access-element">Nessun risultato</p>
+    <div *ngIf="noResults" @fadeInOut class="flex flex-col justify-center items-center gap-4">
+        <img src="assets/images/noResult.png" class="w-52 h-52">
+        <p class="mb-0 access-element font-semibold">Nessun risultato</p>
+        <p class="text-slate-600">Prova ancora utilizzando dei valori più generali</p>
     </div>
     <!-- select access role for merchant for searched users-->
     <div *ngIf="selectedAccess && !createUserAccess" @fadeInOut>

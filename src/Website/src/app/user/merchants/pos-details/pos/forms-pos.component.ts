@@ -74,7 +74,13 @@ export class PosFormComponent implements OnInit, AfterViewInit, OnDestroy {
             name: ["", [Validators.required, Validators.minLength(4)]],
             latitude: [0, [Validators.required, this.latLonValidator]],
             longitude: [0, [Validators.required, this.latLonValidator]],
-            url: [""],
+            url: ["", [
+                Validators.required,
+                Validators.pattern(
+                    "^(https?:\\/\\/)?([\\da-z\\.-]+)\\.([a-z\\.]+)(:[0-9]{1,5})?(\\/[^\\s]*)?$"
+                ),
+                Validators.minLength(10),
+            ]],
             isActive: [
                 this.pos !== undefined && this.pos !== null ? this.pos.isActive : true,
                 ,

@@ -17,7 +17,6 @@
                     class="font-semibold text-cyan-700 text-3xl"
             ></app-editable-element>
         </div>
-
         <div class="w-full flex items-center justify-between gap-2 mt-6">
             <p class="flex items-center gap-2 mb-0 h-8">
                 <span class="text-slate-600 font-semibold">Abilitato: </span>
@@ -36,7 +35,7 @@
                 <ng-template #notEnable>Disattivato</ng-template>
             </p>
 
-            <div *ngIf="action === 'edit'" class="merchant-element">
+            <div class="merchant-element">
                 <p class="mb-0">
                     <span class="text-slate-600 font-semibold">ID</span>: {{ pos.id }}
                 </p>

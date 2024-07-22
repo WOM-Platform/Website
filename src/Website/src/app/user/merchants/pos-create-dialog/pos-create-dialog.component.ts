@@ -1,5 +1,5 @@
-import {Component, Inject} from '@angular/core';
-import {UntypedFormGroup} from "@angular/forms";
+import {Component, Inject, OnInit} from '@angular/core';
+import {FormBuilder, FormGroup, UntypedFormGroup, Validators} from "@angular/forms";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {PosService} from "../../../_services";
 import {StorageService} from "../../../_services/storage.service";
@@ -11,17 +11,61 @@ import {Pos, PosRegistration} from "../../../_models";
     templateUrl: './pos-create-dialog.component.html',
     styleUrl: './pos-create-dialog.component.css'
 })
-export class PosCreateDialogComponent {
+export class PosCreateDialogComponent implements OnInit {
+    newPos: FormGroup;
     formPos: UntypedFormGroup;
     formInputError: boolean;
     formApiError: boolean;
 
+    firstFormGroup = this.fb.group({
+        firstCtrl: ['', Validators.required],
+    });
+    secondFormGroup = this.fb.group({
+        secondCtrl: ['', Validators.required],
+    });
+    isLinear = false;
+
     constructor(
         @Inject(MAT_DIALOG_DATA) public data: PosDialogData,
         public dialogRef: MatDialogRef<PosCreateDialogComponent>,
+        private fb: FormBuilder,
         private posService: PosService,
         private storageService: StorageService
     ) {
+    }
+
+    ngOnInit() {
+        this.newPos = this.fb.group({
+            name: ["", [Validators.required, Validators.minLength(4)]],
+            isActive: [false],
+            url: [
+                "",
+                [
+                    Validators.required,
+                    Validators.pattern(
+                        "^(https?:\\/\\/)?([\\da-z\\.-]+)\\.([a-z\\.]+)(:[0-9]{1,5})?(\\/[^\\s]*)?$"
+                    ),
+                    Validators.minLength(10),
+                ],
+            ],
+            latitude: [0, [Validators.required, this.latLonValidator]],
+            longitude: [0, [Validators.required, this.latLonValidator]],
+            location: []
+        });
+    }
+
+    latLonValidator(control) {
+        const value = control.value;
+        if (value !== 0) {
+            return null; // Value is valid
+        } else {
+            return {nonZero: true}; // Value is not valid
+        }
+    }
+
+    mapFiltered(bounds: any) {
+        this.newPos.patchValue({location: bounds});
+        /*this.emitFilterValues();*/
     }
 
     onSubmit(): any {

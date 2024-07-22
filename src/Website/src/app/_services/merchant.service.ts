@@ -31,8 +31,8 @@ export class MerchantService {
      * Get merchant list
      */
     getAllMerchants(
-        search: string,
-        page: number,
+        search: string = "",
+        page: number = 1,
         itemsPerPage: string = "10"
     ): Observable<any> {
         const cachedMerchants = this.storageService.get("merchantsList");

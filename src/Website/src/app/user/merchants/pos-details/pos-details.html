@@ -59,7 +59,6 @@
             <ng-template #addPosApiError>
                 {{ "USER.ADD_POS.API_ERROR" | translate }}
             </ng-template>
-            [offers]="pos.offers"
         </mat-error>
         <div class="mt-10">
             <app-forms-pos [(form)]="formPos" [pos]="pos" [action]=action></app-forms-pos>

@@ -20,7 +20,7 @@ import {Merchant} from "../../../_models";
 import {MerchantService, UserService} from "../../../_services";
 import {StorageService} from "../../../_services/storage.service";
 import {FiltersComponent} from "../../components/filters/filters.component";
-import {Subscription} from "rxjs";
+import {finalize, Subscription} from "rxjs";
 import {DialogConfirmCancelComponent} from "../../../components/dialog-confirm-cancel/dialog-confirm-cancel";
 import {LoadingService} from "../../../_services/loading.service";
 import {Router} from "@angular/router";
@@ -34,8 +34,6 @@ import {SnackBarService} from "../../../_services/snack-bar.service";
     styleUrl: "./merchants-admin.component.css",
 })
 export class MerchantsAdminComponent implements OnInit {
-    @Output() isLoading = new EventEmitter<boolean>();
-
     merchantsList;
     merchantsTableColumns = [
         {field: "name", hideOnMobile: false},
@@ -43,13 +41,14 @@ export class MerchantsAdminComponent implements OnInit {
             field: "primaryActivity",
             hideOnMobile: false,
         },
-        {field: "WOM consumati", hideOnMobile: true},
     ];
 
     currentPage: number = 1;
     itemsPerPage: string;
     pageCount: number;
     totalItems: number;
+    hasNext: boolean;
+    hasPrev: boolean;
 
     errorMessage: string = "";
 
@@ -83,25 +82,30 @@ export class MerchantsAdminComponent implements OnInit {
                 this.currentPage,
                 this.itemsPerPage
             )
+            .pipe(
+                finalize(() => {
+                    this.loadingService.hide()
+                    this.cd.detectChanges();
+                })
+            )
             .subscribe({
                 next: (res) => {
                     this.assignMerchantData(res);
-                    this.cd.detectChanges();
                 },
                 error: (err) => console.error(err),
-                complete: () => {
-                    this.loadingService.hide();
-                },
             });
     }
 
+
     private assignMerchantData(data) {
+        console.log("I dati ", data)
         this.totalItems = data.totalCount;
         this.pageCount = data.pageCount;
         this.itemsPerPage = data.pageSize;
         this.merchantsList = data.data || [];
-        this.currentPage =
-            this.storageService.get("merchantsCurrentPage") || this.currentPage;
+        this.currentPage = data.page || this.currentPage;
+        this.hasNext = data.hasNext
+        this.hasPrev = data.hasPrev;
     }
 
     updateMerchantsList() {
@@ -222,7 +226,6 @@ export class MerchantsAdminComponent implements OnInit {
     onPageChange(page: number): void {
         this.storageService.clearCache("merchantsList");
         this.currentPage = page;
-        this.storageService.set("merchantsCurrentPage", this.currentPage);
         this.getMerchantsList();
     }
 

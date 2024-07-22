@@ -1,4 +1,4 @@
-import {ChangeDetectorRef, Component, OnChanges, OnInit, SimpleChanges} from '@angular/core';
+import {ChangeDetectorRef, Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {StorageService} from "../../_services/storage.service";
 import {UserService} from "../../_services";
 import {User} from "../../_models";
@@ -7,6 +7,7 @@ import {SnackBarService} from "../../_services/snack-bar.service";
 import {MatDialog} from "@angular/material/dialog";
 import {CreateEditUserDialogComponent} from "./create-edit-user-dialog/create-edit-user-dialog.component";
 import {DialogConfirmCancelComponent} from "../../components/dialog-confirm-cancel/dialog-confirm-cancel";
+import {finalize} from "rxjs";
 
 @Component({
     selector: 'app-users-tab',
@@ -19,6 +20,8 @@ export class UserUsersComponent implements OnInit, OnChanges {
     searchParameters: string = ""
     pageCount: number;
     totalItems: number;
+    hasNext: boolean;
+    hasPrev: boolean;
 
     userList: User[]
     usersTableColumns = [
@@ -48,18 +51,21 @@ export class UserUsersComponent implements OnInit, OnChanges {
     getUsersList() {
         this.loadingService.show()
 
-        this.userService.getAllUsers(this.searchParameters, this.currentPage, this.itemsPerPage).subscribe({
-            next: (res) => {
-                this.assignUserData(res);
-                this.cd.detectChanges();
-            }, error: (err) => {
-                console.error(err)
-                this.snackBarService.openSnackBar("Errore nel caricamento della lista degli utenti")
-                this.loadingService.hide();
-            }, complete: () => {
+        this.userService.getAllUsers(this.searchParameters, this.currentPage, this.itemsPerPage).pipe(
+            finalize(() => {
                 this.loadingService.hide()
-            }
-        })
+                this.cd.detectChanges();
+            })
+        )
+            .subscribe({
+                next: (res) => {
+                    this.assignUserData(res);
+
+                }, error: (err) => {
+                    console.error(err)
+                    this.snackBarService.openSnackBar("Errore nel caricamento della lista degli utenti")
+                }
+            })
     }
 
     filterUpdate(filter) {
@@ -82,8 +88,9 @@ export class UserUsersComponent implements OnInit, OnChanges {
         this.pageCount = data.pageCount;
         this.itemsPerPage = data.pageSize;
         this.userList = data.data || [];
-        this.currentPage =
-            this.storageService.get("usersCurrentPage") || this.currentPage;
+        this.currentPage = data.page || this.currentPage;
+        this.hasNext = data.hasNext
+        this.hasPrev = data.hasPrev;
     }
 
     onCreateUser() {
@@ -150,7 +157,6 @@ export class UserUsersComponent implements OnInit, OnChanges {
     onPageChange(page: number): void {
         this.storageService.clearCache("usersList");
         this.currentPage = page;
-        this.storageService.set("usersCurrentPage", this.currentPage);
         this.getUsersList();
     }
 

@@ -30,6 +30,8 @@ export class AdminManagmentInstrumentsComponent implements OnInit, OnDestroy {
     itemsPerPage: string;
     pageCount: number;
     totalItems: number;
+    hasNext: boolean;
+    hasPrev: boolean;
 
     tableToUpdate: boolean = false;
 
@@ -39,7 +41,6 @@ export class AdminManagmentInstrumentsComponent implements OnInit, OnDestroy {
     instrumentsTableColumns: any[] = [
         {field: "name", hideOnMobile: false},
         {field: "url", hideOnMobile: true},
-        {field: "WOM generati", hideOnMobile: true},
     ];
 
     private subscriptions: Subscription[] = [];
@@ -81,7 +82,7 @@ export class AdminManagmentInstrumentsComponent implements OnInit, OnDestroy {
                     }),
                     finalize(() => {
                         this.loadingService.hide();
-                        this.cd.markForCheck();
+                        this.cd.detectChanges();
                     })
                 )
                 .subscribe({
@@ -107,8 +108,9 @@ export class AdminManagmentInstrumentsComponent implements OnInit, OnDestroy {
         this.pageCount = data.pageCount;
         this.itemsPerPage = data.pageSize;
         this.instrumentsList = data.data || [];
-        this.currentPage =
-            this.storageService.get("instrumentsCurrentPage") || this.currentPage;
+        this.currentPage = data.page || this.currentPage;
+        this.hasNext = data.hasNext
+        this.hasPrev = data.hasPrev;
     }
 
     onCreateSource() {
@@ -256,7 +258,6 @@ export class AdminManagmentInstrumentsComponent implements OnInit, OnDestroy {
                 // Check if the current user is in the access list
                 this.sourceService.getInstrumentAccessList(instrumentToDelete.id).subscribe({
                     next: (res) => {
-                        console.log("acee list ", res)
                         const accessList = res.users
                         let isMyInstrumentToUpdate: boolean = false
 
@@ -312,7 +313,6 @@ export class AdminManagmentInstrumentsComponent implements OnInit, OnDestroy {
     onPageChange(page: number): void {
         this.storageService.clearCache("instrumentsList");
         this.currentPage = page;
-        this.storageService.set("instrumentsCurrentPage", this.currentPage);
         this.getSourcesList();
     }
 

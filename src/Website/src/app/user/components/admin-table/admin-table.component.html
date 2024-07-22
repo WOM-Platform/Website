@@ -52,6 +52,8 @@
         <app-pagination [currentPage]="currentPage"
                         [itemsPerPage]="itemsPerPage"
                         [totalItems]="totalItems"
+                        [hasNext]=""
+                        [hasPrev]=""
                         [pageCount]="pageCount"
                         (pageChanged)="onPageChange($event)"></app-pagination>
     </div>

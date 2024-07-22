@@ -1,45 +1,123 @@
-<h2 mat-dialog-title>
-    <ng-container *ngIf="data.isEdit; else addPosTitle">
-        {{ "USER.EDIT_POS.TITLE" | translate }}
-    </ng-container>
-    <ng-template #addPosTitle>
+<div class="mx-4 my-2">
+    <h2>
         {{ "USER.ADD_POS.TITLE" | translate }}
+    </h2>
+</div>
+
+<mat-error *ngIf="formInputError">
+    <ng-container *ngIf="data.isEdit; else addPosInputError">
+        {{ "USER.EDIT_POS.INPUT_ERROR" | translate }}
+    </ng-container>
+    <ng-template #addPosInputError>
+        {{ "USER.ADD_POS.INPUT_ERROR" | translate }}
     </ng-template>
-</h2>
-<mat-dialog-content>
-    <mat-error *ngIf="formInputError">
-        <ng-container *ngIf="data.isEdit; else addPosInputError">
-            {{ "USER.EDIT_POS.INPUT_ERROR" | translate }}
-        </ng-container>
-        <ng-template #addPosInputError>
-            {{ "USER.ADD_POS.INPUT_ERROR" | translate }}
-        </ng-template>
-    </mat-error>
-    <mat-error *ngIf="formApiError">
-        <ng-container *ngIf="data.isEdit; else addPosApiError">
-            {{ "USER.EDIT_POS.API_ERROR" | translate }}
-        </ng-container>
-        <ng-template #addPosApiError>
-            {{ "USER.ADD_POS.API_ERROR" | translate }}
-        </ng-template>
-    </mat-error>
-    <app-forms-pos [(form)]="formPos" [pos]="data.pos"></app-forms-pos>
-</mat-dialog-content>
-<mat-dialog-actions align="end">
-    <button mat-button mat-dialog-close>
-        <ng-container *ngIf="data.isEdit; else addPosCancel">
-            {{ "USER.EDIT_POS.CANCEL" | translate }}
-        </ng-container>
-        <ng-template #addPosCancel>
-            {{ "USER.ADD_POS.CANCEL" | translate }}
-        </ng-template>
-    </button>
-    <button mat-button (click)="onSubmit()" cdkFocusInitial>
-        <ng-container *ngIf="data.isEdit; else addPosAdd">
-            {{ "USER.EDIT_POS.ADD" | translate }}
-        </ng-container>
-        <ng-template #addPosAdd>
-            {{ "USER.ADD_POS.ADD" | translate }}
-        </ng-template>
-    </button>
-</mat-dialog-actions>
+</mat-error>
+<mat-error *ngIf="formApiError">
+    <ng-container *ngIf="data.isEdit; else addPosApiError">
+        {{ "USER.EDIT_POS.API_ERROR" | translate }}
+    </ng-container>
+    <ng-template #addPosApiError>
+        {{ "USER.ADD_POS.API_ERROR" | translate }}
+    </ng-template>
+</mat-error>
+<mat-stepper [linear]="isLinear" #stepper>
+    <mat-step [stepControl]="firstFormGroup">
+        <form
+                class="flex flex-col gap-4 mt-6"
+                [formGroup]="newPos"
+                (ngSubmit)="onSubmit()"
+        >
+            <ng-template matStepLabel>Inserirsci POS</ng-template>
+            <div class="flex flex-row justify-start gap-6 items-center">
+                <label class="w-20">Nome<span class="text-red-600">*</span>:</label>
+
+                <input type="text" formControlName="name" class="input-create"/>
+                <div
+                        class="text-red-600"
+                        *ngIf="newPos.get('name').invalid && newPos.get('name').touched"
+                >
+                    Inserire il nome<br/>(min 4 caratteri)
+                </div>
+            </div>
+
+            <div class="flex flex-row justify-start gap-6 items-center">
+                <label class="w-20">URL<span class="text-red-600">*</span>:</label>
+                <input
+                        type="text"
+                        formControlName="url"
+                        class="input-create"
+                        placeholder="https://example.com"
+                />
+                <div
+                        class="text-red-600"
+                        *ngIf="newPos.get('url').invalid && newPos.get('url').touched"
+                >
+                    Inserire l'url
+                </div>
+
+            </div>
+            <!--   <div class="flex flex-row gap-4">
+                   <label>Latitdine</label>
+                   <input type="text" formControlName="latitude"/>
+               </div>
+               <div class="flex flex-row gap-4">
+                   <label>Longitudine</label>
+                   <input type="text" formControlName="longitude"/>
+               </div>-->
+            <label>Seleziona l'indirizzo della tua attività:</label>
+            <app-address-selector-map/>
+            <div>
+                <button>Next</button>
+            </div>
+        </form>
+    </mat-step>
+    <mat-step [stepControl]="secondFormGroup" label="Aggiungi offerte">
+
+        <form [formGroup]="secondFormGroup">
+            <app-offers/>
+            <app-create-offer/>
+
+            <div>
+                <button mat-button matStepperPrevious>Back</button>
+                <button mat-button matStepperNext>Next</button>
+            </div>
+        </form>
+    </mat-step>
+    <mat-step>
+        <ng-template matStepLabel>Done</ng-template>
+        <p>You are now done.</p>
+        <div>
+            <button mat-button matStepperPrevious>Back</button>
+            <button mat-button (click)="stepper.reset()">Reset</button>
+        </div>
+    </mat-step>
+</mat-stepper>
+
+
+<div class="mx-4 my-2">
+
+    <!--
+        <app-forms-pos [(form)]="formPos" [pos]="data.pos" [action]="'edit'"></app-forms-pos>
+
+    -->
+
+
+    <mat-dialog-actions align="end">
+        <button mat-button mat-dialog-close>
+            <ng-container *ngIf="data.isEdit; else addPosCancel">
+                {{ "USER.EDIT_POS.CANCEL" | translate }}
+            </ng-container>
+            <ng-template #addPosCancel>
+                {{ "USER.ADD_POS.CANCEL" | translate }}
+            </ng-template>
+        </button>
+        <button mat-button (click)="onSubmit()" cdkFocusInitial>
+            <ng-container *ngIf="data.isEdit; else addPosAdd">
+                {{ "USER.EDIT_POS.ADD" | translate }}
+            </ng-container>
+            <ng-template #addPosAdd>
+                {{ "USER.ADD_POS.ADD" | translate }}
+            </ng-template>
+        </button>
+    </mat-dialog-actions>
+</div>

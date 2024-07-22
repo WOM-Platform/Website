@@ -77,26 +77,25 @@ export class MyInstrumentsCollectionComponent implements OnInit, OnDestroy {
         this.subscriptions.forEach(subscription => subscription.unsubscribe());
     }
 
-    fetchAimsForInstrument(instrument: InstrumentEditing): Observable<Aim[]> {
-        const {id} = instrument;
-        this.subscriptions.push(
-            this.aimsService.getAll().subscribe({
-                next: (aimList: Aim[]) => {
-                    const matchingAims = this.aimsService.findMatchingCodes(aimList, instrument.aims.enabled);
-                    const instrumentUI = this.uiInstruments.find(uiInstrument => uiInstrument.id === id);
-                    if (instrumentUI) {
-                        instrumentUI.aims = matchingAims;
-                        this.cd.detectChanges();
-                    }
-                },
-                error: (err) => console.error(err),
-            })
-        );
-        return of([]); // returning an observable to comply with the method signature
-    }
-
     loadUserData() {
         this.currentUser = this.storageService.loadCurrentUser();
+
+        this.userService.userOwnershipStatus.subscribe({
+            next: (res) => {
+                console.log("entri qua")
+                if (this.currentUser && this.currentUser.sources) {
+                    this.editingInstruments = this.currentUser.sources;
+                    this.uiInstruments = this.currentUser.sources.map((instrument: InstrumentEditing, index: number) => {
+                        this.fetchAimsForInstrument(instrument);
+                        this.fetchAccessListForInstrument(instrument);
+                        return {
+                            ...instrument,
+                            isOpen: index === 0,
+                        };
+                    });
+                }
+            },
+        });
 
         if (this.currentUser && this.currentUser.sources) {
             this.editingInstruments = this.currentUser.sources;
@@ -110,6 +109,27 @@ export class MyInstrumentsCollectionComponent implements OnInit, OnDestroy {
             });
         }
     }
+
+
+    fetchAimsForInstrument(instrument: InstrumentEditing): Observable<Aim[]> {
+        const {id} = instrument;
+        this.uiInstruments = this.currentUser.sources;
+        this.subscriptions.push(
+            this.aimsService.getAll().subscribe({
+                next: (aimList: Aim[]) => {
+                    const matchingAims: Aim[] = this.aimsService.findMatchingCodes(aimList, instrument.aims.enabled);
+                    const instrumentUI = this.uiInstruments.find(uiInstrument => uiInstrument.id === instrument.id);
+                    if (instrumentUI) {
+                        instrumentUI.aims = matchingAims;
+                        this.cd.detectChanges();
+                    }
+                },
+                error: (err) => console.error(err),
+            })
+        );
+        return of([]); // returning an observable to comply with the method signature
+    }
+
 
     fetchAccessListForInstrument(instrument: InstrumentEditing) {
         this.subscriptions.push(
@@ -149,21 +169,6 @@ export class MyInstrumentsCollectionComponent implements OnInit, OnDestroy {
         if (instrumentUI) {
             instrumentUI[key] = value;
         }
-    }
-
-    refreshInstrumentView() {
-        this.editingInstruments.forEach(instrument => {
-            this.fetchAimsForInstrument(instrument).subscribe({
-                next: (aimsView) => {
-                    const instrumentUI = this.uiInstruments.find(uiInstrument => uiInstrument.id === instrument.id);
-                    if (instrumentUI) {
-                        instrumentUI.aims = aimsView;
-                    }
-                    this.cd.detectChanges();
-                },
-                error: (err) => console.error(err)
-            });
-        });
     }
 
     findEditingInstrumentById(instrumentId: string) {

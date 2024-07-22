@@ -6,7 +6,7 @@ import {
 } from "../../../_models";
 import {MerchantService, PosService, UserService} from "src/app/_services";
 import {ActivatedRoute} from "@angular/router";
-import {Subscription, forkJoin, Observable} from "rxjs";
+import {Subscription, forkJoin, Observable, finalize} from "rxjs";
 import {LoadingService} from "src/app/_services/loading.service";
 import {Location} from "@angular/common";
 import {StorageService} from "src/app/_services/storage.service";
@@ -73,7 +73,11 @@ export class MerchantDetailComponent implements OnInit, OnDestroy {
                 accessData: this.merchantService.getAccessList(this.merchantId),
                 posData: this.merchantService.getMerchantPos(this.merchantId),
             })
-            observable.subscribe(({merchantData, accessData, posData}) => {
+            observable.pipe(
+                finalize(() => {
+                    this.loadingService.hide();
+                })
+            ).subscribe(({merchantData, accessData, posData}) => {
                 this.merchant = merchantData;
                 this.id = merchantData.id;
                 this.name = merchantData.name;
@@ -85,7 +89,7 @@ export class MerchantDetailComponent implements OnInit, OnDestroy {
                 this.country = merchantData.country;
                 this.accessList = accessData["users"] || [];
                 this.posList = posData["pos"] || [];
-                this.loadingService.hide();
+
                 this.cd.detectChanges();
             });
         });
@@ -106,7 +110,6 @@ export class MerchantDetailComponent implements OnInit, OnDestroy {
 
         updatedMerchant[key] = value;
 
-        console.log("is table to update ", isTableToUpdate)
         this.merchantService
             .update(updatedMerchant)
             .subscribe({
@@ -117,7 +120,10 @@ export class MerchantDetailComponent implements OnInit, OnDestroy {
                             next: (res) => {
                                 // update admin table if a field of the one shown is edited
                                 if (isTableToUpdate) this.storageService.clearCache('merchantsList')
-                                
+                                this.accessList.map(accessToCheck => {
+                                    this.checkAccessCurrentUser(accessToCheck, 'edit')
+                                })
+
                                 this.userService.updateUserOwnership(res)
                                 this.merchant = updatedMerchant
                             },
