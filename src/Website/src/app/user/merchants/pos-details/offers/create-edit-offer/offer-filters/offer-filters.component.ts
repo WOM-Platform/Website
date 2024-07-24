@@ -32,7 +32,6 @@ export class OfferFiltersComponent implements OnInit {
     }
 
     ngOnInit() {
-        console.log("I filtri ", this.filters)
         this.initializeForm();
         // in case is editing open the filter section
         if (this.filters) {

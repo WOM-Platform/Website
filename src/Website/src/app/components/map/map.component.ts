@@ -44,7 +44,8 @@ export class MapComponent implements AfterViewInit, OnChanges {
                     center: [position.latitude, position.longitude],
                     zoom: 13
                 });
-                this.map.on('moveend', this.onBoundsChanged.bind(this));
+
+                this.map.on('dragend', this.onBoundsChanged.bind(this));
                 tiles.addTo(this.map);
 
                 // Set initial bounds if provided

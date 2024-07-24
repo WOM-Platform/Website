@@ -42,6 +42,8 @@ export class AdminTableComponent {
     @Input() itemsPerPage: string;
     @Input() totalItems: number;
     @Input() pageCount: number;
+    @Input() hasNext: boolean;
+    @Input() hasPrev: boolean;
     @Output() pageChanged: EventEmitter<number> = new EventEmitter();
 
     @Output() deleteItem: EventEmitter<any> = new EventEmitter<any>();

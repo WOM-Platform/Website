@@ -1,11 +1,19 @@
 <div class="m-4">
     <div class="px-4 py-2 border-dotted border-2 border-gray-400 rounded-lg w-40">
         <img class="w-full" src="/assets/images/gallery.png" alt="Gallery"/>
-        <p>Trascina l'immagine o
-            <label for="fileInput" class="cursor-pointer text-blue-500">scegli il file</label>
+        <!--        <p>Trascina l'immagine o
+                    <label for="fileInput" class="cursor-pointer text-blue-500">scegli il file</label>
+                    <input id="fileInput" type="file" class="hidden" (change)="onFileSelected($event)"/>
+                </p>-->
+        <!--        <button (click)="uploadFile()" class="mt-2 px-4 py-2 bg-blue-500 text-white rounded">
+                    Carica immagine
+                </button>
+                -->
+        <div class="mt-6">
+            <label for="fileInput" class="mt-2 px-4 py-2 bg-blue-500 text-white rounded cursor-pointer ">Scegli il
+                file</label>
             <input id="fileInput" type="file" class="hidden" (change)="onFileSelected($event)"/>
-        </p>
-        <button (click)="uploadFile()" class="mt-2 px-4 py-2 bg-blue-500 text-white rounded">Carica immagine</button>
+        </div>
     </div>
     <div *ngIf="uploadProgress >= 0" class="mt-4">
         <p>Caricamento: {{ uploadProgress }}%</p>

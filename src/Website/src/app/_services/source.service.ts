@@ -1,10 +1,11 @@
 import {Injectable} from "@angular/core";
 import {environment} from "../../environments/environment";
-import {catchError, concatMap, delay, map} from "rxjs/operators";
+import {catchError, concatMap, delay, map, tap} from "rxjs/operators";
 import {HttpClient, HttpParams} from "@angular/common/http";
 import {from, Observable, of, throwError} from "rxjs";
 import {Aim, AimEditing} from "../_models";
 import {Instrument, InstrumentEditing, UIInstrument} from "../_models/instrument";
+import {StorageService} from "./storage.service";
 
 @Injectable({
     providedIn: "root",
@@ -12,7 +13,7 @@ import {Instrument, InstrumentEditing, UIInstrument} from "../_models/instrument
 export class SourceService {
     localUrlV1 = environment.baseUrl + environment.v1 + "source/";
 
-    constructor(private http: HttpClient) {
+    constructor(private http: HttpClient, private storageService: StorageService) {
     }
 
     /**
@@ -21,24 +22,37 @@ export class SourceService {
      * @param {number} itemsPerPage Number of items per page.
      * @returns {Observable<any>} An observable of the paginated instrument list.
      */
-    getInstrumentList(
+    getAllInstruments(
         search: string,
         page: number,
         itemsPerPage: string = "10"
     ): Observable<any> {
-        const params = new HttpParams()
-            .set("search", search)
-            .set("page", page.toString())
-            .set("pageSize", itemsPerPage);
-        return this.http.get(`${this.localUrlV1}`, {params}).pipe(
-            map((res) => {
-                return res;
-            }),
-            catchError((err) => {
-                console.error("Error fetching instruments", err);
-                return throwError(() => new Error("Failed to fetch instruments"));
-            })
-        );
+        const cachedInstruments = this.storageService.get("instrumentsList");
+
+        if (cachedInstruments) {
+            return of(cachedInstruments)
+        } else {
+            const params = new HttpParams()
+                .set("search", search)
+                .set("page", page.toString())
+                .set("pageSize", itemsPerPage);
+            return this.http.get(`${this.localUrlV1}`, {params}).pipe(
+                tap({
+                    next: (data) => this.storageService.set("instrumentsList", data),
+                    error: (err) => {
+                        console.error("err", err)
+                    }
+                }),
+                map((res) => {
+                    return res;
+                }),
+                catchError((err) => {
+                    console.error("Error fetching instruments", err);
+                    return throwError(() => new Error("Failed to fetch instruments"));
+                })
+            );
+        }
+
     }
 
     getInstrument(idInstrument: string): Observable<Instrument> {

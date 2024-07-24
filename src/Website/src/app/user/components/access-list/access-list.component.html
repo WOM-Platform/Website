@@ -31,8 +31,7 @@
 <div *ngIf="action === 'edit'">
     <div *ngIf="!createNewAccess" class="mt-6">
         <app-user-access-list
-                [isRoleRequired]="showRole"
-
+                [isRoleAccessRequired]="showRole"
                 (accessToAdd)="handleAccessList($event)"
         ></app-user-access-list>
     </div>

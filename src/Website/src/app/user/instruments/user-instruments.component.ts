@@ -10,6 +10,7 @@ import {UserService} from "../../_services";
 import {StorageService} from "../../_services/storage.service";
 import {Instrument} from "src/app/_models/instrument";
 import {MatTabGroup} from "@angular/material/tabs";
+import {UserMe} from "../../_models";
 
 @Component({
     selector: "app-user-instrument",
@@ -19,8 +20,8 @@ import {MatTabGroup} from "@angular/material/tabs";
 export class UserInstrumentsComponent
     implements OnInit, AfterViewInit, OnDestroy {
     username: string;
-    instruments: Instrument[];
-    currentUser: any;
+    myInstruments: Instrument[];
+    currentUser: UserMe;
 
     @ViewChild("tabGroup") tabGroup!: MatTabGroup;
 
@@ -35,7 +36,7 @@ export class UserInstrumentsComponent
     ngOnInit() {
         this.userService.userOwnershipStatus.subscribe({
             next: (res) => {
-                this.instruments = res["sources"];
+                this.myInstruments = res["sources"];
             },
         });
 
@@ -59,8 +60,8 @@ export class UserInstrumentsComponent
     }
 
     loadData(): any {
-        this.instruments = this.storageService.load("instrumentData");
-        this.currentUser = this.storageService.load("currentUser");
+        this.currentUser = this.storageService.loadCurrentUser()
+        this.myInstruments = this.currentUser.sources
     }
 
     async navigateToSecondTab(): Promise<void> {

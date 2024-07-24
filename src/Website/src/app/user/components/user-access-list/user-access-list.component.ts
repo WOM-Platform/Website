@@ -36,7 +36,7 @@ import {FormsModule} from "@angular/forms";
     ],
 })
 export class UserAccessListComponent implements OnDestroy {
-    @Input() isRoleRequired: boolean = false;
+    @Input() isRoleAccessRequired: boolean = false;
     @Output() accessToAdd = new EventEmitter<any>();
     @ViewChild(SearchSourceComponent)
     searchSourceComponent: SearchSourceComponent;
@@ -55,6 +55,10 @@ export class UserAccessListComponent implements OnDestroy {
 
     selectedAccess: any | null = null;
 
+    // Indicates whether the user selection UI should be shown.
+    // This should only be set to true when searching for an already existing user.
+    createUserAccess = false;
+
     constructor(
         private userService: UserService,
         private cd: ChangeDetectorRef
@@ -70,6 +74,7 @@ export class UserAccessListComponent implements OnDestroy {
     }
 
     handleCancellationAccess() {
+        this.noResults = false;
         this.addAccess = !this.addAccess;
         this.clearList();
         this.searchSourceComponent.clearForm();
@@ -83,11 +88,12 @@ export class UserAccessListComponent implements OnDestroy {
             userToSearch.email.length < 3
         ) {
             this.listAccess = [];
-            this.cd.markForCheck();
+            this.cd.detectChanges();
         } else {
             this.subscriptions = this.userService
                 .userSearch(userToSearch.name, userToSearch.email)
                 .subscribe((res) => {
+                    console.log("cerchi.. ", res)
                     this.listAccess = [];
                     if (res.data && res.data.length > 0) {
                         this.noResults = false;
@@ -95,39 +101,15 @@ export class UserAccessListComponent implements OnDestroy {
                     } else {
                         this.noResults = true;
                     }
-                    this.cd.markForCheck();
+                    this.cd.detectChanges();
                 });
         }
     }
 
-    onCreateAccess(userToAdd: any) {
-        if (
-            userToAdd.name &&
-            userToAdd.surname &&
-            userToAdd.email &&
-            userToAdd.password
-        ) {
-            this.isLoading = true;
-            this.userService
-                .userCreate(
-                    userToAdd.name,
-                    userToAdd.surname,
-                    userToAdd.email,
-                    userToAdd.password
-                )
-                .subscribe({
-                    next: (user) => {
-                        this.handleSelection(user);
-                        this.isLoading = false;
-                        this.cd.markForCheck();
-                    },
-                    error: (err) => {
-                        (this.errorMessage = "Failed to create instrument: "), err;
-                        this.isLoading = false;
-                        this.cd.markForCheck();
-                    },
-                });
-        }
+    onCreateAccess(user: any) {
+        this.handleSelection(user);
+        this.isLoading = false;
+        this.cd.markForCheck();
     }
 
     handleSelection(access) {
@@ -137,11 +119,12 @@ export class UserAccessListComponent implements OnDestroy {
         } else {
             console.error("SearchSourceComponent is not yet available.");
         }
-        if (!this.isRoleRequired) {
+        if (!this.isRoleAccessRequired) {
             this.addUserToAccessList(access);
         } else {
             this.selectedAccess = access;
         }
+        this.cd.detectChanges()
     }
 
     addUserToAccessList(access, role = "") {
@@ -152,6 +135,7 @@ export class UserAccessListComponent implements OnDestroy {
 
     clearList() {
         this.listAccess = [];
+        this.createUserAccess = !this.createUserAccess
     }
 
     trackByAccess(index, access) {

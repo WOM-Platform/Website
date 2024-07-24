@@ -1,7 +1,7 @@
 import {Component, OnInit} from "@angular/core";
 import {Router} from "@angular/router";
 
-import {UserLogin} from "../../_models";
+import {UserLogin, UserMe} from "../../_models";
 import {TranslateService} from "@ngx-translate/core";
 import {UserService} from "../../_services";
 
@@ -16,7 +16,7 @@ import {MatDialog} from "@angular/material/dialog";
     styleUrls: ["./nav.component.css"],
 })
 export class NavComponent implements OnInit {
-    currentUserLogin: UserLogin;
+    currentUserLogin: UserMe;
     selectLang = "";
     TransLang = [];
     openMenu = false;

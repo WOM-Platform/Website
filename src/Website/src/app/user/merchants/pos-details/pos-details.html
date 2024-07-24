@@ -8,28 +8,23 @@
     </button>
     <!-- title and id -->
     <div class="flex justify-center mx-6 mb-6">
-        <h2>
-            <ng-container *ngIf="action === 'edit'; else addPosTitle">
-                {{ "USER.EDIT_POS.TITLE" | translate }}
-            </ng-container>
+        <!--        <h2>
+                    <ng-container *ngIf="action === 'edit'; else addPosTitle">
+                        {{ "USER.EDIT_POS.TITLE" | translate }}
+                    </ng-container>
 
-            <div *ngIf="action === 'edit'">
-                <p class="merchant-element">
-                    <span class="text-slate-600 font-semibold">ID</span>: {{ pos.id }}
-                </p>
-            </div>
-            <ng-template #addPosTitle>
-                <ng-container *ngIf="action === 'view'; else defaultTitle">
-                    {{ "USER.VIEW_POS.TITLE" | translate }}
-                </ng-container>
+                    <ng-template #addPosTitle>
+                        <ng-container *ngIf="action === 'view'; else defaultTitle">
+                            {{ "USER.VIEW_POS.TITLE" | translate }}
+                        </ng-container>
 
-                <!-- Default case -->
-                <ng-template #defaultTitle>
-                    {{ "USER.ADD_POS.TITLE" | translate }}
-                </ng-template>
+                        &lt;!&ndash; Default case &ndash;&gt;
+                        <ng-template #defaultTitle>
+                            {{ "USER.ADD_POS.TITLE" | translate }}
+                        </ng-template>
 
-            </ng-template>
-        </h2>
+                    </ng-template>
+                </h2>-->
     </div>
     <!--cover image pos -->
     <div class="flex justify-center">
@@ -64,29 +59,28 @@
             <ng-template #addPosApiError>
                 {{ "USER.ADD_POS.API_ERROR" | translate }}
             </ng-template>
-            [offers]="pos.offers"
         </mat-error>
-        <div class="mt-6">
-            <app-forms-pos [(form)]="formPos" [pos]="pos"></app-forms-pos>
+        <div class="mt-10">
+            <app-forms-pos [(form)]="formPos" [pos]="pos" [action]=action></app-forms-pos>
         </div>
-        <div class="flex justify-end">
-            <button mat-button mat-dialog-close>
-                <ng-container *ngIf="action === 'edit'; else addPosCancel">
-                    {{ "USER.EDIT_POS.CANCEL" | translate }}
-                </ng-container>
-                <ng-template #addPosCancel>
-                    {{ "USER.ADD_POS.CANCEL" | translate }}
-                </ng-template>
-            </button>
-            <button mat-button (click)="onSubmit()" cdkFocusInitial>
-                <ng-container *ngIf="action === 'edit'; else addPosAdd">
-                    {{ "USER.EDIT_POS.ADD" | translate }}
-                </ng-container>
-                <ng-template #addPosAdd>
-                    {{ "USER.ADD_POS.ADD" | translate }}
-                </ng-template>
-            </button>
-        </div>
+        <!--    <div class="flex justify-end">
+                <button mat-button mat-dialog-close>
+                    <ng-container *ngIf="action === 'edit'; else addPosCancel">
+                        {{ "USER.EDIT_POS.CANCEL" | translate }}
+                    </ng-container>
+                    <ng-template #addPosCancel>
+                        {{ "USER.ADD_POS.CANCEL" | translate }}
+                    </ng-template>
+                </button>
+                <button mat-button (click)="onSubmit()" cdkFocusInitial>
+                    <ng-container *ngIf="action === 'edit'; else addPosAdd">
+                        {{ "USER.EDIT_POS.ADD" | translate }}
+                    </ng-container>
+                    <ng-template #addPosAdd>
+                        {{ "USER.ADD_POS.ADD" | translate }}
+                    </ng-template>
+                </button>
+            </div>-->
         <div class="mb-6">
             <app-offers [posAction]="action"/>
         </div>

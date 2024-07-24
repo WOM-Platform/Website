@@ -1,5 +1,5 @@
 import {ChangeDetectorRef, Component, OnInit} from "@angular/core";
-import {countryList, Merchant, primaryActivityType, UIMerchant} from "src/app/_models";
+import {countryList, Merchant, primaryActivityType, UIMerchant, UserMe} from "src/app/_models";
 import {StorageService} from "src/app/_services/storage.service";
 import {Subscription, first} from "rxjs";
 import {DialogType} from "src/app/_models/dialogType";
@@ -52,6 +52,7 @@ import {Access} from "../../../_models/instrument";
     ],
 })
 export class MyMerchantsCollectionComponent implements OnInit {
+    currentUser: UserMe
     merchants: UIMerchant[];
 
     subscriptions: Subscription;
@@ -74,8 +75,14 @@ export class MyMerchantsCollectionComponent implements OnInit {
     }
 
     loadData(): any {
-        this.merchants = this.storageService.load("merchantData");
-        this.merchants = this.merchants.map((merchant, idx) => ({
+        this.currentUser = this.storageService.loadCurrentUser()
+
+        this.userService.userOwnershipStatus.subscribe({
+            next: (res) => {
+                this.merchants = res["merchants"];
+            },
+        });
+        this.merchants = this.currentUser.merchants.map((merchant: Merchant, idx: number) => ({
             ...merchant,
             isOpen: idx === 0
         }));
@@ -206,6 +213,11 @@ export class MyMerchantsCollectionComponent implements OnInit {
             .update(updatedMerchant)
             .subscribe({
                 next: () => {
+                    // clear local storage info and merchant list
+                    this.storageService.clear('currentUser')
+                    this.storageService.clearCache('merchantsList')
+
+
                     this.userService
                         .me()
                         .subscribe({

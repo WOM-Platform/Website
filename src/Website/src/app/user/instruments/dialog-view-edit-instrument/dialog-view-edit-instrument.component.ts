@@ -10,7 +10,7 @@ import {
 } from "@angular/core";
 import {MAT_DIALOG_DATA, MatDialog} from "@angular/material/dialog";
 import {Observable, of, Subscription, Subject} from "rxjs";
-import {Aim, AimEditing} from "src/app/_models/aim";
+import {Aim} from "src/app/_models/aim";
 import {Access, Instrument, InstrumentEditing} from "src/app/_models/instrument";
 import {AimsService, UserService} from "src/app/_services";
 import {SourceService} from "src/app/_services/source.service";
@@ -30,10 +30,10 @@ export class DialogViewEditInstrumentComponent implements OnInit, OnDestroy {
 
     instrumentEditing: InstrumentEditing;
     instrumentView: Instrument;
-    accessUsers: Access[];
+
+    currentUser
 
     action: string;
-    createNewAccess = false;
 
     private subscriptions: Subscription[] = [];
     private destroy$ = new Subject<void>();
@@ -53,6 +53,7 @@ export class DialogViewEditInstrumentComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
+        this.currentUser = this.storageService.loadCurrentUser()
         this.refreshInstrumentView();
     }
 
@@ -90,11 +91,15 @@ export class DialogViewEditInstrumentComponent implements OnInit, OnDestroy {
         ).subscribe({
             next: () => {
                 if (isTableToUpdate) this.updatedField.emit(key);
+
+                this.instrumentView.access.map(accessToCheck => {
+                    this.checkAccessCurrentUser(accessToCheck.userId, 'edit')
+                })
                 if (key === "aims") {
                     this.aimsService.getAll().pipe(
                         takeUntil(this.destroy$)
                     ).subscribe((aimList) => {
-                        // Update aims if necessary
+
                     });
                 }
                 this.instrumentEditing = updatedInstrument;
@@ -144,11 +149,12 @@ export class DialogViewEditInstrumentComponent implements OnInit, OnDestroy {
             takeUntil(this.destroy$)
         ).subscribe({
             next: () => {
-                this.verifyAndRefreshCurrentUserAccess(access.userId);
+                this.checkAccessCurrentUser(access.userId, 'delete');
                 this.instrumentEditing.access = this.instrumentEditing.access.filter(
                     (a) => a["userId"] !== access.userId
                 );
                 this.refreshAccessData(this.instrumentEditing.access);
+                this.cd.detectChanges();
             },
             error: (err) => console.error("Error deleting instrument access:", err),
         });
@@ -164,6 +170,8 @@ export class DialogViewEditInstrumentComponent implements OnInit, OnDestroy {
             next: (res) => {
                 this.instrumentEditing.access = res["users"];
                 this.refreshAccessData(this.instrumentEditing.access);
+                this.checkAccessCurrentUser(access.access.id, 'edit')
+                this.cd.detectChanges();
             },
             error: (err) => console.error(err),
         });
@@ -171,19 +179,22 @@ export class DialogViewEditInstrumentComponent implements OnInit, OnDestroy {
         this.cd.markForCheck();
     }
 
-    verifyAndRefreshCurrentUserAccess(idAccess: string) {
-        const currentUser = this.storageService.load("currentUser");
-        if (idAccess === currentUser.id) {
-            this.userService.me().pipe(
-                takeUntil(this.destroy$)
-            ).subscribe((res) => this.userService.updateUserOwnership(res));
-        }
-    }
-
     refreshAccessData(data: any): void {
         this.instrumentEditing.access = data || [];
         this.instrumentView.access = data || []
         this.action = "edit";
         this.cd.detectChanges();
+    }
+
+    checkAccessCurrentUser(accessId: string, actionOnUser: string) {
+        if (accessId === this.currentUser.id) {
+            /*this.userService.updateCurrentUser(access, actionOnUser)*/
+            this.storageService.clear('currentUser')
+            this.userService
+                .me()
+                .subscribe((res) => {
+                    this.userService.updateUserOwnership(res)
+                });
+        }
     }
 }

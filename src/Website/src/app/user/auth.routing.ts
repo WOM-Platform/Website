@@ -16,6 +16,7 @@ import {UserAimsComponent} from "./aims/user-aims.component";
 import {UserUsersComponent} from "./users/user-users.component";
 import {MerchantDetailComponent} from "./merchants/merchant-detail/merchant-detail.component";
 import {PosDetailsComponent} from "./merchants/pos-details/pos-details";
+import {instrumentsGuard} from "../_helpers/instruments.guard";
 
 const routes: Routes = [
     {
@@ -90,8 +91,9 @@ const routes: Routes = [
             {
                 path: "instruments",
                 component: UserInstrumentsComponent,
-                canActivate: [AuthGuard],
+                canActivate: [AuthGuard, instrumentsGuard],
                 data: {
+
                     breadcrumb: "BREADCRUMBS.USER.INSTRUMENT",
                 },
             },
@@ -100,6 +102,7 @@ const routes: Routes = [
                 component: UserAimsComponent,
                 canActivate: [AuthGuard],
                 data: {
+                    roles: ['Admin'],
                     breadcrumb: "BREADCRUMBS.USER.AIM",
                 },
             },
@@ -108,6 +111,7 @@ const routes: Routes = [
                 component: UserUsersComponent,
                 canActivate: [AuthGuard],
                 data: {
+                    roles: ['Admin'],
                     breadcrumb: "BREADCRUMBS.USER.USERS",
                 },
             },

@@ -11,7 +11,8 @@
 <div *ngIf="addAccess" class="add-access-container" @fadeInOut>
     <app-search-source (createSource)="onCreateAccess($event)"
                        (searchSource)="onSearch($event)"
-                       (clearFormEvent)="clearList()"></app-search-source>
+                       (clearFormEvent)="clearList()"
+                       [isRoleAccessRequired]="isRoleAccessRequired"></app-search-source>
 
     <div *ngIf="listAccess && listAccess.length > 0" @fadeInOut>
         <div @fadeInOut>
@@ -26,17 +27,21 @@
             </ul>
         </div>
     </div>
-
-    <div *ngIf="selectedAccess" @fadeInOut>
+    <div *ngIf="noResults" @fadeInOut class="flex flex-col justify-center items-center gap-4">
+        <img src="assets/images/noResult.png" class="w-52 h-52">
+        <p class="mb-0 access-element font-semibold">Nessun risultato</p>
+        <p class="text-slate-600">Prova ancora utilizzando dei valori più generali</p>
+    </div>
+    <!-- select access role for merchant for searched users-->
+    <div *ngIf="selectedAccess && !createUserAccess" @fadeInOut>
         <div class="flex items-center">
-
             <div><span
                     class="text-slate-600 font-semibold">Name</span>: {{ selectedAccess.name }} {{ selectedAccess.surname }}
             </div>
             <div><span class="text-slate-600 font-semibold">Email</span>: {{ selectedAccess.email }}</div>
 
 
-            <div class="px-6" *ngIf="isRoleRequired">
+            <div class="px-6" *ngIf="isRoleAccessRequired">
                 <label>Seleziona ruolo<span class="text-red-600">*</span>:</label>
                 <select [(ngModel)]="userRole" name="role" #role="ngModel" required>
                     <option value="Admin">Admin</option>

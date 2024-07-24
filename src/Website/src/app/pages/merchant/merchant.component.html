@@ -1,125 +1,128 @@
 <div class="container" xmlns="http://www.w3.org/1999/html">
-  <div class="page-title">
-    <h1>{{ "MERCHANT.TITLE" | translate }}</h1>
-  </div>
-
-  <div class="flex flex-wrap">
-    <div class="basis-full">
-      <h2 [innerHTML]="'MERCHANT.SECTION_A.TITLE' | translate"></h2>
-      <div class="mt-6">
-        <p [innerHTML]="'MERCHANT.SECTION_A.A' | translate"></p>
-        <p [innerHTML]="'MERCHANT.SECTION_A.B' | translate"></p>
-        <p [innerHTML]="'MERCHANT.SECTION_A.C' | translate"></p>
-      </div>
+    <div class="page-title">
+        <h1>{{ "MERCHANT.TITLE" | translate }}</h1>
     </div>
 
-    <!-- FILTERS -->
+    <div class="flex flex-wrap">
+        <div class="basis-full">
+            <h2 [innerHTML]="'MERCHANT.SECTION_A.TITLE' | translate"></h2>
+            <div class="mt-6">
+                <p [innerHTML]="'MERCHANT.SECTION_A.A' | translate"></p>
+                <p [innerHTML]="'MERCHANT.SECTION_A.B' | translate"></p>
+                <p [innerHTML]="'MERCHANT.SECTION_A.C' | translate"></p>
+            </div>
+        </div>
 
-    <div class="basis-full">
-      <p [innerHTML]="'MERCHANT.FILTERS.SEARCH.TITLE' | translate"></p>
-      <input
-        #mapSearchField
-        placeholder="{{ 'MERCHANT.FILTERS.SEARCH.PLACEHOLDER' | translate }}"
-        type="text"
-      />
+        <!-- FILTERS -->
+
+        <div class="basis-full">
+            <p [innerHTML]="'MERCHANT.FILTERS.SEARCH.TITLE' | translate"></p>
+            <input
+                #mapSearchField
+                placeholder="{{ 'MERCHANT.FILTERS.SEARCH.PLACEHOLDER' | translate }}"
+                type="text"
+            />
+        </div>
     </div>
-  </div>
-  <div class="desktop-only">
-    <div class="flex flex-row">
-      <!-- MAP -->
-      <google-map
-        class="basis-full xs:basis-3/4"
-        height="500px"
-        width="100%"
-        (mapDragend)="boundsChanged()"
-        (zoomChanged)="boundsChanged()"
-        [zoom]="zoom"
-        [center]="center"
-        [options]="options"
-      >
-        <map-marker
-          #markerElem="mapMarker"
-          *ngFor="let marker of markers"
-          [position]="marker.getPosition()"
-          [label]="marker.getLabel()"
-          [title]="marker.getTitle()"
-          [icon]="marker.getIcon()"
-          (mapClick)="openInfo(markerElem, marker)"
-        >
-        </map-marker>
+    <div class="desktop-only">
+        <div class="flex flex-row">
+            <!-- MAP -->
+            <google-map
+                    class="basis-full xs:basis-3/4"
+                    height="500px"
+                    width="100%"
+                    (mapDragend)="boundsChanged()"
+                    (zoomChanged)="boundsChanged()"
+                    [zoom]="zoom"
+                    [center]="center"
+                    [options]="options"
+            >
+                <map-marker
+                    #markerElem="mapMarker"
+                    *ngFor="let marker of markers"
+                    [position]="marker.getPosition()"
+                    [label]="marker.getLabel()"
+                    [title]="marker.getTitle()"
+                    [icon]="marker.getIcon()"
+                    (mapClick)="openInfo(markerElem, marker)"
+                >
+                </map-marker>
 
-        <map-info-window [innerHTML]="infoContent"></map-info-window>
-      </google-map>
+                <map-info-window [innerHTML]="infoContent"></map-info-window>
+            </google-map>
 
-      <mat-selection-list
-        [multiple]="false"
-        (selectionChange)="onPosSelection($event)"
-        class="basis-1/4"
-      >
-        <mat-list-option *ngFor="let pos of posList" [value]="pos">{{
-          pos.name
-        }}</mat-list-option>
-      </mat-selection-list>
+            <mat-selection-list
+                    [multiple]="false"
+                    (selectionChange)="onPosSelection($event)"
+                    class="basis-1/4"
+            >
+                <mat-list-option *ngFor="let pos of posList" [value]="pos">{{
+                        pos.name
+                    }}
+                </mat-list-option>
+            </mat-selection-list>
+        </div>
     </div>
-  </div>
-  <div class="mobile-only">
-    <div class="flex flex-col">
-      <!-- MAP -->
-      <google-map
-        class="basis-full xs:basis-3/4"
-        height="500px"
-        width="100%"
-        (mapDragend)="boundsChanged()"
-        (zoomChanged)="boundsChanged()"
-        [zoom]="zoom"
-        [center]="center"
-        [options]="options"
-      >
-        <map-marker
-          #markerElem="mapMarker"
-          *ngFor="let marker of markers"
-          [position]="marker.getPosition()"
-          [label]="marker.getLabel()"
-          [title]="marker.getTitle()"
-          [icon]="marker.getIcon()"
-          (mapClick)="openInfo(markerElem, marker)"
-        >
-        </map-marker>
+    <div class="mobile-only">
+        <div class="flex flex-col">
+            <!-- MAP -->
 
-        <map-info-window [innerHTML]="infoContent"></map-info-window>
-      </google-map>
-      <div class="">
-        <mat-selection-list
-          [multiple]="false"
-          (selectionChange)="onPosSelection($event)"
-        >
-          <mat-list-option *ngFor="let pos of posList" [value]="pos">{{
-            pos.name
-          }}</mat-list-option>
-        </mat-selection-list>
-      </div>
+            <google-map
+                    class="basis-full xs:basis-3/4"
+                    height="500px"
+                    width="100%"
+                    (mapDragend)="boundsChanged()"
+                    (zoomChanged)="boundsChanged()"
+                    [zoom]="zoom"
+                    [center]="center"
+                    [options]="options"
+            >
+                <map-marker
+                    #markerElem="mapMarker"
+                    *ngFor="let marker of markers"
+                    [position]="marker.getPosition()"
+                    [label]="marker.getLabel()"
+                    [title]="marker.getTitle()"
+                    [icon]="marker.getIcon()"
+                    (mapClick)="openInfo(markerElem, marker)"
+                >
+                </map-marker>
+
+                <map-info-window [innerHTML]="infoContent"></map-info-window>
+            </google-map>
+            <div class="">
+                <mat-selection-list
+                        [multiple]="false"
+                        (selectionChange)="onPosSelection($event)"
+                >
+                    <mat-list-option *ngFor="let pos of posList" [value]="pos">{{
+                            pos.name
+                        }}
+                    </mat-list-option>
+                </mat-selection-list>
+            </div>
+        </div>
     </div>
-  </div>
-  <!--
-    <button (click)="zoomIn()">Zoom in</button>
-    <button (click)="zoomOut()">Zoom out</button>
-    <button (click)="logCenter()">Log center</button>
-    <button (click)="addMarker()">Add marker</button>
-    -->
+    <!--
+      <button (click)="zoomIn()">Zoom in</button>
+      <button (click)="zoomOut()">Zoom out</button>
+      <button (click)="logCenter()">Log center</button>
+      <button (click)="addMarker()">Add marker</button>
+      -->
 
-  <div class="flex mt-11">
-    <div class="basis-full">
-      <h2 [innerHTML]="'MERCHANT.SECTION_B.TITLE' | translate"></h2>
-      <div class="mt-6">
-        <p [innerHTML]="'MERCHANT.SECTION_B.A' | translate"></p>
-        <p [innerHTML]="'MERCHANT.SECTION_B.B' | translate"></p>
-      </div>
+    <div class="flex mt-11">
+        <div class="basis-full">
+            <h2 [innerHTML]="'MERCHANT.SECTION_B.TITLE' | translate"></h2>
+            <div class="mt-6">
+                <p [innerHTML]="'MERCHANT.SECTION_B.A' | translate"></p>
+                <p [innerHTML]="'MERCHANT.SECTION_B.B' | translate"></p>
+            </div>
+        </div>
     </div>
-  </div>
 
-  <app-store-logos
-    [appName]="'WOM POS '"
-    [appleURL]="'https://apps.apple.com/it/app/wom-pos/id1468252634'"
-    [googleURL]="'https://play.google.com/store/apps/details?id=social.wom.pos'"
-  ></app-store-logos>
+    <app-store-logos
+            [appName]="'WOM POS '"
+            [appleURL]="'https://apps.apple.com/it/app/wom-pos/id1468252634'"
+            [googleURL]="'https://play.google.com/store/apps/details?id=social.wom.pos'"
+    ></app-store-logos>
 </div>

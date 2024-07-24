@@ -1,4 +1,4 @@
-<div class="flex w-full min-h-[84vh]">
+<div *ngIf="filteredNavLinks" class="flex w-full min-h-[84vh]">
     <div class="loading-overlay" *ngIf="isLoading">
         <img src="/assets/gif/loading.gif" alt="Caricamento..." class="loading-image">
     </div>
@@ -6,7 +6,7 @@
         <div class="flex flex-col">
             <app-avatar [fullName]="username" [role]="role"></app-avatar>
             <ul class="flex flex-col gap-y-4 mt-6">
-                <li *ngFor="let link of navLinks" routerLinkActive="active-link"
+                <li *ngFor="let link of filteredNavLinks" routerLinkActive="active-link"
                     [routerLinkActiveOptions]="{exact: true}" class="px-2">
                     <div *ngIf="link.isActive; else notActive">
                         <a [routerLink]="link.path" class="flex items-center space-x-2 blue-wom">

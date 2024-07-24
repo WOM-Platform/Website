@@ -1,12 +1,14 @@
 import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
+import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {debounceTime, distinctUntilChanged} from "rxjs/operators";
 import {PaginatorModule} from "primeng/paginator";
-import {Subject, Subscription} from "rxjs";
+import {Subscription} from "rxjs";
 import {MatIcon} from "@angular/material/icon";
 import {NgClass, NgIf} from "@angular/common";
 import {MatError} from "@angular/material/form-field";
 import {TranslateModule} from "@ngx-translate/core";
+import {UserFormComponent} from "../../user-form/user-form.component";
+import {User} from "../../../../_models";
 
 @Component({
     selector: 'app-search-source',
@@ -19,23 +21,21 @@ import {TranslateModule} from "@ngx-translate/core";
         NgIf,
         NgClass,
         MatError,
-        TranslateModule
+        TranslateModule,
+        UserFormComponent
     ],
     templateUrl: './search-source.component.html',
     styleUrl: './search-source.component.css'
 })
 export class SearchSourceComponent implements OnInit, OnDestroy {
+    @Input() isRoleAccessRequired: boolean = false
     @Output() searchSource = new EventEmitter<any>()
     @Output() clearFormEvent = new EventEmitter<void>();
     @Output() createSource = new EventEmitter<any>();
 
     searchForm: FormGroup;
-    createForm: FormGroup;
-    searchResults: any[] = [];
 
     searchSubscription: Subscription
-    searchParameters: string = ""
-    searchTerms = new Subject<string>();
 
     createNewUser = false
 
@@ -43,13 +43,7 @@ export class SearchSourceComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
-        this.createForm = this.fb.group({
-            nameCreate: ['', Validators.required],
-            surnameCreate: ['', Validators.required,],
-            emailCreate: ['', [Validators.required, Validators.email]],
-            passwordCreate: ['', [Validators.required, Validators.minLength(8)]],
 
-        })
         this.searchForm = this.fb.group({
             nameSearch: ['',],
             emailSearch: ['',],
@@ -69,6 +63,7 @@ export class SearchSourceComponent implements OnInit, OnDestroy {
     }
 
     search() {
+
         const searchCriteria = {};
         // Extract values from form controls
         const name = this.searchForm.get('nameSearch').value;
@@ -93,20 +88,9 @@ export class SearchSourceComponent implements OnInit, OnDestroy {
         this.clearFormEvent.emit()
     }
 
-    create() {
-        const createCriteria = {};
-        const name = this.createForm.get('nameCreate').value;
-        const surname = this.createForm.get('surnameCreate').value;
-        const email = this.createForm.get('emailCreate').value;
-        const password = this.createForm.get('passwordCreate').value;
+    createdUser(userAdded: User) {
+        this.createSource.emit(userAdded)
 
-        createCriteria['name'] = name
-        createCriteria['surname'] = surname
-        createCriteria['email'] = email
-        createCriteria['password'] = password
-
-        this.createSource.emit(createCriteria)
-        /*}*/
     }
 
     clearForm() {

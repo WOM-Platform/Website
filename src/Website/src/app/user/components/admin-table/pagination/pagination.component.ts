@@ -20,9 +20,12 @@ export class PaginationComponent implements OnInit, OnChanges {
     @Input() itemsPerPage: string;
     @Input() totalItems: number;
     @Input() pageCount: number;
+    @Input() hasNext: boolean;
+    @Input() hasPrev: boolean;
     @Output() pageChanged: EventEmitter<number> = new EventEmitter();
 
     totalPagesArray: number[] = []
+    limitedPagesArray: (number | string)[] = [];
 
     constructor() {
     }
@@ -42,6 +45,7 @@ export class PaginationComponent implements OnInit, OnChanges {
         if (changes.itemsPerPage || changes.totalItems || changes.pageCount) {
             this.updatePagination();
         }
+        this.calculateLimitedPages()
     }
 
     changePage(page: number): void {
@@ -50,4 +54,25 @@ export class PaginationComponent implements OnInit, OnChanges {
             this.pageChanged.emit(page);
         }
     }
+
+    calculateLimitedPages() {
+        const totalPages = this.pageCount;
+        const currentPage = this.currentPage;
+        const maxPagesToShow = 10;
+
+        if (totalPages <= maxPagesToShow) {
+            this.limitedPagesArray = this.totalPagesArray;
+        } else {
+            const pages = [];
+            if (currentPage <= 8) {
+                pages.push(...this.totalPagesArray.slice(0, 9), '...', totalPages);
+            } else if (currentPage >= totalPages - 8) {
+                pages.push(1, '...', ...this.totalPagesArray.slice(totalPages - 9, totalPages));
+            } else {
+                pages.push(1, '...', ...this.totalPagesArray.slice(currentPage - 2, currentPage + 7), '...', totalPages);
+            }
+            this.limitedPagesArray = pages;
+        }
+    }
+
 }

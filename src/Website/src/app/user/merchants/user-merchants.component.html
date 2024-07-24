@@ -1,6 +1,8 @@
 <mat-tab-group class="min-w-[800px]" #tabGroup>
-  <mat-tab *ngIf="currentUser.role === 'Admin'" label="Lista Merchant">
-    <app-merchants-admin></app-merchants-admin>
-  </mat-tab>
-  <mat-tab label="I tuoi Merchant"> <app-my-merchants-collection /> </mat-tab>
+    <mat-tab *ngIf="currentUser.role === 'Admin'" label="Lista Merchant">
+        <app-merchants-admin></app-merchants-admin>
+    </mat-tab>
+    <mat-tab label="I tuoi Merchant">
+        <app-my-merchants-collection/>
+    </mat-tab>
 </mat-tab-group>

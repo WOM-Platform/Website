@@ -1,4 +1,4 @@
-import {NgIf, NgFor} from "@angular/common";
+import {NgIf, NgFor, NgStyle} from "@angular/common";
 import {
     ChangeDetectorRef,
     Component,
@@ -8,16 +8,19 @@ import {
     Output,
 } from "@angular/core";
 import {FormsModule} from "@angular/forms";
+import {MatTooltip} from "@angular/material/tooltip";
+import {TranslateModule} from "@ngx-translate/core";
 
 @Component({
     selector: "app-editable-element",
     standalone: true,
-    imports: [NgIf, NgFor, FormsModule],
+    imports: [NgIf, NgFor, FormsModule, NgStyle, MatTooltip, TranslateModule],
     templateUrl: "./editable-element.component.html",
     styleUrls: ["./editable-element.component.css"],
 })
 export class EditableElementComponent implements OnInit, OnChanges {
     @Input() keyEl: string;
+    @Input() tooltipText: string;
     @Input() valueEl: any;
     @Input() typeEl: any;
     @Input() option: any;
@@ -39,7 +42,13 @@ export class EditableElementComponent implements OnInit, OnChanges {
     }
 
     ngOnInit() {
-
+        if (this.typeEl === 'list') {
+            if (this.option.includes(this.valueEl)) {
+                this.newValue = this.valueEl;
+            } else {
+                this.newValue = this.option[0]; // Fallback to the first option if existing value is not in the options
+            }
+        }
     }
 
     ngOnChanges() {
@@ -69,6 +78,12 @@ export class EditableElementComponent implements OnInit, OnChanges {
         this.newValue = this.originalValue;
         this.isEditing = false;
         this.cd.detectChanges();
+    }
+
+    calculateInputWidth(): string {
+        // Adding 1ch to ensure there is some extra space
+        const width = this.newValue.length + 2;
+        return `${width}ch`;
     }
 
     validateValue(): void {

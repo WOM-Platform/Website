@@ -54,7 +54,6 @@ export class UserPosListComponent implements OnInit {
     }
 
     onAddPos() {
-
         const posData = new PosDialogData();
         posData.merchantId = this.merchantId;
         posData.pos = null;
@@ -62,6 +61,8 @@ export class UserPosListComponent implements OnInit {
 
         const dialogRef = this.matDialog.open(PosCreateDialogComponent, {
             data: posData,
+            width: '80vw',
+            height: '90vh'
         });
         dialogRef.afterClosed().subscribe((result) => {
             if (result) {

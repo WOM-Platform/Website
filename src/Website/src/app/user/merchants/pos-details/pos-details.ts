@@ -1,6 +1,6 @@
 import {Component, OnInit} from "@angular/core";
 import {Pos, PosRegistration} from "../../../_models";
-import {first, map} from "rxjs/operators";
+import {first} from "rxjs/operators";
 import {UntypedFormGroup} from "@angular/forms";
 import {PosService} from "../../../_services";
 import {StorageService} from "../../../_services/storage.service";
@@ -12,10 +12,10 @@ import {MatButtonModule} from "@angular/material/button";
 import {MatIconModule} from "@angular/material/icon";
 import {TranslateModule} from "@ngx-translate/core";
 import {MatFormFieldModule} from "@angular/material/form-field";
-import {PosFormComponent} from "../../../_forms/pos/forms-pos.directive";
+import {PosFormComponent} from "./pos/forms-pos.component";
 import {ActivatedRoute} from "@angular/router";
 import {OffersComponent} from "./offers/offers.component";
-import {forkJoin} from "rxjs";
+import {SnackBarService} from "../../../_services/snack-bar.service";
 
 @Component({
     selector: "app-pos-details",
@@ -49,6 +49,7 @@ export class PosDetailsComponent implements OnInit {
         private matDialog: MatDialog,
         private posService: PosService,
         private route: ActivatedRoute,
+        private snackBarService: SnackBarService,
         private storageService: StorageService
     ) {
     }
@@ -89,7 +90,7 @@ export class PosDetailsComponent implements OnInit {
                 this.formPos.controls[control].markAsTouched();
             }
         } else {
-            this.formInputError = this.formPos === undefined;
+            this.formInputError = false;
             if (this.formPos.controls.latitude.value === 0) {
                 this.formInputError = true;
                 return;
@@ -128,10 +129,12 @@ export class PosDetailsComponent implements OnInit {
                 next: () => {
                     /*this.dialogRef.close(true);*/
                     this.storageService.clear(this.storageService.posFormKey);
+                    this.snackBarService.openSnackBar("✔️ POS modificato correttamente")
                 },
                 error: (error) => {
                     this.formApiError = true;
-                    console.log(error);
+                    console.error(error);
+                    this.snackBarService.openSnackBar("❌ Errore durante la modifica del POS")
                 }
             });
     }

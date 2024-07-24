@@ -1,5 +1,5 @@
 import {
-    AfterViewInit,
+    AfterViewInit, ChangeDetectorRef,
     Component,
     ElementRef,
     EventEmitter,
@@ -17,23 +17,33 @@ import {
 } from "@angular/forms";
 import MapTypeId = google.maps.MapTypeId;
 import {GoogleMap, GoogleMapsModule} from "@angular/google-maps";
-import {LatLon, Pos} from "../../_models";
+import {Pos} from "../../../../_models";
 import {debounceTime, switchMap, takeUntil} from "rxjs/operators";
-import {StorageService} from "../../_services/storage.service";
-import {Observable, Subject, Subscription} from "rxjs";
+import {StorageService} from "../../../../_services/storage.service";
+import {Subject} from "rxjs";
 import {TranslateModule} from "@ngx-translate/core";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatCheckboxModule} from "@angular/material/checkbox";
 import {MatInput} from "@angular/material/input";
+import {EditableElementComponent} from "../../../components/editable-element/editable-element.component";
+import {PosService} from "../../../../_services";
+import {NgIf} from "@angular/common";
+import {MatTooltipModule} from "@angular/material/tooltip";
+import {SnackBarService} from "../../../../_services/snack-bar.service";
 
 @Component({
     selector: "app-forms-pos",
-    templateUrl: "./forms-pos.directive.html",
+    templateUrl: "./forms-pos.component.html",
     standalone: true,
-    imports: [TranslateModule, MatFormFieldModule, ReactiveFormsModule, MatCheckboxModule, GoogleMapsModule, MatInput],
-    styleUrls: ["./forms-pos.directive.css", "../forms.directive.css"],
+    imports: [TranslateModule, MatFormFieldModule, ReactiveFormsModule, MatCheckboxModule, MatTooltipModule, GoogleMapsModule, MatInput, EditableElementComponent, NgIf],
+    styleUrls: ["./forms-pos.component.css", "../../../../_forms/forms.directive.css"],
 })
 export class PosFormComponent implements OnInit, AfterViewInit, OnDestroy {
+    @Input() form: UntypedFormGroup;
+    @Input() pos: Pos;
+    @Input() action: string
+    @Output() formChange = new EventEmitter<UntypedFormGroup>();
+
     @ViewChild(GoogleMap, {static: false}) map: GoogleMap;
     @ViewChild("mapSearchField") searchField: ElementRef;
 
@@ -49,12 +59,12 @@ export class PosFormComponent implements OnInit, AfterViewInit, OnDestroy {
         mapTypeId: MapTypeId.ROADMAP,
     };
 
-    @Input() form: UntypedFormGroup;
-    @Input() pos: Pos;
-    @Output() formChange = new EventEmitter<UntypedFormGroup>();
 
     constructor(
+        private cd: ChangeDetectorRef,
         private fb: UntypedFormBuilder,
+        private posService: PosService,
+        private snackBarService: SnackBarService,
         private storageService: StorageService
     ) {
     }
@@ -64,13 +74,18 @@ export class PosFormComponent implements OnInit, AfterViewInit, OnDestroy {
             name: ["", [Validators.required, Validators.minLength(4)]],
             latitude: [0, [Validators.required, this.latLonValidator]],
             longitude: [0, [Validators.required, this.latLonValidator]],
-            url: [""],
+            url: ["", [
+                Validators.required,
+                Validators.pattern(
+                    "^(https?:\\/\\/)?([\\da-z\\.-]+)\\.([a-z\\.]+)(:[0-9]{1,5})?(\\/[^\\s]*)?$"
+                ),
+                Validators.minLength(10),
+            ]],
             isActive: [
                 this.pos !== undefined && this.pos !== null ? this.pos.isActive : true,
                 ,
             ],
         });
-
         this.form
             .get("name")
             .valueChanges.subscribe((value) => this.formChange.emit(this.form));
@@ -183,6 +198,10 @@ export class PosFormComponent implements OnInit, AfterViewInit, OnDestroy {
         this.markerLocation();
     }
 
+    ngOnDestroy() {
+        this.unsubscribe.next();
+    }
+
     latLonValidator(control) {
         const value = control.value;
         if (value !== 0) {
@@ -226,7 +245,32 @@ export class PosFormComponent implements OnInit, AfterViewInit, OnDestroy {
         this.pos.isActive = this.isActive;
     }
 
-    ngOnDestroy() {
-        this.unsubscribe.next();
+    // toggle is active value and then perform the api call
+    toggleIsActive(event) {
+        const newIsActiveValue = !this.form.get('isActive').value
+
+        this.updatePosField('isActive', newIsActiveValue);
+    }
+
+    updatePosField(key: string, value: any, isTableToUpdate: boolean = false) {
+        console.log("Value ", value)
+        this.form.controls[key].setValue(value);
+        const updatedPos = {...this.pos, [key]: value};
+
+
+        this.posService.update(updatedPos).pipe(
+            takeUntil(this.unsubscribe)
+        ).subscribe({
+            next: () => {
+                if (isTableToUpdate) this.formChange.emit(this.form);
+                this.pos = updatedPos;
+                this.cd.detectChanges();
+                this.snackBarService.openSnackBar("Update Successful");
+            },
+            error: (err) => {
+                console.error(err);
+                this.snackBarService.openSnackBar("Error occurred");
+            }
+        });
     }
 }

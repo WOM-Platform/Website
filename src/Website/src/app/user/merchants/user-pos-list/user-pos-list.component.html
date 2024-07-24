@@ -1,4 +1,4 @@
-<div *ngIf="posList && posList.length > 0" class="mt-6">
+<div class="mt-6">
     <p class="font-semibold mb-0">POS:</p>
     <ul class="access-list">
         <li *ngFor="let pos of posList" class="">
@@ -11,14 +11,14 @@
                 </div>
                 <div class="flex gap-2">
                     <button class="icon-button-bg hover:bg-slate-300" (click)="onEditPos(pos, 'view')">
-                        <i class="fa-solid fa-eye text-black"></i>
+                        <i class="fa-solid fa-eye text-black text-base flex items-center justify-center w-8 h-8"></i>
                     </button>
                     <ng-container *ngIf="actionMerchant === 'edit'">
                         <button class="icon-button-bg hover:bg-blue-200" (click)="onEditPos(pos, 'edit')">
-                            <i class="text-blue-500 fa-solid fa-pen"></i>
+                            <i class="text-blue-500 fa-solid fa-pen text-base flex items-center justify-center w-8 h-8"></i>
                         </button>
-                        <button class="icon-button-bg hover:bg-red-200" (click)="onDeletePos(pos)">
-                            <i class="fa-solid fa-trash text-red-500"></i>
+                        <button class="icon-button-bg hover:bg-red-100" (click)="onDeletePos(pos)">
+                            <i class="fas fa-trash text-red-500 text-base flex items-center justify-center w-8 h-8 hover:rounded-full"></i>
                         </button>
                     </ng-container>
                 </div>

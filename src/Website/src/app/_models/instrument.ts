@@ -8,6 +8,10 @@ export interface Instrument {
     access: Access[];
 }
 
+export interface UIInstrument extends Instrument {
+    isOpen: boolean;
+}
+
 export interface InstrumentEditing {
     id: string;
     url: string;
@@ -24,6 +28,4 @@ export interface Access {
     role: string;
 }
 
-export interface UIInstrument extends Instrument {
-    isOpen: boolean;
-}
+

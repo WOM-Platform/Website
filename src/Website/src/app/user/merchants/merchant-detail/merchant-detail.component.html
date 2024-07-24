@@ -13,7 +13,7 @@
                 [minLength]="8"
                 [maxLength]="100"
                 (onChangeElement)="onUpdateMerchant('name', $event, true)"
-                class="font-semibold text-cyan-700"
+                class="font-semibold text-cyan-700 text-2xl"
         />
 
         <div class="merchant-data my-4">
@@ -43,40 +43,48 @@
         </div>
 
         <div class="my-4 merchant-data">
-            <app-editable-element
-                    [keyEl]="'Attività primaria'"
-                    [valueEl]="merchant.primaryActivity"
-                    [action]="action"
-                    [typeEl]="'list'"
-                    [option]="businessList"
-                    (onChangeElement)="onUpdateMerchant('primaryActivity', $event, true)"
-                    class="merchant-element"
-            ></app-editable-element>
-            <app-editable-element
-                    [keyEl]="'Indirizzo'"
-                    [valueEl]="merchant.address"
-                    [action]="action"
-                    [typeEl]="'string'"
-                    (onChangeElement)="onUpdateMerchant('address', $event, false)"
-                    class="merchant-element"
-            ></app-editable-element>
-            <app-editable-element
-                    [keyEl]="'CAP'"
-                    [valueEl]="merchant.zipCode"
-                    [action]="action"
-                    [pattern]="'^[0-9]{5}$'"
-                    (onChangeElement)="onUpdateMerchant('zipCode', $event, false)"
-                    class="merchant-element"
-            />
-            <app-editable-element
-                    [keyEl]="'Paese'"
-                    [valueEl]="merchant.country"
-                    [action]="action"
-                    [typeEl]="'list'"
-                    [option]="countryList"
-                    (onChangeElement)="onUpdateMerchant('country', $event, false)"
-                    class="merchant-element"
-            ></app-editable-element>
+            <p class="mb-0">
+                <app-editable-element
+                        [keyEl]="'Attività primaria'"
+                        [valueEl]="merchant.primaryActivity"
+                        [action]="action"
+                        [typeEl]="'list'"
+                        [option]="businessList"
+                        (onChangeElement)="onUpdateMerchant('primaryActivity', $event, true)"
+                        class="merchant-element"
+                ></app-editable-element>
+            </p>
+            <p class="mb-0">
+                <app-editable-element
+                        [keyEl]="'Indirizzo'"
+                        [valueEl]="merchant.address"
+                        [action]="action"
+                        [typeEl]="'string'"
+                        (onChangeElement)="onUpdateMerchant('address', $event, false)"
+                        class="merchant-element"
+                ></app-editable-element>
+            </p>
+            <p class="mb-0">
+                <app-editable-element
+                        [keyEl]="'CAP'"
+                        [valueEl]="merchant.zipCode"
+                        [action]="action"
+                        [pattern]="'^[0-9]{5}$'"
+                        (onChangeElement)="onUpdateMerchant('zipCode', $event, false)"
+                        class="merchant-element"
+                />
+            </p>
+            <p class="mb-0">
+                <app-editable-element
+                        [keyEl]="'Paese'"
+                        [valueEl]="merchant.country"
+                        [action]="action"
+                        [typeEl]="'list'"
+                        [option]="countryList"
+                        (onChangeElement)="onUpdateMerchant('country', $event, false)"
+                        class="merchant-element"
+                ></app-editable-element>
+            </p>
             <app-editable-element
                     [keyEl]="'URL'"
                     [valueEl]="merchant.url"
@@ -93,14 +101,15 @@
         </div>
         <div *ngIf="accessList && accessList.length > 0">
             <p class="font-semibold mb-0">Gestori:</p>
-            <app-access-list
-                    [accessList]="accessList"
-                    [action]="action"
-                    [showRole]="true"
-                    (deleteAccess)="onDeleteAccess($event)"
-                    (addAccess)="handleAccessList($event)"
-            />
         </div>
+        <app-access-list
+                [accessList]="accessList"
+                [action]="action"
+                [showRole]="true"
+                (deleteAccess)="onDeleteAccess($event)"
+                (addAccess)="handleAccessList($event)"
+        />
+
         <app-user-pos-list [merchantId]="merchantId" [posList]="posList" [actionMerchant]="action"/>
     </div>
 </div>

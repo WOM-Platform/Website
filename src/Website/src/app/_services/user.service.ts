@@ -1,8 +1,8 @@
 import {Injectable} from "@angular/core";
-import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
+import {HttpClient, HttpParams} from "@angular/common/http";
 import {BehaviorSubject, Observable, of, throwError} from "rxjs";
 import {catchError, map, tap} from "rxjs/operators";
-import {User, UserLogin, UserRegistrationPayload} from "../_models";
+import {User, UserLogin, UserMe, UserRegistrationPayload} from "../_models";
 import {environment} from "../../environments/environment";
 import {StorageService} from "./storage.service";
 
@@ -12,8 +12,8 @@ export class UserService {
     localUrlV2 = environment.baseUrl + environment.v2 + "user/";
 
     // Login data
-    public currentUserLogin: Observable<UserLogin>;
-    private currentUserLoginSubject: BehaviorSubject<UserLogin>;
+    public currentUserLogin: Observable<UserMe>;
+    private currentUserLoginSubject: BehaviorSubject<UserMe>;
 
     // User data
     public currentUser: Observable<User>;
@@ -23,27 +23,46 @@ export class UserService {
 
     public userOwnershipStatus = this.userOwnership.asObservable();
 
+    // Merchants and Sources cache
+    private merchantsCacheSubject: BehaviorSubject<any[]>;
+    public merchantsCache$: Observable<any[]>;
+
+    private sourcesCacheSubject: BehaviorSubject<any[]>;
+    public sourcesCache$: Observable<any[]>;
+
+    currentUserData: Partial<UserMe>
+
     constructor(private http: HttpClient, private storageService: StorageService) {
-        const localStorageUserLogin = UserLogin.fromJson(
-            JSON.parse(localStorage.getItem("currentUserLogin"))
-        );
-        this.currentUserLoginSubject = new BehaviorSubject<UserLogin>(
-            localStorageUserLogin
+        const localStorageUserLogin = this.storageService.load("currentUserLogin");
+        this.currentUserLoginSubject = new BehaviorSubject<UserMe>(
+            localStorageUserLogin ? UserLogin.fromJson(localStorageUserLogin) : null
         );
         this.currentUserLogin = this.currentUserLoginSubject.asObservable();
 
-        const localStorageUser = User.fromJson(
-            JSON.parse(localStorage.getItem("currentUser"))
+        const localStorageUser = this.storageService.load("currentUser");
+        this.currentUserSubject = new BehaviorSubject<User>(
+            localStorageUser ? User.fromJson(localStorageUser) : null
         );
-        this.currentUserSubject = new BehaviorSubject<User>(localStorageUser);
         this.currentUser = this.currentUserSubject.asObservable();
+
+        const localStorageMerchants = this.storageService.get("myMerchantData");
+        this.merchantsCacheSubject = new BehaviorSubject<any[]>(
+            localStorageMerchants ? JSON.parse(localStorageMerchants) : []
+        );
+        this.merchantsCache$ = this.merchantsCacheSubject.asObservable();
+
+        const localStorageSources = this.storageService.get("myInstrumentData");
+        this.sourcesCacheSubject = new BehaviorSubject<any[]>(
+            localStorageSources ? JSON.parse(localStorageSources) : []
+        );
+        this.sourcesCache$ = this.sourcesCacheSubject.asObservable();
     }
 
     public get currentUserValue(): User {
         return this.currentUserSubject.value;
     }
 
-    public get currentUserLoginValue(): UserLogin {
+    public get currentUserLoginValue(): UserMe {
         return this.currentUserLoginSubject.value;
     }
 
@@ -103,35 +122,10 @@ export class UserService {
         );
 
         // remove user from local storage to log user out
-        localStorage.removeItem("currentUserLogin");
-        localStorage.removeItem("currentUser");
-        localStorage.removeItem("merchantData");
-        localStorage.removeItem("instrumentData");
+        this.storageService.clearAllCacheAndLocalStorage()
 
         this.currentUserLoginSubject.next(null);
         this.currentUserSubject.next(null);
-    }
-
-    /**
-     * Get user data for current user id
-     */
-    getLoggedUser(): Observable<User> {
-        return this.http
-            .get<User>(this.localUrlV1 + this.currentUserLoginSubject.value.id)
-            .pipe(
-                map((user) => {
-                    // user id is correct if value is not null
-                    if (user) {
-                        // hydrate a full User object from its JSON representation (to have its methods/logic)
-                        user = User.fromJson(user);
-
-                        // store user details in local storage to save user data in between page refreshes
-                        localStorage.setItem("currentUser", JSON.stringify(user));
-                        this.currentUserSubject.next(user);
-                    }
-                    return user;
-                })
-            );
     }
 
     /**
@@ -143,6 +137,70 @@ export class UserService {
             .post<User>(this.localUrlV1 + "register", data)
             .pipe(map((response) => response));
     }
+
+    me(): Observable<any> {
+        const storageUser = this.storageService.load("currentUser");
+        if (storageUser) {
+            return of(storageUser)
+        } else {
+            return this.http.get<any>(this.localUrlV1 + "me").pipe(
+                map((user) => {
+                    this.currentUserData = {
+                        id: user.id,
+                        name: user.name,
+                        surname: user.surname,
+                        email: user.email,
+                        role: user.role,
+                        verified: user.verified,
+                        merchants: user.merchants,
+                        sources: user.sources
+                    };
+                    // store user details in local storage to save user data in between page refreshes
+                    this.storageService.save(this.currentUserData, "currentUser")
+
+                    user = User.fromJson(user);
+
+                    this.currentUserSubject.next(user);
+
+                    // save user's merchant and instrument on cache
+                    this.storageService.set("myMerchantData", JSON.stringify(user.merchants));
+                    this.merchantsCacheSubject.next(user.merchants);
+                    this.storageService.set("myInstrumentData", JSON.stringify(user.sources));
+                    this.sourcesCacheSubject.next(user.sources);
+
+                    return user;
+                })
+            );
+        }
+    }
+
+    getMerchants(): Observable<any[]> {
+        return this.merchantsCache$;
+    }
+
+    getSources(): Observable<any[]> {
+        return this.sourcesCache$;
+    }
+
+    /*    updateMyMerchants(myMerchant: any[], actionOn: string): void {
+    
+            this.storageService.set("myMerchantData", JSON.stringify(myMerchant));
+            this.merchantsCacheSubject.next(myMerchant);
+        }*/
+
+    updateMySources(newSources: any[]): void {
+        this.storageService.set("myInstrumentData", JSON.stringify(newSources));
+        this.sourcesCacheSubject.next(newSources);
+    }
+
+    invalidateCache(): void {
+        this.storageService.clearCache("myMerchantData");
+        this.storageService.clearCache("myInstrumentData");
+
+        this.merchantsCacheSubject.next([]);
+        this.sourcesCacheSubject.next([]);
+    }
+
 
     /**
      * Update an existing user's data
@@ -224,22 +282,6 @@ export class UserService {
             .pipe(map((response) => response));
     }
 
-    me(): Observable<any> {
-        return this.http.get<any>(this.localUrlV1 + "me").pipe(
-            map((user) => {
-                user = User.fromJson(user);
-
-                // store user details in local storage to save user data in between page refreshes
-                localStorage.setItem("currentUser", JSON.stringify(user));
-                this.currentUserSubject.next(user);
-
-                localStorage.setItem("merchantData", JSON.stringify(user.merchants));
-                localStorage.setItem("instrumentData", JSON.stringify(user.sources));
-                return user;
-            })
-        );
-    }
-
     updateUserOwnership(data: any) {
         this.userOwnership.next(data);
     }
@@ -248,7 +290,8 @@ export class UserService {
         name: string,
         surname: string,
         email: string,
-        password: string
+        password: string,
+        role: string
     ): Observable<any> {
         const body = {
             name: name,
@@ -256,10 +299,21 @@ export class UserService {
             email: email,
             password: password,
             verified: true,
-            role: "User",
+            role: role,
         };
 
-        return this.http.post<any>(this.localUrlV1, body).pipe(
+        return this.http.post<any>(`${this.localUrlV1}`, body).pipe(
+            map((res) => {
+                return res;
+            })
+        );
+    }
+
+    userEdit(
+        id: string,
+        user: User): Observable<any> {
+
+        return this.http.put<any>(`${this.localUrlV1}${id}`, user).pipe(
             map((res) => {
                 return res;
             })
@@ -290,12 +344,15 @@ export class UserService {
             return of(cachedUsers);
         } else {
             const params = new HttpParams()
-                .set("search", search)
+                .set("name", search)
+                .set("email", search)
                 .set("page", page.toString())
                 .set("pageSize", itemsPerPage);
             return this.http.get(`${this.localUrlV1}`, {params}).pipe(
                 tap({
-                    next: (data) => this.storageService.set("usersList", data),
+                    next: (data) => {
+                        this.storageService.set("usersList", data)
+                    },
                     error: (err) => console.error("err ", err),
                 }),
                 map((res) => {

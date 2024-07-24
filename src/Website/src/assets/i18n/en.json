@@ -188,7 +188,7 @@
       "LAT_ERROR": "Indicate latitude by map or manually",
       "LON_ERROR": "Indicate longitude by map or manually",
       "URL": "URL",
-      "URL_OPTIONAL_TEXT": "<i>Optional.</i>\nWill be shown to users when the payment is confirmed. Can be used to show more information about the POS of the Merchant."
+      "URL_OPTIONAL_TEXT": "Optional. Will be shown to users when the payment is confirmed. Can be used to show more information about the POS of the Merchant."
     },
     "TERMS_CONDITIONS_TITLE": "Terms & Conditions",
     "TERMS_CONDITIONS": "Accept terms and conditions",

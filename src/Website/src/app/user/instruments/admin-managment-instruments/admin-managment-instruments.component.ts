@@ -5,19 +5,17 @@ import {
     of,
     Subject,
     Subscription,
-    throwError,
 } from "rxjs";
 import {DialogCreateSourceComponent} from "../dialog-create-instrument/dialog-create-instrument.component";
 import {DialogViewEditInstrumentComponent} from "../dialog-view-edit-instrument/dialog-view-edit-instrument.component";
-import {MatDialog, MatDialogRef} from "@angular/material/dialog";
+import {MatDialog} from "@angular/material/dialog";
 import {catchError} from "rxjs/operators";
-import {Router} from "@angular/router";
 import {SourceService} from "../../../_services/source.service";
 import {DialogConfirmCancelComponent} from "../../../components/dialog-confirm-cancel/dialog-confirm-cancel";
 import {LoadingService} from "../../../_services/loading.service";
 import {StorageService} from "../../../_services/storage.service";
 import {AimsService, UserService} from "src/app/_services";
-import {Aim} from "src/app/_models";
+import {SnackBarService} from "../../../_services/snack-bar.service";
 
 @Component({
     selector: "app-admin-managment-instruments",
@@ -32,6 +30,8 @@ export class AdminManagmentInstrumentsComponent implements OnInit, OnDestroy {
     itemsPerPage: string;
     pageCount: number;
     totalItems: number;
+    hasNext: boolean;
+    hasPrev: boolean;
 
     tableToUpdate: boolean = false;
 
@@ -41,7 +41,6 @@ export class AdminManagmentInstrumentsComponent implements OnInit, OnDestroy {
     instrumentsTableColumns: any[] = [
         {field: "name", hideOnMobile: false},
         {field: "url", hideOnMobile: true},
-        {field: "WOM generati", hideOnMobile: true},
     ];
 
     private subscriptions: Subscription[] = [];
@@ -52,6 +51,7 @@ export class AdminManagmentInstrumentsComponent implements OnInit, OnDestroy {
         private matDialog: MatDialog,
         private cd: ChangeDetectorRef,
         private loadingService: LoadingService,
+        private snackBarService: SnackBarService,
         private storageService: StorageService,
         private userService: UserService
     ) {
@@ -67,36 +67,40 @@ export class AdminManagmentInstrumentsComponent implements OnInit, OnDestroy {
 
     getSourcesList() {
         this.loadingService.show();
-        const cachedData = this.storageService.get("instrumentsList");
-        if (cachedData) {
-            this.assignInstrumentData(cachedData);
-            this.loadingService.hide();
-        } else {
-            this.subscriptions.push(
-                this.sourceService
-                    .getInstrumentList(
-                        this.searchParameters,
-                        this.currentPage,
-                        this.itemsPerPage
-                    )
-                    .pipe(
-                        catchError((error) => {
-                            console.error("Error fetching instruments:", error);
-                            return of(null);
-                        }),
-                        finalize(() => {
-                            this.loadingService.hide();
-                            this.cd.markForCheck();
-                        })
-                    )
-                    .subscribe((res) => {
-                        if (res) {
-                            this.storageService.set("instrumentsList", res);
-                            this.assignInstrumentData(res);
-                        }
+
+        this.subscriptions.push(
+            this.sourceService
+                .getAllInstruments(
+                    this.searchParameters,
+                    this.currentPage,
+                    this.itemsPerPage
+                )
+                .pipe(
+                    catchError((error) => {
+                        console.error("Error fetching instruments:", error);
+                        return of(null);
+                    }),
+                    finalize(() => {
+                        this.loadingService.hide();
+                        this.cd.detectChanges();
                     })
-            );
-        }
+                )
+                .subscribe({
+                    next:
+                        (res) => {
+                            this.assignInstrumentData(res);
+                            this.cd.detectChanges()
+                        },
+                    error: (err) => {
+                        console.error(err)
+                        this.snackBarService.openSnackBar("Errore: riprova ad aggiornare la pagina")
+                    }, complete: () => {
+                        this.loadingService.hide();
+                    },
+                })
+        );
+
+
     }
 
     private assignInstrumentData(data) {
@@ -104,8 +108,9 @@ export class AdminManagmentInstrumentsComponent implements OnInit, OnDestroy {
         this.pageCount = data.pageCount;
         this.itemsPerPage = data.pageSize;
         this.instrumentsList = data.data || [];
-        this.currentPage =
-            this.storageService.get("instrumentsCurrentPage") || this.currentPage;
+        this.currentPage = data.page || this.currentPage;
+        this.hasNext = data.hasNext
+        this.hasPrev = data.hasPrev;
     }
 
     onCreateSource() {
@@ -116,16 +121,19 @@ export class AdminManagmentInstrumentsComponent implements OnInit, OnDestroy {
             data: {},
         });
 
-        dialogRef.afterClosed().subscribe((result) => {
-            if (result && result.name && result.url) {
+        dialogRef.afterClosed().subscribe((instrum) => {
+            if (instrum && instrum.name && instrum.url) {
                 this.loadingService.show();
                 this.cd.markForCheck();
                 this.subscriptions.push(
                     this.sourceService
-                        .createInstrument(result.name, result.url, result.aims)
+                        .createInstrument(instrum.name, instrum.url, instrum.aims)
                         .subscribe({
                             next: (user) => {
-                                this.processAccess(user, result);
+                                this.storageService.clearCache("instrumentsList")
+                                // add access users
+                                this.processAccess(user, instrum);
+                                this.getSourcesList()
                             },
                             error: (err) => {
                                 this.errorMessage = "Failed to create instrument.";
@@ -219,6 +227,7 @@ export class AdminManagmentInstrumentsComponent implements OnInit, OnDestroy {
                 this.tableToUpdate = true;
 
                 dialogRef.afterClosed().subscribe((res) => {
+                    // update the table if the edited field is shown on the admin table
                     if (this.tableToUpdate) {
                         this.storageService.clearCache("instrumentsList");
                         this.getSourcesList();
@@ -232,7 +241,7 @@ export class AdminManagmentInstrumentsComponent implements OnInit, OnDestroy {
         });
     }
 
-    onDeleteSource(userToDelete: any) {
+    onDeleteSource(instrumentToDelete: any) {
         const dialogRef = this.matDialog.open(DialogConfirmCancelComponent, {
             width: "500px",
             data: {
@@ -245,23 +254,65 @@ export class AdminManagmentInstrumentsComponent implements OnInit, OnDestroy {
 
         dialogRef.afterClosed().subscribe((result) => {
             if (result) {
-                const delSub = this.sourceService
-                    .deleteInstrument(userToDelete.id)
-                    .subscribe((res) => {
-                        this.storageService.clearCache("instrumentsList");
-                        this.getSourcesList();
-                        // update list of my instruments in case the one deleted was one of yours
-                        this.userService.me();
-                    });
-                this.subscriptions.push(delSub);
+                this.loadingService.show();
+                // Check if the current user is in the access list
+                this.sourceService.getInstrumentAccessList(instrumentToDelete.id).subscribe({
+                    next: (res) => {
+                        const accessList = res.users
+                        let isMyInstrumentToUpdate: boolean = false
+
+                        const currentUser = this.storageService.load('currentUser');
+                        if (accessList.find(acc => acc.userId === currentUser.id)) {
+                            isMyInstrumentToUpdate = true;
+                        }
+
+                        const delSub = this.sourceService
+                            .deleteInstrument(instrumentToDelete.id)
+                            .subscribe({
+                                next: (res) => {
+                                    // Update user access if necessary
+                                    if (isMyInstrumentToUpdate) {
+                                        this.checkAccessCurrentUser();
+                                    }
+                                    this.storageService.clearCache("instrumentsList")
+                                    // Refresh the instruments list
+                                    this.getSourcesList();
+                                    this.snackBarService.openSnackBar("Instrument cancellato correttamente")
+                                },
+                                error: (err) => {
+                                    console.error("Error deleting instrument:", err);
+                                    this.snackBarService.openSnackBar("Errore nella cancellazione. Riprova");
+                                },
+                                complete: () => {
+                                    this.loadingService.hide();
+                                }
+
+                            });
+                        this.subscriptions.push(delSub);
+
+                    },
+                    error: (err) => {
+                        console.error("Error deleting instrument:", err);
+                        this.snackBarService.openSnackBar("Errore. Riprova");
+                        this.loadingService.hide();
+                    },
+                })
             }
         });
+    }
+
+    checkAccessCurrentUser() {
+        this.storageService.clear('currentUser')
+        this.userService
+            .me()
+            .subscribe((res) => {
+                this.userService.updateUserOwnership(res)
+            });
     }
 
     onPageChange(page: number): void {
         this.storageService.clearCache("instrumentsList");
         this.currentPage = page;
-        this.storageService.set("instrumentsCurrentPage", this.currentPage);
         this.getSourcesList();
     }
 
