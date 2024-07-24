@@ -43,11 +43,11 @@ import {AccessListComponent} from "./components/access-list/access-list.componen
 import {AimsListComponent} from "./components/aims-list/aims-list.component";
 import {PosDetailsComponent} from "./merchants/pos-details/pos-details";
 import {UserPosListComponent} from "./merchants/user-pos-list/user-pos-list.component";
-import {PosCreateDialogComponent} from "./merchants/pos-create-dialog/pos-create-dialog.component";
 import {MapComponent} from "../components/map/map.component";
 import {OffersComponent} from "./merchants/pos-details/offers/offers.component";
 import {CreateEditOfferComponent} from "./merchants/pos-details/offers/create-edit-offer/create-edit-offer.component";
 import {AddressSelectorMapComponent} from "./components/address-selector-map/address-selector-map.component";
+import {PosCreateDialogComponent} from "./merchants/pos-create-dialog/pos-create-dialog.component";
 
 @NgModule({
     declarations: [
@@ -58,7 +58,6 @@ import {AddressSelectorMapComponent} from "./components/address-selector-map/add
         FormMerchantComponent,
         MerchantDetailComponent,
         MerchantStatsComponent,
-        PosCreateDialogComponent,
         MyInstrumentsCollectionComponent,
         MyMerchantsCollectionComponent,
         UserAdminComponent,
@@ -82,6 +81,7 @@ import {AddressSelectorMapComponent} from "./components/address-selector-map/add
         EditableElementComponent,
         ExpandableCardComponent,
         SharedModule,
+        PosCreateDialogComponent,
         PosDetailsComponent,
         PosFormComponent,
         SearchSourceComponent,

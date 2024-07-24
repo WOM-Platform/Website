@@ -1,5 +1,5 @@
 import {AfterViewInit, Component} from '@angular/core';
-import {OpenStreetMapProvider} from "leaflet-geosearch";
+import {SearchControl, OpenStreetMapProvider} from 'leaflet-geosearch';
 import * as L from 'leaflet';
 
 @Component({

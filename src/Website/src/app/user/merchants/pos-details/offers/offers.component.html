@@ -1,6 +1,7 @@
 <div class="mt-11">
-    <h2 class="text-xl">Le offerte: </h2>
+
     <div *ngIf="offers && offers.length > 0; else noOffers">
+        <h2 class="text-xl">Le offerte: </h2>
         <ul *ngFor="let offer of offers">
             <li class="flex justify-between items-center">
                 <div class="flex flex-col justify-center mt-4">
@@ -39,9 +40,9 @@
         </ul>
     </div>
     <ng-template #noOffers>
-        <p>Nessuna offerta disponibile</p>
+        <p class="text-sm text-slate-600">Ancora nessuna offerta creata</p>
     </ng-template>
-    <button *ngIf="posAction === 'edit'" (click)="addNewOffer()" class="btn-rounded-outline mt-6"><i
+    <button *ngIf="posAction !== 'view'" (click)="addNewOffer()" class="btn-rounded-outline mt-6"><i
             class="fa-solid fa-plus"></i>Nuova
         Offerta
     </button>

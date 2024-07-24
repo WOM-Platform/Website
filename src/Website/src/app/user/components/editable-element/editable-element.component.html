@@ -11,7 +11,7 @@
     </ng-template>
     <ng-container *ngIf="!isEditing; else fieldIsEditing">
         <a *ngIf="keyEl=== 'URL'; else noUrl" target="_blank" [href]="valueEl">
-            <span class="mb-0 text-base"> {{ valueEl }}</span>
+            <span class="mb-0"> {{ valueEl }}</span>
         </a>
         <ng-template #noUrl>
             <span class="mb-0"> {{ valueEl }}</span>
@@ -29,7 +29,7 @@
                     [(ngModel)]="newValue"
                     (ngModelChange)="validateValue()"
             >
-                <option *ngFor="let business of option" [value]="business">
+                <option [defaultSelected]="valueEl === business" *ngFor="let business of option" [value]="business">
                     {{ business }}
                 </option>
             </select>
@@ -48,8 +48,8 @@
             <input
                     [(ngModel)]="newValue"
                     name="valueKey"
-                    class="border-2 border-black rounded-lg px-2 max-w-[200px]"
-                    [ngStyle]="{ width: newValue.length + 1 + 'ch' }"
+                    class="border-2 border-black rounded-lg px-2"
+                    [ngStyle]="{ width: calculateInputWidth() }"
                     (ngModelChange)="validateValue()"
             />
             <button (click)="stopEditing()" [disabled]="!isDirty">

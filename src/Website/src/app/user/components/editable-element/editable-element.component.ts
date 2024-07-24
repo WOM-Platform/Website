@@ -42,7 +42,13 @@ export class EditableElementComponent implements OnInit, OnChanges {
     }
 
     ngOnInit() {
-
+        if (this.typeEl === 'list') {
+            if (this.option.includes(this.valueEl)) {
+                this.newValue = this.valueEl;
+            } else {
+                this.newValue = this.option[0]; // Fallback to the first option if existing value is not in the options
+            }
+        }
     }
 
     ngOnChanges() {
@@ -72,6 +78,12 @@ export class EditableElementComponent implements OnInit, OnChanges {
         this.newValue = this.originalValue;
         this.isEditing = false;
         this.cd.detectChanges();
+    }
+
+    calculateInputWidth(): string {
+        // Adding 1ch to ensure there is some extra space
+        const width = this.newValue.length + 2;
+        return `${width}ch`;
     }
 
     validateValue(): void {
