@@ -20,7 +20,7 @@ export const authGuard: CanActivateFn = (route: ActivatedRouteSnapshot, state: R
 
         if (state.url.includes("not-verified")) {
             if (verified) {
-                router.navigate(["user/home"]).then((r) => {
+                router.navigate(["user/home"]).then(() => {
                 });
             }
         } else if (!verified) {
@@ -28,14 +28,14 @@ export const authGuard: CanActivateFn = (route: ActivatedRouteSnapshot, state: R
                 .navigate(["/user/not-verified"], {
                     queryParams: {returnUrl: state.url},
                 })
-                .then((r) => {
+                .then(() => {
                 });
         }
         // Check for admin access
         const requiredRoles = route.data['roles'] as Array<string>;
         if (requiredRoles && !requiredRoles.includes(currentUserLogin.role)) {
             // Role not authorised so redirect to home page
-            router.navigate(["/user/home"]).then((r) => {
+            router.navigate(["/user/home"]).then(() => {
             });
             return false;
         }
@@ -50,7 +50,7 @@ export const authGuard: CanActivateFn = (route: ActivatedRouteSnapshot, state: R
             .navigate(["/authentication/signin"], {
                 queryParams: {returnUrl: state.url},
             })
-            .then((r) => {
+            .then(() => {
             });
         return false;
     }
@@ -58,7 +58,7 @@ export const authGuard: CanActivateFn = (route: ActivatedRouteSnapshot, state: R
     // not logged in so redirect to login page with the return url
     router
         .navigate(["/"], {queryParams: {returnUrl: state.url}})
-        .then((r) => {
+        .then(() => {
         });
     return false;
 
