@@ -1,6 +1,6 @@
 import {NgModule} from "@angular/core";
 import {RouterModule, Routes} from "@angular/router";
-import {AuthGuard} from "../_helpers/auth.guard";
+
 import {ManageGuard} from "../_helpers/manage.guard";
 import {ManageComponent} from "../manage/manage/manage.component";
 import {UserHomeComponent} from "./home/user-home.component";
@@ -17,12 +17,13 @@ import {UserUsersComponent} from "./users/user-users.component";
 import {MerchantDetailComponent} from "./merchants/merchant-detail/merchant-detail.component";
 import {PosDetailsComponent} from "./merchants/pos-details/pos-details";
 import {instrumentsGuard} from "../_helpers/instruments.guard";
+import {authGuard} from "../_helpers/auth.guard";
 
 const routes: Routes = [
     {
         path: "user",
         component: UserComponent,
-        canActivate: [AuthGuard],
+        canActivate: [authGuard],
         data: {
             breadcrumb: "BREADCRUMBS.USER.USER",
         },
@@ -35,7 +36,7 @@ const routes: Routes = [
             {
                 path: "not-verified",
                 component: UserNotVerifiedComponent,
-                canActivate: [AuthGuard],
+                canActivate: [authGuard],
                 data: {
                     breadcrumb: "BREADCRUMBS.USER.ERROR",
                 },
@@ -50,14 +51,14 @@ const routes: Routes = [
             {
                 path: "home",
                 component: UserHomeComponent,
-                canActivate: [AuthGuard],
+                canActivate: [authGuard],
                 data: {
                     breadcrumb: "BREADCRUMBS.USER.HOME",
                 },
             },
             {
                 path: "merchants",
-                canActivate: [AuthGuard],
+                canActivate: [authGuard],
                 data: {
                     breadcrumb: "BREADCRUMBS.USER.MERCHANT",
                 },
@@ -65,7 +66,7 @@ const routes: Routes = [
                     {
                         path: "",
                         component: UserMerchantsComponent,
-                        canActivate: [AuthGuard],
+                        canActivate: [authGuard],
                         data: {
                             breadcrumb: "BREADCRUMBS.USER.HOME",
                         },
@@ -91,7 +92,7 @@ const routes: Routes = [
             {
                 path: "instruments",
                 component: UserInstrumentsComponent,
-                canActivate: [AuthGuard, instrumentsGuard],
+                canActivate: [authGuard, instrumentsGuard],
                 data: {
 
                     breadcrumb: "BREADCRUMBS.USER.INSTRUMENT",
@@ -100,7 +101,7 @@ const routes: Routes = [
             {
                 path: "aims",
                 component: UserAimsComponent,
-                canActivate: [AuthGuard],
+                canActivate: [authGuard],
                 data: {
                     roles: ['Admin'],
                     breadcrumb: "BREADCRUMBS.USER.AIM",
@@ -109,7 +110,7 @@ const routes: Routes = [
             {
                 path: "users",
                 component: UserUsersComponent,
-                canActivate: [AuthGuard],
+                canActivate: [authGuard],
                 data: {
                     roles: ['Admin'],
                     breadcrumb: "BREADCRUMBS.USER.USERS",
@@ -118,7 +119,7 @@ const routes: Routes = [
             {
                 path: "stats/admin",
                 component: AdminStatsComponent,
-                canActivate: [AuthGuard],
+                canActivate: [authGuard],
                 data: {
                     breadcrumb: "BREADCRUMBS.USER.ADMIN-STATS",
                 },
@@ -126,7 +127,7 @@ const routes: Routes = [
             {
                 path: "stats/merchant/:id",
                 component: MerchantStatsComponent,
-                canActivate: [AuthGuard],
+                canActivate: [authGuard],
                 data: {
                     breadcrumb: "BREADCRUMBS.USER.MERCHANT-STATS",
                 },
@@ -134,14 +135,14 @@ const routes: Routes = [
             {
                 path: "stats/instrument",
                 component: InstrumentStatsComponent,
-                canActivate: [AuthGuard],
+                canActivate: [authGuard],
                 data: {
                     breadcrumb: "BREADCRUMBS.USER.INSTRUMENT-STATS",
                 },
             },
             {
                 path: "manage",
-                canActivate: [AuthGuard, ManageGuard],
+                canActivate: [authGuard, ManageGuard],
                 data: {
                     breadcrumb: "BREADCRUMBS.MANAGE.TITLE",
                 },
@@ -149,7 +150,7 @@ const routes: Routes = [
                     {
                         path: "",
                         component: ManageComponent,
-                        canActivate: [AuthGuard, ManageGuard],
+                        canActivate: [authGuard, ManageGuard],
                         data: {
                             breadcrumb: "BREADCRUMBS.MANAGE.HOME",
                         },

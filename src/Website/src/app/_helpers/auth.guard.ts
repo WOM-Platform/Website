@@ -1,78 +1,65 @@
-import {Injectable} from "@angular/core";
+import {inject} from "@angular/core";
 import {
     Router,
     ActivatedRouteSnapshot,
-    RouterStateSnapshot,
+    RouterStateSnapshot, CanActivate, CanActivateFn,
 } from "@angular/router";
-import {AuthService, UserService} from "../_services";
+import {UserService} from "../_services";
+import {Observable} from "rxjs";
 
-@Injectable({providedIn: "root"})
-export class AuthGuard {
-    currentUser
 
-    constructor(
-        private router: Router,
-        private authenticationService: AuthService,
-        private userService: UserService
-    ) {
-    }
+export const authGuard: CanActivateFn = (route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | boolean => {
+    const router = inject(Router);
+    const userService = inject(UserService);
+    const currentUserLogin = userService.currentUserLoginValue;
 
-    canActivate(
-        route: ActivatedRouteSnapshot,
-        state: RouterStateSnapshot
-    ): boolean {
-        const currentUserLogin = this.userService.currentUserLoginValue;
-        this.userService.currentUser.subscribe({
-            next: (res) => this.currentUser = res
-        });
+    // User is logged
+    if (currentUserLogin) {
+        // check if user has validated email
+        const verified = currentUserLogin.verified;
 
-        // User is logged
-        if (currentUserLogin) {
-            // check if user has validated email
-            const verified = currentUserLogin.verified;
-
-            if (state.url.includes("not-verified")) {
-                if (verified) {
-                    this.router.navigate(["user/home"]).then((r) => {
-                    });
-                }
-            } else if (!verified) {
-                this.router
-                    .navigate(["/user/not-verified"], {
-                        queryParams: {returnUrl: state.url},
-                    })
-                    .then((r) => {
-                    });
-            }
-            // Check for admin access
-            const requiredRoles = route.data['roles'] as Array<string>;
-            if (requiredRoles && !requiredRoles.includes(this.currentUser.role)) {
-                // Role not authorised so redirect to home page
-                this.router.navigate(["/user/home"]).then((r) => {
+        if (state.url.includes("not-verified")) {
+            if (verified) {
+                router.navigate(["user/home"]).then((r) => {
                 });
-                return false;
             }
-
-
-            return true;
-        }
-
-        // User not logged - redirect to login
-        if (state.url === "/merchant" || state.url === "/user/home") {
-            this.router
-                .navigate(["/authentication/signin"], {
+        } else if (!verified) {
+            router
+                .navigate(["/user/not-verified"], {
                     queryParams: {returnUrl: state.url},
                 })
                 .then((r) => {
                 });
+        }
+        // Check for admin access
+        const requiredRoles = route.data['roles'] as Array<string>;
+        if (requiredRoles && !requiredRoles.includes(currentUserLogin.role)) {
+            // Role not authorised so redirect to home page
+            router.navigate(["/user/home"]).then((r) => {
+            });
             return false;
         }
 
-        // not logged in so redirect to login page with the return url
-        this.router
-            .navigate(["/"], {queryParams: {returnUrl: state.url}})
+
+        return true;
+    }
+
+    // User not logged - redirect to login
+    if (state.url === "/merchant" || state.url === "/user/home") {
+        router
+            .navigate(["/authentication/signin"], {
+                queryParams: {returnUrl: state.url},
+            })
             .then((r) => {
             });
         return false;
     }
+
+    // not logged in so redirect to login page with the return url
+    router
+        .navigate(["/"], {queryParams: {returnUrl: state.url}})
+        .then((r) => {
+        });
+    return false;
+
 }
