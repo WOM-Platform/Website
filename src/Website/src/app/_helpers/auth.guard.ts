@@ -2,7 +2,7 @@ import {inject} from "@angular/core";
 import {
     Router,
     ActivatedRouteSnapshot,
-    RouterStateSnapshot, CanActivate, CanActivateFn,
+    RouterStateSnapshot, CanActivateFn,
 } from "@angular/router";
 import {UserService} from "../_services";
 import {Observable} from "rxjs";
