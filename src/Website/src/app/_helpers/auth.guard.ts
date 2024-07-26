@@ -11,6 +11,7 @@ import {Observable} from "rxjs";
 export const authGuard: CanActivateFn = (route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | boolean => {
     const router = inject(Router);
     const userService = inject(UserService);
+    const currentUser = userService.currentUserValue
     const currentUserLogin = userService.currentUserLoginValue;
 
     // User is logged
@@ -33,14 +34,12 @@ export const authGuard: CanActivateFn = (route: ActivatedRouteSnapshot, state: R
         }
         // Check for admin access
         const requiredRoles = route.data['roles'] as Array<string>;
-        if (requiredRoles && !requiredRoles.includes(currentUserLogin.role)) {
+        if (requiredRoles && !requiredRoles.includes(currentUser.role)) {
             // Role not authorised so redirect to home page
             router.navigate(["/user/home"]).then(() => {
             });
             return false;
         }
-
-
         return true;
     }
 
