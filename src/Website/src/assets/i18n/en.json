@@ -64,7 +64,8 @@
       "VERIFY": "Verify",
       "ADMIN-STATS": "Admin Statistics",
       "INSTRUMENT-STATS": "Instrument Statistics",
-      "MERCHANT-STATS": "Merchant Statistics"
+      "MERCHANT-STATS": "Merchant Statistics",
+      "STATISTICS": "Statistics"
     },
     "MANAGE": {
       "TITLE": "Manage",

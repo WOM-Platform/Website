@@ -1,13 +1,12 @@
 import {Component, OnDestroy, OnInit} from "@angular/core";
 
 import {Subscription, interval} from "rxjs";
-import {map, takeWhile} from "rxjs/operators";
 import {MatDatepickerInputEvent} from "@angular/material/datepicker";
 
 import {jsPDF} from "jspdf";
 import html2canvas from 'html2canvas';
-import {AuthService, StatsService} from "src/app/_services";
-import {Merchants} from "src/app/_models";
+import {AuthService, StatsService, UserService} from "src/app/_services";
+import {Merchants, User} from "src/app/_models";
 
 
 interface PieChartData {
@@ -17,10 +16,11 @@ interface PieChartData {
 
 @Component({
     selector: 'app-user-stats',
-    templateUrl: './user-stats.component.html',
-    styleUrls: ['./user-stats.component.css']
+    templateUrl: './user-statistics.component.html',
+    styleUrls: ['./user-statistics.component.css']
 })
-export class UserStatsComponent implements OnInit, OnDestroy {
+export class UserStatisticsComponent implements OnInit, OnDestroy {
+    currentUser: User
     merchantData: Merchants;
     merchantSubscription: Subscription;
 
@@ -36,10 +36,13 @@ export class UserStatsComponent implements OnInit, OnDestroy {
         domain: ['#5AA454', '#C7B42C', '#7aa3e5']
     };
 
-    constructor(private authService: AuthService, private statsService: StatsService) {
+    constructor(private authService: AuthService, private statsService: StatsService, private userService: UserService) {
     }
 
     ngOnInit(): any {
+        // check user role
+        this.currentUser = this.userService.currentUserValue
+        console.log("Utente ", this.currentUser)
         this.loadData();
     }
 

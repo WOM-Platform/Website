@@ -5,6 +5,8 @@ import {catchError, map, tap} from "rxjs/operators";
 import {User, UserLogin, UserMe, UserRegistrationPayload} from "../_models";
 import {environment} from "../../environments/environment";
 import {StorageService} from "./storage.service";
+import {Router} from "@angular/router";
+import {SnackBarService} from "./snack-bar.service";
 
 @Injectable({providedIn: "root"})
 export class UserService {
@@ -32,7 +34,10 @@ export class UserService {
 
     currentUserData: Partial<UserMe>
 
-    constructor(private http: HttpClient, private storageService: StorageService) {
+    constructor(private http: HttpClient,
+                private router: Router,
+                private snackBarService: SnackBarService,
+                private storageService: StorageService) {
         const localStorageUserLogin = this.storageService.load("currentUserLogin");
         this.currentUserLoginSubject = new BehaviorSubject<UserMe>(
             localStorageUserLogin ? UserLogin.fromJson(localStorageUserLogin) : null
@@ -366,7 +371,7 @@ export class UserService {
         }
     }
 
-// Delete user
+    // Delete user
     delete(idUser: string): Observable<any> {
         return this.http.delete(`${this.localUrlV1}${idUser}`).pipe(
             tap({
@@ -378,6 +383,20 @@ export class UserService {
                 return throwError(() => new Error('Failed to delete user'));
             })
         );
+    }
+
+    handle403Error(error: any) {
+        if (error.status === 403) {
+            // Clear any user-related data
+            this.storageService.clearAllCacheAndLocalStorage();
+            this.logout()
+            // Redirect to login page
+            this.router.navigate(['/authentication/signin']);
+            // Show an error message
+            this.snackBarService.openSnackBar('Session expired. Please log in again.');
+        } else {
+            console.error('An error occurred:', error);
+        }
     }
 
 }

@@ -7,9 +7,9 @@ import {UserHomeComponent} from "./home/user-home.component";
 import {UserMerchantsComponent} from "./merchants/user-merchants.component";
 import {UserNotVerifiedComponent} from "./not-verified/user-not-verified.component";
 import {UserVerifyComponent} from "./verify/user-verify.component";
-import {MerchantStatsComponent} from "./stats/merchant/merchant-stats.component";
-import {AdminStatsComponent} from "./stats/admin/admin-stats.component";
-import {InstrumentStatsComponent} from "./stats/instrument/instrument-stats.component";
+import {MerchantStatsComponent} from "./statistics/merchant/merchant-stats.component";
+import {AdminRoleComponent} from "./statistics/admin-role/admin-role.component";
+import {InstrumentStatsComponent} from "./statistics/instrument/instrument-stats.component";
 import {UserComponent} from "./user.component";
 import {UserInstrumentsComponent} from "./instruments/user-instruments.component";
 import {UserAimsComponent} from "./aims/user-aims.component";
@@ -18,6 +18,7 @@ import {MerchantDetailComponent} from "./merchants/merchant-detail/merchant-deta
 import {PosDetailsComponent} from "./merchants/pos-details/pos-details";
 import {instrumentsGuard} from "../_helpers/instruments.guard";
 import {authGuard} from "../_helpers/auth.guard";
+import {UserStatisticsComponent} from "./statistics/user-statistics.component";
 
 const routes: Routes = [
     {
@@ -117,8 +118,16 @@ const routes: Routes = [
                 },
             },
             {
+                path: "statistics",
+                component: UserStatisticsComponent,
+                canActivate: [authGuard],
+                data: {
+                    breadcrumb: "BREADCRUMBS.USER.STATISTICS"
+                }
+            },
+            {
                 path: "stats/admin",
-                component: AdminStatsComponent,
+                component: AdminRoleComponent,
                 canActivate: [authGuard],
                 data: {
                     breadcrumb: "BREADCRUMBS.USER.ADMIN-STATS",

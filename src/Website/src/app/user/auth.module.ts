@@ -8,8 +8,8 @@ import {AuthRouting} from "./auth.routing";
 
 import {FormMerchantComponent} from "./merchants/dialog-create-merchant/form-merchant/form-merchant.component";
 import {PosFormComponent} from "./merchants/pos-details/pos/forms-pos.component";
-import {MerchantStatsComponent} from "./stats/merchant/merchant-stats.component";
-import {UserStatsComponent} from "./stats/user-stats.component";
+import {MerchantStatsComponent} from "./statistics/merchant/merchant-stats.component";
+import {UserStatisticsComponent} from "./statistics/user-statistics.component";
 import {SharedModule} from "../shared/shared.module";
 
 import {UserAdminComponent} from "./admin/user-admin.component";
@@ -48,6 +48,8 @@ import {OffersComponent} from "./merchants/pos-details/offers/offers.component";
 import {CreateEditOfferComponent} from "./merchants/pos-details/offers/create-edit-offer/create-edit-offer.component";
 import {AddressSelectorMapComponent} from "./components/address-selector-map/address-selector-map.component";
 import {PosCreateDialogComponent} from "./merchants/pos-create-dialog/pos-create-dialog.component";
+import {AdminRoleComponent} from "./statistics/admin-role/admin-role.component";
+import {UserRoleComponent} from "./statistics/user-role/user-role.component";
 
 @NgModule({
     declarations: [
@@ -67,7 +69,7 @@ import {PosCreateDialogComponent} from "./merchants/pos-create-dialog/pos-create
         UserInstrumentsComponent,
         UserMerchantsComponent,
         UserNotVerifiedComponent,
-        UserStatsComponent,
+        UserStatisticsComponent,
         UserUsersComponent,
         UserVerifyComponent,
 
@@ -94,6 +96,8 @@ import {PosCreateDialogComponent} from "./merchants/pos-create-dialog/pos-create
         OffersComponent,
         CreateEditOfferComponent,
         AddressSelectorMapComponent,
+        AdminRoleComponent,
+        UserRoleComponent,
     ]
 })
 export class AuthModule {

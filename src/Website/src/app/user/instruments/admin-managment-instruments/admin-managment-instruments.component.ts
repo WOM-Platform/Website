@@ -16,6 +16,7 @@ import {LoadingService} from "../../../_services/loading.service";
 import {StorageService} from "../../../_services/storage.service";
 import {AimsService, UserService} from "src/app/_services";
 import {SnackBarService} from "../../../_services/snack-bar.service";
+import {Router} from "@angular/router";
 
 @Component({
     selector: "app-admin-managment-instruments",
@@ -51,6 +52,7 @@ export class AdminManagmentInstrumentsComponent implements OnInit, OnDestroy {
         private matDialog: MatDialog,
         private cd: ChangeDetectorRef,
         private loadingService: LoadingService,
+        private router: Router,
         private snackBarService: SnackBarService,
         private storageService: StorageService,
         private userService: UserService
@@ -78,6 +80,7 @@ export class AdminManagmentInstrumentsComponent implements OnInit, OnDestroy {
                 .pipe(
                     catchError((error) => {
                         console.error("Error fetching instruments:", error);
+                        this.userService.handle403Error(error);
                         return of(null);
                     }),
                     finalize(() => {
@@ -128,6 +131,12 @@ export class AdminManagmentInstrumentsComponent implements OnInit, OnDestroy {
                 this.subscriptions.push(
                     this.sourceService
                         .createInstrument(instrum.name, instrum.url, instrum.aims)
+                        .pipe(
+                            catchError((error) => {
+                                this.userService.handle403Error(error);
+                                return of(null);
+                            })
+                        )
                         .subscribe({
                             next: (user) => {
                                 this.storageService.clearCache("instrumentsList")
@@ -202,7 +211,12 @@ export class AdminManagmentInstrumentsComponent implements OnInit, OnDestroy {
         forkJoin({
             accessInstrument: this.sourceService.getInstrumentAccessList(user.id),
             dataInstrument: this.sourceService.getInstrument(user.id),
-        }).subscribe((res) => {
+        }).pipe(
+            catchError((error) => {
+                this.userService.handle403Error(error);
+                return of(null);
+            })
+        ).subscribe((res) => {
             this.loadingService.hide();
 
             const data = res.dataInstrument;
@@ -268,6 +282,12 @@ export class AdminManagmentInstrumentsComponent implements OnInit, OnDestroy {
 
                         const delSub = this.sourceService
                             .deleteInstrument(instrumentToDelete.id)
+                            .pipe(
+                                catchError((error) => {
+                                    this.userService.handle403Error(error);
+                                    return of(null);
+                                })
+                            )
                             .subscribe({
                                 next: (res) => {
                                     // Update user access if necessary
