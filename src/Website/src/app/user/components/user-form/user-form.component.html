@@ -1,7 +1,7 @@
 <form [formGroup]="userForm" class="">
-    <div class="flex flex-col gap-2 mt-6">
+    <div class="flex flex-col gap-4 mt-6">
         <div class="flex flex-row justify-between px-6 gap-6">
-            <div>
+            <div class="flex flex-col">
                 <label>Nome<span class="text-red-600">*</span>: </label>
                 <input type="text" formControlName="name" class="input-create" autocomplete="off">
                 <div class="text-red-600"
@@ -9,7 +9,7 @@
                     Campo obbligatorio
                 </div>
             </div>
-            <div>
+            <div class="flex flex-col">
                 <label>Cognome<span class="text-red-600">*</span>: </label>
                 <input type="text" formControlName="surname" class="input-create" autocomplete="off">
                 <div class="text-red-600"
@@ -19,7 +19,8 @@
             </div>
         </div>
         <div class="flex flex-row justify-between px-6 gap-6">
-            <div><label>Email: </label>
+            <div class="flex flex-col">
+                <label>Email: </label>
                 <input type="email" formControlName="email" class="input-create grow" autocomplete="off">
                 <div class="text-red-600"
                      *ngIf="userForm.get('email').invalid && userForm.get('email').touched">
@@ -29,23 +30,37 @@
             <div>
                 <div *ngIf="!userToEdit; else editingPassword">
                     <label>Password<span class="text-red-600">*</span>: </label>
-                    <input type="password" formControlName="password" class="input-create grow"
-                           autocomplete="new-password">
-                    <div class="text-red-600"
-                         *ngIf="userForm.get('password').invalid && userForm.get('password').touched">
-                        Campo obbligatorio
+                    <div class="relative w-full">
+                        <input [type]="hidePassword ? 'password' : 'text'" formControlName="password"
+                               class="input-create grow pr-10"
+                               autocomplete="new-password">
+                        <i (click)="hidePassword = !hidePassword"
+                           class="fa-solid absolute right-3 top-1/2 transform -translate-y-1/2 cursor-pointer"
+                           [ngClass]="hidePassword ? 'fa-eye-slash' : 'fa-eye'"></i>
+                        <div class="text-red-600"
+                             *ngIf="userForm.get('password').invalid && userForm.get('password').touched">
+                            Campo obbligatorio
+                        </div>
                     </div>
                 </div>
                 <ng-template #editingPassword>
                     <label>Modifica password: </label>
-                    <input type="password" formControlName="password" class="input-create grow"
-                           autocomplete="new-password">
-                    <div class="text-red-600"
-                         *ngIf="userForm.get('password').invalid && userForm.get('password').touched">
-                        La password deve essere lunga almento 8 caratteri
+                    <div class="relative w-full">
+                        <input [type]="hidePassword ? 'password' : 'text'"
+                               formControlName="password"
+                               class="input-create grow pr-10"
+                               autocomplete="new-password">
+                        <i (click)="hidePassword = !hidePassword"
+                           class="fa-solid absolute right-3 top-1/2 transform -translate-y-1/2 cursor-pointer"
+                           [ngClass]="hidePassword ? 'fa-eye-slash' : 'fa-eye'"></i>
+                        <div class="text-red-600"
+                             *ngIf="userForm.get('password').invalid && userForm.get('password').touched">
+                            La password deve essere lunga almento 8 caratteri
+                        </div>
                     </div>
                 </ng-template>
             </div>
+
         </div>
         <div class="flex flex-row px-6 gap-6">
             <!-- select to set user role if superuser or normal one -->

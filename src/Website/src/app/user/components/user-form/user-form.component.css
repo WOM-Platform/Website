@@ -1,3 +1,11 @@
+input {
+    @apply max-w-[250px]
+}
+
+label {
+    @apply text-slate-600
+}
+
 .input-create {
     @apply bg-[#e5e5e5] w-full h-[3rem] rounded-xl px-6
 }

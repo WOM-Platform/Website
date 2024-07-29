@@ -27,6 +27,8 @@ export class UserFormComponent implements OnInit {
     isLoading: boolean = false
     errorMessage: string = "";
 
+    hidePassword: boolean = true
+
     currentUser
 
     constructor(private cd: ChangeDetectorRef,
