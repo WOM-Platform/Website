@@ -3,11 +3,7 @@ import {APP_INITIALIZER, NgModule} from "@angular/core";
 
 import {AppComponent} from "./app.component";
 import {TranslateHttpLoader} from "@ngx-translate/http-loader";
-import {
-    HttpClientModule,
-    HTTP_INTERCEPTORS,
-    HttpClient,
-} from "@angular/common/http";
+import { HTTP_INTERCEPTORS, HttpClient, provideHttpClient, withInterceptorsFromDi } from "@angular/common/http";
 import {appRoutingModule} from "./app.routing";
 import {RouterModule} from "@angular/router";
 import {
@@ -114,8 +110,7 @@ export function translateFactory(translate: TranslateService): any {
 
 export const isMock = environment.mock;
 
-@NgModule({
-    declarations: [
+@NgModule({ declarations: [
         AboutComponent,
         AboutSectionComponent,
         AlbergatoriComponent,
@@ -173,11 +168,10 @@ export const isMock = environment.mock;
         VolontarxComponent,
     ],
     exports: [],
-    imports: [
-        appRoutingModule,
+    bootstrap: [AppComponent], imports: [appRoutingModule,
         AuthModule,
         RouterModule.forRoot([
-            {path: "", component: HomeComponent, pathMatch: "full"},
+            { path: "", component: HomeComponent, pathMatch: "full" },
         ]),
         TranslateModule.forRoot({
             defaultLanguage: "it",
@@ -194,7 +188,6 @@ export const isMock = environment.mock;
         CommonModule,
         FormsModule,
         GoogleMapsModule,
-        HttpClientModule,
         OverlayModule,
         ReactiveFormsModule,
         SharedModule,
@@ -202,9 +195,7 @@ export const isMock = environment.mock;
         TranslateModule,
         LayoutModule,
         NgChartsModule,
-        SearchSourceComponent,
-    ],
-    providers: [
+        SearchSourceComponent], providers: [
         {
             provide: APP_INITIALIZER,
             useFactory: translateFactory,
@@ -228,8 +219,7 @@ export const isMock = environment.mock;
                 },
                 CookieService,
             ],
-    ],
-    bootstrap: [AppComponent],
-})
+        provideHttpClient(withInterceptorsFromDi()),
+    ] })
 export class AppModule {
 }

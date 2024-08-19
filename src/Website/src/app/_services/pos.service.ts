@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpErrorResponse, HttpEvent, HttpEventType, HttpHeaders} from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpEvent, HttpEventType, HttpHeaders } from '@angular/common/http';
 import {forkJoin, Observable, of, throwError} from 'rxjs';
 import {Pos, PosRegistration} from '../_models';
 import {environment} from '../../environments/environment';

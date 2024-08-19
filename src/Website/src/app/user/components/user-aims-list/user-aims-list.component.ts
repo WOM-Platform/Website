@@ -4,7 +4,7 @@ import {Aim, AimEditing, AimWithChecked} from "src/app/_models";
 import {AimsService} from "src/app/_services";
 import {MatIcon, MatIconModule} from "@angular/material/icon";
 import {FormsModule} from "@angular/forms";
-import {HttpClientModule} from "@angular/common/http";
+import {} from "@angular/common/http";
 import {NgFor, NgIf} from "@angular/common";
 
 @Component({
@@ -12,7 +12,11 @@ import {NgFor, NgIf} from "@angular/common";
     templateUrl: "./user-aims-list.component.html",
     styleUrls: ["./user-aims-list.component.css"],
     standalone: true,
-    imports: [NgIf, NgFor, FormsModule, HttpClientModule, MatIconModule],
+    imports: [NgIf, NgFor, FormsModule, 
+// TODO: `HttpClientModule` should not be imported into a component directly.
+// Please refactor the code to add `provideHttpClient()` call to the provider list in the
+// application bootstrap logic and remove the `HttpClientModule` import from this component.
+HttpClientModule, MatIconModule],
     animations: [
         trigger("fadeInOut", [
             transition(":enter", [

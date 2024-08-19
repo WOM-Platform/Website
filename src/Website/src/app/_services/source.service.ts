@@ -1,7 +1,7 @@
 import {Injectable} from "@angular/core";
 import {environment} from "../../environments/environment";
 import {catchError, concatMap, delay, map, tap} from "rxjs/operators";
-import {HttpClient, HttpParams} from "@angular/common/http";
+import { HttpClient, HttpParams } from "@angular/common/http";
 import {from, Observable, of, throwError} from "rxjs";
 import {Aim, AimEditing} from "../_models";
 import {Instrument, InstrumentEditing, UIInstrument} from "../_models/instrument";

@@ -1,7 +1,7 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {PosService} from "../../_services";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
-import {HttpEvent, HttpEventType} from "@angular/common/http";
+import { HttpEvent, HttpEventType } from "@angular/common/http";
 import {NgIf} from "@angular/common";
 
 

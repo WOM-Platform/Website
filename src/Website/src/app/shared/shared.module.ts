@@ -33,7 +33,7 @@ import {MatSelectModule} from "@angular/material/select";
 import {MatSnackBarModule} from "@angular/material/snack-bar";
 import {GoogleMapsModule} from "@angular/google-maps";
 import {NgxChartsModule} from "@swimlane/ngx-charts";
-import {HttpClient} from "@angular/common/http";
+import { HttpClient } from "@angular/common/http";
 import {AnimatedNumberComponent} from "../components/animated-number/animated-number.component";
 import {AvatarComponent} from "../user/components/avatar/avatar.component";
 import {MatTableModule} from "@angular/material/table";
