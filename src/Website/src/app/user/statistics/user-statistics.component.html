@@ -1,4 +1,4 @@
-<div *ngIf="currentUser.role === 'Admin'; else userRole">
+<div *ngIf="currentUser && currentUser.role === 'Admin'; else userRole">
     <app-admin-role/>
 </div>
 <ng-template #userRole>

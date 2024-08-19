@@ -93,7 +93,6 @@ export class UserAccessListComponent implements OnDestroy {
             this.subscriptions = this.userService
                 .userSearch(userToSearch.name, userToSearch.email)
                 .subscribe((res) => {
-                    console.log("cerchi.. ", res)
                     this.listAccess = [];
                     if (res.data && res.data.length > 0) {
                         this.noResults = false;

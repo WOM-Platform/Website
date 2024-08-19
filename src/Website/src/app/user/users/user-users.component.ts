@@ -1,4 +1,4 @@
-import {ChangeDetectorRef, Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
+import {ChangeDetectorRef, Component, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {StorageService} from "../../_services/storage.service";
 import {UserService} from "../../_services";
 import {User} from "../../_models";
@@ -109,7 +109,6 @@ export class UserUsersComponent implements OnInit, OnChanges {
     }
 
     onEditUser(user: User) {
-        console.log("Utente dati ", user)
         const dialogRef = this.dialog.open(CreateEditUserDialogComponent, {
             data: user
         })

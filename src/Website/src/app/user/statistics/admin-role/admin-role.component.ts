@@ -8,6 +8,7 @@ import {AuthService, StatsService} from "../../../_services";
 import {MatDatepickerInputEvent} from "@angular/material/datepicker";
 import html2canvas from "html2canvas";
 import {jsPDF} from "jspdf";
+import {AmountMapComponent} from "../../components/amount-map/amount-map.component";
 
 interface PieChartData {
     name: string;
@@ -20,7 +21,8 @@ interface PieChartData {
     imports: [
         NgIf,
         PieChartModule,
-        SharedModule
+        SharedModule,
+        AmountMapComponent
     ],
     templateUrl: './admin-role.component.html',
     styleUrl: './admin-role.component.css'
@@ -34,6 +36,7 @@ export class AdminRoleComponent {
     totalCreatedAmountSub: Subscription;
     totalConsumedAmount: number = 0;
 
+    bboxArea
     chartCreatedAmountByAim: PieChartData[] = [];
 
     view: [number, number] = [700, 400];
@@ -56,7 +59,6 @@ export class AdminRoleComponent {
     loadData(): any {
         // total amount of created wom
         this.statsService.getAdminTotalAmountCreated().subscribe(data => {
-            console.log("Created ")
             this.totalCreatedAmount = data;
         })
 
@@ -71,14 +73,8 @@ export class AdminRoleComponent {
                 name: item.aimTextId,
                 value: item.amount
             }))
-            console.log("Total amount of wom")
-            console.log(data)
         });
 
-        // amount of wom created divided by position
-        this.statsService.getAdminCreatedAmountByPosition().subscribe(data => {
-            console.log(data)
-        })
         this.merchantSubscription = this.authService.merchants().subscribe({
                 next: (response) => {
                     this.merchantData = response;
@@ -104,6 +100,10 @@ export class AdminRoleComponent {
             pdf.addImage(contentDataURL, 'PNG', 0, 0, width, height)
             pdf.save('output.pdf'); // Generated PDF
         });
+    }
+
+    movedBboxArea(data) {
+        console.log("jiji ", data)
     }
 }
 

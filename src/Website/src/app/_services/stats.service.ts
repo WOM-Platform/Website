@@ -1,8 +1,8 @@
 import {environment} from '../../environments/environment';
 import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpParams} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {map, tap} from 'rxjs/operators';
+import {map} from 'rxjs/operators';
 import {Stats} from '../_models/stats';
 
 @Injectable({providedIn: 'root'})
@@ -27,8 +27,15 @@ export class StatsService {
         return this.http.get(this.localUrlV2 + 'AdminDashboard/' + 'created-by-aim')
     }
 
-    getAdminCreatedAmountByPosition(): Observable<any> {
-        return this.http.get(`${this.localUrlV2}AdminDashboard/created-by-position`)
+    getAdminCreatedAmountByPosition(north, south, east, west, zoomLevel): Observable<any> {
+        const params: HttpParams = new HttpParams()
+            .set("north", north.toString())
+            .set("south", south.toString())
+            .set("east", east.toString())
+            .set("west", west.toString())
+            .set("zoomLevel", zoomLevel.toString())
+
+        return this.http.get(`${this.localUrlV2}AdminDashboard/created-by-position`, {params})
     }
 
     getPosTotalAmount(id: string): Observable<any> {

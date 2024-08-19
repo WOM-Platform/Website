@@ -32,7 +32,6 @@ export class CreateEditUserDialogComponent implements OnInit {
     }
 
     onEditUser(user: Partial<User>) {
-        console.log("utente ", user)
         this.dialogRef.close(user)
     }
 }

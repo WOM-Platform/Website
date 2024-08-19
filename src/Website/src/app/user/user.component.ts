@@ -60,7 +60,7 @@ export class UserComponent implements OnInit, OnDestroy {
             path: "/user/statistics",
             text: "Statistics",
             icon: "fa-solid fa-chart-simple",
-            isActive: false,
+            isActive: true,
             adminOnly: false
         },
     ];

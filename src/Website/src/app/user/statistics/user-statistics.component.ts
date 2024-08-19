@@ -1,6 +1,6 @@
 import {Component, OnDestroy, OnInit} from "@angular/core";
 
-import {Subscription, interval} from "rxjs";
+import {Subscription} from "rxjs";
 import {MatDatepickerInputEvent} from "@angular/material/datepicker";
 
 import {jsPDF} from "jspdf";
@@ -42,12 +42,11 @@ export class UserStatisticsComponent implements OnInit, OnDestroy {
     ngOnInit(): any {
         // check user role
         this.currentUser = this.userService.currentUserValue
-        console.log("Utente ", this.currentUser)
-        this.loadData();
+        /*this.loadData();*/
     }
 
     ngOnDestroy(): any {
-        this.merchantSubscription.unsubscribe();
+        /*this.merchantSubscription.unsubscribe();*/
     }
 
     loadData(): any {
@@ -69,10 +68,6 @@ export class UserStatisticsComponent implements OnInit, OnDestroy {
             }))
         });
 
-        // amount of wom created divided by position
-        this.statsService.getAdminCreatedAmountByPosition().subscribe(data => {
-            console.log(data)
-        })
         this.merchantSubscription = this.authService.merchants().subscribe({
                 next: (response) => {
                     this.merchantData = response;
