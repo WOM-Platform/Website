@@ -1,6 +1,6 @@
 import {environment} from '../../environments/environment';
 import {Injectable} from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import {HttpClient, HttpParams} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {Stats} from '../_models/stats';
@@ -15,16 +15,28 @@ export class StatsService {
     constructor(private http: HttpClient) {
     }
 
-    getAdminTotalAmountCreated(): Observable<any> {
-        return this.http.get(this.localUrlV2 + 'AdminDashboard/' + 'total-created')
+    /*   getAdminTotalAmountCreated(): Observable<any> {
+           return this.http.get(this.localUrlV2 + 'AdminDashboard/' + 'total-created')
+       }*/
+
+    getAdminTotalAmountCreated(startDate: string = "", endDate: string = ""): Observable<any> {
+        const params: HttpParams = new HttpParams()
+            .set("startDate", startDate)
+            .set("endDate", endDate)
+
+        return this.http.get(`${this.localUrlV1}vouchers/total-generated`, {params})
     }
 
-    getAdminTotalAmountConsumed(): Observable<any> {
-        return this.http.get(this.localUrlV2 + 'AdminDashboard/' + 'total-consumed')
+    getAdminTotalAmountConsumed(startDate: string = "", endDate: string = ""): Observable<any> {
+        const params: HttpParams = new HttpParams()
+            .set("startDate", startDate)
+            .set("endDate", endDate)
+
+        return this.http.get(`${this.localUrlV1}vouchers/total-consumed`, {params})
     }
 
     getAdminCreatedAmountByAim(): Observable<any> {
-        return this.http.get(this.localUrlV2 + 'AdminDashboard/' + 'created-by-aim')
+        return this.http.get(this.localUrlV1 + 'vouchers/' + 'total-generated')
     }
 
     getAdminCreatedAmountByPosition(north, south, east, west, zoomLevel): Observable<any> {

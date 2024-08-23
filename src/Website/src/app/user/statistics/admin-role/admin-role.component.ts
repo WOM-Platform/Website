@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {NgIf} from "@angular/common";
 import {PieChartModule} from "@swimlane/ngx-charts";
 import {SharedModule} from "../../../shared/shared.module";
@@ -27,7 +27,7 @@ interface PieChartData {
     templateUrl: './admin-role.component.html',
     styleUrl: './admin-role.component.css'
 })
-export class AdminRoleComponent {
+export class AdminRoleComponent implements OnInit {
 
     merchantData: Merchants;
     merchantSubscription: Subscription;
@@ -57,14 +57,16 @@ export class AdminRoleComponent {
     }
 
     loadData(): any {
+        const startDate = '2023-01-01';
+        const endDate = '2023-12-31'
         // total amount of created wom
-        this.statsService.getAdminTotalAmountCreated().subscribe(data => {
-            this.totalCreatedAmount = data;
+        this.statsService.getAdminTotalAmountCreated(startDate, endDate).subscribe(data => {
+            this.totalCreatedAmount = data.totalAmountGenerated;
         })
 
         // total amount of consumed wom
-        this.statsService.getAdminTotalAmountConsumed().subscribe(data => {
-            this.totalConsumedAmount = data;
+        this.statsService.getAdminTotalAmountConsumed(startDate, endDate).subscribe(data => {
+            this.totalConsumedAmount = data.totalAmountConsumed;
         })
 
         // amount of wom created divided by aim
@@ -75,15 +77,17 @@ export class AdminRoleComponent {
             }))
         });
 
-        this.merchantSubscription = this.authService.merchants().subscribe({
-                next: (response) => {
-                    this.merchantData = response;
-                },
-                error: (error) => {
-                    console.log('Errore durante il download dei dati del merchant:', error);
-                }
-            }
-        );
+        /*
+                       this.merchantSubscription = this.authService.merchants().subscribe({
+                                next: (response) => {
+                                    this.merchantData = response;
+                                },
+                                error: (error) => {
+                                    console.log('Errore durante il download dei dati del merchant:', error);
+                                }
+                            }
+                        );
+                    */
     }
 
     addEvent(type: string, event: MatDatepickerInputEvent<Date>) {

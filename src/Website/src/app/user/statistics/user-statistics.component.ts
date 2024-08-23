@@ -50,33 +50,33 @@ export class UserStatisticsComponent implements OnInit, OnDestroy {
     }
 
     loadData(): any {
-        // total amount of created wom
-        this.statsService.getAdminTotalAmountCreated().subscribe(data => {
-            this.totalCreatedAmount = data;
-        })
+        /*  // total amount of created wom
+          this.statsService.getAdminTotalAmountCreated().subscribe(data => {
+              this.totalCreatedAmount = data;
+          })
 
-        // total amount of consumed wom
-        this.statsService.getAdminTotalAmountConsumed().subscribe(data => {
-            this.totalConsumedAmount = data;
-        })
+          // total amount of consumed wom
+          this.statsService.getAdminTotalAmountConsumed().subscribe(data => {
+              this.totalConsumedAmount = data;
+          })
 
-        // amount of wom created divided by aim
-        this.statsService.getAdminCreatedAmountByAim().subscribe(data => {
-            this.chartCreatedAmountByAim = data.map(item => ({
-                name: item.aimTextId,
-                value: item.amount
-            }))
-        });
+          // amount of wom created divided by aim
+          this.statsService.getAdminCreatedAmountByAim().subscribe(data => {
+              this.chartCreatedAmountByAim = data.map(item => ({
+                  name: item.aimTextId,
+                  value: item.amount
+              }))
+          });
 
-        this.merchantSubscription = this.authService.merchants().subscribe({
-                next: (response) => {
-                    this.merchantData = response;
-                },
-                error: (error) => {
-                    console.log('Errore durante il download dei dati del merchant:', error);
-                }
-            }
-        );
+          this.merchantSubscription = this.authService.merchants().subscribe({
+                  next: (response) => {
+                      this.merchantData = response;
+                  },
+                  error: (error) => {
+                      console.log('Errore durante il download dei dati del merchant:', error);
+                  }
+              }
+          );*/
     }
 
     addEvent(type: string, event: MatDatepickerInputEvent<Date>) {
