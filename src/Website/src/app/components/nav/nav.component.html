@@ -35,6 +35,15 @@
                         </a>
                         <a
                                 mat-list-item
+                                routerLink="pesaro2024"
+                                (click)="drawer.toggle()"
+                                [routerLinkActive]="['active']"
+                        >
+                            <!-- <mat-icon></mat-icon> -->
+                            <span>{{ "NAV.ABOUT.PESARO2024" | translate }}</span>
+                        </a>
+                        <a
+                                mat-list-item
                                 routerLink="about-section/urbino"
                                 (click)="drawer.toggle()"
                                 [routerLinkActive]="['active']"
@@ -138,6 +147,9 @@
                     <mat-menu #menuAbout="matMenu">
                         <button mat-menu-item (click)="navigate('about-section/about')">
                             <span>{{ "NAV.ABOUT.ABOUT" | translate }}</span>
+                        </button>
+                        <button mat-menu-item (click)="navigate('pesaro2024')">
+                            <span>{{ "NAV.ABOUT.PESARO2024" | translate }}</span>
                         </button>
                         <button mat-menu-item (click)="navigate('about-section/urbino')">
                             <span>{{ "NAV.ABOUT.URBINO" | translate }}</span>
