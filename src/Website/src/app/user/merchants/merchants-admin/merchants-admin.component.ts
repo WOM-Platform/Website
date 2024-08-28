@@ -230,17 +230,20 @@ export class MerchantsAdminComponent implements OnInit {
     }
 
     filterUpdate(filter) {
-        this.storageService.clearCache("merchantsList");
-        this.itemsPerPage = filter.get("itemsPerPage").value;
+        if (filter) {
+            this.storageService.clearCache("merchantsList");
+            this.itemsPerPage = filter.itemsPerPage;
 
-        if (this.currentPage != 1) this.currentPage = 1;
-        this.itemsPerPage = filter.get("itemsPerPage").value;
-        if (
-            filter.get("search").value.length >= 3 ||
-            filter.get("search").value.length === 0
-        ) {
-            this.searchParameters = filter.get("search").value;
+            if (this.currentPage != 1) this.currentPage = 1;
+            this.itemsPerPage = filter.itemsPerPage;
+            if (
+                filter.search.length >= 3 ||
+                filter.search.length === 0
+            ) {
+                this.searchParameters = filter.search;
+            }
+            this.getMerchantsList();
         }
-        this.getMerchantsList();
+
     }
 }
