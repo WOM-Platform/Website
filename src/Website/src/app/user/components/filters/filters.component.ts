@@ -38,7 +38,7 @@ export class FiltersComponent implements OnInit, OnDestroy {
 
     onSearch(value: string) {
         this.searchValue = value
-        console.log(this.filterForm.get('itemsPerPage').value)
+        
         if (this.searchValue.length >= 3 || this.searchValue.length === 0) {
             this.filterEmit.emit({search: this.searchValue, itemsPerPage: this.filterForm.get('itemsPerPage').value});
         }
