@@ -15,28 +15,40 @@ export class StatsService {
     constructor(private http: HttpClient) {
     }
 
-    /*   getAdminTotalAmountCreated(): Observable<any> {
-           return this.http.get(this.localUrlV2 + 'AdminDashboard/' + 'total-created')
-       }*/
-
-    getAdminTotalAmountCreated(startDate: string = "", endDate: string = ""): Observable<any> {
+    getAdminTotalAmountGeneratedAndRedeemed(startDate: string = "", endDate: string = "", instrumentName: string = ""): Observable<any> {
         const params: HttpParams = new HttpParams()
             .set("startDate", startDate)
             .set("endDate", endDate)
+            .set("instrumentName", instrumentName)
 
-        return this.http.get(`${this.localUrlV1}vouchers/total-generated`, {params})
+        return this.http.get(`${this.localUrlV1}vouchers/total-generated-redeemed`, {params})
     }
 
-    getAdminTotalAmountConsumed(startDate: string = "", endDate: string = ""): Observable<any> {
+    getAdminTotalAmountConsumed(startDate: string = "", endDate: string = "", merchantName = ""): Observable<any> {
         const params: HttpParams = new HttpParams()
             .set("startDate", startDate)
             .set("endDate", endDate)
+            .set("merchantName", merchantName)
 
         return this.http.get(`${this.localUrlV1}vouchers/total-consumed`, {params})
     }
 
-    getAdminCreatedAmountByAim(): Observable<any> {
-        return this.http.get(this.localUrlV1 + 'vouchers/' + 'total-generated')
+    getAdminCreatedAmountByAim(startDate: string = "", endDate: string = "", instrumentName: string = ""): Observable<any> {
+        const params: HttpParams = new HttpParams()
+            .set("startDate", startDate)
+            .set("endDate", endDate)
+            .set("instrumentName", instrumentName)
+
+        return this.http.get(`${this.localUrlV1}vouchers/total-generated-by-aim`, {params}).pipe()
+    }
+
+    getAdminTotalConsumedByAim(startDate: string = "", endDate: string = "", merchantName = ""): Observable<any> {
+        const params: HttpParams = new HttpParams()
+            .set("startDate", startDate)
+            .set("endDate", endDate)
+            .set("merchantName", merchantName)
+
+        return this.http.get(`${this.localUrlV1}vouchers/total-consumed-by-aims`, {params});
     }
 
     getAdminCreatedAmountByPosition(north, south, east, west, zoomLevel): Observable<any> {

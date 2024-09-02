@@ -24,7 +24,6 @@ export class SearchComponent implements OnInit, OnDestroy {
             )
             .subscribe((searchValue) => {
                 if (searchValue.length >= 3 || searchValue.length === 0) {
-                    console.log("seraddd ")
                     this.searchEmit.emit(searchValue);
                 }
             });

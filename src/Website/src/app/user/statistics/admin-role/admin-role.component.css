@@ -1,0 +1,7 @@
+h3 {
+    @apply text-lg
+}
+
+.statistic-title {
+    @apply font-semibold underline
+}

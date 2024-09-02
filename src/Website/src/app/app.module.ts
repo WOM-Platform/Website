@@ -1,9 +1,9 @@
 import {BrowserModule} from "@angular/platform-browser";
-import {APP_INITIALIZER, NgModule} from "@angular/core";
+import {APP_INITIALIZER, LOCALE_ID, NgModule} from "@angular/core";
 
 import {AppComponent} from "./app.component";
 import {TranslateHttpLoader} from "@ngx-translate/http-loader";
-import { HTTP_INTERCEPTORS, HttpClient, provideHttpClient, withInterceptorsFromDi } from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClient, provideHttpClient, withInterceptorsFromDi} from "@angular/common/http";
 import {appRoutingModule} from "./app.routing";
 import {RouterModule} from "@angular/router";
 import {
@@ -52,7 +52,7 @@ import {BillingSuccessComponent} from "./billing/success/success.component";
 import {BreadcrumbModule} from "primeng/breadcrumb";
 import {BreadcrumbsComponent} from "./components/breadcrumbs/breadcrumbs.component";
 import {CarouselModule} from "primeng/carousel";
-import {CommonModule} from "@angular/common";
+import {CommonModule, registerLocaleData} from "@angular/common";
 import {ContactFormComponent} from "./_forms/contact/forms-contact.directive";
 import {ContactsComponent} from "./pages/contacts/contacts.component";
 import {CookieService} from "ngx-cookie-service";
@@ -86,7 +86,7 @@ import {NgChartsModule} from "ng2-charts";
 import {VolontarxComponent} from "./pages/pesaro2024-section/volontarx/volontarx.component";
 import {SearchSourceComponent} from "./user/components/user-access-list/search-source/search-source.component";
 import {AlbergatoriComponent} from "./pages/pesaro2024-section/albergatori/albergatori.component";
-import {NgxFileDropModule} from "ngx-file-drop";
+import localeIt from '@angular/common/locales/it';
 
 // AoT requires an exported function for factories
 export const createTranslateLoader = (http: HttpClient) =>
@@ -110,7 +110,8 @@ export function translateFactory(translate: TranslateService): any {
 
 export const isMock = environment.mock;
 
-@NgModule({ declarations: [
+@NgModule({
+    declarations: [
         AboutComponent,
         AboutSectionComponent,
         AlbergatoriComponent,
@@ -171,7 +172,7 @@ export const isMock = environment.mock;
     bootstrap: [AppComponent], imports: [appRoutingModule,
         AuthModule,
         RouterModule.forRoot([
-            { path: "", component: HomeComponent, pathMatch: "full" },
+            {path: "", component: HomeComponent, pathMatch: "full"},
         ]),
         TranslateModule.forRoot({
             defaultLanguage: "it",
@@ -220,6 +221,11 @@ export const isMock = environment.mock;
                 CookieService,
             ],
         provideHttpClient(withInterceptorsFromDi()),
-    ] })
+        {provide: LOCALE_ID, useValue: 'it-IT'}
+    ]
+})
 export class AppModule {
+    constructor() {
+        registerLocaleData(localeIt);
+    }
 }
