@@ -87,7 +87,6 @@ export class MyInstrumentsCollectionComponent implements OnInit, OnDestroy {
 
         this.userService.userOwnershipStatus.subscribe({
             next: (res) => {
-                console.log("Editing  nextv ", res)
                 if (res && res.sources) {
                     this.editingInstruments = res.sources;
                     this.uiInstruments = res.sources.map((instrument: InstrumentEditing, index: number) => {

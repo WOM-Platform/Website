@@ -1,5 +1,5 @@
 import {Injectable} from "@angular/core";
-import { HttpClient, HttpParams } from "@angular/common/http";
+import {HttpClient, HttpParams} from "@angular/common/http";
 import {Observable, of, throwError} from "rxjs";
 import {Merchant} from "../_models";
 import {environment} from "../../environments/environment";
@@ -28,35 +28,57 @@ export class MerchantService {
     }
 
     /**
-     * Get merchant list
+     * Fetches the list of merchants with optional search and pagination.
+     *
+     * @param {Object} options - The options for fetching instruments.
+     * @param {string} [options.search] - The search term to filter merchants by name (optional).
+     * @param {number} [options.page=1] - The current page of the pagination (optional, default is 1).
+     * @param {string} [options.itemsPerPage="10"] - The number of items per page (optional, default is "10").
+     *
+     * @returns {Observable<any>} An observable of the merchant list, optionally paginated and filtered by search term.
      */
     getAllMerchants(
-        search: string = "",
-        page: number = 1,
-        itemsPerPage: string = "10"
+        options: {
+            search?: string,
+            page?: number,
+            itemsPerPage?: string
+        } = {}
     ): Observable<any> {
-        const cachedMerchants = this.storageService.get("merchantsList");
-        if (cachedMerchants) {
-            return of(cachedMerchants);
-        } else {
-            const params = new HttpParams()
-                .set("search", search)
-                .set("page", page.toString())
-                .set("pageSize", itemsPerPage);
+        const {search = '', page = 1, itemsPerPage = "10"} = options;
+
+        const params = new HttpParams()
+            .set("search", search)
+            .set("page", page.toString())
+            .set("pageSize", itemsPerPage);
+
+        if (search) {
             return this.http.get(`${this.localUrlV1}`, {params}).pipe(
-                tap({
-                    next: (data) => this.storageService.set("merchantsList", data),
-                    error: (err) => console.error("err ", err),
-                }),
-                map((res) => {
-                    return res;
-                }),
+                map((res) => res),
                 catchError((err) => {
-                    console.error("Error fetching instruments", err);
-                    return throwError(() => new Error("Failed to fetch instruments"));
+                    console.error("Error fetching search results", err);
+                    return throwError(() => new Error("Failed to fetch search results"));
                 })
             );
         }
+
+        const cachedMerchants = this.storageService.get("merchantsList");
+        if (cachedMerchants) {
+            return of(cachedMerchants);
+        }
+        return this.http.get(`${this.localUrlV1}`, {params}).pipe(
+            tap({
+                next: (data) => this.storageService.set("merchantsList", data),
+                error: (err) => console.error("err ", err),
+            }),
+            map((res) => {
+                return res;
+            }),
+            catchError((err) => {
+                console.error("Error fetching instruments", err);
+                return throwError(() => new Error("Failed to fetch instruments"));
+            })
+        );
+
     }
 
     /**

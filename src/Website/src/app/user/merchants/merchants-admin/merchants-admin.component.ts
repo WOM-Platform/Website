@@ -1,9 +1,7 @@
 import {
     ChangeDetectorRef,
     Component,
-    EventEmitter,
     OnInit,
-    Output,
 } from "@angular/core";
 import {MatIcon} from "@angular/material/icon";
 import {
@@ -77,10 +75,11 @@ export class MerchantsAdminComponent implements OnInit {
         this.loadingService.show();
 
         this.merchantService
-            .getAllMerchants(
-                this.searchParameters,
-                this.currentPage,
-                this.itemsPerPage
+            .getAllMerchants({
+                    search: this.searchParameters,
+                    page: this.currentPage,
+                    itemsPerPage: this.itemsPerPage
+                }
             )
             .pipe(
                 finalize(() => {

@@ -1,16 +1,19 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {DatePipe, NgIf} from "@angular/common";
+import {CommonModule, DatePipe} from "@angular/common";
 import {PieChartModule} from "@swimlane/ngx-charts";
 import {SharedModule} from "../../../shared/shared.module";
 import {Merchants} from "../../../_models";
 import {Subscription} from "rxjs";
-import {AuthService, StatsService} from "../../../_services";
+import {AuthService, MerchantService, StatsService} from "../../../_services";
 import {MatDatepickerInputEvent} from "@angular/material/datepicker";
 import html2canvas from "html2canvas";
 import {jsPDF} from "jspdf";
 import {AmountMapComponent} from "../../components/amount-map/amount-map.component";
 import {DatepickerComponent} from "../../../components/datepicker/datepicker.component";
 import {SearchComponent} from "../../components/search/search.component";
+import {DashboardAdminFilter} from "../../../_models/filter";
+import {SourceService} from "../../../_services/source.service";
+import {LazySearchComponent} from "../../components/lazy-search/lazy-search.component";
 
 interface PieChartData {
     name: string;
@@ -21,13 +24,14 @@ interface PieChartData {
     selector: 'app-admin-role',
     standalone: true,
     imports: [
-        NgIf,
         PieChartModule,
         SharedModule,
         AmountMapComponent,
         DatepickerComponent,
         DatePipe,
-        SearchComponent
+        SearchComponent,
+        CommonModule,
+        LazySearchComponent
     ],
     templateUrl: './admin-role.component.html',
     styleUrl: './admin-role.component.css'
@@ -39,8 +43,15 @@ export class AdminRoleComponent implements OnInit, OnDestroy {
 
     isDateFiltering: boolean = false;
 
-    startDate
-    endDate
+    filters: DashboardAdminFilter = {
+        startDate: "",
+        endDate: "",
+        merchantName: "",
+        sourceName: ""
+    }
+
+    generatedDataFetched = []
+    consumedDataFetched = []
 
     totalCreatedAmount: number;
     totalRedeemedAmount: number;
@@ -61,7 +72,7 @@ export class AdminRoleComponent implements OnInit, OnDestroy {
             '#9933FF', '#FF3380', '#80FF33', '#3380FF', '#FF5733',]
     };
 
-    constructor(private authService: AuthService, private statsService: StatsService) {
+    constructor(private authService: AuthService, private merchantService: MerchantService, private sourceService: SourceService, private statsService: StatsService) {
     }
 
     ngOnInit(): any {
@@ -90,16 +101,37 @@ export class AdminRoleComponent implements OnInit, OnDestroy {
                    */
     }
 
-    generationVoucherData(instrumentName = "") {
+    // search for source user
+    searchSource(sourceName: string) {
+        this.sourceService.getAllInstruments({search: sourceName}).subscribe(data => {
+            this.generatedDataFetched = data.data
+
+        })
+    }
+
+    // search for merchant user
+    searchMerchant(merchantName: string) {
+        this.merchantService.getAllMerchants({search: merchantName}).subscribe(data => {
+            this.consumedDataFetched = data.data
+            console.log("I dati consumati ", this.consumedDataFetched)
+
+        })
+    }
+
+    generationVoucherData(sourceName?) {
+        if (sourceName) {
+            this.filters.sourceName = sourceName.name;
+        }
+
         // Created total amount of wom
-        this.statsService.getAdminTotalAmountGeneratedAndRedeemed(this.startDate, this.endDate, instrumentName).subscribe(data => {
+        this.statsService.getAdminTotalAmountGeneratedAndRedeemed(this.filters).subscribe(data => {
             this.totalCreatedAmount = data.totalCount;
             this.totalRedeemedAmount = data.redeemedCount;
         })
 
 
         // Created amount of wom divided by aim
-        this.statsService.getAdminCreatedAmountByAim(this.startDate, this.endDate, instrumentName).subscribe(data => {
+        this.statsService.getAdminCreatedAmountByAim(this.filters).subscribe(data => {
             this.totalCreatedAmountByAim = data;
 
             this.chartCreatedAmountByAim = data.map(item => ({
@@ -109,14 +141,16 @@ export class AdminRoleComponent implements OnInit, OnDestroy {
         });
     }
 
-    consumptionVoucherData(merchantName = "") {
+    consumptionVoucherData(merchantName?) {
+        if (merchantName)
+            this.filters.merchantName = merchantName.name;
+
         // Consumed total amount of wom
-        this.statsService.getAdminTotalAmountConsumed(this.startDate, this.endDate, merchantName).subscribe(data => {
+        this.statsService.getAdminTotalAmountConsumed(this.filters).subscribe(data => {
             this.totalConsumedAmount = data.totalAmountConsumed;
         })
         // get total consumed by aims
-        this.statsService.getAdminTotalConsumedByAim(this.startDate, this.endDate, merchantName).subscribe(data => {
-            console.log("data ", data)
+        this.statsService.getAdminTotalConsumedByAim(this.filters).subscribe(data => {
             this.chartConsumedAmountByAim = data.map(item => ({
                 name: item.aimCode,
                 value: item.amount
@@ -141,8 +175,12 @@ export class AdminRoleComponent implements OnInit, OnDestroy {
     }
 
     onDatesSelected(dates: { startDate: Date | null, endDate: Date | null }) {
-        this.startDate = new DatePipe("it-IT").transform(dates.startDate, 'yyyy-MM-dd').toLocaleString()
-        this.endDate = new DatePipe("it-IT").transform(dates.endDate, 'yyyy-MM-dd').toLocaleString()
+        if (dates.startDate) {
+            this.filters.startDate = new DatePipe("it-IT").transform(dates.startDate, 'yyyy-MM-dd').toLocaleString();
+        }
+        if (dates.endDate) {
+            this.filters.endDate = new DatePipe("it-IT").transform(dates.endDate, 'yyyy-MM-dd').toLocaleString();
+        }
 
         // call api to update statistics
         this.loadData()
@@ -150,10 +188,61 @@ export class AdminRoleComponent implements OnInit, OnDestroy {
     }
 
     cancelDataFilter() {
-        this.startDate = ""
-        this.endDate = ""
+        this.filters.startDate = ""
+        this.filters.endDate = ""
         this.isDateFiltering = !this.isDateFiltering
         this.loadData()
+    }
+
+    convertToCSV(): string {
+        let csvRows = [];
+
+
+        csvRows.push('Total Created Amount,' + this.totalCreatedAmount);
+        csvRows.push('Total Redeemed Amount,' + this.totalRedeemedAmount);
+        csvRows.push('Total Consumed Amount,' + this.totalConsumedAmount);
+        csvRows.push('');  // Blank line for separation
+
+        // totalCreatedAmountByAim
+        csvRows.push('Aim Code,Created Amount');
+        this.totalCreatedAmountByAim.forEach(item => {
+            csvRows.push(`${item.aimCode},${item.amount}`);
+        });
+        csvRows.push('');  // Blank line for separation
+
+        // chartCreatedAmountByAim
+        csvRows.push('Chart Created Amount By Aim');
+        csvRows.push('Label,Value');
+        this.chartCreatedAmountByAim.forEach(item => {
+            csvRows.push(`${item.value},${item.value}`);
+        });
+        csvRows.push('');  // Blank line for separation
+
+        // chartConsumedAmountByAim
+        csvRows.push('Chart Consumed Amount By Aim');
+        csvRows.push('Label,Value');
+        this.chartConsumedAmountByAim.forEach(item => {
+            csvRows.push(`${item.value},${item.value}`);
+        });
+
+        // Join all rows with a newline
+        return csvRows.join('\n');
+    }
+
+    // Method to download the CSV
+    downloadCSV() {
+        const csvData = this.convertToCSV();
+        const blob = new Blob([csvData], {type: 'text/csv'});
+        const url = URL.createObjectURL(blob);
+
+        const a = document.createElement('a');
+        a.setAttribute('style', 'display:none;');
+        a.href = url;
+        a.download = 'data.csv';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
     }
 }
 

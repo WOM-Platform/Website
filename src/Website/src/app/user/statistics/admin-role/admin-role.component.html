@@ -1,5 +1,5 @@
-<div class="mx-11 my-6">
-    <div class="flex justify-between">
+<div class="mx-11 my-6 flex flex-col justify-center items-center">
+    <div class="flex flex-row justify-between">
         <div>
             <ng-container *ngIf="!isDateFiltering; else filteringForDate">
                 <button
@@ -19,7 +19,8 @@
             </ng-template>
         </div>
         <div>
-            <button class="hover:underline">Scarica dati <i class="fa-regular fa-circle-down"></i></button>
+            <button class="hover:underline" (click)="downloadCSV()">Scarica dati <i
+                    class="fa-regular fa-circle-down"></i></button>
         </div>
     </div>
 
@@ -30,14 +31,25 @@
     <div class="mt-11">
         <div class="flex justify-between mb-4">
             <h2>WOM Generati</h2>
+
             <div class="flex items-center gap-2">
                 <p class="mb-0">
                     Filtra per Instrument:
                 </p>
-                <app-search (searchEmit)="generationVoucherData($event)"/>
+                <div class="flex flex-col relative">
+                    <app-search (searchEmit)="searchSource($event)"/>
+                    <ng-container *ngIf="generatedDataFetched && generatedDataFetched.length > 0">
+                        <app-lazy-search [fetchData]="generatedDataFetched"
+                                         (selectEmit)="generationVoucherData($event)"
+                                         class="absolute top-[40px]"
+                        />
+                    </ng-container>
+                </div>
             </div>
+
+
         </div>
-        <div class="p-6 rounded-lg border-black border-2 border-dashed">
+        <div class="p-6 rounded-lg border-black border-2 border-dashed bg-white">
             <div class="flex gap-4">
                 <div class="flex items-center gap-2">
                     <p class="statistic-title">Totali: </p>
@@ -78,10 +90,19 @@
                 <p class="mb-0">
                     Filtra per Merchant:
                 </p>
-                <app-search (searchEmit)="consumptionVoucherData($event)"/>
+                <div class="flex flex-col relative">
+                    <app-search (searchEmit)="searchMerchant($event)"/>
+                    <ng-container *ngIf="consumedDataFetched && consumedDataFetched.length > 0">
+                        <app-lazy-search [fetchData]="consumedDataFetched"
+                                         (selectEmit)="consumptionVoucherData($event)"
+                                         class="absolute top-[40px]"
+                        />
+                    </ng-container>
+                </div>
+
             </div>
         </div>
-        <div class="p-6 rounded-lg border-black border-2 border-dashed">
+        <div class="p-6 rounded-lg border-black border-2 border-dashed bg-white">
             <div class="flex gap-4">
                 <div class="flex items-center gap-2">
                     <p class="statistic-title">Totali: </p>

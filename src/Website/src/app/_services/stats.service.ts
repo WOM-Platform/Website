@@ -4,6 +4,7 @@ import {HttpClient, HttpParams} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {Stats} from '../_models/stats';
+import {DashboardAdminFilter} from "../_models/filter";
 
 @Injectable({providedIn: 'root'})
 export class StatsService {
@@ -15,38 +16,38 @@ export class StatsService {
     constructor(private http: HttpClient) {
     }
 
-    getAdminTotalAmountGeneratedAndRedeemed(startDate: string = "", endDate: string = "", instrumentName: string = ""): Observable<any> {
+    getAdminTotalAmountGeneratedAndRedeemed(filters: DashboardAdminFilter): Observable<any> {
         const params: HttpParams = new HttpParams()
-            .set("startDate", startDate)
-            .set("endDate", endDate)
-            .set("instrumentName", instrumentName)
+            .set("startDate", filters.startDate)
+            .set("endDate", filters.endDate)
+            .set("sourceName", filters.sourceName)
 
         return this.http.get(`${this.localUrlV1}vouchers/total-generated-redeemed`, {params})
     }
 
-    getAdminTotalAmountConsumed(startDate: string = "", endDate: string = "", merchantName = ""): Observable<any> {
+    getAdminTotalAmountConsumed(filters: DashboardAdminFilter): Observable<any> {
         const params: HttpParams = new HttpParams()
-            .set("startDate", startDate)
-            .set("endDate", endDate)
-            .set("merchantName", merchantName)
+            .set("startDate", filters.startDate)
+            .set("endDate", filters.endDate)
+            .set("merchantName", filters.merchantName)
 
         return this.http.get(`${this.localUrlV1}vouchers/total-consumed`, {params})
     }
 
-    getAdminCreatedAmountByAim(startDate: string = "", endDate: string = "", instrumentName: string = ""): Observable<any> {
+    getAdminCreatedAmountByAim(filters: DashboardAdminFilter): Observable<any> {
         const params: HttpParams = new HttpParams()
-            .set("startDate", startDate)
-            .set("endDate", endDate)
-            .set("instrumentName", instrumentName)
+            .set("startDate", filters.startDate)
+            .set("endDate", filters.endDate)
+            .set("sourceName", filters.sourceName)
 
         return this.http.get(`${this.localUrlV1}vouchers/total-generated-by-aim`, {params}).pipe()
     }
 
-    getAdminTotalConsumedByAim(startDate: string = "", endDate: string = "", merchantName = ""): Observable<any> {
+    getAdminTotalConsumedByAim(filters: DashboardAdminFilter): Observable<any> {
         const params: HttpParams = new HttpParams()
-            .set("startDate", startDate)
-            .set("endDate", endDate)
-            .set("merchantName", merchantName)
+            .set("startDate", filters.startDate)
+            .set("endDate", filters.endDate)
+            .set("merchantName", filters.merchantName)
 
         return this.http.get(`${this.localUrlV1}vouchers/total-consumed-by-aims`, {params});
     }
