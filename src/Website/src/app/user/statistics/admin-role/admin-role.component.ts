@@ -2,7 +2,7 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {CommonModule, DatePipe} from "@angular/common";
 import {PieChartModule} from "@swimlane/ngx-charts";
 import {SharedModule} from "../../../shared/shared.module";
-import {Merchants} from "../../../_models";
+import {Merchant, Merchants} from "../../../_models";
 import {Subscription} from "rxjs";
 import {AuthService, MerchantService, StatsService} from "../../../_services";
 import {MatDatepickerInputEvent} from "@angular/material/datepicker";
@@ -14,6 +14,8 @@ import {SearchComponent} from "../../components/search/search.component";
 import {DashboardAdminFilter} from "../../../_models/filter";
 import {SourceService} from "../../../_services/source.service";
 import {LazySearchComponent} from "../../components/lazy-search/lazy-search.component";
+import {Instrument} from "../../../_models/instrument";
+import {LocationParams} from "../../../_models/LocationParams";
 
 interface PieChartData {
     name: string;
@@ -46,9 +48,11 @@ export class AdminRoleComponent implements OnInit, OnDestroy {
     filters: DashboardAdminFilter = {
         startDate: "",
         endDate: "",
-        merchantName: "",
-        sourceName: ""
+        merchantId: "",
+        sourceId: ""
     }
+
+    locationParameters: LocationParams = {}
 
     generatedDataFetched = []
     consumedDataFetched = []
@@ -58,6 +62,8 @@ export class AdminRoleComponent implements OnInit, OnDestroy {
     totalCreatedAmountSub: Subscription;
     totalConsumedAmount: number = 0;
     totalCreatedAmountByAim: { aimCode: string, amount: number }[];
+    rankMerchants: { id: string, name: string, amount: number, rank: number }[] = []
+    offerConsumedVouchers: any;
 
     isShowedGenerationFilter: boolean = false
     bboxArea
@@ -87,6 +93,8 @@ export class AdminRoleComponent implements OnInit, OnDestroy {
     loadData(): any {
         this.generationVoucherData()
         this.consumptionVoucherData()
+        this.generalData()
+
         /*
                        this.merchantSubscription = this.authService.merchants().subscribe({
                                 next: (response) => {
@@ -113,14 +121,19 @@ export class AdminRoleComponent implements OnInit, OnDestroy {
     searchMerchant(merchantName: string) {
         this.merchantService.getAllMerchants({search: merchantName}).subscribe(data => {
             this.consumedDataFetched = data.data
-            console.log("I dati consumati ", this.consumedDataFetched)
-
         })
     }
 
-    generationVoucherData(sourceName?) {
-        if (sourceName) {
-            this.filters.sourceName = sourceName.name;
+    generalData() {
+        // ask for the amount of available vouchers
+        this.statsService.getAmountOfAvailableVouchers(this.locationParameters).subscribe(data => {
+            console.log("data ", data)
+        })
+    }
+
+    generationVoucherData(source?: Instrument) {
+        if (source) {
+            this.filters.sourceId = source.id;
         }
 
         // Created total amount of wom
@@ -141,9 +154,9 @@ export class AdminRoleComponent implements OnInit, OnDestroy {
         });
     }
 
-    consumptionVoucherData(merchantName?) {
+    consumptionVoucherData(merchantName?: Merchant) {
         if (merchantName)
-            this.filters.merchantName = merchantName.name;
+            this.filters.merchantId = merchantName.id;
 
         // Consumed total amount of wom
         this.statsService.getAdminTotalAmountConsumed(this.filters).subscribe(data => {
@@ -156,6 +169,18 @@ export class AdminRoleComponent implements OnInit, OnDestroy {
                 value: item.amount
             }))
         })
+
+        this.statsService.getRankMerchants(this.filters).subscribe(data => {
+            this.rankMerchants = data
+        })
+
+        // Only for a specific merchant
+        if (this.filters.merchantId) {
+            this.statsService.getVouchersConsumedByOffer(this.filters).subscribe(data => {
+                this.offerConsumedVouchers = data
+                console.log("jojdsf ", data)
+            })
+        }
     }
 
     addEvent(type: string, event: MatDatepickerInputEvent<Date>) {

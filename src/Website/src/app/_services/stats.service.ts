@@ -5,6 +5,7 @@ import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {Stats} from '../_models/stats';
 import {DashboardAdminFilter} from "../_models/filter";
+import {LocationParams} from "../_models/LocationParams";
 
 @Injectable({providedIn: 'root'})
 export class StatsService {
@@ -16,11 +17,12 @@ export class StatsService {
     constructor(private http: HttpClient) {
     }
 
+    // BEGIN REGISTRY API
     getAdminTotalAmountGeneratedAndRedeemed(filters: DashboardAdminFilter): Observable<any> {
         const params: HttpParams = new HttpParams()
             .set("startDate", filters.startDate)
             .set("endDate", filters.endDate)
-            .set("sourceName", filters.sourceName)
+            .set("sourceId", filters.sourceId)
 
         return this.http.get(`${this.localUrlV1}vouchers/total-generated-redeemed`, {params})
     }
@@ -29,7 +31,7 @@ export class StatsService {
         const params: HttpParams = new HttpParams()
             .set("startDate", filters.startDate)
             .set("endDate", filters.endDate)
-            .set("merchantName", filters.merchantName)
+            .set("merchantId", filters.merchantId)
 
         return this.http.get(`${this.localUrlV1}vouchers/total-consumed`, {params})
     }
@@ -38,7 +40,7 @@ export class StatsService {
         const params: HttpParams = new HttpParams()
             .set("startDate", filters.startDate)
             .set("endDate", filters.endDate)
-            .set("sourceName", filters.sourceName)
+            .set("sourceId", filters.sourceId)
 
         return this.http.get(`${this.localUrlV1}vouchers/total-generated-by-aim`, {params}).pipe()
     }
@@ -47,11 +49,50 @@ export class StatsService {
         const params: HttpParams = new HttpParams()
             .set("startDate", filters.startDate)
             .set("endDate", filters.endDate)
-            .set("merchantName", filters.merchantName)
+            .set("merchantId", filters.merchantId)
 
         return this.http.get(`${this.localUrlV1}vouchers/total-consumed-by-aims`, {params});
     }
 
+    getRankMerchants(filters: DashboardAdminFilter): Observable<any> {
+        const params: HttpParams = new HttpParams()
+            .set("startDate", filters.startDate)
+            .set("endDate", filters.endDate)
+            .set("merchantId", filters.merchantId)
+
+        return this.http.get(`${this.localUrlV1}merchant/rank-consumed`, {params});
+    }
+
+    getVouchersConsumedByOffer(filters: DashboardAdminFilter) {
+        const params: HttpParams = new HttpParams()
+            .set("startDate", filters.startDate)
+            .set("endDate", filters.endDate)
+            .set("merchantId", filters.merchantId)
+
+        return this.http.get(`${this.localUrlV1}merchant/voucher/total-consumed-by-offer`, {params});
+
+    }
+
+    getAmountOfAvailableVouchers(locationParams: LocationParams) {
+        let params
+        if (locationParams.latitude != null) {
+            params = params.set('latitude', locationParams.latitude.toString());
+        }
+        if (locationParams.longitude != null) {
+            params = params.set('longitude', locationParams.longitude.toString());
+        }
+        if (locationParams.radius != null) {
+            params = params.set('radius', locationParams.radius.toString());
+        }
+
+
+        return this.http.get(`${this.localUrlV1}voucher/available`, {params});
+    }
+
+// END REGISTRY API
+
+
+    // SERVER STATISTICHE
     getAdminCreatedAmountByPosition(north, south, east, west, zoomLevel): Observable<any> {
         const params: HttpParams = new HttpParams()
             .set("north", north.toString())

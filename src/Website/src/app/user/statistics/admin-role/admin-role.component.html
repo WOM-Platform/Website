@@ -1,26 +1,28 @@
 <div class="mx-11 my-6 flex flex-col justify-center items-center">
-    <div class="flex flex-row justify-between">
-        <div>
-            <ng-container *ngIf="!isDateFiltering; else filteringForDate">
-                <button
-                        (click)="isDateFiltering = !isDateFiltering"
-                        class="flex items-center gap-2 px-4 py-2 border-2 border-blue-500 text-blue-500 font-semibold rounded-lg shadow-md hover:bg-blue-200 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75 transition duration-300"
-                >
-                    <i class="fa-solid fa-calendar-days text-blue-500"></i> Filtra per data
-                </button>
-            </ng-container>
-            <ng-template #filteringForDate>
-                <button
-                        (click)="cancelDataFilter()"
-                        class="flex items-center gap-2 px-4 py-2 border-2 border-red-500 text-red-500 font-semibold rounded-lg shadow-md hover:bg-red-200 focus:outline-none focus:ring-2 focus:ring-red-400 focus:ring-opacity-75 transition duration-300"
-                >
-                    <i class="fa-solid fa-times text-red-500"></i> Annulla
-                </button>
-            </ng-template>
-        </div>
-        <div>
+    <div>
+        <div class="flex justify-between items-center">
+            <div class="relative">
+                <ng-container *ngIf="!isDateFiltering; else filteringForDate">
+                    <button
+                            (click)="isDateFiltering = !isDateFiltering"
+                            class="flex items-center gap-2 px-4 py-2 border-2 border-blue-500 text-blue-500 font-semibold rounded-lg shadow-md hover:bg-blue-200 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75 transition duration-300"
+                    >
+                        <i class="fa-solid fa-calendar-days text-blue-500"></i> Filtra per data
+                    </button>
+                </ng-container>
+                <ng-template #filteringForDate>
+                    <button
+                            (click)="cancelDataFilter()"
+                            class="flex items-center gap-2 px-4 py-2 border-2 border-red-500 text-red-500 font-semibold rounded-lg shadow-md hover:bg-red-200 focus:outline-none focus:ring-2 focus:ring-red-400 focus:ring-opacity-75 transition duration-300"
+                    >
+                        <i class="fa-solid fa-times text-red-500"></i> Annulla
+                    </button>
+                </ng-template>
+            </div>
+
             <button class="hover:underline" (click)="downloadCSV()">Scarica dati <i
                     class="fa-regular fa-circle-down"></i></button>
+
         </div>
     </div>
 
@@ -28,6 +30,56 @@
         <app-datepicker (dates)="onDatesSelected($event)"/>
     </ng-container>
 
+    <div class="mt-11">
+        <div class="mb-4 flex justify-between">
+            <h2>WOM Consumati</h2>
+            <div class="flex items-center gap-2">
+                <p class="mb-0">
+                    Filtra per Merchant:
+                </p>
+                <div class="flex flex-col relative">
+                    <app-search (searchEmit)="searchMerchant($event)"/>
+                    <ng-container *ngIf="consumedDataFetched && consumedDataFetched.length > 0">
+                        <app-lazy-search [fetchData]="consumedDataFetched"
+                                         (selectEmit)="consumptionVoucherData($event)"
+                                         class="absolute top-[40px]"
+                        />
+                    </ng-container>
+                </div>
+
+            </div>
+        </div>
+        <div class="p-6 rounded-lg border-black border-2 border-dashed bg-white">
+            <div class="flex gap-4">
+                <div class="flex items-center gap-2">
+                    <p class="statistic-title">Totali: </p>
+                    <ng-container *ngIf="totalConsumedAmount; else zeroConsumedAmount">
+                        <app-animated-number [finalNumber]="totalConsumedAmount" [duration]="1000"/>
+                    </ng-container>
+                    <ng-template #zeroConsumedAmount>
+                        <p class="">0</p>
+                    </ng-template>
+                </div>
+            </div>
+            <ng-container *ngIf="chartConsumedAmountByAim && chartConsumedAmountByAim.length > 0">
+                <p class="statistic-title">Divisi per AIM: </p>
+                <ngx-charts-pie-chart
+                        [view]="view"
+                        [scheme]="colorScheme"
+                        [results]="chartConsumedAmountByAim"
+                        [legend]="true"
+                        [labels]="true">
+                </ngx-charts-pie-chart>
+            </ng-container>
+        </div>
+        <!-- rank merchant -->
+        <div *ngIf="rankMerchants && rankMerchants.length > 0">
+            <ul *ngFor="let rank of rankMerchants">
+                <li>{{ rank.rank }}){{ rank.name }} {{ rank.id }} - consumati: {{ rank.amount }}</li>
+            </ul>
+        </div>
+    </div>
+    
     <div class="mt-11">
         <div class="flex justify-between mb-4">
             <h2>WOM Generati</h2>
@@ -83,49 +135,7 @@
         </div>
     </div>
 
-    <div class="mt-11">
-        <div class="mb-4 flex justify-between">
-            <h2>WOM Consumati</h2>
-            <div class="flex items-center gap-2">
-                <p class="mb-0">
-                    Filtra per Merchant:
-                </p>
-                <div class="flex flex-col relative">
-                    <app-search (searchEmit)="searchMerchant($event)"/>
-                    <ng-container *ngIf="consumedDataFetched && consumedDataFetched.length > 0">
-                        <app-lazy-search [fetchData]="consumedDataFetched"
-                                         (selectEmit)="consumptionVoucherData($event)"
-                                         class="absolute top-[40px]"
-                        />
-                    </ng-container>
-                </div>
 
-            </div>
-        </div>
-        <div class="p-6 rounded-lg border-black border-2 border-dashed bg-white">
-            <div class="flex gap-4">
-                <div class="flex items-center gap-2">
-                    <p class="statistic-title">Totali: </p>
-                    <ng-container *ngIf="totalConsumedAmount; else zeroConsumedAmount">
-                        <app-animated-number [finalNumber]="totalConsumedAmount" [duration]="1000"/>
-                    </ng-container>
-                    <ng-template #zeroConsumedAmount>
-                        <p class="">0</p>
-                    </ng-template>
-                </div>
-            </div>
-            <ng-container *ngIf="chartConsumedAmountByAim && chartConsumedAmountByAim.length > 0">
-                <p class="statistic-title">Divisi per AIM: </p>
-                <ngx-charts-pie-chart
-                        [view]="view"
-                        [scheme]="colorScheme"
-                        [results]="chartConsumedAmountByAim"
-                        [legend]="true"
-                        [labels]="true">
-                </ngx-charts-pie-chart>
-            </ng-container>
-        </div>
-    </div>
     <!-- <h2>WOM generati divisi per posizione</h2>
      <app-amount-map></app-amount-map>-->
 </div>

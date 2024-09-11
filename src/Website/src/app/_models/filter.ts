@@ -9,6 +9,6 @@ export interface Filter {
 export interface DashboardAdminFilter {
     startDate?: string;
     endDate?: string;
-    merchantName?: string;
-    sourceName?: string;
+    merchantId?: string;
+    sourceId?: string;
 }
