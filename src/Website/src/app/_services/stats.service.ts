@@ -70,11 +70,10 @@ export class StatsService {
             .set("merchantId", filters.merchantId)
 
         return this.http.get(`${this.localUrlV1}merchant/voucher/total-consumed-by-offer`, {params});
-
     }
 
-    getAmountOfAvailableVouchers(locationParams: LocationParams) {
-        let params
+    getAmountOfAvailableVouchers(locationParams: LocationParams, merchantId: string) {
+        let params = new HttpParams()
         if (locationParams.latitude != null) {
             params = params.set('latitude', locationParams.latitude.toString());
         }
@@ -84,9 +83,28 @@ export class StatsService {
         if (locationParams.radius != null) {
             params = params.set('radius', locationParams.radius.toString());
         }
+        if (merchantId) params = params.set('merchantId', merchantId);
 
 
         return this.http.get(`${this.localUrlV1}voucher/available`, {params});
+    }
+
+    getTotalConsumedOverTime(filters: DashboardAdminFilter) {
+        const params: HttpParams = new HttpParams()
+            .set("startDate", filters.startDate)
+            .set("endDate", filters.endDate)
+            .set("merchantId", filters.merchantId)
+
+        return this.http.get(`${this.localUrlV1}voucher/total-consumption-over-time`, {params});
+    }
+
+    getTotalGeneratedOverTime(filters: DashboardAdminFilter) {
+        const params: HttpParams = new HttpParams()
+            .set("startDate", filters.startDate)
+            .set("endDate", filters.endDate)
+            .set("merchantId", filters.merchantId)
+
+        return this.http.get(`${this.localUrlV1}voucher/total-generated-redeemed-over-time`, {params});
     }
 
 // END REGISTRY API

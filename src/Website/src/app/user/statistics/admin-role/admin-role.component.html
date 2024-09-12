@@ -1,141 +1,234 @@
-<div class="mx-11 my-6 flex flex-col justify-center items-center">
-    <div>
-        <div class="flex justify-between items-center">
-            <div class="relative">
-                <ng-container *ngIf="!isDateFiltering; else filteringForDate">
-                    <button
-                            (click)="isDateFiltering = !isDateFiltering"
-                            class="flex items-center gap-2 px-4 py-2 border-2 border-blue-500 text-blue-500 font-semibold rounded-lg shadow-md hover:bg-blue-200 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75 transition duration-300"
-                    >
-                        <i class="fa-solid fa-calendar-days text-blue-500"></i> Filtra per data
-                    </button>
-                </ng-container>
-                <ng-template #filteringForDate>
-                    <button
-                            (click)="cancelDataFilter()"
-                            class="flex items-center gap-2 px-4 py-2 border-2 border-red-500 text-red-500 font-semibold rounded-lg shadow-md hover:bg-red-200 focus:outline-none focus:ring-2 focus:ring-red-400 focus:ring-opacity-75 transition duration-300"
-                    >
-                        <i class="fa-solid fa-times text-red-500"></i> Annulla
-                    </button>
-                </ng-template>
-            </div>
-
-            <button class="hover:underline" (click)="downloadCSV()">Scarica dati <i
-                    class="fa-regular fa-circle-down"></i></button>
-
+<div class="container mx-auto py-10 px-4">
+    <!-- Date Filtering and CSV Download Section -->
+    <div class="flex justify-between items-center mb-8">
+        <div class="relative">
+            <ng-container *ngIf="!isDateFiltering; else filteringForDate">
+                <button
+                        (click)="isDateFiltering = !isDateFiltering"
+                        class="flex items-center gap-2 px-4 py-2 border border-blue-500 text-blue-500 font-semibold rounded-lg shadow hover:bg-blue-100 focus:ring focus:ring-blue-400 transition"
+                >
+                    <i class="fa-solid fa-calendar-days text-blue-500"></i>
+                    Filtra per data
+                </button>
+            </ng-container>
+            <ng-template #filteringForDate>
+                <button
+                        (click)="cancelDataFilter()"
+                        class="flex items-center gap-2 px-4 py-2 border border-red-500 text-red-500 font-semibold rounded-lg shadow hover:bg-red-100 focus:ring focus:ring-red-400 transition"
+                >
+                    <i class="fa-solid fa-times text-red-500"></i>
+                    Annulla
+                </button>
+            </ng-template>
         </div>
+        <button
+                class="flex items-center gap-2 hover:underline text-gray-600"
+                (click)="downloadCSV()"
+        >
+            Scarica dati <i class="fa-regular fa-circle-down text-lg"></i>
+        </button>
     </div>
 
+    <!-- Datepicker -->
     <ng-container *ngIf="isDateFiltering">
-        <app-datepicker (dates)="onDatesSelected($event)"/>
+        <div class="mb-8">
+            <app-datepicker (dates)="onDatesSelected($event)"></app-datepicker>
+        </div>
     </ng-container>
 
-    <div class="mt-11">
-        <div class="mb-4 flex justify-between">
-            <h2>WOM Consumati</h2>
+    <!-- WOM Consumati Section -->
+    <div class="mb-12 bg-white shadow-md rounded-lg p-6 border">
+        <div class="flex justify-between items-center mb-4">
+            <h2 class="text-xl font-semibold">WOM Consumati</h2>
             <div class="flex items-center gap-2">
-                <p class="mb-0">
-                    Filtra per Merchant:
-                </p>
-                <div class="flex flex-col relative">
-                    <app-search (searchEmit)="searchMerchant($event)"/>
-                    <ng-container *ngIf="consumedDataFetched && consumedDataFetched.length > 0">
-                        <app-lazy-search [fetchData]="consumedDataFetched"
-                                         (selectEmit)="consumptionVoucherData($event)"
-                                         class="absolute top-[40px]"
-                        />
+                <p>Filtra per Merchant:</p>
+                <div class="relative">
+                    <app-search (searchEmit)="searchMerchant($event)"></app-search>
+                    <ng-container
+                            *ngIf="consumedDataFetched && consumedDataFetched.length > 0"
+                    >
+                        <app-lazy-search
+                                [fetchData]="consumedDataFetched"
+                                (selectEmit)="consumptionVoucherData($event)"
+                                class="absolute top-full mt-2 w-full z-10 bg-white shadow-md border rounded-lg"
+                        ></app-lazy-search>
                     </ng-container>
                 </div>
+            </div>
+        </div>
 
+        <div class="flex flex-wrap gap-6">
+            <!-- Totals Section -->
+            <div class="flex gap-2 items-center">
+                <p class="font-semibold">Totali:</p>
+                <ng-container *ngIf="totalConsumedAmount; else zeroConsumedAmount">
+                    <app-animated-number
+                            [finalNumber]="totalConsumedAmount"
+                            [duration]="1000"
+                    ></app-animated-number>
+                </ng-container>
+                <ng-template #zeroConsumedAmount>
+                    <p>0</p>
+                </ng-template>
             </div>
         </div>
-        <div class="p-6 rounded-lg border-black border-2 border-dashed bg-white">
-            <div class="flex gap-4">
-                <div class="flex items-center gap-2">
-                    <p class="statistic-title">Totali: </p>
-                    <ng-container *ngIf="totalConsumedAmount; else zeroConsumedAmount">
-                        <app-animated-number [finalNumber]="totalConsumedAmount" [duration]="1000"/>
-                    </ng-container>
-                    <ng-template #zeroConsumedAmount>
-                        <p class="">0</p>
-                    </ng-template>
-                </div>
-            </div>
-            <ng-container *ngIf="chartConsumedAmountByAim && chartConsumedAmountByAim.length > 0">
-                <p class="statistic-title">Divisi per AIM: </p>
-                <ngx-charts-pie-chart
-                        [view]="view"
-                        [scheme]="colorScheme"
-                        [results]="chartConsumedAmountByAim"
-                        [legend]="true"
-                        [labels]="true">
-                </ngx-charts-pie-chart>
-            </ng-container>
-        </div>
-        <!-- rank merchant -->
-        <div *ngIf="rankMerchants && rankMerchants.length > 0">
-            <ul *ngFor="let rank of rankMerchants">
-                <li>{{ rank.rank }}){{ rank.name }} {{ rank.id }} - consumati: {{ rank.amount }}</li>
+
+        <!-- Bar Chart for Consumption over Time -->
+        <ng-container *ngIf="totalConsumedOverTime">
+            <p class="mt-6 font-semibold">Consumo nel tempo</p>
+            <ngx-charts-bar-vertical
+                    [view]="view"
+                    [scheme]="colorScheme"
+                    [results]="totalConsumedOverTime"
+                    [gradient]="false"
+                    [xAxis]="true"
+                    [yAxis]="true"
+                    [legend]="true"
+                    [showXAxisLabel]="true"
+                    [showYAxisLabel]="true"
+                    [xAxisLabel]="'Data'"
+                    [yAxisLabel]="'Quantità'"
+                    (select)="onSelect($event)"
+            >
+            </ngx-charts-bar-vertical>
+        </ng-container>
+
+        <!-- Pie Chart by Aim -->
+        <ng-container
+                *ngIf="chartConsumedAmountByAim && chartConsumedAmountByAim.length > 0"
+        >
+            <p class="mt-6 font-semibold">Divisi per AIM:</p>
+            <ngx-charts-pie-chart
+                    [view]="view"
+                    [scheme]="colorScheme"
+                    [results]="chartConsumedAmountByAim"
+                    [legend]="true"
+                    [labels]="true"
+            >
+            </ngx-charts-pie-chart>
+        </ng-container>
+
+        <!-- Merchant Ranking -->
+
+        <div class="mt-6" *ngIf="rankMerchants && rankMerchants.length > 0">
+            <h3 class="font-semibold mb-4">
+                <i class="fa-solid fa-star" style="color: #ffd43b"></i> Classifica
+                Merchant
+            </h3>
+
+            <ul class="list-disc pl-5 space-y-2">
+                <li *ngFor="let rank of rankMerchants | slice:0:displayLimit">
+                    <!-- Conditional rendering for trophy icon based on rank -->
+                    <span *ngIf="rank.rank === 1">
+            1) <i class="fa-solid fa-trophy" style="color: #ffd43b"></i>
+          </span>
+                    <span *ngIf="rank.rank === 2">
+            2) <i class="fa-solid fa-trophy" style="color: #c0c0c0"></i>
+          </span>
+                    <span *ngIf="rank.rank === 3">
+            3) <i class="fa-solid fa-trophy" style="color: #cd7f32"></i>
+          </span>
+                    <span *ngIf="rank.rank > 3"> {{ rank.rank }}) </span>
+
+                    <!-- Merchant name and amount display -->
+                    {{ rank.name }}: <strong>{{ rank.amount }}</strong>
+                    <span class="italic text-xs"> WOM</span>
+                </li>
             </ul>
+
+            <div class="text-center mt-4">
+                <button
+                        class="text-blue-500 hover:text-blue-700 underline"
+                        (click)="toggleDisplay()"
+                >
+                    {{ isExpanded ? 'Mostra meno' : 'Mostra di più' }}
+                </button>
+            </div>
         </div>
     </div>
-    
-    <div class="mt-11">
-        <div class="flex justify-between mb-4">
-            <h2>WOM Generati</h2>
 
+    <!-- WOM Generati Section -->
+    <div class="mb-12 bg-white shadow-md rounded-lg p-6 border">
+        <div class="flex justify-between items-center mb-4">
+            <h2 class="text-xl font-semibold">WOM Generati</h2>
             <div class="flex items-center gap-2">
-                <p class="mb-0">
-                    Filtra per Instrument:
-                </p>
-                <div class="flex flex-col relative">
-                    <app-search (searchEmit)="searchSource($event)"/>
-                    <ng-container *ngIf="generatedDataFetched && generatedDataFetched.length > 0">
-                        <app-lazy-search [fetchData]="generatedDataFetched"
-                                         (selectEmit)="generationVoucherData($event)"
-                                         class="absolute top-[40px]"
-                        />
+                <p>Filtra per Instrument:</p>
+                <div class="relative">
+                    <app-search (searchEmit)="searchSource($event)"></app-search>
+                    <ng-container
+                            *ngIf="generatedDataFetched && generatedDataFetched.length > 0"
+                    >
+                        <app-lazy-search
+                                [fetchData]="generatedDataFetched"
+                                (selectEmit)="generationVoucherData($event)"
+                                class="absolute top-full mt-2 w-full z-10 bg-white shadow-md border rounded-lg"
+                        ></app-lazy-search>
                     </ng-container>
                 </div>
             </div>
-
-
         </div>
-        <div class="p-6 rounded-lg border-black border-2 border-dashed bg-white">
-            <div class="flex gap-4">
-                <div class="flex items-center gap-2">
-                    <p class="statistic-title">Totali: </p>
-                    <div *ngIf="totalCreatedAmount; else zeroGeneratedAmount">
-                        <app-animated-number [finalNumber]="totalCreatedAmount" [duration]="1000"/>
-                    </div>
-                    <ng-template #zeroGeneratedAmount>
-                        <p class="">0</p>
-                    </ng-template>
-                </div>
-                <div class="flex items-center gap-2">
-                    <p class="">di cui <span class="statistic-title">Riscattati</span></p>
-                    <div *ngIf="totalRedeemedAmount; else zeroRedeemedAmount">
-                        <app-animated-number [finalNumber]="totalRedeemedAmount" [duration]="1000"/>
-                    </div>
-                    <ng-template #zeroRedeemedAmount>
-                        <p class="">0</p>
-                    </ng-template>
-                </div>
+
+        <!-- Totals Section -->
+        <div class="flex gap-6">
+            <div class="flex gap-2 items-center">
+                <p class="font-semibold">Totali:</p>
+                <ng-container *ngIf="totalCreatedAmount; else zeroGeneratedAmount">
+                    <app-animated-number
+                            [finalNumber]="totalCreatedAmount"
+                            [duration]="1000"
+                    ></app-animated-number>
+                </ng-container>
+                <ng-template #zeroGeneratedAmount>
+                    <p>0</p>
+                </ng-template>
             </div>
-            <ng-container *ngIf="chartCreatedAmountByAim && chartCreatedAmountByAim.length > 0">
-                <p class="statistic-title">Divisi per AIM: </p>
-                <ngx-charts-pie-chart
-                        [view]="view"
-                        [scheme]="colorScheme"
-                        [results]="chartCreatedAmountByAim"
-                        [legend]="true"
-                        [labels]="true">
-                </ngx-charts-pie-chart>
-            </ng-container>
+            <div class="flex gap-2 items-center">
+                <p>di cui <span class="font-semibold">Riscattati:</span></p>
+                <ng-container *ngIf="totalRedeemedAmount; else zeroRedeemedAmount">
+                    <app-animated-number
+                            [finalNumber]="totalRedeemedAmount"
+                            [duration]="1000"
+                    ></app-animated-number>
+                </ng-container>
+                <ng-template #zeroRedeemedAmount>
+                    <p>0</p>
+                </ng-template>
+            </div>
         </div>
+
+        <!-- Bar Chart for Generated and Redeemed Over Time -->
+        <ng-container *ngIf="totalGeneratedOverTime">
+            <p class="mt-6 font-semibold">Generati e riscossi nel tempo</p>
+            <ngx-charts-bar-vertical-2d
+                    [view]="view"
+                    [scheme]="colorScheme"
+                    [results]="totalGeneratedOverTime"
+                    [gradient]="false"
+                    [xAxis]="true"
+                    [yAxis]="true"
+                    [legend]="true"
+                    [showXAxisLabel]="true"
+                    [showYAxisLabel]="true"
+                    [xAxisLabel]="'Data'"
+                    [yAxisLabel]="'Quantità'"
+                    (select)="onSelect($event)"
+            >
+            </ngx-charts-bar-vertical-2d>
+        </ng-container>
+
+        <!-- Pie Chart by Aim -->
+        <ng-container
+                *ngIf="chartCreatedAmountByAim && chartCreatedAmountByAim.length > 0"
+        >
+            <p class="mt-6 font-semibold">Divisi per AIM:</p>
+            <ngx-charts-pie-chart
+                    [view]="view"
+                    [scheme]="colorScheme"
+                    [results]="chartCreatedAmountByAim"
+                    [legend]="true"
+                    [labels]="true"
+            >
+            </ngx-charts-pie-chart>
+        </ng-container>
     </div>
-
-
-    <!-- <h2>WOM generati divisi per posizione</h2>
-     <app-amount-map></app-amount-map>-->
 </div>

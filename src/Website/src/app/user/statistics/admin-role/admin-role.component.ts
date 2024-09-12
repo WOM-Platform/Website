@@ -17,7 +17,7 @@ import {LazySearchComponent} from "../../components/lazy-search/lazy-search.comp
 import {Instrument} from "../../../_models/instrument";
 import {LocationParams} from "../../../_models/LocationParams";
 
-interface PieChartData {
+interface ChartData {
     name: string;
     value: number;
 }
@@ -52,6 +52,9 @@ export class AdminRoleComponent implements OnInit, OnDestroy {
         sourceId: ""
     }
 
+    displayLimit: number = 5;
+    isExpanded: boolean = false;
+
     locationParameters: LocationParams = {}
 
     generatedDataFetched = []
@@ -61,14 +64,17 @@ export class AdminRoleComponent implements OnInit, OnDestroy {
     totalRedeemedAmount: number;
     totalCreatedAmountSub: Subscription;
     totalConsumedAmount: number = 0;
+    totalConsumedOverTime: ChartData[] = [];
+    totalGeneratedOverTime: { name: string, series: ChartData[] }[] = [];
     totalCreatedAmountByAim: { aimCode: string, amount: number }[];
     rankMerchants: { id: string, name: string, amount: number, rank: number }[] = []
     offerConsumedVouchers: any;
+    availableVouchers: number
 
     isShowedGenerationFilter: boolean = false
     bboxArea
-    chartCreatedAmountByAim: PieChartData[] = [];
-    chartConsumedAmountByAim: PieChartData[] = [];
+    chartCreatedAmountByAim: ChartData[] = [];
+    chartConsumedAmountByAim: ChartData[] = [];
 
     view: [number, number] = [700, 400];
 
@@ -125,10 +131,6 @@ export class AdminRoleComponent implements OnInit, OnDestroy {
     }
 
     generalData() {
-        // ask for the amount of available vouchers
-        this.statsService.getAmountOfAvailableVouchers(this.locationParameters).subscribe(data => {
-            console.log("data ", data)
-        })
     }
 
     generationVoucherData(source?: Instrument) {
@@ -152,6 +154,23 @@ export class AdminRoleComponent implements OnInit, OnDestroy {
                 value: item.amount
             }))
         });
+
+
+        this.statsService.getTotalGeneratedOverTime(this.filters).subscribe((data: any[]) => {
+            this.totalGeneratedOverTime = data.map(item => ({
+                name: item.date,
+                series: [
+                    {
+                        name: 'Voucher Redeemed',
+                        value: item.totalRedeemed ? Number(item.totalRedeemed) : 0  // Ensure value is a number or 0
+                    },
+                    {
+                        name: 'Voucher Generated',
+                        value: item.totalGenerated ? Number(item.totalGenerated) : 0  // Ensure value is a number or 0
+                    }
+                ]
+            }))
+        })
     }
 
     consumptionVoucherData(merchantName?: Merchant) {
@@ -159,8 +178,8 @@ export class AdminRoleComponent implements OnInit, OnDestroy {
             this.filters.merchantId = merchantName.id;
 
         // Consumed total amount of wom
-        this.statsService.getAdminTotalAmountConsumed(this.filters).subscribe(data => {
-            this.totalConsumedAmount = data.totalAmountConsumed;
+        this.statsService.getAdminTotalAmountConsumed(this.filters).subscribe((data: number) => {
+            this.totalConsumedAmount = data;
         })
         // get total consumed by aims
         this.statsService.getAdminTotalConsumedByAim(this.filters).subscribe(data => {
@@ -174,11 +193,23 @@ export class AdminRoleComponent implements OnInit, OnDestroy {
             this.rankMerchants = data
         })
 
+        this.statsService.getAmountOfAvailableVouchers(this.locationParameters, this.filters.merchantId).subscribe((data: number) => {
+            this.availableVouchers = data
+        })
+
+        this.statsService.getTotalConsumedOverTime(this.filters).subscribe((res: any[]) => {
+
+            this.totalConsumedOverTime = res.map(data => ({
+                name: data.date,
+                value: data.total
+            }))
+        })
+
         // Only for a specific merchant
         if (this.filters.merchantId) {
             this.statsService.getVouchersConsumedByOffer(this.filters).subscribe(data => {
                 this.offerConsumedVouchers = data
-                console.log("jojdsf ", data)
+
             })
         }
     }
@@ -187,6 +218,11 @@ export class AdminRoleComponent implements OnInit, OnDestroy {
         console.log(`${type}: ${event.value}`);
     }
 
+    toggleDisplay() {
+        this.isExpanded = !this.isExpanded;
+        this.displayLimit = this.isExpanded ? this.rankMerchants.length : 5;
+    }
+    
     public convertToPDF() {
         html2canvas(document.getElementById('toPrint')).then(canvas => {
             // Few necessary setting options
@@ -209,7 +245,6 @@ export class AdminRoleComponent implements OnInit, OnDestroy {
 
         // call api to update statistics
         this.loadData()
-
     }
 
     cancelDataFilter() {
@@ -221,7 +256,6 @@ export class AdminRoleComponent implements OnInit, OnDestroy {
 
     convertToCSV(): string {
         let csvRows = [];
-
 
         csvRows.push('Total Created Amount,' + this.totalCreatedAmount);
         csvRows.push('Total Redeemed Amount,' + this.totalRedeemedAmount);
@@ -268,6 +302,10 @@ export class AdminRoleComponent implements OnInit, OnDestroy {
         a.click();
         document.body.removeChild(a);
         URL.revokeObjectURL(url);
+    }
+
+    onSelect(event): void {
+        console.log(event);
     }
 }
 
