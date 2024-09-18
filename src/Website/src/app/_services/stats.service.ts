@@ -102,7 +102,7 @@ export class StatsService {
         const params: HttpParams = new HttpParams()
             .set("startDate", filters.startDate)
             .set("endDate", filters.endDate)
-            .set("merchantId", filters.merchantId)
+            .set("sourceId", filters.sourceId)
 
         return this.http.get(`${this.localUrlV1}voucher/total-generated-redeemed-over-time`, {params});
     }

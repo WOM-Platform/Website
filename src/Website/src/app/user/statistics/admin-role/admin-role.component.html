@@ -57,7 +57,7 @@
                     >
                         <app-lazy-search
                                 [fetchData]="consumedDataFetched"
-                                (selectEmit)="consumptionVoucherData($event)"
+                                (selectEmit)="elementSelected('merchant',$event)"
                                 class="absolute top-full mt-2 w-full z-10 bg-white shadow-md border rounded-lg"
                         ></app-lazy-search>
                     </ng-container>
@@ -195,7 +195,8 @@
     </ng-template>
 
     <!-- WOM Generati Section -->
-    <div *ngIf="isGeneratedDataReady; else loadingGeneration" class="mb-12 bg-white shadow-md rounded-lg p-6 border">
+    <div *ngIf="isGeneratedDataReady && isGeneratedDataReady === true; else loadingGeneration"
+         class="mb-12 bg-white shadow-md rounded-lg p-6 border">
         <div class="flex justify-between items-center mb-4">
             <h2 class="text-xl font-semibold">WOM Generati</h2>
             <div class="flex items-center gap-2">
@@ -215,7 +216,7 @@
                     >
                         <app-lazy-search
                                 [fetchData]="generatedDataFetched"
-                                (selectEmit)="generationVoucherData($event)"
+                                (selectEmit)="elementSelected('source',$event)"
                                 class="absolute top-full mt-2 w-full z-10 bg-white shadow-md border rounded-lg"
                         ></app-lazy-search>
                     </ng-container>

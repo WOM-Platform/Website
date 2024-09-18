@@ -17,6 +17,7 @@ import {LazySearchComponent} from "../../components/lazy-search/lazy-search.comp
 import {Instrument} from "../../../_models/instrument";
 import {LocationParams} from "../../../_models/LocationParams";
 import {tap} from "rxjs/operators";
+import {Source} from "postcss";
 
 interface ChartData {
     name: string;
@@ -298,18 +299,41 @@ export class AdminRoleComponent implements OnInit, OnDestroy {
         this.loadData()
     }
 
+    elementSelected(elementKey: string, elementSelected: Merchant | Instrument) {
+        if (elementKey === 'merchant' && this.isMerchant(elementSelected)) {
+            this.consumedDataFetched = []
+            this.isConsumedDataReady = false;
+            this.consumptionVoucherData(elementSelected);
+        } else if (elementKey === 'source' && this.isInstrument(elementSelected)) {
+            this.generatedDataFetched = []
+            this.isGeneratedDataReady = false;
+            this.generationVoucherData(elementSelected);
+        }
+    }
+
+    isMerchant(element: Merchant | Instrument): element is Merchant {
+        // Check for a property that only Merchant has
+        return (element as Merchant).name !== undefined;
+    }
+
+    isInstrument(element: Merchant | Instrument): element is Instrument {
+        // Check for a property that only Instrument has
+        return (element as Instrument).name !== undefined;
+    }
+
     clearElementFilter(elementToClear: string) {
         if (elementToClear === 'merchant') {
             this.filters.merchantName = ''
             this.filters.merchantId = ''
+            this.isConsumedDataReady = false
 
             this.consumptionVoucherData()
         }
         if (elementToClear === "source") {
             this.filters.sourceName = ''
             this.filters.sourceId = ''
+            this.isGeneratedDataReady = false
 
-            console.log("calling here ")
             this.generationVoucherData()
         }
     }
