@@ -3,7 +3,7 @@ import {CommonModule, DatePipe} from "@angular/common";
 import {PieChartModule} from "@swimlane/ngx-charts";
 import {SharedModule} from "../../../shared/shared.module";
 import {Merchant, Merchants} from "../../../_models";
-import {Subscription} from "rxjs";
+import {forkJoin, Subscription} from "rxjs";
 import {AuthService, MerchantService, StatsService} from "../../../_services";
 import {MatDatepickerInputEvent} from "@angular/material/datepicker";
 import html2canvas from "html2canvas";
@@ -16,6 +16,7 @@ import {SourceService} from "../../../_services/source.service";
 import {LazySearchComponent} from "../../components/lazy-search/lazy-search.component";
 import {Instrument} from "../../../_models/instrument";
 import {LocationParams} from "../../../_models/LocationParams";
+import {tap} from "rxjs/operators";
 
 interface ChartData {
     name: string;
@@ -71,12 +72,15 @@ export class AdminRoleComponent implements OnInit, OnDestroy {
     offerConsumedVouchers: any;
     availableVouchers: number
 
+    isConsumedDataReady = false
+    isGeneratedDataReady = false
+
     isShowedGenerationFilter: boolean = false
     bboxArea
     chartCreatedAmountByAim: ChartData[] = [];
     chartConsumedAmountByAim: ChartData[] = [];
 
-    view: [number, number] = [700, 400];
+    view: [number, number] = [500, 400];
 
     colorScheme: any = {
         domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA', '#FF5733',
@@ -137,82 +141,113 @@ export class AdminRoleComponent implements OnInit, OnDestroy {
         if (source) {
             this.filters.sourceId = source.id;
         }
+        const observables = [
+            // Created total amount of wom
+            this.statsService.getAdminTotalAmountGeneratedAndRedeemed(this.filters).pipe(tap(data => {
+                this.totalCreatedAmount = data.totalCount;
+                this.totalRedeemedAmount = data.redeemedCount;
+            })),
+            // Created amount of wom divided by aim
+            this.statsService.getAdminCreatedAmountByAim(this.filters).pipe(tap((data) => {
+                this.totalCreatedAmountByAim = data;
 
-        // Created total amount of wom
-        this.statsService.getAdminTotalAmountGeneratedAndRedeemed(this.filters).subscribe(data => {
-            this.totalCreatedAmount = data.totalCount;
-            this.totalRedeemedAmount = data.redeemedCount;
-        })
+                this.chartCreatedAmountByAim = data.map(item => ({
+                    name: item.aimCode,
+                    value: item.amount
+                }))
+            })),
 
-
-        // Created amount of wom divided by aim
-        this.statsService.getAdminCreatedAmountByAim(this.filters).subscribe(data => {
-            this.totalCreatedAmountByAim = data;
-
-            this.chartCreatedAmountByAim = data.map(item => ({
-                name: item.aimCode,
-                value: item.amount
+            this.statsService.getTotalGeneratedOverTime(this.filters).pipe(tap((data: any[]) => {
+                this.totalGeneratedOverTime = data.map(item => ({
+                    name: item.date,
+                    series: [
+                        {
+                            name: 'Voucher Redeemed',
+                            value: item.totalRedeemed ? Number(item.totalRedeemed) : 0  // Ensure value is a number or 0
+                        },
+                        {
+                            name: 'Voucher Generated',
+                            value: item.totalGenerated ? Number(item.totalGenerated) : 0  // Ensure value is a number or 0
+                        }
+                    ]
+                }))
             }))
+        ]
+
+        forkJoin(observables).subscribe({
+            next: () => {
+                // All requests are done, now set isConsumedDataReady to true
+                this.isGeneratedDataReady = true;
+            },
+            error: (err) => {
+                console.error('Error occurred while fetching data:', err);
+                // Handle error and potentially set isConsumedDataReady to false
+            }
         });
-
-
-        this.statsService.getTotalGeneratedOverTime(this.filters).subscribe((data: any[]) => {
-            this.totalGeneratedOverTime = data.map(item => ({
-                name: item.date,
-                series: [
-                    {
-                        name: 'Voucher Redeemed',
-                        value: item.totalRedeemed ? Number(item.totalRedeemed) : 0  // Ensure value is a number or 0
-                    },
-                    {
-                        name: 'Voucher Generated',
-                        value: item.totalGenerated ? Number(item.totalGenerated) : 0  // Ensure value is a number or 0
-                    }
-                ]
-            }))
-        })
     }
 
     consumptionVoucherData(merchantName?: Merchant) {
-        if (merchantName)
+        if (merchantName) {
             this.filters.merchantId = merchantName.id;
-
-        // Consumed total amount of wom
-        this.statsService.getAdminTotalAmountConsumed(this.filters).subscribe((data: number) => {
-            this.totalConsumedAmount = data;
-        })
-        // get total consumed by aims
-        this.statsService.getAdminTotalConsumedByAim(this.filters).subscribe(data => {
-            this.chartConsumedAmountByAim = data.map(item => ({
-                name: item.aimCode,
-                value: item.amount
-            }))
-        })
-
-        this.statsService.getRankMerchants(this.filters).subscribe(data => {
-            this.rankMerchants = data
-        })
-
-        this.statsService.getAmountOfAvailableVouchers(this.locationParameters, this.filters.merchantId).subscribe((data: number) => {
-            this.availableVouchers = data
-        })
-
-        this.statsService.getTotalConsumedOverTime(this.filters).subscribe((res: any[]) => {
-
-            this.totalConsumedOverTime = res.map(data => ({
-                name: data.date,
-                value: data.total
-            }))
-        })
-
-        // Only for a specific merchant
-        if (this.filters.merchantId) {
-            this.statsService.getVouchersConsumedByOffer(this.filters).subscribe(data => {
-                this.offerConsumedVouchers = data
-
-            })
         }
+
+        // Array to store the observables
+        const observables = [
+            // Consumed total amount of WOM
+            this.statsService.getAdminTotalAmountConsumed(this.filters).pipe(tap((data: number) => {
+                this.totalConsumedAmount = data;
+            })),
+
+            // Get total consumed by aims
+            this.statsService.getAdminTotalConsumedByAim(this.filters).pipe(tap((data) => {
+                this.chartConsumedAmountByAim = data.map(item => ({
+                    name: item.aimCode,
+                    value: item.amount
+                }));
+            })),
+
+            // Get rank of merchants
+            this.statsService.getRankMerchants(this.filters).pipe(tap((data) => {
+                this.rankMerchants = data;
+            })),
+
+            // Get total consumed over time
+            this.statsService.getTotalConsumedOverTime(this.filters).pipe(tap((res: any[]) => {
+                this.totalConsumedOverTime = res.map(data => ({
+                    name: data.date,
+                    value: data.total
+                }));
+            }))
+        ];
+
+        // Add additional observable if merchantId is present
+        if (this.filters.merchantId) {
+            observables.push(
+                // Get vouchers consumed by offer
+                this.statsService.getVouchersConsumedByOffer(this.filters).pipe(tap((data) => {
+                    this.offerConsumedVouchers = data;
+                }))
+            );
+        }
+
+        // Execute all requests in parallel
+        forkJoin(observables).subscribe({
+            next: () => {
+                // All requests are done, now set isConsumedDataReady to true
+                this.isConsumedDataReady = true;
+            },
+            error: (err) => {
+                console.error('Error occurred while fetching data:', err);
+                // Handle error and potentially set isConsumedDataReady to false
+            }
+        });
+
+        // Fetch the available vouchers in parallel (not part of the forkJoin)
+        this.statsService.getAmountOfAvailableVouchers(this.locationParameters, this.filters.merchantId).subscribe((data: number) => {
+            this.availableVouchers = data;
+        });
     }
+
 
     addEvent(type: string, event: MatDatepickerInputEvent<Date>) {
         console.log(`${type}: ${event.value}`);
@@ -222,7 +257,7 @@ export class AdminRoleComponent implements OnInit, OnDestroy {
         this.isExpanded = !this.isExpanded;
         this.displayLimit = this.isExpanded ? this.rankMerchants.length : 5;
     }
-    
+
     public convertToPDF() {
         html2canvas(document.getElementById('toPrint')).then(canvas => {
             // Few necessary setting options
@@ -233,6 +268,10 @@ export class AdminRoleComponent implements OnInit, OnDestroy {
             pdf.addImage(contentDataURL, 'PNG', 0, 0, width, height)
             pdf.save('output.pdf'); // Generated PDF
         });
+    }
+
+    onResize(event) {
+        this.view = [event.target.innerWidth / 1.35, 400];
     }
 
     onDatesSelected(dates: { startDate: Date | null, endDate: Date | null }) {

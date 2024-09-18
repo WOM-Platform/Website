@@ -1,4 +1,4 @@
-<div class="container mx-auto py-10 px-4">
+<div class="relative mx-auto py-10 px-4 max-w-full">
     <!-- Date Filtering and CSV Download Section -->
     <div class="flex justify-between items-center mb-8">
         <div class="relative">
@@ -37,7 +37,7 @@
     </ng-container>
 
     <!-- WOM Consumati Section -->
-    <div class="mb-12 bg-white shadow-md rounded-lg p-6 border">
+    <div *ngIf="isConsumedDataReady; else loadingConsumption" class="mb-12 bg-white shadow-md rounded-lg p-6 border">
         <div class="flex justify-between items-center mb-4">
             <h2 class="text-xl font-semibold">WOM Consumati</h2>
             <div class="flex items-center gap-2">
@@ -74,42 +74,50 @@
         </div>
 
         <!-- Bar Chart for Consumption over Time -->
-        <ng-container *ngIf="totalConsumedOverTime">
-            <p class="mt-6 font-semibold">Consumo nel tempo</p>
-            <ngx-charts-bar-vertical
-                    [view]="view"
-                    [scheme]="colorScheme"
-                    [results]="totalConsumedOverTime"
-                    [gradient]="false"
-                    [xAxis]="true"
-                    [yAxis]="true"
-                    [legend]="true"
-                    [showXAxisLabel]="true"
-                    [showYAxisLabel]="true"
-                    [xAxisLabel]="'Data'"
-                    [yAxisLabel]="'Quantità'"
-                    (select)="onSelect($event)"
-            >
-            </ngx-charts-bar-vertical>
-        </ng-container>
+        <div class="flex justify-center gap-4">
+            <div>
+                <ng-container *ngIf="totalConsumedOverTime">
+                    <p class="mt-6 font-semibold">Consumo nel tempo</p>
+                    <ngx-charts-bar-vertical
+                            [view]="view"
+                            [scheme]="colorScheme"
+                            [results]="totalConsumedOverTime"
+                            [gradient]="false"
+                            [xAxis]="true"
+                            [yAxis]="true"
+                            [legend]="true"
+                            [showXAxisLabel]="true"
+                            [showYAxisLabel]="true"
+                            [xAxisLabel]="'Data'"
+                            [yAxisLabel]="'Quantità'"
+                            (select)="onSelect($event)"
+                    >
+                    </ngx-charts-bar-vertical>
+                </ng-container>
+            </div>
+            <!-- BEGIN Pie Chart by Aim -->
+            <div class="relative">
+                <ng-container
+                        *ngIf="chartConsumedAmountByAim && chartConsumedAmountByAim.length > 0"
+                >
+                    <p class="mt-6 font-semibold">Divisi per AIM:</p>
+                    <div class="w-full max-w-full overflo">
+                        <ngx-charts-pie-chart
+                                (window:resize)="onResize($event)"
+                                [view]="view"
+                                [scheme]="colorScheme"
+                                [results]="chartConsumedAmountByAim"
+                                [legend]="true"
+                                [labels]="true"
+                        >
+                        </ngx-charts-pie-chart>
+                    </div>
 
-        <!-- Pie Chart by Aim -->
-        <ng-container
-                *ngIf="chartConsumedAmountByAim && chartConsumedAmountByAim.length > 0"
-        >
-            <p class="mt-6 font-semibold">Divisi per AIM:</p>
-            <ngx-charts-pie-chart
-                    [view]="view"
-                    [scheme]="colorScheme"
-                    [results]="chartConsumedAmountByAim"
-                    [legend]="true"
-                    [labels]="true"
-            >
-            </ngx-charts-pie-chart>
-        </ng-container>
-
-        <!-- Merchant Ranking -->
-
+                </ng-container>
+            </div>
+        </div>
+        <!-- END Pie Chart by Aim -->
+        <!-- BEGIN Merchant Ranking -->
         <div class="mt-6" *ngIf="rankMerchants && rankMerchants.length > 0">
             <h3 class="font-semibold mb-4">
                 <i class="fa-solid fa-star" style="color: #ffd43b"></i> Classifica
@@ -145,10 +153,41 @@
                 </button>
             </div>
         </div>
+        <!-- END Merchant Ranking -->
     </div>
+    <ng-template #loadingConsumption>
+        <div class="flex flex-col gap-4 p-6 bg-white shadow-md rounded-lg">
+            <ngx-skeleton-loader
+                    count="1"
+                    appearance="line"
+                    [theme]="{ height: '50px', width: '180px', 'border-radius': '20px' }"
+            ></ngx-skeleton-loader>
+            <div class="flex justify-around">
+                <ngx-skeleton-loader
+                        count="1"
+                        appearance="line"
+                        [theme]="{ height: '300px', width: '300px', 'border-radius': '20px' }"
+                ></ngx-skeleton-loader>
+                <ngx-skeleton-loader
+                        count="1"
+                        appearance="circle"
+                        animation="progress-dark"
+                        [theme]="{ height: '300px', width: '300px'}"
+                ></ngx-skeleton-loader>
+            </div>
+
+            <ngx-skeleton-loader
+                    count="5"
+                    [theme]="{
+        'border-radius': '5px',
+        height: '50px'
+      }"
+            ></ngx-skeleton-loader>
+        </div>
+    </ng-template>
 
     <!-- WOM Generati Section -->
-    <div class="mb-12 bg-white shadow-md rounded-lg p-6 border">
+    <div *ngIf="isGeneratedDataReady; else loadingGeneration" class="mb-12 bg-white shadow-md rounded-lg p-6 border">
         <div class="flex justify-between items-center mb-4">
             <h2 class="text-xl font-semibold">WOM Generati</h2>
             <div class="flex items-center gap-2">
@@ -167,7 +206,6 @@
                 </div>
             </div>
         </div>
-
         <!-- Totals Section -->
         <div class="flex gap-6">
             <div class="flex gap-2 items-center">
@@ -196,39 +234,75 @@
             </div>
         </div>
 
-        <!-- Bar Chart for Generated and Redeemed Over Time -->
-        <ng-container *ngIf="totalGeneratedOverTime">
-            <p class="mt-6 font-semibold">Generati e riscossi nel tempo</p>
-            <ngx-charts-bar-vertical-2d
-                    [view]="view"
-                    [scheme]="colorScheme"
-                    [results]="totalGeneratedOverTime"
-                    [gradient]="false"
-                    [xAxis]="true"
-                    [yAxis]="true"
-                    [legend]="true"
-                    [showXAxisLabel]="true"
-                    [showYAxisLabel]="true"
-                    [xAxisLabel]="'Data'"
-                    [yAxisLabel]="'Quantità'"
-                    (select)="onSelect($event)"
-            >
-            </ngx-charts-bar-vertical-2d>
-        </ng-container>
-
-        <!-- Pie Chart by Aim -->
-        <ng-container
-                *ngIf="chartCreatedAmountByAim && chartCreatedAmountByAim.length > 0"
-        >
-            <p class="mt-6 font-semibold">Divisi per AIM:</p>
-            <ngx-charts-pie-chart
-                    [view]="view"
-                    [scheme]="colorScheme"
-                    [results]="chartCreatedAmountByAim"
-                    [legend]="true"
-                    [labels]="true"
-            >
-            </ngx-charts-pie-chart>
-        </ng-container>
+        <div class="flex">
+            <!-- Bar Chart for Generated and Redeemed Over Time -->
+            <div>
+                <ng-container *ngIf="totalGeneratedOverTime">
+                    <p class="mt-6 font-semibold">Generati e riscossi nel tempo</p>
+                    <ngx-charts-bar-vertical-2d
+                            [view]="view"
+                            [scheme]="colorScheme"
+                            [results]="totalGeneratedOverTime"
+                            [gradient]="false"
+                            [xAxis]="true"
+                            [yAxis]="true"
+                            [legend]=""
+                            [showXAxisLabel]="true"
+                            [showYAxisLabel]="true"
+                            [xAxisLabel]="'Data'"
+                            [yAxisLabel]="'Quantità'"
+                            (select)="onSelect($event)"
+                    >
+                    </ngx-charts-bar-vertical-2d>
+                </ng-container>
+            </div>
+            <!-- Pie Chart by Aim -->
+            <div>
+                <ng-container
+                        *ngIf="chartCreatedAmountByAim && chartCreatedAmountByAim.length > 0"
+                >
+                    <p class="mt-6 font-semibold">Divisi per AIM:</p>
+                    <ngx-charts-pie-chart
+                            [view]="view"
+                            [scheme]="colorScheme"
+                            [results]="chartCreatedAmountByAim"
+                            [legend]="true"
+                            [labels]="true"
+                    >
+                    </ngx-charts-pie-chart>
+                </ng-container>
+            </div>
+        </div>
     </div>
+    <ng-template #loadingGeneration>
+        <div class="flex flex-col gap-4 p-6 bg-white shadow-md rounded-lg">
+            <ngx-skeleton-loader
+                    count="1"
+                    appearance="line"
+                    [theme]="{ height: '50px', width: '180px', 'border-radius': '20px' }"
+            ></ngx-skeleton-loader>
+            <div class="flex justify-around">
+                <ngx-skeleton-loader
+                        count="1"
+                        appearance="line"
+                        [theme]="{ height: '300px', width: '300px', 'border-radius': '20px' }"
+                ></ngx-skeleton-loader>
+                <ngx-skeleton-loader
+                        count="1"
+                        appearance="circle"
+                        animation="progress-dark"
+                        [theme]="{ height: '300px', width: '300px'}"
+                ></ngx-skeleton-loader>
+            </div>
+
+            <ngx-skeleton-loader
+                    count="5"
+                    [theme]="{
+        'border-radius': '5px',
+        height: '50px'
+      }"
+            ></ngx-skeleton-loader>
+        </div>
+
+    </ng-template>
 </div>

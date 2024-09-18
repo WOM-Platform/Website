@@ -43,6 +43,7 @@ import {DialogConfirmComponent} from "../components/dialog-confirm/dialog-confir
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {NgxFileDropModule} from "ngx-file-drop";
 import {BadgeComponent} from "../components/badge/badge.component";
+import {NgxSkeletonLoaderModule} from "ngx-skeleton-loader";
 
 @NgModule({
     declarations: [
@@ -86,6 +87,7 @@ import {BadgeComponent} from "../components/badge/badge.component";
         MatToolbarModule,
         MatTooltipModule,
         NgxChartsModule,
+        NgxSkeletonLoaderModule,
         NgxFileDropModule,
         PdfViewerModule,
         ReactiveFormsModule,
@@ -134,6 +136,7 @@ import {BadgeComponent} from "../components/badge/badge.component";
         MatTooltipModule,
         NgxChartsModule,
         NgxFileDropModule,
+        NgxSkeletonLoaderModule,
         PaginationComponent,
         PdfViewerModule,
         ReactiveFormsModule,
