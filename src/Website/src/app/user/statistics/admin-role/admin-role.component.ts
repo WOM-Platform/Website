@@ -50,7 +50,9 @@ export class AdminRoleComponent implements OnInit, OnDestroy {
         startDate: "",
         endDate: "",
         merchantId: "",
-        sourceId: ""
+        merchantName: "",
+        sourceId: "",
+        sourceName: ""
     }
 
     displayLimit: number = 5;
@@ -139,6 +141,7 @@ export class AdminRoleComponent implements OnInit, OnDestroy {
 
     generationVoucherData(source?: Instrument) {
         if (source) {
+            this.filters.sourceName = source.name
             this.filters.sourceId = source.id;
         }
         const observables = [
@@ -186,9 +189,10 @@ export class AdminRoleComponent implements OnInit, OnDestroy {
         });
     }
 
-    consumptionVoucherData(merchantName?: Merchant) {
-        if (merchantName) {
-            this.filters.merchantId = merchantName.id;
+    consumptionVoucherData(merchant?: Merchant) {
+        if (merchant) {
+            this.filters.merchantName = merchant.name
+            this.filters.merchantId = merchant.id;
         }
 
         // Array to store the observables
@@ -245,6 +249,7 @@ export class AdminRoleComponent implements OnInit, OnDestroy {
         // Fetch the available vouchers in parallel (not part of the forkJoin)
         this.statsService.getAmountOfAvailableVouchers(this.locationParameters, this.filters.merchantId).subscribe((data: number) => {
             this.availableVouchers = data;
+            console.log("available ", this.availableVouchers)
         });
     }
 
@@ -271,7 +276,7 @@ export class AdminRoleComponent implements OnInit, OnDestroy {
     }
 
     onResize(event) {
-        this.view = [event.target.innerWidth / 1.35, 400];
+        this.view = [event.target.innerWidth / 3, 400];
     }
 
     onDatesSelected(dates: { startDate: Date | null, endDate: Date | null }) {
@@ -291,6 +296,22 @@ export class AdminRoleComponent implements OnInit, OnDestroy {
         this.filters.endDate = ""
         this.isDateFiltering = !this.isDateFiltering
         this.loadData()
+    }
+
+    clearElementFilter(elementToClear: string) {
+        if (elementToClear === 'merchant') {
+            this.filters.merchantName = ''
+            this.filters.merchantId = ''
+
+            this.consumptionVoucherData()
+        }
+        if (elementToClear === "source") {
+            this.filters.sourceName = ''
+            this.filters.sourceId = ''
+
+            console.log("calling here ")
+            this.generationVoucherData()
+        }
     }
 
     convertToCSV(): string {
@@ -329,7 +350,19 @@ export class AdminRoleComponent implements OnInit, OnDestroy {
 
     // Method to download the CSV
     downloadCSV() {
-        const csvData = this.convertToCSV();
+        this.statsService.downloadCsv().subscribe(blob => {
+            const url = URL.createObjectURL(blob);
+
+            // Create an anchor element and trigger a download
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'totalConsumedOverTime.csv';
+            a.click();
+
+            // Clean up the URL object
+            URL.revokeObjectURL(url);
+        })
+        /*const csvData = this.convertToCSV();
         const blob = new Blob([csvData], {type: 'text/csv'});
         const url = URL.createObjectURL(blob);
 
@@ -340,11 +373,13 @@ export class AdminRoleComponent implements OnInit, OnDestroy {
         document.body.appendChild(a);
         a.click();
         document.body.removeChild(a);
-        URL.revokeObjectURL(url);
+        URL.revokeObjectURL(url);*/
     }
 
     onSelect(event): void {
         console.log(event);
     }
+
+
 }
 

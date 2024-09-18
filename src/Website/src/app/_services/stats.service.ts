@@ -107,6 +107,11 @@ export class StatsService {
         return this.http.get(`${this.localUrlV1}voucher/total-generated-redeemed-over-time`, {params});
     }
 
+
+    downloadCsv(): Observable<Blob> {
+        return this.http.get(`${this.localUrlV1}download/csv`, {responseType: 'blob'});
+    }
+
 // END REGISTRY API
 
 

@@ -43,7 +43,15 @@
             <div class="flex items-center gap-2">
                 <p>Filtra per Merchant:</p>
                 <div class="relative">
-                    <app-search (searchEmit)="searchMerchant($event)"></app-search>
+                    <app-search *ngIf="filters.merchantName === ''; else searchMerchantValueSelected"
+                                (searchEmit)="searchMerchant($event)" [searchValue]="filters.merchantName"></app-search>
+                    <ng-template #searchMerchantValueSelected>
+                        <p>{{ filters.merchantName }}
+                            <button (click)="clearElementFilter('merchant')"><i
+                                    class="fa-solid fa-xmark text-red-500"></i>
+                            </button>
+                        </p>
+                    </ng-template>
                     <ng-container
                             *ngIf="consumedDataFetched && consumedDataFetched.length > 0"
                     >
@@ -193,7 +201,15 @@
             <div class="flex items-center gap-2">
                 <p>Filtra per Instrument:</p>
                 <div class="relative">
-                    <app-search (searchEmit)="searchSource($event)"></app-search>
+                    <app-search *ngIf="filters.sourceName === ''; else searchSourceValueSelected"
+                                (searchEmit)="searchSource($event)" [searchValue]="filters.sourceName"></app-search>
+                    <ng-template #searchSourceValueSelected>
+                        <p>{{ filters.sourceName }}
+                            <button (click)="clearElementFilter('source')"><i
+                                    class="fa-solid fa-xmark text-red-500"></i>
+                            </button>
+                        </p>
+                    </ng-template>
                     <ng-container
                             *ngIf="generatedDataFetched && generatedDataFetched.length > 0"
                     >
