@@ -1,0 +1,11 @@
+.sharper-text {
+  @apply bg-white bg-opacity-70 p-4 rounded-lg text-black mt-6;
+}
+
+ul {
+  @apply list-disc list-inside;
+}
+
+p {
+  @apply mb-0;
+}

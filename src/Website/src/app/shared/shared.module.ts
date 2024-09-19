@@ -47,12 +47,12 @@ import {NgxSkeletonLoaderModule} from "ngx-skeleton-loader";
 
 @NgModule({
     declarations: [
-
         AnimatedNumberComponent,
         AvatarComponent,
         DialogConfirmCancelComponent,
         DialogConfirmComponent,
         PaginationComponent,
+        
     ],
     imports: [
         BadgeComponent,
