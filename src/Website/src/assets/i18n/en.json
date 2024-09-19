@@ -54,6 +54,9 @@
     "MERCHANT": "Merchant",
     "INSTRUMENT": "Instrument",
     "CONTACTS": "Contact us",
+    "UNIURB": {
+      "SHARPER2024": "UNIURB Sharper 2024"
+    },
     "USER": {
       "USER": "Your profile",
       "MERCHANT": "Merchant",

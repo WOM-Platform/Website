@@ -1,16 +1,20 @@
-<div
-  class="w-full relative bg-[#a7368c] text-white bg-gradient-to-r from-[#a7368c] from-70% to-[#CA86BA]"
->
+<div class="w-full relative bg-[#a7368c] text-white">
+  <!-- Overlay with improved visibility -->
   <div class="absolute inset-0 bg-white bg-opacity-40"></div>
+
+  <!-- Content container with mobile responsiveness -->
   <div style="margin-bottom: 0" class="container pt-10 relative z-10 pb-10">
     <div class="flex justify-center">
       <img
-        class="relative w-[600px]"
+        class="relative w-[300px] sm:w-[600px]"
         src="assets/images/sharper2024/logoSharper.png"
       />
     </div>
-    <div class="mt-10">
-      <h2 class="relative text-center">
+
+    <div class="mt-10 px-4">
+      <!-- Add padding on small screens -->
+      <h2 class="relative text-center text-lg sm:text-4xl">
+        <!-- Adjust heading size -->
         <span class="relative">
           <img
             class="absolute bottom-2"
@@ -19,25 +23,34 @@
         </span>
         <em class="text-[#a7368c]">Fil rouge:</em> Caccia ai WOM di Sharper
       </h2>
+
       <div class="mt-6">
-        <p class="mb-0">Tutti i partecipanti potranno collezionare WOM:</p>
-        <ul>
-          <li>
+        <p class="mb-0 text-sm sm:text-xl">
+          <!-- Responsive text size -->
+          Tutti i partecipanti potranno collezionare WOM:
+        </p>
+        <ul class="list-disc pl-4">
+          <li class="text-sm sm:text-xl">
             <strong>Visitando le sedi di Sharper</strong> (20 WOM per sede)
           </li>
-          <li><strong>Partecipando agli eventi</strong> (20 WOM per evento)</li>
-          <li>
+          <li class="text-sm sm:text-xl">
+            <strong>Partecipando agli eventi</strong> (20 WOM per evento)
+          </li>
+          <li class="text-sm sm:text-xl">
             <strong>Incontrando i protagonisti</strong> (5 WOM per contatto)
           </li>
         </ul>
       </div>
+
       <div class="mt-6">
-        <p class="mb-0">Il valore della partecipazione:</p>
-        <ul>
-          <li><strong>Consapevolezza</strong></li>
-          <li><strong>Gadget Sharper</strong></li>
-          <li><strong>Gadget Uniurb a prezzo di costo</strong></li>
-          <li>
+        <p class="mb-0 text-sm sm:text-xl">Il valore della partecipazione:</p>
+        <ul class="list-disc pl-4">
+          <li class="text-sm sm:text-xl"><strong>Consapevolezza</strong></li>
+          <li class="text-sm sm:text-xl"><strong>Gadget Sharper</strong></li>
+          <li class="text-sm sm:text-xl">
+            <strong>Gadget Uniurb a prezzo di costo</strong>
+          </li>
+          <li class="text-sm sm:text-xl">
             <strong
               >Sconti e agevolazioni presso negozi ed esercizi
               commerciali</strong
@@ -45,15 +58,24 @@
           </li>
         </ul>
       </div>
+
       <div class="mt-10">
-        <h2 class="text-center">
+        <h2 class="text-center text-lg sm:text-4xl">
           <span class="text-[#a7368c]">WOM</span> in pratica
         </h2>
-        <h3 class="text-2xl text-[#a7368c]">WOM Pocket</h3>
-        <div class="mt-6 flex gap-8 justify-center items-center">
-          <img src="assets/images/sharper2024/womPhone.png" />
-          <div>
-            <p class="sharper-text">
+
+        <!-- Responsive flexbox for WOM Pocket section -->
+        <h3 class="text-3xl text-[#a7368c] mt-6">WOM Pocket</h3>
+        <div
+          class="mt-6 flex flex-col sm:flex-row gap-8 justify-center items-center"
+        >
+          <img
+            src="assets/images/sharper2024/womPhone.png"
+            class="w-[150px] sm:w-[300px]"
+          />
+          <!-- Smaller image on mobile -->
+          <div class="sharper-text">
+            <p class="text-sm sm:text-xl">
               È l’<strong>app gratuita</strong> che permette di raccogliere e
               utilizzare <strong>WOM</strong>. Disponibile su
               <strong>Google Play</strong> (Android) e
@@ -66,6 +88,7 @@
               convenzionati.
             </p>
 
+            <!-- Responsive logos component -->
             <app-store-logos
               [appName]="'WOM POCKET'"
               [appleURL]="
@@ -82,40 +105,47 @@
           </div>
         </div>
 
+        <!-- Responsive QRcode TOTEM section -->
         <div class="mt-10">
-          <h3 class="text-2xl text-[#a7368c]">QRcode TOTEM</h3>
-          <div class="sharper-text">
-            <p class="mb-0">QRcode associati a luoghi ed eventi:</p>
-            <ul>
-              <li>Esposti all’ingresso o sui tavoli</li>
-              <li>Mostrati a schermo per gli eventi da palco</li>
-              <li>
-                Permettono di guadagnare WOM
-                <ul>
-                  <li>solo <strong>una volta</strong></li>
-                  <li>solo <strong>durante l’evento</strong></li>
-                  <li>
-                    solo in <strong>prossimità del luogo</strong> in cui sono
-                    esposti
-                  </li>
-                </ul>
-              </li>
-            </ul>
-            <p class="mb-0">
-              Tutti i QRcode, se scansionati normalmente, permettono di
-              scaricare l’app WOM Pocket
-            </p>
+          <h3 class="text-3xl text-[#a7368c]">QRcode TOTEM</h3>
+          <div class="mt-6">
+            <div class="sharper-text text-sm sm:text-xl">
+              <p class="mb-0">QRcode associati a luoghi ed eventi:</p>
+              <ul class="list-disc pl-4">
+                <li>Esposti all’ingresso o sui tavoli</li>
+                <li>Mostrati a schermo per gli eventi da palco</li>
+                <li>
+                  Permettono di guadagnare WOM
+                  <ul class="list-disc pl-4">
+                    <li>solo <strong>una volta</strong></li>
+                    <li>solo <strong>durante l’evento</strong></li>
+                    <li>
+                      solo in <strong>prossimità del luogo</strong> in cui sono
+                      esposti
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+              <p class="mb-0">
+                Tutti i QRcode, se scansionati normalmente, permettono di
+                scaricare l’app WOM Pocket
+              </p>
+            </div>
           </div>
         </div>
+
+        <!-- Responsive QRcode BADGE section -->
         <div class="mt-10">
-          <h3 class="text-2xl text-[#a7368c]">QRcode BADGE</h3>
-          <div class="mt-6 flex gap-8 justify-center items-center">
-            <div class="sharper-text">
+          <h3 class="">QRcode BADGE</h3>
+          <div
+            class="mt-6 flex flex-col sm:flex-row gap-8 justify-center items-center"
+          >
+            <div class="sharper-text text-sm sm:text-xl">
               <p class="mb-0">QRcode associati a ricercatrici e ricercatori:</p>
-              <ul>
+              <ul class="list-disc pl-4">
                 <li>
                   Card digitali con QRcode e metadati: <strong>nome</strong>,
-                  <strong>cognome</strong>, <strong>email</strong> e
+                  <strong>cognome</strong>, <strong>email</strong>,
                   <strong>URL</strong>
                 </li>
               </ul>
@@ -123,7 +153,7 @@
                 Ricercatrici e ricercatori possono farle scansionare ai
                 partecipanti per:
               </p>
-              <ul>
+              <ul class="list-disc pl-4">
                 <li>permettere loro di guadagnare WOM</li>
                 <li>lasciare loro i propri contatti istituzionali</li>
                 <li>lasciare traccia del luogo in cui ci si è incontrati</li>
@@ -135,10 +165,14 @@
                   href="https://forms.gle/ChzjeNjgWcNnHKHr8"
                   target="_blank"
                   >Google form</a
-                >
+                >.
               </p>
             </div>
-            <img src="assets/images/sharper2024/sharperPhone.png" />
+            <img
+              src="assets/images/sharper2024/sharperPhone.png"
+              class="w-[150px] sm:w-[300px]"
+            />
+            <!-- Smaller image on mobile -->
           </div>
         </div>
       </div>
