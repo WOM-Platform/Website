@@ -3,17 +3,18 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false,
-  mock: false,
-  baseUrl: 'https://dev.wom.social/api/',
-  baseBillingUrl: 'https://localhost:7284/billing',
-  baseUrlStats: 'http://localhost:5024/api/',
-  v1: 'v1/',
-  v2: 'v2/',
-  i18n: '1.1.0',
-  noreplyEmail: 'noreply@wom.social',
-  baseEmail: 'info@digit.srl',
-  sendInBlueApiKey: '#SENDINBLUEAPI#'
+    production: false,
+    mock: false,
+    /*baseUrl: 'https://dev.wom.social/api/',*/ //server sviluppo
+    baseUrl: 'http://localhost:64422/api/', // server locale
+    baseBillingUrl: 'https://localhost:7284/billing',
+    baseUrlStats: 'http://localhost:5024/api/',
+    v1: 'v1/',
+    v2: 'v2/',
+    i18n: '1.1.0',
+    noreplyEmail: 'noreply@wom.social',
+    baseEmail: 'info@digit.srl',
+    sendInBlueApiKey: '#SENDINBLUEAPI#'
 };
 
 /*

@@ -1,10 +1,10 @@
 import {Injectable} from "@angular/core";
 import {environment} from "../../environments/environment";
 import {catchError, concatMap, delay, map, tap} from "rxjs/operators";
-import { HttpClient, HttpParams } from "@angular/common/http";
+import {HttpClient, HttpParams} from "@angular/common/http";
 import {from, Observable, of, throwError} from "rxjs";
-import {Aim, AimEditing} from "../_models";
-import {Instrument, InstrumentEditing, UIInstrument} from "../_models/instrument";
+import {AimEditing} from "../_models";
+import {Instrument, InstrumentEditing} from "../_models/instrument";
 import {StorageService} from "./storage.service";
 
 @Injectable({
@@ -17,41 +17,63 @@ export class SourceService {
     }
 
     /**
-     * Fetches the list of instruments with pagination.
-     * @param {number} page The current page of the pagination.
-     * @param {number} itemsPerPage Number of items per page.
-     * @returns {Observable<any>} An observable of the paginated instrument list.
+     * Fetches the list of instruments with optional search and pagination.
+     *
+     * @param {Object} options - The options for fetching instruments.
+     * @param {string} [options.search] - The search term to filter instruments by name (optional).
+     * @param {number} [options.page=1] - The current page of the pagination (optional, default is 1).
+     * @param {string} [options.itemsPerPage="10"] - The number of items per page (optional, default is "10").
+     *
+     * @returns {Observable<any>} An observable of the instrument list, optionally paginated and filtered by search term.
      */
     getAllInstruments(
-        search: string,
-        page: number,
-        itemsPerPage: string = "10"
+        options: {
+            search?: string,
+            page?: number,
+            itemsPerPage?: string
+        } = {}
     ): Observable<any> {
-        const cachedInstruments = this.storageService.get("instrumentsList");
+        const {search = '', page = 1, itemsPerPage = "10"} = options;
 
-        if (cachedInstruments) {
-            return of(cachedInstruments)
-        } else {
-            const params = new HttpParams()
-                .set("search", search)
-                .set("page", page.toString())
-                .set("pageSize", itemsPerPage);
+        // Define HttpParams
+        const params = new HttpParams()
+            .set("search", search)
+            .set("page", page.toString())
+            .set("pageSize", itemsPerPage);
+
+        // If search is present, bypass cache and directly fetch from the API
+        if (search) {
             return this.http.get(`${this.localUrlV1}`, {params}).pipe(
-                tap({
-                    next: (data) => this.storageService.set("instrumentsList", data),
-                    error: (err) => {
-                        console.error("err", err)
-                    }
-                }),
-                map((res) => {
-                    return res;
-                }),
+                map((res) => res),
                 catchError((err) => {
-                    console.error("Error fetching instruments", err);
-                    return throwError(() => new Error("Failed to fetch instruments"));
+                    console.error("Error fetching search results", err);
+                    return throwError(() => new Error("Failed to fetch search results"));
                 })
             );
         }
+
+        // Check if cached data exists and return it if available
+        const cachedInstruments = this.storageService.get("instrumentsList");
+        if (cachedInstruments) {
+            return of(cachedInstruments);
+        }
+
+        // If no cache and no search, fetch from API and cache the result
+        return this.http.get(`${this.localUrlV1}`, {params}).pipe(
+            tap({
+                next: (data) => this.storageService.set("instrumentsList", data),
+                error: (err) => {
+                    console.error("err", err)
+                }
+            }),
+            map((res) => {
+                return res;
+            }),
+            catchError((err) => {
+                console.error("Error fetching instruments", err);
+                return throwError(() => new Error("Failed to fetch instruments"));
+            })
+        );
 
     }
 

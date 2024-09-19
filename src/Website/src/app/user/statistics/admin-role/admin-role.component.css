@@ -1,0 +1,22 @@
+h3 {
+    @apply text-lg
+}
+
+.statistic-title {
+    @apply font-semibold underline
+}
+
+ngx-charts-pie-chart .legend-item,
+ngx-charts-bar-vertical .legend-item {
+    display: none; /* Default hidden */
+}
+
+ngx-charts-pie-chart .legend-item[data-value="0"],
+ngx-charts-bar-vertical .legend-item[data-value="0"] {
+    display: none; /* Hide items with zero values */
+}
+
+ngx-charts-pie-chart .legend-item:not([data-value="0"]),
+ngx-charts-bar-vertical .legend-item:not[data-value="0"] {
+    display: block; /* Show items with non-zero values */
+}

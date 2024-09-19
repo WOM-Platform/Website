@@ -1,6 +1,6 @@
 import {Aim, AimEditing} from "./aim";
 
-export interface Instrument {
+export class Instrument {
     id: string;
     url: string;
     name: string;

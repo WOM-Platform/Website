@@ -70,15 +70,15 @@ export class UserUsersComponent implements OnInit, OnChanges {
 
     filterUpdate(filter) {
         this.storageService.clearCache("usersList");
-        this.itemsPerPage = filter.get("itemsPerPage").value;
+        this.itemsPerPage = filter.itemsPerPage;
 
         if (this.currentPage != 1) this.currentPage = 1;
-        this.itemsPerPage = filter.get("itemsPerPage").value;
+
         if (
-            filter.get("search").value.length >= 3 ||
-            filter.get("search").value.length === 0
+            filter.search.length >= 3 ||
+            filter.search.length === 0
         ) {
-            this.searchParameters = filter.get("search").value;
+            this.searchParameters = filter.search;
         }
         this.getUsersList();
     }
