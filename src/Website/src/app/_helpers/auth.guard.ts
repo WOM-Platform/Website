@@ -16,33 +16,36 @@ export const authGuard: CanActivateFn = (route: ActivatedRouteSnapshot, state: R
     const currentUser = userService.currentUserValue
     const currentUserLogin: UserMe = userService.currentUserLoginValue;
 
-    const token = currentUserLogin.token
+
     // User is logged
-    if (currentUserLogin && token && isTokenValid(token)) {
+    if (currentUserLogin) {
 
-        // check if user has validated email
-        const verified = currentUserLogin.verified;
+        const token = currentUserLogin.token
+        if (token && isTokenValid(token)) {
+            // check if user has validated email
+            const verified = currentUserLogin.verified;
 
-        if (state.url.includes("not-verified")) {
-            if (verified) {
-                router.navigate(["user/home"]).then(() => {
-                });
+            if (state.url.includes("not-verified")) {
+                if (verified) {
+                    router.navigate(["user/home"]).then(() => {
+                    });
+                }
+            } else if (!verified) {
+                router
+                    .navigate(["/user/not-verified"], {
+                        queryParams: {returnUrl: state.url},
+                    })
+                    .then(() => {
+                    });
             }
-        } else if (!verified) {
-            router
-                .navigate(["/user/not-verified"], {
-                    queryParams: {returnUrl: state.url},
-                })
-                .then(() => {
+            // Check for admin access
+            const requiredRoles = route.data['roles'] as Array<string>;
+            if (requiredRoles && !requiredRoles.includes(currentUser.role)) {
+                // Role not authorised so redirect to home page
+                router.navigate(["/user/home"]).then(() => {
                 });
-        }
-        // Check for admin access
-        const requiredRoles = route.data['roles'] as Array<string>;
-        if (requiredRoles && !requiredRoles.includes(currentUser.role)) {
-            // Role not authorised so redirect to home page
-            router.navigate(["/user/home"]).then(() => {
-            });
-            return false;
+                return false;
+            }
         }
         return true;
     }

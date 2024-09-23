@@ -1,4 +1,4 @@
-import {Merchant, Merchants} from "./merchant";
+import {Merchant} from "./merchant";
 import {Instrument} from "./instrument";
 
 /**
@@ -21,6 +21,7 @@ export interface UserMe {
     role: string;
     sources: Instrument[];
     verified: boolean;
+    token: string;
 }
 
 enum Roles {
