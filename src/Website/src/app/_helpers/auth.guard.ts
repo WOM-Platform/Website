@@ -6,16 +6,20 @@ import {
 } from "@angular/router";
 import {UserService} from "../_services";
 import {Observable} from "rxjs";
+import {UserMe} from "../_models";
+import {isTokenValid} from "./token.helper";
 
 
 export const authGuard: CanActivateFn = (route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | boolean => {
     const router = inject(Router);
     const userService = inject(UserService);
     const currentUser = userService.currentUserValue
-    const currentUserLogin = userService.currentUserLoginValue;
+    const currentUserLogin: UserMe = userService.currentUserLoginValue;
 
+    const token = currentUserLogin.token
     // User is logged
-    if (currentUserLogin) {
+    if (currentUserLogin && token && isTokenValid(token)) {
+
         // check if user has validated email
         const verified = currentUserLogin.verified;
 
