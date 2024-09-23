@@ -19,94 +19,100 @@ export class StatsService {
 
     // BEGIN REGISTRY API
     getAdminTotalAmountGeneratedAndRedeemed(filters: DashboardAdminFilter): Observable<any> {
-        const params: HttpParams = new HttpParams()
-            .set("startDate", filters.startDate)
-            .set("endDate", filters.endDate)
-            .set("sourceId", filters.sourceId)
+        const requestData = {
+            startDate: filters.startDate || null,
+            endDate: filters.endDate || null,
+            sourceId: filters.sourceId || null,
+            merchantId: filters.merchantId || null
+        }
 
-        return this.http.get(`${this.localUrlV1}vouchers/total-generated-redeemed`, {params})
+        return this.http.post(`${this.localUrlV1}vouchers/total-generated-redeemed`, {requestData})
     }
 
     getAdminTotalAmountConsumed(filters: DashboardAdminFilter): Observable<any> {
-        const params: HttpParams = new HttpParams()
-            .set("startDate", filters.startDate)
-            .set("endDate", filters.endDate)
-            .set("merchantId", filters.merchantId)
+        const requestData = {
+            "startDate": filters.startDate || null,
+            "endDate": filters.endDate || null,
+            "merchantId": filters.merchantId || null,
+        }
 
-        return this.http.get(`${this.localUrlV1}vouchers/total-consumed`, {params})
+        return this.http.post(`${this.localUrlV1}vouchers/total-consumed`, {requestData})
     }
 
     getAdminCreatedAmountByAim(filters: DashboardAdminFilter): Observable<any> {
-        const params: HttpParams = new HttpParams()
-            .set("startDate", filters.startDate)
-            .set("endDate", filters.endDate)
-            .set("sourceId", filters.sourceId)
+        const requestData = {
+            "startDate": filters.startDate || null,
+            "endDate": filters.endDate || null,
+            "sourceId": filters.sourceId || null,
+        }
 
-        return this.http.get(`${this.localUrlV1}vouchers/total-generated-by-aim`, {params}).pipe()
+        return this.http.post(`${this.localUrlV1}vouchers/total-generated-by-aim`, {requestData}).pipe()
     }
 
     getAdminTotalConsumedByAim(filters: DashboardAdminFilter): Observable<any> {
-        const params: HttpParams = new HttpParams()
-            .set("startDate", filters.startDate)
-            .set("endDate", filters.endDate)
-            .set("merchantId", filters.merchantId)
-
-        return this.http.get(`${this.localUrlV1}vouchers/total-consumed-by-aims`, {params});
-    }
-
-    getRankMerchants(filters: DashboardAdminFilter): Observable<any> {
-        const params: HttpParams = new HttpParams()
-            .set("startDate", filters.startDate)
-            .set("endDate", filters.endDate)
-            .set("merchantId", filters.merchantId)
-
-        return this.http.get(`${this.localUrlV1}merchant/rank-consumed`, {params});
-    }
-
-    getVouchersConsumedByOffer(filters: DashboardAdminFilter) {
-        const params: HttpParams = new HttpParams()
-            .set("startDate", filters.startDate)
-            .set("endDate", filters.endDate)
-            .set("merchantId", filters.merchantId)
-
-        return this.http.get(`${this.localUrlV1}merchant/voucher/total-consumed-by-offer`, {params});
-    }
-
-    getAmountOfAvailableVouchers(locationParams: LocationParams, merchantId: string) {
-        let params = new HttpParams()
-        if (locationParams.latitude != null) {
-            params = params.set('latitude', locationParams.latitude.toString());
+        const requestData = {
+            "startDate": filters.startDate || null,
+            "endDate": filters.endDate || null,
+            "merchantId": filters.merchantId || null,
         }
-        if (locationParams.longitude != null) {
-            params = params.set('longitude', locationParams.longitude.toString());
-        }
-        if (locationParams.radius != null) {
-            params = params.set('radius', locationParams.radius.toString());
-        }
-        if (merchantId) params = params.set('merchantId', merchantId);
 
-
-        return this.http.get(`${this.localUrlV1}voucher/available`, {params});
-    }
-
-    getTotalConsumedOverTime(filters: DashboardAdminFilter) {
-        const params: HttpParams = new HttpParams()
-            .set("startDate", filters.startDate)
-            .set("endDate", filters.endDate)
-            .set("merchantId", filters.merchantId)
-
-        return this.http.get(`${this.localUrlV1}voucher/total-consumption-over-time`, {params});
+        return this.http.post(`${this.localUrlV1}vouchers/total-consumed-by-aims`, {requestData});
     }
 
     getTotalGeneratedOverTime(filters: DashboardAdminFilter) {
-        const params: HttpParams = new HttpParams()
-            .set("startDate", filters.startDate)
-            .set("endDate", filters.endDate)
-            .set("sourceId", filters.sourceId)
+        const requestData = {
+            "startDate": filters.startDate || null,
+            "endDate": filters.endDate || null,
+            "sourceId": filters.sourceId || null,
+        }
 
-        return this.http.get(`${this.localUrlV1}voucher/total-generated-redeemed-over-time`, {params});
+        return this.http.post(`${this.localUrlV1}voucher/total-generated-redeemed-over-time`, {requestData});
     }
 
+    getTotalConsumedOverTime(filters: DashboardAdminFilter) {
+        const requestData = {
+            "startDate": filters.startDate || null,
+            "endDate": filters.endDate || null,
+            "merchantId": filters.merchantId || null,
+        }
+        return this.http.post(`${this.localUrlV1}voucher/total-consumption-over-time`, {requestData});
+    }
+
+    getAmountOfAvailableVouchers(locationParams: LocationParams, merchantId: string) {
+        let requestData = {}
+
+        if (locationParams.latitude != null) {
+            requestData = {...requestData, 'latitude': locationParams.latitude.toString()}
+        }
+        if (locationParams.longitude != null) {
+            requestData = {...requestData, 'longitude': locationParams.longitude.toString()}
+        }
+        if (locationParams.radius != null) {
+            requestData = {...requestData, 'radius': locationParams.radius.toString()}
+        }
+        if (merchantId) requestData = {...requestData, 'merchantId': merchantId}
+
+        return this.http.post(`${this.localUrlV1}voucher/available`, {requestData});
+    }
+
+    getVouchersConsumedByOffer(filters: DashboardAdminFilter) {
+        const requestData = {
+            "startDate": filters.startDate || null,
+            "endDate": filters.endDate || null,
+            "merchantId": filters.merchantId || null,
+        }
+        return this.http.post(`${this.localUrlV1}merchant/voucher/total-consumed-by-offer`, {requestData});
+    }
+
+    getRankMerchants(filters: DashboardAdminFilter): Observable<any> {
+        const requestData = {
+            "startDate": filters.startDate || null,
+            "endDate": filters.endDate || null,
+            "merchantId": filters.merchantId || null,
+        }
+
+        return this.http.post(`${this.localUrlV1}merchant/rank-consumed`, {requestData});
+    }
 
     downloadCsv(): Observable<Blob> {
         return this.http.get(`${this.localUrlV1}download/csv`, {responseType: 'blob'});
