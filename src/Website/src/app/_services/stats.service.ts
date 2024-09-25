@@ -18,12 +18,43 @@ export class StatsService {
     }
 
     // BEGIN REGISTRY API
+    fetchVouchersGeneratedAndRedeemedStats(filters: DashboardAdminFilter) {
+        let requestData = {
+            startDate: filters.startDate || null,
+            endDate: filters.endDate || null,
+            sourceId: filters.sourceId || null,
+
+        }
+
+
+        return this.http.post(`${this.localUrlV1}vouchers/generated-redeemed-statistics`, {requestData})
+    }
+
+    fetchVouchersConsumedStats(filters: DashboardAdminFilter, location: LocationParams) {
+        let requestData;
+        requestData = {
+            startDate: filters.startDate || null,
+            endDate: filters.endDate || null,
+            merchantId: filters.merchantId || null
+        }
+        if (location.latitude != null) {
+            requestData = {...requestData, 'latitude': location.latitude.toString()}
+        }
+        if (location.longitude != null) {
+            requestData = {...requestData, 'longitude': location.longitude.toString()}
+        }
+        if (location.radius != null) {
+            requestData = {...requestData, 'radius': location.radius.toString()}
+        }
+
+        return this.http.post(`${this.localUrlV1}vouchers/consumed-statistics`, {requestData});
+    }
+
     getAdminTotalAmountGeneratedAndRedeemed(filters: DashboardAdminFilter): Observable<any> {
         const requestData = {
             startDate: filters.startDate || null,
             endDate: filters.endDate || null,
             sourceId: filters.sourceId || null,
-            merchantId: filters.merchantId || null
         }
 
         return this.http.post(`${this.localUrlV1}vouchers/total-generated-redeemed`, {requestData})

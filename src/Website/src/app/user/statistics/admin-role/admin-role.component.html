@@ -125,6 +125,10 @@
             </div>
         </div>
         <!-- END Pie Chart by Aim -->
+        <!-- AVAILABLE WOM -->
+        <div *ngIf="availableVouchers">
+            <p><strong>Voucher disponibili:</strong> {{ availableVouchers }}</p>
+        </div>
         <!-- BEGIN Merchant Ranking -->
         <div class="mt-6" *ngIf="rankMerchants && rankMerchants.length > 0">
             <h3 class="font-semibold mb-4">
