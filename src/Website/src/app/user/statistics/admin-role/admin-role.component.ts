@@ -17,12 +17,12 @@ import {LazySearchComponent} from "../../components/lazy-search/lazy-search.comp
 import {Instrument} from "../../../_models/instrument";
 import {LocationParams} from "../../../_models/LocationParams";
 import {tap} from "rxjs/operators";
-import {Source} from "postcss";
-
-interface ChartData {
-    name: string;
-    value: number;
-}
+import {
+    ChartDataSwimlane, GenerationRedeemedStatsApiResponse,
+    RankMerchants,
+    TotalCreatedAmountByAim,
+    TotalGeneratedAndRedeemedOverTimeDto
+} from "../../../_models/stats";
 
 @Component({
     selector: 'app-admin-role',
@@ -68,10 +68,10 @@ export class AdminRoleComponent implements OnInit, OnDestroy {
     totalRedeemedAmount: number;
     totalCreatedAmountSub: Subscription;
     totalConsumedAmount: number = 0;
-    totalConsumedOverTime: ChartData[] = [];
-    totalGeneratedOverTime: { name: string, series: ChartData[] }[] = [];
-    totalCreatedAmountByAim: { aimCode: string, amount: number }[];
-    rankMerchants: { id: string, name: string, amount: number, rank: number }[] = []
+    totalConsumedOverTime: ChartDataSwimlane[] = [];
+    totalGeneratedOverTime: TotalGeneratedAndRedeemedOverTimeDto[] = [];
+    totalCreatedAmountByAim: TotalCreatedAmountByAim[];
+    rankMerchants: RankMerchants[] = []
     offerConsumedVouchers: any;
     availableVouchers: number
 
@@ -80,8 +80,8 @@ export class AdminRoleComponent implements OnInit, OnDestroy {
 
     isShowedGenerationFilter: boolean = false
     bboxArea
-    chartCreatedAmountByAim: ChartData[] = [];
-    chartConsumedAmountByAim: ChartData[] = [];
+    chartCreatedAmountByAim: ChartDataSwimlane[] = [];
+    chartConsumedAmountByAim: ChartDataSwimlane[] = [];
 
     view: [number, number] = [500, 400];
 
@@ -137,7 +137,21 @@ export class AdminRoleComponent implements OnInit, OnDestroy {
         })
     }
 
-    generalData() {
+    generalData(source?: Instrument, merchant?: Merchant) {
+        if (source) {
+            this.filters.sourceName = source.name
+            this.filters.sourceId = source.id;
+        }
+
+        if (merchant) {
+            this.filters.merchantName = merchant.name
+            this.filters.merchantId = merchant.id;
+        }
+
+
+        this.statsService.fetchVouchersConsumedStats(this.filters, this.locationParameters).subscribe((data) =>
+            console.log("iojioj ", data)
+        )
     }
 
     generationVoucherData(source?: Instrument) {
@@ -145,6 +159,12 @@ export class AdminRoleComponent implements OnInit, OnDestroy {
             this.filters.sourceName = source.name
             this.filters.sourceId = source.id;
         }
+        this.statsService.fetchVouchersGeneratedAndRedeemedStats(this.filters).subscribe((data: GenerationRedeemedStatsApiResponse) => {
+            this.totalCreatedAmount = data.TotalGenerated;
+            this.totalRedeemedAmount = data.TotalRedeemed;
+            this.totalCreatedAmountByAim = data.VoucherByAim;
+
+        })
         const observables = [
             // Created total amount of wom
             this.statsService.getAdminTotalAmountGeneratedAndRedeemed(this.filters).pipe(tap(data => {
@@ -250,7 +270,6 @@ export class AdminRoleComponent implements OnInit, OnDestroy {
         // Fetch the available vouchers in parallel (not part of the forkJoin)
         this.statsService.getAmountOfAvailableVouchers(this.locationParameters, this.filters.merchantId).subscribe((data: number) => {
             this.availableVouchers = data;
-            console.log("available ", this.availableVouchers)
         });
     }
 
