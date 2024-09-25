@@ -1,19 +1,23 @@
 .sharper-text {
-  @apply bg-white bg-opacity-70 p-4 rounded-lg text-black;
+    @apply bg-white bg-opacity-70 p-4 rounded-lg text-black;
 }
+
 h2 {
-  @apply relative text-center text-lg sm:text-3xl;
+    @apply relative text-center text-lg sm:text-3xl;
 }
+
 h3 {
-  @apply text-xl sm:text-2xl text-[#a7368c] mt-6;
+    @apply text-xl sm:text-2xl mt-6;
 }
+
 ul {
-  @apply list-disc list-inside;
+    @apply list-disc list-inside;
 }
+
 ul li {
-  @apply text-sm sm:text-xl;
+    @apply text-sm sm:text-xl;
 }
 
 p {
-  @apply mb-0 text-sm sm:text-xl;
+    @apply mb-0 text-sm sm:text-xl;
 }
