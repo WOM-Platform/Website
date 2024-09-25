@@ -1,5 +1,5 @@
 import {Injectable} from "@angular/core";
-import { HttpClient, HttpParams } from "@angular/common/http";
+import {HttpClient, HttpParams} from "@angular/common/http";
 import {BehaviorSubject, Observable, of, throwError} from "rxjs";
 import {catchError, map, tap} from "rxjs/operators";
 import {User, UserLogin, UserMe, UserRegistrationPayload} from "../_models";
@@ -314,11 +314,13 @@ export class UserService {
         );
     }
 
-    userEdit(
-        id: string,
-        user: User): Observable<any> {
-
-        return this.http.put<any>(`${this.localUrlV1}${id}`, user).pipe(
+    userEdit(id: string, user: any): Observable<any> {
+        const updatedUser = {
+            ...user,
+            role: user.roleUser,
+        };
+        delete updatedUser.roleUser;
+        return this.http.put<any>(`${this.localUrlV1}${id}`, updatedUser).pipe(
             map((res) => {
                 return res;
             })
@@ -339,6 +341,10 @@ export class UserService {
                 return res;
             })
         );
+    }
+
+    getUser(userId: string) {
+        return this.http.get(`${this.localUrlV1}${userId}`)
     }
 
     getAllUsers(search: string,

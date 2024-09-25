@@ -109,20 +109,23 @@ export class UserUsersComponent implements OnInit, OnChanges {
     }
 
     onEditUser(user: User) {
-        const dialogRef = this.dialog.open(CreateEditUserDialogComponent, {
-            data: user
+        this.userService.getUser(user.id).subscribe(() => {
+            const dialogRef = this.dialog.open(CreateEditUserDialogComponent, {
+                data: user
+            })
+
+            dialogRef.afterClosed().subscribe({
+                next: (editedUser) => {
+                    if (editedUser) {
+                        this.storageService.clearCache('usersList')
+                        this.getUsersList()
+                    }
+                },
+                error: () => {
+                }
+            })
         })
 
-        dialogRef.afterClosed().subscribe({
-            next: (editedUser) => {
-                if (editedUser) {
-                    this.storageService.clearCache('usersList')
-                    this.getUsersList()
-                }
-            },
-            error: () => {
-            }
-        })
     }
 
     onDeleteUser(user: User): void {

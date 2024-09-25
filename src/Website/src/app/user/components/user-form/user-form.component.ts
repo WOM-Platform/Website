@@ -73,7 +73,6 @@ export class UserFormComponent implements OnInit {
 
 
     onSave() {
-        console.log(this.userForm);
         if (this.userForm.valid) {
             this.isLoading = true;
             const user: User = {
@@ -84,6 +83,7 @@ export class UserFormComponent implements OnInit {
             let request$
             if (this.userToEdit) {
                 const changedValues = this.getChangedValues(this.userToEdit, this.userForm.value);
+
                 request$ = this.userService.userEdit(user.id, changedValues)
             } else {
                 request$ = this.userService.userCreate(user.name, user.surname, user.email, user.password, user.role);
@@ -103,7 +103,6 @@ export class UserFormComponent implements OnInit {
     }
 
     getChangedValues(initialValues: any, currentValues: any): any {
-        console.log("changed values")
         const changedValues: any = {};
 
         for (const key in currentValues) {
@@ -114,7 +113,6 @@ export class UserFormComponent implements OnInit {
                 }
                 continue;
             }
-            console.log(`key ${key} and initial value ${initialValues[key]} and current value ${currentValues[key]}`);
             if (initialValues[key] !== currentValues[key]) {
                 changedValues[key] = currentValues[key];
             }
