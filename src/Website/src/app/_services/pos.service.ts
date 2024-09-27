@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import { HttpClient, HttpErrorResponse, HttpEvent, HttpEventType, HttpHeaders } from '@angular/common/http';
+import {HttpClient, HttpErrorResponse, HttpEvent, HttpEventType, HttpHeaders} from '@angular/common/http';
 import {forkJoin, Observable, of, throwError} from 'rxjs';
 import {Pos, PosRegistration} from '../_models';
 import {environment} from '../../environments/environment';
@@ -68,7 +68,7 @@ export class PosService {
                     return of([])
                 }
                 const offerDetailsRequests = offers.map(offer =>
-                    this.http.get(`https://dev.wom.social/api/render/offer/${offer.id}`, {responseType: 'blob'}).pipe(
+                    this.http.get(`${environment.baseUrl}render/offer/${offer.id}`, {responseType: 'blob'}).pipe(
                         map((offerDetails: any) => {
                             return {
                                 ...offer,
