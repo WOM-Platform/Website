@@ -315,66 +315,41 @@ export class UserService {
     }
 
     userEdit(id: string, user: any): Observable<any> {
-        const updatedUser = {
-            ...user,
-            role: user.roleUser,
-        };
-        delete updatedUser.roleUser;
-        return this.http.put<any>(`${this.localUrlV1}${id}`, updatedUser).pipe(
+
+        return this.http.put<any>(`${this.localUrlV1}${id}`, user).pipe(
             map((res) => {
                 return res;
             })
         );
     }
 
-    userSearch(name: string = "", email: string = ""): Observable<any> {
-        let page = 1;
-        let pageSize = 10;
+    getAllUsers(name: string = "", email: string = "", globalSearch: string = "", page: number = 1, itemsPerPage: string = "10"): Observable<any> {
         const params: HttpParams = new HttpParams()
             .set("name", name.toString())
             .set("email", email.toString())
+            .set("globalSearch", globalSearch.toString())
             .set("page", page.toString())
-            .set("pageSize", pageSize.toString());
+            .set("pageSize", itemsPerPage.toString());
 
         return this.http.get<any>(this.localUrlV1, {params}).pipe(
+            tap({
+                next: (data) => {
+                    this.storageService.set("usersList", data)
+                },
+                error: (err) => console.error("err ", err),
+            }),
             map((res) => {
                 return res;
+            }),
+            catchError((err) => {
+                console.error("Error fetching instruments", err);
+                return throwError(() => new Error("Failed to fetch instruments"));
             })
         );
     }
 
     getUser(userId: string) {
         return this.http.get(`${this.localUrlV1}${userId}`)
-    }
-
-    getAllUsers(search: string,
-                page: number,
-                itemsPerPage: string = "10"): Observable<any> {
-        const cachedUsers = this.storageService.get("usersList");
-        if (cachedUsers) {
-            return of(cachedUsers);
-        } else {
-            const params = new HttpParams()
-                .set("name", search)
-                .set("email", search)
-                .set("page", page.toString())
-                .set("pageSize", itemsPerPage);
-            return this.http.get(`${this.localUrlV1}`, {params}).pipe(
-                tap({
-                    next: (data) => {
-                        this.storageService.set("usersList", data)
-                    },
-                    error: (err) => console.error("err ", err),
-                }),
-                map((res) => {
-                    return res;
-                }),
-                catchError((err) => {
-                    console.error("Error fetching instruments", err);
-                    return throwError(() => new Error("Failed to fetch instruments"));
-                })
-            );
-        }
     }
 
     // Delete user

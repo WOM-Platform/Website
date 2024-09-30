@@ -45,7 +45,7 @@ export class UserFormComponent implements OnInit {
             surname: ['', Validators.required],
             email: ['', [Validators.required, Validators.email]],
             password: ['', this.passwordValidator],
-            roleUser: ['User'],
+            role: ['User'],
         });
 
         if (this.isRoleAccessRequired) {
@@ -58,7 +58,7 @@ export class UserFormComponent implements OnInit {
                 name: this.userToEdit.name,
                 surname: this.userToEdit.surname,
                 email: this.userToEdit.email,
-                roleUser: this.userToEdit.role,
+                role: this.userToEdit.role,
             });
         }
     }
@@ -70,7 +70,6 @@ export class UserFormComponent implements OnInit {
         }
         return null;
     }
-
 
     onSave() {
         if (this.userForm.valid) {

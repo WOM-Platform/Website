@@ -66,13 +66,13 @@
             <!-- select to set user role if superuser or normal one -->
             <div *ngIf="currentUser.role === 'Admin'">
                 <label>Ruolo Utente<span class="text-red-600">*</span>: </label>
-                <select formControlName="roleUser" class="input-create grow" autocomplete="off">
+                <select formControlName="role" class="input-create grow" autocomplete="off">
                     <option value="Admin">Admin</option>
-                    <option value="User" [defaultSelected]="true">User</option>
+                    <option value="User">User</option>
                 </select>
 
                 <div class="text-red-600"
-                     *ngIf="userForm.get('roleUser').invalid && userForm.get('roleUser').touched">
+                     *ngIf="userForm.get('role').invalid && userForm.get('role').touched">
                     Campo obbligatorio
                 </div>
             </div>

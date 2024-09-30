@@ -51,7 +51,7 @@ export class UserUsersComponent implements OnInit, OnChanges {
     getUsersList() {
         this.loadingService.show()
 
-        this.userService.getAllUsers(this.searchParameters, this.currentPage, this.itemsPerPage).pipe(
+        this.userService.getAllUsers("", "", this.searchParameters, this.currentPage, this.itemsPerPage).pipe(
             finalize(() => {
                 this.loadingService.hide()
                 this.cd.detectChanges();
@@ -67,6 +67,7 @@ export class UserUsersComponent implements OnInit, OnChanges {
                 }
             })
     }
+
 
     filterUpdate(filter) {
         this.storageService.clearCache("usersList");

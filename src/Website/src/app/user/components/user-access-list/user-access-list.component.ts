@@ -91,7 +91,7 @@ export class UserAccessListComponent implements OnDestroy {
             this.cd.detectChanges();
         } else {
             this.subscriptions = this.userService
-                .userSearch(userToSearch.name, userToSearch.email)
+                .getAllUsers(userToSearch.name, userToSearch.email)
                 .subscribe((res) => {
                     this.listAccess = [];
                     if (res.data && res.data.length > 0) {
