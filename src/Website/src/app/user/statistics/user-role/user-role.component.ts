@@ -2,13 +2,13 @@ import {Component, OnInit} from '@angular/core';
 import {Merchant} from "../../../_models";
 import {StorageService} from "../../../_services/storage.service";
 import {MerchantService, UserService} from "../../../_services";
-import {NgFor} from "@angular/common";
+import {NgFor, NgIf} from "@angular/common";
 import {Instrument} from "../../../_models/instrument";
 
 @Component({
     selector: 'app-user-role',
     standalone: true,
-    imports: [NgFor],
+    imports: [NgFor, NgIf],
     templateUrl: './user-role.component.html',
     styleUrl: './user-role.component.css'
 })

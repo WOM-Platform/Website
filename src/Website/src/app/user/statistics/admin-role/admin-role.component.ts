@@ -3,7 +3,7 @@ import {CommonModule, DatePipe} from "@angular/common";
 import {PieChartModule} from "@swimlane/ngx-charts";
 import {SharedModule} from "../../../shared/shared.module";
 import {Merchant, Merchants} from "../../../_models";
-import {finalize, Subscription} from "rxjs";
+import {Subscription} from "rxjs";
 import {AuthService, MerchantService, StatsService} from "../../../_services";
 import {MatDatepickerInputEvent} from "@angular/material/datepicker";
 import html2canvas from "html2canvas";
@@ -24,6 +24,7 @@ import {
     ChartDataSwimlaneSeries, ConsumedStatsApiResponse
 } from "../../../_models/stats";
 import {LoadingService} from "../../../_services/loading.service";
+import {StatisticsFiltersComponent} from "../../components/statistics-filters/statistics-filters.component";
 
 @Component({
     selector: 'app-admin-role',
@@ -36,7 +37,8 @@ import {LoadingService} from "../../../_services/loading.service";
         DatePipe,
         SearchComponent,
         CommonModule,
-        LazySearchComponent
+        LazySearchComponent,
+        StatisticsFiltersComponent
     ],
     templateUrl: './admin-role.component.html',
     styleUrl: './admin-role.component.css'
@@ -46,7 +48,6 @@ export class AdminRoleComponent implements OnInit, OnDestroy {
     merchantData: Merchants;
     merchantSubscription: Subscription;
 
-    isDateFiltering: boolean = false;
 
     filters: DashboardAdminFilter = {
         startDate: "",
@@ -264,25 +265,6 @@ export class AdminRoleComponent implements OnInit, OnDestroy {
         this.view = [event.target.innerWidth / 3, 400];
     }
 
-    onDatesSelected(dates: { startDate: Date | null, endDate: Date | null }) {
-        if (dates.startDate) {
-            this.filters.startDate = new DatePipe("it-IT").transform(dates.startDate, 'yyyy-MM-dd').toLocaleString();
-        }
-        if (dates.endDate) {
-            this.filters.endDate = new DatePipe("it-IT").transform(dates.endDate, 'yyyy-MM-dd').toLocaleString();
-        }
-
-        // call api to update statistics
-        this.loadData()
-    }
-
-    cancelDataFilter() {
-        this.filters.startDate = ""
-        this.filters.endDate = ""
-        this.isDateFiltering = !this.isDateFiltering
-        this.loadData()
-    }
-
     elementSelected(elementKey: string, elementSelected: Merchant | Instrument) {
         if (elementKey === 'merchant' && this.isMerchant(elementSelected)) {
             this.consumedDataFetched = []
@@ -322,6 +304,12 @@ export class AdminRoleComponent implements OnInit, OnDestroy {
         }
     }
 
+    onDatesSelected(date) {
+        this.filters.startDate = date.startDate;
+        this.filters.endDate = date.endDate;
+        this.loadData()
+    }
+
     convertToCSV(): string {
         let csvRows = [];
 
@@ -354,52 +342,6 @@ export class AdminRoleComponent implements OnInit, OnDestroy {
 
         // Join all rows with a newline
         return csvRows.join('\n');
-    }
-
-
-    // Method to download the CSV
-    downloadCSV() {
-        this.loadingService.show()
-        this.statsService.downloadCsv(this.filters).pipe(
-            finalize(() => {
-                this.loadingService.hide()
-            })
-        ).subscribe(blob => {
-            const url = URL.createObjectURL(blob.body);
-            console.log(blob.headers)
-            // Estrai l'intestazione Content-Disposition
-            const contentDisposition = blob.headers.get('Content-Disposition');
-            let fileName = 'download.csv'; // Nome di default
-
-            if (contentDisposition) {
-                console.log("Entrato dentro a contentDisposition")
-                const matches = /filename="([^"]+)"/.exec(contentDisposition);
-                if (matches && matches[1]) {
-                    fileName = matches[1];
-                }
-            }
-
-            // Create an anchor element and trigger a download
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = fileName;
-            a.click();
-
-            // Clean up the URL object
-            URL.revokeObjectURL(url);
-        })
-        /*const csvData = this.convertToCSV();
-        const blob = new Blob([csvData], {type: 'text/csv'});
-        const url = URL.createObjectURL(blob);
-
-        const a = document.createElement('a');
-        a.setAttribute('style', 'display:none;');
-        a.href = url;
-        a.download = 'data.csv';
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-        URL.revokeObjectURL(url);*/
     }
 
     onSelect(event): void {

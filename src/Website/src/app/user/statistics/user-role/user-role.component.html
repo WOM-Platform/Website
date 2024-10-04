@@ -1,4 +1,11 @@
-<div *ngFor="let merc of merchants">
-    <p>{{ merc.name }}</p>
+<div *ngIf="merchants">
+    <div *ngFor="let merc of merchants">
+        <p>{{ merc.name }}</p>
+    </div>
+</div>
+<div *ngIf="sources">
+    <div *ngFor="let source of sources">
+        <p>{{ source.name }}</p>
+    </div>
 </div>
 

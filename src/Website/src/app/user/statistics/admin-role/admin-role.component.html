@@ -1,41 +1,5 @@
 <div class="relative mx-auto py-10 px-4 max-w-full">
-    <!-- Date Filtering and CSV Download Section -->
-    <div class="flex justify-between items-center mb-8">
-        <div class="relative">
-            <ng-container *ngIf="!isDateFiltering; else filteringForDate">
-                <button
-                        (click)="isDateFiltering = !isDateFiltering"
-                        class="flex items-center gap-2 px-4 py-2 border border-blue-500 text-blue-500 font-semibold rounded-lg shadow hover:bg-blue-100 focus:ring focus:ring-blue-400 transition"
-                >
-                    <i class="fa-solid fa-calendar-days text-blue-500"></i>
-                    Filtra per data
-                </button>
-            </ng-container>
-            <ng-template #filteringForDate>
-                <button
-                        (click)="cancelDataFilter()"
-                        class="flex items-center gap-2 px-4 py-2 border border-red-500 text-red-500 font-semibold rounded-lg shadow hover:bg-red-100 focus:ring focus:ring-red-400 transition"
-                >
-                    <i class="fa-solid fa-times text-red-500"></i>
-                    Annulla
-                </button>
-            </ng-template>
-        </div>
-        <button
-                class="flex items-center gap-2 hover:underline text-gray-600"
-                (click)="downloadCSV()"
-        >
-            Scarica dati <i class="fa-regular fa-circle-down text-lg"></i>
-        </button>
-    </div>
-
-    <!-- Datepicker -->
-    <ng-container *ngIf="isDateFiltering">
-        <div class="mb-8">
-            <app-datepicker (dates)="onDatesSelected($event)"></app-datepicker>
-        </div>
-    </ng-container>
-
+    <app-statistics-filters (onDateFilter)="onDatesSelected($event)"/>
     <!-- WOM Consumati Section -->
     <div *ngIf="isConsumedDataReady; else loadingConsumption" class="mb-12 bg-white shadow-md rounded-lg p-6 border">
         <div class="flex justify-between items-center mb-4">
