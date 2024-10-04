@@ -67,7 +67,6 @@ export class OffersComponent implements OnInit {
                 this.posService.createOffer(this.posId, newOffer).subscribe({
                     next: (newOffer) => {
                         if (newOffer) {
-                            console.log("new offer ", newOffer)
                             this.snackBarService.openSnackBar("Offerta creata correttamente")
                             this.posService.getOfferQrCode(newOffer).subscribe({
                                 next: (offer) => {

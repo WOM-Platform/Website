@@ -14,7 +14,7 @@ import {StorageService} from "../_services/storage.service";
 export class UserComponent implements OnInit, OnDestroy {
     username: string;
     role: string = ""
-    userData: any;
+    userData: UserMe;
 
     userDataSubscription: Subscription;
     isLoading = false;
@@ -70,7 +70,6 @@ export class UserComponent implements OnInit, OnDestroy {
         private userService: UserService,
         private cd: ChangeDetectorRef,
         private loadingService: LoadingService,
-        private storageService: StorageService
     ) {
     }
 
@@ -82,8 +81,6 @@ export class UserComponent implements OnInit, OnDestroy {
             }
         );
 
-        const correntUser = this.storageService.load('currentUser')
-        this.userData = `${correntUser.name} ${correntUser.surname}`;
         this.username =
             this.userService.currentUserValue.name +
             " " +
@@ -117,7 +114,11 @@ export class UserComponent implements OnInit, OnDestroy {
             if (link.adminOnly && this.role !== 'Admin') {
                 return false;
             }
-            // if user role is user than check if they are instrument
+            // remove statistics if user has no merchant and no sources
+            if (link.path === "/user/statistics" && (this.userData.merchants.length <= 0 && this.userData.sources.length <= 0)) {
+                return false
+            }
+            // if user role is user than check if they have sources
             return !(link.path === '/user/instruments' && (this.role === 'User' && this.userData.sources.length === 0));
         });
     }

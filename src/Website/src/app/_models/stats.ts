@@ -34,9 +34,20 @@ export interface VoucherByAimDTO {
     amount: number;
 }
 
-export interface TotalGeneratedAndRedeemedOverTimeDto {
+export interface ChartDataSwimlaneSeries {
     name: string;
     series: ChartDataSwimlane[];
+}
+
+export interface TotalGeneratedRedeemedOverTime {
+    date: string;
+    totalRedeemed: number;
+    totalGenerated: number;
+}
+
+export interface TotalConsumedOverTime {
+    date: string;
+    total: number;
 }
 
 export interface TotalCreatedAmountByAim {
@@ -59,17 +70,17 @@ export interface RankMerchants {
 }
 
 export interface GenerationRedeemedStatsApiResponse {
-    TotalGenerated: number;
-    TotalRedeemed: number;
-    VoucherByAim: VoucherByAimDTO[];
-    VoucherAvailable: number;
-    TotalGeneratedAndRedeemedOverTime: TotalGeneratedAndRedeemedOverTimeDto[];
+    totalGenerated: number;
+    totalRedeemed: number;
+    voucherByAim: VoucherByAimDTO[];
+    voucherAvailable: number;
+    totalGeneratedAndRedeemedOverTime: TotalGeneratedRedeemedOverTime[];
 }
 
 export interface ConsumedStatsApiResponse {
-    TotalConsumed: number;
-    VoucherByAim: VoucherByAimDTO[];
-    MerchantRanks: MerchantRankDTO[];
-    TotalConsumedOverTime: ChartDataSwimlane[];
+    totalConsumed: number;
+    voucherByAims: VoucherByAimDTO[];
+    merchantRanks: MerchantRankDTO[];
+    totalConsumedOverTime: TotalConsumedOverTime[];
 }
 

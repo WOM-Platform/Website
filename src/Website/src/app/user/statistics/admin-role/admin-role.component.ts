@@ -3,7 +3,7 @@ import {CommonModule, DatePipe} from "@angular/common";
 import {PieChartModule} from "@swimlane/ngx-charts";
 import {SharedModule} from "../../../shared/shared.module";
 import {Merchant, Merchants} from "../../../_models";
-import {forkJoin, Subscription} from "rxjs";
+import {finalize, Subscription} from "rxjs";
 import {AuthService, MerchantService, StatsService} from "../../../_services";
 import {MatDatepickerInputEvent} from "@angular/material/datepicker";
 import html2canvas from "html2canvas";
@@ -21,8 +21,9 @@ import {
     ChartDataSwimlane, GenerationRedeemedStatsApiResponse,
     RankMerchants,
     TotalCreatedAmountByAim,
-    TotalGeneratedAndRedeemedOverTimeDto
+    ChartDataSwimlaneSeries, ConsumedStatsApiResponse
 } from "../../../_models/stats";
+import {LoadingService} from "../../../_services/loading.service";
 
 @Component({
     selector: 'app-admin-role',
@@ -69,7 +70,7 @@ export class AdminRoleComponent implements OnInit, OnDestroy {
     totalCreatedAmountSub: Subscription;
     totalConsumedAmount: number = 0;
     totalConsumedOverTime: ChartDataSwimlane[] = [];
-    totalGeneratedOverTime: TotalGeneratedAndRedeemedOverTimeDto[] = [];
+    totalGeneratedOverTime: ChartDataSwimlaneSeries[] = [];
     totalCreatedAmountByAim: TotalCreatedAmountByAim[];
     rankMerchants: RankMerchants[] = []
     offerConsumedVouchers: any;
@@ -91,7 +92,13 @@ export class AdminRoleComponent implements OnInit, OnDestroy {
             '#9933FF', '#FF3380', '#80FF33', '#3380FF', '#FF5733',]
     };
 
-    constructor(private authService: AuthService, private merchantService: MerchantService, private sourceService: SourceService, private statsService: StatsService) {
+    constructor(
+        private authService: AuthService,
+        private loadingService: LoadingService,
+        private merchantService: MerchantService,
+        private sourceService: SourceService,
+        private statsService: StatsService
+    ) {
     }
 
     ngOnInit(): any {
@@ -149,9 +156,6 @@ export class AdminRoleComponent implements OnInit, OnDestroy {
         }
 
 
-        this.statsService.fetchVouchersConsumedStats(this.filters, this.locationParameters).subscribe((data) =>
-            console.log("iojioj ", data)
-        )
     }
 
     generationVoucherData(source?: Instrument) {
@@ -160,54 +164,33 @@ export class AdminRoleComponent implements OnInit, OnDestroy {
             this.filters.sourceId = source.id;
         }
         this.statsService.fetchVouchersGeneratedAndRedeemedStats(this.filters).subscribe((data: GenerationRedeemedStatsApiResponse) => {
-            this.totalCreatedAmount = data.TotalGenerated;
-            this.totalRedeemedAmount = data.TotalRedeemed;
-            this.totalCreatedAmountByAim = data.VoucherByAim;
+            this.totalCreatedAmount = data.totalGenerated;
+            this.totalRedeemedAmount = data.totalRedeemed;
+            this.totalCreatedAmountByAim = data.voucherByAim;
+
+            this.chartCreatedAmountByAim = this.totalCreatedAmountByAim.map(item => ({
+                name: item.aimCode,
+                value: item.amount
+            }))
+
+            this.availableVouchers = data.voucherAvailable
+            this.isGeneratedDataReady = true
+
+            this.totalGeneratedOverTime = data.totalGeneratedAndRedeemedOverTime.map(item => ({
+                name: item.date,
+                series: [
+                    {
+                        name: 'Voucher Redeemed',
+                        value: item.totalRedeemed ? Number(item.totalRedeemed) : 0  // Ensure value is a number or 0
+                    },
+                    {
+                        name: 'Voucher Generated',
+                        value: item.totalGenerated ? Number(item.totalGenerated) : 0  // Ensure value is a number or 0
+                    }
+                ]
+            }))
 
         })
-        const observables = [
-            // Created total amount of wom
-            this.statsService.getAdminTotalAmountGeneratedAndRedeemed(this.filters).pipe(tap(data => {
-                this.totalCreatedAmount = data.totalCount;
-                this.totalRedeemedAmount = data.redeemedCount;
-            })),
-            // Created amount of wom divided by aim
-            this.statsService.getAdminCreatedAmountByAim(this.filters).pipe(tap((data) => {
-                this.totalCreatedAmountByAim = data;
-
-                this.chartCreatedAmountByAim = data.map(item => ({
-                    name: item.aimCode,
-                    value: item.amount
-                }))
-            })),
-
-            this.statsService.getTotalGeneratedOverTime(this.filters).pipe(tap((data: any[]) => {
-                this.totalGeneratedOverTime = data.map(item => ({
-                    name: item.date,
-                    series: [
-                        {
-                            name: 'Voucher Redeemed',
-                            value: item.totalRedeemed ? Number(item.totalRedeemed) : 0  // Ensure value is a number or 0
-                        },
-                        {
-                            name: 'Voucher Generated',
-                            value: item.totalGenerated ? Number(item.totalGenerated) : 0  // Ensure value is a number or 0
-                        }
-                    ]
-                }))
-            }))
-        ]
-
-        forkJoin(observables).subscribe({
-            next: () => {
-                // All requests are done, now set isConsumedDataReady to true
-                this.isGeneratedDataReady = true;
-            },
-            error: (err) => {
-                console.error('Error occurred while fetching data:', err);
-                // Handle error and potentially set isConsumedDataReady to false
-            }
-        });
     }
 
     consumptionVoucherData(merchant?: Merchant) {
@@ -216,56 +199,38 @@ export class AdminRoleComponent implements OnInit, OnDestroy {
             this.filters.merchantId = merchant.id;
         }
 
-        // Array to store the observables
-        const observables = [
+        this.statsService.fetchVouchersConsumedStats(this.filters, this.locationParameters).subscribe((data: ConsumedStatsApiResponse) => {
             // Consumed total amount of WOM
-            this.statsService.getAdminTotalAmountConsumed(this.filters).pipe(tap((data: number) => {
-                this.totalConsumedAmount = data;
-            })),
-
+            this.totalConsumedAmount = data.totalConsumed;
+            console.log("Undefie ", data)
             // Get total consumed by aims
-            this.statsService.getAdminTotalConsumedByAim(this.filters).pipe(tap((data) => {
-                this.chartConsumedAmountByAim = data.map(item => ({
-                    name: item.aimCode,
-                    value: item.amount
-                }));
-            })),
+            this.chartConsumedAmountByAim = data.voucherByAims.map(item => ({
+                name: item.aimCode,
+                value: item.amount
+            }));
 
             // Get rank of merchants
-            this.statsService.getRankMerchants(this.filters).pipe(tap((data) => {
-                this.rankMerchants = data;
-            })),
-
+            this.rankMerchants = data.merchantRanks
             // Get total consumed over time
-            this.statsService.getTotalConsumedOverTime(this.filters).pipe(tap((res: any[]) => {
-                this.totalConsumedOverTime = res.map(data => ({
+            this.totalConsumedOverTime = data.totalConsumedOverTime.map(
+                data => ({
                     name: data.date,
                     value: data.total
-                }));
-            }))
-        ];
+                })
+            )
+
+            // All requests are done, now set isConsumedDataReady to true
+            this.isConsumedDataReady = true;
+        })
+
 
         // Add additional observable if merchantId is present
         if (this.filters.merchantId) {
-            observables.push(
-                // Get vouchers consumed by offer
-                this.statsService.getVouchersConsumedByOffer(this.filters).pipe(tap((data) => {
-                    this.offerConsumedVouchers = data;
-                }))
-            );
+            // Get vouchers consumed by offer
+            this.statsService.getVouchersConsumedByOffer(this.filters).pipe(tap((data) => {
+                this.offerConsumedVouchers = data;
+            }))
         }
-
-        // Execute all requests in parallel
-        forkJoin(observables).subscribe({
-            next: () => {
-                // All requests are done, now set isConsumedDataReady to true
-                this.isConsumedDataReady = true;
-            },
-            error: (err) => {
-                console.error('Error occurred while fetching data:', err);
-                // Handle error and potentially set isConsumedDataReady to false
-            }
-        });
 
         // Fetch the available vouchers in parallel (not part of the forkJoin)
         this.statsService.getAmountOfAvailableVouchers(this.locationParameters, this.filters.merchantId).subscribe((data: number) => {
@@ -391,15 +356,33 @@ export class AdminRoleComponent implements OnInit, OnDestroy {
         return csvRows.join('\n');
     }
 
+
     // Method to download the CSV
     downloadCSV() {
-        this.statsService.downloadCsv().subscribe(blob => {
-            const url = URL.createObjectURL(blob);
+        this.loadingService.show()
+        this.statsService.downloadCsv(this.filters).pipe(
+            finalize(() => {
+                this.loadingService.hide()
+            })
+        ).subscribe(blob => {
+            const url = URL.createObjectURL(blob.body);
+            console.log(blob.headers)
+            // Estrai l'intestazione Content-Disposition
+            const contentDisposition = blob.headers.get('Content-Disposition');
+            let fileName = 'download.csv'; // Nome di default
+
+            if (contentDisposition) {
+                console.log("Entrato dentro a contentDisposition")
+                const matches = /filename="([^"]+)"/.exec(contentDisposition);
+                if (matches && matches[1]) {
+                    fileName = matches[1];
+                }
+            }
 
             // Create an anchor element and trigger a download
             const a = document.createElement('a');
             a.href = url;
-            a.download = 'totalConsumedOverTime.csv';
+            a.download = fileName;
             a.click();
 
             // Clean up the URL object

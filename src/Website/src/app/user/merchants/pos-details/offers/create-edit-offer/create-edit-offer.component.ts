@@ -68,10 +68,7 @@ export class CreateEditOfferComponent implements OnInit {
             // Mapping form values to Offer type
             const offer: Offer = formValue as Offer;
             this.dialogRef.close(offer);
-        } else {
-            console.log("erroe")
         }
-
     }
 
     onCancellation() {

@@ -1,5 +1,5 @@
 import {Component, ElementRef, Inject, OnInit, ViewChild} from '@angular/core';
-import {FormBuilder, FormGroup, ReactiveFormsModule, UntypedFormGroup, Validators} from "@angular/forms";
+import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {MAT_DIALOG_DATA, MatDialogModule, MatDialogRef} from "@angular/material/dialog";
 import {PosService} from "../../../_services";
 import {StorageService} from "../../../_services/storage.service";
@@ -131,14 +131,15 @@ export class PosCreateDialogComponent implements OnInit {
         this.posService
             .update(this.data.pos)
             .pipe(first())
-            .subscribe(
-                (result) => {
-                    this.dialogRef.close(true);
-                    this.storageService.clear(this.storageService.posFormKey);
-                },
-                (error) => {
-                    this.formApiError = true;
-                    console.log(error);
+            .subscribe({
+                    next: () => {
+                        this.dialogRef.close(true);
+                        this.storageService.clear(this.storageService.posFormKey);
+                    },
+                    error: (error) => {
+                        this.formApiError = true;
+                        console.error(error);
+                    }
                 }
             );
     }
@@ -158,16 +159,16 @@ export class PosCreateDialogComponent implements OnInit {
         this.posService
             .register(pos)
             .pipe(first())
-            .subscribe(
-                (result) => {
+            .subscribe({
+                next: () => {
                     this.dialogRef.close(true);
                     this.storageService.clear(this.storageService.posFormKey);
                 },
-                (error) => {
+                error: (error) => {
                     this.formApiError = true;
-                    console.log(error);
+                    console.error(error);
                 }
-            );
+            });
     }
 
     mapClick(event): any {
@@ -182,7 +183,7 @@ export class PosCreateDialogComponent implements OnInit {
                 map: this.map.googleMap,
                 draggable: true,
             });
-            google.maps.event.addListener(this.marker, "dragend", (evt) => {
+            google.maps.event.addListener(this.marker, "dragend", () => {
                 this.markerLocation();
             });
         } else {

@@ -97,7 +97,6 @@ export class MerchantsAdminComponent implements OnInit {
 
 
     private assignMerchantData(data) {
-        console.log("I dati ", data)
         this.totalItems = data.totalCount;
         this.pageCount = data.pageCount;
         this.itemsPerPage = data.pageSize;
