@@ -13,7 +13,6 @@ import {StorageService} from "src/app/_services/storage.service";
 import {Access} from "src/app/_models/instrument";
 import {MatDialog} from "@angular/material/dialog";
 import {DialogConfirmCancelComponent} from "src/app/components/dialog-confirm-cancel/dialog-confirm-cancel";
-import {MatSnackBar} from "@angular/material/snack-bar";
 import {TranslateService} from "@ngx-translate/core";
 import {switchMap, tap} from "rxjs/operators";
 import {SnackBarService} from "../../../_services/snack-bar.service";
@@ -120,8 +119,9 @@ export class MerchantDetailComponent implements OnInit, OnDestroy {
                             next: (res) => {
                                 // update admin table if a field of the one shown is edited
                                 if (isTableToUpdate) this.storageService.clearCache('merchantsList')
+
                                 this.accessList.map(accessToCheck => {
-                                    this.checkAccessCurrentUser(accessToCheck, 'edit')
+                                    this.checkAccessCurrentUser(accessToCheck)
                                 })
 
                                 this.userService.updateUserOwnership(res)
@@ -153,7 +153,7 @@ export class MerchantDetailComponent implements OnInit, OnDestroy {
                 next: () => {
                     // search for the access id to have the access type
                     const accessToCheck: Access = this.accessList.find(acc => acc.userId === access.id)
-                    this.checkAccessCurrentUser(accessToCheck, 'update');
+                    this.checkAccessCurrentUser(accessToCheck);
                 },
                 error: (err) =>
                     console.error("Error adding new instrument access:", err),
@@ -180,7 +180,7 @@ export class MerchantDetailComponent implements OnInit, OnDestroy {
                 next: () => {
                     // Check if we need to
                     this.updateAccessList();
-                    this.checkAccessCurrentUser(access, 'delete');
+                    this.checkAccessCurrentUser(access);
                 },
             });
         });
@@ -206,10 +206,10 @@ export class MerchantDetailComponent implements OnInit, OnDestroy {
             .subscribe((res) => (this.posList = res["pos"]));
     }
 
-    checkAccessCurrentUser(access: Access, actionOnUser: string) {
+    checkAccessCurrentUser(access: Access) {
         const currentUser = this.storageService.load("currentUser");
 
-        if (access.userId === currentUser.id) {
+        if (access.userId === currentUser.userId) {
             /*this.userService.updateCurrentUser(access, actionOnUser)*/
             this.storageService.clear('currentUser')
             this.userService
