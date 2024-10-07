@@ -7,7 +7,7 @@
             <app-avatar [fullName]="username" [role]="role"></app-avatar>
             <ul class="flex flex-col gap-y-4 mt-6">
                 <li *ngFor="let link of filteredNavLinks" routerLinkActive="active-link"
-                    [routerLinkActiveOptions]="{exact: true}" class="px-2">
+                    [routerLinkActiveOptions]="{exact: false}" class="px-2">
                     <div *ngIf="link.isActive; else notActive">
                         <a [routerLink]="link.path" class="flex items-center space-x-2 blue-wom">
                             <i [class]="link.icon" class="icon-sidenav"></i>
