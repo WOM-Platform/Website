@@ -20,7 +20,9 @@
             </button>
         </ng-template>
     </div>
-    <app-csv-download [filters]="filters"/>
+    <div *ngIf="currentUser && currentUser.role === 'Admin';">
+        <app-csv-download [filters]="filters"/>
+    </div>
 </div>
 
 <!-- Datepicker -->

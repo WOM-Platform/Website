@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {User} from '../../_models';
+import {UserMe} from '../../_models';
 import {UntypedFormBuilder, UntypedFormGroup, Validators} from '@angular/forms';
 import {UserService} from '../../_services/user.service';
 import {ActivatedRoute, Router} from '@angular/router';
@@ -12,7 +12,7 @@ import {MatSnackBar} from "@angular/material/snack-bar";
     styleUrls: ['./reset-password.component.css']
 })
 export class ResetPasswordComponent implements OnInit {
-    user: User;
+    user: UserMe;
     userId: string;
     token: string;
     form: UntypedFormGroup;
@@ -54,8 +54,8 @@ export class ResetPasswordComponent implements OnInit {
             return;
         }
         const pswd = this.form.controls.password.value;
-        this.userService.passwordReset(this.userId, this.token, pswd).pipe().subscribe(
-            response => {
+        this.userService.passwordReset(this.userId, this.token, pswd).pipe().subscribe({
+            next: () => {
                 const snackTitle = this.translate.instant('RESET_PASSWORD.SNACKBAR_SUCCESS');
                 const snackAction = this.translate.instant('RESET_PASSWORD.SNACKBAR_HOME');
 
@@ -72,11 +72,13 @@ export class ResetPasswordComponent implements OnInit {
                     this.router.navigate(['/authentication/signin']).then(r => r);
                 });
                 console.log('password reset success');
-            }, error => {
+            },
+            error: error => {
                 // link already used if 404
                 this.expiredLink = true;
                 console.log('error: ', error);
-            });
+            }
+        })
     }
 
     checkPasswords(): boolean {

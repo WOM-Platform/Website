@@ -1,8 +1,10 @@
-import {Component, EventEmitter, Output} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {DashboardAdminFilter} from "../../../_models/filter";
 import {DatePipe, NgFor, NgIf} from "@angular/common";
 import {DatepickerComponent} from "../../../components/datepicker/datepicker.component";
 import {CsvDownloadComponent} from "../csv-download/csv-download.component";
+import {UserService} from "../../../_services";
+import {UserMe} from "../../../_models";
 
 @Component({
     selector: 'app-statistics-filters',
@@ -16,7 +18,7 @@ import {CsvDownloadComponent} from "../csv-download/csv-download.component";
     templateUrl: './statistics-filters.component.html',
     styleUrl: './statistics-filters.component.css'
 })
-export class StatisticsFiltersComponent {
+export class StatisticsFiltersComponent implements OnInit {
     @Output() onDateFilter = new EventEmitter();
     @Output() onDownload = new EventEmitter();
 
@@ -25,7 +27,16 @@ export class StatisticsFiltersComponent {
         endDate: ""
     }
 
+    currentUser: UserMe
     isDateFiltering: boolean = false;
+
+    constructor(private userService: UserService) {
+
+    }
+
+    ngOnInit() {
+        this.currentUser = this.userService.currentUserValue
+    }
 
     onDatesSelected(dates: { startDate: Date | null, endDate: Date | null }) {
         if (dates.startDate) {

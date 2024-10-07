@@ -18,8 +18,8 @@ export class UserService {
     private currentUserLoginSubject: BehaviorSubject<UserMe>;
 
     // User data
-    public currentUser: Observable<User>;
-    private currentUserSubject: BehaviorSubject<User>;
+    public currentUser: Observable<UserMe>;
+    private currentUserSubject: BehaviorSubject<UserMe>;
 
     private userOwnership: BehaviorSubject<any> = new BehaviorSubject<any>({});
 
@@ -45,7 +45,7 @@ export class UserService {
         this.currentUserLogin = this.currentUserLoginSubject.asObservable();
 
         const localStorageUser = this.storageService.load("currentUser");
-        this.currentUserSubject = new BehaviorSubject<User>(
+        this.currentUserSubject = new BehaviorSubject<UserMe>(
             localStorageUser ? User.fromJson(localStorageUser) : null
         );
         this.currentUser = this.currentUserSubject.asObservable();
@@ -63,7 +63,7 @@ export class UserService {
         this.sourcesCache$ = this.sourcesCacheSubject.asObservable();
     }
 
-    public get currentUserValue(): User {
+    public get currentUserValue(): UserMe {
         return this.currentUserSubject.value;
     }
 

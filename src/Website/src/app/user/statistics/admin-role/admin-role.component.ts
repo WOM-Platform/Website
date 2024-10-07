@@ -2,9 +2,9 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {CommonModule, DatePipe} from "@angular/common";
 import {PieChartModule} from "@swimlane/ngx-charts";
 import {SharedModule} from "../../../shared/shared.module";
-import {Merchant, Merchants} from "../../../_models";
+import {Merchant, Merchants, UserMe} from "../../../_models";
 import {Subscription} from "rxjs";
-import {AuthService, MerchantService, StatsService} from "../../../_services";
+import {AuthService, MerchantService, StatsService, UserService} from "../../../_services";
 import {MatDatepickerInputEvent} from "@angular/material/datepicker";
 import html2canvas from "html2canvas";
 import {jsPDF} from "jspdf";
@@ -44,6 +44,7 @@ import {StatisticsFiltersComponent} from "../../components/statistics-filters/st
     styleUrl: './admin-role.component.css'
 })
 export class AdminRoleComponent implements OnInit, OnDestroy {
+    currentUser: UserMe
 
     merchantData: Merchants;
     merchantSubscription: Subscription;
@@ -68,7 +69,6 @@ export class AdminRoleComponent implements OnInit, OnDestroy {
 
     totalCreatedAmount: number;
     totalRedeemedAmount: number;
-    totalCreatedAmountSub: Subscription;
     totalConsumedAmount: number = 0;
     totalConsumedOverTime: ChartDataSwimlane[] = [];
     totalGeneratedOverTime: ChartDataSwimlaneSeries[] = [];
@@ -98,11 +98,15 @@ export class AdminRoleComponent implements OnInit, OnDestroy {
         private loadingService: LoadingService,
         private merchantService: MerchantService,
         private sourceService: SourceService,
-        private statsService: StatsService
+        private statsService: StatsService,
+        private userService: UserService
     ) {
     }
 
     ngOnInit(): any {
+        this.currentUser = this.userService.currentUserValue
+        console.log("current user ", this.currentUser)
+        this.currentUser.role
         this.loadData();
     }
 
@@ -112,9 +116,17 @@ export class AdminRoleComponent implements OnInit, OnDestroy {
     }
 
     loadData(): any {
-        this.generationVoucherData()
-        this.consumptionVoucherData()
-        this.generalData()
+        // set id if the current user is not admin
+        if (this.currentUser.role !== "Admin") {
+            this.generationVoucherData(this.currentUser.sources[0])
+            this.consumptionVoucherData(this.currentUser.merchants[0])
+            this.generalData()
+        } else {
+            this.generationVoucherData()
+            this.consumptionVoucherData()
+            this.generalData()
+        }
+
 
         /*
                        this.merchantSubscription = this.authService.merchants().subscribe({
@@ -155,8 +167,6 @@ export class AdminRoleComponent implements OnInit, OnDestroy {
             this.filters.merchantName = merchant.name
             this.filters.merchantId = merchant.id;
         }
-
-
     }
 
     generationVoucherData(source?: Instrument) {
@@ -174,7 +184,6 @@ export class AdminRoleComponent implements OnInit, OnDestroy {
                 value: item.amount
             }))
 
-            this.availableVouchers = data.voucherAvailable
             this.isGeneratedDataReady = true
 
             this.totalGeneratedOverTime = data.totalGeneratedAndRedeemedOverTime.map(item => ({
@@ -235,10 +244,10 @@ export class AdminRoleComponent implements OnInit, OnDestroy {
 
         // Fetch the available vouchers in parallel (not part of the forkJoin)
         this.statsService.getAmountOfAvailableVouchers(this.locationParameters, this.filters.merchantId).subscribe((data: number) => {
+
             this.availableVouchers = data;
         });
     }
-
 
     addEvent(type: string, event: MatDatepickerInputEvent<Date>) {
         console.log(`${type}: ${event.value}`);

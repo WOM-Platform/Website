@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {UserService} from '../../_services';
-import {User} from '../../_models';
+import {UserMe} from '../../_models';
 import {TranslateService} from "@ngx-translate/core";
 import {Router} from "@angular/router";
 import {MatSnackBar} from "@angular/material/snack-bar";
@@ -10,8 +10,8 @@ import {MatSnackBar} from "@angular/material/snack-bar";
     templateUrl: './user-not-verified.component.html',
     styleUrls: ['./user-not-verified.component.css']
 })
-export class UserNotVerifiedComponent  {
-    user: User;
+export class UserNotVerifiedComponent {
+    user: UserMe;
 
     constructor(private userService: UserService,
                 private snackBar: MatSnackBar,
@@ -21,7 +21,7 @@ export class UserNotVerifiedComponent  {
     }
 
     sendValidationEmail(): any {
-        this.userService.requestVerificationEmailById().subscribe(result => {
+        this.userService.requestVerificationEmailById().subscribe(() => {
             const message = this.translate.instant('USER.NOT_VERIFIED.EMAIL_SENT');
             this.openSnackBar(message);
         });
@@ -30,7 +30,7 @@ export class UserNotVerifiedComponent  {
     openSnackBar(message = 'null'): any {
         this.snackBar.open(message, null, {
             duration: 5000
-        }).afterDismissed().subscribe(result => {
+        }).afterDismissed().subscribe(() => {
             this.userService.logout();
             this.router.navigate(['/home']).then();
         });

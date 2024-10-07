@@ -4,7 +4,7 @@ import {map, takeWhile} from "rxjs/operators";
 
 @Component({
     selector: 'app-animated-number',
-    template: `<p>{{ formattedDisplayNumber }}</p>`,
+    template: `<p><strong>{{ formattedDisplayNumber }}</strong></p>`,
 })
 export class AnimatedNumberComponent implements OnChanges, OnDestroy {
     @Input() finalNumber: number;
