@@ -87,11 +87,14 @@ export class AdminRoleComponent implements OnInit, OnDestroy {
 
     view: [number, number] = [500, 400];
 
-    colorScheme: any = {
-        domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA', '#FF5733',
-            '#33FF57', '#3357FF', '#FF33A5', '#33FFF1', '#FF9933',
-            '#9933FF', '#FF3380', '#80FF33', '#3380FF', '#FF5733',]
+    colorscheme: any = {domain: ['#2569FF', '#ffec26', '#34c38f', '#f46a6a', '#50a5f1', '#f1b44c', '#7460ee', '#e83e8c']};
+
+    blueWomScheme: any = {
+        domain: ['#2569FF']
     };
+    blueAndYellowWom: any = {
+        domain: ['#2569FF', '#ffec26']
+    }
 
     constructor(
         private authService: AuthService,
@@ -190,13 +193,13 @@ export class AdminRoleComponent implements OnInit, OnDestroy {
                 name: item.date,
                 series: [
                     {
+                        name: 'Voucher Generated',
+                        value: item.totalGenerated ? Number(item.totalGenerated) : 0  // Ensure value is a number or 0
+                    },
+                    {
                         name: 'Voucher Redeemed',
                         value: item.totalRedeemed ? Number(item.totalRedeemed) : 0  // Ensure value is a number or 0
                     },
-                    {
-                        name: 'Voucher Generated',
-                        value: item.totalGenerated ? Number(item.totalGenerated) : 0  // Ensure value is a number or 0
-                    }
                 ]
             }))
 
