@@ -106,8 +106,8 @@
                 [accessList]="accessList"
                 [action]="action"
                 [showRole]="true"
-                (deleteAccess)="onDeleteAccess($event)"
                 (addAccess)="handleAccessList($event)"
+                (deleteAccess)="onDeleteAccess($event)"
         />
 
         <app-user-pos-list [merchantId]="merchantId" [posList]="posList" [actionMerchant]="action"/>

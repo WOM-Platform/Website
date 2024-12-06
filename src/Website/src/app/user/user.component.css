@@ -1,33 +1,35 @@
-
 .icon-sidenav {
-    @apply text-xs
+  @apply text-xs;
 }
 
 a {
-    @apply text-black
+  @apply text-black;
 }
 
-
 .active-link {
-    background-color: #E9EDF3;
-    color: #405DBD;
-    border-left: 3px solid #405DBD;
+  background-color: #e9edf3;
+  color: #405dbd;
+  border-left: 3px solid #405dbd;
 }
 
 .loading-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(128, 128, 128, 0.5);
-    z-index: 1000;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(128, 128, 128, 0.5);
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .loading-image {
-    width: 100px;
-    height: auto;
+  width: 100px;
+  height: auto;
+}
+
+.bg-user {
+  background-image: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%);
 }

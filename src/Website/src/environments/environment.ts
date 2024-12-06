@@ -5,7 +5,7 @@
 export const environment = {
     production: false,
     mock: false,
-    /*baseUrl: 'https://dev.wom.social/api/',*/ //server sviluppo
+    // baseUrl: 'https://dev.wom.social/api/', //server sviluppo
     baseUrl: 'http://localhost:64422/api/', // server locale
     baseBillingUrl: 'https://localhost:7284/billing',
     baseUrlStats: 'http://localhost:5024/api/',

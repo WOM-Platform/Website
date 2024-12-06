@@ -3,7 +3,7 @@
     <!-- WOM Consumati Section -->
     <div *ngIf="currentUser.role === 'Admin' || currentUser.merchants.length > 0">
         <div *ngIf="isConsumedDataReady; else loadingConsumption"
-             class="mb-12 bg-white shadow-md rounded-lg p-6 border">
+             class="mb-12">
             <div class="flex justify-between items-center mb-4">
                 <h2 class="text-xl font-semibold">WOM Consumati</h2>
                 <div class="flex items-center gap-2">
@@ -34,7 +34,7 @@
                 </div>
             </div>
 
-            <div class="flex flex-wrap gap-10">
+            <div class="flex flex-wrap gap-10 card-stat max-w-fit min-w-[530px]">
                 <!-- Totals Section -->
                 <div class="flex gap-2 items-center">
                     <p class="font-semibold">Totali:</p>
@@ -49,7 +49,7 @@
                     </ng-template>
                 </div>
                 <!-- AVAILABLE WOM -->
-                <div *ngIf="availableVouchers" class="flex gap-2">
+                <div *ngIf="availableVouchers; else loadingAvailableVouchers" class="flex gap-2">
                     <p>Restano</p>
                     <app-animated-number
                             [finalNumber]="availableVouchers"
@@ -57,11 +57,18 @@
                     ></app-animated-number>
                     <p>WOM <strong>disponibili</strong></p>
                 </div>
+                <ng-template #loadingAvailableVouchers>
+                    <ngx-skeleton-loader
+                    count="1"
+                    appearance="line"
+                    [theme]="{ height: '50px', width: '280px', 'border-radius': '20px' }"
+            ></ngx-skeleton-loader>
+                </ng-template>
             </div>
 
             <!-- Bar Chart for Consumption over Time -->
-            <div class="flex justify-center gap-4">
-                <div>
+            <div class="flex justify-center gap-6 mt-6">
+                <div class="card-stat">
                     <ng-container *ngIf="totalConsumedOverTime">
                         <p class="mt-6 font-semibold">Consumo nel tempo</p>
                         <ngx-charts-bar-vertical
@@ -82,7 +89,7 @@
                     </ng-container>
                 </div>
                 <!-- BEGIN Pie Chart by Aim -->
-                <div class="relative">
+                <div class="relative card-stat">
                     <ng-container
                             *ngIf="chartConsumedAmountByAim && chartConsumedAmountByAim.length > 0"
                     >
@@ -104,7 +111,7 @@
             </div>
             <!-- END Pie Chart by Aim -->
             <!-- BEGIN Merchant Ranking -->
-            <div class="mt-6" *ngIf="rankMerchants && rankMerchants.length > 0">
+            <div class="mt-6 card-stat max-w-fit" *ngIf="rankMerchants && rankMerchants.length > 0">
                 <h3 class="font-semibold mb-4">
                     <i class="fa-solid fa-star" style="color: #ffd43b"></i> Classifica
                     Merchant
@@ -141,6 +148,13 @@
             <!-- END Merchant Ranking -->
         </div>
         <ng-template #loadingConsumption>
+            <div class="flex flex-col gap-4 p-6 bg-white shadow-md rounded-lg w-[530px] mb-10">
+                <ngx-skeleton-loader
+                count="1"
+                appearance="line"
+                [theme]="{ height: '50px', width: '180px', 'border-radius': '20px' }"
+        ></ngx-skeleton-loader>
+            </div>
             <div class="flex flex-col gap-4 p-6 bg-white shadow-md rounded-lg min-w-[1000px]">
                 <ngx-skeleton-loader
                         count="1"
@@ -174,7 +188,7 @@
     <!-- WOM Generati Section -->
     <div *ngIf="currentUser.role === 'Admin' || currentUser.sources.length > 0">
         <div *ngIf="isGeneratedDataReady && isGeneratedDataReady === true; else loadingGeneration"
-             class="mb-12 bg-white shadow-md rounded-lg p-6 border">
+             class="mb-12">
             <div class="flex justify-between items-center mb-4">
                 <h2 class="text-xl font-semibold">WOM Generati e Riscossi</h2>
                 <div class="flex items-center gap-2">
@@ -204,7 +218,7 @@
                 </div>
             </div>
             <!-- Totals Section -->
-            <div class="flex gap-6">
+            <div class="flex gap-6 card-stat">
                 <div class="flex gap-2 items-center">
                     <p class="font-semibold">Totali:</p>
                     <ng-container *ngIf="totalCreatedAmount; else zeroGeneratedAmount">
@@ -231,9 +245,9 @@
                 </div>
             </div>
 
-            <div class="flex">
+            <div class="flex mt-6 gap-6">
                 <!-- Bar Chart for Generated and Redeemed Over Time -->
-                <div>
+                <div class="card-stat">
                     <ng-container *ngIf="totalGeneratedOverTime">
                         <p class="mt-6 font-semibold">Generati e riscossi nel tempo</p>
                         <ngx-charts-bar-vertical-2d
@@ -254,7 +268,7 @@
                     </ng-container>
                 </div>
                 <!-- Pie Chart by Aim -->
-                <div>
+                <div class="card-stat">
                     <ng-container
                             *ngIf="chartCreatedAmountByAim && chartCreatedAmountByAim.length > 0"
                     >

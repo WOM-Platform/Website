@@ -1,26 +1,31 @@
 h3 {
-    @apply text-lg
+  @apply text-lg;
 }
 
 .statistic-title {
-    @apply font-semibold underline
+  @apply font-semibold underline;
 }
 
 .filter-selected-el {
-    @apply mb-0 border-slate-200 border-2 rounded-full px-4 py-2;
+  @apply mb-0 border-slate-200 border-2 rounded-full px-4 py-2;
+}
+
+.card-stat {
+  @apply shadow-md rounded-lg p-6 border;
+  background-image: linear-gradient(120deg, #fdfbfb 80%, #f3f7f8 100%);
 }
 
 ngx-charts-pie-chart .legend-item,
 ngx-charts-bar-vertical .legend-item {
-    display: none; /* Default hidden */
+  display: none; /* Default hidden */
 }
 
 ngx-charts-pie-chart .legend-item[data-value="0"],
 ngx-charts-bar-vertical .legend-item[data-value="0"] {
-    display: none; /* Hide items with zero values */
+  display: none; /* Hide items with zero values */
 }
 
 ngx-charts-pie-chart .legend-item:not([data-value="0"]),
 ngx-charts-bar-vertical .legend-item:not[data-value="0"] {
-    display: block; /* Show items with non-zero values */
+  display: block; /* Show items with non-zero values */
 }
