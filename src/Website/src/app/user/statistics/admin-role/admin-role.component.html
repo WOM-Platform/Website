@@ -1,320 +1,390 @@
 <div class="relative mx-auto py-10 px-4 max-w-full">
-    <app-statistics-filters (onDateFilter)="onDatesSelected($event)"/>
-    <!-- WOM Consumati Section -->
-    <div *ngIf="currentUser.role === 'Admin' || currentUser.merchants.length > 0">
-        <div *ngIf="isConsumedDataReady; else loadingConsumption"
-             class="mb-12">
-            <div class="flex justify-between items-center mb-4">
-                <h2 class="text-xl font-semibold">WOM Consumati</h2>
-                <div class="flex items-center gap-2">
-                    <p class="mb-0">{{ currentUser.role === "Admin" ? "Filtra per Merchant:" : "Vista Merchant:" }}</p>
-                    <div class="relative">
-                        <app-search *ngIf="filters.merchantName === ''; else searchMerchantValueSelected"
-                                    (searchEmit)="searchMerchant($event)"
-                                    [searchValue]="filters.merchantName"></app-search>
-                        <ng-template #searchMerchantValueSelected>
-                            <p class="filter-selected-el">
-                                <button *ngIf="currentUser.role === 'Admin'" (click)="clearElementFilter('merchant')"><i
-                                        class="fa-solid fa-xmark text-red-500"></i>
-                                </button>
-                                {{ filters.merchantName }}
+  <div class="flex justify-between items-center mb-8">
+    <app-statistics-filters (onDateFilter)="onDatesSelected($event)" />
+    <app-csv-download [filters]="filters" />
+  </div>
 
-                            </p>
-                        </ng-template>
-                        <ng-container
-                                *ngIf="consumedDataFetched && consumedDataFetched.length > 0"
-                        >
-                            <app-lazy-search
-                                    [fetchData]="consumedDataFetched"
-                                    (selectEmit)="elementSelected('merchant',$event)"
-                                    class="absolute top-full mt-2 w-full z-10 bg-white shadow-md border rounded-lg"
-                            ></app-lazy-search>
-                        </ng-container>
-                    </div>
-                </div>
-            </div>
-
-            <div class="flex flex-wrap gap-10 card-stat max-w-fit min-w-[530px]">
-                <!-- Totals Section -->
-                <div class="flex gap-2 items-center">
-                    <p class="font-semibold">Totali:</p>
-                    <ng-container *ngIf="totalConsumedAmount; else zeroConsumedAmount">
-                        <app-animated-number
-                                [finalNumber]="totalConsumedAmount"
-                                [duration]="1000"
-                        ></app-animated-number>
-                    </ng-container>
-                    <ng-template #zeroConsumedAmount>
-                        <p>0</p>
-                    </ng-template>
-                </div>
-                <!-- AVAILABLE WOM -->
-                <div *ngIf="availableVouchers; else loadingAvailableVouchers" class="flex gap-2">
-                    <p>Restano</p>
-                    <app-animated-number
-                            [finalNumber]="availableVouchers"
-                            [duration]="1000"
-                    ></app-animated-number>
-                    <p>WOM <strong>disponibili</strong></p>
-                </div>
-                <ng-template #loadingAvailableVouchers>
-                    <ngx-skeleton-loader
-                    count="1"
-                    appearance="line"
-                    [theme]="{ height: '50px', width: '280px', 'border-radius': '20px' }"
-            ></ngx-skeleton-loader>
-                </ng-template>
-            </div>
-
-            <!-- Bar Chart for Consumption over Time -->
-            <div class="flex justify-center gap-6 mt-6">
-                <div class="card-stat">
-                    <ng-container *ngIf="totalConsumedOverTime">
-                        <p class="mt-6 font-semibold">Consumo nel tempo</p>
-                        <ngx-charts-bar-vertical
-                                [view]="view"
-                                [scheme]="blueWomScheme"
-                                [results]="totalConsumedOverTime"
-                                [gradient]="false"
-                                [xAxis]="true"
-                                [yAxis]="true"
-                                [legend]="false"
-                                [showXAxisLabel]="true"
-                                [showYAxisLabel]="true"
-                                [xAxisLabel]="'Data'"
-                                [yAxisLabel]="'Quantità'"
-                                (select)="onSelect($event)"
-                        >
-                        </ngx-charts-bar-vertical>
-                    </ng-container>
-                </div>
-                <!-- BEGIN Pie Chart by Aim -->
-                <div class="relative card-stat">
-                    <ng-container
-                            *ngIf="chartConsumedAmountByAim && chartConsumedAmountByAim.length > 0"
-                    >
-                        <p class="mt-6 font-semibold">Divisi per AIM:</p>
-                        <div class="w-full max-w-full overflo">
-                            <ngx-charts-pie-chart
-                                    (window:resize)="onResize($event)"
-                                    [view]="view"
-                                    [scheme]="colorscheme"
-                                    [results]="chartConsumedAmountByAim"
-                                    [legend]=""
-                                    [labels]="true"
-                            >
-                            </ngx-charts-pie-chart>
-                        </div>
-
-                    </ng-container>
-                </div>
-            </div>
-            <!-- END Pie Chart by Aim -->
-            <!-- BEGIN Merchant Ranking -->
-            <div class="mt-6 card-stat max-w-fit" *ngIf="rankMerchants && rankMerchants.length > 0">
-                <h3 class="font-semibold mb-4">
-                    <i class="fa-solid fa-star" style="color: #ffd43b"></i> Classifica
-                    Merchant
-                </h3>
-
-                <ul class="list-disc pl-5 space-y-2">
-                    <li *ngFor="let rank of rankMerchants | slice:0:displayLimit">
-                        <!-- Conditional rendering for trophy icon based on rank -->
-                        <span *ngIf="rank.rank === 1">
-            1) <i class="fa-solid fa-trophy" style="color: #ffd43b"></i>
-          </span>
-                        <span *ngIf="rank.rank === 2">
-            2) <i class="fa-solid fa-trophy" style="color: #c0c0c0"></i>
-          </span>
-                        <span *ngIf="rank.rank === 3">
-            3) <i class="fa-solid fa-trophy" style="color: #cd7f32"></i>
-          </span>
-                        <span *ngIf="rank.rank > 3"> {{ rank.rank }}) </span>
-
-                        <!-- Merchant name and amount display -->
-                        {{ rank.name }}: <strong>{{ rank.amount }}</strong>
-                        <span class="italic text-xs"> WOM</span>
-                    </li>
-                </ul>
-                <div *ngIf="currentUser.role === 'Admin'" class="text-center mt-4">
-                    <button
-                            class="text-blue-500 hover:text-blue-700 underline"
-                            (click)="toggleDisplay()"
-                    >
-                        {{ isExpanded ? 'Mostra meno' : 'Mostra di più' }}
-                    </button>
-                </div>
-            </div>
-            <!-- END Merchant Ranking -->
+  <!-- WOM Consumati Section -->
+  <div *ngIf="currentUser.role === 'Admin' || currentUser.merchants.length > 0">
+    <div *ngIf="isConsumedDataReady; else loadingConsumption" class="mb-12">
+      <div class="flex justify-between items-center mb-4">
+        <h2 class="text-xl font-semibold">WOM Consumati</h2>
+        <div class="flex items-center gap-2">
+          <div class="relative">
+            <app-search
+              *ngIf="
+                filters.merchantName === '';
+                else searchMerchantValueSelected
+              "
+              (searchEmit)="searchMerchant($event)"
+              [searchValue]="filters.merchantName"
+            ></app-search>
+            <ng-template #searchMerchantValueSelected>
+              <p class="filter-selected-el">
+                <button
+                  *ngIf="currentUser.role === 'Admin'"
+                  (click)="clearElementFilter('merchant')"
+                >
+                  <i class="fa-solid fa-xmark text-red-500"></i>
+                </button>
+                {{ filters.merchantName }}
+              </p>
+            </ng-template>
+            <ng-container
+              *ngIf="consumedDataFetched && consumedDataFetched.length > 0"
+            >
+              <app-lazy-search
+                [fetchData]="consumedDataFetched"
+                (selectEmit)="onElementSelection('merchant', $event)"
+                class="absolute top-full mt-2 w-full z-10 bg-white shadow-md border rounded-lg"
+              ></app-lazy-search>
+            </ng-container>
+          </div>
         </div>
-        <ng-template #loadingConsumption>
-            <div class="flex flex-col gap-4 p-6 bg-white shadow-md rounded-lg w-[530px] mb-10">
-                <ngx-skeleton-loader
-                count="1"
-                appearance="line"
-                [theme]="{ height: '50px', width: '180px', 'border-radius': '20px' }"
+      </div>
+
+      <div class="flex flex-wrap gap-10 card-stat max-w-fit min-w-[530px]">
+        <!-- Totals Section -->
+        <div class="flex gap-2 items-center">
+          <p class="font-semibold">Totali:</p>
+          <ng-container *ngIf="totalConsumedAmount; else zeroConsumedAmount">
+            <app-animated-number
+              [finalNumber]="totalConsumedAmount"
+              [duration]="1000"
+            ></app-animated-number>
+          </ng-container>
+          <ng-template #zeroConsumedAmount>
+            <p>0</p>
+          </ng-template>
+        </div>
+        <!-- AVAILABLE WOM -->
+        <div
+          *ngIf="availableVouchers; else loadingAvailableVouchers"
+          class="flex gap-2"
+        >
+          <p>Restano</p>
+          <app-animated-number
+            [finalNumber]="availableVouchers"
+            [duration]="1000"
+          ></app-animated-number>
+          <p>WOM <strong>disponibili</strong></p>
+        </div>
+        <ng-template #loadingAvailableVouchers>
+          <ngx-skeleton-loader
+            count="1"
+            appearance="line"
+            [theme]="{
+              height: '50px',
+              width: '280px',
+              'border-radius': '20px'
+            }"
+          ></ngx-skeleton-loader>
+        </ng-template>
+      </div>
+
+      <!-- Bar Chart for Consumption over Time -->
+      <div class="flex justify-center gap-6 mt-6">
+        <div class="card-stat">
+          <ng-container *ngIf="totalConsumedOverTime">
+            <p class="mt-6 font-semibold">Consumo nel tempo</p>
+            <ngx-charts-bar-vertical
+              [view]="view"
+              [scheme]="blueWomScheme"
+              [results]="totalConsumedOverTime"
+              [gradient]="false"
+              [xAxis]="true"
+              [yAxis]="true"
+              [legend]="false"
+              [showXAxisLabel]="true"
+              [showYAxisLabel]="true"
+              [xAxisLabel]="'Data'"
+              [yAxisLabel]="'Quantità'"
+              (select)="onSelect($event)"
+            >
+            </ngx-charts-bar-vertical>
+          </ng-container>
+        </div>
+        <!-- BEGIN Pie Chart by Aim -->
+        <div class="relative card-stat">
+          <ng-container
+            *ngIf="
+              chartConsumedAmountByAim && chartConsumedAmountByAim.length > 0
+            "
+          >
+            <p class="mt-6 font-semibold">Divisi per AIM:</p>
+            <div class="w-full max-w-full overflo">
+              <ngx-charts-pie-chart
+                (window:resize)="onResize($event)"
+                [view]="view"
+                [scheme]="colorscheme"
+                [results]="chartConsumedAmountByAim"
+                [legend]=""
+                [labels]="true"
+              >
+              </ngx-charts-pie-chart>
+            </div>
+          </ng-container>
+        </div>
+      </div>
+      <!-- END Pie Chart by Aim -->
+      <!-- BEGIN Merchant Ranking -->
+      <div
+        class="mt-6 card-stat max-w-fit"
+        *ngIf="rankMerchants && rankMerchants.length > 0"
+      >
+        <h3 class="font-semibold mb-4">
+          <i class="fa-solid fa-star" style="color: #ffd43b"></i> Classifica
+          Merchant
+        </h3>
+
+        <ul class="list-disc pl-5 space-y-2">
+          <li *ngFor="let rank of rankMerchants | slice : 0 : displayLimit">
+            <!-- Conditional rendering for trophy icon based on rank -->
+            <span *ngIf="rank.rank === 1">
+              1) <i class="fa-solid fa-trophy" style="color: #ffd43b"></i>
+            </span>
+            <span *ngIf="rank.rank === 2">
+              2) <i class="fa-solid fa-trophy" style="color: #c0c0c0"></i>
+            </span>
+            <span *ngIf="rank.rank === 3">
+              3) <i class="fa-solid fa-trophy" style="color: #cd7f32"></i>
+            </span>
+            <span *ngIf="rank.rank > 3"> {{ rank.rank }}) </span>
+            {{ rank.name }}: <strong>{{ rank.amount }}</strong>
+            <span class="italic text-xs"> WOM</span>
+          </li>
+        </ul>
+        <div *ngIf="currentUser.role === 'Admin'" class="text-center mt-4">
+          <button
+            class="text-blue-500 hover:text-blue-700 underline"
+            (click)="toggleRankMerchants()"
+          >
+            {{ isExpanded ? "Mostra meno" : "Mostra di più" }}
+          </button>
+        </div>
+      </div>
+      <!-- END Merchant Ranking -->
+    </div>
+    <ng-template #loadingConsumption>
+      <div
+        class="flex flex-col gap-4 p-6 bg-white shadow-md rounded-lg w-[530px] mb-10"
+      >
+        <ngx-skeleton-loader
+          count="1"
+          appearance="line"
+          [theme]="{ height: '50px', width: '180px', 'border-radius': '20px' }"
         ></ngx-skeleton-loader>
-            </div>
-            <div class="flex flex-col gap-4 p-6 bg-white shadow-md rounded-lg min-w-[1000px]">
-                <ngx-skeleton-loader
-                        count="1"
-                        appearance="line"
-                        [theme]="{ height: '50px', width: '180px', 'border-radius': '20px' }"
-                ></ngx-skeleton-loader>
-                <div class="flex justify-around">
-                    <ngx-skeleton-loader
-                            count="1"
-                            appearance="line"
-                            [theme]="{ height: '300px', width: '300px', 'border-radius': '20px' }"
-                    ></ngx-skeleton-loader>
-                    <ngx-skeleton-loader
-                            count="1"
-                            appearance="circle"
-                            animation="progress-dark"
-                            [theme]="{ height: '300px', width: '300px'}"
-                    ></ngx-skeleton-loader>
-                </div>
-                <ngx-skeleton-loader
-                        count="5"
-                        [theme]="{
-        'border-radius': '5px',
-        height: '50px'
-      }"
-                ></ngx-skeleton-loader>
-            </div>
-        </ng-template>
-    </div>
-
-    <!-- WOM Generati Section -->
-    <div *ngIf="currentUser.role === 'Admin' || currentUser.sources.length > 0">
-        <div *ngIf="isGeneratedDataReady && isGeneratedDataReady === true; else loadingGeneration"
-             class="mb-12">
-            <div class="flex justify-between items-center mb-4">
-                <h2 class="text-xl font-semibold">WOM Generati e Riscossi</h2>
-                <div class="flex items-center gap-2">
-                    <p class="mb-0">{{ currentUser.role === "Admin" ? "Filtra per Instrument:" : "Vista Instrument:" }}</p>
-                    <div class="relative">
-                        <app-search *ngIf="filters.sourceName === ''; else searchSourceValueSelected"
-                                    (searchEmit)="searchSource($event)" [searchValue]="filters.sourceName"></app-search>
-                        <ng-template #searchSourceValueSelected>
-                            <p class="filter-selected-el ">
-                                <button *ngIf="currentUser.role === 'Admin'" (click)="clearElementFilter('source')"><i
-                                        class="fa-solid fa-xmark text-red-500"></i>
-                                </button>
-                                {{ filters.sourceName }}
-
-                            </p>
-                        </ng-template>
-                        <ng-container
-                                *ngIf="generatedDataFetched && generatedDataFetched.length > 0"
-                        >
-                            <app-lazy-search
-                                    [fetchData]="generatedDataFetched"
-                                    (selectEmit)="elementSelected('source',$event)"
-                                    class="absolute top-full mt-2 w-full z-10 bg-white shadow-md border rounded-lg"
-                            ></app-lazy-search>
-                        </ng-container>
-                    </div>
-                </div>
-            </div>
-            <!-- Totals Section -->
-            <div class="flex gap-6 card-stat">
-                <div class="flex gap-2 items-center">
-                    <p class="font-semibold">Totali:</p>
-                    <ng-container *ngIf="totalCreatedAmount; else zeroGeneratedAmount">
-                        <app-animated-number
-                                [finalNumber]="totalCreatedAmount"
-                                [duration]="1000"
-                        ></app-animated-number>
-                    </ng-container>
-                    <ng-template #zeroGeneratedAmount>
-                        <p>0</p>
-                    </ng-template>
-                </div>
-                <div class="flex gap-2 items-center">
-                    <p>di cui <span class="font-semibold">Riscossi:</span></p>
-                    <ng-container *ngIf="totalRedeemedAmount; else zeroRedeemedAmount">
-                        <app-animated-number
-                                [finalNumber]="totalRedeemedAmount"
-                                [duration]="1000"
-                        ></app-animated-number>
-                    </ng-container>
-                    <ng-template #zeroRedeemedAmount>
-                        <p>0</p>
-                    </ng-template>
-                </div>
-            </div>
-
-            <div class="flex mt-6 gap-6">
-                <!-- Bar Chart for Generated and Redeemed Over Time -->
-                <div class="card-stat">
-                    <ng-container *ngIf="totalGeneratedOverTime">
-                        <p class="mt-6 font-semibold">Generati e riscossi nel tempo</p>
-                        <ngx-charts-bar-vertical-2d
-                                [view]="view"
-                                [scheme]="blueAndYellowWom"
-                                [results]="totalGeneratedOverTime"
-                                [gradient]="false"
-                                [xAxis]="true"
-                                [yAxis]="true"
-                                [legend]=""
-                                [showXAxisLabel]="true"
-                                [showYAxisLabel]="true"
-                                [xAxisLabel]="'Data'"
-                                [yAxisLabel]="'Quantità'"
-                                (select)="onSelect($event)"
-                        >
-                        </ngx-charts-bar-vertical-2d>
-                    </ng-container>
-                </div>
-                <!-- Pie Chart by Aim -->
-                <div class="card-stat">
-                    <ng-container
-                            *ngIf="chartCreatedAmountByAim && chartCreatedAmountByAim.length > 0"
-                    >
-                        <p class="mt-6 font-semibold">Divisi per AIM:</p>
-                        <ngx-charts-pie-chart
-                                [view]="view"
-                                [scheme]="colorscheme"
-                                [results]="chartCreatedAmountByAim"
-                                [legend]=""
-                                [labels]="true"
-                        >
-                        </ngx-charts-pie-chart>
-                    </ng-container>
-                </div>
-            </div>
+      </div>
+      <div
+        class="flex flex-col gap-4 p-6 bg-white shadow-md rounded-lg min-w-[1000px]"
+      >
+        <ngx-skeleton-loader
+          count="1"
+          appearance="line"
+          [theme]="{ height: '50px', width: '180px', 'border-radius': '20px' }"
+        ></ngx-skeleton-loader>
+        <div class="flex justify-around">
+          <ngx-skeleton-loader
+            count="1"
+            appearance="line"
+            [theme]="{
+              height: '300px',
+              width: '300px',
+              'border-radius': '20px'
+            }"
+          ></ngx-skeleton-loader>
+          <ngx-skeleton-loader
+            count="1"
+            appearance="circle"
+            animation="progress-dark"
+            [theme]="{ height: '300px', width: '300px' }"
+          ></ngx-skeleton-loader>
         </div>
-        <ng-template #loadingGeneration>
-            <div class="flex flex-col gap-4 p-6 bg-white shadow-md rounded-lg">
-                <ngx-skeleton-loader
-                        count="1"
-                        appearance="line"
-                        [theme]="{ height: '50px', width: '180px', 'border-radius': '20px' }"
-                ></ngx-skeleton-loader>
-                <div class="flex justify-around">
-                    <ngx-skeleton-loader
-                            count="1"
-                            appearance="line"
-                            [theme]="{ height: '300px', width: '300px', 'border-radius': '20px' }"
-                    ></ngx-skeleton-loader>
-                    <ngx-skeleton-loader
-                            count="1"
-                            appearance="circle"
-                            animation="progress-dark"
-                            [theme]="{ height: '300px', width: '300px'}"
-                    ></ngx-skeleton-loader>
-                </div>
+        <ngx-skeleton-loader
+          count="5"
+          [theme]="{
+            'border-radius': '5px',
+            height: '50px'
+          }"
+        ></ngx-skeleton-loader>
+      </div>
+    </ng-template>
+  </div>
 
-                <ngx-skeleton-loader
-                        count="5"
-                        [theme]="{
-        'border-radius': '5px',
-        height: '50px'
-      }"
-                ></ngx-skeleton-loader>
+  <!-- WOM Generati Section -->
+  <div *ngIf="currentUser.role === 'Admin' || currentUser.sources.length > 0">
+    <div
+      *ngIf="
+        isGeneratedDataReady && isGeneratedDataReady === true;
+        else loadingGeneration
+      "
+      class="mb-12"
+    >
+      <div class="flex justify-between items-center mb-4">
+        <h2 class="text-xl font-semibold">WOM Generati e Riscossi</h2>
+        <div class="flex items-center gap-2">
+          <div class="flex flex-row gap-2">
+            <div
+              [ngClass]="{
+                'bg-white': filters.aimListFilter.length === 0,
+                'bg-green-200': filters.aimListFilter.length > 0
+              }"
+              class="flex gap-2 justify-center items-center py-2 px-4 border border-black rounded-full hover:bg-slate-300"
+              (click)="openDialogAimsSelected()"
+            >
+              <span
+                *ngIf="filters.aimListFilter.length === 0"
+                class="flex items-center gap-1"
+              >
+                <mat-icon>filter_list</mat-icon>
+                per AIM
+              </span>
+
+              <span *ngIf="filters.aimListFilter.length > 0">
+                {{ filters.aimListFilter.length }} filtro/i selezionati
+              </span>
             </div>
 
-        </ng-template>
+            <div class="flex gap-2 justify-between items-center">
+              <div class="relative">
+                <app-search
+                  *ngIf="
+                    filters.sourceName === '';
+                    else searchSourceValueSelected
+                  "
+                  (searchEmit)="searchSource($event)"
+                  [searchValue]="filters.sourceName"
+                ></app-search>
+                <ng-template #searchSourceValueSelected>
+                  <p class="filter-selected-el">
+                    <button
+                      *ngIf="currentUser.role === 'Admin'"
+                      (click)="clearElementFilter('source')"
+                    >
+                      <i class="fa-solid fa-xmark text-red-500"></i>
+                    </button>
+                    {{ filters.sourceName }}
+                  </p>
+                </ng-template>
+                <ng-container
+                  *ngIf="
+                    generatedDataFetched && generatedDataFetched.length > 0
+                  "
+                >
+                  <app-lazy-search
+                    [fetchData]="generatedDataFetched"
+                    (selectEmit)="onElementSelection('source', $event)"
+                    class="absolute top-full mt-2 w-full z-10 bg-white shadow-md border rounded-lg"
+                  ></app-lazy-search>
+                </ng-container>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Totals Section -->
+      <div class="flex flex-wrap gap-10 card-stat max-w-fit min-w-[530px]">
+        <div class="flex gap-2 items-center">
+          <p class="font-semibold">Totali:</p>
+          <ng-container *ngIf="totalCreatedAmount; else zeroGeneratedAmount">
+            <app-animated-number
+              [finalNumber]="totalCreatedAmount"
+              [duration]="1000"
+            ></app-animated-number>
+          </ng-container>
+          <ng-template #zeroGeneratedAmount>
+            <p>0</p>
+          </ng-template>
+        </div>
+        <div class="flex gap-2 items-center">
+          <p>di cui <span class="font-semibold">Riscossi:</span></p>
+          <ng-container *ngIf="totalRedeemedAmount; else zeroRedeemedAmount">
+            <app-animated-number
+              [finalNumber]="totalRedeemedAmount"
+              [duration]="1000"
+            ></app-animated-number>
+          </ng-container>
+          <ng-template #zeroRedeemedAmount>
+            <p>0</p>
+          </ng-template>
+        </div>
+      </div>
+
+      <div class="flex mt-6 gap-6">
+        <!-- Bar Chart for Generated and Redeemed Over Time -->
+        <div class="card-stat">
+          <ng-container *ngIf="totalGeneratedOverTime">
+            <p class="mt-6 font-semibold">Generati e riscossi nel tempo</p>
+            <ngx-charts-bar-vertical-2d
+              [view]="view"
+              [scheme]="blueAndYellowWom"
+              [results]="totalGeneratedOverTime"
+              [gradient]="false"
+              [xAxis]="true"
+              [yAxis]="true"
+              [legend]=""
+              [showXAxisLabel]="true"
+              [showYAxisLabel]="true"
+              [xAxisLabel]="'Data'"
+              [yAxisLabel]="'Quantità'"
+              (select)="onSelect($event)"
+            >
+            </ngx-charts-bar-vertical-2d>
+          </ng-container>
+        </div>
+        <!-- Pie Chart by Aim -->
+        <div class="card-stat">
+          <ng-container
+            *ngIf="
+              chartCreatedAmountByAim && chartCreatedAmountByAim.length > 0
+            "
+          >
+            <p class="mt-6 font-semibold">Divisi per AIM:</p>
+            <ngx-charts-pie-chart
+              [view]="view"
+              [scheme]="colorscheme"
+              [results]="chartCreatedAmountByAim"
+              [legend]=""
+              [labels]="true"
+            >
+            </ngx-charts-pie-chart>
+          </ng-container>
+        </div>
+      </div>
     </div>
+    <ng-template #loadingGeneration>
+      <div class="flex flex-col gap-4 p-6 bg-white shadow-md rounded-lg">
+        <ngx-skeleton-loader
+          count="1"
+          appearance="line"
+          [theme]="{ height: '50px', width: '180px', 'border-radius': '20px' }"
+        ></ngx-skeleton-loader>
+        <div class="flex justify-around">
+          <ngx-skeleton-loader
+            count="1"
+            appearance="line"
+            [theme]="{
+              height: '300px',
+              width: '300px',
+              'border-radius': '20px'
+            }"
+          ></ngx-skeleton-loader>
+          <ngx-skeleton-loader
+            count="1"
+            appearance="circle"
+            animation="progress-dark"
+            [theme]="{ height: '300px', width: '300px' }"
+          ></ngx-skeleton-loader>
+        </div>
+
+        <ngx-skeleton-loader
+          count="5"
+          [theme]="{
+            'border-radius': '5px',
+            height: '50px'
+          }"
+        ></ngx-skeleton-loader>
+      </div>
+    </ng-template>
+  </div>
 </div>

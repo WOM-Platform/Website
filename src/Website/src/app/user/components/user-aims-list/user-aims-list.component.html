@@ -1,43 +1,43 @@
 <div class="">
-    <button *ngIf="!addAim" (click)="onAddAim()" class="btn-default">
-        Gestisci lista aim
-    </button>
-    <button *ngIf="addAim" (click)="handleCancellationAim()" class="btn-default">
-        <mat-icon>cancel</mat-icon>
-        Annulla
-    </button>
+  <button *ngIf="!addAim" (click)="onAddAim()" class="btn-default">
+    Gestisci lista aim
+  </button>
+  <button *ngIf="addAim" (click)="handleCancellationAim()" class="btn-default">
+    <mat-icon>cancel</mat-icon>
+    Annulla
+  </button>
 </div>
 <div *ngIf="addAim" class="add-access-container" @fadeInOut>
-    <div class="mb-4">
-        <label>
-            <input
-                    type="checkbox"
-                    [(ngModel)]="selectAll"
-                    (change)="toggleAll($event)"
-            />
-            <span class="font-semibold text-lg">{{ " " }}Select All</span>
-        </label>
-    </div>
-    <ul class="flex flex-wrap gap-4">
-        <li *ngFor="let aim of listAims">
-            <label>
-                <input
-                        type="checkbox"
-                        [(ngModel)]="aim.isChecked"
-                        (change)="onAimChange()"
-                />
-                <span class="font-semibold">{{ " " }}{{ aim.code }}</span>
-                {{ " " }}
-                {{ aim.titles["it"] }}
-            </label>
-        </li>
-    </ul>
-    <button
-            [disabled]="!hasChanges()"
-            (click)="emitSelectedAims()"
-            class="btn-default mt-4"
-    >
-        <mat-icon>check</mat-icon>
-        Conferma selezione
-    </button>
+  <div class="mb-4">
+    <label>
+      <input
+        type="checkbox"
+        [(ngModel)]="selectAll"
+        (change)="toggleAll($event)"
+      />
+      <span class="font-semibold text-lg">{{ " " }}Select All</span>
+    </label>
+  </div>
+  <ul class="flex flex-wrap gap-4">
+    <li *ngFor="let aim of listAims">
+      <label>
+        <input
+          type="checkbox"
+          [(ngModel)]="aim.isChecked"
+          (change)="onAimChange()"
+        />
+        <span class="font-semibold">{{ " " }}{{ aim.code }}</span>
+        {{ " " }}
+        {{ aim.titles["it"] }}
+      </label>
+    </li>
+  </ul>
+  <button
+    [disabled]="!hasChanges()"
+    (click)="emitSelectedAims()"
+    class="btn-default mt-4"
+  >
+    <mat-icon>check</mat-icon>
+    Conferma selezione
+  </button>
 </div>
