@@ -1,5 +1,5 @@
 # BUILD step
-FROM node:18.19.1 as build
+FROM node:18.19.1 AS build
 
 # Import environment variables from build args
 
