@@ -29,7 +29,7 @@ ENV NODE_OPTIONS=--openssl-legacy-provider
 RUN ng build --output-path=/app/dist --configuration=production
 
 # DISTRIBUTE step
-FROM nginx:1.23-alpine
+FROM nginx:1.27-alpine
 COPY --from=build /app/dist /usr/share/nginx/html
 COPY ./ng.conf /etc/nginx/conf.d/
 RUN rm /etc/nginx/conf.d/default.conf

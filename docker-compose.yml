@@ -1,4 +1,3 @@
-version: '3'
 networks:
   web:
     external: true
@@ -16,7 +15,7 @@ services:
 
     - "traefik.http.routers.wom-web.rule=Host(`wom.social`)"
     - "traefik.http.routers.wom-web.entrypoints=websecure"
- 
+
     - "traefik.http.routers.wom-web-insecure.rule=Host(`wom-social`)"
     - "traefik.http.routers.wom-web-insecure.entrypoints=web"
     - "traefik.http.routers.wom-web-insecure.middlewares=wom-web-redirect"
