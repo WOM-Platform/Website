@@ -16,8 +16,9 @@
                 filters.merchantName === '';
                 else searchMerchantValueSelected
               "
-              (searchEmit)="searchMerchant($event)"
+              [placeholder]="'Ricerca Merchant'"
               [searchValue]="filters.merchantName"
+              (searchEmit)="searchMerchant($event)"
             ></app-search>
             <ng-template #searchMerchantValueSelected>
               <p class="filter-selected-el">
@@ -86,85 +87,72 @@
 
       <!-- Bar Chart for Consumption over Time -->
       <div class="flex justify-center gap-6 mt-6">
-        <div class="card-stat">
-          <ng-container *ngIf="totalConsumedOverTime">
-            <p class="mt-6 font-semibold">Consumo nel tempo</p>
-            <ngx-charts-bar-vertical
-              [view]="view"
-              [scheme]="blueWomScheme"
-              [results]="totalConsumedOverTime"
-              [gradient]="false"
-              [xAxis]="true"
-              [yAxis]="true"
-              [legend]="false"
-              [showXAxisLabel]="true"
-              [showYAxisLabel]="true"
-              [xAxisLabel]="'Data'"
-              [yAxisLabel]="'Quantità'"
-              (select)="onSelect($event)"
-            >
-            </ngx-charts-bar-vertical>
-          </ng-container>
-        </div>
-        <!-- BEGIN Pie Chart by Aim -->
-        <div class="relative card-stat">
-          <ng-container
-            *ngIf="
-              chartConsumedAmountByAim && chartConsumedAmountByAim.length > 0
-            "
+        <div>
+          <div
+            class="card-stat"
+            *ngIf="totalConsumedOverTime && totalConsumedAmount > 0"
           >
-            <p class="mt-6 font-semibold">Divisi per AIM:</p>
-            <div class="w-full max-w-full overflo">
-              <ngx-charts-pie-chart
-                (window:resize)="onResize($event)"
+            <ng-container>
+              <p class="mt-6 font-semibold">Consumo nel tempo</p>
+              <ngx-charts-bar-vertical
                 [view]="view"
-                [scheme]="colorscheme"
-                [results]="chartConsumedAmountByAim"
-                [legend]=""
-                [labels]="true"
+                [scheme]="blueWomScheme"
+                [results]="totalConsumedOverTime"
+                [gradient]="false"
+                [xAxis]="true"
+                [yAxis]="true"
+                [legend]="false"
+                [showXAxisLabel]="true"
+                [showYAxisLabel]="true"
+                [xAxisLabel]="'Data'"
+                [yAxisLabel]="'Quantità'"
+                (select)="onSelect($event)"
               >
-              </ngx-charts-pie-chart>
-            </div>
-          </ng-container>
+              </ngx-charts-bar-vertical>
+            </ng-container>
+          </div>
         </div>
-      </div>
-      <!-- END Pie Chart by Aim -->
-      <!-- BEGIN Merchant Ranking -->
-      <div
-        class="mt-6 card-stat max-w-fit"
-        *ngIf="rankMerchants && rankMerchants.length > 0"
-      >
-        <h3 class="font-semibold mb-4">
-          <i class="fa-solid fa-star" style="color: #ffd43b"></i> Classifica
-          Merchant
-        </h3>
+        <!-- BEGIN Merchant Ranking -->
+        <div
+          class="card-stat max-w-fit"
+          *ngIf="rankMerchants && rankMerchants.length > 0"
+        >
+          <h3 class="font-semibold mb-4">
+            <i class="fa-solid fa-star" style="color: #ffd43b"></i> Classifica
+            Merchant
+          </h3>
 
-        <ul class="list-disc pl-5 space-y-2">
-          <li *ngFor="let rank of rankMerchants | slice : 0 : displayLimit">
-            <!-- Conditional rendering for trophy icon based on rank -->
-            <span *ngIf="rank.rank === 1">
-              1) <i class="fa-solid fa-trophy" style="color: #ffd43b"></i>
-            </span>
-            <span *ngIf="rank.rank === 2">
-              2) <i class="fa-solid fa-trophy" style="color: #c0c0c0"></i>
-            </span>
-            <span *ngIf="rank.rank === 3">
-              3) <i class="fa-solid fa-trophy" style="color: #cd7f32"></i>
-            </span>
-            <span *ngIf="rank.rank > 3"> {{ rank.rank }}) </span>
-            {{ rank.name }}: <strong>{{ rank.amount }}</strong>
-            <span class="italic text-xs"> WOM</span>
-          </li>
-        </ul>
-        <div *ngIf="currentUser.role === 'Admin'" class="text-center mt-4">
-          <button
-            class="text-blue-500 hover:text-blue-700 underline"
-            (click)="toggleRankMerchants()"
+          <ul class="list-disc pl-5 space-y-2">
+            <li *ngFor="let rank of rankMerchants | slice : 0 : displayLimit">
+              <!-- Conditional rendering for trophy icon based on rank -->
+              <span *ngIf="rank.rank === 1">
+                1) <i class="fa-solid fa-trophy" style="color: #ffd43b"></i>
+              </span>
+              <span *ngIf="rank.rank === 2">
+                2) <i class="fa-solid fa-trophy" style="color: #c0c0c0"></i>
+              </span>
+              <span *ngIf="rank.rank === 3">
+                3) <i class="fa-solid fa-trophy" style="color: #cd7f32"></i>
+              </span>
+              <span *ngIf="rank.rank > 3"> {{ rank.rank }}) </span>
+              {{ rank.name }}: <strong>{{ rank.amount }}</strong>
+              <span class="italic text-xs"> WOM</span>
+            </li>
+          </ul>
+          <div
+            *ngIf="currentUser.role === 'Admin' && rankMerchants.length > 5"
+            class="text-center mt-4"
           >
-            {{ isExpanded ? "Mostra meno" : "Mostra di più" }}
-          </button>
+            <button
+              class="text-blue-500 hover:text-blue-700 underline"
+              (click)="toggleRankMerchants()"
+            >
+              {{ isExpanded ? "Mostra meno" : "Mostra di più" }}
+            </button>
+          </div>
         </div>
       </div>
+
       <!-- END Merchant Ranking -->
     </div>
     <ng-template #loadingConsumption>
@@ -254,8 +242,9 @@
                     filters.sourceName === '';
                     else searchSourceValueSelected
                   "
-                  (searchEmit)="searchSource($event)"
+                  [placeholder]="'Ricerca Instrument'"
                   [searchValue]="filters.sourceName"
+                  (searchEmit)="searchSource($event)"
                 ></app-search>
                 <ng-template #searchSourceValueSelected>
                   <p class="filter-selected-el">

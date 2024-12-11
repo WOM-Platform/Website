@@ -72,7 +72,7 @@ export class AdminRoleComponent implements OnInit, OnDestroy {
     aimListFilter: [],
   };
 
-  displayLimit: number = 5;
+  displayLimit: number = 10;
   isExpanded: boolean = false;
 
   locationParameters: LocationParams = {};
@@ -96,7 +96,6 @@ export class AdminRoleComponent implements OnInit, OnDestroy {
   isShowedGenerationFilter: boolean = false;
   bboxArea;
   chartCreatedAmountByAim: ChartDataSwimlane[] = [];
-  chartConsumedAmountByAim: ChartDataSwimlane[] = [];
 
   view: [number, number] = [500, 400];
 
@@ -254,11 +253,6 @@ export class AdminRoleComponent implements OnInit, OnDestroy {
       .subscribe((data: ConsumedStatsApiResponse) => {
         // Consumed total amount of WOM
         this.totalConsumedAmount = data.totalConsumed;
-        // Get total consumed by aims
-        this.chartConsumedAmountByAim = data.voucherByAims.map((item) => ({
-          name: item.aimCode,
-          value: item.amount,
-        }));
 
         // Get rank of merchants
         this.rankMerchants = data.merchantRanks;
@@ -268,6 +262,8 @@ export class AdminRoleComponent implements OnInit, OnDestroy {
           value: data.total,
         }));
 
+        console.log("this.totalConsumedOverTime");
+        console.log(this.totalConsumedOverTime);
         // All requests are done, now set isConsumedDataReady to true
         this.isConsumedDataReady = true;
       });
@@ -300,7 +296,7 @@ export class AdminRoleComponent implements OnInit, OnDestroy {
   // to open and close rank of merchants
   toggleRankMerchants() {
     this.isExpanded = !this.isExpanded;
-    this.displayLimit = this.isExpanded ? this.rankMerchants.length : 5;
+    this.displayLimit = this.isExpanded ? this.rankMerchants.length : 10;
   }
 
   // On reseize charts
@@ -379,13 +375,6 @@ export class AdminRoleComponent implements OnInit, OnDestroy {
       csvRows.push(`${item.value},${item.value}`);
     });
     csvRows.push(""); // Blank line for separation
-
-    // chartConsumedAmountByAim
-    csvRows.push("Chart Consumed Amount By Aim");
-    csvRows.push("Label,Value");
-    this.chartConsumedAmountByAim.forEach((item) => {
-      csvRows.push(`${item.value},${item.value}`);
-    });
 
     // Join all rows with a newline
     return csvRows.join("\n");
