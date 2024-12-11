@@ -71,12 +71,14 @@
         </div>
         <ng-template #loadingAvailableVouchers>
           <ngx-skeleton-loader
+            class="skeleton-class"
             count="1"
             appearance="line"
             [theme]="{
-              height: '50px',
+              height: '28px',
               width: '280px',
-              'border-radius': '20px'
+              'border-radius': '20px',
+              'margin-bottom': '0px'
             }"
           ></ngx-skeleton-loader>
         </ng-template>
@@ -229,7 +231,7 @@
                 'bg-white': filters.aimListFilter.length === 0,
                 'bg-green-200': filters.aimListFilter.length > 0
               }"
-              class="flex gap-2 justify-center items-center py-2 px-4 border border-black rounded-full hover:bg-slate-300"
+              class="flex gap-2 justify-center items-center py-2 px-4 border border-black rounded-full hover:bg-slate-300 cursor-pointer"
               (click)="openDialogAimsSelected()"
             >
               <span

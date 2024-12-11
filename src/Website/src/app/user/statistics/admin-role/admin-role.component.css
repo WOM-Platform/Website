@@ -1,3 +1,7 @@
+p {
+  @apply mb-0;
+}
+
 h3 {
   @apply text-lg;
 }
@@ -13,6 +17,10 @@ h3 {
 .card-stat {
   @apply shadow-md rounded-lg p-6 border;
   background-image: linear-gradient(120deg, #fdfbfb 80%, #f3f7f8 100%);
+}
+
+.skeleton-class div {
+  @apply mb-0;
 }
 
 ngx-charts-pie-chart .legend-item,

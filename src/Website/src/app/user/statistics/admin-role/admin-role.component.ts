@@ -254,7 +254,6 @@ export class AdminRoleComponent implements OnInit, OnDestroy {
       .subscribe((data: ConsumedStatsApiResponse) => {
         // Consumed total amount of WOM
         this.totalConsumedAmount = data.totalConsumed;
-        console.log("Undefie ", data);
         // Get total consumed by aims
         this.chartConsumedAmountByAim = data.voucherByAims.map((item) => ({
           name: item.aimCode,
