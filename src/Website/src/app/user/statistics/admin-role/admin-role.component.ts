@@ -25,10 +25,11 @@ import { tap } from "rxjs/operators";
 import {
   ChartDataSwimlane,
   GenerationRedeemedStatsApiResponse,
-  RankMerchants,
   TotalCreatedAmountByAim,
   ChartDataSwimlaneSeries,
   ConsumedStatsApiResponse,
+  MerchantRankDTO,
+  SourceRankDTO,
 } from "../../../_models/stats";
 import { LoadingService } from "../../../_services/loading.service";
 import { StatisticsFiltersComponent } from "../../components/statistics-filters/statistics-filters.component";
@@ -72,8 +73,11 @@ export class AdminRoleComponent implements OnInit, OnDestroy {
     aimListFilter: [],
   };
 
-  displayLimit: number = 10;
+  defaultNumberRank: number = 10;
+  displayLimit: number = this.defaultNumberRank;
+  displayLimitSources: number = this.defaultNumberRank;
   isExpanded: boolean = false;
+  isExpandedSources: boolean = false;
 
   locationParameters: LocationParams = {};
 
@@ -86,7 +90,8 @@ export class AdminRoleComponent implements OnInit, OnDestroy {
   totalConsumedOverTime: ChartDataSwimlane[] = [];
   totalGeneratedOverTime: ChartDataSwimlaneSeries[] = [];
   totalCreatedAmountByAim: TotalCreatedAmountByAim[];
-  rankMerchants: RankMerchants[] = [];
+  rankMerchants: MerchantRankDTO[] = [];
+  rankSources: SourceRankDTO[] = [];
   offerConsumedVouchers: any;
   availableVouchers: number;
 
@@ -215,13 +220,13 @@ export class AdminRoleComponent implements OnInit, OnDestroy {
         this.totalCreatedAmount = data.totalGenerated;
         this.totalRedeemedAmount = data.totalRedeemed;
         this.totalCreatedAmountByAim = data.voucherByAim;
-
         this.chartCreatedAmountByAim = this.totalCreatedAmountByAim.map(
           (item) => ({
             name: item.aimCode,
             value: item.amount,
           })
         );
+        this.rankSources = data.sourceRank;
 
         this.isGeneratedDataReady = true;
 
@@ -261,9 +266,6 @@ export class AdminRoleComponent implements OnInit, OnDestroy {
           name: data.date,
           value: data.total,
         }));
-
-        console.log("this.totalConsumedOverTime");
-        console.log(this.totalConsumedOverTime);
         // All requests are done, now set isConsumedDataReady to true
         this.isConsumedDataReady = true;
       });
@@ -297,6 +299,14 @@ export class AdminRoleComponent implements OnInit, OnDestroy {
   toggleRankMerchants() {
     this.isExpanded = !this.isExpanded;
     this.displayLimit = this.isExpanded ? this.rankMerchants.length : 10;
+  }
+
+  // to open and close rank of sources
+  toggleRankSources() {
+    this.isExpandedSources = !this.isExpandedSources;
+    this.displayLimitSources = this.isExpandedSources
+      ? this.rankSources.length
+      : 10;
   }
 
   // On reseize charts

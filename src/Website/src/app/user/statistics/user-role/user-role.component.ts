@@ -16,7 +16,7 @@ import {
   ChartDataSwimlaneSeries,
   ConsumedStatsApiResponse,
   GenerationRedeemedStatsApiResponse,
-  RankMerchants,
+  MerchantRankDTO,
   TotalCreatedAmountByAim,
 } from "../../../_models/stats";
 import { tap } from "rxjs/operators";
@@ -57,7 +57,7 @@ export class UserRoleComponent implements OnInit {
   totalConsumedOverTime: ChartDataSwimlane[] = [];
   totalGeneratedOverTime: ChartDataSwimlaneSeries[] = [];
   totalCreatedAmountByAim: TotalCreatedAmountByAim[];
-  rankMerchants: RankMerchants[] = [];
+  rankMerchants: MerchantRankDTO[] = [];
   offerConsumedVouchers: any;
   availableVouchers: number;
 

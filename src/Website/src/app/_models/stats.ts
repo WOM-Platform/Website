@@ -55,18 +55,20 @@ export interface TotalCreatedAmountByAim {
   amount: number;
 }
 
-export interface MerchantRankDTO {
+export interface ElementRankDTO {
   id: string;
   name: string;
-  amount: number;
+
   rank: number;
 }
 
-export interface RankMerchants {
-  id: string;
-  name: string;
+export interface MerchantRankDTO extends ElementRankDTO {
   amount: number;
-  rank: number;
+}
+
+export interface SourceRankDTO extends ElementRankDTO {
+  totalRedeemedAmount: number;
+  totalGeneratedAmount: number;
 }
 
 export interface GenerationRedeemedStatsApiResponse {
@@ -75,6 +77,7 @@ export interface GenerationRedeemedStatsApiResponse {
   voucherByAim: VoucherByAimDTO[];
   voucherAvailable: number;
   totalGeneratedAndRedeemedOverTime: TotalGeneratedRedeemedOverTime[];
+  sourceRank: SourceRankDTO[];
 }
 
 export interface ConsumedStatsApiResponse {
