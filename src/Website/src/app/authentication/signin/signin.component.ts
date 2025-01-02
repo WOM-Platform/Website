@@ -83,4 +83,9 @@ export class SignInComponent implements OnInit {
             this.formSubmitAttempt = true;
         }
     }
+
+    throwTestError(): void {
+        throw new Error("Sentry Test Error");
+      }
+      
 }
