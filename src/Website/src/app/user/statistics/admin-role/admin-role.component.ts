@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from "@angular/core";
+import { ChangeDetectorRef, Component, OnDestroy, OnInit } from "@angular/core";
 import { CommonModule, DatePipe } from "@angular/common";
 import { PieChartModule } from "@swimlane/ngx-charts";
 import { SharedModule } from "../../../shared/shared.module";
@@ -47,7 +47,7 @@ import { MatTooltip } from "@angular/material/tooltip";
     LazySearchComponent,
     StatisticsFiltersComponent,
     MatIcon,
-    MatTooltip
+    MatTooltip,
   ],
   templateUrl: "./admin-role.component.html",
   styleUrl: "./admin-role.component.css",
@@ -64,7 +64,6 @@ export class AdminRoleComponent implements OnInit, OnDestroy {
   today = new Date();
   oneMonthAgo: Date;
 
-
   filters: DashboardAdminFilter = {
     startDate: undefined,
     endDate: undefined,
@@ -75,9 +74,9 @@ export class AdminRoleComponent implements OnInit, OnDestroy {
     aimListFilter: [],
   };
 
-  searchSourceElement = ""
-  searchMerchantElement = ""
-  
+  searchSourceElement = "";
+  searchMerchantElement = "";
+
   tooltipActiveFilters = "Non ci sono filtri attivi";
 
   locationParameters: LocationParams = {};
@@ -90,7 +89,7 @@ export class AdminRoleComponent implements OnInit, OnDestroy {
   totalRedeemedAmount: number;
   totalEverRedeemedAmount: number;
   totalConsumedAmount: number = 0;
-  totalEverConsumedAmount: number = 0
+  totalEverConsumedAmount: number = 0;
   totalConsumedOverTime: ChartDataSwimlane[] = [];
   totalGeneratedOverTime: ChartDataSwimlaneSeries[] = [];
   totalCreatedAmountByAim: TotalCreatedAmountByAim[];
@@ -107,7 +106,7 @@ export class AdminRoleComponent implements OnInit, OnDestroy {
   chartCreatedAmountByAim: ChartDataSwimlane[] = [];
 
   view: [number, number] = [500, 400];
-pieView: [number, number] = [300, 200];
+  pieView: [number, number] = [300, 200];
   colorscheme: any = {
     domain: [
       "#6898ff",
@@ -129,6 +128,7 @@ pieView: [number, number] = [300, 200];
   };
 
   constructor(
+    private cdr: ChangeDetectorRef,
     public dialog: MatDialog,
     private merchantService: MerchantService,
     private sourceService: SourceService,
@@ -138,10 +138,10 @@ pieView: [number, number] = [300, 200];
     this.oneMonthAgo = new Date();
     this.oneMonthAgo.setMonth(this.today.getMonth() - 1);
 
-    this.filters.startDate = this.oneMonthAgo
-    this.filters.endDate = this.today
+    this.filters.startDate = this.oneMonthAgo;
+    this.filters.endDate = this.today;
   }
-  
+
   ngOnInit(): any {
     this.currentUser = this.userService.currentUserValue;
     this.currentUser.role;
@@ -194,17 +194,17 @@ pieView: [number, number] = [300, 200];
   // search for merchant user
   searchMerchant(merchantName: string = this.searchMerchantElement) {
     this.merchantService
-      .getAllMerchants({ search:merchantName })
+      .getAllMerchants({ search: merchantName })
       .subscribe((data) => {
         this.consumedDataFetched = data.data;
       });
   }
 
   generalData(source?: Instrument, merchant?: Merchant) {
-    this.hasActiveFilters() // update active filters
+    this.hasActiveFilters(); // update active filters
     if (source) {
       if (!this.filters.sourceNames.includes(source.name)) {
-        this.filters.sourceNames.push(source.name); 
+        this.filters.sourceNames.push(source.name);
       }
       if (!this.filters.sourceId.includes(source.id)) {
         this.filters.sourceId.push(source.id);
@@ -213,17 +213,16 @@ pieView: [number, number] = [300, 200];
 
     if (merchant) {
       if (!this.filters.merchantNames.includes(merchant.name)) {
-        this.filters.merchantNames.push(merchant.name); 
+        this.filters.merchantNames.push(merchant.name);
       }
       if (!this.filters.merchantId.includes(merchant.id)) {
         this.filters.merchantId.push(merchant.id);
       }
-     
     }
   }
 
   generationVoucherData(source?: Instrument) {
-    this.hasActiveFilters() // update active filters
+    this.hasActiveFilters(); // update active filters
     if (source) {
       if (!this.filters.sourceNames.includes(source.name)) {
         this.filters.sourceNames.push(source.name);
@@ -270,7 +269,7 @@ pieView: [number, number] = [300, 200];
   consumptionVoucherData(merchant?: Merchant) {
     if (merchant) {
       if (!this.filters.merchantNames.includes(merchant.name)) {
-        this.filters.merchantNames.push(merchant.name); 
+        this.filters.merchantNames.push(merchant.name);
       }
       if (!this.filters.merchantId.includes(merchant.id)) {
         this.filters.merchantId.push(merchant.id);
@@ -330,15 +329,20 @@ pieView: [number, number] = [300, 200];
     elementKey: string,
     elementSelected: Merchant | Instrument
   ) {
+    console.log("Is it here element");
     if (elementKey === "merchant" && this.isMerchant(elementSelected)) {
       this.consumedDataFetched = [];
       this.isConsumedDataReady = false;
+      this.searchMerchantElement = "";
       this.consumptionVoucherData(elementSelected);
     } else if (elementKey === "source" && this.isInstrument(elementSelected)) {
       this.generatedDataFetched = [];
       this.isGeneratedDataReady = false;
+      this.searchSourceElement = "";
       this.generationVoucherData(elementSelected);
     }
+    console.log(this.searchMerchantElement);
+    this.cdr.detectChanges();
   }
 
   isMerchant(element: Merchant | Instrument): element is Merchant {
@@ -353,30 +357,40 @@ pieView: [number, number] = [300, 200];
 
   clearElementFilter(elementToClear: string, name?: string, id?: string) {
     if (elementToClear === "merchant" && name && id) {
-      this.filters.merchantNames = this.filters.merchantNames.filter(currentName => currentName !== name);
-      this.filters.merchantId = this.filters.merchantId.filter(currentId => currentId !== id);
-  
+      this.filters.merchantNames = this.filters.merchantNames.filter(
+        (currentName) => currentName !== name
+      );
+      this.filters.merchantId = this.filters.merchantId.filter(
+        (currentId) => currentId !== id
+      );
+
       this.isConsumedDataReady = false; // Reset data flag
       this.consumptionVoucherData();
     }
-  
+
     if (elementToClear === "source" && name && id) {
-      this.filters.sourceNames = this.filters.sourceNames.filter(currentName => currentName !== name);
-      this.filters.sourceId = this.filters.sourceId.filter(currentId => currentId !== id);
-  
+      this.filters.sourceNames = this.filters.sourceNames.filter(
+        (currentName) => currentName !== name
+      );
+      this.filters.sourceId = this.filters.sourceId.filter(
+        (currentId) => currentId !== id
+      );
+
       this.isGeneratedDataReady = false; // Reset data flag
-  
+
       this.generationVoucherData();
     }
-      // Update active filters state
-      this.hasActiveFilters();
-    }
+    // Update active filters state
+    this.hasActiveFilters();
+  }
 
   onDatesSelected(date) {
+    this.isConsumedDataReady = false;
+    this.isGeneratedDataReady = false;
     this.filters.startDate = date.startDate;
     this.filters.endDate = date.endDate;
     this.loadData();
-    this.hasActiveFilters() // update active filters
+    this.hasActiveFilters(); // update active filters
   }
 
   convertToCSV(): string {
@@ -430,36 +444,44 @@ pieView: [number, number] = [300, 200];
   }
 
   hasActiveFilters(): boolean {
-    return !!this.filters.startDate ||
-           !!this.filters.endDate || 
-           this.filters.merchantId.length > 0  ||
-           this.filters.merchantNames.length > 0||
-           this.filters.sourceId.length > 0  ||
-           this.filters.sourceNames.length > 0 ||
-           this.filters.aimListFilter.length > 0;
+    return (
+      !!this.filters.startDate ||
+      !!this.filters.endDate ||
+      this.filters.merchantId.length > 0 ||
+      this.filters.merchantNames.length > 0 ||
+      this.filters.sourceId.length > 0 ||
+      this.filters.sourceNames.length > 0 ||
+      this.filters.aimListFilter.length > 0
+    );
   }
 
   getActiveFiltersSummary(): string {
     const activeFilters: string[] = [];
-  
+
     if (this.filters.startDate) {
-      const formattedStartDate = new DatePipe("it-IT").transform(this.filters.startDate, 'dd/MM/yyyy');
+      const formattedStartDate = new DatePipe("it-IT").transform(
+        this.filters.startDate,
+        "dd/MM/yyyy"
+      );
       activeFilters.push(`Data Inizio ${formattedStartDate}`);
     }
     if (this.filters.endDate) {
-      const formattedEndDate = new DatePipe("it-IT").transform(this.filters.endDate, 'dd/MM/yyyy');
+      const formattedEndDate = new DatePipe("it-IT").transform(
+        this.filters.endDate,
+        "dd/MM/yyyy"
+      );
       activeFilters.push(`Data Fine ${formattedEndDate}`);
     }
     if (this.filters.merchantNames.length > 0) {
-      activeFilters.push(`Merchants: ${this.filters.merchantNames.join(', ')}`);
+      activeFilters.push(`Merchants: ${this.filters.merchantNames.join(", ")}`);
     }
     if (this.filters.sourceNames.length > 0) {
-      activeFilters.push(`Sources: ${this.filters.sourceNames.join(', ')}`);
+      activeFilters.push(`Sources: ${this.filters.sourceNames.join(", ")}`);
     }
     if (this.filters.aimListFilter.length > 0) {
-      activeFilters.push(`Aims: ${this.filters.aimListFilter.join(', ')}`);
+      activeFilters.push(`Aims: ${this.filters.aimListFilter.join(", ")}`);
     }
-  
-    return activeFilters.join('; ');
+
+    return activeFilters.join("; ");
   }
 }
