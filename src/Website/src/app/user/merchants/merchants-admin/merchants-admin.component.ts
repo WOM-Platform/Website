@@ -50,7 +50,7 @@ export class MerchantsAdminComponent implements OnInit {
 
     errorMessage: string = "";
 
-    searchParameters = "";
+    searchParameters: string = "";
     formApiError: boolean;
 
     subscriptions = new Subscription();

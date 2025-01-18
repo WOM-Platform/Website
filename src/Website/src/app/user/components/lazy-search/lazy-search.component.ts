@@ -11,14 +11,12 @@ import {Merchant} from "../../../_models";
     templateUrl: './lazy-search.component.html',
     styleUrl: './lazy-search.component.css'
 })
-export class LazySearchComponent implements OnChanges {
+export class LazySearchComponent {
     @Input() placeholder: string = 'Search...';
     @Input() fetchData: Source[] | Merchant[];
     @Output() selectEmit = new EventEmitter<any>();
 
-    ngOnChanges() {
-        console.log("on changes ", this.fetchData)
-    }
+ 
 
     onSelection(selectedItem: any) {
         this.selectEmit.emit(selectedItem);

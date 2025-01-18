@@ -19,8 +19,8 @@ export class StatsService {
   // BEGIN REGISTRY API
   fetchVouchersGeneratedAndRedeemedStats(filters: DashboardAdminFilter) {
     let requestData = {
-      startDate: filters.startDate || null,
-      endDate: filters.endDate || null,
+      startDate: filters.startDate?.toISOString()  || null,
+      endDate: filters.endDate?.toISOString()  || null,
       sourceId: filters.sourceId || null,
       aimListFilter: filters.aimListFilter || null,
     };
@@ -37,8 +37,8 @@ export class StatsService {
   ) {
     let requestData;
     requestData = {
-      startDate: filters.startDate || null,
-      endDate: filters.endDate || null,
+      startDate: filters.startDate?.toISOString()  || null,
+      endDate: filters.endDate?.toISOString()  || null,
       merchantId: filters.merchantId || null,
     };
     if (location) {
@@ -66,7 +66,7 @@ export class StatsService {
 
   getAdminTotalAmountConsumed(filters: DashboardAdminFilter): Observable<any> {
     const requestData = {
-      startDate: filters.startDate || null,
+      startDate: filters.startDate?.toISOString()  || null,
       endDate: filters.endDate || null,
       merchantId: filters.merchantId || null,
     };
@@ -79,8 +79,8 @@ export class StatsService {
 
   getAdminTotalConsumedByAim(filters: DashboardAdminFilter): Observable<any> {
     const requestData = {
-      startDate: filters.startDate || null,
-      endDate: filters.endDate || null,
+      startDate: filters.startDate?.toISOString()  || null,
+      endDate: filters.endDate?.toISOString()  || null,
       merchantId: filters.merchantId || null,
     };
 
@@ -92,8 +92,8 @@ export class StatsService {
 
   getTotalConsumedOverTime(filters: DashboardAdminFilter) {
     const requestData = {
-      startDate: filters.startDate || null,
-      endDate: filters.endDate || null,
+      startDate: filters.startDate?.toISOString()  || null,
+      endDate: filters.endDate?.toISOString()  || null,
       merchantId: filters.merchantId || null,
     };
     return this.http.post(
@@ -104,7 +104,7 @@ export class StatsService {
 
   getAmountOfAvailableVouchers(
     locationParams: LocationParams,
-    merchantId: string
+    merchantId: string[]
   ) {
     let requestData = {};
 

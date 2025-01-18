@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Output} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {DatePipe, NgFor, NgIf} from "@angular/common";
 
 @Component({
@@ -9,13 +9,14 @@ import {DatePipe, NgFor, NgIf} from "@angular/common";
     styleUrl: './datepicker.component.css'
 })
 export class DatepickerComponent {
+    @Input() startDate: Date | null = null;
+    @Input() endDate: Date | null = null;
     @Output() dates = new EventEmitter<{ startDate: Date | null, endDate: Date | null }>();
     calendarVisible = false;
     isSelectingStart = true;
     currentMonth = new Date();
     days: Date[] = [];
-    startDate: Date | null = null;
-    endDate: Date | null = null;
+   
 
     ngOnInit() {
         this.updateDays();

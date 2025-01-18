@@ -13,8 +13,8 @@ import {DashboardAdminFilter} from "../../../_models/filter";
 })
 export class CsvDownloadComponent {
     @Input() filters: DashboardAdminFilter = {
-        startDate: "",
-        endDate: ""
+        startDate: undefined,
+        endDate: undefined
     }
 
     constructor(private loadingService: LoadingService, private statsService: StatsService) {

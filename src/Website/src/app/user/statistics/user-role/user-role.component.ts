@@ -113,8 +113,12 @@ export class UserRoleComponent implements OnInit {
 
   consumptionVoucherData(merchant?: Merchant) {
     if (merchant) {
-      this.filters.merchantName = merchant.name;
-      this.filters.merchantId = merchant.id;
+      if (!this.filters.merchantNames.includes(merchant.name)) {
+        this.filters.merchantNames.push(merchant.name); // Update filters
+      }
+      if (!this.filters.merchantId.includes(merchant.id)) {
+        this.filters.merchantId.push(merchant.id);
+      }
     }
 
     this.statsService
@@ -158,8 +162,12 @@ export class UserRoleComponent implements OnInit {
 
   generationVoucherData(source?: Instrument) {
     if (source) {
-      this.filters.sourceName = source.name;
-      this.filters.sourceId = source.id;
+      if (!this.filters.sourceNames.includes(source.name)) {
+        this.filters.sourceNames.push(source.name); // Update filters
+      }
+      if (!this.filters.sourceId.includes(source.id)) {
+        this.filters.sourceId.push(source.id);
+      }
     }
     this.statsService
       .fetchVouchersGeneratedAndRedeemedStats(this.filters)
