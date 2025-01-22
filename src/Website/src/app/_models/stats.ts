@@ -31,6 +31,7 @@ export interface ChartDataSwimlane {
 
 export interface VoucherByAimDTO {
   aimCode: string;
+  aimName: string;
   amount: number;
 }
 
@@ -48,11 +49,6 @@ export interface TotalGeneratedRedeemedOverTime {
 export interface TotalConsumedOverTime {
   date: string;
   total: number;
-}
-
-export interface TotalCreatedAmountByAim {
-  aimCode: string;
-  amount: number;
 }
 
 export interface ElementRankDTO {

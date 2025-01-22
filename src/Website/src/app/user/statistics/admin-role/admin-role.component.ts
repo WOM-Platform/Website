@@ -21,11 +21,11 @@ import { tap } from "rxjs/operators";
 import {
   ChartDataSwimlane,
   GenerationRedeemedStatsApiResponse,
-  TotalCreatedAmountByAim,
   ChartDataSwimlaneSeries,
   ConsumedStatsApiResponse,
   MerchantRankDTO,
   SourceRankDTO,
+  VoucherByAimDTO,
 } from "../../../_models/stats";
 import { LoadingService } from "../../../_services/loading.service";
 import { StatisticsFiltersComponent } from "../../components/statistics-filters/statistics-filters.component";
@@ -92,7 +92,7 @@ export class AdminRoleComponent implements OnInit, OnDestroy {
   totalEverConsumedAmount: number = 0;
   totalConsumedOverTime: ChartDataSwimlane[] = [];
   totalGeneratedOverTime: ChartDataSwimlaneSeries[] = [];
-  totalCreatedAmountByAim: TotalCreatedAmountByAim[];
+  totalCreatedAmountByAim: VoucherByAimDTO[];
   rankMerchants: MerchantRankDTO[] = [];
   rankSources: SourceRankDTO[] = [];
   offerConsumedVouchers: any;
@@ -106,7 +106,7 @@ export class AdminRoleComponent implements OnInit, OnDestroy {
   chartCreatedAmountByAim: ChartDataSwimlane[] = [];
 
   view: [number, number] = [500, 400];
-  pieView: [number, number] = [300, 200];
+  pieView: [number, number] = [520, 400];
   colorscheme: any = {
     domain: [
       "#6898ff",
@@ -240,8 +240,8 @@ export class AdminRoleComponent implements OnInit, OnDestroy {
         this.totalEverRedeemedAmount = data.totalEverRedeemed;
         this.totalCreatedAmountByAim = data.voucherByAim;
         this.chartCreatedAmountByAim = this.totalCreatedAmountByAim.map(
-          (item) => ({
-            name: item.aimCode,
+          (item: VoucherByAimDTO) => ({
+            name: item.aimName,
             value: item.amount,
           })
         );
