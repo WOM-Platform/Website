@@ -36,20 +36,21 @@ import { MatIcon } from "@angular/material/icon";
 import { MatTooltip } from "@angular/material/tooltip";
 
 @Component({
-    selector: "app-admin-role",
-    imports: [
-        PieChartModule,
-        SharedModule,
-        CsvDownloadComponent,
-        SearchComponent,
-        CommonModule,
-        LazySearchComponent,
-        StatisticsFiltersComponent,
-        MatIcon,
-        MatTooltip,
-    ],
-    templateUrl: "./admin-role.component.html",
-    styleUrl: "./admin-role.component.css"
+  selector: "app-admin-role",
+  imports: [
+    PieChartModule,
+    SharedModule,
+    CsvDownloadComponent,
+    SearchComponent,
+    CommonModule,
+    LazySearchComponent,
+    StatisticsFiltersComponent,
+    MatIcon,
+    MatTooltip,
+  ],
+  standalone: true,
+  templateUrl: "./admin-role.component.html",
+  styleUrl: "./admin-role.component.css",
 })
 export class AdminRoleComponent implements OnInit, OnDestroy {
   currentUser: UserMe;

@@ -2,14 +2,12 @@ import { Component, OnInit } from "@angular/core";
 import { Merchant } from "../../../_models";
 import { StorageService } from "../../../_services/storage.service";
 import { MerchantService, StatsService, UserService } from "../../../_services";
-import { NgFor, NgIf, SlicePipe } from "@angular/common";
+import { NgFor, NgIf } from "@angular/common";
 import { Instrument } from "../../../_models/instrument";
 import { StatisticsFiltersComponent } from "../../components/statistics-filters/statistics-filters.component";
 import { DashboardAdminFilter } from "../../../_models/filter";
 import { BarChartModule, PieChartModule } from "@swimlane/ngx-charts";
-import { LazySearchComponent } from "../../components/lazy-search/lazy-search.component";
 import { NgxSkeletonLoaderModule } from "ngx-skeleton-loader";
-import { SearchComponent } from "../../components/search/search.component";
 import { SharedModule } from "../../../shared/shared.module";
 import {
   ChartDataSwimlane,
@@ -22,21 +20,19 @@ import {
 import { tap } from "rxjs/operators";
 
 @Component({
-    selector: "app-user-role",
-    imports: [
-        NgFor,
-        NgIf,
-        StatisticsFiltersComponent,
-        BarChartModule,
-        LazySearchComponent,
-        NgxSkeletonLoaderModule,
-        PieChartModule,
-        SearchComponent,
-        SharedModule,
-        SlicePipe,
-    ],
-    templateUrl: "./user-role.component.html",
-    styleUrl: "./user-role.component.css"
+  selector: "app-user-role",
+  imports: [
+    NgFor,
+    NgIf,
+    StatisticsFiltersComponent,
+    BarChartModule,
+    NgxSkeletonLoaderModule,
+    PieChartModule,
+    SharedModule,
+  ],
+  standalone: true,
+  templateUrl: "./user-role.component.html",
+  styleUrl: "./user-role.component.css",
 })
 export class UserRoleComponent implements OnInit {
   currentUser;
