@@ -6,7 +6,6 @@ import {DashboardAdminFilter} from "../../../_models/filter";
 
 @Component({
     selector: 'app-csv-download',
-    standalone: true,
     imports: [],
     templateUrl: './csv-download.component.html',
     styleUrl: './csv-download.component.css'

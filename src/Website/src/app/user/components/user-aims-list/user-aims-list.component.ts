@@ -10,17 +10,16 @@ import {NgFor, NgIf} from "@angular/common";
     selector: "app-user-aims-list",
     templateUrl: "./user-aims-list.component.html",
     styleUrls: ["./user-aims-list.component.css"],
-    standalone: true,
     imports: [NgIf, NgFor, FormsModule, MatIconModule],
     animations: [
         trigger("fadeInOut", [
             transition(":enter", [
-                style({opacity: 0}),
-                animate("0.2s ease-out", style({opacity: 1})),
+                style({ opacity: 0 }),
+                animate("0.2s ease-out", style({ opacity: 1 })),
             ]),
-            transition(":leave", [animate("0.2s ease-in", style({opacity: 0}))]),
+            transition(":leave", [animate("0.2s ease-in", style({ opacity: 0 }))]),
         ]),
-    ],
+    ]
 })
 export class UserAimsListComponent implements OnInit, OnChanges {
     @Input() instrumentAims: AimEditing;

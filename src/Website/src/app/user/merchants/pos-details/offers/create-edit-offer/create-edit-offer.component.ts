@@ -16,7 +16,6 @@ import {Filter} from "../../../../../_models/filter";
 
 @Component({
     selector: 'app-create-offer',
-    standalone: true,
     imports: [
         NgIf,
         PaginatorModule,

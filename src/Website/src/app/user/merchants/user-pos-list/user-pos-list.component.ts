@@ -14,7 +14,6 @@ import {PosCreateDialogComponent} from "../pos-create-dialog/pos-create-dialog.c
 
 @Component({
     selector: 'app-user-pos-list',
-    standalone: true,
     imports: [NgIf, NgFor, MatIcon, PosDetailsComponent],
     templateUrl: './user-pos-list.component.html',
     styleUrl: './user-pos-list.component.css'

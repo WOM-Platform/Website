@@ -10,6 +10,7 @@ import {StorageService} from "../_services/storage.service";
     selector: "app-user",
     templateUrl: "./user.component.html",
     styleUrl: "./user.component.css",
+    standalone: false
 })
 export class UserComponent implements OnInit, OnDestroy {
     username: string;

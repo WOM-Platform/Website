@@ -6,7 +6,8 @@ import {ActivatedRoute} from "@angular/router";
 @Component({
     selector: 'app-merchant-stats',
     templateUrl: './merchant-stats.component.html',
-    styleUrls: ['./merchant-stats.component.css']
+    styleUrls: ['./merchant-stats.component.css'],
+    standalone: false
 })
 export class MerchantStatsComponent implements OnInit {
     merchants: MerchantContainer[];

@@ -5,7 +5,6 @@ import {NgIf} from "@angular/common";
 
 @Component({
     selector: 'app-validity-slider',
-    standalone: true,
     imports: [
         MatSliderModule,
         FormsModule,

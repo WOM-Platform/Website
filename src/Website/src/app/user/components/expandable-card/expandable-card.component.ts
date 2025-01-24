@@ -3,11 +3,10 @@ import { EditableElementComponent } from "../editable-element/editable-element.c
 import { NgFor, NgIf } from "@angular/common";
 
 @Component({
-  selector: "app-expandable-card",
-  standalone: true,
-  imports: [EditableElementComponent, NgFor, NgIf],
-  templateUrl: "./expandable-card.component.html",
-  styleUrl: "./expandable-card.component.css",
+    selector: "app-expandable-card",
+    imports: [EditableElementComponent, NgFor, NgIf],
+    templateUrl: "./expandable-card.component.html",
+    styleUrl: "./expandable-card.component.css"
 })
 export class ExpandableCardComponent implements OnInit {
   @Input() name: string;

@@ -9,11 +9,9 @@ import { filter } from 'rxjs';
 
 @Component({
     selector: 'app-statistics-filters',
-    standalone: true,
     imports: [
         DatepickerComponent,
         NgIf,
-
     ],
     templateUrl: './statistics-filters.component.html',
     styleUrl: './statistics-filters.component.css'

@@ -8,7 +8,6 @@ import {SearchComponent} from "../search/search.component";
 
 @Component({
     selector: 'app-filters',
-    standalone: true,
     imports: [
         MatIcon,
         PaginatorModule,

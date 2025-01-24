@@ -34,9 +34,8 @@ import {SnackBarService} from "../../../../_services/snack-bar.service";
 @Component({
     selector: "app-forms-pos",
     templateUrl: "./forms-pos.component.html",
-    standalone: true,
     imports: [TranslateModule, MatFormFieldModule, ReactiveFormsModule, MatCheckboxModule, MatTooltipModule, GoogleMapsModule, MatInput, EditableElementComponent, NgIf],
-    styleUrls: ["./forms-pos.component.css", "../../../../_forms/forms.directive.css"],
+    styleUrls: ["./forms-pos.component.css", "../../../../_forms/forms.directive.css"]
 })
 export class PosFormComponent implements OnInit, AfterViewInit, OnDestroy {
     @Input() form: UntypedFormGroup;

@@ -6,7 +6,8 @@ import {EmailData} from "../../_models/emailData";
 @Component({
     selector: 'app-forms-contact',
     templateUrl: './forms-contact.directive.html',
-    styleUrls: ['./forms-contact.directive.css', '../forms.directive.css']
+    styleUrls: ['./forms-contact.directive.css', '../forms.directive.css'],
+    standalone: false
 })
 export class ContactFormComponent implements OnInit {
     @Input() form: UntypedFormGroup;

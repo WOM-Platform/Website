@@ -6,7 +6,6 @@ import {NgFor, NgIf} from "@angular/common";
 
 @Component({
     selector: 'app-aims-select',
-    standalone: true,
     imports: [NgIf, NgFor],
     templateUrl: './aims-select.component.html',
     styleUrls: ['./aims-select.component.css']

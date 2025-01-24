@@ -13,7 +13,8 @@ import {MatPaginator} from "@angular/material/paginator";
 @Component({
     selector: 'app-pagination',
     templateUrl: './pagination.component.html',
-    styleUrl: './pagination.component.css'
+    styleUrl: './pagination.component.css',
+    standalone: false
 })
 export class PaginationComponent implements OnInit, OnChanges {
     @Input() currentPage: number;

@@ -19,7 +19,6 @@ import {SnackBarService} from "../../../_services/snack-bar.service";
 
 @Component({
     selector: "app-pos-details",
-    standalone: true,
     imports: [CommonModule,
         MatDialogModule,
         MatButtonModule,
@@ -28,7 +27,7 @@ import {SnackBarService} from "../../../_services/snack-bar.service";
         TranslateModule, PosFormComponent, OffersComponent,
     ],
     templateUrl: "pos-details.html",
-    styleUrls: ["pos-details.css"],
+    styleUrls: ["pos-details.css"]
 })
 export class PosDetailsComponent implements OnInit {
     formPos: UntypedFormGroup;

@@ -13,6 +13,7 @@ import {MatTabGroup} from "@angular/material/tabs";
     selector: "app-user-merchant",
     templateUrl: "./user-merchants.component.html",
     styleUrls: ["./user-merchants.component.css"],
+    standalone: false
 })
 export class UserMerchantsComponent implements OnInit, OnDestroy {
     username: string;

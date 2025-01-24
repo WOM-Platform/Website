@@ -11,7 +11,6 @@ import {SnackBarService} from "../../../../_services/snack-bar.service";
 
 @Component({
     selector: 'app-offers',
-    standalone: true,
     imports: [
         NgForOf,
         NgIf,

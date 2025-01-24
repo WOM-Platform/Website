@@ -7,7 +7,6 @@ import {NgIf} from "@angular/common";
 
 @Component({
     selector: 'app-upload-image',
-    standalone: true,
     imports: [NgIf],
     templateUrl: './upload-image.component.html',
     styleUrl: './upload-image.component.css'

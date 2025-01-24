@@ -12,7 +12,6 @@ import {User} from "../../../../_models";
 
 @Component({
     selector: 'app-search-source',
-    standalone: true,
     imports: [
         FormsModule,
         PaginatorModule,

@@ -6,7 +6,8 @@ import {TranslateService} from '@ngx-translate/core';
 
 @Component({
     selector: 'app-breadcrumbs',
-    templateUrl: './breadcrumbs.component.html'
+    templateUrl: './breadcrumbs.component.html',
+    standalone: false
 })
 export class BreadcrumbsComponent implements OnInit {
     static readonly ROUTE_DATA_BREADCRUMB = 'breadcrumb';

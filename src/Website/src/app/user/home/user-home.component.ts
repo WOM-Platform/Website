@@ -12,6 +12,7 @@ import {SnackBarService} from "../../_services/snack-bar.service";
     selector: "app-user-home",
     templateUrl: "./user-home.component.html",
     styleUrls: ["./user-home.component.css"],
+    standalone: false
 })
 export class UserHomeComponent implements OnInit, OnDestroy {
     userData: any;

@@ -13,11 +13,10 @@ import { debounceTime, Subject, takeUntil } from "rxjs";
 import { MatIcon } from "@angular/material/icon";
 
 @Component({
-  selector: "app-search",
-  standalone: true,
-  imports: [ReactiveFormsModule, MatIcon],
-  templateUrl: "./search.component.html",
-  styleUrls: ["./search.component.css"],
+    selector: "app-search",
+    imports: [ReactiveFormsModule, MatIcon],
+    templateUrl: "./search.component.html",
+    styleUrls: ["./search.component.css"]
 })
 export class SearchComponent implements OnInit, OnDestroy, OnChanges {
   @Input() placeholder: string = "Ricerca...";

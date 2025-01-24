@@ -14,7 +14,6 @@ import {SharedModule} from "../../../shared/shared.module";
 
 @Component({
     selector: 'app-admin-table',
-    standalone: true,
     imports: [
         MatCellDef,
         MatColumnDef,

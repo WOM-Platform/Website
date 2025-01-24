@@ -1,9 +1,10 @@
 import { Component } from "@angular/core";
 
 @Component({
-  selector: "app-albergatori",
-  templateUrl: "./albergatori.component.html",
-  styleUrl: "./albergatori.component.css",
+    selector: "app-albergatori",
+    templateUrl: "./albergatori.component.html",
+    styleUrl: "./albergatori.component.css",
+    standalone: false
 })
 export class AlbergatoriComponent {
   faqs = [

@@ -7,10 +7,9 @@ import {MatIcon} from "@angular/material/icon";
 
 @Component({
     selector: "app-access-list",
-    standalone: true,
     imports: [NgIf, NgFor, UserAccessListComponent, MatIcon],
     templateUrl: "./access-list.component.html",
-    styleUrls: ["./access-list.component.css"],
+    styleUrls: ["./access-list.component.css"]
 })
 export class AccessListComponent {
     @Input() accessList: Access[];

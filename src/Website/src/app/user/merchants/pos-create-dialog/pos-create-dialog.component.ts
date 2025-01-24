@@ -22,8 +22,7 @@ import {CreateEditOfferComponent} from "../pos-details/offers/create-edit-offer/
     selector: 'app-pos-create-dialog',
     templateUrl: './pos-create-dialog.component.html',
     styleUrl: './pos-create-dialog.component.css',
-    standalone: true,
-    imports: [OffersComponent, CreateEditOfferComponent, MatDialogModule, TranslateModule, MatFormFieldModule, ReactiveFormsModule, MatCheckboxModule, MatTooltipModule, GoogleMapsModule, MatInput, EditableElementComponent, NgIf],
+    imports: [OffersComponent, CreateEditOfferComponent, MatDialogModule, TranslateModule, MatFormFieldModule, ReactiveFormsModule, MatCheckboxModule, MatTooltipModule, GoogleMapsModule, MatInput, EditableElementComponent, NgIf]
 })
 export class PosCreateDialogComponent implements OnInit {
     @ViewChild(GoogleMap, {static: false}) map: GoogleMap;

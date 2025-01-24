@@ -13,7 +13,6 @@ import {Filter} from "../../../../../../_models/filter";
 
 @Component({
     selector: 'app-offer-filters',
-    standalone: true,
     imports: [NgIf, MatSliderModule, UserAimsListComponent, ValiditySliderComponent, GoogleMap, TranslateModule, MapComponent, AimsSelectComponent, NgClass],
     templateUrl: './offer-filters.component.html',
     styleUrl: './offer-filters.component.css'

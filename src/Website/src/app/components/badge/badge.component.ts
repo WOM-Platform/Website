@@ -3,7 +3,6 @@ import {NgClass, NgIf} from "@angular/common";
 
 @Component({
     selector: 'app-badge',
-    standalone: true,
     imports: [NgIf, NgClass],
     templateUrl: './badge.component.html',
     styleUrl: './badge.component.css'

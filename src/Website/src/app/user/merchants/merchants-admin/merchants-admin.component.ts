@@ -26,10 +26,9 @@ import {SnackBarService} from "../../../_services/snack-bar.service";
 
 @Component({
     selector: "app-merchants-admin",
-    standalone: true,
     imports: [MatIcon, AdminTableComponent, NgIf, SharedModule, FiltersComponent],
     templateUrl: "./merchants-admin.component.html",
-    styleUrl: "./merchants-admin.component.css",
+    styleUrl: "./merchants-admin.component.css"
 })
 export class MerchantsAdminComponent implements OnInit {
     merchantsList;

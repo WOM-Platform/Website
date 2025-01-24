@@ -9,10 +9,11 @@ import { interval, Subscription } from "rxjs";
 import { map, takeWhile } from "rxjs/operators";
 
 @Component({
-  selector: "app-animated-number",
-  template: `<p class="mb-0">
+    selector: "app-animated-number",
+    template: `<p class="mb-0">
     <strong>{{ formattedDisplayNumber }}</strong>
   </p>`,
+    standalone: false
 })
 export class AnimatedNumberComponent implements OnChanges, OnDestroy {
   @Input() finalNumber: number;

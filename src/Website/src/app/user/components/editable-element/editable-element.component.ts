@@ -13,10 +13,9 @@ import {TranslateModule} from "@ngx-translate/core";
 
 @Component({
     selector: "app-editable-element",
-    standalone: true,
     imports: [NgIf, NgFor, FormsModule, NgStyle, MatTooltip, TranslateModule],
     templateUrl: "./editable-element.component.html",
-    styleUrls: ["./editable-element.component.css"],
+    styleUrls: ["./editable-element.component.css"]
 })
 export class EditableElementComponent implements OnInit, OnChanges {
     @Input() keyEl: string;

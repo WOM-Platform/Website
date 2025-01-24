@@ -11,6 +11,7 @@ import {Aim} from "../../_models";
     selector: "app-aims-tab",
     templateUrl: "./user-aims.component.html",
     styleUrl: "./user-aims.component.css",
+    standalone: false
 })
 export class UserAimsComponent implements OnInit {
     aimsTableColumns: any[] = [

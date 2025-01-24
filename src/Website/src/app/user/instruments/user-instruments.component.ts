@@ -16,6 +16,7 @@ import {UserMe} from "../../_models";
     selector: "app-user-instrument",
     templateUrl: "./user-instruments.component.html",
     styleUrls: ["./user-instruments.component.css"],
+    standalone: false
 })
 export class UserInstrumentsComponent
     implements OnInit, AfterViewInit, OnDestroy {

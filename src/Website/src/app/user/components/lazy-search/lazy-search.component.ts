@@ -6,7 +6,6 @@ import {Merchant} from "../../../_models";
 
 @Component({
     selector: 'app-lazy-search',
-    standalone: true,
     imports: [NgIf, NgFor],
     templateUrl: './lazy-search.component.html',
     styleUrl: './lazy-search.component.css'

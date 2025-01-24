@@ -6,7 +6,6 @@ import {Observable, Subscriber} from 'rxjs';
     selector: 'app-map',
     templateUrl: './map.component.html',
     styleUrls: ['./map.component.css'],
-    standalone: true,
     imports: []
 })
 export class MapComponent implements AfterViewInit, OnChanges {

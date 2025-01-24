@@ -3,7 +3,6 @@ import {DatePipe, NgFor, NgIf} from "@angular/common";
 
 @Component({
     selector: 'app-datepicker',
-    standalone: true,
     imports: [NgIf, NgFor, DatePipe],
     templateUrl: './datepicker.component.html',
     styleUrl: './datepicker.component.css'
