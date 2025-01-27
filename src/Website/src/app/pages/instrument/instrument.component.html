@@ -16,8 +16,14 @@
         class="centered rounded-container-header px-2 py-1 m-0"
         [innerHTML]="'INSTRUMENT.STATS.AVAILABLE' | translate"
       ></p>
-      <p *ngIf="stats.totalVouchersAvailable" class="centered bold rounded-container-body px-2 py-1 m-0">
-          <app-animated-number [finalNumber]="stats.totalVouchersAvailable" [duration]="2000"/>
+      <p
+        *ngIf="stats.totalVouchersAvailable"
+        class="centered bold rounded-container-body px-2 py-1 m-0"
+      >
+        <app-animated-number
+          [finalNumber]="stats.totalVouchersAvailable"
+          [duration]="2000"
+        />
       </p>
     </div>
   </div>

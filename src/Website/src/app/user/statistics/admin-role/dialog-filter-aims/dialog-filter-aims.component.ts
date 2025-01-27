@@ -8,16 +8,16 @@ import { Aim } from "src/app/_models";
 import { AimsService } from "src/app/_services";
 
 @Component({
-  selector: "app-dialog-filter-aims",
-  standalone: true,
-  providers: [AimsService],
-  imports: [NgFor, MatIcon],
-  templateUrl: "./dialog-filter-aims.component.html",
-  styleUrls: ["./dialog-filter-aims.component.css"],
+    selector: "app-dialog-filter-aims",
+    providers: [AimsService],
+    imports: [NgFor, MatIcon],
+    templateUrl: "./dialog-filter-aims.component.html",
+    styleUrls: ["./dialog-filter-aims.component.css"]
 })
 export class DialogFilterAimsComponent implements OnInit {
   listAims: any[] = [];
-  instrumentAims: { enabled: string[] } | null = null;
+  prevAimsSelected: string[] = [];
+
   filteredAims: string[] = [];
 
   constructor(
@@ -25,28 +25,34 @@ export class DialogFilterAimsComponent implements OnInit {
     public dialogRef: MatDialogRef<DialogFilterAimsComponent>,
     @Inject(MAT_DIALOG_DATA) public data: { filterAim: string[] }
   ) {
-    this.filteredAims = data.filterAim;
+    this.filteredAims = data.filterAim || [];
   }
 
   ngOnInit(): void {
-    console.log("flflf ", this.filteredAims);
     this.loadAims();
   }
 
   // Load the aims and map the selected ones
   loadAims() {
     this.aimsService.getAll().subscribe((aims: Aim[]) => {
-      // Map the loaded aims with the selected state based on filteredAims
       this.listAims = aims.map((aim) => {
-        console.log("Before");
+        // Determine if the aim is selected
+        const isSelected = this.filteredAims.some((code) => {
+          const isMatch = code.toLowerCase() === aim.code.toLowerCase();
+          if (isMatch) {
+            // Add the code to prevAimsSelected if not already included
+            if (!this.prevAimsSelected.includes(aim.code)) {
+              this.prevAimsSelected.push(aim.code);
+            }
+          }
+          return isMatch;
+        });
+
         return {
           ...aim,
-          isChecked: this.filteredAims.some(
-            (code) => code.toLowerCase() === aim.code.toLowerCase()
-          ),
+          isChecked: isSelected,
         };
       });
-      console.log(this.listAims);
     });
   }
 
@@ -56,8 +62,11 @@ export class DialogFilterAimsComponent implements OnInit {
 
   get hasChanges(): boolean {
     const selectedCodes = this.selectedAims.sort();
-    const instrumentCodes = this.instrumentAims?.enabled?.slice().sort() || [];
-    return JSON.stringify(selectedCodes) !== JSON.stringify(instrumentCodes);
+
+    return (
+      selectedCodes.length !== this.prevAimsSelected.length ||
+      JSON.stringify(selectedCodes) !== JSON.stringify(this.prevAimsSelected)
+    );
   }
 
   onAimChange(aimCode: string) {

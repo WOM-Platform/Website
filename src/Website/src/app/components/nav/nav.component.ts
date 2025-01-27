@@ -14,6 +14,7 @@ import {MatDialog} from "@angular/material/dialog";
     selector: "app-nav",
     templateUrl: "./nav.component.html",
     styleUrls: ["./nav.component.css"],
+    standalone: false
 })
 export class NavComponent implements OnInit {
     currentUserLogin: UserMe;
@@ -77,6 +78,7 @@ export class NavComponent implements OnInit {
 @Component({
     selector: "app-nav-logout-dialog",
     templateUrl: "nav-logout-dialog.component.html",
+    standalone: false
 })
 export class LogoutDialogComponent {
 }

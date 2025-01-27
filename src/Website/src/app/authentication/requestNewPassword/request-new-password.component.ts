@@ -7,7 +7,8 @@ import {UntypedFormBuilder, UntypedFormGroup, Validators} from '@angular/forms';
 @Component({
     selector: 'app-request-new-password',
     templateUrl: './request-new-password.component.html',
-    styleUrls: ['./request-new-password.component.css']
+    styleUrls: ['./request-new-password.component.css'],
+    standalone: false
 })
 export class RequestNewPasswordComponent implements OnInit {
     requestSent = false;

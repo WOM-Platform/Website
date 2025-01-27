@@ -2,9 +2,10 @@ import {ChangeDetectorRef, Component, OnDestroy, OnInit} from '@angular/core';
 import {MediaMatcher} from "@angular/cdk/layout";
 
 @Component({
-  selector: 'app-manage',
-  templateUrl: './manage.component.html',
-  styleUrls: ['./manage.component.css']
+    selector: 'app-manage',
+    templateUrl: './manage.component.html',
+    styleUrls: ['./manage.component.css'],
+    standalone: false
 })
 export class ManageComponent implements OnInit, OnDestroy {
   mobileQuery: MediaQueryList;

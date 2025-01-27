@@ -1,8 +1,8 @@
+@import "@fortawesome/fontawesome-free/css/all.css";
+@import "primeicons/primeicons.css";
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-@import "~@fortawesome/fontawesome-free/css/all.css";
 
 /* COLOR STYLES */
 .green-icon {
@@ -132,21 +132,21 @@ mat-form-field label {
 }
 
 .point-disc-container {
-    position: relative;
-    width: 20px;
-    height: 20px;
+  position: relative;
+  width: 20px;
+  height: 20px;
 }
 
 .point-disc-container::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 100%;
-    height: 100%;
-    background-color: #3498db;
-    border-radius: 50%;
-    transform: translate(-50%, -50%);
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  background-color: #3498db;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
 }
 
 @media only screen and (max-width: 1050px) {

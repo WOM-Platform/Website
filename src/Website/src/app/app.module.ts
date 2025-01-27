@@ -1,7 +1,19 @@
 import { BrowserModule } from "@angular/platform-browser";
-import { APP_INITIALIZER, LOCALE_ID, NgModule } from "@angular/core";
+import {
+  APP_INITIALIZER,
+  LOCALE_ID,
+  NgModule,
+  ErrorHandler,
+} from "@angular/core";
+import { Router } from "@angular/router";
 
 import { AppComponent } from "./app.component";
+import { ApplicationConfig } from "@angular/core";
+import { provideAnimationsAsync } from "@angular/platform-browser/animations/async";
+import { providePrimeNG } from "primeng/config";
+import Aura from "@primeng/themes/aura";
+import Nora from "@primeng/themes/nora";
+
 import { TranslateHttpLoader } from "@ngx-translate/http-loader";
 import {
   HTTP_INTERCEPTORS,
@@ -61,6 +73,7 @@ import { CommonModule, registerLocaleData } from "@angular/common";
 import { ContactFormComponent } from "./_forms/contact/forms-contact.directive";
 import { ContactsComponent } from "./pages/contacts/contacts.component";
 import { CookieService } from "ngx-cookie-service";
+import * as Sentry from "@sentry/angular";
 
 import { environment } from "../environments/environment";
 import { GoogleMapsModule } from "@angular/google-maps";
@@ -90,7 +103,6 @@ import { VolontarxComponent } from "./pages/pesaro2024-section/volontarx/volonta
 import { SearchSourceComponent } from "./user/components/user-access-list/search-source/search-source.component";
 import { AlbergatoriComponent } from "./pages/pesaro2024-section/albergatori/albergatori.component";
 import localeIt from "@angular/common/locales/it";
-import { Sharper2024Component } from "./pages/uniurb/sharper2024/sharper2024.component";
 import { StoreLogosComponent } from "./components/store-logos/store-logos.component";
 
 // AoT requires an exported function for factories
@@ -114,6 +126,22 @@ export function translateFactory(translate: TranslateService): any {
 }
 
 export const isMock = environment.mock;
+
+const httpInterceptorProviders = environment.mock
+  ? [
+      {
+        provide: HTTP_INTERCEPTORS,
+        useClass: HttpMockRequestInterceptor,
+        multi: true,
+      },
+    ]
+  : [
+      {
+        provide: HTTP_INTERCEPTORS,
+        useClass: TokenInterceptorService,
+        multi: true,
+      },
+    ];
 
 @NgModule({
   declarations: [
@@ -196,8 +224,6 @@ export const isMock = environment.mock;
     OverlayModule,
     ReactiveFormsModule,
     SharedModule,
-    TranslateModule,
-    TranslateModule,
     LayoutModule,
     NgChartsModule,
     SearchSourceComponent,
@@ -210,25 +236,35 @@ export const isMock = environment.mock;
       deps: [TranslateService],
       multi: true,
     },
-    isMock
-      ? [
-          {
-            provide: HTTP_INTERCEPTORS,
-            useClass: HttpMockRequestInterceptor,
-            multi: true,
-          },
-          CookieService,
-        ]
-      : [
-          {
-            provide: HTTP_INTERCEPTORS,
-            useClass: TokenInterceptorService,
-            multi: true,
-          },
-          CookieService,
-        ],
+    {
+      provide: APP_INITIALIZER,
+      useFactory: () => () => {},
+      deps: [Sentry.TraceService],
+      multi: true,
+    },
+    provideAnimationsAsync(),
+    providePrimeNG({
+      theme: {
+        preset: Nora,
+        options: {
+          prefix: "p",
+          darkModeSelector: "light",
+          cssLayer: false,
+        },
+      },
+    }),
+    ...httpInterceptorProviders,
+    CookieService,
     provideHttpClient(withInterceptorsFromDi()),
     { provide: LOCALE_ID, useValue: "it-IT" },
+    {
+      provide: ErrorHandler,
+      useValue: Sentry.createErrorHandler(),
+    },
+    {
+      provide: Sentry.TraceService,
+      deps: [Router],
+    },
   ],
 })
 export class AppModule {

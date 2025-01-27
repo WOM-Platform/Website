@@ -13,9 +13,10 @@ import { PosMap } from "../../_models";
 import { MatSelectionListChange } from "@angular/material/list";
 
 @Component({
-  selector: "app-merchant",
-  templateUrl: "./merchant.component.html",
-  styleUrls: ["./merchant.component.css"],
+    selector: "app-merchant",
+    templateUrl: "./merchant.component.html",
+    styleUrls: ["./merchant.component.css"],
+    standalone: false
 })
 export class MerchantComponent implements OnInit, AfterViewInit {
   @ViewChild(GoogleMap, { static: false }) map: GoogleMap;

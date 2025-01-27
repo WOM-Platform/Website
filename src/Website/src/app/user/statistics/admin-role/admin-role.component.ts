@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from "@angular/core";
+import { ChangeDetectorRef, Component, OnDestroy, OnInit } from "@angular/core";
 import { CommonModule, DatePipe } from "@angular/common";
 import { PieChartModule } from "@swimlane/ngx-charts";
 import { SharedModule } from "../../../shared/shared.module";
@@ -11,12 +11,8 @@ import {
   UserService,
 } from "../../../_services";
 import { MatDatepickerInputEvent } from "@angular/material/datepicker";
-import html2canvas from "html2canvas";
-import { jsPDF } from "jspdf";
-import { AmountMapComponent } from "../../components/amount-map/amount-map.component";
-import { DatepickerComponent } from "../../../components/datepicker/datepicker.component";
 import { SearchComponent } from "../../components/search/search.component";
-import { DashboardAdminFilter } from "../../../_models/filter";
+import { DashboardAdminFilter, Filter } from "../../../_models/filter";
 import { SourceService } from "../../../_services/source.service";
 import { LazySearchComponent } from "../../components/lazy-search/lazy-search.component";
 import { Instrument } from "../../../_models/instrument";
@@ -25,10 +21,11 @@ import { tap } from "rxjs/operators";
 import {
   ChartDataSwimlane,
   GenerationRedeemedStatsApiResponse,
-  RankMerchants,
-  TotalCreatedAmountByAim,
   ChartDataSwimlaneSeries,
   ConsumedStatsApiResponse,
+  MerchantRankDTO,
+  SourceRankDTO,
+  VoucherByAimDTO,
 } from "../../../_models/stats";
 import { LoadingService } from "../../../_services/loading.service";
 import { StatisticsFiltersComponent } from "../../components/statistics-filters/statistics-filters.component";
@@ -36,10 +33,10 @@ import { MatDialog } from "@angular/material/dialog";
 import { DialogFilterAimsComponent } from "./dialog-filter-aims/dialog-filter-aims.component";
 import { CsvDownloadComponent } from "../../components/csv-download/csv-download.component";
 import { MatIcon } from "@angular/material/icon";
+import { MatTooltip } from "@angular/material/tooltip";
 
 @Component({
   selector: "app-admin-role",
-  standalone: true,
   imports: [
     PieChartModule,
     SharedModule,
@@ -49,7 +46,9 @@ import { MatIcon } from "@angular/material/icon";
     LazySearchComponent,
     StatisticsFiltersComponent,
     MatIcon,
+    MatTooltip,
   ],
+  standalone: true,
   templateUrl: "./admin-role.component.html",
   styleUrl: "./admin-role.component.css",
 })
@@ -62,18 +61,23 @@ export class AdminRoleComponent implements OnInit, OnDestroy {
   filteredAimList: Aim[] = [];
   showFilterAims = false;
 
+  today = new Date();
+  oneMonthAgo: Date;
+
   filters: DashboardAdminFilter = {
-    startDate: "",
-    endDate: "",
-    merchantId: "",
-    merchantName: "",
-    sourceId: "",
-    sourceName: "",
+    startDate: undefined,
+    endDate: undefined,
+    merchantId: [],
+    merchantNames: [],
+    sourceId: [],
+    sourceNames: [],
     aimListFilter: [],
   };
 
-  displayLimit: number = 5;
-  isExpanded: boolean = false;
+  searchSourceElement = "";
+  searchMerchantElement = "";
+
+  tooltipActiveFilters = "Non ci sono filtri attivi";
 
   locationParameters: LocationParams = {};
 
@@ -81,12 +85,16 @@ export class AdminRoleComponent implements OnInit, OnDestroy {
   consumedDataFetched = [];
 
   totalCreatedAmount: number;
+  totalEverCreatedAmount: number;
   totalRedeemedAmount: number;
+  totalEverRedeemedAmount: number;
   totalConsumedAmount: number = 0;
+  totalEverConsumedAmount: number = 0;
   totalConsumedOverTime: ChartDataSwimlane[] = [];
   totalGeneratedOverTime: ChartDataSwimlaneSeries[] = [];
-  totalCreatedAmountByAim: TotalCreatedAmountByAim[];
-  rankMerchants: RankMerchants[] = [];
+  totalCreatedAmountByAim: VoucherByAimDTO[];
+  rankMerchants: MerchantRankDTO[] = [];
+  rankSources: SourceRankDTO[] = [];
   offerConsumedVouchers: any;
   availableVouchers: number;
 
@@ -96,10 +104,9 @@ export class AdminRoleComponent implements OnInit, OnDestroy {
   isShowedGenerationFilter: boolean = false;
   bboxArea;
   chartCreatedAmountByAim: ChartDataSwimlane[] = [];
-  chartConsumedAmountByAim: ChartDataSwimlane[] = [];
 
   view: [number, number] = [500, 400];
-
+  pieView: [number, number] = [520, 400];
   colorscheme: any = {
     domain: [
       "#6898ff",
@@ -121,14 +128,19 @@ export class AdminRoleComponent implements OnInit, OnDestroy {
   };
 
   constructor(
-    private authService: AuthService,
+    private cdr: ChangeDetectorRef,
     public dialog: MatDialog,
-    private loadingService: LoadingService,
     private merchantService: MerchantService,
     private sourceService: SourceService,
     private statsService: StatsService,
     private userService: UserService
-  ) {}
+  ) {
+    this.oneMonthAgo = new Date();
+    this.oneMonthAgo.setMonth(this.today.getMonth() - 1);
+
+    this.filters.startDate = this.oneMonthAgo;
+    this.filters.endDate = this.today;
+  }
 
   ngOnInit(): any {
     this.currentUser = this.userService.currentUserValue;
@@ -167,7 +179,7 @@ export class AdminRoleComponent implements OnInit, OnDestroy {
   }
 
   // search for source user
-  searchSource(sourceName: string = this.filters.sourceName) {
+  searchSource(sourceName: string = this.searchSourceElement) {
     // Call the service to fetch the data
     this.sourceService.getAllInstruments({ search: sourceName }).subscribe({
       next: (data) => {
@@ -180,7 +192,7 @@ export class AdminRoleComponent implements OnInit, OnDestroy {
   }
 
   // search for merchant user
-  searchMerchant(merchantName: string) {
+  searchMerchant(merchantName: string = this.searchMerchantElement) {
     this.merchantService
       .getAllMerchants({ search: merchantName })
       .subscribe((data) => {
@@ -188,41 +200,52 @@ export class AdminRoleComponent implements OnInit, OnDestroy {
       });
   }
 
-  onSourceNameInput(sourceName: string) {
-    this.filters.sourceName = sourceName; // Update filters
-    this.searchSource(); // Trigger search
-  }
-
   generalData(source?: Instrument, merchant?: Merchant) {
+    this.hasActiveFilters(); // update active filters
     if (source) {
-      this.filters.sourceName = source.name;
-      this.filters.sourceId = source.id;
+      if (!this.filters.sourceNames.includes(source.name)) {
+        this.filters.sourceNames.push(source.name);
+      }
+      if (!this.filters.sourceId.includes(source.id)) {
+        this.filters.sourceId.push(source.id);
+      }
     }
 
     if (merchant) {
-      this.filters.merchantName = merchant.name;
-      this.filters.merchantId = merchant.id;
+      if (!this.filters.merchantNames.includes(merchant.name)) {
+        this.filters.merchantNames.push(merchant.name);
+      }
+      if (!this.filters.merchantId.includes(merchant.id)) {
+        this.filters.merchantId.push(merchant.id);
+      }
     }
   }
 
   generationVoucherData(source?: Instrument) {
+    this.hasActiveFilters(); // update active filters
     if (source) {
-      this.filters.sourceName = source.name;
-      this.filters.sourceId = source.id;
+      if (!this.filters.sourceNames.includes(source.name)) {
+        this.filters.sourceNames.push(source.name);
+      }
+      if (!this.filters.sourceId.includes(source.id)) {
+        this.filters.sourceId.push(source.id);
+      }
     }
     this.statsService
       .fetchVouchersGeneratedAndRedeemedStats(this.filters)
       .subscribe((data: GenerationRedeemedStatsApiResponse) => {
         this.totalCreatedAmount = data.totalGenerated;
+        this.totalEverCreatedAmount = data.totalEverGenerated;
         this.totalRedeemedAmount = data.totalRedeemed;
+        this.totalEverRedeemedAmount = data.totalEverRedeemed;
         this.totalCreatedAmountByAim = data.voucherByAim;
-
         this.chartCreatedAmountByAim = this.totalCreatedAmountByAim.map(
-          (item) => ({
-            name: item.aimCode,
+          (item: VoucherByAimDTO) => ({
+            name: item.aimName,
             value: item.amount,
           })
         );
+        this.rankSources = data.sourceRank;
 
         this.isGeneratedDataReady = true;
 
@@ -245,8 +268,12 @@ export class AdminRoleComponent implements OnInit, OnDestroy {
 
   consumptionVoucherData(merchant?: Merchant) {
     if (merchant) {
-      this.filters.merchantName = merchant.name;
-      this.filters.merchantId = merchant.id;
+      if (!this.filters.merchantNames.includes(merchant.name)) {
+        this.filters.merchantNames.push(merchant.name);
+      }
+      if (!this.filters.merchantId.includes(merchant.id)) {
+        this.filters.merchantId.push(merchant.id);
+      }
     }
 
     this.statsService
@@ -254,13 +281,8 @@ export class AdminRoleComponent implements OnInit, OnDestroy {
       .subscribe((data: ConsumedStatsApiResponse) => {
         // Consumed total amount of WOM
         this.totalConsumedAmount = data.totalConsumed;
-        console.log("Undefie ", data);
-        // Get total consumed by aims
-        this.chartConsumedAmountByAim = data.voucherByAims.map((item) => ({
-          name: item.aimCode,
-          value: item.amount,
-        }));
-
+        // Consumed ever total amount of WOM
+        this.totalEverConsumedAmount = data.totalEverConsumed;
         // Get rank of merchants
         this.rankMerchants = data.merchantRanks;
         // Get total consumed over time
@@ -268,7 +290,6 @@ export class AdminRoleComponent implements OnInit, OnDestroy {
           name: data.date,
           value: data.total,
         }));
-
         // All requests are done, now set isConsumedDataReady to true
         this.isConsumedDataReady = true;
       });
@@ -298,12 +319,6 @@ export class AdminRoleComponent implements OnInit, OnDestroy {
     console.log(`${type}: ${event.value}`);
   }
 
-  // to open and close rank of merchants
-  toggleRankMerchants() {
-    this.isExpanded = !this.isExpanded;
-    this.displayLimit = this.isExpanded ? this.rankMerchants.length : 5;
-  }
-
   // On reseize charts
   onResize(event) {
     this.view = [event.target.innerWidth / 3, 400];
@@ -314,15 +329,20 @@ export class AdminRoleComponent implements OnInit, OnDestroy {
     elementKey: string,
     elementSelected: Merchant | Instrument
   ) {
+    console.log("Is it here element");
     if (elementKey === "merchant" && this.isMerchant(elementSelected)) {
       this.consumedDataFetched = [];
       this.isConsumedDataReady = false;
+      this.searchMerchantElement = "";
       this.consumptionVoucherData(elementSelected);
     } else if (elementKey === "source" && this.isInstrument(elementSelected)) {
       this.generatedDataFetched = [];
       this.isGeneratedDataReady = false;
+      this.searchSourceElement = "";
       this.generationVoucherData(elementSelected);
     }
+    console.log(this.searchMerchantElement);
+    this.cdr.detectChanges();
   }
 
   isMerchant(element: Merchant | Instrument): element is Merchant {
@@ -335,27 +355,42 @@ export class AdminRoleComponent implements OnInit, OnDestroy {
     return (element as Instrument).name !== undefined;
   }
 
-  clearElementFilter(elementToClear: string) {
-    if (elementToClear === "merchant") {
-      this.filters.merchantName = "";
-      this.filters.merchantId = "";
-      this.isConsumedDataReady = false;
+  clearElementFilter(elementToClear: string, name?: string, id?: string) {
+    if (elementToClear === "merchant" && name && id) {
+      this.filters.merchantNames = this.filters.merchantNames.filter(
+        (currentName) => currentName !== name
+      );
+      this.filters.merchantId = this.filters.merchantId.filter(
+        (currentId) => currentId !== id
+      );
 
+      this.isConsumedDataReady = false; // Reset data flag
       this.consumptionVoucherData();
     }
-    if (elementToClear === "source") {
-      this.filters.sourceName = "";
-      this.filters.sourceId = "";
-      this.isGeneratedDataReady = false;
+
+    if (elementToClear === "source" && name && id) {
+      this.filters.sourceNames = this.filters.sourceNames.filter(
+        (currentName) => currentName !== name
+      );
+      this.filters.sourceId = this.filters.sourceId.filter(
+        (currentId) => currentId !== id
+      );
+
+      this.isGeneratedDataReady = false; // Reset data flag
 
       this.generationVoucherData();
     }
+    // Update active filters state
+    this.hasActiveFilters();
   }
 
   onDatesSelected(date) {
+    this.isConsumedDataReady = false;
+    this.isGeneratedDataReady = false;
     this.filters.startDate = date.startDate;
     this.filters.endDate = date.endDate;
     this.loadData();
+    this.hasActiveFilters(); // update active filters
   }
 
   convertToCSV(): string {
@@ -380,13 +415,6 @@ export class AdminRoleComponent implements OnInit, OnDestroy {
       csvRows.push(`${item.value},${item.value}`);
     });
     csvRows.push(""); // Blank line for separation
-
-    // chartConsumedAmountByAim
-    csvRows.push("Chart Consumed Amount By Aim");
-    csvRows.push("Label,Value");
-    this.chartConsumedAmountByAim.forEach((item) => {
-      csvRows.push(`${item.value},${item.value}`);
-    });
 
     // Join all rows with a newline
     return csvRows.join("\n");
@@ -415,20 +443,45 @@ export class AdminRoleComponent implements OnInit, OnDestroy {
     });
   }
 
-  async updateAimsArray(enabledAims: any[]) {
-    console.log("Aims list ", enabledAims);
-    // const aimsArray = this.newSource.get('aims').get('enabled') as FormArray;
-    // while (aimsArray.length) {
-    //     aimsArray.removeAt(0);
-    // }
-    // enabledAims.forEach(aim => aimsArray.push(this.fb.control(aim)));
+  hasActiveFilters(): boolean {
+    return (
+      !!this.filters.startDate ||
+      !!this.filters.endDate ||
+      this.filters.merchantId.length > 0 ||
+      this.filters.merchantNames.length > 0 ||
+      this.filters.sourceId.length > 0 ||
+      this.filters.sourceNames.length > 0 ||
+      this.filters.aimListFilter.length > 0
+    );
+  }
 
-    // try {
-    //     const aimsView = await this.fetchAimsForInstrument({enabled: enabledAims, enableAll: false}).toPromise();
-    //     this.aimList = aimsView;
-    //     this.cd.detectChanges();
-    // } catch (err) {
-    //     console.error(err);
-    // }
+  getActiveFiltersSummary(): string {
+    const activeFilters: string[] = [];
+
+    if (this.filters.startDate) {
+      const formattedStartDate = new DatePipe("it-IT").transform(
+        this.filters.startDate,
+        "dd/MM/yyyy"
+      );
+      activeFilters.push(`Data Inizio ${formattedStartDate}`);
+    }
+    if (this.filters.endDate) {
+      const formattedEndDate = new DatePipe("it-IT").transform(
+        this.filters.endDate,
+        "dd/MM/yyyy"
+      );
+      activeFilters.push(`Data Fine ${formattedEndDate}`);
+    }
+    if (this.filters.merchantNames.length > 0) {
+      activeFilters.push(`Merchants: ${this.filters.merchantNames.join(", ")}`);
+    }
+    if (this.filters.sourceNames.length > 0) {
+      activeFilters.push(`Sources: ${this.filters.sourceNames.join(", ")}`);
+    }
+    if (this.filters.aimListFilter.length > 0) {
+      activeFilters.push(`Aims: ${this.filters.aimListFilter.join(", ")}`);
+    }
+
+    return activeFilters.join("; ");
   }
 }

@@ -22,6 +22,7 @@ import {Router} from "@angular/router";
     selector: "app-admin-managment-instruments",
     templateUrl: "./admin-managment-instruments.component.html",
     styleUrl: "./admin-managment-instruments.component.css",
+    standalone: false
 })
 export class AdminManagmentInstrumentsComponent implements OnInit, OnDestroy {
     searchParameters: string = "";

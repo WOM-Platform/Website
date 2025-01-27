@@ -7,7 +7,8 @@ import {MatSnackBar} from "@angular/material/snack-bar";
 @Component({
     selector: 'app-user-verify',
     templateUrl: './user-verify.component.html',
-    styleUrls: ['./user-verify.component.css']
+    styleUrls: ['./user-verify.component.css'],
+    standalone: false
 })
 export class UserVerifyComponent implements OnInit {
     workingText: string;

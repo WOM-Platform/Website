@@ -24,6 +24,7 @@ import {switchMap, takeUntil} from "rxjs/operators";
     templateUrl: "./dialog-view-edit-instrument.component.html",
     styleUrls: ["./dialog-view-edit-instrument.component.css"],
     changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class DialogViewEditInstrumentComponent implements OnInit, OnDestroy {
     @Output() updatedField = new EventEmitter<string>();

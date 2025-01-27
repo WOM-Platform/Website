@@ -7,11 +7,11 @@ export interface Filter {
 }
 
 export interface DashboardAdminFilter {
-  startDate?: string;
-  endDate?: string;
-  merchantId?: string;
-  merchantName?: string;
-  sourceId?: string;
-  sourceName?: string;
+  startDate?: Date;
+  endDate?: Date;
+  merchantId?: string[];
+  merchantNames?: string[];
+  sourceId?: string[];
+  sourceNames?: string[];
   aimListFilter?: string[];
 }

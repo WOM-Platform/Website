@@ -14,7 +14,8 @@ export const environment = {
     i18n: '1.1.0',
     noreplyEmail: 'noreply@wom.social',
     baseEmail: 'info@digit.srl',
-    sendInBlueApiKey: '#SENDINBLUEAPI#'
+    sendInBlueApiKey: '#SENDINBLUEAPI#',
+    sentryDsn: "#SENTRYDSN#",
 };
 
 /*
