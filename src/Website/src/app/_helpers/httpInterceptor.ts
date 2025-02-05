@@ -67,7 +67,6 @@ export class TokenInterceptorService implements HttpInterceptor {
         if (error instanceof HttpErrorResponse) {
           if (userLogin && error.status == 401) {
             this.userService.logout();
-            this.router.navigate(["/authentication/signin"]);
             let ref = this.snackBar.open("Unauthorized.", "close", {
               duration: 5000,
             });
