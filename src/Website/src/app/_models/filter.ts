@@ -6,12 +6,24 @@ export interface Filter {
   maxAge: number;
 }
 
-export interface DashboardAdminFilter {
+export interface CombinedFilters {
+  dateFilters: DateFilter;
+  merchantFilters: MerchantFilter;
+  sourceFilters: GenerationFilter;
+}
+
+export interface DateFilter {
   startDate?: Date;
   endDate?: Date;
-  merchantId?: string[];
-  merchantNames?: string[];
-  sourceId?: string[];
-  sourceNames?: string[];
-  aimListFilter?: string[];
+}
+
+export interface MerchantFilter {
+  merchantIds: string[];
+  merchantNames: string[];
+}
+
+export interface GenerationFilter {
+  sourceId: string[];
+  sourceNames: string[];
+  aimListFilter: string[];
 }

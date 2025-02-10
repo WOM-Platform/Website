@@ -23,6 +23,10 @@
 <!-- Datepicker -->
 <ng-container *ngIf="isDateFiltering">
   <div class="">
-    <app-datepicker [startDate]="filters.startDate" [endDate]="filters.endDate" (dates)="onDatesSelected($event)"></app-datepicker>
+    <app-datepicker
+      [startDate]="dateFilters.startDate"
+      [endDate]="dateFilters.endDate"
+      (dates)="onDatesSelected($event)"
+    ></app-datepicker>
   </div>
 </ng-container>

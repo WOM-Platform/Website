@@ -4,8 +4,12 @@ import { HttpClient, HttpParams, HttpResponse } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { map } from "rxjs/operators";
 import { Stats } from "../_models/stats";
-import { DashboardAdminFilter } from "../_models/filter";
 import { LocationParams } from "../_models/LocationParams";
+import {
+  MerchantFilter,
+  DateFilter,
+  GenerationFilter,
+} from "../_models/filter";
 
 @Injectable({ providedIn: "root" })
 export class StatsService {
@@ -17,12 +21,15 @@ export class StatsService {
   constructor(private http: HttpClient) {}
 
   // BEGIN REGISTRY API
-  fetchVouchersGeneratedAndRedeemedStats(filters: DashboardAdminFilter) {
+  fetchVouchersGeneratedAndRedeemedStats(
+    dateFilters: DateFilter,
+    sourceFilters: GenerationFilter
+  ) {
     let requestData = {
-      startDate: filters.startDate?.toISOString()  || null,
-      endDate: filters.endDate?.toISOString()  || null,
-      sourceId: filters.sourceId || null,
-      aimListFilter: filters.aimListFilter || null,
+      startDate: dateFilters.startDate?.toISOString() || null,
+      endDate: dateFilters.endDate?.toISOString() || null,
+      sourceId: sourceFilters.sourceId || null,
+      aimListFilter: sourceFilters.aimListFilter || null,
     };
 
     return this.http.post(
@@ -32,14 +39,15 @@ export class StatsService {
   }
 
   fetchVouchersConsumedStats(
-    filters: DashboardAdminFilter,
+    dateFilters: DateFilter,
+    merchantFilters: MerchantFilter,
     location?: LocationParams
   ) {
     let requestData;
     requestData = {
-      startDate: filters.startDate?.toISOString()  || null,
-      endDate: filters.endDate?.toISOString()  || null,
-      merchantId: filters.merchantId || null,
+      startDate: dateFilters.startDate?.toISOString() || null,
+      endDate: dateFilters.endDate?.toISOString() || null,
+      merchantIds: merchantFilters.merchantIds || null,
     };
     if (location) {
       if (location.latitude != null) {
@@ -60,44 +68,6 @@ export class StatsService {
     }
     return this.http.post(
       `${this.localUrlV1}vouchers/consumed-statistics`,
-      requestData
-    );
-  }
-
-  getAdminTotalAmountConsumed(filters: DashboardAdminFilter): Observable<any> {
-    const requestData = {
-      startDate: filters.startDate?.toISOString()  || null,
-      endDate: filters.endDate || null,
-      merchantId: filters.merchantId || null,
-    };
-
-    return this.http.post(
-      `${this.localUrlV1}vouchers/total-consumed`,
-      requestData
-    );
-  }
-
-  getAdminTotalConsumedByAim(filters: DashboardAdminFilter): Observable<any> {
-    const requestData = {
-      startDate: filters.startDate?.toISOString()  || null,
-      endDate: filters.endDate?.toISOString()  || null,
-      merchantId: filters.merchantId || null,
-    };
-
-    return this.http.post(
-      `${this.localUrlV1}vouchers/total-consumed-by-aims`,
-      requestData
-    );
-  }
-
-  getTotalConsumedOverTime(filters: DashboardAdminFilter) {
-    const requestData = {
-      startDate: filters.startDate?.toISOString()  || null,
-      endDate: filters.endDate?.toISOString()  || null,
-      merchantId: filters.merchantId || null,
-    };
-    return this.http.post(
-      `${this.localUrlV1}voucher/total-consumption-over-time`,
       requestData
     );
   }
@@ -131,27 +101,21 @@ export class StatsService {
     return this.http.post(`${this.localUrlV1}voucher/available`, requestData);
   }
 
-  getVouchersConsumedByOffer(filters: DashboardAdminFilter) {
+  getActiveOffers(): Observable<any> {
+    return this.http.get(`${this.localUrlV1}offers/active`);
+  }
+
+  getVouchersConsumedByOffer(
+    dateFilters: DateFilter,
+    merchantFilters: MerchantFilter
+  ) {
     const requestData = {
-      startDate: filters.startDate || null,
-      endDate: filters.endDate || null,
-      merchantId: filters.merchantId || null,
+      startDate: dateFilters.startDate || null,
+      endDate: dateFilters.endDate || null,
+      merchantId: merchantFilters.merchantIds || null,
     };
     return this.http.post(
       `${this.localUrlV1}merchant/voucher/total-consumed-by-offer`,
-      requestData
-    );
-  }
-
-  getRankMerchants(filters: DashboardAdminFilter): Observable<any> {
-    const requestData = {
-      startDate: filters.startDate || null,
-      endDate: filters.endDate || null,
-      merchantId: filters.merchantId || null,
-    };
-
-    return this.http.post(
-      `${this.localUrlV1}merchant/rank-consumed`,
       requestData
     );
   }
@@ -164,53 +128,11 @@ export class StatsService {
       aimListFilter: filters.aimListFilter || null,
       merchantId: filters.merchantId || null,
     };
-
-    console.log("Request Data:", JSON.stringify(requestData));
-
+    console.log("requestData", requestData);
     return this.http.post<Blob>(`${this.localUrlV1}download/csv`, requestData, {
       observe: "response",
       responseType: "blob" as "json",
     });
-  }
-
-  getAdminTotalAmountGeneratedAndRedeemed(
-    filters: DashboardAdminFilter
-  ): Observable<any> {
-    const requestData = {
-      startDate: filters.startDate || null,
-      endDate: filters.endDate || null,
-      sourceId: filters.sourceId || null,
-    };
-
-    return this.http.post(
-      `${this.localUrlV1}vouchers/total-generated-redeemed`,
-      requestData
-    );
-  }
-
-  getAdminCreatedAmountByAim(filters: DashboardAdminFilter): Observable<any> {
-    const requestData = {
-      startDate: filters.startDate || null,
-      endDate: filters.endDate || null,
-      sourceId: filters.sourceId || null,
-    };
-
-    return this.http
-      .post(`${this.localUrlV1}vouchers/total-generated-by-aim`, requestData)
-      .pipe();
-  }
-
-  getTotalGeneratedOverTime(filters: DashboardAdminFilter) {
-    const requestData = {
-      startDate: filters.startDate || null,
-      endDate: filters.endDate || null,
-      sourceId: filters.sourceId || null,
-    };
-
-    return this.http.post(
-      `${this.localUrlV1}voucher/total-generated-redeemed-over-time`,
-      requestData
-    );
   }
 
   // END REGISTRY API

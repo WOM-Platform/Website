@@ -68,10 +68,10 @@ export interface SourceRankDTO extends ElementRankDTO {
 }
 
 export interface GenerationRedeemedStatsApiResponse {
+  generatedInPeriod: number;
   totalGenerated: number;
-  totalEverGenerated: number;
+  redeemedInPeriod: number;
   totalRedeemed: number;
-  totalEverRedeemed: number;
   voucherByAim: VoucherByAimDTO[];
   voucherAvailable: number;
   totalGeneratedAndRedeemedOverTime: TotalGeneratedRedeemedOverTime[];
@@ -79,8 +79,10 @@ export interface GenerationRedeemedStatsApiResponse {
 }
 
 export interface ConsumedStatsApiResponse {
+  consumedInPeriod: number;
   totalConsumed: number;
-  totalEverConsumed: number;
+  transactionsInPeriod: number;
+  totalTransactions: number;
   merchantRanks: MerchantRankDTO[];
   totalConsumedOverTime: TotalConsumedOverTime[];
 }

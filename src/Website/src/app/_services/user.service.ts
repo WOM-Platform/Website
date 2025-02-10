@@ -103,7 +103,6 @@ export class UserService {
 
   isTokenExpired(): boolean {
     const token = this.getToken();
-    console.log("token", token);
     if (!token) return true;
     const decoded = this.decodeToken(token);
     return decoded && decoded.exp * 1000 < Date.now();

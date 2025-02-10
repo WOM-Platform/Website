@@ -1,0 +1,244 @@
+<div>
+  <div class="flex justify-between items-center">
+    <h2 class="text-xl font-semibold">WOM Generati e Riscossi</h2>
+    <div class="flex items-center gap-2">
+      <div class="flex flex-row gap-2">
+        <div
+          [ngClass]="{
+            'bg-white': filters.aimListFilter.length === 0,
+            'bg-green-200': filters.aimListFilter.length > 0
+          }"
+          class="flex gap-2 justify-center items-center py-2 px-4 border border-black rounded-full hover:bg-slate-300 cursor-pointer"
+          (click)="openDialogAimsSelected()"
+        >
+          <span
+            *ngIf="filters.aimListFilter.length === 0"
+            class="flex items-center gap-1"
+          >
+            <mat-icon>filter_list</mat-icon>
+            per AIM
+          </span>
+
+          <span *ngIf="filters.aimListFilter.length > 0">
+            {{ filters.aimListFilter.length }} filtro/i selezionati
+          </span>
+        </div>
+
+        <div class="flex gap-2 justify-between items-center">
+          <div class="relative">
+            <app-search
+              [placeholder]="'Ricerca Instrument'"
+              [searchValue]="searchSourceElement"
+              (searchEmit)="searchSource($event)"
+            ></app-search>
+
+            <ng-container
+              *ngIf="generatedDataFetched && generatedDataFetched.length > 0"
+            >
+              <app-lazy-search
+                [fetchData]="generatedDataFetched"
+                (selectEmit)="onElementSelection('source', $event)"
+                class="absolute top-full mt-2 w-full z-10 bg-white shadow-md border rounded-lg"
+              ></app-lazy-search>
+            </ng-container>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="flex flex-row justify-end gap-4 my-2">
+  <div *ngFor="let sourceName of filters.sourceNames; let i = index">
+    <p class="filter-selected-el">
+      <button
+        *ngIf="currentUser.role === 'Admin'"
+        (click)="
+          clearElementFilter({
+            elementToClear: 'source',
+            name: sourceName,
+            id: filters.sourceId[i]
+          })
+        "
+      >
+        <i class="fa-solid fa-xmark text-red-500"></i>
+        {{ sourceName }}
+      </button>
+    </p>
+  </div>
+</div>
+<div
+  *ngIf="
+    isGeneratedDataReady && isGeneratedDataReady === true;
+    else loadingGeneration
+  "
+>
+  <div class="flex flex-wrap items-center mt-2">
+    <!-- Totals Section -->
+    <div class="flex flex-wrap gap-10 card-stat w-full min-w-[530px]">
+      <div class="flex gap-2 items-center">
+        <p class="font-semibold">Totali:</p>
+        <ng-container *ngIf="totalCreatedAmount; else zeroGeneratedAmount">
+          <app-animated-number
+            [finalNumber]="totalCreatedAmount"
+            [duration]="1000"
+          ></app-animated-number>
+        </ng-container>
+        <ng-template #zeroGeneratedAmount>
+          <p>0</p>
+        </ng-template>
+      </div>
+      <div class="flex gap-2 items-center">
+        <p>di cui <span class="font-semibold">Riscossi:</span></p>
+        <ng-container *ngIf="totalRedeemedAmount; else zeroRedeemedAmount">
+          <app-animated-number
+            [finalNumber]="totalRedeemedAmount"
+            [duration]="1000"
+          ></app-animated-number>
+        </ng-container>
+        <ng-template #zeroRedeemedAmount>
+          <p>0</p>
+        </ng-template>
+      </div>
+      <div class="flex gap-2 items-center">
+        <p class="font-semibold">Totali di sempre:</p>
+        <ng-container *ngIf="totalEverCreatedAmount; else zeroGeneratedAmount">
+          <app-animated-number
+            [finalNumber]="totalEverCreatedAmount"
+            [duration]="1000"
+          ></app-animated-number>
+        </ng-container>
+        <ng-template #zeroGeneratedAmount>
+          <p>0</p>
+        </ng-template>
+      </div>
+      <div class="flex gap-2 items-center">
+        <p>di cui <span class="font-semibold">Riscossi:</span></p>
+        <ng-container *ngIf="totalEverRedeemedAmount; else zeroRedeemedAmount">
+          <app-animated-number
+            [finalNumber]="totalEverRedeemedAmount"
+            [duration]="1000"
+          ></app-animated-number>
+        </ng-container>
+        <ng-template #zeroRedeemedAmount>
+          <p>0</p>
+        </ng-template>
+      </div>
+    </div>
+
+    <div class="flex flex-col items-center lg:flex-row mt-2 gap-2">
+      <!-- Bar Chart for Generated and Redeemed Over Time -->
+      <div class="card-stat">
+        <ng-container *ngIf="totalGeneratedOverTime">
+          <p class="mt-6 font-semibold">Generati e riscossi nel tempo</p>
+          <ngx-charts-bar-vertical-2d
+            [view]="view"
+            [scheme]="blueAndYellowWom"
+            [results]="totalGeneratedOverTime"
+            [gradient]="false"
+            [xAxis]="true"
+            [yAxis]="true"
+            [legend]=""
+            [showXAxisLabel]="true"
+            [showYAxisLabel]="true"
+            [xAxisLabel]="'Data'"
+            [yAxisLabel]="'Quantità'"
+            (select)="onSelect($event)"
+          >
+          </ngx-charts-bar-vertical-2d>
+        </ng-container>
+      </div>
+      <!-- Pie Chart by Aim -->
+      <div class="card-stat">
+        <ng-container
+          *ngIf="chartCreatedAmountByAim && chartCreatedAmountByAim.length > 0"
+        >
+          <p class="mt-2 font-semibold">Divisi per AIM:</p>
+          <ngx-charts-pie-chart
+            [view]="pieView"
+            [scheme]="colorscheme"
+            [results]="chartCreatedAmountByAim"
+            [legend]=""
+            [labels]="true"
+            [maxLabelLength]="60"
+            [tooltipTemplate]="tooltipTemplate"
+          >
+          </ngx-charts-pie-chart>
+        </ng-container>
+      </div>
+    </div>
+    <div class="flex justify-start mt-2">
+      <!-- BEGIN Sources Ranking -->
+      <div
+        class="card-stat max-w-fit"
+        *ngIf="rankSources && rankSources.length > 0"
+      >
+        <h3 class="font-semibold mb-4">
+          <i class="fa-solid fa-star" style="color: #ffd43b"></i> Classifica
+          Instrument
+        </h3>
+
+        <ul class="list-disc pl-5 space-y-2 h-[450px] overflow-y-auto">
+          <li *ngFor="let rank of rankSources">
+            <!-- Conditional rendering for trophy icon based on rank -->
+            <span *ngIf="rank.rank === 1">
+              1) <i class="fa-solid fa-trophy" style="color: #ffd43b"></i>
+            </span>
+            <span *ngIf="rank.rank === 2">
+              2) <i class="fa-solid fa-trophy" style="color: #c0c0c0"></i>
+            </span>
+            <span *ngIf="rank.rank === 3">
+              3) <i class="fa-solid fa-trophy" style="color: #cd7f32"></i>
+            </span>
+            <span *ngIf="rank.rank > 3"> {{ rank.rank }}) </span>
+            {{ rank.name }}: Generati
+            <strong>{{ rank.totalGeneratedAmount }}</strong>
+            Riscossi
+            <strong>{{ rank.totalRedeemedAmount }}</strong>
+            <span class="italic text-xs"> WOM</span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- END Sources Ranking -->
+    </div>
+  </div>
+</div>
+
+<ng-template #loadingGeneration>
+  <div class="flex flex-col gap-4 p-6 bg-white shadow-md rounded-lg mt-6">
+    <ngx-skeleton-loader
+      count="1"
+      appearance="line"
+      [theme]="{
+        height: '50px',
+        width: '180px',
+        'border-radius': '20px'
+      }"
+    ></ngx-skeleton-loader>
+    <div class="flex justify-around">
+      <ngx-skeleton-loader
+        count="1"
+        appearance="line"
+        [theme]="{
+          height: '300px',
+          width: '300px',
+          'border-radius': '20px'
+        }"
+      ></ngx-skeleton-loader>
+      <ngx-skeleton-loader
+        count="1"
+        appearance="circle"
+        animation="progress-dark"
+        [theme]="{ height: '300px', width: '300px' }"
+      ></ngx-skeleton-loader>
+    </div>
+
+    <ngx-skeleton-loader
+      count="5"
+      [theme]="{
+        'border-radius': '5px',
+        height: '50px'
+      }"
+    ></ngx-skeleton-loader>
+  </div>
+</ng-template>

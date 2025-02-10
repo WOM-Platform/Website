@@ -1,6 +1,12 @@
-<ul *ngIf="fetchData.length > 0" class="bg-white border border-gray-200 rounded-lg shadow-md max-w-md mx-auto">
-    <li *ngFor="let item of fetchData" (click)="onSelection(item)"
-        class="px-4 py-2 hover:bg-blue-500 hover:text-white cursor-pointer border-b border-gray-200 last:border-b-0">
-        {{ item.name }}
-    </li>
+<ul
+  *ngIf="fetchData.length > 0"
+  class="bg-white border border-gray-200 rounded-lg shadow-md max-w-md mx-auto"
+>
+  <li
+    *ngFor="let item of fetchData"
+    (click)="onSelection(item)"
+    class="px-4 py-2 hover:bg-blue-500 hover:text-white cursor-pointer border-b border-gray-200 last:border-b-0"
+  >
+    {{ item.name }}
+  </li>
 </ul>
