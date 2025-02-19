@@ -26,8 +26,12 @@ export class StatsService {
     sourceFilters: GenerationFilter
   ) {
     let requestData = {
-      startDate: dateFilters.startDate?.toISOString() || null,
-      endDate: dateFilters.endDate?.toISOString() || null,
+      startDate: dateFilters.startDate
+        ? this.convertToLocalISOString(dateFilters.startDate)
+        : null,
+      endDate: dateFilters.endDate
+        ? this.convertToLocalISOString(dateFilters.endDate)
+        : null,
       sourceId: sourceFilters.sourceId || null,
       aimListFilter: sourceFilters.aimListFilter || null,
     };
@@ -45,8 +49,12 @@ export class StatsService {
   ) {
     let requestData;
     requestData = {
-      startDate: dateFilters.startDate?.toISOString() || null,
-      endDate: dateFilters.endDate?.toISOString() || null,
+      startDate: dateFilters.startDate
+        ? this.convertToLocalISOString(dateFilters.startDate)
+        : null,
+      endDate: dateFilters.endDate
+        ? this.convertToLocalISOString(dateFilters.endDate)
+        : null,
       merchantIds: merchantFilters.merchantIds || null,
     };
     if (location) {
@@ -135,6 +143,14 @@ export class StatsService {
     });
   }
 
+  private convertToLocalISOString(date: Date): string {
+    let offset = date.getTimezoneOffset() * 60000;
+    console.log("offset ", offset);
+    let localISO = new Date(date.getTime() - offset).toISOString();
+    console.log("localISO ", localISO);
+
+    return localISO;
+  }
   // END REGISTRY API
 
   // SERVER STATISTICHE

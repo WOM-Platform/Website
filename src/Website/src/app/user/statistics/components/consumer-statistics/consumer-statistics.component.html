@@ -136,7 +136,7 @@
         <i class="fa-solid fa-star" style="color: #ffd43b"></i> Classifica
         Merchant
       </h3>
-      <ul class="pl-5 space-y-2 h-[450px] overflow-y-auto list-none">
+      <ul class="pl-5 space-y-2 max-h-[450px] overflow-y-auto list-none">
         <li *ngFor="let rank of consumedStats.merchantRanks">
           <!-- Conditional rendering for trophy icon based on rank -->
           <span *ngIf="rank.rank === 1">
