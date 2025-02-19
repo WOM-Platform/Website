@@ -12,6 +12,7 @@ import { LazySearchComponent } from "../../lazy-search/lazy-search.component";
 import { Merchant } from "src/app/_models";
 import { Instrument } from "src/app/_models/instrument";
 import { MerchantFilter } from "src/app/_models/filter";
+import { FormControl } from "@angular/forms";
 
 @Component({
   selector: "app-merchant-search",
@@ -29,7 +30,7 @@ export class MerchantSearchComponent {
     merchantNames: [],
   };
 
-  searchMerchantElement = "";
+  searchMerchantControl = new FormControl("");
   consumedDataFetched = [];
   isConsumedDataReady = false;
 
@@ -39,14 +40,14 @@ export class MerchantSearchComponent {
   ) {}
 
   // search for merchant user
-  searchMerchant(merchantName: string = this.searchMerchantElement) {
-    if (merchantName && merchantName.length >= 3)
+  searchMerchant(merchantName: string = this.searchMerchantControl.value) {
+    if (merchantName.length >= 3) {
       this.merchantService
         .getAllMerchants({ search: merchantName })
         .subscribe((data) => {
           this.consumedDataFetched = data.data;
         });
-    else {
+    } else {
       this.consumedDataFetched = [];
     }
   }
@@ -59,7 +60,7 @@ export class MerchantSearchComponent {
     if (elementKey === "merchant" && this.isMerchant(elementSelected)) {
       this.consumedDataFetched = [];
       this.isConsumedDataReady = false;
-      this.searchMerchantElement = "";
+      this.searchMerchantControl.setValue("", { emitEvent: true });
       this.consumptionVoucherData.emit(elementSelected);
       this.addFilter(elementSelected);
     }

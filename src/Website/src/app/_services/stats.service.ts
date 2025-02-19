@@ -136,7 +136,6 @@ export class StatsService {
       aimListFilter: filters.aimListFilter || null,
       merchantId: filters.merchantId || null,
     };
-    console.log("requestData", requestData);
     return this.http.post<Blob>(`${this.localUrlV1}download/csv`, requestData, {
       observe: "response",
       responseType: "blob" as "json",
@@ -145,9 +144,7 @@ export class StatsService {
 
   private convertToLocalISOString(date: Date): string {
     let offset = date.getTimezoneOffset() * 60000;
-    console.log("offset ", offset);
     let localISO = new Date(date.getTime() - offset).toISOString();
-    console.log("localISO ", localISO);
 
     return localISO;
   }

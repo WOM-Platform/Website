@@ -32,6 +32,7 @@ import { SharedModule } from "../../../../shared/shared.module";
 import { AnimatedNumberComponent } from "src/app/components/animated-number/animated-number.component";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { SnackBarService } from "src/app/_services/snack-bar.service";
+import { FormControl } from "@angular/forms";
 
 @Component({
   selector: "app-generator-statistics-component",
@@ -60,7 +61,7 @@ export class GeneratorStatisticsComponentComponent
     sourceNames: [],
   };
 
-  searchSourceElement = "";
+  searchSourceElement = new FormControl("");
 
   isGeneratedDataReady: boolean = false;
   isError: boolean = false;
@@ -249,7 +250,7 @@ export class GeneratorStatisticsComponentComponent
   }
 
   // search for source user
-  searchSource(sourceName: string = this.searchSourceElement) {
+  searchSource(sourceName: string = this.searchSourceElement.value) {
     // Call the service to fetch the data
     this.sourceService.getAllInstruments({ search: sourceName }).subscribe({
       next: (data) => {
@@ -266,7 +267,7 @@ export class GeneratorStatisticsComponentComponent
     if (elementKey === "source" && this.isInstrument(elementSelected)) {
       this.generatedDataFetched = [];
       this.isGeneratedDataReady = false;
-      this.searchSourceElement = "";
+      this.searchSourceElement = new FormControl("");
       this.generationVoucherData(elementSelected);
     }
 
