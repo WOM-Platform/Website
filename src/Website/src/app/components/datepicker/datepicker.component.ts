@@ -26,9 +26,6 @@ export class DatepickerComponent {
 
   ngOnInit() {
     this.updateDays();
-    console.log("current month ", this.currentMonth.getMonth());
-
-    console.log("ds luna ", this.today.getMonth());
   }
 
   toggleCalendar(type: "start" | "end") {
