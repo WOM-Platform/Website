@@ -30,6 +30,8 @@ import { LazySearchComponent } from "src/app/user/components/lazy-search/lazy-se
 import { SearchComponent } from "src/app/user/components/search/search.component";
 import { SharedModule } from "../../../../shared/shared.module";
 import { AnimatedNumberComponent } from "src/app/components/animated-number/animated-number.component";
+import { MatSnackBar } from "@angular/material/snack-bar";
+import { SnackBarService } from "src/app/_services/snack-bar.service";
 
 @Component({
   selector: "app-generator-statistics-component",
@@ -61,6 +63,8 @@ export class GeneratorStatisticsComponentComponent
   searchSourceElement = "";
 
   isGeneratedDataReady: boolean = false;
+  isError: boolean = false;
+  errorMessage: string = "";
 
   locationParameters: LocationParams = {};
 
@@ -101,6 +105,7 @@ export class GeneratorStatisticsComponentComponent
   constructor(
     private cdr: ChangeDetectorRef,
     public dialog: MatDialog,
+    private snackBarService: SnackBarService,
     private sourceService: SourceService,
     private statsService: StatsService
   ) {}
@@ -150,36 +155,53 @@ export class GeneratorStatisticsComponentComponent
 
     this.statsService
       .fetchVouchersGeneratedAndRedeemedStats(this.dateFilters, this.filters)
-      .subscribe((data: GenerationRedeemedStatsApiResponse) => {
-        this.totalCreatedAmount = data.generatedInPeriod;
-        this.totalEverCreatedAmount = data.totalGenerated;
-        this.totalRedeemedAmount = data.redeemedInPeriod;
-        this.totalEverRedeemedAmount = data.totalRedeemed;
-        this.totalCreatedAmountByAim = data.voucherByAim;
-        this.chartCreatedAmountByAim = this.totalCreatedAmountByAim.map(
-          (item: VoucherByAimDTO) => ({
-            name: item.aimName,
-            value: item.amount,
-          })
-        );
-        this.rankSources = data.sourceRank;
+      .subscribe({
+        next: (data: GenerationRedeemedStatsApiResponse) => {
+          this.totalCreatedAmount = data.generatedInPeriod;
+          this.totalEverCreatedAmount = data.totalGenerated;
+          this.totalRedeemedAmount = data.redeemedInPeriod;
+          this.totalEverRedeemedAmount = data.totalRedeemed;
+          this.totalCreatedAmountByAim = data.voucherByAim;
+          this.chartCreatedAmountByAim = this.totalCreatedAmountByAim.map(
+            (item: VoucherByAimDTO) => ({
+              name: item.aimName,
+              value: item.amount,
+            })
+          );
+          this.rankSources = data.sourceRank;
 
-        this.isGeneratedDataReady = true;
+          this.isGeneratedDataReady = true;
 
-        this.totalGeneratedOverTime =
-          data.totalGeneratedAndRedeemedOverTime.map((item) => ({
-            name: item.date,
-            series: [
-              {
-                name: "Voucher Generated",
-                value: item.totalGenerated ? Number(item.totalGenerated) : 0,
-              },
-              {
-                name: "Voucher Redeemed",
-                value: item.totalRedeemed ? Number(item.totalRedeemed) : 0,
-              },
-            ],
-          }));
+          this.totalGeneratedOverTime =
+            data.totalGeneratedAndRedeemedOverTime.map((item) => ({
+              name: item.date,
+              series: [
+                {
+                  name: "Voucher Generated",
+                  value: item.totalGenerated ? Number(item.totalGenerated) : 0,
+                },
+                {
+                  name: "Voucher Redeemed",
+                  value: item.totalRedeemed ? Number(item.totalRedeemed) : 0,
+                },
+              ],
+            }));
+        },
+        error: (error) => {
+          this.isError = true;
+          this.isGeneratedDataReady = true;
+
+          if (error.status === 400) {
+            this.snackBarService.openSnackBar(
+              "Richiesta non valida. Controllare i filtri."
+            );
+            this.errorMessage = "Richiesta non valida. Controllare i filtri.";
+          } else {
+            this.snackBarService.openSnackBar("Errore. Riprova più tardi.");
+            this.errorMessage =
+              "Si è verificato un errore nel caricamento dei dati. Riprova più tardi.";
+          }
+        },
       });
   }
 
