@@ -33,6 +33,8 @@ export class SearchComponent implements OnInit, OnDestroy, OnChanges {
       .subscribe((searchValue) => {
         if (searchValue.length >= 3 || searchValue.length === 0) {
           this.searchEmit.emit(searchValue);
+        } else {
+          this.searchEmit.emit("");
         }
       });
   }

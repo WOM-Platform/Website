@@ -31,20 +31,24 @@ export class MerchantSearchComponent {
 
   searchMerchantElement = "";
   consumedDataFetched = [];
+  isConsumedDataReady = false;
 
   constructor(
     private cdr: ChangeDetectorRef,
     private merchantService: MerchantService
   ) {}
 
-  isConsumedDataReady = false;
   // search for merchant user
   searchMerchant(merchantName: string = this.searchMerchantElement) {
-    this.merchantService
-      .getAllMerchants({ search: merchantName })
-      .subscribe((data) => {
-        this.consumedDataFetched = data.data;
-      });
+    if (merchantName && merchantName.length >= 3)
+      this.merchantService
+        .getAllMerchants({ search: merchantName })
+        .subscribe((data) => {
+          this.consumedDataFetched = data.data;
+        });
+    else {
+      this.consumedDataFetched = [];
+    }
   }
 
   // on selection of a Merchant or Instrument
