@@ -3,10 +3,13 @@ steps:
     args:
       - build
       - '--no-cache'
+      - '--build-arg'
+      - '"ARG_GOOGLE_MAPS_API=${_GOOGLE_MAPS_API}"'
+      - '--build-arg'
+      - '"ARG_SEND_IN_BLUE_API=${_SEND_IN_BLUE_API}"'
+      - '--build-arg'
+      - '"ARG_SENTRY_DSN=${_SENTRY_DSN}"'
       - '-t'
-      - '--build-arg ARG_GOOGLE_MAPS_API=$_GOOGLE_MAPS_API'
-      - '--build-arg ARG_SEND_IN_BLUE_API=$_SEND_IN_BLUE_API'
-      - '--build-arg ARG_SENTRY_DSN=$_SENTRY_DSN'
       - '$_GCR_HOSTNAME/$PROJECT_ID/$_SERVICE_NAME:$COMMIT_SHA'
       - './src/Website'
     id: Build
