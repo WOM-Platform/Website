@@ -22,7 +22,9 @@ import {
 } from "src/app/_models/stats";
 import { StatsService } from "src/app/_services";
 import { AnimatedNumberComponent } from "src/app/components/animated-number/animated-number.component";
-import { MerchantSearchComponent } from "src/app/user/components/statistics/merchant-search/merchant-search.component";
+import { EntitySearchComponent } from "src/app/user/components/statistics/merchant-search/entity-search.component";
+import { SkeletonLoaderComponent } from "../../../components/skeleton-loader/skeleton-loader.component";
+import { SnackBarService } from "src/app/_services/snack-bar.service";
 
 @Component({
   selector: "app-consumer-statistics",
@@ -32,7 +34,8 @@ import { MerchantSearchComponent } from "src/app/user/components/statistics/merc
     PieChartModule,
     NgxChartsModule,
     CommonModule,
-    MerchantSearchComponent,
+    EntitySearchComponent,
+    SkeletonLoaderComponent,
   ],
   templateUrl: "./consumer-statistics.component.html",
   styleUrl: "./consumer-statistics.component.css",
@@ -66,9 +69,11 @@ export class ConsumerStatisticsComponent implements OnInit, OnChanges {
   consumedDataFetched = [];
   searchMerchantElement = "";
 
+  errorMessage: string = "";
+
   locationParameters: LocationParams = {};
 
-  view: [number, number] = [500, 400];
+  view: [number, number] = [450, 400];
   pieView: [number, number] = [520, 400];
   colorscheme: any = {
     domain: [
@@ -92,7 +97,8 @@ export class ConsumerStatisticsComponent implements OnInit, OnChanges {
 
   constructor(
     private statsService: StatsService,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private snackBarService: SnackBarService
   ) {}
 
   ngOnInit(): any {
@@ -102,7 +108,7 @@ export class ConsumerStatisticsComponent implements OnInit, OnChanges {
   loadData() {
     this.generalData();
     if (this.currentUser.role !== "Admin") {
-      this.consumptionVoucherData(this.currentUser.merchants[0]);
+      // TO FIX  this.consumptionVoucherData(this.currentUser.merchants[0]);
     } else {
       this.consumptionVoucherData();
     }
@@ -142,15 +148,10 @@ export class ConsumerStatisticsComponent implements OnInit, OnChanges {
     }
   }
 
-  consumptionVoucherData(merchant?: Merchant) {
-    if (merchant) {
-      if (!this.filters.merchantNames.includes(merchant.name)) {
-        this.filters.merchantNames.push(merchant.name);
-      }
-      if (!this.filters.merchantIds.includes(merchant.id)) {
-        this.filters.merchantIds.push(merchant.id);
-      }
-    }
+  consumptionVoucherData(merchantFilters?: MerchantFilter) {
+    this.isConsumedDataReady = false; // Reset data flag
+    if (merchantFilters) this.filters = merchantFilters;
+    this.emitFilters();
 
     this.statsService
       .fetchVouchersConsumedStats(
@@ -158,24 +159,40 @@ export class ConsumerStatisticsComponent implements OnInit, OnChanges {
         this.filters,
         this.locationParameters
       )
-      .subscribe((data: ConsumedStatsApiResponse) => {
-        this.consumedStats = {
-          consumedInPeriod: data.consumedInPeriod,
-          totalConsumed: data.totalConsumed,
-          transactionsInPeriod: data.transactionsInPeriod,
-          totalTransactions: data.totalTransactions,
-          merchantRanks: data.merchantRanks,
-          totalConsumedOverTime: data.totalConsumedOverTime,
-        };
+      .subscribe({
+        next: (data: ConsumedStatsApiResponse) => {
+          this.consumedStats = {
+            consumedInPeriod: data.consumedInPeriod,
+            totalConsumed: data.totalConsumed,
+            transactionsInPeriod: data.transactionsInPeriod,
+            totalTransactions: data.totalTransactions,
+            merchantRanks: data.merchantRanks,
+            totalConsumedOverTime: data.totalConsumedOverTime,
+          };
 
-        // Get total consumed over time
-        this.totalConsumedOverTime =
-          this.consumedStats.totalConsumedOverTime.map((data) => ({
-            name: data.date,
-            value: data.total,
-          }));
-        // All requests are done, now set isConsumedDataReady to true
-        this.isConsumedDataReady = true;
+          // Get total consumed over time
+          this.totalConsumedOverTime =
+            this.consumedStats.totalConsumedOverTime.map((data) => ({
+              name: data.date,
+              value: data.total,
+            }));
+          // All requests are done, now set isConsumedDataReady to true
+          this.isConsumedDataReady = true;
+        },
+        error: (error) => {
+          this.isConsumedDataReady = true;
+
+          if (error.status === 400) {
+            this.snackBarService.openSnackBar(
+              "Richiesta non valida. Controllare i filtri."
+            );
+            this.errorMessage = "Richiesta non valida. Controllare i filtri.";
+          } else {
+            this.snackBarService.openSnackBar("Errore. Riprova più tardi.");
+            this.errorMessage =
+              "Si è verificato un errore nel caricamento dei dati. Riprova più tardi.";
+          }
+        },
       });
 
     // Add additional observable if merchantId is present
@@ -210,41 +227,30 @@ export class ConsumerStatisticsComponent implements OnInit, OnChanges {
     });
   }
 
-  // on selection of a Merchant
-  onElementSelection(elementKey: string, elementSelected: Merchant) {
-    if (elementKey === "merchant" && this.isMerchant(elementSelected)) {
-      this.consumedDataFetched = [];
-      this.isConsumedDataReady = false;
-      this.searchMerchantElement = "";
-      this.consumptionVoucherData(elementSelected);
-    }
-    this.cdr.detectChanges();
-  }
-
   isMerchant(element: Merchant): element is Merchant {
     // Check for a property that only Merchant has
     return (element as Merchant).name !== undefined;
   }
 
-  clearElementFilter(event: {
-    elementToClear: string;
-    name?: string;
-    id?: string;
-  }) {
-    const { elementToClear, name, id } = event;
-    if (elementToClear === "merchant" && name && id) {
+  clearElementFilter(event: { name?: string; id?: string }) {
+    const { name, id } = event;
+    if (name && id) {
       this.filters.merchantNames = this.filters.merchantNames.filter(
         (currentName) => currentName !== name
       );
       this.filters.merchantIds = this.filters.merchantIds.filter(
         (currentId) => currentId !== id
       );
-
+      this.emitFilters();
       this.isConsumedDataReady = false; // Reset data flag
       this.consumptionVoucherData();
     }
 
     // Update active filters state
     this.hasActiveFilters();
+  }
+
+  private emitFilters() {
+    this.filtersEmit.emit(this.filters);
   }
 }

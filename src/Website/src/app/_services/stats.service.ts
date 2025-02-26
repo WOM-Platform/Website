@@ -8,7 +8,8 @@ import { LocationParams } from "../_models/LocationParams";
 import {
   MerchantFilter,
   DateFilter,
-  GenerationFilter,
+  InstrumentFilter,
+  CombinedFilters,
 } from "../_models/filter";
 
 @Injectable({ providedIn: "root" })
@@ -23,7 +24,7 @@ export class StatsService {
   // BEGIN REGISTRY API
   fetchVouchersGeneratedAndRedeemedStats(
     dateFilters: DateFilter,
-    sourceFilters: GenerationFilter
+    sourceFilters: InstrumentFilter
   ) {
     let requestData = {
       startDate: dateFilters.startDate
@@ -32,8 +33,8 @@ export class StatsService {
       endDate: dateFilters.endDate
         ? this.convertToLocalISOString(dateFilters.endDate)
         : null,
-      sourceId: sourceFilters.sourceId || null,
-      aimListFilter: sourceFilters.aimListFilter || null,
+      sourceId: sourceFilters?.sourceId || null,
+      aimListFilter: sourceFilters?.aimListFilter || null,
     };
 
     return this.http.post(
@@ -55,7 +56,7 @@ export class StatsService {
       endDate: dateFilters.endDate
         ? this.convertToLocalISOString(dateFilters.endDate)
         : null,
-      merchantIds: merchantFilters.merchantIds || null,
+      merchantIds: merchantFilters?.merchantIds || null,
     };
     if (location) {
       if (location.latitude != null) {
@@ -128,13 +129,18 @@ export class StatsService {
     );
   }
 
-  downloadCsv(filters): Observable<HttpResponse<Blob>> {
+  downloadCsv(filters: CombinedFilters): Observable<HttpResponse<Blob>> {
+    const { startDate, endDate } = filters.dateFilters;
+    const { merchantIds, merchantNames } = filters.merchantFilters;
+    const { sourceId, sourceNames, aimListFilter } = filters.sourceFilters;
     let requestData = {
-      startDate: filters.startDate || null,
-      endDate: filters.endDate || null,
-      sourceId: filters.sourceId || null,
-      aimListFilter: filters.aimListFilter || null,
-      merchantId: filters.merchantId || null,
+      startDate: startDate || null,
+      endDate: endDate || null,
+      sourceId: sourceId || null,
+      sourceNames: sourceNames || null,
+      aimListFilter: aimListFilter || null,
+      merchantIds: merchantIds || null,
+      merchantNames: merchantNames || null,
     };
     return this.http.post<Blob>(`${this.localUrlV1}download/csv`, requestData, {
       observe: "response",

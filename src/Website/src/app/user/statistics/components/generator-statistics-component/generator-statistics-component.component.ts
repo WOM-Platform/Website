@@ -10,7 +10,7 @@ import {
 } from "@angular/core";
 import { MatDialog } from "@angular/material/dialog";
 import { UserMe } from "src/app/_models";
-import { DateFilter, GenerationFilter } from "src/app/_models/filter";
+import { DateFilter, InstrumentFilter } from "src/app/_models/filter";
 import { Instrument } from "src/app/_models/instrument";
 import { LocationParams } from "src/app/_models/LocationParams";
 import {
@@ -24,15 +24,14 @@ import { StatsService } from "src/app/_services";
 import { DialogFilterAimsComponent } from "../../admin-role/dialog-filter-aims/dialog-filter-aims.component";
 import { SourceService } from "src/app/_services/source.service";
 import { CommonModule } from "@angular/common";
-import { MatIcon } from "@angular/material/icon";
+
 import { PieChartModule } from "@swimlane/ngx-charts";
-import { LazySearchComponent } from "src/app/user/components/lazy-search/lazy-search.component";
-import { SearchComponent } from "src/app/user/components/search/search.component";
 import { SharedModule } from "../../../../shared/shared.module";
 import { AnimatedNumberComponent } from "src/app/components/animated-number/animated-number.component";
-import { MatSnackBar } from "@angular/material/snack-bar";
 import { SnackBarService } from "src/app/_services/snack-bar.service";
 import { FormControl } from "@angular/forms";
+import { EntitySearchComponent } from "../../../components/statistics/merchant-search/entity-search.component";
+import { SkeletonLoaderComponent } from "../../../components/skeleton-loader/skeleton-loader.component";
 
 @Component({
   selector: "app-generator-statistics-component",
@@ -41,9 +40,8 @@ import { FormControl } from "@angular/forms";
     PieChartModule,
     SharedModule,
     CommonModule,
-    LazySearchComponent,
-    MatIcon,
-    SearchComponent,
+    EntitySearchComponent,
+    SkeletonLoaderComponent,
   ],
   templateUrl: "./generator-statistics-component.component.html",
   styleUrl: "./generator-statistics-component.component.css",
@@ -55,7 +53,7 @@ export class GeneratorStatisticsComponentComponent
   @Input() currentUser: UserMe;
   @Output() filtersEmit = new EventEmitter<any>();
 
-  filters: GenerationFilter = {
+  filters: InstrumentFilter = {
     aimListFilter: [],
     sourceId: [],
     sourceNames: [],
@@ -124,7 +122,7 @@ export class GeneratorStatisticsComponentComponent
   loadData() {
     this.generalData();
     if (this.currentUser.role !== "Admin") {
-      this.generationVoucherData(this.currentUser.sources[0]);
+      // TO FIX this.generationVoucherData(this.currentUser.sources[0]);
     } else {
       this.generationVoucherData();
     }
@@ -142,18 +140,11 @@ export class GeneratorStatisticsComponentComponent
     this.hasActiveFilters(); // update active filters
   }
 
-  generationVoucherData(source?: Instrument) {
-    this.hasActiveFilters(); // update active filters
-    if (source) {
-      if (!this.filters.sourceNames.includes(source.name)) {
-        this.filters.sourceNames.push(source.name);
-      }
-      if (!this.filters.sourceId.includes(source.id)) {
-        this.filters.sourceId.push(source.id);
-      }
-    }
-    this.emitFilters();
+  generationVoucherData(sourceFilters?: InstrumentFilter) {
+    this.isGeneratedDataReady = false; // Reset data flag
+    if (sourceFilters) this.filters = sourceFilters;
 
+    this.emitFilters();
     this.statsService
       .fetchVouchersGeneratedAndRedeemedStats(this.dateFilters, this.filters)
       .subscribe({
@@ -229,51 +220,6 @@ export class GeneratorStatisticsComponentComponent
     );
   }
 
-  openDialogAimsSelected() {
-    const dialogRef = this.dialog.open(DialogFilterAimsComponent, {
-      width: "900px",
-      maxHeight: "90vh",
-      panelClass: "custom-dialog-backdrop",
-      data: {
-        filterAim: this.filters.aimListFilter,
-      },
-    });
-
-    dialogRef.afterClosed().subscribe((selectedAims: string[] | null) => {
-      if (selectedAims) {
-        this.isGeneratedDataReady = false;
-        this.filters.aimListFilter = selectedAims;
-        this.emitFilters();
-        this.generationVoucherData();
-      }
-    });
-  }
-
-  // search for source user
-  searchSource(sourceName: string = this.searchSourceElement.value) {
-    // Call the service to fetch the data
-    this.sourceService.getAllInstruments({ search: sourceName }).subscribe({
-      next: (data) => {
-        this.generatedDataFetched = data.data;
-      },
-      error: (error) => {
-        console.error("Error fetching source data:", error);
-      },
-    });
-  }
-
-  // on selection of a Merchant or Instrument
-  onElementSelection(elementKey: string, elementSelected: Instrument) {
-    if (elementKey === "source" && this.isInstrument(elementSelected)) {
-      this.generatedDataFetched = [];
-      this.isGeneratedDataReady = false;
-      this.searchSourceElement = new FormControl("");
-      this.generationVoucherData(elementSelected);
-    }
-
-    this.cdr.detectChanges();
-  }
-
   onSelect(event): void {
     console.log(event);
   }
@@ -283,14 +229,10 @@ export class GeneratorStatisticsComponentComponent
     return (element as Instrument).name !== undefined;
   }
 
-  clearElementFilter(event: {
-    elementToClear: string;
-    name?: string;
-    id?: string;
-  }) {
-    const { elementToClear, name, id } = event;
+  clearElementFilter(event: { name?: string; id?: string }) {
+    const { name, id } = event;
 
-    if (elementToClear === "source" && name && id) {
+    if (name && id) {
       this.filters.sourceNames = this.filters.sourceNames.filter(
         (currentName) => currentName !== name
       );

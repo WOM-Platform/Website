@@ -1,10 +1,11 @@
-<app-merchant-search
+<app-entity-search
   [currentUser]="currentUser"
-  (consumptionVoucherData)="consumptionVoucherData($event)"
+  [entityType]="'merchant'"
+  (voucherData)="consumptionVoucherData($event)"
   (clearElementFilter)="clearElementFilter($event)"
-></app-merchant-search>
+></app-entity-search>
 <!-- WOM Consumati Section -->
-<div *ngIf="isConsumedDataReady; else loadingConsumption" class="mt-6">
+<div *ngIf="isConsumedDataReady && !errorMessage; else loadedOrError">
   <div
     class="flex flex-wrap justify-center gap-10 card-stat max-w-fit min-w-[530px]"
   >
@@ -102,27 +103,25 @@
   <div class="flex flex-col lg:flex-row gap-2 mt-2">
     <div>
       <div
-        class="card-stat"
+        class="card-stat max-w-[480px]"
         *ngIf="totalConsumedOverTime && consumedStats.consumedInPeriod > 0"
       >
-        <ng-container>
-          <p class="font-semibold">Consumo nel tempo</p>
-          <ngx-charts-bar-vertical
-            [view]="view"
-            [scheme]="blueWomScheme"
-            [results]="totalConsumedOverTime"
-            [gradient]="false"
-            [xAxis]="true"
-            [yAxis]="true"
-            [legend]="false"
-            [showXAxisLabel]="true"
-            [showYAxisLabel]="true"
-            [xAxisLabel]="'Data'"
-            [yAxisLabel]="'Quantità'"
-            (select)="onSelect($event)"
-          >
-          </ngx-charts-bar-vertical>
-        </ng-container>
+        <p class="font-semibold">Consumo nel tempo</p>
+        <ngx-charts-bar-vertical
+          [view]="view"
+          [scheme]="blueWomScheme"
+          [results]="totalConsumedOverTime"
+          [gradient]="false"
+          [xAxis]="true"
+          [yAxis]="true"
+          [legend]="false"
+          [showXAxisLabel]="true"
+          [showYAxisLabel]="true"
+          [xAxisLabel]="'Data'"
+          [yAxisLabel]="'Quantità'"
+          (select)="onSelect($event)"
+        >
+        </ngx-charts-bar-vertical>
       </div>
     </div>
     <!-- BEGIN Merchant Ranking -->
@@ -137,20 +136,49 @@
         Merchant
       </h3>
       <ul class="pl-5 space-y-2 max-h-[450px] overflow-y-auto list-none">
-        <li *ngFor="let rank of consumedStats.merchantRanks">
+        <li
+          class="text-base flex items-center gap-2"
+          *ngFor="let rank of consumedStats.merchantRanks"
+        >
           <!-- Conditional rendering for trophy icon based on rank -->
           <span *ngIf="rank.rank === 1">
-            1) <i class="fa-solid fa-trophy" style="color: #ffd43b"></i>
+            1) <i class="fa-solid fa-trophy text-yellow-500"></i>
           </span>
+          <span
+            *ngIf="rank.rank === 1"
+            class="text-lg font-semibold text-yellow-500"
+          >
+            {{ " " }}{{ rank.name }}:
+          </span>
+
           <span *ngIf="rank.rank === 2">
-            2) <i class="fa-solid fa-trophy" style="color: #c0c0c0"></i>
+            2) <i class="fa-solid fa-trophy text-gray-400"></i>
           </span>
+          <span
+            *ngIf="rank.rank === 2"
+            class="text-lg font-semibold text-gray-400"
+          >
+            {{ " " }}{{ rank.name }}:
+          </span>
+
           <span *ngIf="rank.rank === 3">
-            3) <i class="fa-solid fa-trophy" style="color: #cd7f32"></i>
+            3) <i class="fa-solid fa-trophy text-amber-600"></i>
           </span>
-          <span *ngIf="rank.rank > 3"> {{ rank.rank }}) </span>
-          {{ rank.name }}: <strong>{{ rank.amount }}</strong>
-          <span class="italic text-xs"> WOM</span>
+          <span
+            *ngIf="rank.rank === 3"
+            class="text-lg font-semibold text-amber-600"
+          >
+            {{ " " }}{{ rank.name }}:
+          </span>
+
+          <span *ngIf="rank.rank > 3">{{ rank.rank }}) </span>
+          <span *ngIf="rank.rank > 3" class="text-lg font-semibold">
+            {{ rank.name }}:
+          </span>
+
+          <strong class="text-gray-800">{{ rank.amount }}</strong>
+
+          <span class="italic text-xs text-gray-500">WOM</span>
         </li>
       </ul>
     </div>
@@ -158,55 +186,12 @@
     <!-- END Merchant Ranking -->
   </div>
 </div>
-<ng-template #loadingConsumption>
-  <div
-    class="flex flex-col gap-4 p-6 bg-white shadow-md rounded-lg w-[530px] mb-10"
-  >
-    <ngx-skeleton-loader
-      count="1"
-      appearance="line"
-      [theme]="{
-        height: '50px',
-        width: '180px',
-        'border-radius': '20px'
-      }"
-    ></ngx-skeleton-loader>
+
+<ng-template #loadedOrError>
+  <div *ngIf="errorMessage" class="bg-red-100 text-red-700 p-4 rounded-md mt-4">
+    <p>{{ errorMessage }}</p>
   </div>
-  <div
-    class="flex flex-col gap-4 p-6 bg-white shadow-md rounded-lg min-w-[1000px]"
-  >
-    <ngx-skeleton-loader
-      count="1"
-      appearance="line"
-      [theme]="{
-        height: '50px',
-        width: '180px',
-        'border-radius': '20px'
-      }"
-    ></ngx-skeleton-loader>
-    <div class="flex justify-around">
-      <ngx-skeleton-loader
-        count="1"
-        appearance="line"
-        [theme]="{
-          height: '300px',
-          width: '300px',
-          'border-radius': '20px'
-        }"
-      ></ngx-skeleton-loader>
-      <ngx-skeleton-loader
-        count="1"
-        appearance="circle"
-        animation="progress-dark"
-        [theme]="{ height: '300px', width: '300px' }"
-      ></ngx-skeleton-loader>
-    </div>
-    <ngx-skeleton-loader
-      count="5"
-      [theme]="{
-        'border-radius': '5px',
-        height: '50px'
-      }"
-    ></ngx-skeleton-loader>
+  <div *ngIf="!errorMessage">
+    <app-skeleton-loader />
   </div>
 </ng-template>

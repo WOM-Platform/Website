@@ -2,7 +2,7 @@ import { Component, Input, OnChanges, SimpleChanges } from "@angular/core";
 import { finalize } from "rxjs";
 import { LoadingService } from "../../../_services/loading.service";
 import { StatsService } from "../../../_services";
-import { DateFilter } from "src/app/_models/filter";
+import { CombinedFilters, DateFilter, Filter } from "src/app/_models/filter";
 
 @Component({
   selector: "app-csv-download",
@@ -12,9 +12,10 @@ import { DateFilter } from "src/app/_models/filter";
   styleUrl: "./csv-download.component.css",
 })
 export class CsvDownloadComponent {
-  @Input() filters: DateFilter = {
-    startDate: undefined,
-    endDate: undefined,
+  @Input() filters: CombinedFilters = {
+    dateFilters: undefined,
+    merchantFilters: undefined,
+    sourceFilters: undefined,
   };
 
   constructor(

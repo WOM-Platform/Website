@@ -20,7 +20,7 @@ import { tap } from "rxjs/operators";
 import {
   MerchantFilter,
   DateFilter,
-  GenerationFilter,
+  InstrumentFilter,
 } from "src/app/_models/filter";
 import { StatisticsFiltersComponent } from "../components/statistics-filters/statistics-filters.component";
 
@@ -53,7 +53,7 @@ export class UserRoleComponent implements OnInit {
     merchantNames: [],
   };
 
-  sourceFilters: GenerationFilter = {
+  sourceFilters: InstrumentFilter = {
     sourceId: [],
     sourceNames: [],
     aimListFilter: [],

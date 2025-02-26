@@ -9,7 +9,7 @@ export interface Filter {
 export interface CombinedFilters {
   dateFilters: DateFilter;
   merchantFilters: MerchantFilter;
-  sourceFilters: GenerationFilter;
+  sourceFilters: InstrumentFilter;
 }
 
 export interface DateFilter {
@@ -22,7 +22,7 @@ export interface MerchantFilter {
   merchantNames: string[];
 }
 
-export interface GenerationFilter {
+export interface InstrumentFilter {
   sourceId: string[];
   sourceNames: string[];
   aimListFilter: string[];

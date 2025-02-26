@@ -10,7 +10,7 @@ import { MatDatepickerInputEvent } from "@angular/material/datepicker";
 import {
   MerchantFilter,
   DateFilter,
-  GenerationFilter,
+  InstrumentFilter,
   CombinedFilters,
 } from "../../../_models/filter";
 import { CsvDownloadComponent } from "../../components/csv-download/csv-download.component";
@@ -58,11 +58,12 @@ export class AdminRoleComponent implements OnInit, OnDestroy {
     merchantNames: [],
   };
 
-  sourceFilters: GenerationFilter = {
+  sourceFilters: InstrumentFilter = {
     sourceId: [],
     sourceNames: [],
     aimListFilter: [],
   };
+
   tooltipActiveFilters = "Non ci sono filtri attivi";
 
   isShowedGenerationFilter: boolean = false;
@@ -109,6 +110,17 @@ export class AdminRoleComponent implements OnInit, OnDestroy {
     this.cdr.detectChanges();
   }
 
+  onSourceSelected(source: InstrumentFilter) {
+    this.sourceFilters = { ...source };
+    this.updateCombinedFilters();
+    this.cdr.detectChanges();
+  }
+  onMerchantSelected(merchant: MerchantFilter) {
+    this.merchantFilters = { ...merchant };
+    this.updateCombinedFilters();
+    this.cdr.detectChanges();
+  }
+
   addEvent(type: string, event: MatDatepickerInputEvent<Date>) {
     console.log(`${type}: ${event.value}`);
   }
@@ -138,6 +150,11 @@ export class AdminRoleComponent implements OnInit, OnDestroy {
 
     // Join all rows with a newline
     return csvRows.join("\n");
+  }
+  get activeFiltersSummary(): string {
+    return this.hasActiveFilters()
+      ? "I filtri attivi sono: " + this.getActiveFiltersSummary()
+      : "Non ci sono filtri attivi";
   }
 
   getActiveFiltersSummary(): string {
@@ -187,6 +204,4 @@ export class AdminRoleComponent implements OnInit, OnDestroy {
       this.sourceFilters.aimListFilter.length > 0
     );
   }
-
-  handleFiltersChange() {}
 }

@@ -5,13 +5,7 @@
       (onDateFilter)="onDatesSelected($event)"
     />
     <div class="flex items-center gap-2">
-      <button
-        [matTooltip]="
-          hasActiveFilters()
-            ? 'I filtri attivi sono: ' + getActiveFiltersSummary()
-            : 'Non ci sono filtri attivi'
-        "
-      >
+      <button [matTooltip]="activeFiltersSummary" matTooltipShowDelay="200">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           height="16px"
@@ -24,7 +18,7 @@
           />
         </svg>
       </button>
-      <app-csv-download [filters]="dateFilters" />
+      <app-csv-download [filters]="filters" />
     </div>
   </div>
   <header class="w-full h-[5px] bg-[#739cf4] my-6"></header>
@@ -33,7 +27,7 @@
     <app-consumer-statistics
       [dateFilters]="dateFilters"
       [currentUser]="currentUser"
-      (filtersEmit)="handleFiltersChange($event)"
+      (filtersEmit)="onMerchantSelected($event)"
     >
     </app-consumer-statistics>
   </div>
@@ -45,7 +39,7 @@
     <app-generator-statistics-component
       [dateFilters]="dateFilters"
       [currentUser]="currentUser"
-      (filtersEmit)="handleFiltersChange($event)"
+      (filtersEmit)="onSourceSelected($event)"
     >
     </app-generator-statistics-component>
   </div>
