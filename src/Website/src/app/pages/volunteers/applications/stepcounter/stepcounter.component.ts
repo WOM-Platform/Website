@@ -2,9 +2,10 @@ import {Component} from '@angular/core';
 import {TranslateService} from "@ngx-translate/core";
 
 @Component({
-  selector: 'app-applications-stepcounter',
-  templateUrl: './stepcounter.component.html',
-  styleUrls: ['stepcounter.component.css']
+    selector: 'app-applications-stepcounter',
+    templateUrl: './stepcounter.component.html',
+    styleUrls: ['stepcounter.component.css'],
+    standalone: false
 })
 export class ApplicationsStepcounterComponent {
   tutorial_1_src = '/assets/pdf/tutorial_contapassi.pdf';

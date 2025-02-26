@@ -2,9 +2,10 @@ import {ChangeDetectorRef, Component, OnDestroy, OnInit} from '@angular/core';
 import {MediaMatcher} from "@angular/cdk/layout";
 
 @Component({
-  selector: 'app-privacy',
-  templateUrl: './privacy.component.html',
-  styleUrls: ['./privacy.component.css']
+    selector: 'app-privacy',
+    templateUrl: './privacy.component.html',
+    styleUrls: ['./privacy.component.css'],
+    standalone: false
 })
 export class PrivacyComponent implements OnInit, OnDestroy{
   mobileQuery: MediaQueryList;

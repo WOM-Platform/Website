@@ -3,9 +3,10 @@ import { DomSanitizer, SafeHtml } from "@angular/platform-browser";
 import { TranslateService } from "@ngx-translate/core";
 
 @Component({
-  selector: "app-cittadini",
-  templateUrl: "./cittadini.component.html",
-  styleUrls: ["./cittadini.component.css"],
+    selector: "app-cittadini",
+    templateUrl: "./cittadini.component.html",
+    styleUrls: ["./cittadini.component.css"],
+    standalone: false
 })
 export class CittadiniComponent implements OnInit {
   faqs = [];

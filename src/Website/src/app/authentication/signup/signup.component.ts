@@ -11,7 +11,8 @@ import {MatDialog} from "@angular/material/dialog";
 @Component({
     selector: 'app-merchant-signup',
     templateUrl: './signup.component.html',
-    styleUrls: ['./signup.component.css']
+    styleUrls: ['./signup.component.css'],
+    standalone: false
 })
 export class MerchantSignUpComponent implements OnInit {
     formUser: FormGroup;

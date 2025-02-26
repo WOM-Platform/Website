@@ -9,7 +9,8 @@ import {MatSnackBar} from "@angular/material/snack-bar";
 @Component({
     selector: 'app-contacts',
     templateUrl: './contacts.component.html',
-    styleUrls: ['./contacts.component.css']
+    styleUrls: ['./contacts.component.css'],
+    standalone: false
 })
 export class ContactsComponent {
     formData: UntypedFormGroup;

@@ -1,9 +1,10 @@
 import {Component, Input, OnDestroy, OnInit, Output} from '@angular/core';
 
 @Component({
-  selector: 'app-pdf-viewer-container',
-  templateUrl: './pdf-viewer-container.component.html',
-  styleUrls: ['./pdf-viewer-container.component.css']
+    selector: 'app-pdf-viewer-container',
+    templateUrl: './pdf-viewer-container.component.html',
+    styleUrls: ['./pdf-viewer-container.component.css'],
+    standalone: false
 })
 export class PdfViewerContainerComponent implements OnInit {
   @Input() source: string;

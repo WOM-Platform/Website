@@ -12,7 +12,8 @@ import {finalize} from "rxjs";
 @Component({
     selector: 'app-users-tab',
     templateUrl: './user-users.component.html',
-    styleUrl: './user-users.component.css'
+    styleUrl: './user-users.component.css',
+    standalone: false
 })
 export class UserUsersComponent implements OnInit, OnChanges {
     itemsPerPage: string;

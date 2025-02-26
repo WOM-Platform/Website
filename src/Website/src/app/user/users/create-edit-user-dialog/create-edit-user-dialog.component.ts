@@ -6,7 +6,6 @@ import {NgIf} from "@angular/common";
 
 @Component({
     selector: 'app-create-user-dialog',
-    standalone: true,
     imports: [
         NgIf,
         UserFormComponent,

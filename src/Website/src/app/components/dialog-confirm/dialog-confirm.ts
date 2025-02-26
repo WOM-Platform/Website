@@ -11,6 +11,7 @@ export interface DialogData {
 @Component({
     selector: 'app-dialog-confirm',
     templateUrl: 'dialog-confirm.html',
+    standalone: false
 })
 export class DialogConfirmComponent {
     title: string;

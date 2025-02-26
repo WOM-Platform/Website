@@ -10,7 +10,8 @@ import {Merchants, UserMe} from "src/app/_models";
 @Component({
     selector: 'app-user-stats',
     templateUrl: './user-statistics.component.html',
-    styleUrls: ['./user-statistics.component.css']
+    styleUrls: ['./user-statistics.component.css'],
+    standalone: false
 })
 export class UserStatisticsComponent implements OnInit {
     currentUser: UserMe

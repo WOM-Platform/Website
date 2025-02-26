@@ -1,11 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
-import { EditableElementComponent } from "../editable-element/editable-element.component";
-import { NgFor, NgIf } from "@angular/common";
 
 @Component({
   selector: "app-expandable-card",
   standalone: true,
-  imports: [EditableElementComponent, NgFor, NgIf],
   templateUrl: "./expandable-card.component.html",
   styleUrl: "./expandable-card.component.css",
 })

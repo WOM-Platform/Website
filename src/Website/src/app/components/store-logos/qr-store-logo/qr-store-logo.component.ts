@@ -2,10 +2,9 @@ import {Component, Input, OnInit} from "@angular/core";
 
 @Component({
     selector: "app-qr-store-logo",
-    standalone: true,
     imports: [],
     templateUrl: "./qr-store-logo.component.html",
-    styleUrls: ["./qr-store-logo.component.css"],
+    styleUrls: ["./qr-store-logo.component.css"]
 })
 export class QrStoreLogoComponent {
     @Input() appURL: string = "";

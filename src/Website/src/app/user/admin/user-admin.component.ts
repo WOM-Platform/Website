@@ -7,7 +7,8 @@ import {MatDialog} from "@angular/material/dialog";
     selector: 'app-user-admin',
     templateUrl: './user-admin.component.html',
     styleUrls: ['./user-admin.component.css'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class UserAdminComponent {
     @Input() user: any;

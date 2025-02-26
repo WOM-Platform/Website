@@ -1,3 +1,8 @@
-<div *ngIf="aimsData && aimsData.length > 0" class="min-w-[800px]">
-    <app-admin-table [tableColumns]="aimsTableColumns" [tableData]="aimsData"></app-admin-table>
+<div class="mx-auto max-w-[600px]">
+  <div *ngIf="aimsData && aimsData.length > 0">
+    <app-admin-table
+      [tableColumns]="aimsTableColumns"
+      [tableData]="aimsData"
+    ></app-admin-table>
+  </div>
 </div>

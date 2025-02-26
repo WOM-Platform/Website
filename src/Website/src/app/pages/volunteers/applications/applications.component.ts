@@ -4,10 +4,10 @@ import {MediaMatcher} from "@angular/cdk/layout";
 import {applicationsList} from "./applications-list"
 
 @Component({
-  selector: 'app-applications',
-  templateUrl: './applications.component.html',
-  styleUrls: ['./applications.component.css']
-  
+    selector: 'app-applications',
+    templateUrl: './applications.component.html',
+    styleUrls: ['./applications.component.css'],
+    standalone: false
 })
 export class ApplicationsComponent implements OnInit, OnDestroy{
   mobileQuery: MediaQueryList;

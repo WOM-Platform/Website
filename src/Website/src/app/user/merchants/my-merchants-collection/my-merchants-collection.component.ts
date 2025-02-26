@@ -25,31 +25,25 @@ import {Access} from "../../../_models/instrument";
     styleUrl: "./my-merchants-collection.component.css",
     animations: [
         trigger("slideToggle", [
-            state(
-                "open",
-                style({
-                    height: "*",
-                    opacity: 1,
-                    overflow: "hidden",
-                })
-            ),
-            state(
-                "closed",
-                style({
-                    height: "0px",
-                    opacity: 0,
-                    overflow: "hidden",
-                })
-            ),
+            state("open", style({
+                height: "*",
+                opacity: 1,
+                overflow: "hidden",
+            })),
+            state("closed", style({
+                height: "0px",
+                opacity: 0,
+                overflow: "hidden",
+            })),
             transition("open <=> closed", [animate("300ms ease-in-out")]),
         ]),
         trigger("rotateArrow", [
-            state("open", style({transform: 'rotate(180deg)'})),
-            state("close", style({transform: 'rotate(0deg)'})
-            ),
+            state("open", style({ transform: 'rotate(180deg)' })),
+            state("close", style({ transform: 'rotate(0deg)' })),
             transition('open <=> closed', [animate("300ms ease-in-out")])
         ])
     ],
+    standalone: false
 })
 export class MyMerchantsCollectionComponent implements OnInit {
     currentUser: UserMe

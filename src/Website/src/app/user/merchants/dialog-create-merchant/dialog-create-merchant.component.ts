@@ -16,6 +16,7 @@ import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
     selector: "app-form-merchant-dialog",
     templateUrl: "dialog-create-merchant.html",
     styleUrls: ["dialog-create-merchant.css"],
+    standalone: false
 })
 export class DialogCreateMerchant implements OnInit {
     formMerchant: UntypedFormGroup;

@@ -1,10 +1,11 @@
 import { Component, HostBinding } from "@angular/core";
 
 @Component({
-  selector: "app-esercenti",
-  templateUrl: "./esercenti.component.html",
-  styleUrls: ["./esercenti.component.css"],
-  animations: [],
+    selector: "app-esercenti",
+    templateUrl: "./esercenti.component.html",
+    styleUrls: ["./esercenti.component.css"],
+    animations: [],
+    standalone: false
 })
 export class EsercentiComponent {
   faqs = [

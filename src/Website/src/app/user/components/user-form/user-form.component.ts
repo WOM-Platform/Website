@@ -8,7 +8,6 @@ import {StorageService} from "../../../_services/storage.service";
 
 @Component({
     selector: 'app-user-form',
-    standalone: true,
     imports: [
         FormsModule,
         ReactiveFormsModule,

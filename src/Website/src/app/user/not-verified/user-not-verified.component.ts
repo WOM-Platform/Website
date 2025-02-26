@@ -8,7 +8,8 @@ import {MatSnackBar} from "@angular/material/snack-bar";
 @Component({
     selector: 'app-user-not-verified',
     templateUrl: './user-not-verified.component.html',
-    styleUrls: ['./user-not-verified.component.css']
+    styleUrls: ['./user-not-verified.component.css'],
+    standalone: false
 })
 export class UserNotVerifiedComponent {
     user: UserMe;

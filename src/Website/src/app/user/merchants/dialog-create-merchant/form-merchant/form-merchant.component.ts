@@ -15,12 +15,13 @@ import { Subject } from "rxjs";
 import { StorageService } from "../../../../_services/storage.service";
 
 @Component({
-  selector: "app-form-merchant",
-  templateUrl: "./form-merchant.component.html",
-  styleUrls: [
-    "./form-merchant.component.css",
-    "../../../../_forms/forms.directive.css",
-  ],
+    selector: "app-form-merchant",
+    templateUrl: "./form-merchant.component.html",
+    styleUrls: [
+        "./form-merchant.component.css",
+        "../../../../_forms/forms.directive.css",
+    ],
+    standalone: false
 })
 export class FormMerchantComponent implements OnInit, OnDestroy {
   countryList: string[] = countryList;

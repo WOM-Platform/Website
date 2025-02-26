@@ -18,22 +18,21 @@ import {FormsModule} from "@angular/forms";
 @Component({
     selector: "app-user-access-list",
     templateUrl: "./user-access-list.component.html",
-    standalone: true,
     imports: [NgIf, NgFor, FormsModule, MatIcon, SearchSourceComponent],
     styleUrl: "./user-access-list.component.css",
     animations: [
         trigger("fadeInOut", [
             transition(":enter", [
                 // :enter is alias to 'void => *'
-                style({opacity: 0}),
-                animate("0.2s ease-out", style({opacity: 1})),
+                style({ opacity: 0 }),
+                animate("0.2s ease-out", style({ opacity: 1 })),
             ]),
             transition(":leave", [
                 // :leave is alias to '* => void'
-                animate("0.2s ease-in", style({opacity: 0})),
+                animate("0.2s ease-in", style({ opacity: 0 })),
             ]),
         ]),
-    ],
+    ]
 })
 export class UserAccessListComponent implements OnDestroy {
     @Input() isRoleAccessRequired: boolean = false;

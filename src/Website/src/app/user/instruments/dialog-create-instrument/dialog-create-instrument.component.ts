@@ -18,6 +18,7 @@ import {switchMap} from "rxjs/operators";
     selector: "app-dialog-create-instrument",
     templateUrl: "./dialog-create-instrument.component.html",
     styleUrls: ["./dialog-create-instrument.component.css"],
+    standalone: false
 })
 export class DialogCreateSourceComponent implements OnInit, OnDestroy, AfterViewInit {
     newSource: FormGroup;
