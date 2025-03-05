@@ -13,9 +13,10 @@ import { ThemePalette } from "@angular/material/core";
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 
 @Component({
-  selector: "app-progress-spinner",
-  templateUrl: "./progress-spinner.component.html",
-  styleUrls: ["./progress-spinner.component.css"],
+    selector: "app-progress-spinner",
+    templateUrl: "./progress-spinner.component.html",
+    styleUrls: ["./progress-spinner.component.css"],
+    standalone: false
 })
 export class ProgressSpinnerComponent implements OnInit, DoCheck {
   @Input() color?: ThemePalette;

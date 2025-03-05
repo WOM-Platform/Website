@@ -13,7 +13,8 @@ type MerchantType = {
 @Component({
     selector: 'app-forms-user',
     templateUrl: './forms-user.directive.html',
-    styleUrls: ['./forms-user.directive.css', '../forms.directive.css']
+    styleUrls: ['./forms-user.directive.css', '../forms.directive.css'],
+    standalone: false
 })
 export class UserFormComponent implements OnInit, OnChanges {
 

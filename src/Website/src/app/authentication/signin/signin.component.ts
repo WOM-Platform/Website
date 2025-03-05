@@ -8,7 +8,8 @@ import {TranslateService} from '@ngx-translate/core';
 @Component({
     selector: 'app-signin',
     templateUrl: './signin.component.html',
-    styleUrls: ['./signin.component.css']
+    styleUrls: ['./signin.component.css'],
+    standalone: false
 })
 export class SignInComponent implements OnInit {
     error: string;

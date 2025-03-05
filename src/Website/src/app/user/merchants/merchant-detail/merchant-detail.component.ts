@@ -21,6 +21,7 @@ import {SnackBarService} from "../../../_services/snack-bar.service";
     selector: "app-merchant-detail",
     templateUrl: "./merchant-detail.component.html",
     styleUrl: "./merchant-detail.component.css",
+    standalone: false
 })
 export class MerchantDetailComponent implements OnInit, OnDestroy {
     id: string;

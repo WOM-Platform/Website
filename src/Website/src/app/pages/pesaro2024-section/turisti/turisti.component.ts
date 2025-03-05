@@ -6,6 +6,7 @@ import {TranslateService} from "@ngx-translate/core";
     selector: "app-turisti",
     templateUrl: "./turisti.component.html",
     styleUrls: ["./turisti.component.css"],
+    standalone: false
 })
 export class TuristiComponent implements OnInit {
     faqs = [];

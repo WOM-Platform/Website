@@ -31,6 +31,7 @@ export interface ChartDataSwimlane {
 
 export interface VoucherByAimDTO {
   aimCode: string;
+  aimName: string;
   amount: number;
 }
 
@@ -50,11 +51,6 @@ export interface TotalConsumedOverTime {
   total: number;
 }
 
-export interface TotalCreatedAmountByAim {
-  aimCode: string;
-  amount: number;
-}
-
 export interface ElementRankDTO {
   id: string;
   name: string;
@@ -72,7 +68,9 @@ export interface SourceRankDTO extends ElementRankDTO {
 }
 
 export interface GenerationRedeemedStatsApiResponse {
+  generatedInPeriod: number;
   totalGenerated: number;
+  redeemedInPeriod: number;
   totalRedeemed: number;
   voucherByAim: VoucherByAimDTO[];
   voucherAvailable: number;
@@ -81,7 +79,10 @@ export interface GenerationRedeemedStatsApiResponse {
 }
 
 export interface ConsumedStatsApiResponse {
+  consumedInPeriod: number;
   totalConsumed: number;
+  transactionsInPeriod: number;
+  totalTransactions: number;
   merchantRanks: MerchantRankDTO[];
   totalConsumedOverTime: TotalConsumedOverTime[];
 }

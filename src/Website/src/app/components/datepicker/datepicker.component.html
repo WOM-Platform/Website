@@ -1,49 +1,78 @@
 <div class="datepicker">
-    <div class="flex space-x-2">
-        <!-- Start Date -->
-        <div class="relative w-[250px]">
-            <input
-                    type="text"
-                    [value]="startDate | date: 'dd/MM/yyyy'"
-                    (click)="toggleCalendar('start')"
-                    readonly
-                    placeholder="Start Date"
-                    class="block w-full pl-3 pr-10 py-2 border border-gray-300 rounded-l-full focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
-            <i class="fa-regular fa-calendar absolute inset-y-0 right-3 flex items-center text-gray-500"></i>
-        </div>
-
-        <!-- End Date -->
-        <div class="relative w-[250px]">
-            <input
-                    type="text"
-                    [value]="endDate| date: 'dd/MM/yyyy'"
-                    (click)="toggleCalendar('end')"
-                    readonly
-                    placeholder="End Date"
-                    class="block w-full pl-3 pr-10 py-2 border border-gray-300 rounded-r-full focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
-            <i class="fa-regular fa-calendar absolute inset-y-0 right-3 flex items-center text-gray-500"></i>
-        </div>
+  <div class="flex space-x-2">
+    <!-- Start Date -->
+    <div class="relative w-[250px]">
+      <input
+        type="text"
+        [value]="startDate | date : 'dd/MM/yyyy'"
+        (click)="toggleCalendar('start')"
+        readonly
+        placeholder="Start Date"
+        class="block w-full pl-3 pr-10 py-2 border border-gray-300 rounded-l-full focus:outline-none focus:ring-2 focus:ring-blue-500"
+      />
+      <i
+        class="fa-regular fa-calendar absolute inset-y-0 right-3 flex items-center text-gray-500"
+      ></i>
     </div>
 
-    <!-- Calendar -->
-    <div class="calendar" *ngIf="calendarVisible">
-        <div class="header flex justify-between items-center my-2">
-            <button (click)="previousMonth()">&#9664;</button>
-            <span class="capitalize">{{ currentMonth | date: 'MMMM yyyy' }}</span>
-            <button (click)="nextMonth()">&#9654;</button>
-        </div>
-        <div class="days grid grid-cols-7 gap-1">
-            <div class="day text-center py-2 cursor-pointer"
-                 *ngFor="let day of days"
-                 [class.bg-blue-500]="isSelected(day)"
-                 [class.text-white]="isSelected(day)"
-                 [class.bg-gray-200]="!isSelected(day)"
-                 (click)="selectDate(day)">
-                {{ day.getDate() }}
-            </div>
-        </div>
+    <!-- End Date -->
+    <div class="relative w-[250px]">
+      <input
+        type="text"
+        [value]="endDate | date : 'dd/MM/yyyy'"
+        (click)="toggleCalendar('end')"
+        readonly
+        placeholder="End Date"
+        class="block w-full pl-3 pr-10 py-2 border border-gray-300 rounded-r-full focus:outline-none focus:ring-2 focus:ring-blue-500"
+      />
+      <i
+        class="fa-regular fa-calendar absolute inset-y-0 right-3 flex items-center text-gray-500"
+      ></i>
     </div>
-    
+  </div>
+
+  <!-- Calendar -->
+  <div class="calendar" *ngIf="calendarVisible">
+    <div class="header flex justify-between items-center my-2">
+      <button (click)="previousMonth()">&#9664;</button>
+      <span class="capitalize">{{ currentMonth | date : "MMMM yyyy" }}</span>
+      <button
+        (click)="nextMonth()"
+        [disabled]="
+          currentMonth.getMonth() === today.getMonth() &&
+          currentMonth.getYear() === today.getYear()
+        "
+      >
+        &#9654;
+      </button>
+    </div>
+    <div class="days grid grid-cols-7 gap-1">
+      <div
+        class="day text-center py-2 cursor-pointer"
+        *ngFor="let day of days"
+        [class.bg-blue-500]="isSelected(day)"
+        [class.text-white]="isSelected(day)"
+        [class.bg-gray-200]="!isSelected(day)"
+        [class.text-gray-400]="
+          day > today ||
+          (!isSelectingStart && startDate && day < startDate) ||
+          (isSelectingStart && endDate && day > endDate)
+        "
+        [class.cursor-not-allowed]="
+          day > today ||
+          (!isSelectingStart && startDate && day < startDate) ||
+          (isSelectingStart && endDate && day > endDate)
+        "
+        (click)="
+          day <= today &&
+            (isSelectingStart || startDate) &&
+            (isSelectingStart || day >= startDate) &&
+            (!isSelectingStart || !endDate || day < endDate) &&
+            selectDate(day)
+        "
+      >
+        {{ day.getDate() }}
+      </div>
+    </div>
+  </div>
 </div>

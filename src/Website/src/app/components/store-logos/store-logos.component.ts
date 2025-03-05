@@ -1,10 +1,11 @@
 import { Component, Input, OnInit } from "@angular/core";
 import { StoreLogoComponent } from "./store-logo/store-logo.component";
+import { NgIf } from "@angular/common";
 
 @Component({
   selector: "app-store-logos",
+  imports: [StoreLogoComponent, NgIf],
   standalone: true,
-  imports: [StoreLogoComponent],
   templateUrl: "./store-logos.component.html",
   styleUrls: ["./store-logos.component.css"],
 })

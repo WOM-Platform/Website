@@ -1,0 +1,274 @@
+<div *ngIf="currentUser.role === 'Admin'; else enitySearchUser">
+  <app-entity-search
+    [currentUser]="currentUser"
+    [entityType]="'merchant'"
+    (voucherData)="consumptionVoucherData($event)"
+    (clearElementFilter)="clearElementFilter($event)"
+  ></app-entity-search>
+</div>
+<ng-template #enitySearchUser>
+  <app-entity-search-user
+    [entities]="currentUser.merchants"
+    [entityType]="'merchant'"
+    [selectedEntityId]="userMerchantId"
+    (voucherData)="userConsumptionVoucherData($event)"
+    (clearElementFilter)="clearElementFilter($event)"
+  />
+</ng-template>
+<!-- WOM Consumati Section -->
+<div *ngIf="isConsumedDataReady && !errorMessage; else loadedOrError">
+  <!-- WOM Totals Section -->
+  <div
+    class="flex flex-wrap justify-center gap-10 card-stat max-w-fit min-w-[530px]"
+  >
+    <!-- Total Section -->
+    <div class="flex gap-2 items-center">
+      <p class="font-semibold">Totali:</p>
+      <ng-container
+        *ngIf="consumedStats.consumedInPeriod; else zeroConsumedAmount"
+      >
+        <app-animated-number
+          [finalNumber]="consumedStats.consumedInPeriod"
+          [duration]="1000"
+        ></app-animated-number>
+      </ng-container>
+      <ng-template #zeroConsumedAmount>
+        <p>0</p>
+      </ng-template>
+    </div>
+    <!-- Transaction Number -->
+    <div class="flex gap-2 items-center">
+      <p class="font-semibold">Numero transazioni:</p>
+      <ng-container
+        *ngIf="consumedStats.transactionsInPeriod; else zeroConsumedAmount"
+      >
+        <app-animated-number
+          [finalNumber]="consumedStats.transactionsInPeriod"
+          [duration]="1000"
+        ></app-animated-number>
+      </ng-container>
+      <ng-template #zeroConsumedAmount>
+        <p>0</p>
+      </ng-template>
+    </div>
+    <!-- Total Ever Section -->
+    <div class="flex gap-2 items-center">
+      <p class="font-semibold">Totale di sempre:</p>
+      <ng-container
+        *ngIf="consumedStats.totalConsumed; else zeroConsumedAmount"
+      >
+        <app-animated-number
+          [finalNumber]="consumedStats.totalConsumed"
+          [duration]="1000"
+        ></app-animated-number>
+      </ng-container>
+      <ng-template #zeroConsumedAmount>
+        <p>0</p>
+      </ng-template>
+    </div>
+    <!-- Total ever transaction -->
+    <div class="flex gap-2 items-center">
+      <p class="font-semibold">Transazioni di sempre:</p>
+      <ng-container
+        *ngIf="consumedStats.totalTransactions; else zeroConsumedAmount"
+      >
+        <app-animated-number
+          [finalNumber]="consumedStats.totalTransactions"
+          [duration]="1000"
+        ></app-animated-number>
+      </ng-container>
+      <ng-template #zeroConsumedAmount>
+        <p>0</p>
+      </ng-template>
+    </div>
+    <!-- AVAILABLE WOM -->
+    <div
+      *ngIf="
+        availableVouchers !== undefined && availableVouchers !== null;
+        else loadingAvailableVouchers
+      "
+      class="flex gap-2"
+    >
+      <p>Restano</p>
+      <app-animated-number
+        [finalNumber]="availableVouchers"
+        [duration]="1000"
+      ></app-animated-number>
+      <p>WOM <strong>disponibili</strong></p>
+    </div>
+    <ng-template #loadingAvailableVouchers>
+      <ngx-skeleton-loader
+        class="skeleton-class"
+        count="1"
+        appearance="line"
+        [theme]="{
+          height: '28px',
+          width: '280px',
+          'border-radius': '20px',
+          'margin-bottom': '0px'
+        }"
+      ></ngx-skeleton-loader>
+    </ng-template>
+  </div>
+
+  <div class="flex flex-col lg:flex-row gap-2 mt-2">
+    <!-- Bar Chart for Consumption over Time -->
+    <div>
+      <div
+        class="card-stat max-w-[480px]"
+        *ngIf="totalConsumedOverTime && consumedStats.consumedInPeriod > 0"
+      >
+        <p class="font-semibold">Consumo nel tempo</p>
+        <ngx-charts-bar-vertical
+          [view]="view"
+          [scheme]="blueWomScheme"
+          [results]="totalConsumedOverTime"
+          [gradient]="false"
+          [xAxis]="true"
+          [yAxis]="true"
+          [legend]="false"
+          [showXAxisLabel]="true"
+          [showYAxisLabel]="true"
+          [xAxisLabel]="'Data'"
+          [yAxisLabel]="'Quantità'"
+          (select)="onSelect($event)"
+        >
+        </ngx-charts-bar-vertical>
+      </div>
+    </div>
+    <!-- BEGIN Merchant Ranking -->
+    <!-- Case one merchants -->
+    <div
+      *ngIf="
+        consumedStats.merchantRanks && consumedStats.merchantRanks.length === 1
+      "
+      class="stats-bg"
+    >
+      <h3 class="text-lg font-bold">Posizione Merchant</h3>
+      <p class="text-xl">
+        <span
+          [innerHTML]="getTrophy(consumedStats.merchantRanks[0].rank)"
+        ></span>
+
+        {{ consumedStats.merchantRanks[0].name }} è al
+        <span class="font-semibold text-black"
+          >#{{ consumedStats.merchantRanks[0].rank }}</span
+        >
+        nella classifica generale (
+        <span class="font-semibold text-black"
+          >{{ consumedStats.merchantRanks[0].amount }}
+        </span>
+        <span class="italic text-xs text-gray-500">WOM</span>).
+      </p>
+    </div>
+    <!-- Case gt 0 merchants -->
+    <div
+      class="card-stat max-w-fit"
+      *ngIf="
+        consumedStats.merchantRanks && consumedStats.merchantRanks.length > 1
+      "
+    >
+      <h3 class="font-semibold mb-4">
+        <i class="fa-solid fa-star" style="color: #ffd43b"></i> Classifica
+        Merchant
+      </h3>
+      <ul class="pl-5 space-y-2 max-h-[450px] overflow-y-auto list-none">
+        <li
+          class="text-base flex items-center gap-2"
+          *ngFor="let rank of consumedStats.merchantRanks"
+        >
+          <!-- Conditional rendering for trophy icon based on rank -->
+          <span *ngIf="rank.rank === 1">
+            1) <i class="fa-solid fa-trophy text-yellow-500"></i>
+          </span>
+          <span
+            *ngIf="rank.rank === 1"
+            class="text-lg font-semibold text-yellow-500"
+          >
+            {{ " " }}{{ rank.name }}:
+          </span>
+
+          <span *ngIf="rank.rank === 2">
+            2) <i class="fa-solid fa-trophy text-gray-400"></i>
+          </span>
+          <span
+            *ngIf="rank.rank === 2"
+            class="text-lg font-semibold text-gray-400"
+          >
+            {{ " " }}{{ rank.name }}:
+          </span>
+
+          <span *ngIf="rank.rank === 3">
+            3) <i class="fa-solid fa-trophy text-amber-600"></i>
+          </span>
+          <span
+            *ngIf="rank.rank === 3"
+            class="text-lg font-semibold text-amber-600"
+          >
+            {{ " " }}{{ rank.name }}:
+          </span>
+
+          <span *ngIf="rank.rank > 3">{{ rank.rank }}) </span>
+          <span *ngIf="rank.rank > 3" class="text-lg font-semibold">
+            {{ rank.name }}:
+          </span>
+
+          <strong class="text-gray-800">{{ rank.amount }}</strong>
+
+          <span class="italic text-xs text-gray-500">WOM</span>
+        </li>
+      </ul>
+    </div>
+    <!-- END Merchant Ranking -->
+    <!-- Offer section -->
+  </div>
+  <div *ngIf="nActiveOffers" class="bg-[#fdfbfb] rounded-lg h-fit mt-6">
+    <button
+      class="flex items-center gap-4 w-full p-4"
+      (click)="isOffersShown = !isOffersShown"
+    >
+      <h3>
+        Offerte (<span class="text-blue-400">attive {{ nActiveOffers }}</span
+        >)
+      </h3>
+      <i
+        class="fa-solid fa-chevron-down text-gray-500 transition-transform duration-300"
+        [ngClass]="{ 'rotate-180': isOffersShown }"
+      ></i>
+    </button>
+    <div *ngIf="isOffersShown" class="container mx-auto p-4" @fadeInOut>
+      <!-- Table Header -->
+      <div
+        class="grid grid-cols-5 bg-blue-500 text-white font-bold p-2 rounded-t-lg items-center text-center"
+      >
+        <div>Posizione</div>
+        <div>POS (merchant)</div>
+        <div>Titolo</div>
+        <div>N Transazioni</div>
+        <div>N WOM</div>
+      </div>
+      <div class="border border-gray-300 rounded-b-lg">
+        <!-- Table Body (Loop through data) -->
+        <div
+          *ngFor="let item of activeOffers; let i = index"
+          class="grid grid-cols-5 border-b p-2 items-center text-center"
+        >
+          <div>{{ i + 1 }}</div>
+          <div>{{ item.pos?.name }} ({{ item.merchant.name }})</div>
+          <div>{{ item.title }}</div>
+          <div>{{ item.transactionsNumber }}</div>
+          <div>{{ item.totalAmount }}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #loadedOrError>
+  <div *ngIf="errorMessage" class="bg-red-100 text-red-700 p-4 rounded-md mt-4">
+    <p>{{ errorMessage }}</p>
+  </div>
+  <div *ngIf="!errorMessage">
+    <app-skeleton-loader />
+  </div>
+</ng-template>

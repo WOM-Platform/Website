@@ -6,7 +6,8 @@ import {TranslateService} from "@ngx-translate/core";
 @Component({
     selector: 'app-billing-checkout',
     templateUrl: './checkout.component.html',
-    styleUrls: ['./checkout.component.css']
+    styleUrls: ['./checkout.component.css'],
+    standalone: false
 })
 export class BillingCheckoutComponent implements OnInit{
     products: StripePrice[] = [];

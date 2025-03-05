@@ -8,12 +8,11 @@ import { Aim } from "src/app/_models";
 import { AimsService } from "src/app/_services";
 
 @Component({
-  selector: "app-dialog-filter-aims",
-  standalone: true,
-  providers: [AimsService],
-  imports: [NgFor, MatIcon],
-  templateUrl: "./dialog-filter-aims.component.html",
-  styleUrls: ["./dialog-filter-aims.component.css"],
+    selector: "app-dialog-filter-aims",
+    providers: [AimsService],
+    imports: [NgFor, MatIcon],
+    templateUrl: "./dialog-filter-aims.component.html",
+    styleUrls: ["./dialog-filter-aims.component.css"]
 })
 export class DialogFilterAimsComponent implements OnInit {
   listAims: any[] = [];

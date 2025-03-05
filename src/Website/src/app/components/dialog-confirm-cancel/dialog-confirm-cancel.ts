@@ -11,6 +11,7 @@ export interface DialogData {
 @Component({
     selector: 'app-dialog-confirm-cancel',
     templateUrl: 'dialog-confirm-cancel.html',
+    standalone: false
 })
 export class DialogConfirmCancelComponent {
     title: string;

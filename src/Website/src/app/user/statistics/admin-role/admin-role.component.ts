@@ -1,56 +1,34 @@
-import { Component, OnDestroy, OnInit } from "@angular/core";
+import { ChangeDetectorRef, Component, OnDestroy, OnInit } from "@angular/core";
 import { CommonModule, DatePipe } from "@angular/common";
-import { PieChartModule } from "@swimlane/ngx-charts";
 import { SharedModule } from "../../../shared/shared.module";
-import { Aim, Merchant, Merchants, UserMe } from "../../../_models";
+import { Aim, Merchants, UserMe } from "../../../_models";
 import { Subscription } from "rxjs";
+import { UserService } from "../../../_services";
+
 import {
-  AuthService,
-  MerchantService,
-  StatsService,
-  UserService,
-} from "../../../_services";
-import { MatDatepickerInputEvent } from "@angular/material/datepicker";
-import html2canvas from "html2canvas";
-import { jsPDF } from "jspdf";
-import { AmountMapComponent } from "../../components/amount-map/amount-map.component";
-import { DatepickerComponent } from "../../../components/datepicker/datepicker.component";
-import { SearchComponent } from "../../components/search/search.component";
-import { DashboardAdminFilter } from "../../../_models/filter";
-import { SourceService } from "../../../_services/source.service";
-import { LazySearchComponent } from "../../components/lazy-search/lazy-search.component";
-import { Instrument } from "../../../_models/instrument";
-import { LocationParams } from "../../../_models/LocationParams";
-import { tap } from "rxjs/operators";
-import {
-  ChartDataSwimlane,
-  GenerationRedeemedStatsApiResponse,
-  TotalCreatedAmountByAim,
-  ChartDataSwimlaneSeries,
-  ConsumedStatsApiResponse,
-  MerchantRankDTO,
-  SourceRankDTO,
-} from "../../../_models/stats";
-import { LoadingService } from "../../../_services/loading.service";
-import { StatisticsFiltersComponent } from "../../components/statistics-filters/statistics-filters.component";
-import { MatDialog } from "@angular/material/dialog";
-import { DialogFilterAimsComponent } from "./dialog-filter-aims/dialog-filter-aims.component";
+  MerchantFilter,
+  DateFilter,
+  InstrumentFilter,
+  CombinedFilters,
+} from "../../../_models/filter";
 import { CsvDownloadComponent } from "../../components/csv-download/csv-download.component";
-import { MatIcon } from "@angular/material/icon";
+import { MatTooltip } from "@angular/material/tooltip";
+import { GeneratorStatisticsComponentComponent } from "../components/generator-statistics-component/generator-statistics-component.component";
+import { ConsumerStatisticsComponent } from "../components/consumer-statistics/consumer-statistics.component";
+import { StatisticsFiltersComponent } from "../components/statistics-filters/statistics-filters.component";
 
 @Component({
   selector: "app-admin-role",
-  standalone: true,
   imports: [
-    PieChartModule,
     SharedModule,
     CsvDownloadComponent,
-    SearchComponent,
     CommonModule,
-    LazySearchComponent,
     StatisticsFiltersComponent,
-    MatIcon,
+    MatTooltip,
+    GeneratorStatisticsComponentComponent,
+    ConsumerStatisticsComponent,
   ],
+  standalone: true,
   templateUrl: "./admin-role.component.html",
   styleUrl: "./admin-role.component.css",
 })
@@ -63,304 +41,81 @@ export class AdminRoleComponent implements OnInit, OnDestroy {
   filteredAimList: Aim[] = [];
   showFilterAims = false;
 
-  filters: DashboardAdminFilter = {
-    startDate: "",
-    endDate: "",
-    merchantId: "",
-    merchantName: "",
-    sourceId: "",
-    sourceName: "",
+  today = new Date();
+  oneMonthAgo: Date;
+
+  filters: CombinedFilters;
+  dateFilters: DateFilter = {
+    startDate: undefined,
+    endDate: undefined,
+  };
+
+  merchantFilters: MerchantFilter = {
+    merchantIds: [],
+    merchantNames: [],
+  };
+
+  sourceFilters: InstrumentFilter = {
+    sourceId: [],
+    sourceNames: [],
     aimListFilter: [],
   };
 
-  defaultNumberRank: number = 10;
-  displayLimit: number = this.defaultNumberRank;
-  displayLimitSources: number = this.defaultNumberRank;
-  isExpanded: boolean = false;
-  isExpandedSources: boolean = false;
-
-  locationParameters: LocationParams = {};
-
-  generatedDataFetched = [];
-  consumedDataFetched = [];
-
-  totalCreatedAmount: number;
-  totalRedeemedAmount: number;
-  totalConsumedAmount: number = 0;
-  totalConsumedOverTime: ChartDataSwimlane[] = [];
-  totalGeneratedOverTime: ChartDataSwimlaneSeries[] = [];
-  totalCreatedAmountByAim: TotalCreatedAmountByAim[];
-  rankMerchants: MerchantRankDTO[] = [];
-  rankSources: SourceRankDTO[] = [];
-  offerConsumedVouchers: any;
-  availableVouchers: number;
-
-  isConsumedDataReady = false;
-  isGeneratedDataReady = false;
+  tooltipActiveFilters = "Non ci sono filtri attivi";
 
   isShowedGenerationFilter: boolean = false;
   bboxArea;
-  chartCreatedAmountByAim: ChartDataSwimlane[] = [];
-
-  view: [number, number] = [500, 400];
-
-  colorscheme: any = {
-    domain: [
-      "#6898ff",
-      "#f7ea74",
-      "#34c38f",
-      "#f46a6a",
-      "#50a5f1",
-      "#f1b44c",
-      "#7460ee",
-      "#e83e8c",
-    ],
-  };
-
-  blueWomScheme: any = {
-    domain: ["#2569FF"],
-  };
-  blueAndYellowWom: any = {
-    domain: ["#2569FF", "#ffec26"],
-  };
+  chartCreatedAmountByAim: any;
+  totalCreatedAmountByAim: any;
+  totalCreatedAmount: string;
+  totalRedeemedAmount: string;
+  consumedStats: any;
 
   constructor(
-    private authService: AuthService,
-    public dialog: MatDialog,
-    private loadingService: LoadingService,
-    private merchantService: MerchantService,
-    private sourceService: SourceService,
-    private statsService: StatsService,
+    private cdr: ChangeDetectorRef,
     private userService: UserService
-  ) {}
+  ) {
+    this.oneMonthAgo = new Date();
+    this.oneMonthAgo.setMonth(this.today.getMonth() - 1);
+
+    this.dateFilters.startDate = this.oneMonthAgo;
+    this.dateFilters.endDate = this.today;
+
+    this.updateCombinedFilters();
+  }
 
   ngOnInit(): any {
     this.currentUser = this.userService.currentUserValue;
     this.currentUser.role;
-    this.loadData();
   }
 
   ngOnDestroy(): any {
     if (this.merchantSubscription) this.merchantSubscription.unsubscribe();
   }
 
-  loadData(): any {
-    // set id if the current user is not admin
-    if (this.currentUser.role !== "Admin") {
-      this.generationVoucherData(this.currentUser.sources[0]);
-      this.consumptionVoucherData(this.currentUser.merchants[0]);
-      this.generalData();
-    } else {
-      this.generationVoucherData();
-      this.consumptionVoucherData();
-      this.generalData();
-    }
-
-    /*
-                       this.merchantSubscription = this.authService.merchants().subscribe({
-                                next: (response) => {
-                                    this.merchantData = response;
-                                },
-                                error: (error) => {
-                                    console.log('Errore durante il download dei dati del merchant:', error);
-                                }
-                            }
-
-                       );
-                   */
-  }
-
-  // search for source user
-  searchSource(sourceName: string = this.filters.sourceName) {
-    // Call the service to fetch the data
-    this.sourceService.getAllInstruments({ search: sourceName }).subscribe({
-      next: (data) => {
-        this.generatedDataFetched = data.data;
-      },
-      error: (error) => {
-        console.error("Error fetching source data:", error);
-      },
-    });
-  }
-
-  // search for merchant user
-  searchMerchant(merchantName: string) {
-    this.merchantService
-      .getAllMerchants({ search: merchantName })
-      .subscribe((data) => {
-        this.consumedDataFetched = data.data;
-      });
-  }
-
-  onSourceNameInput(sourceName: string) {
-    this.filters.sourceName = sourceName; // Update filters
-    this.searchSource(); // Trigger search
-  }
-
-  generalData(source?: Instrument, merchant?: Merchant) {
-    if (source) {
-      this.filters.sourceName = source.name;
-      this.filters.sourceId = source.id;
-    }
-
-    if (merchant) {
-      this.filters.merchantName = merchant.name;
-      this.filters.merchantId = merchant.id;
-    }
-  }
-
-  generationVoucherData(source?: Instrument) {
-    if (source) {
-      this.filters.sourceName = source.name;
-      this.filters.sourceId = source.id;
-    }
-    this.statsService
-      .fetchVouchersGeneratedAndRedeemedStats(this.filters)
-      .subscribe((data: GenerationRedeemedStatsApiResponse) => {
-        this.totalCreatedAmount = data.totalGenerated;
-        this.totalRedeemedAmount = data.totalRedeemed;
-        this.totalCreatedAmountByAim = data.voucherByAim;
-        this.chartCreatedAmountByAim = this.totalCreatedAmountByAim.map(
-          (item) => ({
-            name: item.aimCode,
-            value: item.amount,
-          })
-        );
-        this.rankSources = data.sourceRank;
-
-        this.isGeneratedDataReady = true;
-
-        this.totalGeneratedOverTime =
-          data.totalGeneratedAndRedeemedOverTime.map((item) => ({
-            name: item.date,
-            series: [
-              {
-                name: "Voucher Generated",
-                value: item.totalGenerated ? Number(item.totalGenerated) : 0,
-              },
-              {
-                name: "Voucher Redeemed",
-                value: item.totalRedeemed ? Number(item.totalRedeemed) : 0,
-              },
-            ],
-          }));
-      });
-  }
-
-  consumptionVoucherData(merchant?: Merchant) {
-    if (merchant) {
-      this.filters.merchantName = merchant.name;
-      this.filters.merchantId = merchant.id;
-    }
-
-    this.statsService
-      .fetchVouchersConsumedStats(this.filters, this.locationParameters)
-      .subscribe((data: ConsumedStatsApiResponse) => {
-        // Consumed total amount of WOM
-        this.totalConsumedAmount = data.totalConsumed;
-
-        // Get rank of merchants
-        this.rankMerchants = data.merchantRanks;
-        // Get total consumed over time
-        this.totalConsumedOverTime = data.totalConsumedOverTime.map((data) => ({
-          name: data.date,
-          value: data.total,
-        }));
-        // All requests are done, now set isConsumedDataReady to true
-        this.isConsumedDataReady = true;
-      });
-
-    // Add additional observable if merchantId is present
-    if (this.filters.merchantId) {
-      // Get vouchers consumed by offer
-      this.statsService.getVouchersConsumedByOffer(this.filters).pipe(
-        tap((data) => {
-          this.offerConsumedVouchers = data;
-        })
-      );
-    }
-
-    // Fetch the available vouchers in parallel (not part of the forkJoin)
-    this.statsService
-      .getAmountOfAvailableVouchers(
-        this.locationParameters,
-        this.filters.merchantId
-      )
-      .subscribe((data: number) => {
-        this.availableVouchers = data;
-      });
-  }
-
-  addEvent(type: string, event: MatDatepickerInputEvent<Date>) {
-    console.log(`${type}: ${event.value}`);
-  }
-
-  // to open and close rank of merchants
-  toggleRankMerchants() {
-    this.isExpanded = !this.isExpanded;
-    this.displayLimit = this.isExpanded ? this.rankMerchants.length : 10;
-  }
-
-  // to open and close rank of sources
-  toggleRankSources() {
-    this.isExpandedSources = !this.isExpandedSources;
-    this.displayLimitSources = this.isExpandedSources
-      ? this.rankSources.length
-      : 10;
-  }
-
-  // On reseize charts
-  onResize(event) {
-    this.view = [event.target.innerWidth / 3, 400];
-  }
-
-  // on selection of a Merchant or Instrument
-  onElementSelection(
-    elementKey: string,
-    elementSelected: Merchant | Instrument
-  ) {
-    if (elementKey === "merchant" && this.isMerchant(elementSelected)) {
-      this.consumedDataFetched = [];
-      this.isConsumedDataReady = false;
-      this.consumptionVoucherData(elementSelected);
-    } else if (elementKey === "source" && this.isInstrument(elementSelected)) {
-      this.generatedDataFetched = [];
-      this.isGeneratedDataReady = false;
-      this.generationVoucherData(elementSelected);
-    }
-  }
-
-  isMerchant(element: Merchant | Instrument): element is Merchant {
-    // Check for a property that only Merchant has
-    return (element as Merchant).name !== undefined;
-  }
-
-  isInstrument(element: Merchant | Instrument): element is Instrument {
-    // Check for a property that only Instrument has
-    return (element as Instrument).name !== undefined;
-  }
-
-  clearElementFilter(elementToClear: string) {
-    if (elementToClear === "merchant") {
-      this.filters.merchantName = "";
-      this.filters.merchantId = "";
-      this.isConsumedDataReady = false;
-
-      this.consumptionVoucherData();
-    }
-    if (elementToClear === "source") {
-      this.filters.sourceName = "";
-      this.filters.sourceId = "";
-      this.isGeneratedDataReady = false;
-
-      this.generationVoucherData();
-    }
+  updateCombinedFilters() {
+    this.filters = {
+      dateFilters: this.dateFilters,
+      merchantFilters: this.merchantFilters,
+      sourceFilters: this.sourceFilters,
+    };
   }
 
   onDatesSelected(date) {
-    this.filters.startDate = date.startDate;
-    this.filters.endDate = date.endDate;
-    this.loadData();
+    this.dateFilters = { ...date };
+    this.updateCombinedFilters();
+    this.cdr.detectChanges();
+  }
+
+  onSourceSelected(source: InstrumentFilter) {
+    this.sourceFilters = { ...source };
+    this.updateCombinedFilters();
+    this.cdr.detectChanges();
+  }
+  onMerchantSelected(merchant: MerchantFilter) {
+    this.merchantFilters = { ...merchant };
+    this.updateCombinedFilters();
+    this.cdr.detectChanges();
   }
 
   convertToCSV(): string {
@@ -368,7 +123,7 @@ export class AdminRoleComponent implements OnInit, OnDestroy {
 
     csvRows.push("Total Created Amount," + this.totalCreatedAmount);
     csvRows.push("Total Redeemed Amount," + this.totalRedeemedAmount);
-    csvRows.push("Total Consumed Amount," + this.totalConsumedAmount);
+    csvRows.push("Total Consumed Amount," + this.consumedStats.totalConsumed);
     csvRows.push(""); // Blank line for separation
 
     // totalCreatedAmountByAim
@@ -389,44 +144,57 @@ export class AdminRoleComponent implements OnInit, OnDestroy {
     // Join all rows with a newline
     return csvRows.join("\n");
   }
-
-  onSelect(event): void {
-    console.log(event);
+  get activeFiltersSummary(): string {
+    return this.hasActiveFilters()
+      ? "I filtri attivi sono: " + this.getActiveFiltersSummary()
+      : "Non ci sono filtri attivi";
   }
 
-  openDialogAimsSelected() {
-    const dialogRef = this.dialog.open(DialogFilterAimsComponent, {
-      width: "900px",
-      maxHeight: "90vh",
-      panelClass: "custom-dialog-backdrop",
-      data: {
-        filterAim: this.filters.aimListFilter,
-      },
-    });
+  getActiveFiltersSummary(): string {
+    const activeFilters: string[] = [];
 
-    dialogRef.afterClosed().subscribe((selectedAims: string[] | null) => {
-      if (selectedAims) {
-        this.isGeneratedDataReady = false;
-        this.filters.aimListFilter = selectedAims;
-        this.generationVoucherData();
-      }
-    });
+    if (this.dateFilters.startDate) {
+      const formattedStartDate = new DatePipe("it-IT").transform(
+        this.dateFilters.startDate,
+        "dd/MM/yyyy"
+      );
+      activeFilters.push(`Data Inizio ${formattedStartDate}`);
+    }
+    if (this.dateFilters.endDate) {
+      const formattedEndDate = new DatePipe("it-IT").transform(
+        this.dateFilters.endDate,
+        "dd/MM/yyyy"
+      );
+      activeFilters.push(`Data Fine ${formattedEndDate}`);
+    }
+    if (this.merchantFilters.merchantNames.length > 0) {
+      activeFilters.push(
+        `Merchants: ${this.merchantFilters.merchantNames.join(", ")}`
+      );
+    }
+    if (this.sourceFilters.sourceNames.length > 0) {
+      activeFilters.push(
+        `Sources: ${this.sourceFilters.sourceNames.join(", ")}`
+      );
+    }
+    if (this.sourceFilters.aimListFilter.length > 0) {
+      activeFilters.push(
+        `Aims: ${this.sourceFilters.aimListFilter.join(", ")}`
+      );
+    }
+
+    return activeFilters.join("; ");
   }
 
-  async updateAimsArray(enabledAims: any[]) {
-    console.log("Aims list ", enabledAims);
-    // const aimsArray = this.newSource.get('aims').get('enabled') as FormArray;
-    // while (aimsArray.length) {
-    //     aimsArray.removeAt(0);
-    // }
-    // enabledAims.forEach(aim => aimsArray.push(this.fb.control(aim)));
-
-    // try {
-    //     const aimsView = await this.fetchAimsForInstrument({enabled: enabledAims, enableAll: false}).toPromise();
-    //     this.aimList = aimsView;
-    //     this.cd.detectChanges();
-    // } catch (err) {
-    //     console.error(err);
-    // }
+  hasActiveFilters(): boolean {
+    return (
+      !!this.dateFilters.startDate ||
+      !!this.dateFilters.endDate ||
+      this.merchantFilters.merchantIds.length > 0 ||
+      this.merchantFilters.merchantNames.length > 0 ||
+      this.sourceFilters.sourceId.length > 0 ||
+      this.sourceFilters.sourceNames.length > 0 ||
+      this.sourceFilters.aimListFilter.length > 0
+    );
   }
 }

@@ -13,6 +13,7 @@ import { map, takeWhile } from "rxjs/operators";
   template: `<p class="mb-0">
     <strong>{{ formattedDisplayNumber }}</strong>
   </p>`,
+  standalone: true,
 })
 export class AnimatedNumberComponent implements OnChanges, OnDestroy {
   @Input() finalNumber: number;

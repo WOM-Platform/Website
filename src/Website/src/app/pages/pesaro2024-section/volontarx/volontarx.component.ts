@@ -6,7 +6,8 @@ import {DomSanitizer} from "@angular/platform-browser";
 @Component({
     selector: 'app-volontarx',
     templateUrl: './volontarx.component.html',
-    styleUrl: './volontarx.component.css'
+    styleUrl: './volontarx.component.css',
+    standalone: false
 })
 export class VolontarxComponent {
     faqs = [];
