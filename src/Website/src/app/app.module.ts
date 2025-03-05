@@ -43,7 +43,7 @@ import { PrivacyComponent } from "./pages/privacy/privacy.component";
 import { PrivacyInstrumentComponent } from "./pages/privacy/instrument/instrument.component";
 import { PrivacyPocketComponent } from "./pages/privacy/pocket/pocket.component";
 import { PrivacyPosComponent } from "./pages/privacy/pos/pos.component";
-import { PrivacyStepcounterComponent } from "./pages/privacy/stepcounter/stepcounter.component";
+import { PrivacyWomFitComponent } from "./pages/privacy/womFit/womFit.component";
 import { PrivacyWebsiteComponent } from "./pages/privacy/website/website.component";
 import { PrivacyOverviewComponent } from "./pages/privacy/overview/overview.component";
 import { SignInComponent } from "./authentication/signin/signin.component";
@@ -60,7 +60,7 @@ import { ApplicationsCodymazeComponent } from "./pages/volunteers/applications/c
 import { ApplicationsComponent } from "./pages/volunteers/applications/applications.component";
 import { ApplicationsLibrariesComponent } from "./pages/volunteers/applications/libraries/libraries.component";
 import { ApplicationsOverviewComponent } from "./pages/volunteers/applications/overview/overview.component";
-import { ApplicationsStepcounterComponent } from "./pages/volunteers/applications/stepcounter/stepcounter.component";
+import { ApplicationsWomFitComponent } from "./pages/volunteers/applications/stepcounter/stepcounter.component";
 import { ApplicationsUniversitiesComponent } from "./pages/volunteers/applications/universities/universities.component";
 import { AppOverlayModule } from "./_overlay/overlay.module";
 import { BillingCancelComponent } from "./billing/cancel/cancel.component";
@@ -104,6 +104,7 @@ import { SearchSourceComponent } from "./user/components/user-access-list/search
 import { AlbergatoriComponent } from "./pages/pesaro2024-section/albergatori/albergatori.component";
 import localeIt from "@angular/common/locales/it";
 import { StoreLogosComponent } from "./components/store-logos/store-logos.component";
+import { AnimatedNumberComponent } from "./components/animated-number/animated-number.component";
 
 // AoT requires an exported function for factories
 export const createTranslateLoader = (http: HttpClient) =>
@@ -155,7 +156,7 @@ const httpInterceptorProviders = environment.mock
     ApplicationsComponent,
     ApplicationsLibrariesComponent,
     ApplicationsOverviewComponent,
-    ApplicationsStepcounterComponent,
+    ApplicationsWomFitComponent,
     ApplicationsUniversitiesComponent,
     BillingCancelComponent,
     BillingCheckoutComponent,
@@ -182,7 +183,7 @@ const httpInterceptorProviders = environment.mock
     PrivacyOverviewComponent,
     PrivacyPocketComponent,
     PrivacyPosComponent,
-    PrivacyStepcounterComponent,
+    PrivacyWomFitComponent,
     PrivacyWebsiteComponent,
     ProgressSpinnerComponent,
     RequestNewPasswordComponent,
@@ -202,6 +203,7 @@ const httpInterceptorProviders = environment.mock
   bootstrap: [AppComponent],
   imports: [
     appRoutingModule,
+    AnimatedNumberComponent,
     AuthModule,
     RouterModule.forRoot([
       { path: "", component: HomeComponent, pathMatch: "full" },

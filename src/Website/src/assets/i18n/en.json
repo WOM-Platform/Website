@@ -86,7 +86,7 @@
     "APPLICATIONS": {
       "APPLICATIONS": "Applications",
       "OVERVIEW": "Overview",
-      "STEPCOUNTER": "Stepcounter",
+      "WOMFIT": "WOM Fit",
       "UNIVERSITIES": "Universities",
       "AWORLD": "AWorld",
       "CODYMAZE": "CodyMaze",
@@ -100,7 +100,7 @@
       "POS": "Point of Service",
       "POCKET": "Pocket",
       "INSTRUMENT": "Instrument",
-      "STEPCOUNTER": "Stepcounter"
+      "WOMFIT": "WOM Fit"
     },
     "BILLING": {
       "TITLE": "Buy",
@@ -637,7 +637,7 @@
       "POS": "WOM POS",
       "POCKET": "WOM Pocket",
       "INSTRUMENT": "WOM Instrument",
-      "STEPCOUNTER": "Step counter app"
+      "WOMFIT": "WOM Fit app"
     },
     "OVERVIEW": {
       "TITLE": "PRIVACY POLICIES",
@@ -762,8 +762,8 @@
         "<p>This document may be updated in the future. Refer to the last update date at the bottom of the document.</p>"
       ]
     },
-    "STEPCOUNTER": {
-      "TITLE": "‘WOM Stepcounter’ privacy policy",
+    "WOMFIT": {
+      "TITLE": "‘WOM Fit privacy policy",
       "CONTENT": [
         "<p>This privacy policy is conform to the General Data Protection Regulation&nbsp;(“GDPR”) 2016/679 and national data protection laws in Italy. It contains all information about the collection and treatment of data by the <strong>“WOM&nbsp;Stepcounter”</strong> application (from now “the app”).</p>",
         "<p>The app enables the conversion of effort towards personal health and fitness into anonymous vouchers, through the “WOM Platform”.</p>",
@@ -821,7 +821,7 @@
     "SIDENAV": {
       "TITLE": "Applications",
       "OVERVIEW": "Overview",
-      "STEPCOUNTER": "Stepcounter",
+      "WOMFIT": "WOM Fit",
       "AWORLD": "AWorld",
       "UNIVERSITIES": "Universities",
       "LIBRARIES": "Libraries"
@@ -831,8 +831,8 @@
       "MAIN_CONTENT": "WOM vouchers can be earned by voluntarily doing a socially useful action. For a WOM to be generated, <b>the activity has to be formally acknowledged by the WOM platform.</b> <br>",
       "CONTENT_A": "Volunteers can obtain WOMs through the use of <b>specific applications</b> that recognize the social value of their actions. <br> <b>Check out the list of the applications in the side menu!</b>"
     },
-    "STEPCOUNTER": {
-      "TITLE": "WOM Stepcounter",
+    "WOMFIT": {
+      "TITLE": "WOM Fit",
       "MAIN_CONTENT": "Keep track of the steps you take with WOM StepCounter, an app that rewards you for the things you do in your daily life!<br /><br />Thanks to WOM StepCounter you will be able to convert your steps into digital vouchers, that reward social effort. You will receive vouchers if you keep track of more than 3.000 steps per day."
     },
     "LIBRARIES": {

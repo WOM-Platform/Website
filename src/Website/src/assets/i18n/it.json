@@ -86,7 +86,7 @@
     "APPLICATIONS": {
       "APPLICATIONS": "Applicazioni",
       "OVERVIEW": "Panoramica",
-      "STEPCOUNTER": "Contapassi",
+      "WOMFIT": "WOM Fit",
       "UNIVERSITIES": "Università",
       "AWORLD": "AWorld",
       "CODYMAZE": "CodyMaze",
@@ -100,7 +100,7 @@
       "POS": "POS",
       "POCKET": "Pocket",
       "INSTRUMENT": "Instrument",
-      "STEPCOUNTER": "Contapassi"
+      "WOMFIT": "WOM Fit"
     },
     "BILLING": {
       "TITLE": "Acquista",
@@ -641,7 +641,7 @@
       "POS": "WOM POS",
       "POCKET": "WOM Pocket",
       "INSTRUMENT": "WOM Instrument",
-      "STEPCOUNTER": "App Contapassi"
+      "WOMFIT": "App WOM Fit"
     },
     "OVERVIEW": {
       "TITLE": "INFORMATIVE SULLA PRIVACY",
@@ -797,8 +797,8 @@
         "<p>La presente informativa privacy potrà essere aggiornata nel tempo, pertanto Digit s.r.l. indicherà la data dell’ultimo aggiornamento in calce all’informativa stessa.</p>"
       ]
     },
-    "STEPCOUNTER": {
-      "TITLE": "Informativa sulla privacy ‘WOM Contapassi’",
+    "WOMFIT": {
+      "TITLE": "Informativa sulla privacy ‘WOM Fit’",
       "CONTENT": [
         "<p>La presente informativa privacy è resa in conformità al Regolamento (UE) 2016/679 (\"GDPR\") e alla normativa vigente in materia di protezione dei dati personali e contiene tutte le informazioni sul trattamento e sulla gestione dei dati personali che vengono raccolti quando si installa l’applicazione <strong>WOM Contapassi</strong> (di seguito \"applicazione\") sul proprio dispositivo mobile.</p>",
         "<p>L’app WOM Contapassi permette di convertire l&#8217;impegno per la propria salute fisica in voucher anonimi, tramite la piattaforma WOM.</p>",
@@ -856,7 +856,7 @@
     "SIDENAV": {
       "TITLE": "Applicazioni",
       "OVERVIEW": "Panoramica",
-      "STEPCOUNTER": "Contapassi",
+      "WOMFIT": "WOM Fit",
       "AWORLD": "AWorld",
       "UNIVERSITIES": "Università",
       "BALANCE": "Balance",
@@ -868,8 +868,8 @@
       "MAIN_CONTENT": "I voucher WOM possono essere ottenuti svolgendo volontariamente un’azione socialmente preziosa. Per la generazione del WOM, <b>l’attività svolta deve essere ufficialmente riconosciuta dalla piattaforma WOM.</b>",
       "CONTENT_A": "I Volontari possono ottenere WOM anche attraverso l’utilizzo di <b>specifiche applicazioni</b> che riconoscono il valore sociale delle azioni che svolgono. <br /><b>Scopri quali dando un’occhiata al menu laterale!</b>"
     },
-    "STEPCOUNTER": {
-      "TITLE": "WOM Contapassi",
+    "WOMFIT": {
+      "TITLE": "WOM Fit",
       "MAIN_CONTENT": "Tieni il conto dei tuoi passi con WOM Step Counter, la prima app che premia ciò che fai abitualmente!<br />Grazie a WOM Step Counter poi trasformare i tuoi passi in WOM, i voucher digitali che premiano l’impegno sociale. Inizierai a collezionare WOM dopo aver superato i 3000&nbsp;passi."
     },
     "LIBRARIES": {
