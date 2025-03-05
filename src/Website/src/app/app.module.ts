@@ -60,7 +60,6 @@ import { ApplicationsCodymazeComponent } from "./pages/volunteers/applications/c
 import { ApplicationsComponent } from "./pages/volunteers/applications/applications.component";
 import { ApplicationsLibrariesComponent } from "./pages/volunteers/applications/libraries/libraries.component";
 import { ApplicationsOverviewComponent } from "./pages/volunteers/applications/overview/overview.component";
-import { ApplicationsWomFitComponent } from "./pages/volunteers/applications/stepcounter/stepcounter.component";
 import { ApplicationsUniversitiesComponent } from "./pages/volunteers/applications/universities/universities.component";
 import { AppOverlayModule } from "./_overlay/overlay.module";
 import { BillingCancelComponent } from "./billing/cancel/cancel.component";
@@ -105,6 +104,7 @@ import { AlbergatoriComponent } from "./pages/pesaro2024-section/albergatori/alb
 import localeIt from "@angular/common/locales/it";
 import { StoreLogosComponent } from "./components/store-logos/store-logos.component";
 import { AnimatedNumberComponent } from "./components/animated-number/animated-number.component";
+import {ApplicationsWomFitComponent} from "./pages/volunteers/applications/womfit/womfit.component";
 
 // AoT requires an exported function for factories
 export const createTranslateLoader = (http: HttpClient) =>

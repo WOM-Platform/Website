@@ -7,7 +7,7 @@ import { ApplicationsCodymazeComponent } from "./pages/volunteers/applications/c
 import { ApplicationsComponent } from "./pages/volunteers/applications/applications.component";
 import { ApplicationsLibrariesComponent } from "./pages/volunteers/applications/libraries/libraries.component";
 import { ApplicationsOverviewComponent } from "./pages/volunteers/applications/overview/overview.component";
-import { ApplicationsWomFitComponent } from "./pages/volunteers/applications/stepcounter/stepcounter.component";
+import { ApplicationsWomFitComponent } from "./pages/volunteers/applications/womfit/womfit.component";
 import { ApplicationsUniversitiesComponent } from "./pages/volunteers/applications/universities/universities.component";
 import { ContactsComponent } from "./pages/contacts/contacts.component";
 import { HomeComponent } from "./pages/home";
