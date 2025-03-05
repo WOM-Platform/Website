@@ -4,7 +4,7 @@
       [dateFilters]="dateFilters"
       (onDateFilter)="onDatesSelected($event)"
     />
-    <div class="flex items-center gap-2">
+    <div *ngIf="currentUser.role === 'Admin'" class="flex items-center gap-2">
       <button [matTooltip]="activeFiltersSummary" matTooltipShowDelay="200">
         <svg
           xmlns="http://www.w3.org/2000/svg"

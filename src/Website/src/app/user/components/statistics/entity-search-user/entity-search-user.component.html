@@ -1,0 +1,32 @@
+<div class="flex justify-between items-center my-3">
+  <h2 class="text-xl font-semibold">
+    WOM {{ entityType === "merchant" ? "Consumati" : " Generati e Riscossi" }}
+  </h2>
+
+  <div class="w-fit max-w-sm" *ngIf="entityType === 'merchant'">
+    <label for="merchant" class="block text-sm font-medium text-gray-700">
+      Seleziona Merchant:
+    </label>
+    <div class="relative mt-1">
+      <select
+        id="merchant"
+        class="block w-full appearance-none rounded-md border border-gray-300 bg-white py-2 px-3 pr-10 text-base focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 sm:text-sm"
+        (change)="onEntitySelect($event.target.value)"
+        [value]="selectedEntityId"
+      >
+        <option *ngFor="let merchant of entities" [value]="merchant.id">
+          {{ merchant.name }}
+        </option>
+      </select>
+
+      <div
+        class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none"
+      >
+        <i class="fa-solid fa-chevron-down text-gray-500"></i>
+      </div>
+    </div>
+  </div>
+  <div class="w-fit max-w-sm" *ngIf="entityType === 'source'">
+    <p>Source user</p>
+  </div>
+</div>

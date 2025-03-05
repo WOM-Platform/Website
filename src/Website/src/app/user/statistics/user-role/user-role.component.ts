@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { Merchant } from "../../../_models";
 import { StorageService } from "../../../_services/storage.service";
-import { MerchantService, StatsService, UserService } from "../../../_services";
+import { StatsService, UserService } from "../../../_services";
 import { NgFor, NgIf } from "@angular/common";
 import { Instrument } from "../../../_models/instrument";
 
@@ -47,7 +47,11 @@ export class UserRoleComponent implements OnInit {
   isOwnerSources: boolean = false;
 
   locationParameters;
-  filters: DateFilter = {};
+
+  dateFilters: DateFilter = {
+    startDate: undefined,
+    endDate: undefined,
+  };
   merchantFilters: MerchantFilter = {
     merchantIds: [],
     merchantNames: [],
@@ -58,6 +62,7 @@ export class UserRoleComponent implements OnInit {
     sourceNames: [],
     aimListFilter: [],
   };
+
   isConsumedDataReady: boolean = false;
   isGeneratedDataReady: boolean = false;
 
@@ -75,7 +80,6 @@ export class UserRoleComponent implements OnInit {
   chartConsumedAmountByAim: ChartDataSwimlane[] = [];
 
   constructor(
-    private merchantService: MerchantService,
     private statsService: StatsService,
     private storageService: StorageService,
     private userService: UserService
@@ -116,8 +120,8 @@ export class UserRoleComponent implements OnInit {
   }
 
   onDatesSelected(date) {
-    this.filters.startDate = date.startDate;
-    this.filters.endDate = date.endDate;
+    this.dateFilters.startDate = date.startDate;
+    this.dateFilters.endDate = date.endDate;
     this.loadData();
   }
 
@@ -132,7 +136,7 @@ export class UserRoleComponent implements OnInit {
     }
 
     this.statsService
-      .fetchVouchersConsumedStats(this.filters, this.locationParameters)
+      .fetchVouchersConsumedStats(this.dateFilters, this.locationParameters)
       .subscribe((data: ConsumedStatsApiResponse) => {
         // Consumed total amount of WOM
         this.totalConsumedAmount = data.consumedInPeriod;
@@ -153,7 +157,7 @@ export class UserRoleComponent implements OnInit {
     if (this.merchantFilters.merchantIds) {
       // Get vouchers consumed by offer
       this.statsService
-        .getVouchersConsumedByOffer(this.filters, this.merchantFilters)
+        .getVouchersConsumedByOffer(this.dateFilters, this.merchantFilters)
         .pipe(
           tap((data) => {
             this.offerConsumedVouchers = data;
@@ -182,7 +186,10 @@ export class UserRoleComponent implements OnInit {
       }
     }
     this.statsService
-      .fetchVouchersGeneratedAndRedeemedStats(this.filters, this.sourceFilters)
+      .fetchVouchersGeneratedAndRedeemedStats(
+        this.dateFilters,
+        this.sourceFilters
+      )
       .subscribe((data: GenerationRedeemedStatsApiResponse) => {
         this.totalCreatedAmount = data.generatedInPeriod;
         this.totalRedeemedAmount = data.redeemedInPeriod;

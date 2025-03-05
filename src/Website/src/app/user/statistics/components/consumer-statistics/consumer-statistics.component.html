@@ -1,11 +1,23 @@
-<app-entity-search
-  [currentUser]="currentUser"
-  [entityType]="'merchant'"
-  (voucherData)="consumptionVoucherData($event)"
-  (clearElementFilter)="clearElementFilter($event)"
-></app-entity-search>
+<div *ngIf="currentUser.role === 'Admin'; else enitySearchUser">
+  <app-entity-search
+    [currentUser]="currentUser"
+    [entityType]="'merchant'"
+    (voucherData)="consumptionVoucherData($event)"
+    (clearElementFilter)="clearElementFilter($event)"
+  ></app-entity-search>
+</div>
+<ng-template #enitySearchUser>
+  <app-entity-search-user
+    [entities]="currentUser.merchants"
+    [entityType]="'merchant'"
+    [selectedEntityId]="userMerchantId"
+    (voucherData)="userConsumptionVoucherData($event)"
+    (clearElementFilter)="clearElementFilter($event)"
+  />
+</ng-template>
 <!-- WOM Consumati Section -->
 <div *ngIf="isConsumedDataReady && !errorMessage; else loadedOrError">
+  <!-- WOM Totals Section -->
   <div
     class="flex flex-wrap justify-center gap-10 card-stat max-w-fit min-w-[530px]"
   >
@@ -99,8 +111,8 @@
     </ng-template>
   </div>
 
-  <!-- Bar Chart for Consumption over Time -->
   <div class="flex flex-col lg:flex-row gap-2 mt-2">
+    <!-- Bar Chart for Consumption over Time -->
     <div>
       <div
         class="card-stat max-w-[480px]"
@@ -125,10 +137,35 @@
       </div>
     </div>
     <!-- BEGIN Merchant Ranking -->
+    <!-- Case one merchants -->
+    <div
+      *ngIf="
+        consumedStats.merchantRanks && consumedStats.merchantRanks.length === 1
+      "
+      class="stats-bg"
+    >
+      <h3 class="text-lg font-bold">Posizione Merchant</h3>
+      <p class="text-xl">
+        <span
+          [innerHTML]="getTrophy(consumedStats.merchantRanks[0].rank)"
+        ></span>
+
+        {{ consumedStats.merchantRanks[0].name }} è al
+        <span class="font-semibold text-black"
+          >#{{ consumedStats.merchantRanks[0].rank }}</span
+        >
+        nella classifica generale (
+        <span class="font-semibold text-black"
+          >{{ consumedStats.merchantRanks[0].amount }}
+        </span>
+        <span class="italic text-xs text-gray-500">WOM</span>).
+      </p>
+    </div>
+    <!-- Case gt 0 merchants -->
     <div
       class="card-stat max-w-fit"
       *ngIf="
-        consumedStats.merchantRanks && consumedStats.merchantRanks.length > 0
+        consumedStats.merchantRanks && consumedStats.merchantRanks.length > 1
       "
     >
       <h3 class="font-semibold mb-4">
@@ -182,8 +219,48 @@
         </li>
       </ul>
     </div>
-
     <!-- END Merchant Ranking -->
+    <!-- Offer section -->
+  </div>
+  <div *ngIf="nActiveOffers" class="bg-[#fdfbfb] rounded-lg h-fit mt-6">
+    <button
+      class="flex items-center gap-4 w-full p-4"
+      (click)="isOffersShown = !isOffersShown"
+    >
+      <h3>
+        Offerte (<span class="text-blue-400">attive {{ nActiveOffers }}</span
+        >)
+      </h3>
+      <i
+        class="fa-solid fa-chevron-down text-gray-500 transition-transform duration-300"
+        [ngClass]="{ 'rotate-180': isOffersShown }"
+      ></i>
+    </button>
+    <div *ngIf="isOffersShown" class="container mx-auto p-4" @fadeInOut>
+      <!-- Table Header -->
+      <div
+        class="grid grid-cols-5 bg-blue-500 text-white font-bold p-2 rounded-t-lg items-center text-center"
+      >
+        <div>Posizione</div>
+        <div>POS (merchant)</div>
+        <div>Titolo</div>
+        <div>N Transazioni</div>
+        <div>N WOM</div>
+      </div>
+      <div class="border border-gray-300 rounded-b-lg">
+        <!-- Table Body (Loop through data) -->
+        <div
+          *ngFor="let item of activeOffers; let i = index"
+          class="grid grid-cols-5 border-b p-2 items-center text-center"
+        >
+          <div>{{ i + 1 }}</div>
+          <div>{{ item.pos?.name }} ({{ item.merchant.name }})</div>
+          <div>{{ item.title }}</div>
+          <div>{{ item.transactionsNumber }}</div>
+          <div>{{ item.totalAmount }}</div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 

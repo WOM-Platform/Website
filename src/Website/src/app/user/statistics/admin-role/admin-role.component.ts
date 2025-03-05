@@ -1,11 +1,9 @@
 import { ChangeDetectorRef, Component, OnDestroy, OnInit } from "@angular/core";
 import { CommonModule, DatePipe } from "@angular/common";
-import { PieChartModule } from "@swimlane/ngx-charts";
 import { SharedModule } from "../../../shared/shared.module";
 import { Aim, Merchants, UserMe } from "../../../_models";
 import { Subscription } from "rxjs";
-import { MerchantService, StatsService, UserService } from "../../../_services";
-import { MatDatepickerInputEvent } from "@angular/material/datepicker";
+import { UserService } from "../../../_services";
 
 import {
   MerchantFilter,
@@ -22,7 +20,6 @@ import { StatisticsFiltersComponent } from "../components/statistics-filters/sta
 @Component({
   selector: "app-admin-role",
   imports: [
-    PieChartModule,
     SharedModule,
     CsvDownloadComponent,
     CommonModule,
@@ -119,10 +116,6 @@ export class AdminRoleComponent implements OnInit, OnDestroy {
     this.merchantFilters = { ...merchant };
     this.updateCombinedFilters();
     this.cdr.detectChanges();
-  }
-
-  addEvent(type: string, event: MatDatepickerInputEvent<Date>) {
-    console.log(`${type}: ${event.value}`);
   }
 
   convertToCSV(): string {

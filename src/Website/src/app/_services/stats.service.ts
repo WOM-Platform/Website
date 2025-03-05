@@ -110,8 +110,16 @@ export class StatsService {
     return this.http.post(`${this.localUrlV1}voucher/available`, requestData);
   }
 
-  getActiveOffers(): Observable<any> {
-    return this.http.get(`${this.localUrlV1}offers/active`);
+  getActiveOffers(
+    dateFilters: DateFilter,
+    merchantFilters: MerchantFilter
+  ): Observable<any> {
+    const requestData = {
+      startDate: dateFilters.startDate || null,
+      endDate: dateFilters.endDate || null,
+      merchantIds: merchantFilters?.merchantIds || null,
+    };
+    return this.http.post(`${this.localUrlV1}offers/rank`, requestData);
   }
 
   getVouchersConsumedByOffer(

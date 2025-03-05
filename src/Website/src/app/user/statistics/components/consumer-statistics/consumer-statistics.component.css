@@ -37,3 +37,7 @@ ngx-charts-pie-chart .legend-item:not([data-value="0"]),
 ngx-charts-bar-vertical .legend-item:not[data-value="0"] {
   display: block; /* Show items with non-zero values */
 }
+
+.stats-bg {
+  @apply p-4 bg-[#fdfbfb] rounded-lg h-fit;
+}

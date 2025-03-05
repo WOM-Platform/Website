@@ -109,8 +109,31 @@
     <div class="flex justify-start mt-2">
       <!-- BEGIN Sources Ranking -->
       <div
+        *ngIf="rankSources && rankSources.length === 1"
+        class="p-4 bg-[#fdfbfb] rounded-lg h-fit"
+      >
+        <h3 class="text-lg font-bold">Posizione Instrument</h3>
+        <p class="text-xl">
+          <span [innerHTML]="getTrophy(rankSources[0].rank)"></span>
+
+          {{ rankSources[0].name }} è al
+          <span class="font-semibold text-black"
+            >#{{ rankSources[0].rank }}</span
+          >
+          nella classifica generale (
+          <span class="font-semibold text-black"
+            >{{ rankSources[0].totalGeneratedAmount }}
+          </span>
+          <span class="italic text-xs text-gray-500">WOM generati</span>) e (
+          <span class="font-semibold text-black"
+            >{{ rankSources[0].totalRedeemedAmount }}
+          </span>
+          <span class="italic text-xs text-gray-500">WOM riscossi</span>) .
+        </p>
+      </div>
+      <div
         class="card-stat max-w-fit"
-        *ngIf="rankSources && rankSources.length > 0"
+        *ngIf="rankSources && rankSources.length > 1"
       >
         <h3 class="font-semibold mb-4">
           <i class="fa-solid fa-star" style="color: #ffd43b"></i> Classifica

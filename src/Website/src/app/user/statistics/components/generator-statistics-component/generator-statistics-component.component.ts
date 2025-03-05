@@ -30,7 +30,7 @@ import { SharedModule } from "../../../../shared/shared.module";
 import { AnimatedNumberComponent } from "src/app/components/animated-number/animated-number.component";
 import { SnackBarService } from "src/app/_services/snack-bar.service";
 import { FormControl } from "@angular/forms";
-import { EntitySearchComponent } from "../../../components/statistics/merchant-search/entity-search.component";
+import { EntitySearchComponent } from "../../../components/statistics/entity-search/entity-search.component";
 import { SkeletonLoaderComponent } from "../../../components/skeleton-loader/skeleton-loader.component";
 
 @Component({
@@ -250,5 +250,18 @@ export class GeneratorStatisticsComponentComponent
 
   private emitFilters() {
     this.filtersEmit.emit(this.filters);
+  }
+
+  getTrophy(rank: number): string {
+    switch (rank) {
+      case 1:
+        return '<i class="fa-solid fa-trophy text-yellow-500"></i>';
+      case 2:
+        return '<i class="fa-solid fa-trophy text-gray-400"></i>';
+      case 3:
+        return '<i class="fa-solid fa-trophy text-amber-600"></i>';
+      default:
+        return "";
+    }
   }
 }

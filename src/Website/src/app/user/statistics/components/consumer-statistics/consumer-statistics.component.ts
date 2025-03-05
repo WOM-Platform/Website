@@ -1,4 +1,4 @@
-import { CommonModule } from "@angular/common";
+import { CommonModule, NgClass } from "@angular/common";
 import {
   ChangeDetectorRef,
   Component,
@@ -15,16 +15,17 @@ import { tap } from "rxjs";
 import { Merchant, UserMe } from "src/app/_models";
 import { MerchantFilter, DateFilter } from "src/app/_models/filter";
 import { LocationParams } from "src/app/_models/LocationParams";
-import { Offer } from "src/app/_models/offer";
 import {
   ChartDataSwimlane,
   ConsumedStatsApiResponse,
 } from "src/app/_models/stats";
 import { StatsService } from "src/app/_services";
 import { AnimatedNumberComponent } from "src/app/components/animated-number/animated-number.component";
-import { EntitySearchComponent } from "src/app/user/components/statistics/merchant-search/entity-search.component";
+import { EntitySearchComponent } from "src/app/user/components/statistics/entity-search/entity-search.component";
 import { SkeletonLoaderComponent } from "../../../components/skeleton-loader/skeleton-loader.component";
 import { SnackBarService } from "src/app/_services/snack-bar.service";
+import { EntitySearchUserComponent } from "../../../components/statistics/entity-search-user/entity-search-user.component";
+import { animate, style, transition, trigger } from "@angular/animations";
 
 @Component({
   selector: "app-consumer-statistics",
@@ -33,9 +34,28 @@ import { SnackBarService } from "src/app/_services/snack-bar.service";
     SharedModule,
     PieChartModule,
     NgxChartsModule,
+    NgClass,
     CommonModule,
     EntitySearchComponent,
     SkeletonLoaderComponent,
+    EntitySearchUserComponent,
+  ],
+  animations: [
+    trigger("fadeInOut", [
+      transition(":enter", [
+        style({ opacity: 0, transform: "translateY(-10px)" }),
+        animate(
+          "300ms ease-in",
+          style({ opacity: 1, transform: "translateY(0)" })
+        ),
+      ]),
+      transition(":leave", [
+        animate(
+          "200ms ease-out",
+          style({ opacity: 0, transform: "translateY(-10px)" })
+        ),
+      ]),
+    ]),
   ],
   templateUrl: "./consumer-statistics.component.html",
   styleUrl: "./consumer-statistics.component.css",
@@ -59,7 +79,9 @@ export class ConsumerStatisticsComponent implements OnInit, OnChanges {
   isConsumedDataReady = false;
   offerConsumedVouchers: any;
 
-  activeOffers: Offer[] = [];
+  isOffersShown: boolean = false;
+  nActiveOffers: number = undefined;
+  activeOffers: any[] = [];
 
   filters: MerchantFilter = {
     merchantIds: [],
@@ -68,6 +90,8 @@ export class ConsumerStatisticsComponent implements OnInit, OnChanges {
 
   consumedDataFetched = [];
   searchMerchantElement = "";
+
+  userMerchantId: number = 0;
 
   errorMessage: string = "";
 
@@ -108,7 +132,11 @@ export class ConsumerStatisticsComponent implements OnInit, OnChanges {
   loadData() {
     this.generalData();
     if (this.currentUser.role !== "Admin") {
-      // TO FIX  this.consumptionVoucherData(this.currentUser.merchants[0]);
+      this.filters = {
+        merchantIds: [this.currentUser.merchants[this.userMerchantId].id],
+        merchantNames: [this.currentUser.merchants[this.userMerchantId].name],
+      };
+      this.consumptionVoucherData();
     } else {
       this.consumptionVoucherData();
     }
@@ -148,9 +176,15 @@ export class ConsumerStatisticsComponent implements OnInit, OnChanges {
     }
   }
 
+  userConsumptionVoucherData(data: { filter: MerchantFilter; index: number }) {
+    this.filters = data.filter;
+    this.userMerchantId = data.index;
+
+    this.consumptionVoucherData(data.filter);
+  }
   consumptionVoucherData(merchantFilters?: MerchantFilter) {
     this.isConsumedDataReady = false; // Reset data flag
-    if (merchantFilters) this.filters = merchantFilters;
+
     this.emitFilters();
 
     this.statsService
@@ -216,15 +250,19 @@ export class ConsumerStatisticsComponent implements OnInit, OnChanges {
       .subscribe((data: number) => {
         this.availableVouchers = data;
       });
-
-    this.statsService.getActiveOffers().subscribe({
-      next: (data) => {
-        this.activeOffers = data;
-      },
-      error: (error) => {
-        console.error("Error fetching aims:", error);
-      },
-    });
+    this.statsService
+      .getActiveOffers(this.dateFilters, this.filters)
+      .subscribe({
+        next: (data) => {
+          this.activeOffers = data;
+          this.nActiveOffers = this.activeOffers.length;
+        },
+        error: (error) => {
+          this.activeOffers = [];
+          this.nActiveOffers = undefined;
+          console.error("Error fetching aims:", error);
+        },
+      });
   }
 
   isMerchant(element: Merchant): element is Merchant {
@@ -252,5 +290,18 @@ export class ConsumerStatisticsComponent implements OnInit, OnChanges {
 
   private emitFilters() {
     this.filtersEmit.emit(this.filters);
+  }
+
+  getTrophy(rank: number): string {
+    switch (rank) {
+      case 1:
+        return '<i class="fa-solid fa-trophy text-yellow-500"></i>';
+      case 2:
+        return '<i class="fa-solid fa-trophy text-gray-400"></i>';
+      case 3:
+        return '<i class="fa-solid fa-trophy text-amber-600"></i>';
+      default:
+        return "";
+    }
   }
 }
