@@ -149,6 +149,15 @@ mat-form-field label {
   transform: translate(-50%, -50%);
 }
 
+.material-symbols-outlined {
+  font-variation-settings: "FILL" 0, "wght" 100, "GRAD" 0, "opsz" 24;
+}
+
+.material-symbols-outlined:hover {
+  font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
+  transition: font-variation-settings 0.3s ease-in-out;
+}
+
 @media only screen and (max-width: 1050px) {
   .container {
     @apply mx-auto max-w-screen-md px-2;

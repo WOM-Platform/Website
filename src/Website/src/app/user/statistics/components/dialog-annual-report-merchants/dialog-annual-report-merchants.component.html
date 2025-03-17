@@ -1,0 +1,35 @@
+<div
+  class="grid grid-cols-5 bg-gray-100 p-4 rounded-lg shadow-md overflow-y-scroll h-full max-h-[600px]"
+>
+  <!-- Intestazione -->
+  <div class="font-semibold p-2">Nome</div>
+  <div class="font-semibold p-2">Email</div>
+  <div class="font-semibold p-2">WOM Consumati</div>
+  <div class="font-semibold p-2">Transazioni</div>
+  <div class="font-semibold p-2">Download</div>
+
+  <!-- Righe dinamiche -->
+  <ng-container *ngFor="let activeMerchant of activeMerchants">
+    <div class="p-2 border-b">{{ activeMerchant.name }}</div>
+    <div class="p-2 border-b">
+      <div *ngIf="activeMerchant.users && activeMerchant.users.length > 0">
+        <div *ngFor="let user of activeMerchant.users">
+          <a [href]="'mailto:' + user.email" class="text-xs">{{
+            user.email
+          }}</a>
+        </div>
+      </div>
+    </div>
+    <div class="p-2 border-b text-center">
+      {{ activeMerchant.amount }}
+    </div>
+    <div class="p-2 border-b text-center">
+      {{ activeMerchant.numberTransactions }}
+    </div>
+    <div class="p-2 border-b flex justify-center">
+      <span class="material-symbols-outlined text-blue-500 cursor-pointer">
+        download
+      </span>
+    </div>
+  </ng-container>
+</div>

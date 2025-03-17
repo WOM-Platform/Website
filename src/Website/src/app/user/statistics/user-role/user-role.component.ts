@@ -27,8 +27,6 @@ import { StatisticsFiltersComponent } from "../components/statistics-filters/sta
 @Component({
   selector: "app-user-role",
   imports: [
-    NgFor,
-    NgIf,
     StatisticsFiltersComponent,
     BarChartModule,
     NgxSkeletonLoaderModule,

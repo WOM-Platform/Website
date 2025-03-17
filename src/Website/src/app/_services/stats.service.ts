@@ -137,6 +137,24 @@ export class StatsService {
     );
   }
 
+  getAnnualReportMerchants(
+    dateFilters: DateFilter,
+    merchantFilters: MerchantFilter
+  ): Observable<any> {
+    const { startDate, endDate } = dateFilters;
+    const { merchantIds, merchantNames } = merchantFilters;
+    let requestData = {
+      startDate: startDate || null,
+      endDate: endDate || null,
+      merchantIds: merchantIds || null,
+      merchantNames: merchantNames || null,
+    };
+    return this.http.post(
+      `${this.localUrlV1}vouchers/active-merchants`,
+      requestData
+    );
+  }
+
   downloadCsv(filters: CombinedFilters): Observable<HttpResponse<Blob>> {
     const { startDate, endDate } = filters.dateFilters;
     const { merchantIds, merchantNames } = filters.merchantFilters;

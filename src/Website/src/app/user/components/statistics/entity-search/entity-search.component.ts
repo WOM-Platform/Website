@@ -14,7 +14,7 @@ import { Instrument } from "src/app/_models/instrument";
 import { InstrumentFilter, MerchantFilter } from "src/app/_models/filter";
 import { FormControl } from "@angular/forms";
 import { SourceService } from "src/app/_services/source.service";
-import { DialogFilterAimsComponent } from "src/app/user/statistics/admin-role/dialog-filter-aims/dialog-filter-aims.component";
+import { DialogFilterAimsComponent } from "src/app/user/components/dialog-filter-aims/dialog-filter-aims.component";
 import { MatDialog } from "@angular/material/dialog";
 import { MatIcon } from "@angular/material/icon";
 

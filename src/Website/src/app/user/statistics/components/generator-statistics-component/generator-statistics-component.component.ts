@@ -21,7 +21,7 @@ import {
   VoucherByAimDTO,
 } from "src/app/_models/stats";
 import { StatsService } from "src/app/_services";
-import { DialogFilterAimsComponent } from "../../admin-role/dialog-filter-aims/dialog-filter-aims.component";
+import { DialogFilterAimsComponent } from "../../../components/dialog-filter-aims/dialog-filter-aims.component";
 import { SourceService } from "src/app/_services/source.service";
 import { CommonModule } from "@angular/common";
 

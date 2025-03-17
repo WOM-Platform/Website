@@ -11,7 +11,6 @@ import { PosFormComponent } from "./merchants/pos-details/pos/forms-pos.componen
 import { UserStatisticsComponent } from "./statistics/user-statistics.component";
 import { SharedModule } from "../shared/shared.module";
 
-import { UserAdminComponent } from "./admin/user-admin.component";
 import { UserInstrumentsComponent } from "./instruments/user-instruments.component";
 import { UserAccessListComponent } from "./components/user-access-list/user-access-list.component";
 import { SearchSourceComponent } from "./components/user-access-list/search-source/search-source.component";
@@ -54,7 +53,6 @@ import { UserRoleComponent } from "./statistics/user-role/user-role.component";
     MerchantDetailComponent,
     MyInstrumentsCollectionComponent,
     MyMerchantsCollectionComponent,
-    UserAdminComponent,
     UserAimsComponent,
     UserComponent,
     UserHomeComponent,

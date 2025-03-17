@@ -2,7 +2,7 @@ import { ChangeDetectorRef, Component, OnDestroy, OnInit } from "@angular/core";
 import { CommonModule, DatePipe } from "@angular/common";
 import { SharedModule } from "../../../shared/shared.module";
 import { Aim, Merchants, UserMe } from "../../../_models";
-import { Subscription } from "rxjs";
+import { filter, Subscription } from "rxjs";
 import { UserService } from "../../../_services";
 
 import {
@@ -16,6 +16,8 @@ import { MatTooltip } from "@angular/material/tooltip";
 import { GeneratorStatisticsComponentComponent } from "../components/generator-statistics-component/generator-statistics-component.component";
 import { ConsumerStatisticsComponent } from "../components/consumer-statistics/consumer-statistics.component";
 import { StatisticsFiltersComponent } from "../components/statistics-filters/statistics-filters.component";
+import { DialogAnnualReportMerchantsComponent } from "../components/dialog-annual-report-merchants/dialog-annual-report-merchants.component";
+import { MatDialog } from "@angular/material/dialog";
 
 @Component({
   selector: "app-admin-role",
@@ -73,6 +75,7 @@ export class AdminRoleComponent implements OnInit, OnDestroy {
 
   constructor(
     private cdr: ChangeDetectorRef,
+    private matDialog: MatDialog,
     private userService: UserService
   ) {
     this.oneMonthAgo = new Date();
@@ -196,5 +199,18 @@ export class AdminRoleComponent implements OnInit, OnDestroy {
       this.sourceFilters.sourceNames.length > 0 ||
       this.sourceFilters.aimListFilter.length > 0
     );
+  }
+
+  openModalReport() {
+    console.log("openModalReport");
+    console.log(this.filters);
+    this.matDialog
+      .open(DialogAnnualReportMerchantsComponent, {
+        data: {
+          filters: this.filters,
+        },
+      })
+      .afterClosed()
+      .subscribe((result) => {});
   }
 }
