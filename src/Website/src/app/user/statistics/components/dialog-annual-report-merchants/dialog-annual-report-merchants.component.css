@@ -1,0 +1,7 @@
+.offscreen {
+  position: absolute;
+  top: -9999px; /* Push it far off the screen */
+  left: -9999px; /* Push it far off the screen */
+  width: 1px; /* You can adjust these values as needed */
+  height: 1px;
+}
