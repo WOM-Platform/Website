@@ -30,3 +30,11 @@ stop:
 .PHONY: rm
 rm rmc: stop
 	${DC} rm -f
+
+.PHONY: gcloud-deploy
+gcloud-deploy:
+	docker compose -f docker-compose.yml -f docker-compose.gcloud.yml --env-file=gcloud.env up -d website
+	docker compose -f docker-compose.yml -f docker-compose.gcloud.yml --env-file=gcloud.env ps
+	@echo
+	@echo 'WOM website deployed'
+	@echo

@@ -16,15 +16,17 @@
         class="centered rounded-container-header px-2 py-1 m-0"
         [innerHTML]="'INSTRUMENT.STATS.AVAILABLE' | translate"
       ></p>
-      <p
-        *ngIf="stats.totalVouchersAvailable"
-        class="centered bold rounded-container-body px-2 py-1 m-0"
-      >
-        <app-animated-number
-          [finalNumber]="stats.totalVouchersAvailable"
-          [duration]="2000"
-        />
-      </p>
+      <div class="centered bold rounded-container-body px-2 py-1 m-0">
+        <ng-container *ngIf="stats.totalVouchersAvailable; else zeroAmount">
+          <app-animated-number
+            [finalNumber]="stats.totalVouchersAvailable"
+            [duration]="1000"
+          ></app-animated-number>
+        </ng-container>
+        <ng-template #zeroAmount>
+          <p class="mb-0">0</p>
+        </ng-template>
+      </div>
     </div>
   </div>
 </div>

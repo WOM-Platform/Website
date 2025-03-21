@@ -19,7 +19,7 @@ export class PrivacyComponent implements OnInit, OnDestroy{
   }
 
   ngOnInit() {
-    this.snavOpened = !this.mobileQuery.matches;
+    this.snavOpened = false; //!this.mobileQuery.matches;
   }
 
   ngOnDestroy(): void {

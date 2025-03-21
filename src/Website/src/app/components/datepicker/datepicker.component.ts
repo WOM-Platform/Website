@@ -5,6 +5,7 @@ import { DatePipe, NgFor, NgIf } from "@angular/common";
   selector: "app-datepicker",
   imports: [NgIf, NgFor, DatePipe],
   standalone: true,
+  providers: [DatePipe],
   templateUrl: "./datepicker.component.html",
   styleUrl: "./datepicker.component.css",
 })
@@ -15,10 +16,13 @@ export class DatepickerComponent {
     startDate: Date | null;
     endDate: Date | null;
   }>();
+  today = new Date();
   calendarVisible = false;
   isSelectingStart = true;
   currentMonth = new Date();
   days: Date[] = [];
+
+  constructor(private datePipe: DatePipe) {}
 
   ngOnInit() {
     this.updateDays();
@@ -62,6 +66,7 @@ export class DatepickerComponent {
   }
 
   selectDate(day: Date) {
+    if (day > this.today) return; // Prevent selection of future dates
     if (this.isSelectingStart) {
       this.startDate = day;
     } else {

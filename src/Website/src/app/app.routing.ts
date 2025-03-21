@@ -7,7 +7,7 @@ import { ApplicationsCodymazeComponent } from "./pages/volunteers/applications/c
 import { ApplicationsComponent } from "./pages/volunteers/applications/applications.component";
 import { ApplicationsLibrariesComponent } from "./pages/volunteers/applications/libraries/libraries.component";
 import { ApplicationsOverviewComponent } from "./pages/volunteers/applications/overview/overview.component";
-import { ApplicationsStepcounterComponent } from "./pages/volunteers/applications/stepcounter/stepcounter.component";
+import { ApplicationsWomFitComponent } from "./pages/volunteers/applications/womfit/womfit.component";
 import { ApplicationsUniversitiesComponent } from "./pages/volunteers/applications/universities/universities.component";
 import { ContactsComponent } from "./pages/contacts/contacts.component";
 import { HomeComponent } from "./pages/home";
@@ -20,7 +20,7 @@ import { PrivacyInstrumentComponent } from "./pages/privacy/instrument/instrumen
 import { PrivacyOverviewComponent } from "./pages/privacy/overview/overview.component";
 import { PrivacyPocketComponent } from "./pages/privacy/pocket/pocket.component";
 import { PrivacyPosComponent } from "./pages/privacy/pos/pos.component";
-import { PrivacyStepcounterComponent } from "./pages/privacy/stepcounter/stepcounter.component";
+import { PrivacyWomFitComponent } from "./pages/privacy/womFit/womFit.component";
 import { PrivacyWebsiteComponent } from "./pages/privacy/website/website.component";
 import { RequestNewPasswordComponent } from "./authentication/requestNewPassword/request-new-password.component";
 import { ResetPasswordComponent } from "./authentication/reset-password/reset-password.component";
@@ -257,10 +257,10 @@ const routes: Routes = [
             },
           },
           {
-            path: "stepcounter",
-            component: ApplicationsStepcounterComponent,
+            path: "womfit",
+            component: ApplicationsWomFitComponent,
             data: {
-              breadcrumb: "BREADCRUMBS.APPLICATIONS.STEPCOUNTER",
+              breadcrumb: "BREADCRUMBS.APPLICATIONS.WOMFIT",
             },
           },
           {
@@ -348,10 +348,10 @@ const routes: Routes = [
             },
           },
           {
-            path: "stepcounter",
-            component: PrivacyStepcounterComponent,
+            path: "womfit",
+            component: PrivacyWomFitComponent,
             data: {
-              breadcrumb: "BREADCRUMBS.PRIVACY.STEPCOUNTER",
+              breadcrumb: "BREADCRUMBS.PRIVACY.WOMFIT",
             },
           },
         ],

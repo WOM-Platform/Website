@@ -1,3 +1,7 @@
-<div>
-    <app-admin-role/>
+<div *ngIf="currentUser.role && currentUser.role === 'Admin'">
+  <app-admin-role />
+</div>
+<div *ngIf="currentUser.role && currentUser.role === 'User'">
+  <app-admin-role />
+  <!-- <app-user-role /> -->
 </div>

@@ -86,7 +86,7 @@
     "APPLICATIONS": {
       "APPLICATIONS": "Applications",
       "OVERVIEW": "Overview",
-      "STEPCOUNTER": "Stepcounter",
+      "WOMFIT": "WOM Fit",
       "UNIVERSITIES": "Universities",
       "AWORLD": "AWorld",
       "CODYMAZE": "CodyMaze",
@@ -100,7 +100,7 @@
       "POS": "Point of Service",
       "POCKET": "Pocket",
       "INSTRUMENT": "Instrument",
-      "STEPCOUNTER": "Stepcounter"
+      "WOMFIT": "WOM Fit"
     },
     "BILLING": {
       "TITLE": "Buy",
@@ -514,7 +514,7 @@
       "SECTION_TUTORIAL2_A_2": "<strong>Visiting the cultural sites</strong> of Pesaro 2024 - small QRcodes worth 15 WOM are posted in front of Pesaro's buildings and monuments.",
       "SECTION_TUTORIAL2_A_3": "<strong>Visiting the museums</strong> of Pesaro - inside the museums are displayed QRcodes that are worth 60 WOM",
       "SECTION_TUTORIAL2_A_4": "<strong>Participating in Pesaro 2024 events</strong> - each event is associated with a specific QRcode that gives value to your participation",
-      "SECTION_TUTORIAL2_A_5": "<strong>Walking</strong> - follow Tutorial 5 to find out how to use WOM Stepcounter",
+      "SECTION_TUTORIAL2_A_5": "<strong>Walking</strong> - follow Tutorial 5 to find out how to use WOM Fit",
       "SECTION_TUTORIAL2_DESCR_B": "On all occasions, you can get WOM:",
       "SECTION_TUTORIAL2_B_1": "<strong>Search</strong> a Pesaro 2024 QRcode (like the one below)",
       "SECTION_TUTORIAL2_B_2": "<strong>Open the WOM Pocket app</strong>.",
@@ -535,7 +535,7 @@
       "SECTION_TUTORIAL3_DESCR_IMG": "Facsimile of the QRcode that you will need to framewith WOM Pocket app to access the offer",
       "SECTION_STICKER_DESCR_IMG": "Sticker that you will find on the windows of participating stores",
       "SECTION_TUTORIAL4": "Tutorial 4: Get WOM by walking",
-      "SECTION_TUTORIAL4_DESCR": "With the <strong>WOM Stepcounter</strong> app, you can earn WOM by walking, because exercise is about staying fit, and individual well-being is of value to the community.",
+      "SECTION_TUTORIAL4_DESCR": "With the <strong>WOM Fit</strong> app, you can earn WOM by walking, because exercise is about staying fit, and individual well-being is of value to the community.",
       "SECTION_TUTORIAL4_1": "<strong>Download</strong> the WOM Contapassi app available in the App Store and Play Store",
       "SECTION_TUTORIAL4_2": "<strong>Allow</strong> the app to <strong>access data</strong> from Google Fit or Health in the case of iOS",
       "SECTION_TUTORIAL4_3": "<strong>You will start earning WOM</strong> once you pass <strong>3000 steps</strong>",
@@ -637,7 +637,7 @@
       "POS": "WOM POS",
       "POCKET": "WOM Pocket",
       "INSTRUMENT": "WOM Instrument",
-      "STEPCOUNTER": "Step counter app"
+      "WOMFIT": "WOM Fit app"
     },
     "OVERVIEW": {
       "TITLE": "PRIVACY POLICIES",
@@ -762,43 +762,46 @@
         "<p>This document may be updated in the future. Refer to the last update date at the bottom of the document.</p>"
       ]
     },
-    "STEPCOUNTER": {
-      "TITLE": "‘WOM Stepcounter’ privacy policy",
+    "WOMFIT": {
+      "TITLE": "Privacy Policy ‘WOM Fit’",
       "CONTENT": [
-        "<p>This privacy policy is conform to the General Data Protection Regulation&nbsp;(“GDPR”) 2016/679 and national data protection laws in Italy. It contains all information about the collection and treatment of data by the <strong>“WOM&nbsp;Stepcounter”</strong> application (from now “the app”).</p>",
-        "<p>The app enables the conversion of effort towards personal health and fitness into anonymous vouchers, through the “WOM Platform”.</p>",
-        "<h2>1. Data controller</h2>",
-        "<p>The data controller, that is the entity that determines the purposes and the means of the processing of personal data, is DIGIT s.r.l., with registered address Corso Giuseppe Garibaldi&nbsp;66, 61029, Urbino&nbsp;(PU).</p>",
-        "<p>Digit s.r.l. is a <em>spin-off</em> of Università degli Studi di Urbino “Carlo Bo” (University of Urbino, Italy).</p>",
-        "<h2>2. Data subject to processing</h2>",
-        "<p>The app locally collects and locally processes data of the user’s fitness activities, such as they are exposed by the platform on which the app is installed by the user (Google Fitness for Android, Apple Healthkit for iOS).</p>",
-        "<p>The app does not provide user registration, thus other personal information is never collected.</p>",
-        "<h2>3. Purpose of processing</h2>",
-        "<p>The project enables territorial and local event marketing, through novel participation and rewarding mechanisms. The app recognizes the value of all those actions that have an intrinsic social value, such as fitness activities. These informations are collected and stored locally on the user’s device and they are never transmitted to any server nor shared with third parties.</p>",
-        "<h2>4. Legal basis of the processing</h2>",
-        "<p>The legal basis of data processing is provided by the freely expressed <strong>consent</strong> of the user, when installing and opening the app on their smartphone. The app provides information about the means and purposes of data processing and then asks for user permission, which is explicitly granted. Consent is provided exclusively for the purposes expressed at point&nbsp;3 of this document.</p>",
-        "<h2>5. Means of data collection</h2>",
-        "<p>After installing and starting the app on the user’s device, the app will start collection information about the user’s fitness activities through the application programming interfaces provided by Google Fitness or Apple Healthkit, respectively on Android and iOS.</p>",
-        "<h2>6. Duration of data storage</h2>",
-        "<p>Data is collected only as long as the application is installed on the user’s device. Uninstalling the app will remove all collected data.</p>",
-        "<h2>7. Means of processing and transmission of data</h2>",
-        "<p>Data collected by the app is stored exclusively on the user’s device (using <em>local data storage</em>). The data stored is used to provide the user with a diary of their activities. Data is never transmitted.</p>",
-        "<h2>8. Third parties</h2>",
-        "<p>Data collected on the device’s memory (<em>local data storage</em>) is never transmitted to third parties.</p>",
-        "<h2>9. Rights of the data subject</h2>",
-        "<p>According to article 15 and following of the GDPR, the user has the following rights:</p>",
+        "<p>This privacy policy is provided in accordance with Regulation (EU) 2016/679 (“GDPR”) and applicable data protection laws. It contains all relevant information regarding the processing and management of personal data collected when the <strong>WOM Fit</strong> application (hereinafter ‘the application’) is installed on a mobile device.</p>",
+        "<p>The WOM Fit app allows users to convert their physical activity efforts into anonymous vouchers through the WOM platform.</p>",
+        "<h2>1. Data Controller</h2>",
+        "<p>The data controller, meaning the entity responsible for determining the purposes and means of personal data processing, is Digit s.r.l., with its registered office at Corso Giuseppe Garibaldi&nbsp;66, 61029, Urbino&nbsp;(PU), represented by its legal representative.</p>",
+        "<p>Digit s.r.l. is a <em>spin-off</em> of the University of Urbino \"Carlo Bo\".</p>",
+        "<h2>2. Data Processed</h2>",
+        "<p>The WOM Fit app locally collects and processes data related to the user’s fitness activities, as provided by the platform on which the application is installed. On the iOS platform, GPS activation is required, not for tracking user movements but solely to keep the application running in the background for proper functionality.</p>",
+        "<p>This data is stored exclusively on the user’s device.</p>",
+        "<p>There is no registration process, and therefore, no personal identification or contact information is collected or otherwise processed.</p>",
+        "<h2>3. Purpose of Data Processing</h2>",
+        "<p>The purpose of the application is to encourage personal well-being through physical activity, particularly walking and cycling.</p>",
+        "<h2>4. Legal Basis for Data Processing</h2>",
+        "<p>The legal basis for data processing is the <strong>consent</strong> freely given by the user at the time of downloading and first opening the application, allowing WOM Fit to store their activity data locally. This consent is granted for the purposes outlined in section 3.</p>",
+        "<h2>5. Data Collection Methods</h2>",
+        "<p>After installing WOM Fit on their device, the application collects data related to the user’s movement activities through the application programming interfaces provided by Google for <i>Activity Recognition</i> (on Android) or Apple for <i>Motion Usage Description</i> (on iOS).</p>",
+        "<p>The activity data refers to whether the user is stationary, walking, cycling, or moving with a vehicle. This data remains on the user’s device and is not shared, except temporarily and in aggregated form to redeem WOM vouchers. The shared data is not stored on any external device.</p>",
+        "<h2>6. Data Retention Period</h2>",
+        "<p>Data is stored exclusively on the user’s device as long as the application remains installed.</p>",
+        "<h2>7. Data Processing, Communication, and Disclosure</h2>",
+        "<p>The data collected by WOM Fit is stored exclusively on the user’s device (<em>local data storage</em>). Through this storage, the user has access to a log of their activities.</p>",
+        "<h2>8. Involvement of Third Parties</h2>",
+        "<p>Data is stored in the device’s memory (<em>local data storage</em>) and is not shared with third parties.</p>",
+        "<h2>9. User Rights</h2>",
+        "<p>Under Articles 15 and following of the GDPR, the user has the right to:</p>",
         "<ul>",
-        "<li>obtain confirmation of the existence of their personal data, accessing it and obtaining a copy of it (<strong>right of access</strong>);</li>",
-        "<li>update, modify and/or correct their personal data (<strong>diritto di rectification</strong>);</li>",
-        "<li>ask the removal or restriction of data processing, as determined by the GDPR (<strong>right of cancellation</strong> e <strong>right to restriction of the processing</strong>);</li>",
-        "<li>oppose the processing, as determined by the GDPR (<strong>right to object</strong>),</li>",
-        "<li>obtain a copy of the data in a common structured format and ask for it to be transmitted to a different Data controller, if technically feasible (<strong>right to portability</strong>).</li>",
+        "<li>Receive confirmation of the existence of their personal data, access its content, and obtain a copy (<strong>right of access</strong>);</li>",
+        "<li>Update, modify, and/or correct their personal data (<strong>right of rectification</strong>);</li>",
+        "<li>Request the deletion or restriction of personal data processing in cases provided for by the GDPR (<strong>right to erasure</strong> and <strong>right to restriction of processing</strong>);</li>",
+        "<li>Object to data processing in cases permitted by the GDPR (<strong>right to object</strong>);</li>",
+        "<li>Receive a copy of the provided data in a structured, commonly used, and machine-readable format and request the transmission of such data to another data controller, if technically feasible (<strong>right to data portability</strong>).</li>",
+        "<li>Withdraw consent for granted permissions at any time.</li>",
         "</ul>",
-        "<p>The user also has the right of complaint to the supervisory authorities.</p>",
-        "<p>To exercise these rights, the user may contact the following e-mail address: <a href=\"mailto:info@digit.srl\">info@digit.srl</a> or write to the following address:</p>",
-        "<p>DIGIT s.r.l.<br>Corso Giuseppe Garibaldi,&nbsp;66<br>61029, Urbino&nbsp;(PU)<br>c.a. Responsabile della protezione dati personali</p>",
-        "<h2>10. Updates to the privacy policy</h2>",
-        "<p>This document may be updated in the future. Refer to the last update date at the bottom of the document.</p>"
+        "<p>The user also has the right to file a complaint with the supervisory authority.</p>",
+        "<p>To exercise these rights, the user may contact the following email address: <a href=\"mailto:info@digit.srl\">info@digit.srl</a> or write to:</p>",
+        "<p>DIGIT s.r.l.<br>Corso Giuseppe Garibaldi,&nbsp;66<br>61029, Urbino&nbsp;(PU)<br>Attn: Data Protection Officer</p>",
+        "<h2>10. Updates to the Privacy Policy</h2>",
+        "<p>This privacy policy may be updated over time. Digit s.r.l. will indicate the date of the last update at the bottom of this document.</p>"
       ]
     },
     "LAST_UPDATE": "Last update",
@@ -821,7 +824,7 @@
     "SIDENAV": {
       "TITLE": "Applications",
       "OVERVIEW": "Overview",
-      "STEPCOUNTER": "Stepcounter",
+      "WOMFIT": "WOM Fit",
       "AWORLD": "AWorld",
       "UNIVERSITIES": "Universities",
       "LIBRARIES": "Libraries"
@@ -831,8 +834,8 @@
       "MAIN_CONTENT": "WOM vouchers can be earned by voluntarily doing a socially useful action. For a WOM to be generated, <b>the activity has to be formally acknowledged by the WOM platform.</b> <br>",
       "CONTENT_A": "Volunteers can obtain WOMs through the use of <b>specific applications</b> that recognize the social value of their actions. <br> <b>Check out the list of the applications in the side menu!</b>"
     },
-    "STEPCOUNTER": {
-      "TITLE": "WOM Stepcounter",
+    "WOMFIT": {
+      "TITLE": "WOM Fit",
       "MAIN_CONTENT": "Keep track of the steps you take with WOM StepCounter, an app that rewards you for the things you do in your daily life!<br /><br />Thanks to WOM StepCounter you will be able to convert your steps into digital vouchers, that reward social effort. You will receive vouchers if you keep track of more than 3.000 steps per day."
     },
     "LIBRARIES": {

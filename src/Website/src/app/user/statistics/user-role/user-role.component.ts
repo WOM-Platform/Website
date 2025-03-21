@@ -1,11 +1,10 @@
 import { Component, OnInit } from "@angular/core";
 import { Merchant } from "../../../_models";
 import { StorageService } from "../../../_services/storage.service";
-import { MerchantService, StatsService, UserService } from "../../../_services";
+import { StatsService, UserService } from "../../../_services";
 import { NgFor, NgIf } from "@angular/common";
 import { Instrument } from "../../../_models/instrument";
-import { StatisticsFiltersComponent } from "../../components/statistics-filters/statistics-filters.component";
-import { DashboardAdminFilter } from "../../../_models/filter";
+
 import { BarChartModule, PieChartModule } from "@swimlane/ngx-charts";
 import { NgxSkeletonLoaderModule } from "ngx-skeleton-loader";
 import { SharedModule } from "../../../shared/shared.module";
@@ -18,12 +17,16 @@ import {
   VoucherByAimDTO,
 } from "../../../_models/stats";
 import { tap } from "rxjs/operators";
+import {
+  MerchantFilter,
+  DateFilter,
+  InstrumentFilter,
+} from "src/app/_models/filter";
+import { StatisticsFiltersComponent } from "../components/statistics-filters/statistics-filters.component";
 
 @Component({
   selector: "app-user-role",
   imports: [
-    NgFor,
-    NgIf,
     StatisticsFiltersComponent,
     BarChartModule,
     NgxSkeletonLoaderModule,
@@ -42,7 +45,22 @@ export class UserRoleComponent implements OnInit {
   isOwnerSources: boolean = false;
 
   locationParameters;
-  filters: DashboardAdminFilter = {};
+
+  dateFilters: DateFilter = {
+    startDate: undefined,
+    endDate: undefined,
+  };
+  merchantFilters: MerchantFilter = {
+    merchantIds: [],
+    merchantNames: [],
+  };
+
+  sourceFilters: InstrumentFilter = {
+    sourceId: [],
+    sourceNames: [],
+    aimListFilter: [],
+  };
+
   isConsumedDataReady: boolean = false;
   isGeneratedDataReady: boolean = false;
 
@@ -60,7 +78,6 @@ export class UserRoleComponent implements OnInit {
   chartConsumedAmountByAim: ChartDataSwimlane[] = [];
 
   constructor(
-    private merchantService: MerchantService,
     private statsService: StatsService,
     private storageService: StorageService,
     private userService: UserService
@@ -101,26 +118,26 @@ export class UserRoleComponent implements OnInit {
   }
 
   onDatesSelected(date) {
-    this.filters.startDate = date.startDate;
-    this.filters.endDate = date.endDate;
+    this.dateFilters.startDate = date.startDate;
+    this.dateFilters.endDate = date.endDate;
     this.loadData();
   }
 
   consumptionVoucherData(merchant?: Merchant) {
     if (merchant) {
-      if (!this.filters.merchantNames.includes(merchant.name)) {
-        this.filters.merchantNames.push(merchant.name); // Update filters
+      if (!this.merchantFilters.merchantNames.includes(merchant.name)) {
+        this.merchantFilters.merchantNames.push(merchant.name); // Update filters
       }
-      if (!this.filters.merchantId.includes(merchant.id)) {
-        this.filters.merchantId.push(merchant.id);
+      if (!this.merchantFilters.merchantIds.includes(merchant.id)) {
+        this.merchantFilters.merchantIds.push(merchant.id);
       }
     }
 
     this.statsService
-      .fetchVouchersConsumedStats(this.filters, this.locationParameters)
+      .fetchVouchersConsumedStats(this.dateFilters, this.locationParameters)
       .subscribe((data: ConsumedStatsApiResponse) => {
         // Consumed total amount of WOM
-        this.totalConsumedAmount = data.totalConsumed;
+        this.totalConsumedAmount = data.consumedInPeriod;
 
         // Get rank of merchants
         this.rankMerchants = data.merchantRanks;
@@ -135,20 +152,22 @@ export class UserRoleComponent implements OnInit {
       });
 
     // Add additional observable if merchantId is present
-    if (this.filters.merchantId) {
+    if (this.merchantFilters.merchantIds) {
       // Get vouchers consumed by offer
-      this.statsService.getVouchersConsumedByOffer(this.filters).pipe(
-        tap((data) => {
-          this.offerConsumedVouchers = data;
-        })
-      );
+      this.statsService
+        .getVouchersConsumedByOffer(this.dateFilters, this.merchantFilters)
+        .pipe(
+          tap((data) => {
+            this.offerConsumedVouchers = data;
+          })
+        );
     }
 
     // Fetch the available vouchers in parallel (not part of the forkJoin)
     this.statsService
       .getAmountOfAvailableVouchers(
         this.locationParameters,
-        this.filters.merchantId
+        this.merchantFilters.merchantIds
       )
       .subscribe((data: number) => {
         this.availableVouchers = data;
@@ -157,18 +176,21 @@ export class UserRoleComponent implements OnInit {
 
   generationVoucherData(source?: Instrument) {
     if (source) {
-      if (!this.filters.sourceNames.includes(source.name)) {
-        this.filters.sourceNames.push(source.name); // Update filters
+      if (!this.sourceFilters.sourceNames.includes(source.name)) {
+        this.sourceFilters.sourceNames.push(source.name); // Update filters
       }
-      if (!this.filters.sourceId.includes(source.id)) {
-        this.filters.sourceId.push(source.id);
+      if (!this.sourceFilters.sourceId.includes(source.id)) {
+        this.sourceFilters.sourceId.push(source.id);
       }
     }
     this.statsService
-      .fetchVouchersGeneratedAndRedeemedStats(this.filters)
+      .fetchVouchersGeneratedAndRedeemedStats(
+        this.dateFilters,
+        this.sourceFilters
+      )
       .subscribe((data: GenerationRedeemedStatsApiResponse) => {
-        this.totalCreatedAmount = data.totalGenerated;
-        this.totalRedeemedAmount = data.totalRedeemed;
+        this.totalCreatedAmount = data.generatedInPeriod;
+        this.totalRedeemedAmount = data.redeemedInPeriod;
         this.totalCreatedAmountByAim = data.voucherByAim;
 
         this.chartCreatedAmountByAim = this.totalCreatedAmountByAim.map(

@@ -19,12 +19,11 @@ import { MatIcon } from "@angular/material/icon";
   templateUrl: "./search.component.html",
   styleUrls: ["./search.component.css"],
 })
-export class SearchComponent implements OnInit, OnDestroy, OnChanges {
+export class SearchComponent implements OnInit, OnDestroy {
   @Input() placeholder: string = "Ricerca...";
-  @Input() searchValue: string = "";
+  @Input() searchControl: FormControl = new FormControl("");
   @Output() searchEmit = new EventEmitter<string>();
 
-  searchControl = new FormControl(this.searchValue);
   private destroy$ = new Subject<void>();
 
   ngOnInit() {
@@ -33,17 +32,10 @@ export class SearchComponent implements OnInit, OnDestroy, OnChanges {
       .subscribe((searchValue) => {
         if (searchValue.length >= 3 || searchValue.length === 0) {
           this.searchEmit.emit(searchValue);
+        } else {
+          this.searchEmit.emit("");
         }
       });
-  }
-
-  ngOnChanges(changes: SimpleChanges) {
-    if (
-      changes["searchValue"] &&
-      changes["searchValue"].currentValue !== this.searchControl.value
-    ) {
-      this.searchControl.setValue(this.searchValue, { emitEvent: false }); // Prevent emitting value changes when setting programmatically
-    }
   }
 
   ngOnDestroy() {

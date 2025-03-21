@@ -1,63 +1,62 @@
-import {Component, OnDestroy, OnInit} from "@angular/core";
-import {UserService} from "../../_services";
-import {TranslateService} from "@ngx-translate/core";
-import {NavigationExtras, Router} from "@angular/router";
-import {MatSnackBar} from "@angular/material/snack-bar";
-import {MatDialog} from "@angular/material/dialog";
-import {Subscription} from "rxjs";
-import {UserMe} from "../../_models";
-import {SnackBarService} from "../../_services/snack-bar.service";
+import { Component, OnDestroy, OnInit } from "@angular/core";
+import { UserService } from "../../_services";
+import { TranslateService } from "@ngx-translate/core";
+import { NavigationExtras, Router } from "@angular/router";
+import { MatSnackBar } from "@angular/material/snack-bar";
+import { MatDialog } from "@angular/material/dialog";
+import { Subscription } from "rxjs";
+import { UserMe } from "../../_models";
+import { SnackBarService } from "../../_services/snack-bar.service";
 
 @Component({
-    selector: "app-user-home",
-    templateUrl: "./user-home.component.html",
-    styleUrls: ["./user-home.component.css"],
-    standalone: false
+  selector: "app-user-home",
+  templateUrl: "./user-home.component.html",
+  styleUrls: ["./user-home.component.css"],
+  standalone: false,
 })
 export class UserHomeComponent implements OnInit, OnDestroy {
-    userData: any;
-    userDataSubscription: Subscription;
-    role: string = ""
+  userData: any;
+  userDataSubscription: Subscription;
+  role: string = "";
 
-    constructor(
-        public dialog: MatDialog,
-        private router: Router,
-        private snackBarService: SnackBarService,
-        private translate: TranslateService,
-        private userService: UserService,
-    ) {
-    }
+  constructor(
+    public dialog: MatDialog,
+    private router: Router,
+    private snackBarService: SnackBarService,
+    private translate: TranslateService,
+    private userService: UserService
+  ) {}
 
-    ngOnInit(): any {
-        this.loadData();
-    }
+  ngOnInit(): any {
+    this.userService.startTokenCheck();
 
-    ngOnDestroy(): any {
-        this.userDataSubscription.unsubscribe();
-    }
+    this.loadData();
+  }
 
-    loadData(): any {
-        // check user instrument and merchant amount
-        this.userDataSubscription = this.userService
-            .me()
-            .subscribe({
-                next: (data: UserMe) => {
-                    if (data) {
-                        this.userData = data;
-                        this.role = data.role;
-                    }
+  ngOnDestroy(): any {
+    this.userDataSubscription.unsubscribe();
+  }
 
-                }, error: (err) => {
-                    this.snackBarService.openSnackBar("errore caricamento dati utente")
-                    console.error(err)
-                }
-            })
-    }
+  loadData(): any {
+    // check user instrument and merchant amount
+    this.userDataSubscription = this.userService.me().subscribe({
+      next: (data: UserMe) => {
+        if (data) {
+          this.userData = data;
+          this.role = data.role;
+        }
+      },
+      error: (err) => {
+        this.snackBarService.openSnackBar("errore caricamento dati utente");
+        console.error(err);
+      },
+    });
+  }
 
-    async navigate(link: string): Promise<void> {
-        const navigationExtra: NavigationExtras = {
-            queryParams: {selectedTabIndex: 1},
-        };
-        await this.router.navigate(["/" + link], navigationExtra);
-    }
+  async navigate(link: string): Promise<void> {
+    const navigationExtra: NavigationExtras = {
+      queryParams: { selectedTabIndex: 1 },
+    };
+    await this.router.navigate(["/" + link], navigationExtra);
+  }
 }

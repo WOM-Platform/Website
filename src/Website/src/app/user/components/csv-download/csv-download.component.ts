@@ -1,8 +1,8 @@
-import { Component, Input } from "@angular/core";
+import { Component, Input, OnChanges, SimpleChanges } from "@angular/core";
 import { finalize } from "rxjs";
 import { LoadingService } from "../../../_services/loading.service";
 import { StatsService } from "../../../_services";
-import { DashboardAdminFilter } from "../../../_models/filter";
+import { CombinedFilters, DateFilter, Filter } from "src/app/_models/filter";
 
 @Component({
   selector: "app-csv-download",
@@ -12,9 +12,10 @@ import { DashboardAdminFilter } from "../../../_models/filter";
   styleUrl: "./csv-download.component.css",
 })
 export class CsvDownloadComponent {
-  @Input() filters: DashboardAdminFilter = {
-    startDate: undefined,
-    endDate: undefined,
+  @Input() filters: CombinedFilters = {
+    dateFilters: undefined,
+    merchantFilters: undefined,
+    sourceFilters: undefined,
   };
 
   constructor(
@@ -34,7 +35,6 @@ export class CsvDownloadComponent {
       )
       .subscribe((blob) => {
         const url = URL.createObjectURL(blob.body);
-        console.log(blob.headers);
         // Estrai l'intestazione Content-Disposition
         const contentDisposition = blob.headers.get("Content-Disposition");
         let fileName = "download.csv"; // Nome di default

@@ -1,0 +1,3 @@
+services:
+  website:
+    build: ./src/Website
