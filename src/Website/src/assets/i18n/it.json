@@ -21,7 +21,6 @@
     "INSTRUMENT": "Instrument",
     "SIGN_IN": "Login",
     "MERCHANT": "Merchant",
-    "CONTACTS": "Contattaci",
     "PROFILE": "Profilo",
     "SIGN_OUT": "Disconnetti",
     "LOGOUT_DIALOG": {
@@ -53,7 +52,6 @@
     "VOLUNTEER": "Volontari",
     "MERCHANT": "Merchant",
     "INSTRUMENT": "Instrument",
-    "CONTACTS": "Contatti",
     "UNIURB": {
       "SHARPER2024": "UNIURB Sharper 2024"
     },
@@ -612,22 +610,6 @@
     },
     "STATS": {
       "AVAILABLE": "WOM in circolazione"
-    }
-  },
-  "CONTACTS": {
-    "TITLE": "Contatti",
-    "SEND_SUCCESS": "Inviato!",
-    "SEND_ERROR": "C'è stato un errore nell’invio della richiesta. Riprova.",
-    "FORM_ERROR": "Sembra che manchi ancora qualche informazione nel form.",
-    "SEND": "Invia",
-    "FORM": {
-      "TITLE": "Domande o dubbi riguardo i WOM? Compila il form sottostante per contattarci!",
-      "SENDER_NAME": "Nome",
-      "SENDER_EMAIL": "Indirizzo e-mail",
-      "SUBJECT": "Soggetto dell’e-mail",
-      "CONTENT": "Scrivi il tuo messaggio qui",
-      "NO_TEXT_ERROR": "Campo obbligatorio",
-      "EMAIL_ERROR": "Inserisci un indirizzo email valido"
     }
   },
   "TERMS_CONDITIONS": {

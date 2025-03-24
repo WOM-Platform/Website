@@ -19,7 +19,6 @@
       "RETE-DELLE-RETI": "Rete delle Reti"
     },
     "INSTRUMENT": "Instrument",
-    "CONTACTS": "Contact Us",
     "SIGN_IN": "Login",
     "PROFILE": "Profile",
     "MERCHANT": "Merchant",
@@ -53,7 +52,6 @@
     "VOLUNTEER": "Volunteers",
     "MERCHANT": "Merchant",
     "INSTRUMENT": "Instrument",
-    "CONTACTS": "Contact us",
     "UNIURB": {
       "SHARPER2024": "UNIURB Sharper 2024"
     },
@@ -608,22 +606,6 @@
     },
     "STATS": {
       "AVAILABLE": "WOMs in circulation"
-    }
-  },
-  "CONTACTS": {
-    "TITLE": "Contacts",
-    "SEND_SUCCESS": "Sent!",
-    "SEND_ERROR": "There was an error sending the request. Please try again.",
-    "FORM_ERROR": "There seems to be something missing in the form.",
-    "SEND": "Send",
-    "FORM": {
-      "TITLE": "Have any questions? Fill out the form below to reach out to us!",
-      "SENDER_NAME": "Name",
-      "SENDER_EMAIL": "E-mail address",
-      "SUBJECT": "E-mail subject",
-      "CONTENT": "Write your message here",
-      "NO_TEXT_ERROR": "Required field",
-      "EMAIL_ERROR": "Please enter a valid email address"
     }
   },
   "TERMS_CONDITIONS": {

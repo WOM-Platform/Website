@@ -69,8 +69,6 @@ import { BreadcrumbModule } from "primeng/breadcrumb";
 import { BreadcrumbsComponent } from "./components/breadcrumbs/breadcrumbs.component";
 import { CarouselModule } from "primeng/carousel";
 import { CommonModule, registerLocaleData } from "@angular/common";
-import { ContactFormComponent } from "./_forms/contact/forms-contact.directive";
-import { ContactsComponent } from "./pages/contacts/contacts.component";
 import { CookieService } from "ngx-cookie-service";
 import * as Sentry from "@sentry/angular";
 
@@ -104,7 +102,7 @@ import { AlbergatoriComponent } from "./pages/pesaro2024-section/albergatori/alb
 import localeIt from "@angular/common/locales/it";
 import { StoreLogosComponent } from "./components/store-logos/store-logos.component";
 import { AnimatedNumberComponent } from "./components/animated-number/animated-number.component";
-import {ApplicationsWomFitComponent} from "./pages/volunteers/applications/womfit/womfit.component";
+import { ApplicationsWomFitComponent } from "./pages/volunteers/applications/womfit/womfit.component";
 
 // AoT requires an exported function for factories
 export const createTranslateLoader = (http: HttpClient) =>
@@ -162,8 +160,6 @@ const httpInterceptorProviders = environment.mock
     BillingCheckoutComponent,
     BillingSuccessComponent,
     BreadcrumbsComponent,
-    ContactFormComponent,
-    ContactsComponent,
     FanoComponent,
     FooterComponent,
     HomeComponent,
