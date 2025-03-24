@@ -160,8 +160,8 @@ export class StatsService {
     const { merchantIds, merchantNames } = filters.merchantFilters;
     const { sourceId, sourceNames, aimListFilter } = filters.sourceFilters;
     let requestData = {
-      startDate: startDate || null,
-      endDate: endDate || null,
+      startDate: startDate ? this.convertToLocalISOString(startDate) : null,
+      endDate: endDate ? this.convertToLocalISOString(endDate) : null,
       sourceId: sourceId || null,
       sourceNames: sourceNames || null,
       aimListFilter: aimListFilter || null,
