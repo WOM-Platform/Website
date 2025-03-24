@@ -1,9 +1,17 @@
 <div class="h-screen">
-    <app-nav class="h-full">
-        <div class="bg-[#F3F3F3]" style="min-height: 94vh; display: flex; flex-direction: column; position: relative; ">
-            <app-breadcrumbs></app-breadcrumbs>
-            <router-outlet style="background-color: black"></router-outlet>
-            <app-footer style="margin-top: auto"></app-footer>
-        </div>
-    </app-nav>
+  <app-nav class="h-full">
+    <div
+      class="bg-slate-50"
+      style="
+        min-height: 94vh;
+        display: flex;
+        flex-direction: column;
+        position: relative;
+      "
+    >
+      <app-breadcrumbs></app-breadcrumbs>
+      <router-outlet style="background-color: black"></router-outlet>
+      <app-footer style="margin-top: auto"></app-footer>
+    </div>
+  </app-nav>
 </div>

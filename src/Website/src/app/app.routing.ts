@@ -9,7 +9,6 @@ import { ApplicationsLibrariesComponent } from "./pages/volunteers/applications/
 import { ApplicationsOverviewComponent } from "./pages/volunteers/applications/overview/overview.component";
 import { ApplicationsWomFitComponent } from "./pages/volunteers/applications/womfit/womfit.component";
 import { ApplicationsUniversitiesComponent } from "./pages/volunteers/applications/universities/universities.component";
-import { ContactsComponent } from "./pages/contacts/contacts.component";
 import { HomeComponent } from "./pages/home";
 import { InstrumentComponent } from "./pages/instrument/instrument.component";
 import { MerchantComponent } from "./pages/merchant/merchant.component";
@@ -192,13 +191,6 @@ const routes: Routes = [
         component: InstrumentComponent,
         data: {
           breadcrumb: "BREADCRUMBS.INSTRUMENT",
-        },
-      },
-      {
-        path: "contacts",
-        component: ContactsComponent,
-        data: {
-          breadcrumb: "BREADCRUMBS.CONTACTS",
         },
       },
       {
