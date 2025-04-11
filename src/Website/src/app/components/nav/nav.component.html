@@ -1,4 +1,5 @@
-<mat-sidenav-container class="sidenav-container">
+<div class="sidenav-container">
+  <!-- mobile menu -->
   <mat-sidenav
     #drawer
     class="sidenav"
@@ -35,12 +36,12 @@
             </a>
             <a
               mat-list-item
-              routerLink="pesaro2024"
+              routerLink="pesaro"
               (click)="drawer.toggle()"
               [routerLinkActive]="['active']"
             >
               <!-- <mat-icon></mat-icon> -->
-              <span>{{ "NAV.ABOUT.PESARO2024" | translate }}</span>
+              <span>{{ "NAV.ABOUT.PESARO" | translate }}</span>
             </a>
             <a
               mat-list-item
@@ -122,65 +123,82 @@
       </mat-accordion>
     </mat-nav-list>
   </mat-sidenav>
-  <mat-sidenav-content>
-    <mat-toolbar color="app-toolbar" class="flex justify-between items-center">
-      <a class="h-20 w-auto items-center flex" routerLink="home">
+  <div>
+    <div class="flex justify-between items-center bg-[#444557] h-14">
+      <a class="h-20 w-auto items-center flex px-4" routerLink="home">
         <img src="../../../assets/images/wom-logo-bianco.png" />
       </a>
       <div class="flex flex-row align-items-center">
         <!-- begin menu pc -->
-        <div class="menu-pc">
-          <button mat-button class="nav-button" (click)="navigate('home')">
+        <div class="menu-pc flex items-center gap-2 px-2">
+          <button class="menu-item" (click)="navigate('home')">
             {{ "NAV.HOME" | translate }}
           </button>
-          <button mat-button class="nav-button" [matMenuTriggerFor]="menuAbout">
-            {{ "NAV.ABOUT.TITLE" | translate }}
-          </button>
-          <mat-menu #menuAbout="matMenu">
-            <button mat-menu-item (click)="navigate('about-section/about')">
-              <span>{{ "NAV.ABOUT.ABOUT" | translate }}</span>
+          <!-- About -->
+          <div class="relative group inline-block">
+            <button class="menu-item">
+              <span>{{ "NAV.ABOUT.TITLE" | translate }}</span>
+              <span
+                class="material-symbols-outlined ransform transition-transform duration-300 group-hover:rotate-180"
+              >
+                keyboard_arrow_down</span
+              >
             </button>
-            <button mat-menu-item (click)="navigate('pesaro2024')">
-              <span>{{ "NAV.ABOUT.PESARO2024" | translate }}</span>
-            </button>
-            <button mat-menu-item (click)="navigate('about-section/urbino')">
-              <span>{{ "NAV.ABOUT.URBINO" | translate }}</span>
-            </button>
-            <!-- <button mat-menu-item (click)="navigate('about-section/fano')">
-                          <span>{{ "NAV.ABOUT.FANO" | translate }}</span>
-                        </button> -->
-          </mat-menu>
+            <div class="submenu">
+              <button
+                (click)="navigate('about-section/about')"
+                class="block w-full text-left px-4 py-2 text-gray-800 hover:bg-gray-100"
+              >
+                {{ "NAV.ABOUT.ABOUT" | translate }}
+              </button>
 
-          <button
-            mat-button
-            class="nav-button"
-            [matMenuTriggerFor]="menuVolunteer"
-          >
-            <span>{{ "NAV.VOLUNTEERS.TITLE" | translate }}</span>
-          </button>
-          <mat-menu #menuVolunteer="matMenu">
-            <button mat-menu-item (click)="navigate('volunteer')">
-              <span>{{ "NAV.VOLUNTEERS.WHO_ARE" | translate }}</span>
-            </button>
-            <button mat-menu-item (click)="navigate('applications')">
-              <span>{{ "NAV.VOLUNTEERS.APPLICATIONS" | translate }}</span>
-            </button>
-          </mat-menu>
+              <button
+                (click)="navigate('pesaro')"
+                class="block w-full text-left px-4 py-2 text-gray-800 hover:bg-gray-100"
+              >
+                {{ "NAV.ABOUT.PESARO" | translate }}
+              </button>
 
-          <button mat-button class="nav-button" (click)="navigate('merchant')">
+              <button
+                (click)="navigate('about-section/urbino')"
+                class="block w-full text-left px-4 py-2 text-gray-800 hover:bg-gray-100"
+              >
+                {{ "NAV.ABOUT.URBINO" | translate }}
+              </button>
+            </div>
+          </div>
+
+          <!-- volunteers -->
+          <div class="relative group inline-block">
+            <button class="menu-item">
+              <span>{{ "NAV.VOLUNTEERS.TITLE" | translate }}</span>
+              <span
+                class="material-symbols-outlined ransform transition-transform duration-300 group-hover:rotate-180"
+              >
+                keyboard_arrow_down</span
+              >
+            </button>
+            <div class="submenu">
+              <button
+                (click)="navigate('volunteer')"
+                class="block w-full text-left px-4 py-2 text-gray-800 hover:bg-gray-100"
+              >
+                <span>{{ "NAV.VOLUNTEERS.WHO_ARE" | translate }}</span>
+              </button>
+              <button
+                (click)="navigate('applications')"
+                class="block w-full text-left px-4 py-2 text-gray-800 hover:bg-gray-100"
+              >
+                <span>{{ "NAV.VOLUNTEERS.APPLICATIONS" | translate }}</span>
+              </button>
+            </div>
+          </div>
+          <button class="menu-item" (click)="navigate('merchant')">
             <span>{{ "NAV.MERCHANT" | translate }}</span>
           </button>
-          <button
-            mat-button
-            class="nav-button"
-            (click)="navigate('instrument')"
-          >
+          <button class="menu-item" (click)="navigate('instrument')">
             <span>{{ "NAV.INSTRUMENT" | translate }}</span>
           </button>
-
-          <!--   <button mat-button class="nav-button" (click)="navigate('user/home')">
-                        <span>{{ "NAV.PROFILE" | translate }}</span>
-                    </button>-->
           <button
             *ngIf="isLogged"
             mat-button
@@ -199,22 +217,18 @@
             <span>{{ "NAV.SIGN_OUT" | translate }}</span>
           </button>
         </div>
-        <mat-divider
-          class="divider nav-button menu-pc"
-          [vertical]="true"
-          style="height: 50px"
-        ></mat-divider>
+        <div class="px-2 border-l border-white"></div>
         <!-- end menu pc-->
 
-        <mat-select
-          class="lang-select"
+        <select
+          class="lang-select w-full mx-4 px-4 py-2 text-sm bg-transparent border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
           [(value)]="selectLang"
           (selectionChange)="setTransLanguage()"
         >
-          <mat-option *ngFor="let lang of TransLang" value="{{ lang }}"
-            >{{ lang }}
-          </mat-option>
-        </mat-select>
+          <option *ngFor="let lang of TransLang" value="{{ lang }}">
+            {{ lang }}
+          </option>
+        </select>
 
         <button
           type="button"
@@ -228,8 +242,8 @@
           </mat-icon>
         </button>
       </div>
-    </mat-toolbar>
+    </div>
     <!-- Add Content Here -->
     <ng-content></ng-content>
-  </mat-sidenav-content>
-</mat-sidenav-container>
+  </div>
+</div>

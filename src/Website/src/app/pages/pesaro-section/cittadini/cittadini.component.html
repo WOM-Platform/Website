@@ -1,0 +1,456 @@
+<div>
+  <div class="banner-width">
+    <img
+      class="w-full hidden lg:block"
+      src="/assets/images/pesaro2024/citizens/bannerSito.jpg"
+    />
+    <img
+      class="w-full block lg:hidden"
+      src="/assets/images/pesaro2024/citizens/bannerTelefono.jpg"
+    />
+  </div>
+  <div class="container">
+    <div class="mt-10 container justify-normal">
+      <h1 class="text-center" style="color: black">
+        <span [innerHTML]="'PESARO2024.CITIZENS.TITLE_FOR' | translate"></span
+        >{{ " "
+        }}<span
+          style="color: #2569ff"
+          [innerHTML]="'PESARO2024.CITIZENS.TITLE' | translate"
+        ></span>
+      </h1>
+      <div class="mt-6">
+        <!-- sottotiolo -->
+        <p
+          class="mb-0"
+          [innerHTML]="'PESARO2024.CITIZENS.PAGE_DESCR' | translate"
+        ></p>
+      </div>
+      <!-- <div class="mt-6">
+        <p
+          class="mb-0"
+          [innerHTML]="'PESARO2024.CITIZENS.DOWNLOAD_GUIDE' | translate"
+        ></p>
+      </div> -->
+      <div class="mt-6">
+        <h2
+          class="blue-wom"
+          [innerHTML]="
+            'PESARO2024.CITIZENS.SECTION_WOM_FOR_PESARO2024' | translate
+          "
+        ></h2>
+        <p
+          class="mt-6"
+          [innerHTML]="
+            'PESARO2024.CITIZENS.SECTION_WOM_FOR_PESARO2024_DESCR' | translate
+          "
+        ></p>
+      </div>
+
+      <div class="mt-6">
+        <h2
+          class="blue-wom"
+          [innerHTML]="'PESARO2024.CITIZENS.SECTION_WOM_POCKET' | translate"
+        ></h2>
+        <p
+          class="mt-6"
+          [innerHTML]="
+            'PESARO2024.CITIZENS.SECTION_WOM_POCKET_DESCR' | translate
+          "
+        ></p>
+      </div>
+      <div class="mt-6">
+        <h2
+          class="blue-wom"
+          [innerHTML]="'PESARO2024.CITIZENS.SECTION_TUTORIAL1' | translate"
+        ></h2>
+        <ul class="mt-6 ml-6 list-decimal list-outside">
+          <li
+            [innerHTML]="
+              'PESARO2024.CITIZENS.SECTION_TUTORIAL1_1_DESCR' | translate
+            "
+          ></li>
+          <div>
+            <app-store-logos
+              [appName]="'WOM POCKET'"
+              [appleURL]="
+                'https://apps.apple.com/it/app/wom-pocket/id1466969163'
+              "
+              [appleQR]="'/assets/images/pesaro2024/tourists/qr-code-ios.png'"
+              [googleURL]="
+                'https://play.google.com/store/apps/details?id=social.wom.pocket'
+              "
+              [googleQR]="
+                '/assets/images/pesaro2024/tourists/qr-code-android.png'
+              "
+            ></app-store-logos>
+          </div>
+          <li
+            [innerHTML]="
+              'PESARO2024.CITIZENS.SECTION_TUTORIAL1_2_DESCR' | translate
+            "
+          ></li>
+          <li
+            [innerHTML]="
+              'PESARO2024.CITIZENS.SECTION_TUTORIAL1_3_DESCR' | translate
+            "
+          ></li>
+        </ul>
+      </div>
+      <div class="mt-6">
+        <h2
+          class="blue-wom"
+          [innerHTML]="
+            'PESARO2024.CITIZENS.SECTION_INTERFACCIA_WOM_POCKET' | translate
+          "
+        ></h2>
+        <p
+          class="mt-6"
+          [innerHTML]="
+            'PESARO2024.CITIZENS.SECTION_INTERFACCIA_WOM_POCKET_DESCR'
+              | translate
+          "
+        ></p>
+        <ul class="ml-6 list-decimal list-outside">
+          <li
+            [innerHTML]="
+              'PESARO2024.CITIZENS.SECTION_INTERFACCIA_WOM_POCKET_1' | translate
+            "
+          ></li>
+          <li
+            [innerHTML]="
+              'PESARO2024.CITIZENS.SECTION_INTERFACCIA_WOM_POCKET_2' | translate
+            "
+          ></li>
+          <li
+            [innerHTML]="
+              'PESARO2024.CITIZENS.SECTION_INTERFACCIA_WOM_POCKET_3' | translate
+            "
+          ></li>
+          <li
+            [innerHTML]="
+              'PESARO2024.CITIZENS.SECTION_INTERFACCIA_WOM_POCKET_4' | translate
+            "
+          ></li>
+        </ul>
+        <div class="flex justify-center mt-8">
+          <img
+            class="px-5 max-w-full md:max-w-[400px]"
+            alt="btn-scan"
+            src="/assets/images/pesaro2024/tourists/scansiona.jpg"
+          />
+        </div>
+      </div>
+
+      <div class="mt-8">
+        <h2
+          class="blue-wom"
+          [innerHTML]="'PESARO2024.CITIZENS.SECTION_TUTORIAL2' | translate"
+        ></h2>
+        <p
+          class="mt-6"
+          [innerHTML]="
+            'PESARO2024.CITIZENS.SECTION_TUTORIAL2_DESCR_A' | translate
+          "
+        ></p>
+        <ul class="ml-6 list-decimal list-outside">
+          <li
+            [innerHTML]="
+              'PESARO2024.CITIZENS.SECTION_TUTORIAL2_A_1' | translate
+            "
+          ></li>
+          <li
+            [innerHTML]="
+              'PESARO2024.CITIZENS.SECTION_TUTORIAL2_A_2' | translate
+            "
+          ></li>
+          <li
+            [innerHTML]="
+              'PESARO2024.CITIZENS.SECTION_TUTORIAL2_A_3' | translate
+            "
+          ></li>
+          <li
+            [innerHTML]="
+              'PESARO2024.CITIZENS.SECTION_TUTORIAL2_A_4' | translate
+            "
+          ></li>
+          <li
+            [innerHTML]="
+              'PESARO2024.CITIZENS.SECTION_TUTORIAL2_A_5' | translate
+            "
+          ></li>
+        </ul>
+        <p
+          class="mt-6"
+          [innerHTML]="
+            'PESARO2024.CITIZENS.SECTION_TUTORIAL2_DESCR_B' | translate
+          "
+        ></p>
+        <ul class="ml-6 list-decimal list-outside">
+          <li
+            [innerHTML]="
+              'PESARO2024.CITIZENS.SECTION_TUTORIAL2_B_1' | translate
+            "
+          ></li>
+          <li
+            [innerHTML]="
+              'PESARO2024.CITIZENS.SECTION_TUTORIAL2_B_2' | translate
+            "
+          ></li>
+          <li
+            [innerHTML]="
+              'PESARO2024.CITIZENS.SECTION_TUTORIAL2_B_3' | translate
+            "
+          ></li>
+          <li
+            [innerHTML]="
+              'PESARO2024.CITIZENS.SECTION_TUTORIAL2_B_4' | translate
+            "
+          ></li>
+          <li
+            [innerHTML]="
+              'PESARO2024.CITIZENS.SECTION_TUTORIAL2_B_5' | translate
+            "
+          ></li>
+          <li
+            [innerHTML]="
+              'PESARO2024.CITIZENS.SECTION_TUTORIAL2_B_6' | translate
+            "
+          ></li>
+        </ul>
+      </div>
+
+      <div class="flex justify-center mt-8">
+        <img
+          class="max-w-[300px] md:max-w-[450px] lg:max-w-[500px]"
+          alt="invitation"
+          src="/assets/images/pesaro2024/tourists/invitation.jpg"
+        />
+      </div>
+      <div class="tutorial-grid mt-8">
+        <h2
+          class="tutorial-grid-title blue-wom"
+          [innerHTML]="'PESARO2024.CITIZENS.SECTION_TUTORIAL3' | translate"
+        ></h2>
+
+        <ul class="ml-6 mt-6 list-decimal list-outside tutorial-grid-text">
+          <li
+            [innerHTML]="'PESARO2024.CITIZENS.SECTION_TUTORIAL3_1' | translate"
+          ></li>
+          <li
+            [innerHTML]="'PESARO2024.CITIZENS.SECTION_TUTORIAL3_2' | translate"
+          ></li>
+          <li
+            [innerHTML]="'PESARO2024.CITIZENS.SECTION_TUTORIAL3_3' | translate"
+          ></li>
+          <li
+            [innerHTML]="'PESARO2024.CITIZENS.SECTION_TUTORIAL3_4' | translate"
+          ></li>
+          <li
+            [innerHTML]="'PESARO2024.CITIZENS.SECTION_TUTORIAL3_5' | translate"
+          ></li>
+          <li
+            [innerHTML]="'PESARO2024.CITIZENS.SECTION_TUTORIAL3_6' | translate"
+          ></li>
+          <li
+            [innerHTML]="'PESARO2024.CITIZENS.SECTION_TUTORIAL3_7' | translate"
+          ></li>
+          <li
+            [innerHTML]="'PESARO2024.CITIZENS.SECTION_TUTORIAL3_8' | translate"
+          ></li>
+          <li
+            [innerHTML]="'PESARO2024.CITIZENS.SECTION_TUTORIAL3_9' | translate"
+          ></li>
+        </ul>
+
+        <div class="image-with-description">
+          <div class="image-with-description-image">
+            <img
+              class="max-h-[350px]"
+              src="/assets/images/toolkit-for-merchant/facsimile.jpeg"
+              alt="facsimile"
+            />
+          </div>
+          <p
+            class="image-description"
+            [innerHTML]="
+              'PESARO2024.CITIZENS.SECTION_TUTORIAL3_DESCR_IMG' | translate
+            "
+          ></p>
+        </div>
+      </div>
+      <div class="image-with-description">
+        <div class="image-with-description-image mt-8">
+          <img
+            class="max-w-[300px] md:max-w-[450px] lg:max-w-[500px]"
+            src="/assets/images/toolkit-for-merchant/vetrofania.jpg"
+            alt="vetrofania"
+          />
+        </div>
+        <p
+          class="image-description"
+          [innerHTML]="
+            'PESARO2024.CITIZENS.SECTION_STICKER_DESCR_IMG' | translate
+          "
+        ></p>
+      </div>
+
+      <div class="tutorial-grid mt-8">
+        <div class="tutorial-grid-title">
+          <h2
+            class="blue-wom"
+            [innerHTML]="'PESARO2024.CITIZENS.SECTION_TUTORIAL4' | translate"
+          ></h2>
+        </div>
+        <div class="tutorial-grid-text">
+          <p
+            [innerHTML]="
+              'PESARO2024.CITIZENS.SECTION_TUTORIAL4_DESCR' | translate
+            "
+          ></p>
+          <ul class="ml-6 list-decimal list-outside">
+            <li
+              [innerHTML]="
+                'PESARO2024.CITIZENS.SECTION_TUTORIAL4_1' | translate
+              "
+            ></li>
+            <li
+              [innerHTML]="
+                'PESARO2024.CITIZENS.SECTION_TUTORIAL4_2' | translate
+              "
+            ></li>
+            <li
+              [innerHTML]="
+                'PESARO2024.CITIZENS.SECTION_TUTORIAL4_3' | translate
+              "
+            ></li>
+            <li
+              [innerHTML]="
+                'PESARO2024.CITIZENS.SECTION_TUTORIAL4_4' | translate
+              "
+            ></li>
+          </ul>
+        </div>
+        <div class="tutorial-grid-img">
+          <img
+            class="max-w-[250px]"
+            src="/assets/images/pesaro2024/tourists/womStepCounter.jpg"
+            alt="womFit"
+          />
+        </div>
+      </div>
+
+      <div class="tutorial-grid mt-6">
+        <h2
+          class="blue-wom tutorial-grid-title"
+          [innerHTML]="'PESARO2024.CITIZENS.SECTION_TUTORIAL5' | translate"
+        ></h2>
+        <div class="tutorial-grid-text">
+          <ul class="ml-6 list-decimal list-outside">
+            <li
+              [innerHTML]="
+                'PESARO2024.CITIZENS.SECTION_TUTORIAL5_1' | translate
+              "
+            ></li>
+            <li
+              [innerHTML]="
+                'PESARO2024.CITIZENS.SECTION_TUTORIAL5_2' | translate
+              "
+            ></li>
+            <li
+              [innerHTML]="
+                'PESARO2024.CITIZENS.SECTION_TUTORIAL5_3' | translate
+              "
+            ></li>
+            <li
+              [innerHTML]="
+                'PESARO2024.CITIZENS.SECTION_TUTORIAL5_4' | translate
+              "
+            ></li>
+            <li
+              [innerHTML]="
+                'PESARO2024.CITIZENS.SECTION_TUTORIAL5_5' | translate
+              "
+            ></li>
+          </ul>
+        </div>
+        <div class="tutorial-grid-img">
+          <img
+            class="max-w-[250px]"
+            src="/assets/images/pesaro2024/tourists/storico.jpg"
+            alt="womFit"
+          />
+        </div>
+      </div>
+
+      <div class="mt-6">
+        <h2
+          class="blue-wom"
+          [innerHTML]="'PESARO2024.CITIZENS.SECTION_FAQ' | translate"
+        ></h2>
+        <div *ngFor="let faq of faqs; let i = index">
+          <div class="mt-6">
+            <div
+              class="font-semibold mt-3 cursor-pointer bg-[#EFEFF1] rounded-xl px-6 py-2 flex justify-between items-center"
+              (click)="toggleFaq(i)"
+            >
+              <p class="mb-0">
+                {{ faq.header }}
+              </p>
+              <i
+                [ngClass]="{ 'rotate-180': faq.isOpen }"
+                class="fas fa-chevron-down"
+              ></i>
+            </div>
+            <div *ngIf="faq.isOpen">
+              <div *ngIf="faq.content.length <= 1; else moreElements">
+                <p
+                  class="mb-0 px-6 py-2 border-b-2 border-l-2 border-r-2 border-black rounded-b-lg"
+                >
+                  {{ faq.content }}
+                </p>
+              </div>
+              <ng-template #moreElements>
+                <div
+                  class="mb-0 px-6 py-2 border-b-2 border-l-2 border-r-2 border-black rounded-b-lg"
+                >
+                  <p
+                    class="mb-0"
+                    *ngFor="let cont of faq.content; let i = index"
+                  >
+                    {{ cont }}
+                  </p>
+                </div>
+              </ng-template>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <p
+            [innerHTML]="'PESARO2024.CITIZENS.CONTACTS_DESCR' | translate"
+            class="mb-2 mt-6"
+          ></p>
+          <p class="mb-0">
+            <a
+              class="font-semibold blue-wom"
+              target="_"
+              href="https://www.facebook.com/wom.digit.srl"
+              ><i class="fab fa-facebook"></i>{{ " " }}
+              <span class="underline">wom.digit.srl</span></a
+            >
+          </p>
+          <p class="mb-0">
+            <a
+              class="font-semibold blue-wom"
+              target="_"
+              href="https://www.instagram.com/wom.italia/"
+              ><i class="fab fa-instagram"></i>{{ " " }}
+              <span class="underline">wom.italia</span></a
+            >
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,8 +1,9 @@
-.mat-toolbar {
-  background-color: #444558;
+.submenu {
+  @apply text-sm font-montserrat font-light absolute left-0 w-max bg-white border border-gray-200 rounded-md shadow-lg opacity-0 invisible group-hover:visible group-hover:opacity-100 transition-opacity duration-200 z-10 pointer-events-none group-hover:pointer-events-auto;
 }
-button.mat-menu-item {
-  outline: none;
+
+.menu-item {
+  @apply text-white flex items-center text-sm font-montserrat font-light hover:bg-[#a0a4da] rounded-3xl px-2 py-1 duration-200;
 }
 
 .example-spacer {
@@ -23,8 +24,8 @@ img {
 }
 
 .nav-button {
-  color: white !important;
-  @apply font-light;
+  color: white;
+  @apply font-light text-sm flex justify-center items-center;
 }
 
 .nav-icon-button {
@@ -102,9 +103,6 @@ mat-nav-list a {
 mat-toolbar {
   background-color: #444558;
 }
-button.mat-menu-item {
-  outline: none;
-}
 
 .example-spacer {
   flex: 1 1 auto;
@@ -178,9 +176,5 @@ button.selected:active {
   }
   .menu-pc {
     @apply flex items-center text-white;
-  }
-
-  .menu-pc button {
-    @apply font-semibold;
   }
 }
