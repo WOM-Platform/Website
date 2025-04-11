@@ -2,13 +2,12 @@ footer {
   display: flex;
   justify-content: center;
   text-align: center;
-  padding-top: 1rem;
-  background-color: #444558;
-  color: white;
-  padding-bottom: 1rem;
 }
 
 a {
-  color: aqua;
+  @apply text-blue-500 cursor-pointer;
 }
 
+p {
+  @apply mb-0;
+}

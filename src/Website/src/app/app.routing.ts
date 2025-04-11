@@ -9,7 +9,6 @@ import { ApplicationsLibrariesComponent } from "./pages/volunteers/applications/
 import { ApplicationsOverviewComponent } from "./pages/volunteers/applications/overview/overview.component";
 import { ApplicationsWomFitComponent } from "./pages/volunteers/applications/womfit/womfit.component";
 import { ApplicationsUniversitiesComponent } from "./pages/volunteers/applications/universities/universities.component";
-import { ContactsComponent } from "./pages/contacts/contacts.component";
 import { HomeComponent } from "./pages/home";
 import { InstrumentComponent } from "./pages/instrument/instrument.component";
 import { MerchantComponent } from "./pages/merchant/merchant.component";
@@ -30,13 +29,16 @@ import { UrbinoComponent } from "./pages/about/urbino/urbino.component";
 import { VolunteerComponent } from "./pages/volunteers/volunteer/volunteer.component";
 import { ReteDelleRetiComponent } from "./pages/projects/rete-delle-reti/rete-delle-reti-component";
 import { Pesaro2024Component } from "./pages/pesaro2024-section/pesaro2024/pesaro2024.component";
-import { EsercentiComponent } from "./pages/pesaro2024-section/esercenti/esercenti.component";
 import { Pesaro2024SectionComponent } from "./pages/pesaro2024-section/pesaro2024-section.component";
-import { TuristiComponent } from "./pages/pesaro2024-section/turisti/turisti.component";
-import { CittadiniComponent } from "./pages/pesaro2024-section/cittadini/cittadini.component";
+import { TuristiComponent } from "./pages/pesaro-section/turisti/turisti.component";
+import { CittadiniComponent } from "./pages/pesaro-section/cittadini/cittadini.component";
 import { VolontarxComponent } from "./pages/pesaro2024-section/volontarx/volontarx.component";
-import { AlbergatoriComponent } from "./pages/pesaro2024-section/albergatori/albergatori.component";
+import { AlbergatoriComponent } from "./pages/pesaro-section/albergatori/albergatori.component";
 import { Sharper2024Component } from "./pages/uniurb/sharper2024/sharper2024.component";
+import { PesaroComponent } from "./pages/pesaro-section/pesaro/pesaro.component";
+import { PesaroSectionComponent } from "./pages/pesaro-section/pesaro-section.component";
+import { pesaro2024RedirectGuard } from "./_helpers/pesaro2024-redirect.guard";
+import { EsercentiComponent } from "./pages/pesaro-section/esercenti/esercenti.component";
 
 const routes: Routes = [
   {
@@ -96,6 +98,54 @@ const routes: Routes = [
         ],
       },
       {
+        path: "pesaro",
+        component: PesaroComponent,
+        data: {
+          breadcrumb: "BREADCRUMBS.PESARO.PESARO",
+        },
+        children: [
+          {
+            path: "",
+            component: PesaroComponent,
+          },
+          {
+            path: "albergatori",
+            component: AlbergatoriComponent,
+            data: {
+              breadcrumb: "BREADCRUMBS.PESARO.HOTELIERS",
+            },
+          },
+          {
+            path: "albergatori",
+            component: AlbergatoriComponent,
+            data: {
+              breadcrumb: "BREADCRUMBS.PESARO.HOTELIERS",
+            },
+          },
+          {
+            path: "esercenti",
+            component: EsercentiComponent,
+            data: {
+              breadcrumb: "BREADCRUMBS.PESARO.MERCHANTS",
+            },
+          },
+          {
+            path: "turisti",
+            component: TuristiComponent,
+            data: {
+              breadcrumb: "BREADCRUMBS.PESARO.TOURISTS",
+            },
+          },
+          {
+            path: "cittadini",
+            component: CittadiniComponent,
+            data: {
+              breadcrumb: "BREADCRUMBS.PESARO.CITIZENS",
+            },
+          },
+        ],
+      },
+      {
         path: "pesaro2024",
         component: Pesaro2024SectionComponent,
         data: {
@@ -107,40 +157,17 @@ const routes: Routes = [
             component: Pesaro2024Component,
           },
           {
-            path: "albergatori",
-            component: AlbergatoriComponent,
-            data: {
-              breadcrumb: "BREADCRUMBS.PESARO2024.HOTELIERS",
-            },
-          },
-          {
-            path: "esercenti",
-            component: EsercentiComponent,
-            data: {
-              breadcrumb: "BREADCRUMBS.PESARO2024.MERCHANTS",
-            },
-          },
-          {
-            path: "turisti",
-            component: TuristiComponent,
-            data: {
-              breadcrumb: "BREADCRUMBS.PESARO2024.TOURISTS",
-            },
-          },
-          {
-            path: "cittadini",
-            component: CittadiniComponent,
-            data: {
-              breadcrumb: "BREADCRUMBS.PESARO2024.CITIZENS",
-            },
-          },
-          {
             path: "volontarx",
             component: VolontarxComponent,
             data: {
               breadcrumb: "BREADCRUMBS.PESARO2024.VOLUNTEERS",
             },
           },
+          {
+            path: ":childPath",
+            canActivate: [pesaro2024RedirectGuard],
+            component: Pesaro2024Component,
+          }, // Apply the guard here
         ],
       },
       {
@@ -192,13 +219,6 @@ const routes: Routes = [
         component: InstrumentComponent,
         data: {
           breadcrumb: "BREADCRUMBS.INSTRUMENT",
-        },
-      },
-      {
-        path: "contacts",
-        component: ContactsComponent,
-        data: {
-          breadcrumb: "BREADCRUMBS.CONTACTS",
         },
       },
       {

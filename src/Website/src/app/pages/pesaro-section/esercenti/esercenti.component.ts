@@ -1,11 +1,15 @@
-import { Component, HostBinding } from "@angular/core";
+import { CommonModule } from "@angular/common";
+import { Component } from "@angular/core";
+import { TranslateModule } from "@ngx-translate/core";
+import { StoreLogosComponent } from "src/app/components/store-logos/store-logos.component";
 
 @Component({
-    selector: "app-esercenti",
-    templateUrl: "./esercenti.component.html",
-    styleUrls: ["./esercenti.component.css"],
-    animations: [],
-    standalone: false
+  selector: "app-esercenti",
+  templateUrl: "./esercenti.component.html",
+  styleUrls: ["./esercenti.component.css"],
+  animations: [],
+  imports: [CommonModule, TranslateModule, StoreLogosComponent],
+  standalone: true,
 })
 export class EsercentiComponent {
   faqs = [

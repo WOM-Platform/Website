@@ -2,28 +2,26 @@ steps:
   - name: gcr.io/cloud-builders/docker
     args:
       - build
-      - '--no-cache'
-      - '--build-arg'
-      - '"ARG_GOOGLE_MAPS_API=${_GOOGLE_MAPS_API}"'
-      - '--build-arg'
-      - '"ARG_SEND_IN_BLUE_API=${_SEND_IN_BLUE_API}"'
-      - '--build-arg'
-      - '"ARG_SENTRY_DSN=${_SENTRY_DSN}"'
-      - '-t'
-      - '$_GCR_HOSTNAME/$PROJECT_ID/$_SERVICE_NAME:$COMMIT_SHA'
-      - './src/Website'
+      - "--no-cache"
+      - "--build-arg"
+      - "ARG_GOOGLE_MAPS_API=${_GOOGLE_MAPS_API}"
+      - "--build-arg"
+      - "ARG_SENTRY_DSN=${_SENTRY_DSN}"
+      - "-t"
+      - "$_GCR_HOSTNAME/$PROJECT_ID/$_SERVICE_NAME:$COMMIT_SHA"
+      - "./src/Website"
     id: Build
 
   - name: gcr.io/cloud-builders/docker
     args:
       - push
-      - '$_GCR_HOSTNAME/$PROJECT_ID/$_SERVICE_NAME:$COMMIT_SHA'
+      - "$_GCR_HOSTNAME/$PROJECT_ID/$_SERVICE_NAME:$COMMIT_SHA"
     id: Push
 
-  - name: 'gcr.io/cloud-builders/gcloud'
-    entrypoint: 'bash'
+  - name: "gcr.io/cloud-builders/gcloud"
+    entrypoint: "bash"
     args:
-      - '-c'
+      - "-c"
       - |
         mkdir -p ~/.ssh
         gcloud secrets versions access latest --secret=WOM_PROD_SERVER_SSH_KEY > ~/.ssh/gcloud_private_key
@@ -39,7 +37,7 @@ steps:
     id: Deploy
 
 images:
-  - '$_GCR_HOSTNAME/$PROJECT_ID/$_SERVICE_NAME:$COMMIT_SHA'
+  - "$_GCR_HOSTNAME/$PROJECT_ID/$_SERVICE_NAME:$COMMIT_SHA"
 
 substitutions:
   _GCR_HOSTNAME: eu.gcr.io
@@ -48,7 +46,6 @@ substitutions:
   _WOM_PROD_SERVER_HOST: localhost
   _WOM_PROD_SERVER_WEBSITE_PWD: /path/to/wom-web
   _GOOGLE_MAPS_API: .
-  _SEND_IN_BLUE_API: .
   _SENTRY_DSN: .
 
 tags:

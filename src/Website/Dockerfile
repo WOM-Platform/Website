@@ -1,21 +1,20 @@
 # BUILD step
-FROM node:22.13.1 as build
+FROM node:22.13.1 AS build
 
 # Import environment variables from build args
 
 ARG ARG_GOOGLE_MAPS_API
 ENV GOOGLE_MAPS_API=$ARG_GOOGLE_MAPS_API
-
-ARG ARG_SEND_IN_BLUE_API
-ENV SEND_IN_BLUE_API=$ARG_SEND_IN_BLUE_API
+RUN echo "Argument ${ARG_GOOGLE_MAPS_API} => ${GOOGLE_MAPS_API}"
 
 ARG ARG_SENTRY_DSN
 ENV SENTRY_DSN=$ARG_SENTRY_DSN
+RUN echo "Argument ${ARG_SENTRY_DSN} => ${SENTRY_DSN}"
 
 WORKDIR /app
 
 # Add `/app/node_modules/.bin` to $PATH
-ENV PATH /app/node_modules/.bin:$PATH
+ENV PATH=/app/node_modules/.bin:$PATH
 
 # Dependencies
 COPY package.json /app/package.json

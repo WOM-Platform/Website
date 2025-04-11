@@ -1,12 +1,15 @@
+import { CommonModule } from "@angular/common";
 import { Component, OnInit } from "@angular/core";
 import { DomSanitizer, SafeHtml } from "@angular/platform-browser";
-import { TranslateService } from "@ngx-translate/core";
+import { TranslateModule, TranslateService } from "@ngx-translate/core";
+import { StoreLogosComponent } from "src/app/components/store-logos/store-logos.component";
 
 @Component({
-    selector: "app-cittadini",
-    templateUrl: "./cittadini.component.html",
-    styleUrls: ["./cittadini.component.css"],
-    standalone: false
+  selector: "app-cittadini",
+  templateUrl: "./cittadini.component.html",
+  styleUrls: ["./cittadini.component.css"],
+  imports: [CommonModule, TranslateModule, StoreLogosComponent],
+  standalone: true,
 })
 export class CittadiniComponent implements OnInit {
   faqs = [];
