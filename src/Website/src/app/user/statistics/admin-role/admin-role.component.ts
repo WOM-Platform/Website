@@ -202,8 +202,6 @@ export class AdminRoleComponent implements OnInit, OnDestroy {
   }
 
   openModalReport() {
-    console.log("openModalReport");
-    console.log(this.filters);
     this.matDialog
       .open(DialogAnnualReportMerchantsComponent, {
         data: {

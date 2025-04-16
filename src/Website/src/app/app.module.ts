@@ -90,15 +90,10 @@ import { LayoutModule } from "@angular/cdk/layout";
 import { AuthModule } from "./user/auth.module";
 import { ReteDelleRetiComponent } from "./pages/projects/rete-delle-reti/rete-delle-reti-component";
 import { Pesaro2024Component } from "./pages/pesaro2024-section/pesaro2024/pesaro2024.component";
-import { EsercentiComponent } from "./pages/pesaro2024-section/esercenti/esercenti.component";
-import { QrStoreLogoComponent } from "./components/store-logos/qr-store-logo/qr-store-logo.component";
 import { Pesaro2024SectionComponent } from "./pages/pesaro2024-section/pesaro2024-section.component";
-import { TuristiComponent } from "./pages/pesaro2024-section/turisti/turisti.component";
-import { CittadiniComponent } from "./pages/pesaro2024-section/cittadini/cittadini.component";
 import { NgChartsModule } from "ng2-charts";
 import { VolontarxComponent } from "./pages/pesaro2024-section/volontarx/volontarx.component";
 import { SearchSourceComponent } from "./user/components/user-access-list/search-source/search-source.component";
-import { AlbergatoriComponent } from "./pages/pesaro2024-section/albergatori/albergatori.component";
 import localeIt from "@angular/common/locales/it";
 import { StoreLogosComponent } from "./components/store-logos/store-logos.component";
 import { AnimatedNumberComponent } from "./components/animated-number/animated-number.component";
@@ -146,7 +141,6 @@ const httpInterceptorProviders = environment.mock
   declarations: [
     AboutComponent,
     AboutSectionComponent,
-    AlbergatoriComponent,
     AppComponent,
     ApplicationsAworldComponent,
     ApplicationsBalanceComponent,
@@ -186,14 +180,10 @@ const httpInterceptorProviders = environment.mock
     ResetPasswordComponent,
     ReteDelleRetiComponent,
     SignInComponent,
-    EsercentiComponent,
     UrbinoComponent,
     UserFormComponent,
     VolunteerComponent,
     Pesaro2024SectionComponent,
-    TuristiComponent,
-    CittadiniComponent,
-    VolontarxComponent,
   ],
   exports: [],
   bootstrap: [AppComponent],
