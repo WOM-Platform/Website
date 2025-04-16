@@ -9,11 +9,11 @@
       "APPLICATIONS": "Come guadagnare WOM"
     },
     "ABOUT": {
-      "TITLE": "Che cos'è",
-      "ABOUT": "Che cos'è",
+      "TITLE": "Che cos’è",
+      "ABOUT": "Che cos’è",
       "PESARO": "WOM per Pesaro",
-      "URBINO": "Wom per Urbino",
-      "FANO": "Wom per Fano"
+      "URBINO": "WOM per Urbino",
+      "FANO": "WOM per Fano"
     },
     "PROJECTS": {
       "RETE-DELLE-RETI": "Rete delle Reti"
@@ -380,13 +380,13 @@
   "ABOUT": {
     "TITLE": "La piattaforma WOM",
     "SECTION_A": {
-      "A": "WOM sta per <b>Worth One Minute</b>, cioè \"Vale un minuto\". È una piattaforma di ricompensa general-purpose basata su un sistema di scambio di voucher che premia l’impatto positivo di azioni e attività svolte da persone che contribuiscono a un bene comune.",
-      "B": "Molte azioni hanno un <b>valore sociale intrinseco</b>, un effetto noto in economia come \"esternalità positiva\". WOM riconosce l’impatto di queste azioni e fornisce uno strumento per premiare queste esternalità positive mediante <b>l’emissione di WOM.</b>"
+      "A": "WOM sta per <b>Worth One Minute</b>, cioè “Vale un minuto”. È una piattaforma di ricompensa general-purpose basata su un sistema di scambio di voucher che premia l’impatto positivo di azioni e attività svolte da persone che contribuiscono a un bene comune.",
+      "B": "Molte azioni hanno un <b>valore sociale intrinseco</b>, un effetto noto in economia come “esternalità positiva”. WOM riconosce l’impatto di queste azioni e fornisce uno strumento per premiare queste esternalità positive mediante <b>l’emissione di WOM.</b>"
     },
     "SECTION_A_2": {
       "TITLE": "Cosa sono i WOM?",
       "A": "I WOM sono <b>voucher digitali</b> progettati per riconoscere il valore di azioni che hanno un effetto positivo. Ogni voucher WOM premia <b>un minuto di impegno socialmente prezioso</b> svolto da un individuo.",
-      "B": "I voucher WOMs sono <b>anonimi</b>. Gli unici dati che raccolgono sono relativi al loro scopo sociale e dove e quando vengono generati.\nI voucher WOM non hanno <b>controvalore in denaro</b>. Sono la prova di uno sforzo socialmente prezioso che un individuo ha effettuato verso una causa condivisa.",
+      "B": "I voucher WOM sono <b>anonimi</b>. Gli unici dati che raccolgono sono relativi al loro scopo sociale e dove e quando vengono generati.\nI voucher WOM non hanno <b>controvalore in denaro</b>. Sono la prova di uno sforzo socialmente prezioso che un individuo ha effettuato verso una causa condivisa.",
       "C": "Il <b>Registry</b> gestisce lo scambio dei voucher e tiene traccia della creazione e del consumo dei WOM.\nLa piattaforma WOM è un <b>sistema centralizzato</b>. Il <b>Registry</b> rappresenta l’autorità che gestisce lo scambio delle chiavi crittografiche (che consentono lo scambio sicuro delle informazioni) e verifica che i voucher siano guadagnati e spesi correttamente.\nIl Registry <b>non memorizza l’identità degli utenti e i loro dati</b>. I voucher WOM sono anonimi e il loro utilizzo non è tracciato."
     },
     "SECTION_B": {
