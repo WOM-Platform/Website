@@ -3,12 +3,20 @@ import { Component, OnInit } from "@angular/core";
 import { DomSanitizer, SafeHtml } from "@angular/platform-browser";
 import { TranslateModule, TranslateService } from "@ngx-translate/core";
 import { StoreLogosComponent } from "src/app/components/store-logos/store-logos.component";
+import { FaqListComponent } from "../../../components/faq-list/faq-list.component";
+import { BtnFaqComponent } from "../../../components/btn-faq/btn-faq.component";
 
 @Component({
   selector: "app-turisti",
   templateUrl: "./turisti.component.html",
   styleUrls: ["./turisti.component.css"],
-  imports: [CommonModule, TranslateModule, StoreLogosComponent],
+  imports: [
+    CommonModule,
+    TranslateModule,
+    StoreLogosComponent,
+    FaqListComponent,
+    BtnFaqComponent,
+  ],
   standalone: true,
 })
 export class TuristiComponent implements OnInit {

@@ -32,6 +32,19 @@ export class DialogAnnualReportMerchantsComponent implements OnInit {
 
   currentYear = String(new Date().getFullYear());
 
+  selectedYear = Number(this.currentYear);
+  years: number[] = [
+    new Date().getFullYear(),
+    new Date().getFullYear() - 1,
+    new Date().getFullYear() - 2,
+    new Date().getFullYear() - 3,
+    new Date().getFullYear() - 4,
+    new Date().getFullYear() - 5,
+    new Date().getFullYear() - 6,
+    new Date().getFullYear() - 7,
+    new Date().getFullYear() - 8,
+    new Date().getFullYear() - 9,
+  ];
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     private merchantService: MerchantService,
@@ -41,11 +54,38 @@ export class DialogAnnualReportMerchantsComponent implements OnInit {
 
   ngOnInit() {
     this.filters = this.data.filters;
-    this.currentYear = String(this.filters.dateFilters.startDate.getFullYear());
+    if (this.filters.dateFilters.startDate) {
+      this.currentYear = String(
+        this.filters.dateFilters.startDate.getFullYear()
+      );
+    }
+
     this.loadDataTable();
   }
 
+  onYearChange(event: any) {
+    console.log("Year changed:", event);
+    this.selectedYear = Number(event.target.value);
+    if (!this.selectedYear || this.selectedYear === 0) {
+      // Optional: handle "Seleziona un anno"
+      console.warn("No valid year selected.");
+      return;
+    }
+
+    this.currentYear = this.selectedYear.toString();
+
+    this.filters.dateFilters.startDate = new Date(this.selectedYear, 0, 1);
+    this.filters.dateFilters.endDate = new Date(this.selectedYear, 11, 31);
+
+    console.log(
+      "Updated date filters:",
+      this.filters.dateFilters.startDate,
+      this.filters.dateFilters.endDate
+    );
+    this.loadDataTable();
+  }
   loadDataTable() {
+    console.log("Loading data table with filters:");
     this.statsService
       .getAnnualReportMerchants(
         this.filters.dateFilters,
@@ -131,47 +171,30 @@ export class DialogAnnualReportMerchantsComponent implements OnInit {
       height: 1600,
     });
 
-    const year = this.currentYear;
-
     const bgImg = fabric.FabricImage.fromURL(
       "assets/images/statistics/copertina.jpeg"
-    ).then(function (img) {
+    ).then((img) => {
       canvas.backgroundImage = img;
       img.canvas = canvas;
       canvas.add(img);
 
-      const anno = "2025";
+      console.log("Background image added to canvas ", this.selectedYear);
+
       const titleToAdd = new fabric.FabricText(
-        `Certificato di impatto sociale ${year}`,
+        `Certificato di impatto sociale ${String(this.selectedYear)}`,
         {
-          left: 280, // X Position
-          top: 60, // Y Position
+          left: 280,
+          top: 60,
           fontSize: 60,
-          fill: "white", // Text color
-          fontWeight: "800", // Bold text
+          fill: "white",
+          fontWeight: "800",
           fontFamily: "Roboto",
           width: 1600,
         }
       );
 
       canvas.add(titleToAdd);
-      // const coseACaso = new fabric.FabricText(
-      //   "Certificato di impatto sociale",
-      //   {
-      //     // left: 260, // X Position
-      //     // top: 60, // Y Position
-      //     top: 30, // Y Position
-      //     fontSize: 60, // Font size
-      //     fill: "white", // Text color
-      //     fontWeight: "600", // Bold text
-      //     fontFamily: "Montserrat",
-      //     width: 1600,
-      //     textAlign: "center",
-      //   }
-      // );
-      // canvas.add(coseACaso);
       canvas.renderAll();
-      console.log(canvas.backgroundImage);
     });
 
     // const imageUrl =

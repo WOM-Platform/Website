@@ -39,6 +39,7 @@ import { PesaroComponent } from "./pages/pesaro-section/pesaro/pesaro.component"
 import { PesaroSectionComponent } from "./pages/pesaro-section/pesaro-section.component";
 import { pesaro2024RedirectGuard } from "./_helpers/pesaro2024-redirect.guard";
 import { EsercentiComponent } from "./pages/pesaro-section/esercenti/esercenti.component";
+import { FaqComponent } from "./pages/faq/faq.component";
 
 const routes: Routes = [
   {
@@ -57,6 +58,13 @@ const routes: Routes = [
         component: HomeComponent,
         data: {
           breadcrumb: "BREADCRUMBS.HOME",
+        },
+      },
+      {
+        path: "faq",
+        component: FaqComponent,
+        data: {
+          breadcrumb: "BREADCRUMBS.FAQ",
         },
       },
       {
@@ -99,13 +107,11 @@ const routes: Routes = [
       },
       {
         path: "pesaro",
-        component: PesaroComponent,
-        data: {
-          breadcrumb: "BREADCRUMBS.PESARO.PESARO",
-        },
+
         children: [
           {
             path: "",
+            pathMatch: "full",
             component: PesaroComponent,
           },
           {
@@ -167,7 +173,7 @@ const routes: Routes = [
             path: ":childPath",
             canActivate: [pesaro2024RedirectGuard],
             component: Pesaro2024Component,
-          }, // Apply the guard here
+          },
         ],
       },
       {

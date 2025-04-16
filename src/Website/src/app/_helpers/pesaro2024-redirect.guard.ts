@@ -11,10 +11,9 @@ export const pesaro2024RedirectGuard: CanActivateFn = (route, state) => {
   const pathsToRedirect = ["albergatori", "esercenti", "turisti", "cittadini"];
 
   if (childPath && pathsToRedirect.includes(childPath)) {
-    console.log(`Redirecting to /pesaro/${childPath}`);
     return router.createUrlTree(["/pesaro", childPath]);
   }
 
-  // Allow navigation if it's not a path that needs redirection
+  // Allow navigation if path no redirection needs
   return true;
 };

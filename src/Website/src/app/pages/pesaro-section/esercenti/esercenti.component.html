@@ -2,11 +2,11 @@
   <div class="banner-width">
     <img
       class="w-full hidden lg:block"
-      src="/src/Website/src/assets/images/pesaro/toolkit-for-merchant/banner.jpg"
+      src="/assets/images/pesaro/toolkit-for-merchant/banner.jpg"
     />
     <img
       class="w-full block lg:hidden"
-      src="/src/Website/src/assets/images/pesaro/toolkit-for-merchant/banner-mb.jpg"
+      src="/assets/images/pesaro/toolkit-for-merchant/banner-mb.webp"
     />
   </div>
   <div class="container">
@@ -27,7 +27,7 @@
         <p class="mb-0">
           <a
             class="font-semibold underline"
-            href="/src/Website/src/assets/images/pesaro/toolkit-for-merchant/wom-Pesaro2024-toolkit-esercenti.pdf"
+            href="/assets/images/pesaro/toolkit-for-merchant/wom-Pesaro2024-toolkit-esercenti.pdf"
             target="_blank"
           >
             Scarica la guida in versione in PDF</a
@@ -35,16 +35,15 @@
         </p>
       </div>
       <div class="mt-6">
-        <h2 class="blue-wom">WOM per Pesaro 2024</h2>
+        <h2 class="blue-wom">WOM per Pesaro</h2>
         <p class="mt-6">
-          Il Comune di Pesaro, nell&rsquo;ambito di
-          <strong>Pesaro 2024</strong> e per iniziativa della
+          Il Comune di Pesaro per iniziativa della
           <strong>Casa della Tecnologie Emergenti</strong>, ha adottato la
           piattaforma digitale <strong>WOM</strong>, presentata
           all&rsquo;inaugurazione del 20 gennaio, per il coinvolgimento attivo
           di cittadini e turisti. Chiunque partecipi alle iniziative culturali o
-          visiti i luoghi di Pesaro 2024 pu&ograve; guadagnare punti, detti WOM,
-          che attestano il
+          visiti i luoghi della città di Pesaro pu&ograve; guadagnare punti,
+          detti WOM, che attestano il
           <strong>valore sociale generato dalla partecipazione</strong>.
           Tecnicamente la riscossione dei WOM avviene inquadrando con
           l&rsquo;applicazione <strong>WOM Pocket</strong> gli speciali QR Code
@@ -64,8 +63,8 @@
           <strong>enti pubblici </strong>e <strong>privati </strong>possono
           liberamente decidere di concedere sconti o agevolazioni su beni o
           servizi a chi è in possesso di WOM, al duplice scopo di contribuire
-          indirettamente al successo di Pesaro 2024 e promuovere la propria
-          attività con una campagna di promozione originale e mirata.
+          indirettamente al successo della città di Pesaro e promuovere la
+          propria attività con una campagna di promozione originale e mirata.
           L&rsquo;entità dello sconto praticato e il numero di WOM necessari a
           ottenerlo sono a totale discrezione di ogni esercente, che ha a
           disposizione l&rsquo;applicazione <strong>WOM POS</strong> per
@@ -212,13 +211,13 @@
         <div class="flex flex-col items-center mt-6 gap-6">
           <img
             class="max-w-[300px] lg:max-w-[600px]"
-            src="/src/Website/src/assets/images/pesaro/toolkit-for-merchant/vetrofania.jpg"
+            src="/assets/images/pesaro/vetrofania.png"
             alt="vetrofania"
           />
           <h2 class="text-center">
             <a
               class="font-semibold text-center underline"
-              href="/src/Website/src/assets/images/pesaro/toolkit-for-merchant/Pesaro2024-vetrofania.pdf"
+              href="/assets/images/pesaro/toolkit-for-merchant/Pesaro2024-vetrofania.pdf"
               target="_blank"
               ><i class="fas fa-file-pdf"></i> Scarica qui l'adesivo da esporre
               in vetrina</a
@@ -314,7 +313,7 @@
             Pocket, in ordine di prossimità o su mappa, ma ti consigliamo di
             annunciare
             <span class="font-semibold">sui tuoi canali social</span> la tua
-            adesione a WOM per Pesaro 2024, citando
+            adesione a WOM per Pesaro, citando
             <a
               href="https://www.facebook.com/wom.digit.srl"
               class="blue-wom underline"
@@ -332,7 +331,7 @@
           <div class="image-with-description-image">
             <img
               class="max-w-[250px]"
-              src="/src/Website/src/assets/images/pesaro/toolkit-for-merchant/facsimile.jpeg"
+              src="/assets/images/pesaro/toolkit-for-merchant/facsimile.jpeg"
               alt="facsimile"
             />
           </div>
@@ -391,7 +390,7 @@
           <p class="mb-0">
             Per questo
             <span class="font-semibold"
-              >ti affidiamo il QRcode di benvenuto a Pesaro 2024,</span
+              >ti affidiamo il QRcode di benvenuto a Pesaro,</span
             >
             che va scansionato due volte:
           </p>
@@ -415,78 +414,25 @@
       </div>
       <div class="flex flex-col justify-center items-center mt-6">
         <p class="font-semibold blue-wom mb-0 text-center">
-          Ecco il QRcode di benvenuto a Pesaro 2024!
+          Ecco il QRcode di benvenuto a Pesaro!
         </p>
         <img
           class="max-w-[300px] lg:max-w-[600px]"
-          src="/src/Website/src/assets/images/pesaro/toolkit-for-merchant/welcome.png"
+          src="/assets/images/pesaro/welcome.png"
           alt="welcome"
         />
         <h2 class="text-center">
           <a
             class="font-semibold underline"
-            href="/src/Website/src/assets/images/pesaro/toolkit-for-merchant/welcomeWOM.pdf"
+            href="/assets/images/pesaro/welcomeWOM.pdf"
             target="_blank"
             ><i class="fas fa-file-pdf"></i> Scarica qui il QRcode di
             benvenuto</a
           >
         </h2>
       </div>
-      <div class="mt-6">
-        <h2 class="blue-wom">FAQ: Risposte alle domande frequenti</h2>
-        <div *ngFor="let faq of faqs; let i = index">
-          <div class="mt-6">
-            <div
-              class="font-semibold mt-3 cursor-pointer bg-[#EFEFF1] rounded-xl px-6 py-2 flex justify-between items-center"
-              (click)="toggleFaq(i)"
-            >
-              <p class="mb-0">
-                {{ faq.header }}
-              </p>
-              <i
-                [ngClass]="{ 'rotate-180': faq.isOpen }"
-                class="fas fa-chevron-down"
-              ></i>
-            </div>
-            <div *ngIf="faq.isOpen">
-              <div *ngIf="faq.content.length <= 1; else moreElements">
-                <p
-                  class="mb-0 px-6 py-2 border-b-2 border-l-2 border-r-2 border-black rounded-b-lg"
-                >
-                  {{ faq.content }}
-                </p>
-              </div>
-              <ng-template #moreElements>
-                <div
-                  class="mb-0 px-6 py-2 border-b-2 border-l-2 border-r-2 border-black rounded-b-lg"
-                >
-                  <p
-                    class="mb-0"
-                    *ngFor="let cont of faq.content; let i = index"
-                  >
-                    {{ cont }}
-                  </p>
-                </div>
-              </ng-template>
-            </div>
-          </div>
-        </div>
-
-        <div>
-          <p class="font-semibold mb-0 mt-6">
-            Per maggiori informazioni o supporto tecnico:
-          </p>
-          <p class="mb-0">
-            <a class="underline" href="tel:0722 042615">0722 042615</a> da lun a
-            ven dalle 10 alle 12
-          </p>
-          <p class="mb-0">
-            <a class="underline" href="mailto:pesaro@wom.social"
-              >pesaro&#64;wom.social</a
-            >
-          </p>
-        </div>
-      </div>
+      <app-faq-list [types]="['merchant', 'generic']" />
+      <app-btn-faq />
     </div>
   </div>
 </div>

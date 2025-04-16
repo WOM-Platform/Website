@@ -52,7 +52,7 @@
     <div class="flex flex-col justify-center items-center mt-6">
       <img
         class="max-w-[300px] lg:max-w-[500px]"
-        src="/assets/images/pesaro/toolkit-for-merchant/welcome.png"
+        src="/assets/images/pesaro/welcome.png"
         alt="welcome"
       />
     </div>
@@ -73,7 +73,7 @@
     <div class="flex flex-col items-center mt-6 gap-6">
       <img
         class="max-w-[300px] lg:max-w-[500px]"
-        src="/assets/images/pesaro/toolkit-for-merchant/vetrofania.jpg"
+        src="/assets/images/pesaro/vetrofania.png"
         alt="vetrofania"
       />
     </div>
@@ -81,5 +81,8 @@
       class="mt-6"
       [innerHTML]="'PESARO.PESARO.SECTION_ENDING_TEXT' | translate"
     ></p>
+
+    <app-faq-list [types]="['generic']" />
+    <app-btn-faq />
   </div>
 </div>

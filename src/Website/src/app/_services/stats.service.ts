@@ -141,11 +141,12 @@ export class StatsService {
     dateFilters: DateFilter,
     merchantFilters: MerchantFilter
   ): Observable<any> {
+    console.log("dateFilters", dateFilters);
     const { startDate, endDate } = dateFilters;
     const { merchantIds, merchantNames } = merchantFilters;
     let requestData = {
-      startDate: startDate || null,
-      endDate: endDate || null,
+      startDate: this.convertToLocalISOString(startDate) || null,
+      endDate: this.convertToLocalISOString(endDate) || null,
       merchantIds: merchantIds || null,
       merchantNames: merchantNames || null,
     };

@@ -1,0 +1,98 @@
+[
+  {
+    "type": "generic",
+    "title": "Domande generali",
+    "list": [
+      {
+        "question": "Devo creare un account per usare l’app WOM Pocket?",
+        "answer": "No, la piattaforma WOM e l’app WOM Pocket sono completamente anonime. È proprio per questo che i tuoi WOM vengono raccolti solo sul tuo smartphone. Se disinstalli l’app WOM Pocket senza trasferire tutti i tuoi WOM, li perderai."
+      },
+      {
+        "question": "Posso trasferire i miei WOM da un telefono all’altro?",
+        "answer": "Sì, puoi trasferire i tuoi WOM da un dispositivo all’altro attraverso la migrazione (Impostazione -> Esporta i tuoi WOM). Ti basterà seguire le istruzioni nell’app per esportare i tuoi WOM e importarli sul nuovo dispositivo."
+      },
+      {
+        "question": "I WOM hanno una scadenza?",
+        "answer": "No, i WOM sono sempre validi. Basta conservarli nell’app WOM Pocket. Tuttavia, alcuni esercenti possono scegliere di accettare solo WOM ottenuti di recente."
+      },
+      {
+        "question": "Quanto vale 1 WOM? Ha controvalore in denaro?",
+        "answer": "Ogni WOM vale un minuto di impegno. I WOM non hanno un valore monetario, ma Pesaro Musei e molti esercenti concedono sconti o agevolazioni su beni e servizi ai possessori di WOM in segno di gratitudine."
+      },
+      {
+        "question": "Posso usare WOM anche al di fuori di Pesaro?",
+        "answer": "Sì, ad oggi WOM è presente anche in altre città oltre a Pesaro. Apri la sezione Offerte sull’app WOM Pocket e visualizza la mappa delle offerte per scoprire dove puoi usare i tuoi WOM. Se non ci sono offerte attive vicino a te, porta WOM nella tua città!"
+      },
+      {
+        "question": "Dove posso vedere le offerte attive?",
+        "answer": "Aprendo l’app WOM Pocket e accedendo alla sezione Offerte potrai visualizzare tutte le offerte attive vicino a te. Se non vedi offerte attive, apri la mappa per scoprire quali sono le offerte nei dintorni oppure porta WOM nella tua città!"
+      },
+      {
+        "question": "Perché devo dare accesso alla mia localizzazione?",
+        "answer": "Anche se i WOM sono completamente anonimi, raccolgono alcuni dati relativi al loro scopo sociale e dove e quando vengono generati. Per questo motivo è necessario permettere all’app di accedere alla propria geolocalizzazione."
+      },
+      {
+        "question": "Ho dato tutti i permessi necessari, ma non riesco a riscattare WOM, perché?",
+        "answer": "La mancata riscossione di WOM potrebbe dipendere da alcuni fattori. Controlla di avere una buona connessione a internet e di aver dato accesso alla tua geolocalizzazione sempre all’app WOM Pocket."
+      },
+      {
+        "question": "Conosco un negozio che potrebbe essere interessato a WOM, può convenzionarsi?",
+        "answer": "Certamente, basterà metterlo in contatto con noi, scrivendo una mail a pesaro@wom.social."
+      }
+    ]
+  },
+  {
+    "type": "pocket",
+    "title": "Domande sull’app WOM Pocket",
+    "list": [
+      {
+        "question": "Ho cancellato l’app, posso recuperare i miei WOM?",
+        "answer": "Purtroppo se hai cancellato l’app non è possibile recuperare i tuoi WOM. Essendo la piattaforma WOM e l’app WOM Pocket completamente anonime, i tuoi WOM vengono raccolti solo sul tuo smartphone e sono legati all’app WOM Pocket. Cancellando l’app, verranno cancellati anche i tuoi WOM."
+      },
+      {
+        "question": "Come funziona la donazione di WOM?",
+        "answer": "La donazione è lo strumento che hai per premiare un altro utente di WOM che ha svolto una azione che per te merita di essere premiata. Accedi all’app WOM Pocket, entra nella sezione Scambio e imposta il numero di WOM che vuoi donare. Puoi donare un massimo di 60 WOM al giorno."
+      }
+    ]
+  },
+  {
+    "type": "pos",
+    "title": "Domande sull'app WOM POS",
+    "list": []
+  },
+  {
+    "type": "instrument",
+    "title": "Domande per gli instrument",
+    "list": []
+  },
+  {
+    "type": "merchant",
+    "title": "Domande per gli esercenti (merchant)",
+    "list": [
+      {
+        "question": "La mia attività pratica già alcuni sconti, utilizzare WOM significherà praticare sconti aggiuntivi?",
+        "answer": "Con l’applicazione WOM POS hai la totale libertà di impostare le tue offerte, decidendo se renderle o no cumulabili con quelle che pratichi abitualmente."
+      },
+      {
+        "question": "Cosa succede se effettuo l’Accesso Anonimo?",
+        "answer": "Con l'accesso anonimo puoi comunque impostare e praticare offerte, ma non vengono visualizzate sulla mappa WOM, né ricondotte alla tua attività."
+      },
+      {
+        "question": "È necessario applicare i filtri?",
+        "answer": "No, nelle prime fasi di adozione della piattaforma ti sconsigliamo di usarli, perchè limiterebbero la possibilità di accesso alle tue offerte."
+      },
+      {
+        "question": "Posso essere sia un utente che un esercente?",
+        "answer": "Certo. Puoi scaricare l’applicazione WOM Pocket e guadagnare WOM come tutti gli altri utenti."
+      },
+      {
+        "question": "Posso cancellare un’offerta?",
+        "answer": "Certo! Si possono creare e revocare offerte in qualsiasi momento. Per cancellarle basta far scorrere verso sinistra la card corrispondente e cliccare sul cestino rosso. Attenzione: se elimini un’offerta getta via i QRcode che avevi eventualmente stampato, perchè non funzioneranno più."
+      },
+      {
+        "question": "Alcuni esempi ed idee per offerte da presentare:",
+        "answer": "per 15 WOM al caffè aggiungiamo un cioccolatino;  per 30 WOM servizio al tavolo gratis; per 60 WOM 10% di sconto su un libro; per 120 WOM il terzo articolo (meno costoso) è gratis;"
+      }
+    ]
+  }
+]

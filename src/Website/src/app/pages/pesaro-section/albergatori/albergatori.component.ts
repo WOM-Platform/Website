@@ -1,10 +1,13 @@
 import { Component } from "@angular/core";
+import { FaqListComponent } from "../../../components/faq-list/faq-list.component";
+import { BtnFaqComponent } from "../../../components/btn-faq/btn-faq.component";
 
 @Component({
-    selector: "app-albergatori",
-    templateUrl: "./albergatori.component.html",
-    styleUrl: "./albergatori.component.css",
-    standalone: false
+  selector: "app-albergatori",
+  templateUrl: "./albergatori.component.html",
+  styleUrl: "./albergatori.component.css",
+  standalone: true,
+  imports: [FaqListComponent, BtnFaqComponent],
 })
 export class AlbergatoriComponent {
   faqs = [

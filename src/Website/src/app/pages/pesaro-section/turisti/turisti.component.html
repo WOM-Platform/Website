@@ -2,11 +2,11 @@
   <div class="banner-width">
     <img
       class="w-full hidden lg:block"
-      src="/assets/images/pesaro2024/tourists/bannerT.jpg"
+      src="/assets/images/pesaro/tourists/banner.jpg"
     />
     <img
       class="w-full block lg:hidden"
-      src="/assets/images/pesaro2024/tourists/bannerTelefono.jpg"
+      src="/assets/images/pesaro/tourists/bannerTelefono.webp"
     />
   </div>
   <div class="container">
@@ -71,13 +71,11 @@
               [appleURL]="
                 'https://apps.apple.com/it/app/wom-pocket/id1466969163'
               "
-              [appleQR]="'/assets/images/pesaro2024/tourists/qr-code-ios.png'"
+              [appleQR]="'/assets/images/pesaro/tourists/qr-code-ios.png'"
               [googleURL]="
                 'https://play.google.com/store/apps/details?id=social.wom.pocket'
               "
-              [googleQR]="
-                '/assets/images/pesaro2024/tourists/qr-code-android.png'
-              "
+              [googleQR]="'/assets/images/pesaro/tourists/qr-code-android.png'"
             ></app-store-logos>
           </div>
           <li
@@ -131,7 +129,7 @@
           <img
             class="px-5 max-w-full md:max-w-[400px]"
             alt="btn-scan"
-            src="/assets/images/pesaro2024/tourists/scansiona.jpg"
+            src="/assets/images/pesaro/tourists/scansiona.jpg"
           />
         </div>
       </div>
@@ -192,7 +190,7 @@
         <img
           class="max-w-[300px] md:max-w-[450px] lg:max-w-[500px]"
           alt="invitation"
-          src="/assets/images/pesaro2024/tourists/invitation.jpg"
+          src="/assets/images/pesaro/tourists/invitation.jpg"
         />
       </div>
       <div class="tutorial-grid mt-8">
@@ -235,7 +233,7 @@
           <div class="image-with-description-image">
             <img
               class="max-h-[350px]"
-              src="/src/Website/src/assets/images/pesaro/toolkit-for-merchant/facsimile.jpeg"
+              src="/assets/images/pesaro/toolkit-for-merchant/facsimile.jpeg"
               alt="facsimile"
             />
           </div>
@@ -251,7 +249,7 @@
         <div class="image-with-description-image mt-8">
           <img
             class="max-w-[300px] md:max-w-[450px] lg:max-w-[500px]"
-            src="/src/Website/src/assets/images/pesaro/toolkit-for-merchant/vetrofania.jpg"
+            src="/assets/images/pesaro/vetrofania.png"
             alt="vetrofania"
           />
         </div>
@@ -290,113 +288,14 @@
         <div class="tutorial-grid-img">
           <img
             class="max-w-[250px]"
-            src="/assets/images/pesaro2024/tourists/womStepCounter.jpg"
+            src="/assets/images/pesaro/tourists/womStepCounter.jpg"
             alt="womFit"
           />
         </div>
       </div>
 
-      <div class="tutorial-grid mt-6">
-        <h2
-          class="blue-wom tutorial-grid-title"
-          [innerHTML]="'PESARO.TOURISTS.SECTION_TUTORIAL5' | translate"
-        ></h2>
-        <div class="tutorial-grid-text">
-          <ul class="ml-6 list-decimal list-outside">
-            <li
-              [innerHTML]="'PESARO.TOURISTS.SECTION_TUTORIAL5_1' | translate"
-            ></li>
-            <li
-              [innerHTML]="'PESARO.TOURISTS.SECTION_TUTORIAL5_2' | translate"
-            ></li>
-            <li
-              [innerHTML]="'PESARO.TOURISTS.SECTION_TUTORIAL5_3' | translate"
-            ></li>
-            <li
-              [innerHTML]="'PESARO.TOURISTS.SECTION_TUTORIAL5_4' | translate"
-            ></li>
-            <li
-              [innerHTML]="'PESARO.TOURISTS.SECTION_TUTORIAL5_5' | translate"
-            ></li>
-          </ul>
-        </div>
-        <div class="tutorial-grid-img">
-          <img
-            class="max-w-[250px]"
-            src="/assets/images/pesaro2024/tourists/storico.jpg"
-            alt="womFit"
-          />
-        </div>
-      </div>
-
-      <div class="mt-6">
-        <h2
-          class="blue-wom"
-          [innerHTML]="'PESARO.TOURISTS.SECTION_FAQ' | translate"
-        ></h2>
-        <div *ngFor="let faq of faqs; let i = index">
-          <div class="mt-6">
-            <div
-              class="font-semibold mt-3 cursor-pointer bg-[#EFEFF1] rounded-xl px-6 py-2 flex justify-between items-center"
-              (click)="toggleFaq(i)"
-            >
-              <p class="mb-0">
-                {{ faq.header }}
-              </p>
-              <i
-                [ngClass]="{ 'rotate-180': faq.isOpen }"
-                class="fas fa-chevron-down"
-              ></i>
-            </div>
-            <div *ngIf="faq.isOpen">
-              <div *ngIf="faq.content.length <= 1; else moreElements">
-                <p
-                  class="mb-0 px-6 py-2 border-b-2 border-l-2 border-r-2 border-black rounded-b-lg"
-                >
-                  {{ faq.content }}
-                </p>
-              </div>
-              <ng-template #moreElements>
-                <div
-                  class="mb-0 px-6 py-2 border-b-2 border-l-2 border-r-2 border-black rounded-b-lg"
-                >
-                  <p
-                    class="mb-0"
-                    *ngFor="let cont of faq.content; let i = index"
-                  >
-                    {{ cont | translate }}
-                  </p>
-                </div>
-              </ng-template>
-            </div>
-          </div>
-        </div>
-
-        <div>
-          <p
-            [innerHTML]="'PESARO.TOURISTS.CONTACTS_DESCR' | translate"
-            class="mb-2 mt-6"
-          ></p>
-          <p class="mb-0">
-            <a
-              class="font-semibold blue-wom"
-              target="_"
-              href="https://www.facebook.com/wom.digit.srl"
-              ><i class="fab fa-facebook"></i>{{ " " }}
-              <span class="underline">wom.digit.srl</span></a
-            >
-          </p>
-          <p class="mb-0">
-            <a
-              class="font-semibold blue-wom"
-              target="_"
-              href="https://www.instagram.com/wom.italia/"
-              ><i class="fab fa-instagram"></i>{{ " " }}
-              <span class="underline">wom.italia</span></a
-            >
-          </p>
-        </div>
-      </div>
+      <app-faq-list [types]="['generic']" />
+      <app-btn-faq />
     </div>
   </div>
 </div>

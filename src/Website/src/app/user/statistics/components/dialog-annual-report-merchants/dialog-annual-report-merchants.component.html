@@ -1,3 +1,11 @@
+<div>
+  <select (change)="onYearChange($event)" class="w-full p-2 mb-4">
+    <option value="0">Seleziona un anno</option>
+    <ng-container *ngFor="let year of years">
+      <option [value]="year">{{ year }}</option>
+    </ng-container>
+  </select>
+</div>
 <div
   class="grid grid-cols-5 bg-gray-100 p-4 rounded-lg shadow-md overflow-y-scroll h-full max-h-[600px]"
 >
