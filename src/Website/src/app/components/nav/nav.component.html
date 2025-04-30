@@ -1,128 +1,180 @@
-<div class="h-full">
+<div #sidenavContainer class="h-full">
   <!-- mobile menu -->
-  <mat-sidenav-container>
+  <mat-sidenav-container style="z-index: 10">
     <mat-sidenav
       #drawer
+      [mode]="'over'"
+      [opened]="(isHandset$ | async) === false"
       class="sidenav"
       fixedInViewport
-      [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
-      [mode]="(isHandset$ | async) ? 'over' : 'side'"
-      [opened]="(isHandset$ | async) === false"
     >
       <mat-toolbar>Menu</mat-toolbar>
-      <mat-nav-list>
-        <mat-accordion>
-          <mat-list-item
-            [routerLink]="['/home']"
-            (click)="drawer.toggle()"
-            [routerLinkActive]="['active']"
+      <nav class="flex flex-col p-4 gap-2 text-lg">
+        <a
+          [routerLink]="['/home']"
+          (click)="drawer.toggle()"
+          routerLinkActive="active"
+          class="menu-item-a"
+        >
+          <span class="material-symbols-outlined icon-mb"> home </span>
+          <span>{{ "NAV.HOME" | translate }}</span>
+        </a>
+        <div>
+          <div
+            class="menu-item-accordion"
+            (click)="isAboutOpen = !isAboutOpen"
+            [ngClass]="{ ' bg-slate-200 rounded-full': isAboutOpen }"
           >
-            <mat-icon matListItemIcon>home</mat-icon>
-            <span>{{ "NAV.HOME" | translate }}</span>
-          </mat-list-item>
+            <div
+              class="flex items-center gap-2"
+              [ngClass]="{ 'text-blue-600 ': isAboutOpen }"
+            >
+              <span
+                class="material-symbols-outlined icon-mb"
+                [ngClass]="{ 'text-blue-600 bg-white ': isAboutOpen }"
+              >
+                info
+              </span>
+              <span>{{ "NAV.ABOUT.TITLE" | translate }}</span>
+            </div>
+            <span
+              class="material-symbols-outlined transition-transform duration-300"
+              [ngClass]="{
+                'rotate-90': isAboutOpen,
+                'text-blue-600': isAboutOpen
+              }"
+            >
+              chevron_right
+            </span>
+          </div>
 
-          <mat-expansion-panel [class.mat-elevation-z0]="true">
-            <mat-expansion-panel-header class="text-lg"
-              >{{ "NAV.ABOUT.TITLE" | translate }}
-            </mat-expansion-panel-header>
-            <mat-nav-list>
-              <a
-                class="text-lg"
-                mat-list-item
-                routerLink="about-section/about"
-                (click)="drawer.toggle()"
-                [routerLinkActive]="['active']"
-              >
-                <span>{{ "NAV.ABOUT.ABOUT" | translate }}</span>
-              </a>
-              <a
-                mat-list-item
-                routerLink="pesaro"
-                (click)="drawer.toggle()"
-                [routerLinkActive]="['active']"
-              >
-                <!-- <mat-icon></mat-icon> -->
-                <span>{{ "NAV.ABOUT.PESARO" | translate }}</span>
-              </a>
-              <a
-                mat-list-item
-                routerLink="about-section/urbino"
-                (click)="drawer.toggle()"
-                [routerLinkActive]="['active']"
-              >
-                <!-- <mat-icon></mat-icon> -->
-                <span>{{ "NAV.ABOUT.URBINO" | translate }}</span>
-              </a>
-            </mat-nav-list>
-          </mat-expansion-panel>
-
-          <mat-expansion-panel [class.mat-elevation-z0]="true">
-            <mat-expansion-panel-header
-              >{{ "NAV.VOLUNTEERS.TITLE" | translate }}
-            </mat-expansion-panel-header>
-            <mat-nav-list>
-              <a
-                mat-list-item
-                [routerLink]="['/volunteer']"
-                (click)="drawer.toggle()"
-                [routerLinkActive]="['active']"
-              >
-                <!-- <mat-icon>dashboard</mat-icon> -->
-                <span>{{ "NAV.VOLUNTEERS.WHO_ARE" | translate }}</span>
-              </a>
-              <a
-                mat-list-item
-                [routerLink]="['/applications']"
-                [routerLinkActive]="['active']"
-                (click)="drawer.toggle()"
-                class="whitespace-normal overflow-hidden"
-              >
-                <!-- <mat-icon>dashboard</mat-icon> -->
-                <span>{{ "NAV.VOLUNTEERS.APPLICATIONS" | translate }}</span>
-              </a>
-            </mat-nav-list>
-          </mat-expansion-panel>
-
-          <mat-list-item
-            [routerLink]="['/merchant']"
-            (click)="drawer.toggle()"
-            [routerLinkActive]="['active']"
+          <!-- Toggleable content -->
+          <div
+            class="flex flex-col gap-1 overflow-hidden transition-all duration-300 px-2"
+            *ngIf="isAboutOpen"
           >
-            <mat-icon matListItemIcon>store</mat-icon>
-            <span>{{ "NAV.MERCHANT" | translate }}</span>
-          </mat-list-item>
+            <a
+              [routerLink]="['about-section/about']"
+              (click)="drawer.toggle()"
+              routerLinkActive="active"
+              class="menu-item-a"
+            >
+              <span class="material-symbols-outlined icon-mb"> info </span>
+              <span>{{ "NAV.ABOUT.ABOUT" | translate }}</span>
+            </a>
+            <a
+              [routerLink]="['pesaro']"
+              (click)="drawer.toggle()"
+              routerLinkActive="active"
+              class="menu-item-a"
+            >
+              <span class="material-symbols-outlined icon-mb"> apartment </span>
+              <span>{{ "NAV.ABOUT.PESARO" | translate }}</span>
+            </a>
+            <a
+              [routerLink]="['about-section/urbino']"
+              (click)="drawer.toggle()"
+              routerLinkActive="active"
+              class="menu-item-a"
+            >
+              <span class="material-symbols-outlined icon-mb"> apartment </span>
+              <span>{{ "NAV.ABOUT.URBINO" | translate }}</span>
+            </a>
+          </div>
+        </div>
 
-          <mat-list-item
-            [routerLink]="['/instrument']"
-            (click)="drawer.toggle()"
-            [routerLinkActive]="['active']"
+        <div
+          class="menu-item-accordion"
+          (click)="isVolunteersOpen = !isVolunteersOpen"
+          [ngClass]="{ ' bg-slate-200 rounded-full': isVolunteersOpen }"
+        >
+          <div
+            class="flex items-center gap-2"
+            [ngClass]="{ 'text-blue-600 ': isVolunteersOpen }"
           >
-            <mat-icon matListItemIcon>timer</mat-icon>
-            <span>{{ "NAV.INSTRUMENT" | translate }}</span>
-          </mat-list-item>
+            <span
+              class="material-symbols-outlined icon-mb"
+              [ngClass]="{ 'text-blue-600 bg-white ': isVolunteersOpen }"
+            >
+              group
+            </span>
+            <span>{{ "NAV.VOLUNTEERS.TITLE" | translate }}</span>
+          </div>
+          <span
+            class="material-symbols-outlined transition-transform duration-300"
+            [ngClass]="{
+              'rotate-90': isVolunteersOpen,
+              'text-blue-600': isVolunteersOpen
+            }"
+          >
+            chevron_right
+          </span>
+        </div>
+        <div
+          class="flex flex-col gap-1 overflow-hidden transition-all duration-300 px-2"
+          *ngIf="isVolunteersOpen"
+        >
+          <a
+            [routerLink]="['/volunteer']"
+            (click)="drawer.toggle()"
+            routerLinkActive="active"
+            class="menu-item-a"
+          >
+            <span class="material-symbols-outlined icon-mb"> badge </span>
+            <span>{{ "NAV.VOLUNTEERS.WHO_ARE" | translate }}</span>
+          </a>
+          <a
+            [routerLink]="['/applications']"
+            (click)="drawer.toggle()"
+            routerLinkActive="active"
+            class="menu-item-a whitespace-normal overflow-hidden"
+          >
+            <span class="material-symbols-outlined icon-mb"> description </span>
+            <span>{{ "NAV.VOLUNTEERS.APPLICATIONS" | translate }}</span>
+          </a>
+        </div>
 
-          <!--
-                        <mat-list-item
-                          routerLink="user/home"
-                          (click)="drawer.toggle()"
-                          [routerLinkActive]="['active']"
-                        >
-                          <mat-icon matListItemIcon>account_circle</mat-icon>
-                          <span>{{ "NAV.PROFILE" | translate }}</span>
-                        </mat-list-item>
+        <a
+          [routerLink]="['/merchant']"
+          (click)="drawer.toggle()"
+          routerLinkActive="active"
+          class="menu-item-a"
+        >
+          <span class="material-symbols-outlined icon-mb"> storefront </span>
+          <span>{{ "NAV.MERCHANT" | translate }}</span>
+        </a>
+        <a
+          [routerLink]="['/instrument']"
+          (click)="drawer.toggle()"
+          routerLinkActive="active"
+          class="menu-item-a"
+        >
+          <span class="material-symbols-outlined icon-mb"> timer </span>
+          <span>{{ "NAV.INSTRUMENT" | translate }}</span>
+        </a>
 
-                        <mat-list-item
-                          *ngIf="isLogged"
-                          (click)="logout()"
-                          (click)="drawer.toggle()"
-                          [routerLinkActive]="['active']"
-                        >
-                          <mat-icon matListItemIcon>close</mat-icon>
-                          <span>{{ "NAV.SIGN_OUT" | translate }}</span>
-                        </mat-list-item>
-                        -->
-        </mat-accordion>
-      </mat-nav-list>
+        <a
+          *ngIf="isLogged"
+          [routerLink]="['/user/home']"
+          (click)="drawer.toggle()"
+          routerLinkActive="active"
+          class="menu-item-a"
+        >
+          <span class="material-symbols-outlined icon-mb"> person </span>
+          <span>{{ "NAV.PROFILE" | translate }}</span>
+        </a>
+
+        <a
+          *ngIf="isLogged"
+          (click)="logout()"
+          (click)="drawer.toggle()"
+          [routerLinkActive]="['active']"
+          class="menu-item-a"
+        >
+          <span class="material-symbols-outlined icon-mb"> logout </span>
+          <span>{{ "NAV.SIGN_OUT" | translate }}</span>
+        </a>
+      </nav>
     </mat-sidenav>
   </mat-sidenav-container>
   <div>

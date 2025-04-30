@@ -1,4 +1,10 @@
-import { Component, OnInit } from "@angular/core";
+import {
+  Component,
+  ElementRef,
+  HostListener,
+  OnInit,
+  ViewChild,
+} from "@angular/core";
 import { Router } from "@angular/router";
 
 import { UserLogin, UserMe } from "../../_models";
@@ -9,6 +15,7 @@ import { BreakpointObserver, Breakpoints } from "@angular/cdk/layout";
 import { Observable } from "rxjs";
 import { map, shareReplay } from "rxjs/operators";
 import { MatDialog } from "@angular/material/dialog";
+import { MatSidenav } from "@angular/material/sidenav";
 
 @Component({
   selector: "app-nav",
@@ -23,6 +30,22 @@ export class NavComponent implements OnInit {
   openMenu = false;
   showSubmenu = false;
 
+  isAboutOpen = false;
+  isVolunteersOpen = false;
+
+  @ViewChild("drawer") drawer!: MatSidenav;
+  @ViewChild("sidenavContainer") sidenavContainer!: ElementRef;
+
+  @HostListener("document:click", ["$event"])
+  handleClickOutside(event: MouseEvent) {
+    const clickedInside = this.sidenavContainer?.nativeElement.contains(
+      event.target
+    );
+
+    if (!clickedInside && this.drawer.opened) {
+      this.drawer.close();
+    }
+  }
   isHandset$: Observable<boolean> = this.breakpointObserver
     .observe(Breakpoints.Handset)
     .pipe(

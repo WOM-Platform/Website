@@ -46,7 +46,16 @@ mat-sidenav-container {
 .mat-divider {
   border-color: white;
 }
+.menu-item-accordion {
+  @apply font-bold flex justify-between hover:bg-gray-100 rounded-full p-2 items-center gap-2 cursor-pointer select-none font-normal text-sm text-slate-700;
+}
+.menu-item-a {
+  @apply flex items-center gap-2 hover:bg-gray-100 p-2 rounded-full font-normal text-sm text-slate-700;
+}
 
+.icon-mb {
+  @apply bg-slate-200 rounded-full p-2 text-slate-700;
+}
 .divider {
   height: 80%;
 }
