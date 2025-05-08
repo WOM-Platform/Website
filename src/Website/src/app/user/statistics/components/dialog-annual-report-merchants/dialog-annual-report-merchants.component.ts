@@ -6,17 +6,17 @@ import {
   Inject,
   OnInit,
   QueryList,
-  ViewChild,
   ViewChildren,
 } from "@angular/core";
 import html2canvas from "html2canvas";
 import { MAT_DIALOG_DATA } from "@angular/material/dialog";
-import { forkJoin, map, switchMap } from "rxjs";
+import { finalize, forkJoin, map, switchMap } from "rxjs";
 import { CombinedFilters } from "src/app/_models/filter";
 import { MerchantService, StatsService } from "src/app/_services";
-import * as htmlToImage from "html-to-image";
-import { toPng, toJpeg, toBlob, toPixelData, toSvg } from "html-to-image";
+import { toJpeg } from "html-to-image";
 import * as fabric from "fabric";
+import { LoadingService } from "src/app/_services/loading.service";
+import { SnackBarService } from "src/app/_services/snack-bar.service";
 
 @Component({
   selector: "app-dialog-annual-report-merchants",
@@ -29,63 +29,42 @@ export class DialogAnnualReportMerchantsComponent implements OnInit {
 
   filters: CombinedFilters;
   activeMerchants: any;
-
   currentYear = String(new Date().getFullYear());
 
-  selectedYear = Number(this.currentYear);
-  years: number[] = [
-    new Date().getFullYear(),
-    new Date().getFullYear() - 1,
-    new Date().getFullYear() - 2,
-    new Date().getFullYear() - 3,
-    new Date().getFullYear() - 4,
-    new Date().getFullYear() - 5,
-    new Date().getFullYear() - 6,
-    new Date().getFullYear() - 7,
-    new Date().getFullYear() - 8,
-    new Date().getFullYear() - 9,
-  ];
+  selectedYear = null;
+  years: number[] = Array.from(
+    { length: 10 },
+    (_, i) => new Date().getFullYear() - i
+  );
+
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
+    private cdr: ChangeDetectorRef,
+    private loadingService: LoadingService,
     private merchantService: MerchantService,
-    private statsService: StatsService,
-    private cdr: ChangeDetectorRef
+    private snackBarService: SnackBarService,
+    private statsService: StatsService
   ) {}
 
-  ngOnInit() {
+  ngOnInit() {}
+
+  onYearChange(event: Event) {
+    const value = (event.target as HTMLSelectElement).value;
+    this.selectedYear = Number(value);
     this.filters = this.data.filters;
-    if (this.filters.dateFilters.startDate) {
-      this.currentYear = String(
-        this.filters.dateFilters.startDate.getFullYear()
-      );
-    }
 
-    this.loadDataTable();
-  }
-
-  onYearChange(event: any) {
-    console.log("Year changed:", event);
-    this.selectedYear = Number(event.target.value);
     if (!this.selectedYear || this.selectedYear === 0) {
-      // Optional: handle "Seleziona un anno"
-      console.warn("No valid year selected.");
       return;
     }
 
     this.currentYear = this.selectedYear.toString();
-
     this.filters.dateFilters.startDate = new Date(this.selectedYear, 0, 1);
     this.filters.dateFilters.endDate = new Date(this.selectedYear, 11, 31);
 
-    console.log(
-      "Updated date filters:",
-      this.filters.dateFilters.startDate,
-      this.filters.dateFilters.endDate
-    );
     this.loadDataTable();
   }
   loadDataTable() {
-    console.log("Loading data table with filters:");
+    this.loadingService.show();
     this.statsService
       .getAnnualReportMerchants(
         this.filters.dateFilters,
@@ -111,11 +90,22 @@ export class DialogAnnualReportMerchantsComponent implements OnInit {
               }));
             })
           );
+        }),
+        finalize(() => {
+          this.loadingService.hide();
         })
       )
-      .subscribe((updatedMerchants) => {
-        // Assign updated merchants to activeMerchants
-        this.activeMerchants = updatedMerchants;
+      .subscribe({
+        next: (updatedMerchants) => {
+          this.activeMerchants = updatedMerchants;
+          this.cdr.detectChanges();
+        },
+        error: (err) => {
+          console.error("Failed to load merchants", err);
+          this.snackBarService.openSnackBar(
+            "Errore nel caricamento degli aims"
+          );
+        },
       });
   }
 
@@ -131,8 +121,6 @@ export class DialogAnnualReportMerchantsComponent implements OnInit {
   }
 
   createPng(index: number) {
-    console.log("Creating PNG for item", index);
-
     // Ensure the hiddenCaptureAreas is available
     if (!this.hiddenCaptureAreas) return;
 
@@ -165,42 +153,160 @@ export class DialogAnnualReportMerchantsComponent implements OnInit {
       });
   }
 
-  generateCertificate(index: number) {
+  generateMerchantCertificate(index: number) {
     var canvas = new fabric.Canvas("canvas", {
       width: 1600,
       height: 1600,
     });
 
-    const bgImg = fabric.FabricImage.fromURL(
-      "assets/images/statistics/copertina.jpeg"
-    ).then((img) => {
+    // handle background image based on the index el
+    let bgImage = null;
+    if (index === 0) {
+      bgImage = "assets/images/statistics/annual-report/bestMerchant.jpg";
+    } else if (index === 1 || index === 2) {
+      bgImage = "assets/images/statistics/annual-report/top3.jpg";
+    } else if (index >= 3 && index <= 9) {
+      bgImage = "assets/images/statistics/annual-report/top10.jpg";
+    } else if (index >= 10 && index <= 19) {
+      bgImage = "assets/images/statistics/annual-report/top20.jpg";
+    } else {
+      bgImage = "assets/images/statistics/annual-report/top30.jpg";
+    }
+
+    const bgImg = fabric.FabricImage.fromURL(bgImage).then((img) => {
       canvas.backgroundImage = img;
       img.canvas = canvas;
       canvas.add(img);
 
-      console.log("Background image added to canvas ", this.selectedYear);
+      // add year
+      const yearToAdd = new fabric.FabricText(`${String(this.selectedYear)}`, {
+        left: 1200,
+        top: 60,
+        fontSize: 60,
+        fill: "white",
+        fontWeight: "800",
+        fontFamily: "Montserrat",
+        width: 1600,
+      });
 
-      const titleToAdd = new fabric.FabricText(
-        `Certificato di impatto sociale ${String(this.selectedYear)}`,
+      // add merchant name
+      const nameMerchant = new fabric.FabricText(
+        `${String(this.activeMerchants[index].name)}`,
         {
-          left: 280,
-          top: 60,
-          fontSize: 60,
-          fill: "white",
+          top: 640,
+          textAlign: "center",
+          fontSize: 70,
+          fill: "black",
           fontWeight: "800",
-          fontFamily: "Roboto",
+          fontFamily: "Montserrat",
           width: 1600,
+          originX: "center",
+        }
+      );
+      nameMerchant.left = canvas.getWidth() / 2;
+
+      // add first line
+      const firstLine = `Ha effettuato ${String(
+        this.activeMerchants[index].numberTransactions
+      )}, transazioni, riconoscendo il`;
+      // Determine the start and end index of the dynamic number
+      const numberTransactionsStr = String(
+        this.activeMerchants[index].numberTransactions
+      );
+      const numberTransactionsStart = firstLine.indexOf(numberTransactionsStr);
+      const numberTransactionsEnd =
+        numberTransactionsStart + numberTransactionsStr.length;
+
+      const firstLineText = new fabric.Textbox(firstLine, {
+        top: 766,
+        width: 1600,
+        fontSize: 58,
+        fill: "black",
+        fontFamily: "Montserrat",
+        fontWeight: "300",
+        textAlign: "center",
+        originX: "center",
+        styles: {
+          0: {},
+        },
+      });
+
+      // Apply bold font size
+      for (let i = numberTransactionsStart; i < numberTransactionsEnd; i++) {
+        firstLineText.setSelectionStyles(
+          {
+            fontWeight: "bold",
+          },
+          i,
+          i + 1
+        );
+      }
+
+      firstLineText.left = canvas.getWidth() / 2;
+
+      const secondLineText = new fabric.Textbox(
+        `valore sociale generato dai propri utenti con`,
+        {
+          top: 834,
+          width: 1600,
+          fontSize: 58,
+          fill: "black",
+          fontFamily: "Montserrat",
+          fontWeight: "100",
+          textAlign: "center",
+          originX: "center",
+          styles: {
+            0: {},
+          },
         }
       );
 
-      canvas.add(titleToAdd);
+      secondLineText.left = canvas.getWidth() / 2;
+
+      const thirdLine = `un impegno complessivo di ${String(
+        this.activeMerchants[index].amount
+      )} minuti.`;
+
+      const amountStr = String(this.activeMerchants[index].amount);
+      const amountStart = thirdLine.indexOf(amountStr);
+      const amountEnd = amountStart + amountStr.length;
+
+      // add minutes
+      const thirdLineText = new fabric.FabricText(thirdLine, {
+        top: 902,
+        fontSize: 60,
+        textAlign: "center",
+        originX: "center",
+        fill: "black",
+        fontWeight: "100",
+        fontFamily: "Montserrat",
+        width: 1600,
+      });
+
+      // Apply bold font size
+      for (let i = amountStart; i < amountEnd; i++) {
+        thirdLineText.setSelectionStyles(
+          {
+            fontWeight: "bold",
+          },
+          i,
+          i + 1
+        );
+      }
+
+      thirdLineText.left = canvas.getWidth() / 2;
+
+      const group = new fabric.Group([
+        yearToAdd,
+        nameMerchant,
+        firstLineText,
+        secondLineText,
+        thirdLineText,
+      ]);
+      canvas.add(group);
+
       canvas.renderAll();
     });
-
-    // const imageUrl =
-    //   "https://upload.wikimedia.org/wikipedia/commons/0/06/Daedalus_Spaceship_concept.jpg";
-    // const image = new Image();
-    // image.src = imageUrl;
 
     setTimeout(() => {
       const dataURL = canvas.toDataURL({
@@ -215,37 +321,5 @@ export class DialogAnnualReportMerchantsComponent implements OnInit {
       link.download = `${this.activeMerchants[index].name}-certificate.jpg`;
       link.click();
     }, 500); // Timeout ensures the image is fully loaded
-
-    // fabric.FabricImage.fromURL(
-    //   "assets/images/statistics/copertina.jpeg",
-    //   (img: fabric.FabricImage) => {
-    //     canvas.backgroundImage(img, canvas.renderAll.bind(canvas));
-
-    //     // Add user details
-    //     const nameText = new fabric.Textbox(user.name, {
-    //       left: 100,
-    //       top: 150,
-    //       fontSize: 30,
-    //       fill: "#000",
-    //     });
-
-    //     const rankText = new fabric.Textbox(`Rank: ${user.rank}`, {
-    //       left: 100,
-    //       top: 200,
-    //       fontSize: 25,
-    //       fill: "#000",
-    //     });
-
-    //     const dateText = new fabric.Textbox(
-    //       `Date: ${new Date().toLocaleDateString()}`,
-    //       {
-    //         left: 100,
-    //         top: 250,
-    //         fontSize: 20,
-    //         fill: "#000",
-    //       }
-    //     );
-    //   }
-    // );
   }
 }

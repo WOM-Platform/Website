@@ -1,23 +1,27 @@
-<div>
-  <select (change)="onYearChange($event)" class="w-full p-2 mb-4">
-    <option value="0">Seleziona un anno</option>
+<div class="flex gap-2 px-4 py-2 items-center w-[746px]">
+  <label>Seleziona un anno per il report:</label>
+  <select (change)="onYearChange($event)" class="p-2 border rounded-lg">
+    <option value="0">---</option>
     <ng-container *ngFor="let year of years">
       <option [value]="year">{{ year }}</option>
     </ng-container>
   </select>
 </div>
 <div
-  class="grid grid-cols-5 bg-gray-100 p-4 rounded-lg shadow-md overflow-y-scroll h-full max-h-[600px]"
+  *ngIf="selectedYear"
+  class="grid grid-cols-6 bg-gray-100 p-4 rounded-lg shadow-md overflow-y-scroll h-full max-h-[650px]"
 >
   <!-- Intestazione -->
-  <div class="font-semibold p-2">Nome</div>
-  <div class="font-semibold p-2">Email</div>
-  <div class="font-semibold p-2">WOM Consumati</div>
-  <div class="font-semibold p-2">Transazioni</div>
-  <div class="font-semibold p-2">Download</div>
+  <div class="font-semibold p-2 text-center">N°</div>
+  <div class="font-semibold p-2 text-center">Nome</div>
+  <div class="font-semibold p-2 text-center">Email</div>
+  <div class="font-semibold p-2 text-center">Consumati</div>
+  <div class="font-semibold p-2 text-center">Transazioni</div>
+  <div class="font-semibold p-2 text-center">Download</div>
 
   <!-- Righe dinamiche -->
   <ng-container *ngFor="let activeMerchant of activeMerchants; let i = index">
+    <div class="p-2 border-b text-center">{{ i + 1 }}</div>
     <div class="p-2 border-b">{{ activeMerchant.name }}</div>
     <div class="p-2 border-b">
       <div *ngIf="activeMerchant.users && activeMerchant.users.length > 0">
@@ -42,39 +46,14 @@
         download
       </span>
     </div> -->
-    <img
-      src="https://media.geeksforgeeks.org/wp-content/uploads/geeksforgeeks-logo.png"
-      id="my_img"
-      style="display: none"
-    />
 
     <div class="p-2 border-b flex justify-center">
       <span
-        (click)="generateCertificate(i)"
+        (click)="generateMerchantCertificate(i)"
         class="material-symbols-outlined text-blue-500 cursor-pointer"
       >
         download
       </span>
-    </div>
-    <div
-      #hiddenCaptureArea
-      class="bg-white w-full col-span-5 offscreen"
-      [hidden]="true"
-    >
-      <div class="bg-[#4769b1] text-white">
-        <p class="text-center">
-          CERTIFICATO DI IMPATTO SOCIALE {{ currentYear }}
-        </p>
-      </div>
-
-      <h1 class="text-center">{{ activeMerchant.name }}</h1>
-      <p>
-        Ha effettuato
-        <span class="font-bold">{{ activeMerchant.numberTransactions }} </span
-        >transazioni, riconoscendo il valore sociale generato dai propri utenti
-        con un impegno complessivo di
-        <span class="font-bold">{{ activeMerchant.amount }}</span> minuti.
-      </p>
     </div>
   </ng-container>
 </div>
