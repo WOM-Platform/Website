@@ -141,7 +141,6 @@ export class StatsService {
     dateFilters: DateFilter,
     merchantFilters: MerchantFilter
   ): Observable<any> {
-    console.log("dateFilters", dateFilters);
     const { startDate, endDate } = dateFilters;
     const { merchantIds, merchantNames } = merchantFilters;
     let requestData = {
