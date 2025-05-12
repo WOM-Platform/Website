@@ -25,6 +25,7 @@ const routes: Routes = [
     canActivate: [authGuard],
     data: {
       breadcrumb: "BREADCRUMBS.USER.USER",
+      requiresAuth: true,
     },
     children: [
       {
@@ -38,6 +39,7 @@ const routes: Routes = [
         canActivate: [authGuard],
         data: {
           breadcrumb: "BREADCRUMBS.USER.ERROR",
+          requiresAuth: true,
         },
       },
       {
@@ -53,6 +55,7 @@ const routes: Routes = [
         canActivate: [authGuard],
         data: {
           breadcrumb: "BREADCRUMBS.USER.HOME",
+          requiresAuth: true,
         },
       },
       {
@@ -60,6 +63,7 @@ const routes: Routes = [
         canActivate: [authGuard],
         data: {
           breadcrumb: "BREADCRUMBS.USER.MERCHANT",
+          requiresAuth: true,
         },
         children: [
           {
@@ -68,6 +72,7 @@ const routes: Routes = [
             canActivate: [authGuard],
             data: {
               breadcrumb: "BREADCRUMBS.USER.HOME",
+              requiresAuth: true,
             },
           },
           {
@@ -99,6 +104,7 @@ const routes: Routes = [
         canActivate: [authGuard, instrumentsGuard],
         data: {
           breadcrumb: "BREADCRUMBS.USER.INSTRUMENT",
+          requiresAuth: true,
         },
       },
       {
@@ -108,6 +114,7 @@ const routes: Routes = [
         data: {
           roles: ["Admin"],
           breadcrumb: "BREADCRUMBS.USER.AIM",
+          requiresAuth: true,
         },
       },
       {
@@ -117,6 +124,7 @@ const routes: Routes = [
         data: {
           roles: ["Admin"],
           breadcrumb: "BREADCRUMBS.USER.USERS",
+          requiresAuth: true,
         },
       },
       {
@@ -125,6 +133,7 @@ const routes: Routes = [
         canActivate: [authGuard],
         data: {
           breadcrumb: "BREADCRUMBS.USER.STATISTICS",
+          requiresAuth: true,
         },
       },
       {
@@ -133,6 +142,7 @@ const routes: Routes = [
         canActivate: [authGuard],
         data: {
           breadcrumb: "BREADCRUMBS.USER.ADMIN-STATS",
+          requiresAuth: true,
         },
       },
       {
@@ -140,6 +150,7 @@ const routes: Routes = [
         canActivate: [authGuard, ManageGuard],
         data: {
           breadcrumb: "BREADCRUMBS.MANAGE.TITLE",
+          requiresAuth: true,
         },
         children: [
           {
@@ -148,6 +159,7 @@ const routes: Routes = [
             canActivate: [authGuard, ManageGuard],
             data: {
               breadcrumb: "BREADCRUMBS.MANAGE.HOME",
+              requiresAuth: true,
             },
           },
         ],
