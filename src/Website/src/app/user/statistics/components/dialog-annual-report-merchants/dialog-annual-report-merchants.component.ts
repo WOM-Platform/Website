@@ -8,7 +8,7 @@ import {
   QueryList,
   ViewChildren,
 } from "@angular/core";
-import html2canvas from "html2canvas";
+import { BlobReader, BlobWriter, ZipWriter } from "@zip.js/zip.js";
 import { MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { finalize, forkJoin, map, switchMap } from "rxjs";
 import { CombinedFilters } from "src/app/_models/filter";
@@ -28,6 +28,7 @@ export class DialogAnnualReportMerchantsComponent implements OnInit {
 
   filters: CombinedFilters;
   activeMerchants: any;
+  canvasesForCertificates: fabric.Canvas[] = [];
   currentYear = String(new Date().getFullYear());
 
   selectedYear = null;
@@ -107,6 +108,67 @@ export class DialogAnnualReportMerchantsComponent implements OnInit {
           );
         },
       });
+  }
+
+  async renderAndExportFabricCanvas(
+    canvas: fabric.Canvas,
+    format: "png" | "jpeg" = "jpeg",
+    quality = 1.0
+  ): Promise<Blob> {
+    const dataURL = canvas.toDataURL({
+      format,
+      quality,
+      multiplier: 1,
+    });
+
+    // Convert dataURL to Blob
+    const blob = await fetch(dataURL).then((res) => res.blob());
+    return blob;
+  }
+
+  async downloadAllCertificates() {
+    const blobWriter = new BlobWriter("application/zip");
+    const zipWriter = new ZipWriter(blobWriter);
+
+    for (let index = 0; index < this.activeMerchants.length; index++) {
+      try {
+        const canvas = await this.generateMerchantCertificate(index);
+
+        const dataURL = canvas.toDataURL({
+          format: "jpeg",
+          quality: 1.0,
+          multiplier: 1,
+        });
+
+        const blob = await fetch(dataURL).then((res) => res.blob());
+
+        await zipWriter.add(
+          `WOM-${this.activeMerchants[index].name}-certificate.jpg`,
+          new BlobReader(blob)
+        );
+      } catch (error) {
+        console.error(`Failed to process merchant at index ${index}:`, error);
+      }
+    }
+
+    const zipBlob = await zipWriter.close();
+
+    this.downloadBlob(zipBlob, "certificates.zip");
+  }
+
+  async dowloadSingleCertificate(index: number) {
+    this.generateMerchantCertificate(index).then((canvas) => {
+      const dataURL = canvas.toDataURL({
+        multiplier: 1,
+        format: "jpeg",
+        quality: 1.0,
+      });
+
+      const link = document.createElement("a");
+      link.href = dataURL;
+      link.download = `WOM-${this.activeMerchants[index].name}-certificate.jpg`;
+      link.click();
+    });
   }
 
   async generateMerchantCertificate(index: number) {
@@ -268,17 +330,20 @@ export class DialogAnnualReportMerchantsComponent implements OnInit {
 
     canvas.renderAll();
 
+    // waits 1 frame to ensure rendering completes before snapshot
     await new Promise((resolve) => requestAnimationFrame(resolve));
 
-    const dataURL = canvas.toDataURL({
-      multiplier: 1,
-      format: "jpeg",
-      quality: 1.0,
-    });
+    return canvas;
+  }
 
-    const link = document.createElement("a");
-    link.href = dataURL;
-    link.download = `${this.activeMerchants[index].name}-certificate.jpg`;
-    link.click();
+  canvasToZip() {}
+
+  downloadBlob(blob: Blob, filename: string) {
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = filename;
+    a.click();
+    URL.revokeObjectURL(url);
   }
 }
