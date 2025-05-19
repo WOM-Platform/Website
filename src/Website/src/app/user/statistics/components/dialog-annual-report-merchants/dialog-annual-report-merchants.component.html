@@ -1,59 +1,63 @@
-<div class="flex gap-2 px-4 py-2 items-center w-[746px]">
-  <label>Seleziona un anno per il report:</label>
-  <select (change)="onYearChange($event)" class="p-2 border rounded-lg">
-    <option value="0">---</option>
-    <ng-container *ngFor="let year of years">
-      <option [value]="year">{{ year }}</option>
-    </ng-container>
-  </select>
+<div class="flex justify-between items-center px-4 py-2">
+  <div class="flex gap-2 items-center w-[746px]">
+    <label>Seleziona un anno per il report:</label>
+    <select (change)="onYearChange($event)" class="p-2 border rounded-lg">
+      <option value="0">---</option>
+      <ng-container *ngFor="let year of years">
+        <option [value]="year">{{ year }}</option>
+      </ng-container>
+    </select>
+  </div>
+  <div class="flex my-4 mx-4" *ngIf="selectedYear">
+    <button
+      class="flex gap-2 items-center border border-blue-200 hover:border-blue-500 transition duration-300 rounded-md px-2"
+      (click)="downloadAllCertificates()"
+    >
+      <span class="material-symbols-outlined text-blue-500 cursor-pointer">
+        download
+      </span>
+      Scarica tutti i certificati
+    </button>
+  </div>
 </div>
-<div
-  *ngIf="selectedYear"
-  class="grid grid-cols-6 bg-gray-100 p-4 rounded-lg shadow-md overflow-y-scroll h-full max-h-[650px]"
->
-  <!-- Intestazione -->
-  <div class="font-semibold p-2 text-center">N°</div>
-  <div class="font-semibold p-2 text-center">Nome</div>
-  <div class="font-semibold p-2 text-center">Email</div>
-  <div class="font-semibold p-2 text-center">Consumati</div>
-  <div class="font-semibold p-2 text-center">Transazioni</div>
-  <div class="font-semibold p-2 text-center">Download</div>
+<div *ngIf="selectedYear">
+  <div
+    class="grid grid-cols-6 bg-gray-100 p-4 rounded-lg shadow-md overflow-y-scroll h-full max-h-[650px]"
+  >
+    <!-- Intestazione -->
+    <div class="font-semibold p-2 text-center">N°</div>
+    <div class="font-semibold p-2 text-center">Nome</div>
+    <div class="font-semibold p-2 text-center">Email</div>
+    <div class="font-semibold p-2 text-center">Consumati</div>
+    <div class="font-semibold p-2 text-center">Transazioni</div>
+    <div class="font-semibold p-2 text-center">Download</div>
 
-  <!-- Righe dinamiche -->
-  <ng-container *ngFor="let activeMerchant of activeMerchants; let i = index">
-    <div class="p-2 border-b text-center">{{ i + 1 }}</div>
-    <div class="p-2 border-b">{{ activeMerchant.name }}</div>
-    <div class="p-2 border-b">
-      <div *ngIf="activeMerchant.users && activeMerchant.users.length > 0">
-        <div *ngFor="let user of activeMerchant.users">
-          <a [href]="'mailto:' + user.email" class="text-xs">{{
-            user.email
-          }}</a>
+    <ng-container *ngFor="let activeMerchant of activeMerchants; let i = index">
+      <div class="p-2 border-b text-center">{{ i + 1 }}</div>
+      <div class="p-2 border-b">{{ activeMerchant.name }}</div>
+      <div class="p-2 border-b">
+        <div *ngIf="activeMerchant.users && activeMerchant.users.length > 0">
+          <div *ngFor="let user of activeMerchant.users">
+            <a [href]="'mailto:' + user.email" class="text-xs">{{
+              user.email
+            }}</a>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="p-2 border-b text-center">
-      {{ activeMerchant.amount }}
-    </div>
-    <div class="p-2 border-b text-center">
-      {{ activeMerchant.numberTransactions }}
-    </div>
-    <!-- <div class="p-2 border-b flex justify-center">
-      <span
-        (click)="createPng(i)"
-        class="material-symbols-outlined text-blue-500 cursor-pointer"
-      >
-        download
-      </span>
-    </div> -->
-
-    <div class="p-2 border-b flex justify-center">
-      <span
-        (click)="generateMerchantCertificate(i)"
-        class="material-symbols-outlined text-blue-500 cursor-pointer"
-      >
-        download
-      </span>
-    </div>
-  </ng-container>
+      <div class="p-2 border-b text-center">
+        {{ activeMerchant.amount }}
+      </div>
+      <div class="p-2 border-b text-center">
+        {{ activeMerchant.numberTransactions }}
+      </div>
+      <div class="p-2 border-b flex justify-center">
+        <span
+          (click)="dowloadSingleCertificate(i)"
+          class="material-symbols-outlined text-blue-500 cursor-pointer"
+        >
+          download
+        </span>
+      </div>
+    </ng-container>
+  </div>
 </div>
