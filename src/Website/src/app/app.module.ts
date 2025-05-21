@@ -49,7 +49,6 @@ import { PrivacyOverviewComponent } from "./pages/privacy/overview/overview.comp
 import { SignInComponent } from "./authentication/signin/signin.component";
 
 import { FanoComponent } from "./pages/about/fano/fano.component";
-import { ManageComponent } from "./manage/manage/manage.component";
 import { SharedModule } from "./shared/shared.module";
 import { UrbinoComponent } from "./pages/about/urbino/urbino.component";
 import { AboutComponent } from "./pages/about/about/about.component";
@@ -161,7 +160,6 @@ const httpInterceptorProviders = environment.mock
     JoinstringsPipe,
     LogInErrorDialogComponent,
     LogoutDialogComponent,
-    ManageComponent,
     MerchantComponent,
     MerchantSignUpComponent,
     NavComponent,

@@ -82,12 +82,14 @@ export class UserComponent implements OnInit, OnDestroy {
             }
         );
 
-        this.username =
-            this.userService.currentUserValue.name +
-            " " +
-            this.userService.currentUserValue.surname;
+    this.userService.currentUser.subscribe((user) => {
+      if (user) {
+        this.username = `${user.name} ${user.surname}`;
         this.loadData();
-
+      } else {
+        console.warn("User null");
+      }
+    });
     }
 
     ngOnDestroy() {

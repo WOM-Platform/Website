@@ -60,24 +60,26 @@ export class TokenInterceptorService implements HttpInterceptor {
     //}
 
     return next.handle(duplicate).pipe(
-      tap((ev: HttpEvent<any>) => {
-        // if (ev instanceof HttpResponse) {}
-      }),
       catchError((error) => {
         if (error instanceof HttpErrorResponse) {
-          if (userLogin && error.status == 401) {
+          if (userLogin && error.status === 401) {
+            // 401 on a protected route — force logout
             this.userService.logout();
-            let ref = this.snackBar.open("Unauthorized.", "close", {
-              duration: 5000,
-            });
+            this.snackBar.open(
+              "Sessione scaduta. Effettua il login.",
+              "Chiudi",
+              {
+                duration: 5000,
+              }
+            );
           } else if (error.status === 0) {
-            let ref = this.snackBar.open("🛠️ Server error", "close", {
+            // Handle connection/server errors
+            this.snackBar.open("🛠️ Errore del server. Riprova.", "Chiudi", {
               duration: 5000,
             });
-            ref.afterDismissed().subscribe((res) => {});
           }
         }
-        return throwError(error);
+        return throwError(() => error);
       })
     );
   }

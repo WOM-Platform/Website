@@ -108,30 +108,6 @@ export class UserService {
     return decoded && decoded.exp * 1000 < Date.now();
   }
 
-  startTokenCheck(intervalTime: number = 20000) {
-    // Prevent multiple timers
-    if (this.tokenCheckInterval) return;
-
-    if (this.isTokenExpired()) {
-      this.logout();
-      this.stopTokenCheck();
-    }
-
-    this.tokenCheckInterval = interval(intervalTime).subscribe(() => {
-      if (this.isTokenExpired()) {
-        this.logout();
-        this.stopTokenCheck();
-      }
-    });
-  }
-
-  stopTokenCheck() {
-    if (this.tokenCheckInterval) {
-      this.tokenCheckInterval.unsubscribe();
-      this.tokenCheckInterval = null;
-    }
-  }
-
   /**
    * Login and retrieve the user id and bearer token
    * @param email username is always email
@@ -174,13 +150,10 @@ export class UserService {
    * Notify the server that the user has logged out & remove local storage data
    */
   logout(): void {
-    this.http.post<any>(this.localUrlV1 + "logout", {}).pipe(
-      map((value) => {
-        console.log("logout: " + value);
-      })
-    );
+    this.http
+      .post<any>(this.localUrlV1 + "logout", {})
+      .pipe(map((value) => {}));
 
-    this.stopTokenCheck();
     // remove user from local storage to log user out
     this.storageService.clearAllCacheAndLocalStorage();
 
