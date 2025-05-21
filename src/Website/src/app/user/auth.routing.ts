@@ -1,8 +1,6 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
 
-import { ManageGuard } from "../_helpers/manage.guard";
-import { ManageComponent } from "../manage/manage/manage.component";
 import { UserHomeComponent } from "./home/user-home.component";
 import { UserMerchantsComponent } from "./merchants/user-merchants.component";
 import { UserNotVerifiedComponent } from "./not-verified/user-not-verified.component";
@@ -144,25 +142,6 @@ const routes: Routes = [
           breadcrumb: "BREADCRUMBS.USER.ADMIN-STATS",
           requiresAuth: true,
         },
-      },
-      {
-        path: "manage",
-        canActivate: [authGuard, ManageGuard],
-        data: {
-          breadcrumb: "BREADCRUMBS.MANAGE.TITLE",
-          requiresAuth: true,
-        },
-        children: [
-          {
-            path: "",
-            component: ManageComponent,
-            canActivate: [authGuard, ManageGuard],
-            data: {
-              breadcrumb: "BREADCRUMBS.MANAGE.HOME",
-              requiresAuth: true,
-            },
-          },
-        ],
       },
     ],
   },

@@ -28,8 +28,6 @@ export class UserHomeComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): any {
-    this.userService.startTokenCheck();
-
     this.loadData();
   }
 
