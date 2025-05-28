@@ -5,14 +5,32 @@
       (onDateFilter)="onDatesSelected($event)"
     />
     <div *ngIf="currentUser.role === 'Admin'" class="flex items-center gap-2">
-      <!-- Scarica CSV -->
-      <button [matTooltip]="activeFiltersSummary" matTooltipShowDelay="200">
-        <span class="material-symbols-outlined">info</span>
+      <button
+        class="cursor-help text-gray-600 focus:outline-none focus:ring-2 focus:ring-slate-400"
+        [matTooltip]="activeFiltersSummary"
+        matTooltipShowDelay="200"
+        aria-label="Informazioni sui filtri attivi"
+      >
+        <span
+          class="material-symbols-outlined rounded-full p-2 hover:bg-slate-100"
+          >info</span
+        >
       </button>
+
       <!-- Scarica report annuale -->
-      <button (click)="openModalReport()">
-        <span class="material-symbols-outlined">assignment</span>
+
+      <button
+        (click)="openModalReport()"
+        class="text-gray-600 transition focus:outline-none focus:ring-2 focus:ring-slate-400"
+        aria-label="Apri il report annuale"
+      >
+        <span
+          class="rounded-full p-2 hover:bg-slate-100 material-symbols-outlined"
+          >assignment</span
+        >
       </button>
+
+      <!-- Scarica CSV -->
       <app-csv-download [filters]="filters" />
     </div>
   </div>

@@ -1,0 +1,92 @@
+<form
+  [formGroup]="badgeForm"
+  (ngSubmit)="onSave()"
+  class="space-y-4 p-4 bg-white rounded shadow"
+>
+  <div class="relative inline-block mb-4 group">
+    <!-- Badge Image -->
+    <img
+      [src]="badgeForm.get('imageUrl')?.value"
+      alt="{{ badgeForm.get('name.it')?.value }}"
+      class="w-full h-full object-cover rounded border"
+    />
+
+    <!-- File Input (hidden) -->
+    <input
+      type="file"
+      id="fileInput"
+      (change)="onFileChange($event)"
+      class="absolute top-0 right-0 w-full h-full opacity-0 cursor-pointer"
+    />
+
+    <!-- Edit Button Overlay -->
+    <label
+      for="fileInput"
+      class="flex items-center absolute top-1 right-1 bg-white text-blue-600 border transition duration-300 hover:border-blue-600 text-xs px-2 py-1 rounded-md shadow-sm cursor-pointer"
+    >
+      <span class="material-symbols-outlined icon-mb"> edit </span> Modifica
+    </label>
+  </div>
+
+  <!-- Nome  -->
+  <div type="text" formGroupName="name" class="flex gap-2">
+    <input class="inputField" formControlName="it" />
+    <input class="inputField" formControlName="en" />
+  </div>
+
+  <!-- isPublic e challenge -->
+  <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+    <div>
+      <label for="isPublic" class="block text-sm text-gray-700"
+        >Pubblico?</label
+      >
+      <input
+        type="checkbox"
+        formControlName="isPublic"
+        id="isPublic"
+        class="h-4 w-4 text-blue-600 border-gray-300 rounded"
+      />
+    </div>
+    <div *ngIf="badgeForm.get('isPublic')?.value === false" [@fadeSlide]>
+      <label class="block text-sm font-medium text-gray-700">Challenge</label>
+      <select formControlName="challenge" class="inputField">
+        <option value="easy">Easy</option>
+        <option value="medium">Medium</option>
+        <option value="hard">Hard</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- Descrizione -->
+  <div formGroupName="description" class="flex gap-2">
+    <input class="inputField" formControlName="it" />
+    <input class="inputField" formControlName="en" />
+  </div>
+  <!-- URL Info -->
+  <div>
+    <label class="block text-sm font-medium text-gray-700">Info URL</label>
+    <input formControlName="infoUrl" type="url" class="inputField" />
+  </div>
+  <!-- Filter -->
+  <div>
+    <label class="block text-sm font-medium text-gray-700"
+      >Filter (JSON string)</label
+    >
+    <textarea formControlName="filter" rows="3" class="inputField"></textarea>
+  </div>
+  <!-- Campi lettura -->
+  <small>
+    Timestamp:
+    {{ badgeForm.get("timestamp")?.value }}
+  </small>
+
+  <!-- Save Button -->
+  <div>
+    <button
+      type="submit"
+      class="mt-4 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+    >
+      Salva
+    </button>
+  </div>
+</form>

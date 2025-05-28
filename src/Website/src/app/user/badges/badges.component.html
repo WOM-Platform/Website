@@ -1,0 +1,43 @@
+<div class="p-6 space-y-10">
+  <div class="flex justify-end gap-2">
+    <app-create-button [label]="'Nuova Challenge'" (clicked)="newChallenge()" />
+    <app-create-button [label]="'Nuovo Badge'" (clicked)="newBadge()" />
+  </div>
+  <div>
+    <div>
+      <h2 class="text-xl font-bold text-gray-800 mb-4">Generali</h2>
+      <div class="flex flex-wrap gap-5">
+        <a
+          *ngFor="let badge of isPublicBadges"
+          (click)="openBadgeDetails(badge, 'edit')"
+          class="relative group"
+        >
+          <img
+            [title]="badge.alt"
+            [src]="badge.imageUrl"
+            [alt]="badge.alt"
+            class="w-16 h-16 object-contain hover:scale-105 transition-transform clickableBadge"
+          />
+        </a>
+      </div>
+    </div>
+
+    <div *ngFor="let challenge of challengeBadges | keyvalue">
+      <h2>{{ challenge.key }}</h2>
+      <div class="flex flex-wrap gap-5">
+        <a
+          *ngFor="let badge of challenge.value"
+          (click)="openBadgeDetails(badge, 'edit')"
+          class="relative group"
+        >
+          <img
+            [title]="badge.alt"
+            [src]="badge.imageUrl"
+            [alt]="badge.alt"
+            class="w-16 h-16 object-contain hover:scale-105 transition-transform clickableBadge"
+          />
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
