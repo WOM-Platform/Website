@@ -3,20 +3,21 @@
     <app-create-button [label]="'Nuova Challenge'" (clicked)="newChallenge()" />
     <app-create-button [label]="'Nuovo Badge'" (clicked)="newBadge()" />
   </div>
-  <div>
+  <div *ngIf="badges">
     <div>
       <h2 class="text-xl font-bold text-gray-800 mb-4">Generali</h2>
       <div class="flex flex-wrap gap-5">
         <a
           *ngFor="let badge of isPublicBadges"
           (click)="openBadgeDetails(badge, 'edit')"
-          class="relative group"
+          class="relative group cursor-pointer"
         >
-          <img
-            [title]="badge.alt"
-            [src]="badge.imageUrl"
-            [alt]="badge.alt"
-            class="w-16 h-16 object-contain hover:scale-105 transition-transform clickableBadge"
+          <app-blurhash
+            [image]="badge.image"
+            [alt]="badge.name.it"
+            [imageSize]="'squareThumbnailUrl'"
+            [width]="200"
+            [height]="200"
           />
         </a>
       </div>
@@ -30,11 +31,12 @@
           (click)="openBadgeDetails(badge, 'edit')"
           class="relative group"
         >
-          <img
-            [title]="badge.alt"
-            [src]="badge.imageUrl"
-            [alt]="badge.alt"
-            class="w-16 h-16 object-contain hover:scale-105 transition-transform clickableBadge"
+          <app-blurhash
+            [image]="badge.image"
+            [alt]="badge.name.it"
+            [imageSize]="'squareThumbnailUrl'"
+            [width]="20"
+            [height]="20"
           />
         </a>
       </div>

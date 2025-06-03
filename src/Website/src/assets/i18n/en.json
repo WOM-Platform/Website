@@ -65,7 +65,8 @@
       "SHARPER2024": "UNIURB Sharper 2024"
     },
     "USER": {
-      "BADGES": " Badges",
+      "BADGES": "Badges",
+      "BADGE_DETAIL": "Badge details",
       "USER": "Your profile",
       "MERCHANT": "Merchant",
       "MERCHANT-DETAIL": "Info",

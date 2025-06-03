@@ -54,16 +54,16 @@ export class DialogCreateBadgeComponent implements OnInit {
       challenge: [null],
       isPublic: [true, Validators.required],
       name: this.fb.group({
-        it: ["", Validators.required],
-        en: ["", Validators.required],
+        it: [null, Validators.required],
+        en: [null, Validators.required],
       }),
-      filter: [null, Validators.required],
+      filter: [null],
       imageUrl: [null],
       description: this.fb.group({
-        it: ["", Validators.required],
-        en: ["", Validators.required],
+        it: [null],
+        en: [null],
       }),
-      infoUrl: [""],
+      informationUrl: [null],
     });
   }
 
@@ -72,8 +72,7 @@ export class DialogCreateBadgeComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.form.value);
-    this.dialogRef.close(this.form);
+    this.dialogRef.close(this.form.value);
   }
 
   onFileChange(event: any) {

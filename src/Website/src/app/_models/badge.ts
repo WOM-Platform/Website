@@ -1,14 +1,20 @@
 import { Filter } from "./filter";
-
+export interface ImageBadge {
+  blurHash: string;
+  fullSizeUrl: string;
+  highDensityFullWidthUrl: string;
+  midDensityFullWidthUrl: string;
+  squareThumbnailUrl: string;
+}
 export interface Badge {
   id: string;
   challenge: string;
   isPublic: boolean;
   name: LocalizedText;
   filter: string;
-  imageUrl: string;
+  image: ImageBadge;
   description: LocalizedText;
-  infoUrl?: string;
+  informationUrl?: string;
   creationTimestamp: string;
   updateTimestamp?: string;
 }

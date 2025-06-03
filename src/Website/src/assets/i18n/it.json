@@ -66,6 +66,7 @@
     },
     "USER": {
       "BADGES": " Badges",
+      "BADGE_DETAIL": "Dettagli badge",
       "USER": "Il tuo profilo",
       "MERCHANT": "Merchant",
       "MERCHANT-DETAIL": "Info",
