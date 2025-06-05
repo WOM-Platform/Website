@@ -15,6 +15,8 @@ import { PosDetailsComponent } from "./merchants/pos-details/pos-details";
 import { instrumentsGuard } from "../_helpers/instruments.guard";
 import { authGuard } from "../_helpers/auth.guard";
 import { UserStatisticsComponent } from "./statistics/user-statistics.component";
+import { BadgesComponent } from "./badges/badges.component";
+import { BadgeDetailComponent } from "./badges/badge-detail/badge-detail.component";
 
 const routes: Routes = [
   {
@@ -53,6 +55,21 @@ const routes: Routes = [
         canActivate: [authGuard],
         data: {
           breadcrumb: "BREADCRUMBS.USER.HOME",
+          requiresAuth: true,
+        },
+      },
+      {
+        path: "badges",
+        component: BadgesComponent,
+        canActivate: [authGuard],
+        data: { breadcrumb: "BREADCRUMBS.USER.BADGES", requiresAuth: true },
+      },
+      {
+        path: "badges/:id",
+        component: BadgeDetailComponent,
+        canActivate: [authGuard],
+        data: {
+          breadcrumb: "BREADCRUMBS.USER.BADGE_DETAIL",
           requiresAuth: true,
         },
       },

@@ -1,0 +1,3 @@
+.clickableBadge {
+  @apply cursor-pointer w-16 h-16 object-contain hover:scale-105 transition-transform;
+}
