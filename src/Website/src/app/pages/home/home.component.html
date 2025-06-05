@@ -1,35 +1,214 @@
+<!-- slider -->
 <div class="img-container">
   <img
     class="image-header"
-    src="../../../assets/images/wom_header.jpg"
+    src="../../../assets/images/home/banner.jpg"
     alt="WOM header"
   />
-  <div class="image-overlay">
-    <a
-      href="https://play.google.com/store/apps/details?id=social.wom.pocket"
-      target="_blank"
-      title="Download WOM Pocket from Google Play"
-    >
+</div>
+<!-- app che valorizza -->
+<div class="px-6 md:px-20 pb-3 pt-16 md:py-6 my-12 bg-[#F2F2F2] relative">
+  <h3
+    class="absolute px-20 -top-9 left-0 text-3xl font-extrabold text-[#1F1F1D]"
+  >
+    L'app<br />che valorizza<br />il tuo tempo
+  </h3>
+  <div class="relative flex justify-center md:justify-end items-center">
+    <app-store-logos />
+  </div>
+  <h3
+    class="absolute px-20 -bottom-4 right-0 text-3xl font-extrabold text-[#CCCCCC]"
+  >
+    Scarica l'app
+  </h3>
+</div>
+<div class="mx-6 md:mx-20">
+  <div class="mb-8">
+    <!-- info wom -->
+    <p>
+      <span class="text-[#009EE2] font-extrabold">WOM</span> - "Worth One
+      Minute" è una piattaforma di ricompensa general-purpose basata su un
+      sistema di scambio di voucher. Molte azioni e attività compiute dagli
+      individui hanno un valore sociale intrinseco, un effetto noto in economia
+      come "esternalità positiva". WOM mira a riconoscere tutte quelle azioni
+      che costituiscono un contributo socialmente prezioso per un obiettivo
+      comune, premiando il tempo che le persone dedicano a queste attività
+      attraverso la generazione di voucher sociali digitali. I voucher WOM
+      premiano ogni minuto di impegno sociale.
+    </p>
+    <app-btn-find-out-more />
+  </div>
+  <!-- trafiletto pesaro -->
+  <a
+    href="https://ctesquare.it/"
+    target="_blank"
+    rel="noopener noreferrer"
+    class="px-6 md:px-20 py-3 md:py-6 my-12 bg-[#F2F2F2] relative flex items-center flex-col md:flex-row gap-4 md:gap-12"
+  >
+    <img
+      class="max-w-28 md:max-w-[200px] w-full h-auto"
+      src="../../../assets/images/pesaro/logo-cte-square.png"
+      alt="CTE Square logo"
+    />
+    <p class="font-light">
+      CTE Square, Casa delle Tecnologie Emergenti ha lo scopo di supportare
+      progetti di ricerca e sperimentazione con l’intento di trasferire know-how
+      tecnologico verso le piccole e medie imprese per produrre sempre più
+      servizi di qualità.
+    </p>
+  </a>
+
+  <div class="space-y-4">
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      <div class="square-info">
+        <h3 class="square-title">Azioni</h3>
+
+        <div class="text-square">
+          <hr class="hr-line w-[48px]" />
+          <p>
+            Compiendo azioni socialmente valide, ogni utente guadagna WOM e
+            diventa un Volontario. I Volontari possono gestire i loro voucher
+            WOM tramite un’app, "WOM Pocket", che possono installare sul proprio
+            dispositivo. L’applicazione consente ai Volontari di raccogliere i
+            propri voucher, conservarli e spenderli.
+          </p>
+        </div>
+        <div class="mt-auto flex justify-end">
+          <app-btn-find-out-more />
+        </div>
+      </div>
+      <div class="square-info">
+        <h3 class="square-title">Merchant</h3>
+
+        <div class="text-square">
+          <hr class="hr-line w-[90px]" />
+          <p>
+            I negozi locali possono partecipare al progetto diventando
+            Merchants. I Merchants sono componenti di sistema che possono creare
+            istanze di pagamento. Possono accettare i voucher WOM in cambio di
+            servizi e sconti. I Merchants utilizzano un’applicazione diversa, il
+            "WOM POS", o un software di integrazione personalizzato. Questi
+            componenti software consentono ai Merchants di creare nuove
+            transazioni, applicando ltri ai voucher WOM raccolti.
+          </p>
+        </div>
+        <div class="mt-auto flex justify-end">
+          <app-btn-find-out-more />
+        </div>
+      </div>
+    </div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      <div class="square-info">
+        <h3 class="square-title">Instrument</h3>
+
+        <div class="text-square">
+          <hr class="hr-line w-[106px]" />
+          <p>
+            Gli Instruments sono i proprietari di un’attività sociale o di
+            un’iniziativa con nalità sociale riconosciuta dalla piattaforma. Gli
+            Instruments consentono ai volontari di intraprendere azioni sociali.
+            I titolari di questo tipo di attività, come organizzazioni no prot,
+            associazioni o privati, possono contattare
+            <a href="mailto:info@wom.social">info&#64;wom.social</a> per essere
+            valutati dal comitato etico della piattaforma e inseriti nella lista
+            dei WOM Instrument che possono generare voucher e premiare i
+            contributori.
+          </p>
+        </div>
+        <div class="mt-auto flex justify-end">
+          <app-btn-find-out-more />
+        </div>
+      </div>
+      <div class="square-info">
+        <h3 class="square-title">Registry</h3>
+
+        <div class="text-square">
+          <hr class="hr-line w-[70px]" />
+          <p>
+            Il Registry è l’entità centrale che genera i WOM su richiesta degli
+            Instrument, ne verica l’autenticità quando devono essere usati
+            presso un Merchant e ne impedisce la duplicazione o il doppio
+            utilizzo.
+          </p>
+        </div>
+        <div class="mt-auto flex justify-end">
+          <app-btn-find-out-more />
+        </div>
+      </div>
+    </div>
+    <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
       <img
-        style="max-width: 100%"
-        src="../../../assets/images/badge_google_play.png"
-        alt="Google Play"
+        src="../../../assets/images/home/bikeColor.jpg"
+        alt="test"
+        class="object-contain"
       />
-    </a>
-    <a
-      href="https://apps.apple.com/it/app/wom-pocket/id1466969163"
-      target="_blank"
-      title="Download WOM Pocket from App Store"
-    >
       <img
-        style="max-width: 100%"
-        src="../../../assets/images/badge_app_store.png"
-        alt="Apple App Store"
+        src="../../../assets/images/home/musicaColor.png"
+        alt="test"
+        class="object-contain"
       />
-    </a>
+      <img
+        src="../../../assets/images/home/studioColor.png"
+        alt="test"
+        class="object-contain"
+      />
+      <img
+        src="../../../assets/images/home/palestraColor.png"
+        alt="test"
+        class="object-contain"
+      />
+    </div>
+  </div>
+
+  <!-- app loghi -->
+  <div
+    class="flex flex-wrap justify-center items-center gap-4 mt-8 relative w-full"
+  >
+    <img
+      src="../../../assets/images/home/WOMPocket.png"
+      alt="WOM Pocket"
+      class="max-w-[250px] h-48 object-contain mr-6"
+    />
+    <div
+      class="hidden md:block w-[2px] h-32 bg-[#CCCCCC] transform rotate-12 origin-center"
+    ></div>
+    <img
+      src="../../../assets/images/home/WOMFit.png"
+      alt="WOM Fit"
+      class="max-w-[250px] h-48 object-contain"
+    />
+    <div
+      class="hidden md:block w-[2px] h-32 bg-[#CCCCCC] transform rotate-12 origin-center"
+    ></div>
+    <img
+      src="../../../assets/images/home/WOMPos.png"
+      alt="WOM POS"
+      class="max-w-[250px] h-48 object-contain"
+    />
   </div>
 </div>
-<div class="container">
+<!-- trafiletto digit -->
+<a
+  href="https://digit.srl/"
+  target="_blank"
+  rel="noopener noreferrer"
+  class="px-6 md:px-20 py-3 md:py-6 mt-6 bg-[#F2F2F2] relative flex flex-col md:flex-row gap-4 md:gap-12"
+>
+  <img
+    class="h-auto max-w-28 md:max-w-full md:max-h-24 w-auto"
+    src="../../../assets/images/digit_logo.png"
+    alt="srl logo"
+  />
+
+  <p class="font-light">
+    DIGIT srl è uno spin-off dell’Università di Urbino che ha come obiettivo
+    creare un valore sociale attraverso la consapevolezza digitale. DIGIT srl è
+    stata fondata sulla convinzione che alla base della tecnologia, delle
+    piattaforme e dei software ci debbano essere gli interessi dell’uomo e della
+    società e che innovazione sociale e digitale siano indissolubilmente legate.
+  </p>
+</a>
+<!-- <div class="container">
   <div class="flex flex-wrap items-center">
     <div class="margin-top-p">
       <div class="basis-full">
@@ -170,4 +349,4 @@
       </div>
     </div>
   </div>
-</div>
+</div> -->

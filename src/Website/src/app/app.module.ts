@@ -91,12 +91,12 @@ import { ReteDelleRetiComponent } from "./pages/projects/rete-delle-reti/rete-de
 import { Pesaro2024Component } from "./pages/pesaro2024-section/pesaro2024/pesaro2024.component";
 import { Pesaro2024SectionComponent } from "./pages/pesaro2024-section/pesaro2024-section.component";
 import { NgChartsModule } from "ng2-charts";
-import { VolontarxComponent } from "./pages/pesaro2024-section/volontarx/volontarx.component";
 import { SearchSourceComponent } from "./user/components/user-access-list/search-source/search-source.component";
 import localeIt from "@angular/common/locales/it";
 import { StoreLogosComponent } from "./components/store-logos/store-logos.component";
 import { AnimatedNumberComponent } from "./components/animated-number/animated-number.component";
 import { ApplicationsWomFitComponent } from "./pages/volunteers/applications/womfit/womfit.component";
+import { BtnFindOutMoreComponent } from "./components/btn-find-out-more/btn-find-out-more.component";
 
 // AoT requires an exported function for factories
 export const createTranslateLoader = (http: HttpClient) =>
@@ -214,6 +214,7 @@ const httpInterceptorProviders = environment.mock
     NgChartsModule,
     SearchSourceComponent,
     StoreLogosComponent,
+    BtnFindOutMoreComponent,
   ],
   providers: [
     {

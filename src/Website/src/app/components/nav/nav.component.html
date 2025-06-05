@@ -178,9 +178,9 @@
     </mat-sidenav>
   </mat-sidenav-container>
   <div>
-    <div class="flex justify-between items-center bg-[#444557] h-14">
+    <div class="flex justify-between items-center bg-[#fff] h-14">
       <a class="h-20 w-auto items-center flex px-4" routerLink="home">
-        <img src="../../../assets/images/wom-logo-bianco.png" />
+        <img src="../../../assets/images/logo.png" />
       </a>
       <div class="flex flex-row align-items-center">
         <!-- begin menu pc -->
@@ -265,10 +265,10 @@
             <span>{{ "NAV.SIGN_OUT" | translate }}</span>
           </button>
         </div>
-        <div class="px-2 border-l border-white"></div>
+        <div class="px-2 border-l border-[#A4A4A4]"></div>
         <!-- end menu pc-->
         <select
-          class="lang-select w-full mx-4 px-4 py-2 text-sm bg-transparent border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+          class="lang-select"
           [(ngModel)]="selectLang"
           (change)="setTransLanguage()"
         >
@@ -284,7 +284,7 @@
           (click)="drawer.toggle()"
           *ngIf="isHandset$ | async"
         >
-          <mat-icon style="color: white" aria-label="Side nav toggle icon"
+          <mat-icon style="color: black" aria-label="Side nav toggle icon"
             >menu
           </mat-icon>
         </button>

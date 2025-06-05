@@ -7,34 +7,18 @@ $my-primary: mat.m2-define-palette(mat.$m2-indigo-palette, 500);
 $my-accent: mat.m2-define-palette(mat.$m2-pink-palette, A200, A100, A400);
 
 $my-theme: mat.m2-define-light-theme(
-                (
-                        color: (
-                                primary: $my-primary,
-                                accent: $my-accent,
-                                blue-wom: myBlueWom,
-                        ),
-                        typography: mat.m2-define-typography-config(),
-                        density: 0,
-                )
+  (
+    color: (
+      primary: $my-primary,
+      accent: $my-accent,
+      blue-wom: myBlueWom,
+    ),
+    typography: mat.m2-define-typography-config(),
+    density: 0,
+  )
 );
 
 @include mat.all-component-themes($my-theme);
-
-@font-face {
-  font-family: "Roboto";
-  src: local("Roboto"),
-  url(./assets/fonts/Roboto/Roboto-Light.ttf) format("truetype");
-}
-
-@font-face {
-  font-family: "Raleway";
-  src: local("Raleway"),
-  url(./assets/fonts/Raleway/Raleway-SemiBold.ttf) format("truetype");
-}
-
-/*a {
-  @apply blue-wom;
-}*/
 
 .mat-h1,
 .mat-headline,
@@ -69,7 +53,7 @@ li {
 }
 
 button:disabled {
-  @apply text-gray-400
+  @apply text-gray-400;
 }
 
 .margin-0 {
@@ -81,11 +65,11 @@ button:disabled {
 }
 
 .btn-rounded-outline {
-  @apply px-4 py-2 border-2 border-black rounded-full flex gap-2 items-center w-fit
+  @apply px-4 py-2 border-2 border-black rounded-full flex gap-2 items-center w-fit;
 }
 
 .pointed-list {
-  @apply list-disc list-inside
+  @apply list-disc list-inside;
 }
 
 @media (max-width: 767px) {

@@ -74,3 +74,16 @@
 .header-box-content {
   margin: 20px;
 }
+
+.square-info {
+  @apply bg-[#E6E6E6]  p-6 rounded  flex flex-col h-full;
+}
+.square-title {
+  @apply text-[#009EE2] text-2xl font-bold mb-1;
+}
+.hr-line {
+  @apply border-t-4 border-solid border-[#ccc] mb-4;
+}
+.text-square {
+  @apply px-5;
+}
