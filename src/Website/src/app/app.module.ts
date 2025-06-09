@@ -97,6 +97,7 @@ import { StoreLogosComponent } from "./components/store-logos/store-logos.compon
 import { AnimatedNumberComponent } from "./components/animated-number/animated-number.component";
 import { ApplicationsWomFitComponent } from "./pages/volunteers/applications/womfit/womfit.component";
 import { BtnFindOutMoreComponent } from "./components/btn-find-out-more/btn-find-out-more.component";
+import { CarouselComponent } from "./components/carousel/carousel.component";
 
 // AoT requires an exported function for factories
 export const createTranslateLoader = (http: HttpClient) =>
@@ -215,6 +216,7 @@ const httpInterceptorProviders = environment.mock
     SearchSourceComponent,
     StoreLogosComponent,
     BtnFindOutMoreComponent,
+    CarouselComponent,
   ],
   providers: [
     {
