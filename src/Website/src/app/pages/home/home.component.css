@@ -24,11 +24,6 @@
   opacity: 0.5;
 }
 
-.img-container {
-  text-align: center;
-  position: relative;
-}
-
 .image-overlay {
   display: flex;
   gap: 10px;

@@ -1,0 +1,23 @@
+<div class="relative w-full mx-auto overflow-hidden">
+  <div class="relative h-64 sm:h-80 md:h-96">
+    <img
+      [src]="images[currentIndex].path"
+      class="w-full h-full object-cover transition-opacity duration-500"
+      alt="Slide Image"
+    />
+  </div>
+
+  <!-- Dots -->
+  <div class="transform flex justify-end mx-20 space-x-2 my-3">
+    <ng-container *ngFor="let img of images; let i = index">
+      <button
+        (click)="currentIndex = i"
+        [ngClass]="{
+          'bg-gray-600': i === currentIndex,
+          'bg-gray-400': i !== currentIndex
+        }"
+        class="w-2 h-2 rounded-full hover:bg-white transition-all"
+      ></button>
+    </ng-container>
+  </div>
+</div>
