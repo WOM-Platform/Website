@@ -10,6 +10,7 @@ import { DialogCreateBadgeComponent } from "./dialog-create-badge/dialog-create-
 import { BadgeService } from "src/app/_services/badge.service";
 import { DialogCreateChallengeComponent } from "./dialog-create-challenge/dialog-create-challenge.component";
 import { BlurhashComponent } from "../components/blurhash/blurhash.component";
+import { Challenge } from "src/app/_models/challenge";
 
 @Component({
   selector: "app-badges",
@@ -21,8 +22,11 @@ export class BadgesComponent implements OnInit {
   challengeList: any[] = [];
 
   badges: Badge[] = [];
-  challengeBadges: { [challengeId: string]: Badge[] } = {};
-
+  challengeBadges: {
+    [challengeId: string]: {
+      badges: Badge[];
+    };
+  } = {};
   isPublicBadges: Badge[] = [];
 
   constructor(
@@ -35,26 +39,50 @@ export class BadgesComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadBadges();
+    // get challenge list
+    this.badgeService.getAllChallenges().subscribe((challenges) => {
+      this.challengeList = challenges;
+    });
   }
 
   loadBadges() {
+    // Clear all data structures before fetching new data
+    this.badges = [];
     this.isPublicBadges = [];
     this.challengeBadges = {};
 
-    this.badgeService.getAllBadges().subscribe((res) => {
-      console.log("Badges loaded:", res);
-      this.badges = res;
-      this.badges.map((b) => {
-        if (b.isPublic) {
-          this.isPublicBadges.push(b);
-        } else if (b.challenge) {
-          if (!this.challengeBadges[b.challenge]) {
-            this.challengeBadges[b.challenge] = [];
+    this.loadingService.show();
+    this.badgeService.getAllBadges().subscribe({
+      next: (res) => {
+        this.badges = res;
+        this.badges.map((b) => {
+          if (b.isPublic) {
+            this.isPublicBadges.push(b);
+          } else if (b.challengeId) {
+            // Group badges by challengeId
+            // Initialize the array if it doesn't exist
+            if (!this.challengeBadges[b.challengeId]) {
+              this.challengeBadges[b.challengeId] = {
+                badges: [],
+              };
+            }
+            this.challengeBadges[b.challengeId].badges.push(b);
           }
-          this.challengeBadges[b.challenge].push(b);
-        }
-      });
+        });
+      },
+      error: (error) => {
+        this.snackBarService.openSnackBar(
+          "Errore durante il caricamento dei badge."
+        );
+      },
+      complete: () => {
+        this.loadingService.hide();
+      },
     });
+  }
+
+  getChallengeKeys(): string[] {
+    return this.challengeBadges ? Object.keys(this.challengeBadges) : [];
   }
 
   newChallenge() {
@@ -63,12 +91,34 @@ export class BadgesComponent implements OnInit {
         title: "Nuova challenge",
       },
     });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.loadingService.show();
+        this.badgeService.createChallenge(result).subscribe({
+          next: (challenge) => {
+            this.snackBarService.openSnackBar("Challenge creata con successo!");
+            this.challengeList.push(challenge);
+            this.loadBadges();
+          },
+          error: (error) => {
+            this.snackBarService.openSnackBar(
+              "Errore durante la creazione della challenge."
+            );
+          },
+          complete: () => {
+            this.loadingService.hide();
+          },
+        });
+      }
+    });
   }
 
   newBadge() {
     const dialogRef = this.matDialog.open(DialogCreateBadgeComponent, {
       data: {
         title: "Nuovo badge",
+        challenges: this.challengeList,
       },
     });
 
@@ -110,5 +160,9 @@ export class BadgesComponent implements OnInit {
 
   openBadgeDetails(badge: Badge, action: string): void {
     this.router.navigate(["/user/badges", badge.id]);
+  }
+
+  openChallengeDetails(challenge: Challenge): void {
+    this.router.navigate(["/user/badges/challenge", challenge.id]);
   }
 }

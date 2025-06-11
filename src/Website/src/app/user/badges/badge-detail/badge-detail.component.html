@@ -49,9 +49,9 @@
     <div *ngIf="badgeForm.get('isPublic')?.value === false" [@fadeSlide]>
       <label class="block text-sm font-medium text-gray-700">Challenge</label>
       <select formControlName="challenge" class="inputField">
-        <option value="easy">Easy</option>
-        <option value="medium">Medium</option>
-        <option value="hard">Hard</option>
+        <option *ngFor="let challenge of challenges" value="easy">
+          {{ challenge.name.it }}
+        </option>
       </select>
     </div>
   </div>
@@ -68,11 +68,9 @@
   </div>
   <!-- Filter -->
   <div>
-    <label class="block text-sm font-medium text-gray-700"
-      >Filter (JSON string)</label
-    >
-    <textarea formControlName="filter" rows="3" class="inputField"></textarea>
+    <app-simple-filter (filteredEmit)="updateFilter($event)" />
   </div>
+
   <!-- Campi lettura -->
   <small>
     Timestamp:

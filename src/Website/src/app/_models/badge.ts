@@ -1,4 +1,3 @@
-import { Filter } from "./filter";
 export interface ImageBadge {
   blurHash: string;
   fullSizeUrl: string;
@@ -6,14 +5,16 @@ export interface ImageBadge {
   midDensityFullWidthUrl: string;
   squareThumbnailUrl: string;
 }
+
 export interface Badge {
   id: string;
-  challenge: string;
+  sortName: string;
+  challengeId: string;
   isPublic: boolean;
   name: LocalizedText;
-  filter: string;
-  image: ImageBadge;
   description: LocalizedText;
+  simpleFilter: SimpleFilter;
+  image: ImageBadge;
   informationUrl?: string;
   creationTimestamp: string;
   updateTimestamp?: string;
@@ -21,4 +22,18 @@ export interface Badge {
 
 interface LocalizedText {
   [locale: string]: string;
+}
+
+export interface SimpleFilter {
+  count: string;
+  sourceId: string;
+  aim: string;
+  bounds: {
+    leftTop: number[];
+    rightBottom: number[];
+  };
+  interval: {
+    start: string;
+    end: string;
+  };
 }

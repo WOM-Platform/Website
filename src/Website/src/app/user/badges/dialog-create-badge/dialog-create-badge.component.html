@@ -45,9 +45,9 @@
       <div *ngIf="form.get('isPublic')?.value === false" [@fadeSlide]>
         <label class="block text-sm font-medium text-gray-700">Challenge</label>
         <select formControlName="challenge" class="inputField">
-          <option value="easy">Easy</option>
-          <option value="medium">Medium</option>
-          <option value="hard">Hard</option>
+          <option *ngFor="let challenge of challengeList" [value]="challenge">
+            {{ challenge.name.it }}
+          </option>
         </select>
       </div>
     </div>
