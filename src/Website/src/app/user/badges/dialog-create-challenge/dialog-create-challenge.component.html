@@ -4,8 +4,75 @@
     (ngSubmit)="onSubmit()"
     class="bg-white p-8 rounded-xl shadow-md mx-auto space-y-6"
   >
-    <label class="block text-sm font-medium text-gray-700">Titolo</label>
-    <input formControlName="title" type="text" class="inputField" />
+    <!-- Nome -->
+    <div formGroupName="name" class="grid grid-cols-1 md:grid-cols-4 gap-4">
+      <div>
+        <div class="flex gap-2 items-start">
+          <label class="block text-sm font-medium text-gray-700"
+            >Nome (IT)</label
+          ><span class="text-red-600">*</span>
+        </div>
+        <input formControlName="it" type="text" class="inputField" />
+      </div>
+      <div>
+        <div class="flex gap-2 items-start">
+          <label class="block text-sm font-medium text-gray-700"
+            >Nome (EN)</label
+          ><span class="text-red-600">*</span>
+        </div>
+        <input formControlName="en" type="text" class="inputField" />
+      </div>
+    </div>
+    <!-- Is Public e challenge-->
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+      <div>
+        <div class="flex gap-2 items-start">
+          <label for="isPublic" class="block text-sm text-gray-700"
+            >Pubblico?</label
+          >
+          <span class="text-red-600">*</span>
+        </div>
+        <input
+          type="checkbox"
+          formControlName="isPublic"
+          id="isPublic"
+          class="h-4 w-4 text-blue-600 border-gray-300 rounded"
+        />
+      </div>
+
+      <div *ngIf="form.get('isPublic')?.value === false" [@fadeSlide]>
+        <label class="block text-sm font-medium text-gray-700">Challenge</label>
+        <select formControlName="challenge" class="inputField">
+          <option *ngFor="let challenge of challengeList" [value]="challenge">
+            {{ challenge.name.it }}
+          </option>
+        </select>
+      </div>
+    </div>
+    <!-- Descrizione -->
+    <div
+      formGroupName="description"
+      class="grid grid-cols-1 md:grid-cols-2 gap-4"
+    >
+      <div>
+        <label class="block text-sm font-medium text-gray-700"
+          >Descrizione (IT)</label
+        >
+        <textarea formControlName="it" rows="3" class="inputField"></textarea>
+      </div>
+      <div>
+        <label class="block text-sm font-medium text-gray-700"
+          >Descrizione (EN)</label
+        >
+        <textarea formControlName="en" rows="3" class="inputField"></textarea>
+      </div>
+    </div>
+
+    <!-- Info URL -->
+    <div>
+      <label class="block text-sm font-medium text-gray-700">Info URL</label>
+      <input formControlName="informationUrl" type="url" class="inputField" />
+    </div>
 
     <button
       type="submit"

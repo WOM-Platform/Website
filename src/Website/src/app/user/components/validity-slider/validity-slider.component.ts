@@ -1,10 +1,17 @@
+import { CommonModule } from "@angular/common";
 import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
-import { FormBuilder, FormGroup, FormsModule } from "@angular/forms";
+import {
+  FormBuilder,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
+} from "@angular/forms";
 import { MatSliderModule } from "@angular/material/slider";
 
 @Component({
   selector: "app-validity-slider",
-  imports: [MatSliderModule, FormsModule],
+  imports: [CommonModule, ReactiveFormsModule],
+
   standalone: true,
   templateUrl: "./validity-slider.component.html",
   styleUrls: ["./validity-slider.component.css"],
@@ -15,6 +22,7 @@ export class ValiditySliderComponent implements OnInit {
   @Output() validitySelected = new EventEmitter<number>();
   validityForm: FormGroup;
 
+  tickValues = [0, 1, 2, 3, 4, 5, 6];
   qntDays: number = -1; // to save the number of WOM days validity to retrieve to the API
 
   sliderValueSave;
@@ -33,15 +41,23 @@ export class ValiditySliderComponent implements OnInit {
       this.qntDays = this.selectedValidity;
       this.validitySelected.emit(this.qntDays);
     }
+
+    this.validityForm
+      .get("validity")
+      ?.valueChanges.subscribe((value: number) => {
+        this.qntDays = this.calculateDays(value);
+        this.validitySelected.emit(this.qntDays);
+      });
   }
 
-  onSliderChange(event: any) {
-    const value = event.target.value;
+  onSliderChange() {
+    const value = this.validityForm.get("validity")?.value;
+
     this.qntDays = this.calculateDays(Number(value));
     this.validitySelected.emit(this.qntDays);
   }
 
-  formatLabel(value: number): string {
+  formatLabel(value: any): string {
     switch (value) {
       case 0:
         return "Accetta tutti";

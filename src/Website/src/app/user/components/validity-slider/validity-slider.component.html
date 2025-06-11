@@ -1,26 +1,33 @@
-<div>
-    <div class="sliderValueSave">
-        <div class="border-2 border-black rounded-xl p-4">
-            <h2>Validità</h2>
-            <div class="flex flex-col">
-                <small class="text-gray-500">
-                    Se impostato, accetti soltanto i voucher WOM più recenti, con un'età pari o
-                    inferiore al valore impostato (espresso in giorni)
-                </small>
-                <mat-slider
-                        min="0"
-                        max="6"
-                        step="1"
-                        tickInterval="1"
-                        showTickMarks
-                        discrete
-                        [displayWith]="formatLabel"
-                        [disabled]="isEditing"
-                        (input)="onSliderChange($event)">
-                    <input matSliderThumb [value]="validityForm.get('validity').value">
-                </mat-slider>
+<form [formGroup]="validityForm">
+  <div class="sliderValueSave">
+    <div class="border-2 border-black rounded-xl p-4">
+      <h2>Validità</h2>
+      <div class="flex flex-col">
+        <small class="text-gray-500">
+          Se impostato, accetti soltanto i voucher WOM più recenti, con un'età
+          pari o inferiore al valore impostato (espresso in giorni)
+        </small>
+        <input
+          type="range"
+          formControlName="validity"
+          min="0"
+          max="6"
+          step="1"
+          [disabled]="isEditing"
+          (input)="onSliderChange()"
+          class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-blue-600"
+        />
 
-            </div>
+        <!-- Tick Marks -->
+        <div class="flex justify-between text-xs mt-1 px-1 text-gray-600">
+          <span *ngFor="let val of tickValues">{{ val }}</span>
         </div>
+
+        <!-- Label Display -->
+        <div class="mt-2 text-sm text-gray-700">
+          {{ formatLabel(validityForm.get("validity")?.value) }}
+        </div>
+      </div>
     </div>
-</div>
+  </div>
+</form>
