@@ -1,0 +1,68 @@
+<form
+  *ngIf="challenge"
+  [formGroup]="challengeForm"
+  (ngSubmit)="onSave()"
+  class="space-y-4 p-4 bg-white rounded shadow"
+>
+  <!-- Nome -->
+  <div formGroupName="name" class="flex gap-2">
+    <input
+      class="inputField"
+      formControlName="it"
+      placeholder="Nome (IT)"
+      type="text"
+    />
+    <input
+      class="inputField"
+      formControlName="en"
+      placeholder="Name (EN)"
+      type="text"
+    />
+  </div>
+
+  <!-- Descrizione -->
+  <div formGroupName="description" class="flex gap-2">
+    <input
+      class="inputField"
+      formControlName="it"
+      placeholder="Descrizione (IT)"
+      type="text"
+    />
+    <input
+      class="inputField"
+      formControlName="en"
+      placeholder="Description (EN)"
+      type="text"
+    />
+  </div>
+
+  <!-- URL Info -->
+  <div>
+    <label class="block text-sm font-medium text-gray-700">Info URL</label>
+    <input
+      formControlName="informationUrl"
+      type="url"
+      placeholder="https://example.com"
+      class="inputField"
+    />
+  </div>
+
+  <!-- Campi lettura -->
+  <small>Challenge ID: {{ challenge.id }}</small>
+
+  <!-- Buttons -->
+  <div class="flex justify-end gap-6 mt-4">
+    <button
+      (click)="deleteChallenge()"
+      class="flex items-center gap-2 bg-red-600 hover:bg-red-700 text-white py-2 px-4 rounded-lg shadow-md transition duration-200"
+    >
+      Elimina Challenge
+    </button>
+    <button
+      type="submit"
+      class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+    >
+      Salva
+    </button>
+  </div>
+</form>

@@ -1,0 +1,68 @@
+<div class="p-6 space-y-10">
+  <div class="flex justify-end gap-2">
+    <app-create-button [label]="'Nuova Challenge'" (clicked)="newChallenge()" />
+    <app-create-button [label]="'Nuovo Badge'" (clicked)="newBadge()" />
+  </div>
+  <div *ngIf="badges">
+    <div>
+      <h2 class="text-xl font-bold text-gray-800 mb-4">Lista Badge</h2>
+      <div class="flex flex-wrap gap-5">
+        <a
+          *ngFor="let badge of isPublicBadges"
+          (click)="openBadgeDetails(badge, 'edit')"
+          class="relative group cursor-pointer"
+        >
+          <app-blurhash
+            [image]="badge.image"
+            [alt]="badge.name.it"
+            [imageSize]="'squareThumbnailUrl'"
+            [width]="200"
+            [height]="200"
+          />
+        </a>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="challengeList">
+    <div
+      *ngIf="challengeList.length === 0; else challengsToShow"
+      class="text-gray-600"
+    >
+      Nessuna sfida disponibile.
+    </div>
+    <div>
+      <h2 class="text-xl font-bold text-gray-800 mb-4">Lista Sfide</h2>
+      <div class="">
+        <div *ngFor="let challenge of challengeList">
+          <a
+            (click)="openChallengeDetails(challenge, 'edit')"
+            class="relative group cursor-pointer flex"
+          >
+            <h3 class="text-xl">
+              {{ challenge.name.it }}
+              <span class="text-base">- {{ challenge.id }}</span>
+            </h3>
+            <p></p>
+          </a>
+          <div *ngIf="challengeBadges[challenge.id]">
+            <div class="flex flex-wrap gap-5 mt-2">
+              <a
+                *ngFor="let badge of challengeBadges[challenge.id].badges"
+                (click)="openBadgeDetails(badge, 'edit')"
+                class="relative group cursor-pointer"
+              >
+                <app-blurhash
+                  [image]="badge.image"
+                  [alt]="badge.name.it"
+                  [imageSize]="'squareThumbnailUrl'"
+                  [width]="200"
+                  [height]="200"
+                />
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

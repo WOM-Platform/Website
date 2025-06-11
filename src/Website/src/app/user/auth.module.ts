@@ -42,6 +42,7 @@ import { AddressSelectorMapComponent } from "./components/address-selector-map/a
 import { PosCreateDialogComponent } from "./merchants/pos-create-dialog/pos-create-dialog.component";
 import { AdminRoleComponent } from "./statistics/admin-role/admin-role.component";
 import { UserRoleComponent } from "./statistics/user-role/user-role.component";
+import { CreateButtonComponent } from "./components/create-button/create-button.component";
 
 @NgModule({
   declarations: [
@@ -69,6 +70,7 @@ import { UserRoleComponent } from "./statistics/user-role/user-role.component";
     AimsListComponent,
     AuthRouting,
     CommonModule,
+    CreateButtonComponent,
     EditableElementComponent,
     ExpandableCardComponent,
     SharedModule,
@@ -87,6 +89,7 @@ import { UserRoleComponent } from "./statistics/user-role/user-role.component";
     AddressSelectorMapComponent,
     AdminRoleComponent,
     UserRoleComponent,
+    CreateButtonComponent,
   ],
 })
 export class AuthModule {}

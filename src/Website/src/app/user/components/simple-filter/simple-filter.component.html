@@ -1,0 +1,95 @@
+<div class="mt-2">
+  <small class="text-gray-500 text-xs"
+    >Se vuoi limitare l'uso di questo badge puoi aggiungere i filtri.</small
+  >
+  <div *ngIf="!newFilter; else cancelFilter">
+    <button (click)="newFilter = !newFilter" class="btn-rounded-outline">
+      <i class="fa-solid fa-plus"></i>
+      Aggiungi filtro
+    </button>
+  </div>
+  <ng-template #cancelFilter>
+    <div class="">
+      <button (click)="newFilter = !newFilter" class="btn-rounded-outline">
+        Annulla
+      </button>
+
+      <div class="flex flex-col gap-4">
+        <div class="flex flex-col gap-2">
+          <div class="flex flex-row gap-2">
+            <p class="mb-0">Quantità:</p>
+            <input
+              type="number"
+              formControlName="count"
+              class="inputField w-[100px] border"
+            />
+          </div>
+          <small>(Deve essere un numero compreso fra 1 e 256)</small>
+        </div>
+        <ng-select
+          class="bg-white"
+          [items]="instrumentList"
+          bindLabel="name"
+          bindValue="id"
+          formControlName="sourceId"
+          [virtualScroll]="true"
+          [loading]="loading"
+          (scrollToEnd)="loadInstruments()"
+          placeholder="Seleziona instrument"
+          [appendTo]="'body'"
+          (change)="onInstrumentSelected($event)"
+        >
+        </ng-select>
+
+        <app-aims-select
+          (aimCodeSelected)="aimsFiltered($event)"
+          [selectedAim]="filterForm.get('aim').value"
+        ></app-aims-select>
+
+        <app-datepicker
+          [startDate]="filterForm.get('interval.start')?.value"
+          [endDate]="filterForm.get('interval.end')?.value"
+          (dates)="onDatesSelected($event)"
+        ></app-datepicker>
+
+        <div
+          class="relative border-2 border-black rounded-xl p-4 flex flex-col"
+        >
+          <h2>Area geografica</h2>
+          <small class="text-gray-500 mb-4"
+            >Se impostato, accetterai solo i voucher WOM generati all'interno di
+            quella specifica area geografica.</small
+          >
+          <div
+            *ngIf="
+              isFilteringMap || filterForm.get('bounds').value;
+              else mapSelection
+            "
+          >
+            <div class="flex flex-col gap-2">
+              <button
+                class="btn-rounded-outline"
+                (click)="isFilteringMap = !isFilteringMap"
+              >
+                Annulla
+              </button>
+              <app-map
+                (bounds)="mapFiltered($event)"
+                [selectedBounds]="filterForm.get('bounds').value"
+                [isEditing]="isEditing"
+              ></app-map>
+            </div>
+          </div>
+          <ng-template #mapSelection>
+            <button
+              class="btn-rounded-outline"
+              (click)="isFilteringMap = !isFilteringMap"
+            >
+              Imposta
+            </button>
+          </ng-template>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+</div>

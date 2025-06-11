@@ -118,12 +118,10 @@ export class UserService {
       .post<any>(
         this.localUrlV1 + "login",
         {
-          /*
-                      email,
-                      password,
-                      clientName: '',
-                      persistent: true
-                      */
+          email,
+          password,
+          clientName: "",
+          persistent: true,
         },
         {
           observe: "response",
@@ -396,7 +394,7 @@ export class UserService {
   delete(idUser: string): Observable<any> {
     return this.http.delete(`${this.localUrlV1}${idUser}`).pipe(
       tap({
-        next: () => console.log(`Deleted user with id=${idUser}`),
+        next: () => {},
         error: (err) =>
           console.error(`Failed to delete user with id=${idUser}`, err),
       }),

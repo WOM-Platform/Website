@@ -19,10 +19,17 @@ import { DialogConfirmCancelComponent } from "../../../components/dialog-confirm
 import { LoadingService } from "../../../_services/loading.service";
 import { Router } from "@angular/router";
 import { SnackBarService } from "../../../_services/snack-bar.service";
+import { CreateButtonComponent } from "../../components/create-button/create-button.component";
 
 @Component({
   selector: "app-merchants-admin",
-  imports: [MatIcon, AdminTableComponent, NgIf, SharedModule, FiltersComponent],
+  imports: [
+    AdminTableComponent,
+    NgIf,
+    SharedModule,
+    FiltersComponent,
+    CreateButtonComponent,
+  ],
   standalone: true,
   templateUrl: "./merchants-admin.component.html",
   styleUrl: "./merchants-admin.component.css",
