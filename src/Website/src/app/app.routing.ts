@@ -1,14 +1,14 @@
 import { FanoComponent } from "./pages/about/fano/fano.component";
 import { AboutComponent } from "./pages/about/about/about.component";
 import { AboutSectionComponent } from "./pages/about/about-section.component";
-import { ApplicationsAworldComponent } from "./pages/volunteers/applications/aworld/aworld.component";
-import { ApplicationsBalanceComponent } from "./pages/volunteers/applications/balance/balance.component";
-import { ApplicationsCodymazeComponent } from "./pages/volunteers/applications/codymaze/codymaze.component";
-import { ApplicationsComponent } from "./pages/volunteers/applications/applications.component";
-import { ApplicationsLibrariesComponent } from "./pages/volunteers/applications/libraries/libraries.component";
-import { ApplicationsOverviewComponent } from "./pages/volunteers/applications/overview/overview.component";
-import { ApplicationsWomFitComponent } from "./pages/volunteers/applications/womfit/womfit.component";
-import { ApplicationsUniversitiesComponent } from "./pages/volunteers/applications/universities/universities.component";
+import { ApplicationsAworldComponent } from "./pages/users/applications/aworld/aworld.component";
+import { ApplicationsBalanceComponent } from "./pages/users/applications/balance/balance.component";
+import { ApplicationsCodymazeComponent } from "./pages/users/applications/codymaze/codymaze.component";
+import { ApplicationsComponent } from "./pages/users/applications/applications.component";
+import { ApplicationsLibrariesComponent } from "./pages/users/applications/libraries/libraries.component";
+import { ApplicationsOverviewComponent } from "./pages/users/applications/overview/overview.component";
+import { ApplicationsWomFitComponent } from "./pages/users/applications/womfit/womfit.component";
+import { ApplicationsUniversitiesComponent } from "./pages/users/applications/universities/universities.component";
 import { HomeComponent } from "./pages/home";
 import { InstrumentComponent } from "./pages/instrument/instrument.component";
 import { MerchantComponent } from "./pages/merchant/merchant.component";
@@ -26,7 +26,7 @@ import { ResetPasswordComponent } from "./authentication/reset-password/reset-pa
 import { RouterModule, Routes } from "@angular/router";
 import { SignInComponent } from "./authentication/signin/signin.component";
 import { UrbinoComponent } from "./pages/about/urbino/urbino.component";
-import { VolunteerComponent } from "./pages/volunteers/volunteer/volunteer.component";
+import { UsersComponent } from "./pages/users/users/users.component";
 import { ReteDelleRetiComponent } from "./pages/projects/rete-delle-reti/rete-delle-reti-component";
 import { Pesaro2024Component } from "./pages/pesaro2024-section/pesaro2024/pesaro2024.component";
 import { Pesaro2024SectionComponent } from "./pages/pesaro2024-section/pesaro2024-section.component";
@@ -36,7 +36,6 @@ import { VolontarxComponent } from "./pages/pesaro2024-section/volontarx/volonta
 import { AlbergatoriComponent } from "./pages/pesaro-section/albergatori/albergatori.component";
 import { Sharper2024Component } from "./pages/uniurb/sharper2024/sharper2024.component";
 import { PesaroComponent } from "./pages/pesaro-section/pesaro/pesaro.component";
-import { PesaroSectionComponent } from "./pages/pesaro-section/pesaro-section.component";
 import { pesaro2024RedirectGuard } from "./_helpers/pesaro2024-redirect.guard";
 import { EsercentiComponent } from "./pages/pesaro-section/esercenti/esercenti.component";
 import { FaqComponent } from "./pages/faq/faq.component";
@@ -204,10 +203,10 @@ const routes: Routes = [
         },
       },
       {
-        path: "volunteer",
-        component: VolunteerComponent,
+        path: "users",
+        component: UsersComponent,
         data: {
-          breadcrumb: "BREADCRUMBS.VOLUNTEER",
+          breadcrumb: "BREADCRUMBS.USERS",
         },
       },
       {

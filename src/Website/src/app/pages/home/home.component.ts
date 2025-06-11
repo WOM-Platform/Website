@@ -27,6 +27,7 @@ export class HomeComponent {
     { path: "/assets/images/home/study.jpg" },
     { path: "/assets/images/home/visiting.jpg" },
     { path: "/assets/images/home/walking.jpg" },
+    { path: "/assets/images/home/osservare.jpg" },
   ];
 
   constructor(private router: Router) {}

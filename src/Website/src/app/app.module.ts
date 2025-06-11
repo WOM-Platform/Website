@@ -53,13 +53,13 @@ import { SharedModule } from "./shared/shared.module";
 import { UrbinoComponent } from "./pages/about/urbino/urbino.component";
 import { AboutComponent } from "./pages/about/about/about.component";
 import { AboutSectionComponent } from "./pages/about/about-section.component";
-import { ApplicationsAworldComponent } from "./pages/volunteers/applications/aworld/aworld.component";
-import { ApplicationsBalanceComponent } from "./pages/volunteers/applications/balance/balance.component";
-import { ApplicationsCodymazeComponent } from "./pages/volunteers/applications/codymaze/codymaze.component";
-import { ApplicationsComponent } from "./pages/volunteers/applications/applications.component";
-import { ApplicationsLibrariesComponent } from "./pages/volunteers/applications/libraries/libraries.component";
-import { ApplicationsOverviewComponent } from "./pages/volunteers/applications/overview/overview.component";
-import { ApplicationsUniversitiesComponent } from "./pages/volunteers/applications/universities/universities.component";
+import { ApplicationsAworldComponent } from "./pages/users/applications/aworld/aworld.component";
+import { ApplicationsBalanceComponent } from "./pages/users/applications/balance/balance.component";
+import { ApplicationsCodymazeComponent } from "./pages/users/applications/codymaze/codymaze.component";
+import { ApplicationsComponent } from "./pages/users/applications/applications.component";
+import { ApplicationsLibrariesComponent } from "./pages/users/applications/libraries/libraries.component";
+import { ApplicationsOverviewComponent } from "./pages/users/applications/overview/overview.component";
+import { ApplicationsUniversitiesComponent } from "./pages/users/applications/universities/universities.component";
 import { AppOverlayModule } from "./_overlay/overlay.module";
 import { BillingCancelComponent } from "./billing/cancel/cancel.component";
 import { BillingCheckoutComponent } from "./billing/checkout/checkout.component";
@@ -83,7 +83,7 @@ import { RequestNewPasswordComponent } from "./authentication/requestNewPassword
 import { ResetPasswordComponent } from "./authentication/reset-password/reset-password.component";
 import { TokenInterceptorService } from "./_helpers/httpInterceptor";
 import { UserFormComponent } from "./_forms/user/forms-user.directive";
-import { VolunteerComponent } from "./pages/volunteers/volunteer/volunteer.component";
+import { UsersComponent } from "./pages/users/users/users.component";
 import { PdfViewerContainerComponent } from "./components/pdf-viewer-container/pdf-viewer-container.component";
 import { LayoutModule } from "@angular/cdk/layout";
 import { AuthModule } from "./user/auth.module";
@@ -95,7 +95,7 @@ import { SearchSourceComponent } from "./user/components/user-access-list/search
 import localeIt from "@angular/common/locales/it";
 import { StoreLogosComponent } from "./components/store-logos/store-logos.component";
 import { AnimatedNumberComponent } from "./components/animated-number/animated-number.component";
-import { ApplicationsWomFitComponent } from "./pages/volunteers/applications/womfit/womfit.component";
+import { ApplicationsWomFitComponent } from "./pages/users/applications/womfit/womfit.component";
 import { BtnFindOutMoreComponent } from "./components/btn-find-out-more/btn-find-out-more.component";
 import { CarouselComponent } from "./components/carousel/carousel.component";
 import { SmallImagesCarouselComponent } from "./components/small-images-carousel/small-images-carousel.component";
@@ -182,7 +182,7 @@ const httpInterceptorProviders = environment.mock
     SignInComponent,
     UrbinoComponent,
     UserFormComponent,
-    VolunteerComponent,
+    UsersComponent,
     Pesaro2024SectionComponent,
   ],
   exports: [],
@@ -191,9 +191,13 @@ const httpInterceptorProviders = environment.mock
     appRoutingModule,
     AnimatedNumberComponent,
     AuthModule,
-    RouterModule.forRoot([
-      { path: "", component: HomeComponent, pathMatch: "full" },
-    ]),
+    RouterModule.forRoot(
+      [{ path: "", component: HomeComponent, pathMatch: "full" }],
+      {
+        scrollPositionRestoration: "enabled",
+        anchorScrolling: "enabled",
+      }
+    ),
     TranslateModule.forRoot({
       defaultLanguage: "it",
       loader: {

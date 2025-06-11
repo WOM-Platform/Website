@@ -3,8 +3,8 @@
   "FLAG_NO": "No",
   "NAV": {
     "HOME": "Home",
-    "VOLUNTEERS": {
-      "TITLE": "Volontari",
+    "USERS": {
+      "TITLE": "Utenti",
       "WHO_ARE": "Chi sono",
       "APPLICATIONS": "Come guadagnare WOM"
     },
@@ -53,12 +53,12 @@
       "MERCHANTS": "Esercenti",
       "TOURISTS": "Turisti",
       "CITIZENS": "Cittadini",
-      "VOLUNTEERS": "Volontarx"
+      "USERS": "Utenti"
     },
     "PROJECTS": {
       "RETE-DELLE-RETI": "Rete delle Reti"
     },
-    "VOLUNTEER": "Volontari",
+    "USERS": "Utenti",
     "MERCHANT": "Merchant",
     "INSTRUMENT": "Instrument",
     "UNIURB": {
@@ -355,7 +355,7 @@
       "B": "DIGIT srl è uno <b>spin-off dell’Università di Urbino</b> che ha come obiettivo <b>creare un valore sociale attraverso la consapevolezza digitale</b>. DIGIT srl è stata fondata sulla convinzione che alla base della tecnologia, delle piattaforme e dei software ci debbano essere gli interessi dell’uomo e della società e che innovazione sociale e digitale siano indissolubilmente legate."
     },
     "SECTION_VOL": {
-      "TITLE": "Volontari",
+      "TITLE": "Utenti",
       "MESSAGE": "Compiendo azioni socialmente valide, ogni utente guadagna WOM e diventa un <b>Volontario</b>. I Volontari possono gestire i loro voucher WOM tramite un’app, <b>\"WOM Pocket\"</b>, che possono installare sul proprio dispositivo. L’applicazione consente ai Volontari di raccogliere i propri voucher, conservarli e spenderli."
     },
     "SECTION_MERCH": {
@@ -600,15 +600,15 @@
       "SUBTITLE": "IN OGNI BIBLIOTECA, IL MEGLIO DELLE BIBLIOTECHE ITALIANE"
     }
   },
-  "VOLUNTEER": {
-    "TITLE": "Volontari",
+  "USERS": {
+    "TITLE": "Utenti",
     "SECTION_A": {
       "TITLE": "Come funziona per gli utenti?",
-      "A": "Molte azioni e attività compiute da un individuo contribuiscono a un bene comune e hanno un valore sociale intrinseco. Compiendo queste azioni socialmente preziose, ogni utente guadagna WOM e diventa un Volontario.\nI Volontari possono utilizzare i voucher WOM per ottenere servizi o beni forniti dai Merchants.\nOgni Volontario può collezionare tutti i voucher guadagnati sull’app <b>\"WOM Pocket\"</b>."
+      "A": "Molte azioni e attività compiute da un individuo contribuiscono a un bene comune e hanno un valore sociale intrinseco. Compiendo queste azioni socialmente preziose, ogni utente guadagna WOM.\nGli Utenti possono utilizzare i voucher WOM per ottenere servizi o beni forniti dai Merchants.\nOgni Utente può collezionare tutti i voucher guadagnati sull’app <b>\"WOM Pocket\"</b>."
     },
     "SECTION_B": {
       "TITLE": "Pocket",
-      "A": "I Volontari possono gestire i loro voucher WOM tramite un’app mobile <b>\"WOM Pocket\"</b>. Questa app consente agli utenti di <b>raccogliere i voucher WOM guadagnati</b>, conservarli (come se fossero in un \"portafoglio\" virtuale) e spendere i loro voucher.\n\nLa piattaforma WOM non ha alcun costo per i Volontari che possono scaricare gratuitamente l’app <b>Pocket</b> dagli <b>store Android e iOS</b>."
+      "A": "Gli Utenti possono gestire i loro voucher WOM tramite un’app mobile <b>\"WOM Pocket\"</b>. Questa app consente agli utenti di <b>raccogliere i voucher WOM guadagnati</b>, conservarli (come se fossero in un \"portafoglio\" virtuale) e spendere i loro voucher.\n\nLa piattaforma WOM non ha alcun costo per i Volontari che possono scaricare gratuitamente l’app <b>Pocket</b> dagli <b>store Android e iOS</b>."
     }
   },
   "MERCHANT": {

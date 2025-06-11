@@ -3,8 +3,8 @@
   "FLAG_NO": "No",
   "NAV": {
     "HOME": "Home",
-    "VOLUNTEERS": {
-      "TITLE": "Volunteers",
+    "USERS": {
+      "TITLE": "Users",
       "WHO_ARE": "About",
       "APPLICATIONS": "How to earn WOM"
     },
@@ -48,7 +48,7 @@
       "MERCHANTS": "Merchants",
       "TOURISTS": "Tourists",
       "CITIZENS": "Citizens",
-      "VOLUNTEERS": "Volunteers"
+      "USERS": "Users"
     },
     "PESARO2024": {
       "HOTELIERS": "Hoteliers",
@@ -58,7 +58,7 @@
       "CITIZENS": "Citizens",
       "VOLUNTEERS": "Volunteers"
     },
-    "VOLUNTEER": "Volunteers",
+    "USERS": "Users",
     "MERCHANT": "Merchant",
     "INSTRUMENT": "Instrument",
     "UNIURB": {
@@ -355,7 +355,7 @@
       "B": "The WOM platform is implemented and managed by DIGIT srl. \nDIGIT srl is a <b>spin-off of the University of Urbino</b> that aims to <b>create social value through digital awareness</b>. It is founded on the conviction that the core of technology, platforms and, software need to be in the interest of human people and society and that social and digital innovation are related. \nWOM is only one of the social projects of DIGIT srl. \n"
     },
     "SECTION_VOL": {
-      "TITLE": "Volunteers",
+      "TITLE": "Users",
       "MESSAGE": "By making socially valuable actions, every user gains WOM and becomes a <b>Volunteer</b>. Volunteers can manage their WOM vouchers by a mobile app, the <b>“WOM Pocket”</b>. They can install it on their device. The application allows volunteers to gather their vouchers, store them, and spend them."
     },
     "SECTION_MERCH": {
@@ -588,6 +588,17 @@
       "SECTION_WHERE_TO_USE": "Where can you use your WOM?",
       "SECTION_WHERE_TO_USE_DESCR": "<strong>WOM</strong> have an important symbolic value: <strong>they represent your contribution to Pesaro 2024</strong>.<br/>But in Pesaro you can also use WOM to access the <strong>discounts</strong> and <strong>concessions</strong> that tradesmen, craftsmen and shopkeepers spontaneously offer to those who have them, as a token of appreciation for the contribution made to Pesaro 2024 with their presence and participation. At the Civic Museums and Casa Rossini you can also get <strong>reductions</strong> and <strong>free</strong> admission on the <a target='_' href='https://pesaro2024.it/card/'><strong><u>Pesaro Capital Card</u></strong></a>. The list of offers is presented in the WOM Pocket app in reverse order of distance from your location. You can recognise shops with offers by seeing the WOM platform label displayed in the shop window.<br/><br/>If you are a shopkeeper/craftsman/shopkeeper, check out the <a href='https://wom.social/pesaro2024/esercenti'><u><strong>guide</strong></u></a> and join the project!",
       "SECTION_ENDING_TEXT": "Culture is a collective fact, which feeds on the participation of everyone. WOM recognises and rewards your contribution to the Italian Capital of Culture 2024."
+    }
+  },
+  "USERS": {
+    "TITLE": "Users",
+    "SECTION_A": {
+      "TITLE": "How does it work for users?",
+      "A": "Many actions and activities performed by an individual contribute to a common good and have an intrinsic social value. By performing these socially valuable actions, each user earns WOM.\nUsers can use WOM vouchers to obtain services or goods provided by Merchants.\nEach User can collect all vouchers earned on the app <b>\"WOM Pocket\"</b>."
+    },
+    "SECTION_B": {
+      "TITLE": "Pocket",
+      "A": "Users can manage their WOM vouchers via a <b>\"WOM Pocket\"</b> mobile app. This app allows users <b>to collect their earned WOM vouchers</b>, store them (as if in a virtual \"wallet\") and spend their vouchers.\n\nThe WOM platform has no cost for Volunteers who can download the <b>Pocket</b> app free of charge from the <b>Android and iOS stores</b>."
     }
   },
   "MERCHANT": {
