@@ -1,18 +1,16 @@
 <!-- carousel -->
 <app-carousel [images]="slidesList" />
 <!-- app che valorizza -->
-<div class="px-6 md:px-20 pb-3 pt-16 md:py-6 my-12 bg-[#F2F2F2] relative">
-  <h3
-    class="absolute px-20 -top-9 left-0 text-3xl font-extrabold text-[#1F1F1D]"
-  >
+<div
+  class="px-6 md:px-20 pb-3 pt-16 md:pb-16 md:pt-10 my-12 bg-[#F2F2F2] relative"
+>
+  <h3 class="homeH3 absolute px-20 -top-9 left-0 text-[#1F1F1D]">
     l'app<br />che valorizza<br />il tuo tempo
   </h3>
   <div class="relative flex justify-center md:justify-end items-center">
     <app-store-logos />
   </div>
-  <h3
-    class="absolute px-20 -bottom-4 right-0 text-3xl font-extrabold text-[#CCCCCC]"
-  >
+  <h3 class="homeH3 absolute px-20 -bottom-8 right-0 text-[#CCCCCC]">
     scarica l'app
   </h3>
 </div>
@@ -20,20 +18,19 @@
   <div class="mb-8">
     <!-- info wom -->
     <p>
-      <span class="text-[#009EE2] font-extrabold">WOM</span> - "Worth One
-      Minute" è una piattaforma di ricompensa general-purpose basata su un
-      sistema di scambio di voucher. Molte azioni e attività compiute dagli
-      individui hanno un valore sociale intrinseco, un effetto noto in economia
-      come "esternalità positiva". WOM mira a riconoscere tutte quelle azioni
-      che costituiscono un contributo socialmente prezioso per un obiettivo
-      comune, premiando il tempo che le persone dedicano a queste attività
-      attraverso la generazione di voucher sociali digitali. I voucher WOM
-      premiano ogni minuto di impegno sociale.
+      <span class="womWord">WOM</span> - "Worth One Minute" è una piattaforma di
+      ricompensa general-purpose basata su un sistema di scambio di voucher.
+      Molte azioni e attività compiute dagli individui hanno un valore sociale
+      intrinseco, un effetto noto in economia come "esternalità positiva". WOM
+      mira a riconoscere tutte quelle azioni che costituiscono un contributo
+      socialmente prezioso per un obiettivo comune, premiando il tempo che le
+      persone dedicano a queste attività attraverso la generazione di voucher
+      sociali digitali. I voucher WOM premiano ogni minuto di impegno sociale.
     </p>
     <app-btn-find-out-more />
   </div>
 
-  <div class="space-y-4">
+  <div class="">
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
       <div class="square-info">
         <h3 class="square-title">azioni</h3>
@@ -111,17 +108,17 @@
         </div>
       </div>
     </div>
-    <h3 class="flex justify-left mt-12 text-3xl font-extrabold text-[#1F1F1D]">
-      come guadagnare WOM
-    </h3>
-    <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 justify-center">
+    <h3 class="mt-12 text-[#1F1F1D]">come guadagnare WOM</h3>
+    <app-small-images-carousel [images]="squareList" />
+
+    <!-- <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 justify-center">
       <img
         *ngFor="let slide of squareList"
         src="{{ slide.path }}"
         alt="test"
         class="object-contain"
       />
-    </div>
+    </div> -->
   </div>
 
   <!-- app loghi -->

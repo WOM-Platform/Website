@@ -7,5 +7,5 @@ a {
 }
 
 p {
-  @apply mb-0 text-base;
+  @apply mb-0  text-[1.3rem];
 }

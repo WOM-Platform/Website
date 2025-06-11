@@ -70,15 +70,27 @@
   margin: 20px;
 }
 
+.homeH3 {
+  @apply text-[4rem] leading-none;
+}
 .square-info {
   @apply bg-[#E6E6E6]  p-6 rounded  flex flex-col h-full;
 }
 .square-title {
-  @apply text-[#009EE2] text-2xl font-bold mb-1;
+  @apply text-[#009EE2] text-[4rem] mb-1;
 }
 .hr-line {
   @apply border-t-4 border-solid border-[#ccc] mb-4;
 }
 .text-square {
   @apply px-5;
+}
+
+.text-square p {
+  @apply text-[1.8rem];
+}
+
+.womWord {
+  @apply text-[#009EE2];
+  font-family: "HelveticaNeueBold";
 }
