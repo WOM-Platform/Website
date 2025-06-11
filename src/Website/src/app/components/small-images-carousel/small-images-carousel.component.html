@@ -1,0 +1,61 @@
+<div class="relative w-full group overflow-hidden">
+  <div
+    class="flex transition-transform duration-500 ease-in-out"
+    [style.transform]="'translateX(-' + currentSlideIndex * 100 + '%)'"
+    [class.no-transition]="noTransition"
+  >
+    <div
+      *ngFor="let group of slideGroups"
+      class="flex-shrink-0 w-full grid grid-cols-2 sm:grid-cols-4 gap-4"
+    >
+      <img
+        *ngFor="let img of group"
+        [src]="img.path"
+        class="w-full max-w-[250px] mx-auto object-cover"
+        alt="carousel image"
+      />
+    </div>
+  </div>
+
+  <button
+    (click)="prevSlide()"
+    class="absolute top-1/2 -translate-y-1/2 left-2 bg-white bg-opacity-70 rounded-full p-2 shadow hover:bg-opacity-100 sm:hidden group-hover:flex items-center justify-center z-10"
+    aria-label="Previous slide"
+  >
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      class="h-6 w-6 text-black"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+    >
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        d="M15 19l-7-7 7-7"
+      />
+    </svg>
+  </button>
+
+  <button
+    (click)="nextSlide()"
+    class="absolute top-1/2 -translate-y-1/2 right-2 bg-white bg-opacity-70 rounded-full p-2 shadow hover:bg-opacity-100 sm:hidden group-hover:flex items-center justify-center z-10"
+    aria-label="Next slide"
+  >
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      class="h-6 w-6 text-black"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+    >
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        d="M9 5l7 7-7 7"
+      />
+    </svg>
+  </button>
+</div>

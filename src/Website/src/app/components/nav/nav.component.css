@@ -3,7 +3,7 @@
 }
 
 .menu-item {
-  @apply text-white flex items-center text-sm font-montserrat font-light hover:bg-[#a0a4da] rounded-3xl px-2 py-1 duration-200;
+  @apply text-black flex items-center text-sm font-montserrat uppercase font-light hover:bg-[#a0a4da] rounded-3xl px-2 py-1 duration-200;
 }
 
 .example-spacer {
@@ -28,7 +28,7 @@ mat-sidenav-container {
 }
 
 .nav-button {
-  color: white;
+  color: black;
   @apply font-light text-sm flex justify-center items-center;
 }
 
@@ -37,10 +37,7 @@ mat-sidenav-container {
 }
 
 .lang-select {
-  @apply flex items-center font-semibold;
-  margin-left: 10px;
-  width: 80px;
-  color: white;
+  @apply flex items-center font-semibold  mx-4 uppercase py-2 text-sm bg-transparent focus:outline-none focus:ring-2 focus:ring-blue-500;
 }
 
 .mat-divider {

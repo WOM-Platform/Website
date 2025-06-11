@@ -1,13 +1,11 @@
 footer {
-  display: flex;
-  justify-content: center;
-  text-align: center;
+  @apply flex flex-col text-left justify-start px-6 py-3 sm:px-20 sm:py-6 bg-[#333333]  text-white;
 }
 
 a {
-  @apply text-blue-500 cursor-pointer;
+  @apply cursor-pointer;
 }
 
 p {
-  @apply mb-0;
+  @apply mb-0  sm:text-[1.3rem];
 }
