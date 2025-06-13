@@ -18,32 +18,8 @@ export class AppComponent {
     private meta: Meta,
     private title: Title
   ) {
-    translate.addLangs(["en", "it"]);
-    translate.setDefaultLang("it");
-
-    networkService.isOnline.subscribe((online) => {
-      this.isOnline = online;
-
-      console.log(
-        "Network status in component:",
-        online ? "Online" : "Offline"
-      );
-    });
-
-    if (translate.getBrowserLang()) {
-      translate.use(translate.getBrowserLang());
-    }
-  }
-
-  ngOnInit() {
     this.title.setTitle("WOM");
-
     this.meta.addTags([
-      {
-        name: "description",
-        content:
-          "Compiendo azioni socialmente valide, ogni utente guadagna WOM",
-      },
       { property: "og:title", content: "WOM" },
       {
         property: "og:description",
@@ -52,10 +28,21 @@ export class AppComponent {
       },
       {
         property: "og:image",
-        content: "https://wom.social/assets/images/logo.png",
+        content: "https://wom.social/assets/images/logo-og.png",
       },
       { property: "og:url", content: "https://wom.social/home" },
       { property: "og:type", content: "website" },
     ]);
+
+    translate.addLangs(["en", "it"]);
+    translate.setDefaultLang("it");
+
+    networkService.isOnline.subscribe((online) => {
+      this.isOnline = online;
+    });
+
+    if (translate.getBrowserLang()) {
+      translate.use(translate.getBrowserLang());
+    }
   }
 }
