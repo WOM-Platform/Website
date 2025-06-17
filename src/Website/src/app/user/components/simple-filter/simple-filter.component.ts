@@ -38,14 +38,20 @@ export class SimpleFilterComponent {
   ngOnInit() {
     this.loadInstruments();
     this.initializeForm();
-    // in case is editing open the filter section
+
+    this.filterForm.get("count")?.valueChanges.subscribe((newCount) => {});
+
     if (this.filters) {
-      this.setFilterValues(this.filters);
+      this.newFilter = true;
     }
+
+    this.filterForm.valueChanges.subscribe((values) => {
+      console.log("Form changed!", values);
+      this.emitFilterValues();
+    });
   }
 
   loadInstruments() {
-    console.log("PEW PEW loading instruments");
     if (this.loading) return;
 
     this.loading = true;
@@ -65,9 +71,9 @@ export class SimpleFilterComponent {
 
   initializeForm() {
     this.filterForm = this.fb.group({
-      count: [1],
-      sourceId: [this.filters?.sourceId || null],
+      count: [this.filters?.count || null],
       aim: [this.filters?.aim || null],
+      sourceId: [this.filters?.sourceId || null],
       bounds: this.fb.group({
         leftTop: [this.filters?.bounds?.leftTop || [0, 0]],
         rightBottom: [this.filters?.bounds?.rightBottom || [0, 0]],
@@ -77,15 +83,6 @@ export class SimpleFilterComponent {
         end: [this.filters?.interval?.end || null],
       }),
     });
-  }
-
-  setFilterValues(filters: SimpleFilter) {
-    this.filterForm.patchValue({
-      aim: filters.aim,
-      bounds: filters.bounds,
-      interval: filters.interval,
-    });
-    this.newFilter = true;
   }
 
   onDatesSelected(dates: { startDate: Date | null; endDate: Date | null }) {
@@ -101,17 +98,10 @@ export class SimpleFilterComponent {
     this.emitFilterValues();
   }
 
-  onInstrumentSelected(instrument: Instrument) {
-    this.emitFilterValues();
-  }
+  onCountChange(newCount: string) {
+    const parsed = parseInt(newCount, 10);
+    this.filterForm.patchValue({ count: parsed });
 
-  aimsFiltered(aim: string) {
-    this.filterForm.patchValue({ aim: aim });
-    this.emitFilterValues();
-  }
-
-  mapFiltered(bounds: any) {
-    this.filterForm.patchValue({ bounds: bounds });
     this.emitFilterValues();
   }
 

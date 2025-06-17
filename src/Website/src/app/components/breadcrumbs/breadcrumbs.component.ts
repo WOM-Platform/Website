@@ -37,12 +37,10 @@ export class BreadcrumbsComponent implements OnInit {
     const children: ActivatedRoute[] = route.children;
     const menu: MenuItem[] = [];
     breadcrumbs.forEach((b) => {
-      console.log("bread ", b);
       const label: string = this.translate.instant(b.label);
       menu.push({ label, url: b.url });
     });
 
-    console.log(menu);
     if (children.length === 0) {
       return menu;
     }

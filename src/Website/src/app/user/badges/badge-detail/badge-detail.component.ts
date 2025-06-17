@@ -164,17 +164,20 @@ export class BadgeDetailComponent implements OnInit {
 
   updateFilter(event: any) {
     if (event) {
+      console.log("SimpleFilter updated:", event);
       this.badgeForm.patchValue({
-        simpleFilter: event.value,
+        simpleFilter: event,
       });
     }
   }
 
   onSave(): void {
+    console.log("Form submitted:", this.badgeForm.value);
     this.badgeService
       .updateBadge(this.badgeId, this.badgeForm.value)
       .subscribe((res) => {
         this.loadBadge(this.badgeId);
+        this.snackBarService.openSnackBar("Badge aggiornato con successo");
       });
   }
 

@@ -50,7 +50,8 @@ export class BadgeService {
   }
 
   updateBadge(badgeId: string, badgeData: Badge) {
-    const inputPayload = {
+    console.log("Updating badge with ID:", badgeData);
+    const body = {
       challengeId: badgeData.challengeId,
       description: badgeData.description,
       informationUrl: badgeData.informationUrl,
@@ -60,17 +61,13 @@ export class BadgeService {
         aim: badgeData.simpleFilter.aim,
         bounds: badgeData.simpleFilter.bounds,
         count: badgeData.simpleFilter.count,
-        interval: badgeData.simpleFilter.interval,
+        // interval: badgeData.simpleFilter.interval,
         sourceId: badgeData.simpleFilter.sourceId,
       },
       sortName: badgeData.sortName,
       image: badgeData.image,
       creationTimestamp: badgeData.creationTimestamp,
       updateTimestamp: badgeData.updateTimestamp,
-    };
-
-    const body = {
-      input: inputPayload,
     };
 
     return this.http.put(`${this.localUrlV1}${badgeId}`, body);

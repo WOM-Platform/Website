@@ -68,7 +68,10 @@
   </div>
   <!-- Filter -->
   <div>
-    <app-simple-filter (filteredEmit)="updateFilter($event)" />
+    <app-simple-filter
+      [filters]="badge.simpleFilter"
+      (filteredEmit)="updateFilter($event)"
+    />
   </div>
 
   <!-- Campi lettura -->

@@ -17,7 +17,7 @@
       <div class="flex flex-col gap-4">
         <div class="flex flex-col gap-2">
           <div class="flex flex-row gap-2">
-            <p class="mb-0">Quantità:</p>
+            <p class="mb-0 text-base font-bold">Quantità:</p>
             <input
               type="number"
               formControlName="count"
@@ -37,12 +37,12 @@
           (scrollToEnd)="loadInstruments()"
           placeholder="Seleziona instrument"
           [appendTo]="'body'"
-          (change)="onInstrumentSelected($event)"
+
         >
         </ng-select>
 
         <app-aims-select
-          (aimCodeSelected)="aimsFiltered($event)"
+          
           [selectedAim]="filterForm.get('aim').value"
         ></app-aims-select>
 
