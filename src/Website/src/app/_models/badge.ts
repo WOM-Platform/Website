@@ -25,7 +25,7 @@ interface LocalizedText {
 }
 
 export interface SimpleFilter {
-  count: string;
+  count: number;
   sourceId: string;
   aim: string;
   bounds: {

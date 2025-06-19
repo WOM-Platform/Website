@@ -10,7 +10,7 @@
         <a
           *ngFor="let badge of isPublicBadges"
           (click)="openBadgeDetails(badge, 'edit')"
-          class="relative group cursor-pointer"
+          class="relative group cursor-pointer hover:border-blue-600 border border-white rounded-2xl transition duration-300 p-4"
         >
           <app-blurhash
             [image]="badge.image"
@@ -36,9 +36,9 @@
         <div *ngFor="let challenge of challengeList">
           <a
             (click)="openChallengeDetails(challenge, 'edit')"
-            class="relative group cursor-pointer flex"
+            class="relative group cursor-pointer flex mt-6"
           >
-            <h3 class="text-xl">
+            <h3 class="text-3xl hover:text-blue-600 transition duration-300">
               {{ challenge.name.it }}
               <span class="text-base">- {{ challenge.id }}</span>
             </h3>
@@ -49,7 +49,7 @@
               <a
                 *ngFor="let badge of challengeBadges[challenge.id].badges"
                 (click)="openBadgeDetails(badge, 'edit')"
-                class="relative group cursor-pointer"
+                class="relative group cursor-pointer hover:border-blue-600 border border-white rounded-2xl transition duration-300 p-4"
               >
                 <app-blurhash
                   [image]="badge.image"

@@ -25,6 +25,9 @@ export class DatepickerComponent {
   constructor(private datePipe: DatePipe) {}
 
   ngOnInit() {
+    if (this.startDate) this.startDate = new Date(this.startDate);
+    if (this.endDate) this.endDate = new Date(this.endDate);
+
     this.updateDays();
   }
 

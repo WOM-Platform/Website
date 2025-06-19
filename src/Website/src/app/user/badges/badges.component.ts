@@ -38,39 +38,44 @@ export class BadgesComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.loadBadges();
     // get challenge list
     this.badgeService.getAllChallenges().subscribe((challenges) => {
       this.challengeList = challenges;
     });
+    this.loadBadges();
   }
 
   loadBadges() {
-    // Clear all data structures before fetching new data
     this.badges = [];
     this.isPublicBadges = [];
     this.challengeBadges = {};
 
     this.loadingService.show();
+
     this.badgeService.getAllBadges().subscribe({
-      next: (res) => {
-        this.badges = res;
-        this.badges.map((b) => {
-          if (b.isPublic) {
-            this.isPublicBadges.push(b);
-          } else if (b.challengeId) {
-            // Group badges by challengeId
-            // Initialize the array if it doesn't exist
-            if (!this.challengeBadges[b.challengeId]) {
-              this.challengeBadges[b.challengeId] = {
-                badges: [],
-              };
-            }
-            this.challengeBadges[b.challengeId].badges.push(b);
-          }
+      next: (badges) => {
+        this.badges = badges;
+
+        this.isPublicBadges = badges.filter((b) => b.isPublic);
+
+        this.challengeList.forEach((challenge) => {
+          this.badgeService.getBadgeChallenge(challenge.id).subscribe({
+            next: (challengeWithBadges: Challenge) => {
+              if (challengeWithBadges.badges?.length) {
+                this.challengeBadges[challenge.id] = {
+                  badges: challengeWithBadges.badges,
+                };
+              }
+            },
+            error: () => {
+              console.warn(
+                `Errore nel recupero badge per la challenge ${challenge.id}`
+              );
+            },
+          });
         });
       },
-      error: (error) => {
+      error: () => {
         this.snackBarService.openSnackBar(
           "Errore durante il caricamento dei badge."
         );
