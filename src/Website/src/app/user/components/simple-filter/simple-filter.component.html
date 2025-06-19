@@ -1,95 +1,120 @@
-<div class="mt-2">
-  <small class="text-gray-500 text-xs"
-    >Se vuoi limitare l'uso di questo badge puoi aggiungere i filtri.</small
-  >
-  <div *ngIf="!newFilter; else cancelFilter">
-    <button (click)="newFilter = !newFilter" class="btn-rounded-outline">
-      <i class="fa-solid fa-plus"></i>
-      Aggiungi filtro
-    </button>
-  </div>
-  <ng-template #cancelFilter>
-    <div class="">
-      <button (click)="newFilter = !newFilter" class="btn-rounded-outline">
-        Annulla
-      </button>
+<form [formGroup]="filterForm" class="border border-black p-4 rounded-xl">
+  <div class="mt-2">
+    <small class="text-gray-500 text-xs">
+      Se vuoi limitare l'uso di questo badge puoi aggiungere i filtri.
+    </small>
+    <div class="mt-6">
+      <div *ngIf="!isFiltering; else cancelFilter">
+        <button
+          type="button"
+          (click)="toggleFiltering()"
+          class="btn-rounded-outline"
+        >
+          <i class="fa-solid fa-plus"></i>
+          Aggiungi filtro
+        </button>
+      </div>
 
-      <div class="flex flex-col gap-4">
-        <div class="flex flex-col gap-2">
-          <div class="flex flex-row gap-2">
-            <p class="mb-0 text-base font-bold">Quantità:</p>
+      <ng-template #cancelFilter>
+        <button
+          type="button"
+          (click)="toggleFiltering()"
+          class="btn-rounded-outline"
+        >
+          Cancella Filtro
+        </button>
+
+        <div class="flex flex-col gap-4 mt-12">
+          <div class="flex flex-col gap-2">
+            <h3 class="mb-0 font-bold">
+              Quantità:<span class="text-red-600">*</span>
+            </h3>
             <input
               type="number"
               formControlName="count"
               class="inputField w-[100px] border"
             />
+            <small>(Deve essere un numero compreso fra 1 e 256)</small>
           </div>
-          <small>(Deve essere un numero compreso fra 1 e 256)</small>
-        </div>
-        <ng-select
-          class="bg-white"
-          [items]="instrumentList"
-          bindLabel="name"
-          bindValue="id"
-          formControlName="sourceId"
-          [virtualScroll]="true"
-          [loading]="loading"
-          (scrollToEnd)="loadInstruments()"
-          placeholder="Seleziona instrument"
-          [appendTo]="'body'"
 
-        >
-        </ng-select>
-
-        <app-aims-select
-          
-          [selectedAim]="filterForm.get('aim').value"
-        ></app-aims-select>
-
-        <app-datepicker
-          [startDate]="filterForm.get('interval.start')?.value"
-          [endDate]="filterForm.get('interval.end')?.value"
-          (dates)="onDatesSelected($event)"
-        ></app-datepicker>
-
-        <div
-          class="relative border-2 border-black rounded-xl p-4 flex flex-col"
-        >
-          <h2>Area geografica</h2>
-          <small class="text-gray-500 mb-4"
-            >Se impostato, accetterai solo i voucher WOM generati all'interno di
-            quella specifica area geografica.</small
+          <h3>Seleziona Instrument</h3>
+          <ng-select
+            class="w-72"
+            [items]="instrumentList"
+            bindLabel="name"
+            bindValue="id"
+            formControlName="sourceId"
+            [virtualScroll]="true"
+            [loading]="loading"
+            (scrollToEnd)="loadInstruments()"
+            placeholder="Seleziona instrument"
+            [appendTo]="'body'"
           >
+          </ng-select>
+
+          <app-aims-select
+            [selectedAim]="filterForm.get('aim').value"
+            (aimCodeSelected)="onAimChange($event)"
+          ></app-aims-select>
+
+          <h3>Seleziona Data</h3>
+          <div class="flex gap-6">
+            <app-date-time-picker
+              [textContent]="'Data di inizio'"
+              [inputDate]="filterForm.get('interval.start')?.value"
+              (dateSelected)="onStartDateSelected($event)"
+            ></app-date-time-picker>
+
+            <app-date-time-picker
+              [textContent]="'Data di fine'"
+              [inputDate]="filterForm.get('interval.end')?.value"
+              (dateSelected)="onEndDateSelected($event)"
+            ></app-date-time-picker>
+          </div>
+
           <div
-            *ngIf="
-              isFilteringMap || filterForm.get('bounds').value;
-              else mapSelection
-            "
+            class="relative border-2 border-black rounded-xl p-4 flex flex-col"
           >
-            <div class="flex flex-col gap-2">
+            <h2>Area geografica</h2>
+            <small class="text-gray-500 mb-4">
+              Se impostato, accetterai solo i voucher WOM generati all'interno
+              di quella specifica area geografica.
+            </small>
+
+            <div
+              *ngIf="
+                isFilteringMap || filterForm.get('bounds').value;
+                else mapSelection
+              "
+            >
+              <div class="flex flex-col gap-2">
+                <button
+                  type="button"
+                  class="btn-rounded-outline"
+                  (click)="isFilteringMap = !isFilteringMap"
+                >
+                  Annulla
+                </button>
+                <app-map
+                  (bounds)="mapFiltered($event)"
+                  [selectedBounds]="filterForm.get('bounds').value"
+                  [isEditing]="isEditing"
+                ></app-map>
+              </div>
+            </div>
+
+            <ng-template #mapSelection>
               <button
+                type="button"
                 class="btn-rounded-outline"
                 (click)="isFilteringMap = !isFilteringMap"
               >
-                Annulla
+                Imposta
               </button>
-              <app-map
-                (bounds)="mapFiltered($event)"
-                [selectedBounds]="filterForm.get('bounds').value"
-                [isEditing]="isEditing"
-              ></app-map>
-            </div>
+            </ng-template>
           </div>
-          <ng-template #mapSelection>
-            <button
-              class="btn-rounded-outline"
-              (click)="isFilteringMap = !isFilteringMap"
-            >
-              Imposta
-            </button>
-          </ng-template>
         </div>
-      </div>
+      </ng-template>
     </div>
-  </ng-template>
-</div>
+  </div>
+</form>

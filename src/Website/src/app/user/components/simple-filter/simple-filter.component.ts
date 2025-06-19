@@ -1,30 +1,42 @@
 import { CommonModule, NgClass } from "@angular/common";
 import { NgSelectComponent } from "@ng-select/ng-select";
-import { Component, EventEmitter, Input, Output } from "@angular/core";
-import { FormBuilder, FormGroup } from "@angular/forms";
+import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
+import {
+  FormBuilder,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
+  Validators,
+} from "@angular/forms";
 import { AimsSelectComponent } from "../aims-select/aims-select.component";
 import { SourceService } from "src/app/_services/source.service";
 import { Instrument } from "src/app/_models/instrument";
 import { SimpleFilter } from "src/app/_models/badge";
-import { DatepickerComponent } from "src/app/components/datepicker/datepicker.component";
+
+import { DateTimePickerComponent } from "../date-time-picker/date-time-picker.component";
+import { MapComponent } from "src/app/components/map/map.component";
 
 @Component({
   selector: "app-simple-filter",
   imports: [
     CommonModule,
     AimsSelectComponent,
-    DatepickerComponent,
+    ReactiveFormsModule,
     NgSelectComponent,
+    FormsModule,
+    DateTimePickerComponent,
+    MapComponent,
   ],
   templateUrl: "./simple-filter.component.html",
   styleUrl: "./simple-filter.component.css",
 })
-export class SimpleFilterComponent {
+export class SimpleFilterComponent implements OnInit {
   @Input() filters: SimpleFilter | null = null;
   @Output() filteredEmit = new EventEmitter<any>();
+  @Output() filterToggled = new EventEmitter<boolean>();
 
   isEditing = true;
-  newFilter: boolean = false;
+  isFiltering: boolean = false;
 
   filterForm: FormGroup;
   isFilteringMap: boolean = false;
@@ -33,25 +45,38 @@ export class SimpleFilterComponent {
   instrumentList: Instrument[] = [];
   loading: boolean = false;
 
+  startDate: Date | null = null;
+  endDate: Date | null = null;
+
   constructor(private fb: FormBuilder, private sourceService: SourceService) {}
+
+  items = [
+    { id: 1, name: "Item One" },
+    { id: 2, name: "Item Two" },
+    { id: 3, name: "Item Three" },
+    { id: 4, name: "Item Four" },
+  ];
+
+  toggleFiltering() {
+    this.isFiltering = !this.isFiltering;
+    this.filterToggled.emit(this.isFiltering);
+  }
+
+  onScrollToEnd() {
+    console.log("Reached end of dropdown!");
+  }
 
   ngOnInit() {
     this.loadInstruments();
     this.initializeForm();
 
-    this.filterForm.get("count")?.valueChanges.subscribe((newCount) => {});
-
     if (this.filters) {
-      this.newFilter = true;
+      this.isFiltering = true;
     }
-
-    this.filterForm.valueChanges.subscribe((values) => {
-      console.log("Form changed!", values);
-      this.emitFilterValues();
-    });
   }
 
   loadInstruments() {
+    console.log("Loading instruments...");
     if (this.loading) return;
 
     this.loading = true;
@@ -71,7 +96,7 @@ export class SimpleFilterComponent {
 
   initializeForm() {
     this.filterForm = this.fb.group({
-      count: [this.filters?.count || null],
+      count: [this.filters?.count || null, Validators.required],
       aim: [this.filters?.aim || null],
       sourceId: [this.filters?.sourceId || null],
       bounds: this.fb.group({
@@ -83,30 +108,42 @@ export class SimpleFilterComponent {
         end: [this.filters?.interval?.end || null],
       }),
     });
+
+    this.filterForm.valueChanges.subscribe(() => {
+      this.filteredEmit.emit(this.filterForm.value);
+    });
   }
 
-  onDatesSelected(dates: { startDate: Date | null; endDate: Date | null }) {
-    const intervalGroup = this.filterForm.get("interval");
+  onStartDateSelected(date: Date | null) {
+    this.startDate = date;
+    this.updateIntervalIfComplete();
+  }
 
-    if (intervalGroup) {
-      intervalGroup.patchValue({
-        start: dates.startDate,
-        end: dates.endDate,
-      });
+  onEndDateSelected(date: Date | null) {
+    this.endDate = date;
+    this.updateIntervalIfComplete();
+  }
+
+  updateIntervalIfComplete() {
+    if (this.startDate && this.endDate) {
+      const intervalGroup = this.filterForm.get("interval");
+      if (intervalGroup) {
+        intervalGroup.patchValue({
+          start: this.startDate,
+          end: this.endDate,
+        });
+        this.emitFilterValues();
+      }
     }
-
-    this.emitFilterValues();
   }
 
-  onCountChange(newCount: string) {
-    const parsed = parseInt(newCount, 10);
-    this.filterForm.patchValue({ count: parsed });
+  onAimChange(aimChanged) {
+    this.filterForm.patchValue({ aim: aimChanged });
 
     this.emitFilterValues();
   }
 
   emitFilterValues() {
-    console.log("Emitting filter values:", this.filterForm.value);
     this.filteredEmit.emit(this.filterForm.value);
   }
 }

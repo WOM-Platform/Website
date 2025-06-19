@@ -1,0 +1,28 @@
+<div class="max-w-md mx-auto p-6 bg-white rounded-2xl shadow-lg space-y-6">
+  <p class="text-base font-semibold">{{ textContent }}</p>
+  <form [formGroup]="form">
+    <div>
+      <label for="date" class="block text-sm font-medium text-gray-700"
+        >Data</label
+      >
+      <input
+        id="date"
+        type="date"
+        formControlName="date"
+        class="mt-1 block w-full rounded-lg border border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500 p-2"
+      />
+    </div>
+
+    <div>
+      <label for="time" class="block text-sm font-medium text-gray-700"
+        >Ora</label
+      >
+      <input
+        id="time"
+        type="time"
+        formControlName="time"
+        class="mt-1 block w-full rounded-lg border border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500 p-2"
+      />
+    </div>
+  </form>
+</div>

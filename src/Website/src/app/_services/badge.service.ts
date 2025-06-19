@@ -38,10 +38,11 @@ export class BadgeService {
   }
 
   uploadBadgeImage(badgeId: string, file: File): Observable<any> {
-    return this.http.put<Badge>(`${this.localUrlV1}${badgeId}/image`, file, {
+    return this.http.put(`${this.localUrlV1}${badgeId}/image`, file, {
       headers: {
-        "Content-Type": file.type, // e.g., image/png or image/jpeg
+        "Content-Type": file.type,
       },
+      responseType: "text",
     });
   }
 
@@ -50,27 +51,7 @@ export class BadgeService {
   }
 
   updateBadge(badgeId: string, badgeData: Badge) {
-    console.log("Updating badge with ID:", badgeData);
-    const body = {
-      challengeId: badgeData.challengeId,
-      description: badgeData.description,
-      informationUrl: badgeData.informationUrl,
-      isPublic: badgeData.isPublic,
-      name: badgeData.name,
-      simpleFilter: {
-        aim: badgeData.simpleFilter.aim,
-        bounds: badgeData.simpleFilter.bounds,
-        count: badgeData.simpleFilter.count,
-        // interval: badgeData.simpleFilter.interval,
-        sourceId: badgeData.simpleFilter.sourceId,
-      },
-      sortName: badgeData.sortName,
-      image: badgeData.image,
-      creationTimestamp: badgeData.creationTimestamp,
-      updateTimestamp: badgeData.updateTimestamp,
-    };
-
-    return this.http.put(`${this.localUrlV1}${badgeId}`, body);
+    return this.http.put(`${this.localUrlV1}${badgeId}`, badgeData);
   }
 
   getAllChallenges(): Observable<Challenge[]> {
