@@ -8,3 +8,4 @@ index-dev.html
 environment.dev-local.ts
 /src/Website/.angular/cache
 /src/Website/dist/*
+.DS_Store

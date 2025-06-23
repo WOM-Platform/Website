@@ -83,7 +83,7 @@ export class StatsService {
 
   getAmountOfAvailableVouchers(
     locationParams: LocationParams,
-    merchantId: string[]
+    merchantIds: string[]
   ) {
     let requestData = {};
 
@@ -105,7 +105,7 @@ export class StatsService {
         radius: locationParams.radius.toString(),
       };
     }
-    if (merchantId) requestData = { ...requestData, merchantId: merchantId };
+    if (merchantIds) requestData = { ...requestData, merchantIds: merchantIds };
 
     return this.http.post(`${this.localUrlV1}voucher/available`, requestData);
   }

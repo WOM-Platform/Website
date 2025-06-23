@@ -1,17 +1,25 @@
 <!-- carousel -->
 <app-carousel [images]="slidesList" />
 <!-- app che valorizza -->
-<div class="px-6 md:px-20 pb-3 pt-16 md:py-6 my-12 bg-[#F2F2F2] relative">
-  <h3
-    class="absolute px-20 -top-9 left-0 text-3xl font-extrabold text-[#1F1F1D]"
-  >
+<div
+  class="px-6 md:px-20 pb-3 pt-16 md:pb-12 md:pt-8 my-12 bg-[#F2F2F2] relative"
+>
+  <h3 class="homeH3 absolute px-20 -top-6 sm:-top-9 left-0 text-[#1F1F1D]">
     l'app<br />che valorizza<br />il tuo tempo
   </h3>
   <div class="relative flex justify-center md:justify-end items-center">
-    <app-store-logos />
+    <app-store-logos
+      [appName]="'WOM POCKET'"
+      [appleURL]="'https://apps.apple.com/it/app/wom-pocket/id1466969163'"
+      [appleQR]="'/assets/images/pesaro/tourists/qr-code-ios.png'"
+      [googleURL]="
+        'https://play.google.com/store/apps/details?id=social.wom.pocket'
+      "
+      [googleQR]="'/assets/images/pesaro/tourists/qr-code-android.png'"
+    />
   </div>
   <h3
-    class="absolute px-20 -bottom-4 right-0 text-3xl font-extrabold text-[#CCCCCC]"
+    class="homeH3 absolute px-20 -bottom-3 sm:-bottom-6 right-0 text-[#CCCCCC]"
   >
     scarica l'app
   </h3>
@@ -20,20 +28,19 @@
   <div class="mb-8">
     <!-- info wom -->
     <p>
-      <span class="text-[#009EE2] font-extrabold">WOM</span> - "Worth One
-      Minute" è una piattaforma di ricompensa general-purpose basata su un
-      sistema di scambio di voucher. Molte azioni e attività compiute dagli
-      individui hanno un valore sociale intrinseco, un effetto noto in economia
-      come "esternalità positiva". WOM mira a riconoscere tutte quelle azioni
-      che costituiscono un contributo socialmente prezioso per un obiettivo
-      comune, premiando il tempo che le persone dedicano a queste attività
-      attraverso la generazione di voucher sociali digitali. I voucher WOM
-      premiano ogni minuto di impegno sociale.
+      <span class="womWord">WOM</span> - "Worth One Minute" è una piattaforma di
+      ricompensa general-purpose basata su un sistema di scambio di voucher.
+      Molte azioni e attività compiute dagli individui hanno un valore sociale
+      intrinseco, un effetto noto in economia come "esternalità positiva". WOM
+      mira a riconoscere tutte quelle azioni che costituiscono un contributo
+      socialmente prezioso per un obiettivo comune, premiando il tempo che le
+      persone dedicano a queste attività attraverso la generazione di voucher
+      sociali digitali. I voucher WOM premiano ogni minuto di impegno sociale.
     </p>
-    <app-btn-find-out-more />
+    <!-- <app-btn-find-out-more /> -->
   </div>
 
-  <div class="space-y-4">
+  <div class="flex flex-col gap-4">
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
       <div class="square-info">
         <h3 class="square-title">azioni</h3>
@@ -41,87 +48,81 @@
         <div class="text-square">
           <hr class="hr-line w-[48px]" />
           <p>
-            Compiendo azioni socialmente valide, ogni utente guadagna WOM e
-            diventa un Volontario. I Volontari possono gestire i loro voucher
-            WOM tramite un’app, "WOM Pocket", che possono installare sul proprio
-            dispositivo. L’applicazione consente ai Volontari di raccogliere i
-            propri voucher, conservarli e spenderli.
+            Compiendo azioni socialmente valide, ogni utente guadagna WOM. Gli
+            Utenti possono gestire i loro voucher WOM tramite un’app, "WOM
+            Pocket", che possono installare sul proprio dispositivo.
+            L’applicazione consente di raccogliere i propri voucher, conservarli
+            e spenderli.
           </p>
         </div>
-        <div class="mt-auto flex justify-end">
-          <app-btn-find-out-more />
+        <div class="mt-auto flex justify-end text-square">
+          <app-btn-find-out-more [ref]="'/users'" />
         </div>
       </div>
       <div class="square-info">
-        <h3 class="square-title">merchant</h3>
+        <h3 class="square-title">offerte</h3>
 
         <div class="text-square">
           <hr class="hr-line w-[90px]" />
           <p>
-            I negozi locali possono partecipare al progetto diventando
-            Merchants. I Merchants sono componenti di sistema che possono creare
-            istanze di pagamento. Possono accettare i voucher WOM in cambio di
-            servizi e sconti. I Merchants utilizzano un’applicazione diversa, il
-            "WOM POS", o un software di integrazione personalizzato. Questi
-            componenti software consentono ai Merchants di creare nuove
-            transazioni, applicando ltri ai voucher WOM raccolti.
+            I negozi locali possono offrire agli utenti servizi e sconti in
+            cambio di WOM.<br />
+            Puoi trovare i negozi che aderiscono al progetto nella sezione
+            "offerte" di "WOM Pocket". <br /><br />Se sei un negoziante e vuoi
+            entrare nel progetto WOM clicca sul pulsante scopri di più
           </p>
         </div>
-        <div class="mt-auto flex justify-end">
-          <app-btn-find-out-more />
+        <div class="mt-auto flex justify-end text-square">
+          <app-btn-find-out-more [ref]="'/merchant'" />
         </div>
       </div>
     </div>
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
       <div class="square-info">
-        <h3 class="square-title">instrument</h3>
+        <h3 class="square-title">valore</h3>
 
         <div class="text-square">
           <hr class="hr-line w-[106px]" />
           <p>
-            Gli Instruments sono i proprietari di un’attività sociale o di
-            un’iniziativa con nalità sociale riconosciuta dalla piattaforma. Gli
-            Instruments consentono ai volontari di intraprendere azioni sociali.
-            I titolari di questo tipo di attività, come organizzazioni no prot,
-            associazioni o privati, possono contattare
-            <a href="mailto:info@wom.social">info&#64;wom.social</a> per essere
-            valutati dal comitato etico della piattaforma e inseriti nella lista
-            dei WOM Instrument che possono generare voucher e premiare i
-            contributori.
+            Molte azioni hanno un valore sociale intrinseco.<br />
+            WOM riconosce l’impatto di queste azioni e fornisce uno strumento
+            per premiare queste esternalità positive mediante l’emissione di
+            WOM.
           </p>
         </div>
-        <div class="mt-auto flex justify-end">
-          <app-btn-find-out-more />
+        <div class="mt-auto flex justify-end text-square">
+          <app-btn-find-out-more [ref]="'/about-section/about'" />
         </div>
       </div>
       <div class="square-info">
-        <h3 class="square-title">registry</h3>
+        <h3 class="square-title">sfide</h3>
 
         <div class="text-square">
           <hr class="hr-line w-[70px]" />
           <p>
-            Il Registry è l’entità centrale che genera i WOM su richiesta degli
-            Instrument, ne verica l’autenticità quando devono essere usati
-            presso un Merchant e ne impedisce la duplicazione o il doppio
-            utilizzo.
+            Sfida te stesso e collezione i badge WOM. Accedi alla sezione
+            "traguardi" sull'app "WOM Pocket" e scopri le sfide che ti
+            circondano.
           </p>
         </div>
-        <div class="mt-auto flex justify-end">
-          <app-btn-find-out-more />
+        <div class="mt-auto flex justify-end text-square">
+          <!-- <app-btn-find-out-more /> -->
         </div>
       </div>
+      <div class="col-span-full relative">
+        <h3 class="text-[#1F1F1D] mt-6 mb-3 homeH3">come guadagnare WOM</h3>
+        <app-small-images-carousel [images]="squareList" />
+      </div>
     </div>
-    <h3 class="flex justify-left mt-12 text-3xl font-extrabold text-[#1F1F1D]">
-      come guadagnare WOM
-    </h3>
-    <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 justify-center">
+
+    <!-- <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 justify-center">
       <img
         *ngFor="let slide of squareList"
         src="{{ slide.path }}"
         alt="test"
         class="object-contain"
       />
-    </div>
+    </div> -->
   </div>
 
   <!-- app loghi -->
@@ -131,7 +132,7 @@
     <img
       src="../../../assets/images/home/WOMPocket.png"
       alt="WOM Pocket"
-      class="max-w-[250px] h-48 object-contain mr-6"
+      class="logo-app sm:mr-6"
     />
     <div
       class="hidden md:block w-[2px] h-32 bg-[#CCCCCC] transform rotate-12 origin-center"
@@ -139,7 +140,7 @@
     <img
       src="../../../assets/images/home/WOMFit.png"
       alt="WOM Fit"
-      class="max-w-[250px] h-48 object-contain"
+      class="logo-app"
     />
     <div
       class="hidden md:block w-[2px] h-32 bg-[#CCCCCC] transform rotate-12 origin-center"
@@ -147,7 +148,7 @@
     <img
       src="../../../assets/images/home/WOMPos.png"
       alt="WOM POS"
-      class="max-w-[250px] h-48 object-contain"
+      class="logo-app"
     />
   </div>
 </div>
@@ -192,145 +193,3 @@
     alt="CTE Square logo"
   />
 </a>
-<!-- <div class="container">
-  <div class="flex flex-wrap items-center">
-    <div class="margin-top-p">
-      <div class="basis-full">
-        <img
-          class="h-48 mx-auto"
-          src="../../../assets/images/wom-logo.png"
-          alt="WOM logo"
-        />
-      </div>
-
-      <div class="section basis-full">
-        <h1 [innerHTML]="'HOME.SECTION_INTRO.TITLE' | translate"></h1>
-        <p [innerHTML]="'HOME.SECTION_INTRO.A' | translate"></p>
-        <div class="flex justify-center">
-          <button
-            class="px-4 py-2 rounded-full"
-            [innerHTML]="'GENERIC.BUTTON.MORE' | translate"
-            [routerLink]="['/about-section/about']"
-          ></button>
-        </div>
-      </div>
-    </div>
-
-    <div class="margin-top-p flex flex-wrap justify-center">
-      <div class="basis-full sm:basis-1/2">
-        <img
-          class="h-48 mx-auto"
-          src="../../../assets/images/digit_logo.png"
-          alt="DIGIT srl logo"
-        />
-      </div>
-      <div class="section basis-full sm:basis-1/2">
-        <p [innerHTML]="'HOME.SECTION_INTRO.B' | translate"></p>
-      </div>
-
-      <button
-        class="mt-8 bg-[#444558] text-white justify-self-center px-4 py-2 rounded-full"
-        [innerHTML]="'GENERIC.BUTTON.MORE' | translate"
-        (click)="navigateExternal('https://www.digit.srl')"
-      ></button>
-    </div>
-  </div>
-  <div class="flex flex-wrap items-start">
-    <div class="section basis-full sm:basis-1/2">
-      <div class="header-box-title rounded-2xl px-4 py-2">
-        <h2 [innerHTML]="'HOME.SECTION_VOL.TITLE' | translate"></h2>
-      </div>
-      <div class="header-box-content">
-        <p [innerHTML]="'HOME.SECTION_VOL.MESSAGE' | translate"></p>
-      </div>
-      <div class="mobile-only">
-        <div class="flex justify-center">
-          <button
-            class="mt-8 bg-[#444558] text-white px-4 py-2 rounded-full"
-            [innerHTML]="'GENERIC.BUTTON.MORE' | translate"
-            (click)="navigate('volunteer')"
-          ></button>
-        </div>
-      </div>
-    </div>
-
-    <div class="section basis-full sm:basis-1/2">
-      <div class="header-box-title rounded-2xl px-4 py-2">
-        <h2 [innerHTML]="'HOME.SECTION_MERCH.TITLE' | translate"></h2>
-      </div>
-      <div class="header-box-content">
-        <p [innerHTML]="'HOME.SECTION_MERCH.MESSAGE' | translate"></p>
-      </div>
-      <div class="mobile-only">
-        <div class="flex justify-center">
-          <button
-            class="mt-8 bg-[#444558] text-white px-4 py-2 rounded-full"
-            [innerHTML]="'GENERIC.BUTTON.MORE' | translate"
-            (click)="navigate('merchant')"
-          ></button>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="desktop-only">
-    <div class="flex">
-      <div class="basis-1/2 flex justify-center">
-        <button
-          class="mt-8 bg-[#444558] text-white justify-self-center px-4 py-2 rounded-full"
-          [innerHTML]="'GENERIC.BUTTON.MORE' | translate"
-          (click)="navigate('volunteer')"
-        ></button>
-      </div>
-      <div class="basis-1/2 flex justify-center">
-        <button
-          class="mt-8 bg-[#444558] text-white justify-self-center px-4 py-2 rounded-full"
-          [innerHTML]="'GENERIC.BUTTON.MORE' | translate"
-          (click)="navigate('merchant')"
-        ></button>
-      </div>
-    </div>
-  </div>
-  <div class="flex flex-wrap">
-    <div class="section basis-full sm:basis-1/2">
-      <div class="header-box-title rounded-2xl px-4 py-2">
-        <h2 [innerHTML]="'HOME.SECTION_INSTR.TITLE' | translate"></h2>
-      </div>
-      <div class="header-box-content">
-        <p [innerHTML]="'HOME.SECTION_INSTR.MESSAGE' | translate"></p>
-        <div class="flex justify-center">
-          <button
-            class="mt-8 bg-[#444558] text-white justify-self-center px-4 py-2 rounded-full"
-            [innerHTML]="'GENERIC.BUTTON.MORE' | translate"
-            (click)="navigate('instrument')"
-          ></button>
-        </div>
-      </div>
-    </div>
-
-    <div class="section basis-full sm:basis-1/2">
-      <div class="header-box-title rounded-2xl px-4 py-2">
-        <h2 [innerHTML]="'HOME.SECTION_REG.TITLE' | translate"></h2>
-      </div>
-      <div class="header-box-content">
-        <p [innerHTML]="'HOME.SECTION_REG.MESSAGE' | translate"></p>
-      </div>
-    </div>
-  </div>
-  <div>
-    <div class="section basis-full">
-      <div class="header-box-title rounded-2xl px-4 py-2">
-        <h2 [innerHTML]="'HOME.SECTION_TECH.TITLE' | translate"></h2>
-      </div>
-      <div class="header-box-content">
-        <p [innerHTML]="'HOME.SECTION_TECH.MESSAGE' | translate"></p>
-      </div>
-    </div>
-
-    <div class="section basis-full">
-      <div>
-        <h2 [innerHTML]="'HOME.SECTION_CONTACT.TITLE' | translate"></h2>
-        <p [innerHTML]="'HOME.SECTION_CONTACT.MESSAGE' | translate"></p>
-      </div>
-    </div>
-  </div>
-</div> -->

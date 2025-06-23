@@ -20,12 +20,38 @@ $my-theme: mat.m2-define-light-theme(
 
 @include mat.all-component-themes($my-theme);
 
+@font-face {
+  font-family: "Helvetica"; /* This is the name you'll use in your CSS */
+  src: url("assets/fonts/Helvetica/Helvetica.ttf") format("truetype");
+  font-weight: normal; /* This font file is for the 'normal' weight */
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "HelveticaNeue"; /* This is the name you'll use in your CSS */
+  src: url("assets/fonts/HelveticaNeue/HelveticaNeueLight.otf")
+    format("truetype");
+  font-weight: normal; /* This font file is for the 'normal' weight */
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "HelveticaNeueBold";
+  src: url("assets/fonts/HelveticaNeue/HelveticaNeueBold.otf")
+    format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 .mat-h1,
 .mat-headline,
 .mat-typography .mat-h1,
 .mat-typography .mat-headline,
 .mat-typography h1 {
-  font-family: "Raleway";
+  font-family: "HelveticaNeueBold";
   font-size: 2.6rem;
 }
 
@@ -34,21 +60,27 @@ $my-theme: mat.m2-define-light-theme(
 .mat-typography .mat-h2,
 .mat-typography .mat-title,
 .mat-typography h2 {
-  font-family: "Raleway";
+  font-family: "HelveticaNeueBold";
   font-size: 1.6rem;
 }
 
+h3 {
+  font-family: "HelveticaNeueBold";
+  font-size: 1.4rem;
+}
+
 p {
-  font-size: 1.25rem;
-  font-family: "Roboto";
+  font-size: 1.7rem;
+  font-family: "HelveticaNeue";
   line-height: 1.4;
+  font-weight: 400;
   text-justify: inter-word;
   margin-bottom: 1.5rem;
 }
 
 li {
   font-size: 1.25rem;
-  font-family: "Roboto";
+  font-family: "HelveticaNeue";
   text-justify: inter-word;
 }
 

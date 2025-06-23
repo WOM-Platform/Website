@@ -7,15 +7,25 @@
     <br />
     Per sviluppare nuove integrazioni WOM, connettori POS o per qualsiasi altra
     domanda, contattaci a
-    <a class="text-[#D20C76]" href="mailto:info@wom.social"
+    <a class="text-[#009EE2]" href="mailto:info@wom.social"
       >info&#64;wom.social</a
     >
   </p>
   <hr class="my-4" />
-  <h3 class="text-3xl font-extrabold text-[#CCCCCC] mt-4">scarica l'app</h3>
+  <h3 class="text-[1.5rem] sm:text-[2.5rem] leading-none text-[#CCCCCC] mt-4">
+    scarica l'app
+  </h3>
   <div class="flex justify-between items-center">
     <div>
-      <app-store-logos />
+      <app-store-logos
+        [appName]="'WOM POCKET'"
+        [appleURL]="'https://apps.apple.com/it/app/wom-pocket/id1466969163'"
+        [appleQR]="'/assets/images/pesaro/tourists/qr-code-ios.png'"
+        [googleURL]="
+          'https://play.google.com/store/apps/details?id=social.wom.pocket'
+        "
+        [googleQR]="'/assets/images/pesaro/tourists/qr-code-android.png'"
+      />
     </div>
     <div class="flex flex-col items-end gap-8">
       <!-- Social Icons -->
@@ -27,9 +37,9 @@
           aria-label="Instagram"
         >
           <img
-            src="assets/icons/Instagram_Glyph_Gradient.png"
+            src="assets/icons/instagram.png"
             alt="Instagram"
-            class="w-5 h-5 hover:opacity-80 transition-opacity duration-200"
+            class="w-7 h-7 hover:opacity-80 transition-opacity duration-200"
           />
         </a>
         <!-- fb -->
@@ -39,15 +49,15 @@
           aria-label="facebook"
         >
           <img
-            src="assets/icons/Facebook_Logo_Primary.png"
+            src="assets/icons/facebook.png"
             alt="facebook"
-            class="w-5 h-5 hover:opacity-80 transition-opacity duration-200"
+            class="w-7 h-7 hover:opacity-80 transition-opacity duration-200"
           />
         </a>
       </div>
       <!-- Privacy-->
-      <div class="text-start">
-        <p class="font-notes margin-0 text-gray-600">
+      <div class="text-end">
+        <p class="font-notes margin-0 text-white">
           WOM&nbsp;Platform&nbsp;&mdash;&nbsp;{{ currentYear }}.
           <a [routerLink]="['/privacy']" class="hover:underline"
             >Privacy policies</a

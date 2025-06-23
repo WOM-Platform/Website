@@ -1,13 +1,25 @@
 <div>
-    <div class="flex flex-col border-2 border-black rounded-xl p-4">
-        <h2>Scopo</h2>
-        <small class="text-gray-500 mb-4">Se impostato accetterai soltanto i voucher WOM generati per lo specifico scopo
-            selezionato</small>
-        <select name="aims" id="aims" (change)="onSelectAim($event)" class="w-[250px]" [disabled]="isEditing">
-            <option value="all" [selected]="selectedAim === ''">Tutti validi</option>
-            <option *ngFor="let aim of aimsList" [value]="aim.code" [selected]="aim.code === selectedAim">
-                {{ aim.titles.it }}
-            </option>
-        </select>
-    </div>
+  <div class="flex flex-col">
+    <h2>Scopo</h2>
+    <small class="text-gray-500 mb-4"
+      >Se impostato accetterai soltanto i voucher WOM generati per lo specifico
+      scopo selezionato</small
+    >
+    <select
+      name="aims"
+      id="aims"
+      (change)="onSelectAim($event)"
+      class="w-[250px] border border-gray-200 py-2 px-1 rounded-sm"
+      [disabled]="isEditing"
+    >
+      <option value="all" [selected]="selectedAim === ''">Tutti validi</option>
+      <option
+        *ngFor="let aim of aimsList"
+        [value]="aim.code"
+        [selected]="aim.code === selectedAim"
+      >
+        {{ aim.titles.it }}
+      </option>
+    </select>
+  </div>
 </div>

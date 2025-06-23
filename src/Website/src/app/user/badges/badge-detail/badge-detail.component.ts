@@ -63,6 +63,7 @@ export class BadgeDetailComponent implements OnInit {
   badgeId: string;
   challenges = [];
 
+  isFiltering: boolean;
   constructor(
     private badgeService: BadgeService,
     private loadingService: LoadingService,
@@ -96,8 +97,9 @@ export class BadgeDetailComponent implements OnInit {
     this.badgeService.getBadge(id).subscribe({
       next: (b) => {
         this.badge = b || {};
+        this.isFiltering = this.badge.simpleFilter;
 
-        this.badgeForm = this.fb.group({
+        const formGroupConfig: any = {
           sortName: [this.badge?.name?.it || ""],
           imageUrl: [this.badge?.imageUrl || null],
           name: this.fb.group(
@@ -111,9 +113,14 @@ export class BadgeDetailComponent implements OnInit {
             it: [this.badge?.description?.it || null],
             en: [this.badge?.description?.en || null],
           }),
-          isPublic: [this.badge?.isPublic || true],
+          isPublic: [this.badge?.isPublic ?? true],
           informationUrl: [this.badge?.informationUrl || null],
-          simpleFilter: this.fb.group({
+          challenge: [this.badge?.challenge || null],
+          createdAt: [this.badge?.createdAt || ""],
+        };
+
+        if (this.isFiltering) {
+          formGroupConfig.simpleFilter = this.fb.group({
             count: [1],
             sourceId: [this.badge?.simpleFilter?.sourceId || null],
             aim: [this.badge?.simpleFilter?.aim || null],
@@ -127,10 +134,11 @@ export class BadgeDetailComponent implements OnInit {
               start: [this.badge?.simpleFilter?.interval?.start || null],
               end: [this.badge?.simpleFilter?.interval?.end || null],
             }),
-          }),
-          challenge: [this.badge?.challenge || null],
-          createdAt: [this.badge?.createdAt || ""],
-        });
+          });
+        }
+
+        this.badgeForm = this.fb.group(formGroupConfig);
+
         this.badgeForm
           .get("name.it")
           ?.valueChanges.subscribe((newValue: string) => {
@@ -150,6 +158,40 @@ export class BadgeDetailComponent implements OnInit {
     });
   }
 
+  onFilterToggle(enabled: boolean) {
+    enabled ? this.addFilter() : this.removeFilter();
+  }
+
+  addFilter() {
+    this.isFiltering = true;
+
+    if (!this.badgeForm.get("simpleFilter")) {
+      const simpleFilterGroup = this.fb.group({
+        count: [1],
+        sourceId: [null],
+        aim: [null],
+        bounds: this.fb.group({
+          leftTop: [[0, 0]],
+          rightBottom: [[0, 0]],
+        }),
+        interval: this.fb.group({
+          start: [null],
+          end: [null],
+        }),
+      });
+
+      this.badgeForm.addControl("simpleFilter", simpleFilterGroup);
+    }
+  }
+
+  removeFilter() {
+    this.isFiltering = false;
+
+    if (this.badgeForm.get("simpleFilter")) {
+      this.badgeForm.removeControl("simpleFilter");
+    }
+  }
+
   onFileChange(event: any) {
     const file = event.target.files[0];
     if (file) {
@@ -165,7 +207,7 @@ export class BadgeDetailComponent implements OnInit {
   updateFilter(event: any) {
     if (event) {
       this.badgeForm.patchValue({
-        simpleFilter: event.value,
+        simpleFilter: event,
       });
     }
   }
@@ -175,6 +217,7 @@ export class BadgeDetailComponent implements OnInit {
       .updateBadge(this.badgeId, this.badgeForm.value)
       .subscribe((res) => {
         this.loadBadge(this.badgeId);
+        this.snackBarService.openSnackBar("Badge aggiornato con successo");
       });
   }
 

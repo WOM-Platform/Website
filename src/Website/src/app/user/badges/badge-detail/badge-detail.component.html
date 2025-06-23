@@ -28,9 +28,15 @@
   </div>
 
   <!-- Nome  -->
-  <div type="text" formGroupName="name" class="flex gap-2">
-    <input class="inputField" formControlName="it" />
-    <input class="inputField" formControlName="en" />
+  <div type="text" formGroupName="name" class="flex gap-5">
+    <div>
+      <label class="block text-sm font-medium text-gray-700">Nome (IT)</label>
+      <input class="inputField" formControlName="it" />
+    </div>
+    <div>
+      <label class="block text-sm font-medium text-gray-700">Nome (EN)</label>
+      <input class="inputField" formControlName="en" />
+    </div>
   </div>
 
   <!-- isPublic e challenge -->
@@ -57,10 +63,21 @@
   </div>
 
   <!-- Descrizione -->
-  <div formGroupName="description" class="flex gap-2">
-    <input class="inputField" formControlName="it" />
-    <input class="inputField" formControlName="en" />
+  <div formGroupName="description" class="flex gap-2 w-full">
+    <div class="flex-1">
+      <label class="block text-sm font-medium text-gray-700"
+        >Descrizione (IT)</label
+      >
+      <input class="inputField w-full" formControlName="it" />
+    </div>
+    <div class="flex-1">
+      <label class="block text-sm font-medium text-gray-700"
+        >Descrizione (EN)</label
+      >
+      <input class="inputField w-full" formControlName="en" />
+    </div>
   </div>
+
   <!-- URL Info -->
   <div>
     <label class="block text-sm font-medium text-gray-700">Info URL</label>
@@ -68,15 +85,12 @@
   </div>
   <!-- Filter -->
   <div>
-    <app-simple-filter (filteredEmit)="updateFilter($event)" />
+    <app-simple-filter
+      [filters]="badge.simpleFilter"
+      (filteredEmit)="updateFilter($event)"
+      (filterToggled)="onFilterToggle($event)"
+    />
   </div>
-
-  <!-- Campi lettura -->
-  <small>
-    Timestamp:
-    {{ badgeForm.get("createdAt")?.value }}
-  </small>
-
   <!-- Buttons -->
   <div class="flex justify-end gap-6 mt-4">
     <button
@@ -93,3 +107,8 @@
     </button>
   </div>
 </form>
+<!-- Campi lettura -->
+<small *ngIf="badge">
+  Timestamp:
+  {{ badgeForm.get("createdAt")?.value }}
+</small>

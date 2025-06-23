@@ -70,15 +70,52 @@
   margin: 20px;
 }
 
+.homeH3 {
+  @apply text-[3rem] leading-none;
+}
 .square-info {
   @apply bg-[#E6E6E6]  p-6 rounded  flex flex-col h-full;
 }
 .square-title {
-  @apply text-[#009EE2] text-2xl font-bold mb-1;
+  @apply text-[#009EE2] text-[3rem] mb-1;
 }
 .hr-line {
   @apply border-t-4 border-solid border-[#ccc] mb-4;
 }
 .text-square {
   @apply px-5;
+}
+
+.text-square p {
+  @apply text-[1.6rem];
+}
+
+.womWord {
+  @apply text-[#009EE2];
+  font-family: "HelveticaNeueBold";
+}
+
+.logo-app {
+  @apply max-w-[250px] h-48 object-contain;
+}
+
+@media only screen and (max-width: 769px) {
+  .square-info {
+    @apply p-3;
+  }
+  .homeH3 {
+    @apply text-[1.9rem] leading-none;
+  }
+
+  .square-title {
+    @apply text-[1.9rem];
+  }
+
+  .text-square p {
+    @apply text-[1.1rem];
+  }
+
+  .logo-app {
+    @apply max-w-[150px] h-auto;
+  }
 }

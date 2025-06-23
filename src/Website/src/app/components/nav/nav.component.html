@@ -98,7 +98,7 @@
             >
               group
             </span>
-            <span>{{ "NAV.VOLUNTEERS.TITLE" | translate }}</span>
+            <span>{{ "NAV.USERS.TITLE" | translate }}</span>
           </div>
           <span
             class="material-symbols-outlined transition-transform duration-300"
@@ -115,13 +115,13 @@
           *ngIf="isVolunteersOpen"
         >
           <a
-            [routerLink]="['/volunteer']"
+            [routerLink]="['/users']"
             (click)="drawer.toggle()"
             routerLinkActive="active"
             class="menu-item-a"
           >
             <span class="material-symbols-outlined icon-mb"> badge </span>
-            <span>{{ "NAV.VOLUNTEERS.WHO_ARE" | translate }}</span>
+            <span>{{ "NAV.USERS.WHO_ARE" | translate }}</span>
           </a>
           <a
             [routerLink]="['/applications']"
@@ -130,7 +130,7 @@
             class="menu-item-a whitespace-normal overflow-hidden"
           >
             <span class="material-symbols-outlined icon-mb"> description </span>
-            <span>{{ "NAV.VOLUNTEERS.APPLICATIONS" | translate }}</span>
+            <span>{{ "NAV.USERS.APPLICATIONS" | translate }}</span>
           </a>
         </div>
 
@@ -178,8 +178,8 @@
     </mat-sidenav>
   </mat-sidenav-container>
   <div>
-    <div class="flex justify-between items-center bg-[#fff] h-14">
-      <a class="h-20 w-auto items-center flex px-4" routerLink="home">
+    <div class="flex justify-between items-center bg-[#fff] h-20">
+      <a class="h-24 w-auto items-center flex px-4" routerLink="home">
         <img src="../../../assets/images/logo.png" />
       </a>
       <div class="flex flex-row align-items-center">
@@ -225,7 +225,7 @@
           <!-- volunteers -->
           <div class="relative group inline-block">
             <button class="menu-item">
-              <span>{{ "NAV.VOLUNTEERS.TITLE" | translate }}</span>
+              <span>{{ "NAV.USERS.TITLE" | translate }}</span>
               <span
                 class="material-symbols-outlined ransform transition-transform duration-300 group-hover:rotate-180"
               >
@@ -234,16 +234,16 @@
             </button>
             <div class="submenu">
               <button
-                (click)="navigate('volunteer')"
+                (click)="navigate('users')"
                 class="block w-full text-left px-4 py-2 text-gray-800 hover:bg-gray-100"
               >
-                <span>{{ "NAV.VOLUNTEERS.WHO_ARE" | translate }}</span>
+                <span>{{ "NAV.USERS.WHO_ARE" | translate }}</span>
               </button>
               <button
                 (click)="navigate('applications')"
                 class="block w-full text-left px-4 py-2 text-gray-800 hover:bg-gray-100"
               >
-                <span>{{ "NAV.VOLUNTEERS.APPLICATIONS" | translate }}</span>
+                <span>{{ "NAV.USERS.APPLICATIONS" | translate }}</span>
               </button>
             </div>
           </div>
