@@ -128,6 +128,7 @@ export class BadgesComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe((result) => {
+      console.log("Dialog closed with result:", result);
       if (result) {
         const { image, ...badgeData } = result;
 

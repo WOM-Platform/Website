@@ -1,10 +1,14 @@
 <div class="relative w-full mx-auto overflow-hidden">
-  <div class="relative h-64 sm:h-80 md:h-fit">
-    <img
-      [src]="images[currentIndex].path"
-      class="w-full h-full object-cover transition-opacity duration-500"
-      alt="Slide Image"
-    />
+  <div class="relative h-96 sm:h-80 md:h-auto">
+    <div
+      class="w-full h-96 sm:h-[700px] bg-cover bg-center transition-opacity duration-500 -z-10"
+      [ngStyle]="{
+        'background-image':
+          'url(' +
+          (isMobile ? images[currentIndex].mobile : images[currentIndex].path) +
+          ')'
+      }"
+    ></div>
   </div>
 
   <!-- Dots -->

@@ -1,5 +1,14 @@
 <!-- carousel -->
-<app-carousel [images]="slidesList" />
+<div class="relative w-full">
+  <!-- Carousel component -->
+  <app-carousel [images]="slidesList" />
+  <img
+    class="absolute top-0 left-1/2 transform -translate-x-1/2 w-3/5 h-full object-contain"
+    src="../../../assets/images/home/generazioneValore.webp"
+    alt="home background"
+  />
+</div>
+
 <!-- app che valorizza -->
 <div
   class="px-6 md:px-20 pb-3 pt-16 md:pb-12 md:pt-8 my-12 bg-[#F2F2F2] relative"
@@ -106,23 +115,15 @@
           </p>
         </div>
         <div class="mt-auto flex justify-end text-square">
-          <!-- <app-btn-find-out-more /> -->
+          <app-btn-find-out-more [ref]="'/challenge'" />
         </div>
       </div>
-      <div class="col-span-full relative">
-        <h3 class="text-[#1F1F1D] mt-6 mb-3 homeH3">come guadagnare WOM</h3>
-        <app-small-images-carousel [images]="squareList" />
-      </div>
     </div>
-
-    <!-- <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 justify-center">
-      <img
-        *ngFor="let slide of squareList"
-        src="{{ slide.path }}"
-        alt="test"
-        class="object-contain"
-      />
-    </div> -->
+  </div>
+  <!-- Carousel how to earn wom -->
+  <div class="col-span-full relative">
+    <h3 class="text-[#1F1F1D] mt-6 mb-3 homeH3">come guadagnare WOM</h3>
+    <app-small-images-carousel [images]="squareList" />
   </div>
 
   <!-- app loghi -->

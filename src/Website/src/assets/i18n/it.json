@@ -6,6 +6,7 @@
     "USERS": {
       "TITLE": "Utenti",
       "WHO_ARE": "Chi sono",
+      "CHALLENGES": "Le Sfide",
       "APPLICATIONS": "Come guadagnare WOM"
     },
     "ABOUT": {
@@ -38,6 +39,7 @@
       "URBINO": "WOM per Urbino",
       "FANO": "WOM per Fano"
     },
+    "CHALLENGE": "Sfida",
     "FAQ": "FAQ",
     "PESARO": {
       "HOTELIERS": "Albergatori",

@@ -57,7 +57,7 @@ export class DialogCreateBadgeComponent implements OnInit {
   ngOnInit(): void {
     this.challengeList = this.data.challenges || [];
     this.badgeForm = this.fb.group({
-      challenge: [null],
+      challengeId: [null],
       isPublic: [true, Validators.required],
       name: this.fb.group({
         it: [null, Validators.required],

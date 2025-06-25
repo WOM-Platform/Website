@@ -9,10 +9,36 @@ import { Router } from "@angular/router";
 })
 export class HomeComponent {
   slidesList = [
-    { path: "/assets/images/home/bannerBike.jpg" },
-    { path: "/assets/images/home/bannerMus.jpg" },
-    { path: "/assets/images/home/bannerMusei.jpg" },
-    { path: "/assets/images/home/bannerPiazza.jpg" },
+    {
+      path: "/assets/images/home/bannerBike.webp",
+      mobile: "/assets/images/home/mbBannerBike.webp",
+      alt: "Bicicletta",
+    },
+    {
+      path: "/assets/images/home/bannerRunning.webp",
+      mobile: "/assets/images/home/mbBannerRunning.webp",
+      alt: "Corsa",
+    },
+    {
+      path: "/assets/images/home/bannerEntrance.webp",
+      mobile: "/assets/images/home/mbBannerEntrance.webp",
+      alt: "Ingresso",
+    },
+    {
+      path: "/assets/images/home/bannerMuseum.webp",
+      mobile: "/assets/images/home/mbBannerMuseum.webp",
+      alt: "Museo",
+    },
+    {
+      path: "/assets/images/home/bannerFriends.webp",
+      mobile: "/assets/images/home/mbBannerFriends.webp",
+      alt: "Amici",
+    },
+    {
+      path: "/assets/images/home/bannerHandshake.webp",
+      mobile: "/assets/images/home/mbBannerHandshake.webp",
+      alt: "Incontro",
+    },
   ];
 
   squareList = [
