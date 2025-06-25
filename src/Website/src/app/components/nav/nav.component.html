@@ -222,7 +222,7 @@
             </div>
           </div>
 
-          <!-- volunteers -->
+          <!-- users -->
           <div class="relative group inline-block">
             <button class="menu-item">
               <span>{{ "NAV.USERS.TITLE" | translate }}</span>
@@ -238,6 +238,12 @@
                 class="block w-full text-left px-4 py-2 text-gray-800 hover:bg-gray-100"
               >
                 <span>{{ "NAV.USERS.WHO_ARE" | translate }}</span>
+              </button>
+              <button
+                (click)="navigate('challenge')"
+                class="block w-full text-left px-4 py-2 text-gray-800 hover:bg-gray-100"
+              >
+                <span>{{ "NAV.USERS.CHALLENGES" | translate }}</span>
               </button>
               <button
                 (click)="navigate('applications')"

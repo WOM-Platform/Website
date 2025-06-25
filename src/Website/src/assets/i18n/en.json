@@ -6,6 +6,7 @@
     "USERS": {
       "TITLE": "Users",
       "WHO_ARE": "About",
+      "CHALLENGES": "Challenges",
       "APPLICATIONS": "How to earn WOM"
     },
     "ABOUT": {
@@ -38,6 +39,7 @@
       "URBINO": "WOM for Urbino",
       "FANO": "WOM for Fano"
     },
+    "CHALLENGE": "Challenge",
     "FAQ": "FAQ",
     "PROJECTS": {
       "RETE-DELLE-RETI": "Rete delle Reti"

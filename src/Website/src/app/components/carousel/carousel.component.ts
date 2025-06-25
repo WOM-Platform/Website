@@ -8,11 +8,18 @@ import { Component, Input, OnInit } from "@angular/core";
   styleUrl: "./carousel.component.css",
 })
 export class CarouselComponent implements OnInit {
-  @Input() images: { path: string }[] = [];
+  @Input() images: { path: string; mobile: string; alt: string }[] = [];
   currentIndex = 0;
+  isMobile = false;
   intervalId: any;
 
   ngOnInit() {
+    this.isMobile = window.innerWidth <= 768;
+
+    window.addEventListener("resize", () => {
+      this.isMobile = window.innerWidth <= 768;
+    });
+
     this.startAutoPlay();
   }
 

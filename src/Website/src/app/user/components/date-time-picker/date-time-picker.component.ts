@@ -12,7 +12,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule } from "@angular/forms";
 @Component({
   selector: "app-date-time-picker",
   standalone: true,
-  imports: [NgIf, ReactiveFormsModule],
+  imports: [ReactiveFormsModule],
   templateUrl: "./date-time-picker.component.html",
   styleUrl: "./date-time-picker.component.css",
 })

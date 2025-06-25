@@ -21,18 +21,10 @@ $my-theme: mat.m2-define-light-theme(
 @include mat.all-component-themes($my-theme);
 
 @font-face {
-  font-family: "Helvetica"; /* This is the name you'll use in your CSS */
-  src: url("assets/fonts/Helvetica/Helvetica.ttf") format("truetype");
-  font-weight: normal; /* This font file is for the 'normal' weight */
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "HelveticaNeue"; /* This is the name you'll use in your CSS */
+  font-family: "HelveticaNeue";
   src: url("assets/fonts/HelveticaNeue/HelveticaNeueLight.otf")
     format("truetype");
-  font-weight: normal; /* This font file is for the 'normal' weight */
+  font-weight: normal;
   font-style: normal;
   font-display: swap;
 }
@@ -61,16 +53,16 @@ $my-theme: mat.m2-define-light-theme(
 .mat-typography .mat-title,
 .mat-typography h2 {
   font-family: "HelveticaNeueBold";
-  font-size: 1.6rem;
+  font-size: 1.8rem;
 }
 
 h3 {
   font-family: "HelveticaNeueBold";
-  font-size: 1.4rem;
+  font-size: 1.65rem;
 }
 
 p {
-  font-size: 1.7rem;
+  font-size: 1.5rem;
   font-family: "HelveticaNeue";
   line-height: 1.4;
   font-weight: 400;

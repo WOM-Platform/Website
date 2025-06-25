@@ -39,6 +39,7 @@ import { PesaroComponent } from "./pages/pesaro-section/pesaro/pesaro.component"
 import { pesaro2024RedirectGuard } from "./_helpers/pesaro2024-redirect.guard";
 import { EsercentiComponent } from "./pages/pesaro-section/esercenti/esercenti.component";
 import { FaqComponent } from "./pages/faq/faq.component";
+import { ChallengeComponent } from "./pages/challenge/challenge.component";
 
 const routes: Routes = [
   {
@@ -55,6 +56,13 @@ const routes: Routes = [
       {
         path: "home",
         component: HomeComponent,
+      },
+      {
+        path: "challenge",
+        component: ChallengeComponent,
+        data: {
+          breadcrumb: "BREADCRUMBS.CHALLENGE",
+        },
       },
       {
         path: "faq",
