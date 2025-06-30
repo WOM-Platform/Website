@@ -12,10 +12,16 @@ import { ReactiveFormsModule } from "@angular/forms";
 import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material/dialog";
 import { Challenge } from "src/app/_models/challenge";
 import { SimpleFilterComponent } from "../../components/simple-filter/simple-filter.component";
+import { TestTormvComponent } from "../../../components/test-tormv/test-tormv.component";
 
 @Component({
   selector: "app-dialog-create-badge",
-  imports: [ReactiveFormsModule, CommonModule, SimpleFilterComponent],
+  imports: [
+    ReactiveFormsModule,
+    CommonModule,
+    SimpleFilterComponent,
+    TestTormvComponent,
+  ],
   templateUrl: "./dialog-create-badge.component.html",
   styleUrl: "./dialog-create-badge.component.css",
   animations: [
@@ -57,14 +63,14 @@ export class DialogCreateBadgeComponent implements OnInit {
   ngOnInit(): void {
     this.challengeList = this.data.challenges || [];
     this.badgeForm = this.fb.group({
-      challenge: [null],
+      challengeId: [null],
       isPublic: [true, Validators.required],
       name: this.fb.group({
         it: [null, Validators.required],
         en: [null, Validators.required],
       }),
       simpleFilter: this.fb.group({
-        count: [null],
+        count: [1],
         sourceId: [null],
         aim: [null],
         bounds: this.fb.group({
@@ -76,7 +82,6 @@ export class DialogCreateBadgeComponent implements OnInit {
           end: [null],
         }),
       }),
-      filter: [null],
       imageUrl: [null],
       description: this.fb.group({
         it: [null],

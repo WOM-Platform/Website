@@ -123,6 +123,17 @@
             <span class="material-symbols-outlined icon-mb"> badge </span>
             <span>{{ "NAV.USERS.WHO_ARE" | translate }}</span>
           </a>
+
+          <a
+            [routerLink]="['/challenge']"
+            (click)="drawer.toggle()"
+            routerLinkActive="active"
+            class="menu-item-a"
+          >
+            <span class="material-symbols-outlined icon-mb"> license </span>
+            <span>{{ "NAV.USERS.CHALLENGES" | translate }}</span>
+          </a>
+
           <a
             [routerLink]="['/applications']"
             (click)="drawer.toggle()"
@@ -222,7 +233,7 @@
             </div>
           </div>
 
-          <!-- volunteers -->
+          <!-- users -->
           <div class="relative group inline-block">
             <button class="menu-item">
               <span>{{ "NAV.USERS.TITLE" | translate }}</span>
@@ -238,6 +249,12 @@
                 class="block w-full text-left px-4 py-2 text-gray-800 hover:bg-gray-100"
               >
                 <span>{{ "NAV.USERS.WHO_ARE" | translate }}</span>
+              </button>
+              <button
+                (click)="navigate('challenge')"
+                class="block w-full text-left px-4 py-2 text-gray-800 hover:bg-gray-100"
+              >
+                <span>{{ "NAV.USERS.CHALLENGES" | translate }}</span>
               </button>
               <button
                 (click)="navigate('applications')"

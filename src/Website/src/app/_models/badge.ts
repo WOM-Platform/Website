@@ -32,6 +32,8 @@ export interface SimpleFilter {
     leftTop: number[];
     rightBottom: number[];
   };
+  period: string;
+  isPeriodic: boolean;
   interval: {
     start: string;
     end: string;
