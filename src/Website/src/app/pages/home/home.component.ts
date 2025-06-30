@@ -42,18 +42,18 @@ export class HomeComponent {
   ];
 
   squareList = [
-    { path: "/assets/images/home/bike.jpg" },
-    { path: "/assets/images/home/bus.jpg" },
-    { path: "/assets/images/home/cinema.jpg" },
-    { path: "/assets/images/home/concert.jpg" },
-    { path: "/assets/images/home/eco.jpg" },
-    { path: "/assets/images/home/events.jpg" },
-    { path: "/assets/images/home/monument.jpg" },
-    { path: "/assets/images/home/museum.jpg" },
-    { path: "/assets/images/home/study.jpg" },
-    { path: "/assets/images/home/visiting.jpg" },
-    { path: "/assets/images/home/walking.jpg" },
-    { path: "/assets/images/home/osservare.jpg" },
+    { path: "/assets/images/home/bike.webp" },
+    { path: "/assets/images/home/bus.webp" },
+    { path: "/assets/images/home/cinema.webp" },
+    { path: "/assets/images/home/concert.webp" },
+    { path: "/assets/images/home/eco.webp" },
+    { path: "/assets/images/home/events.webp" },
+    { path: "/assets/images/home/monument.webp" },
+    { path: "/assets/images/home/museum.webp" },
+    { path: "/assets/images/home/study.webp" },
+    { path: "/assets/images/home/visiting.webp" },
+    { path: "/assets/images/home/walking.webp" },
+    { path: "/assets/images/home/osservare.webp" },
   ];
 
   constructor(private router: Router) {}

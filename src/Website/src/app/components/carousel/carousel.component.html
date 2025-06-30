@@ -1,14 +1,29 @@
 <div class="relative w-full mx-auto overflow-hidden">
-  <div class="relative h-96 sm:h-80 md:h-auto">
-    <div
-      class="w-full h-96 sm:h-[700px] bg-cover bg-center transition-opacity duration-500 -z-10"
-      [ngStyle]="{
-        'background-image':
-          'url(' +
-          (isMobile ? images[currentIndex].mobile : images[currentIndex].path) +
-          ')'
-      }"
-    ></div>
+  <div class="relative w-full h-96 sm:h-[900px] overflow-hidden">
+    <div *ngIf="!isMobile; else bannerMobile">
+      <img
+        *ngFor="let image of images; let i = index"
+        [src]="image.path"
+        alt="Carousel Image"
+        class="absolute inset-0 w-full h-full object-cover object-center transition-opacity duration-700 ease-in-out"
+        [ngClass]="{
+          'opacity-100 -z-10': i === currentIndex,
+          'opacity-0 -z-20': i !== currentIndex
+        }"
+      />
+    </div>
+    <ng-template #bannerMobile>
+      <img
+        *ngFor="let image of images; let i = index"
+        [src]="image.mobile"
+        alt="Carousel Image"
+        class="absolute inset-0 w-full h-96 object-cover object-center transition-opacity duration-700 ease-in-out"
+        [ngClass]="{
+          'opacity-100 -z-10': i === currentIndex,
+          'opacity-0 -z-20': i !== currentIndex
+        }"
+      />
+    </ng-template>
   </div>
 
   <!-- Dots -->

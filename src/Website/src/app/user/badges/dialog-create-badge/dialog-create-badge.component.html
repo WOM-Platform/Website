@@ -51,12 +51,8 @@
         </select>
       </div>
     </div>
-    <!-- Filter -->
-    <app-simple-filter
-      (filteredEmit)="updateFilter($event)"
-      (filterToggled)="onFilterToggle($event)"
-    />
 
+    <app-test-tormv />
     <!-- Image Upload -->
     <div>
       <label class="block text-sm font-medium text-gray-700"
@@ -94,6 +90,11 @@
       <input formControlName="informationUrl" type="url" class="inputField" />
     </div>
 
+    <!-- Filter -->
+    <app-simple-filter
+      (filteredEmit)="updateFilter($event)"
+      (filterToggled)="onFilterToggle($event)"
+    />
     <!-- Submit Button -->
     <button
       type="submit"
