@@ -1,4 +1,13 @@
-::ng-deep .ng-dropdown-panel {
-  max-height: 200px; /* or whatever height fits your design */
-  overflow: auto;
+ul {
+  background-color: white;
+  z-index: 9999 !important;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  border: 1px solid black;
+}
+
+h3 {
+  font-size: 1.2em;
 }

@@ -123,6 +123,17 @@
             <span class="material-symbols-outlined icon-mb"> badge </span>
             <span>{{ "NAV.USERS.WHO_ARE" | translate }}</span>
           </a>
+
+          <a
+            [routerLink]="['/challenge']"
+            (click)="drawer.toggle()"
+            routerLinkActive="active"
+            class="menu-item-a"
+          >
+            <span class="material-symbols-outlined icon-mb"> license </span>
+            <span>{{ "NAV.USERS.CHALLENGES" | translate }}</span>
+          </a>
+
           <a
             [routerLink]="['/applications']"
             (click)="drawer.toggle()"

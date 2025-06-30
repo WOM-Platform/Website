@@ -1,3 +1,4 @@
+import { BreakpointObserver } from "@angular/cdk/layout";
 import { CommonModule } from "@angular/common";
 import { Component, Input, OnInit } from "@angular/core";
 
@@ -13,12 +14,15 @@ export class CarouselComponent implements OnInit {
   isMobile = false;
   intervalId: any;
 
-  ngOnInit() {
-    this.isMobile = window.innerWidth <= 768;
+  constructor(private breakpointObserver: BreakpointObserver) {}
 
-    window.addEventListener("resize", () => {
-      this.isMobile = window.innerWidth <= 768;
-    });
+  ngOnInit() {
+    this.breakpointObserver
+      .observe(["(max-width: 768px)"])
+      .subscribe((result) => {
+        this.isMobile = result.matches;
+        console.log("Is mobile view:", this.isMobile);
+      });
 
     this.startAutoPlay();
   }
