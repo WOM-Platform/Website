@@ -5,7 +5,7 @@
         *ngFor="let image of images; let i = index"
         [src]="image.path"
         alt="Carousel Image"
-        class="absolute inset-0 w-full h-full object-cover object-center transition-opacity duration-700 ease-in-out"
+        class="absolute inset-0 w-full h-96 sm:h-[700px] object-cover object-center transition-opacity duration-700 ease-in-out"
         [ngClass]="{
           'opacity-100 -z-10': i === currentIndex,
           'opacity-0 -z-20': i !== currentIndex
