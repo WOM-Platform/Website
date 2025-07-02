@@ -19,7 +19,6 @@ export class CookieBannerComponent {
   ngOnInit(): void {
     const savedConsent = localStorage.getItem("cookieConsent");
     if (!savedConsent) {
-      console.log("No cookie consent found, showing banner.");
       this.showBanner = true;
     } else {
       this.preferences = JSON.parse(savedConsent);
