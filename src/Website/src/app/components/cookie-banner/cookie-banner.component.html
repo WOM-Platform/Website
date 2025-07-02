@@ -1,0 +1,71 @@
+<div
+  *ngIf="showBanner"
+  class="fixed bottom-5 left-1/2 transform -translate-x-1/2 bg-white border border-black p-4 rounded-lg shadow w-[90%] max-w-3xl text-center z-50"
+>
+  <img
+    src="assets/images/cookieO.png"
+    alt="cookie"
+    class="w-[100px] mx-auto mb-4"
+  />
+  <p class="text-sm mb-4">
+    Utilizziamo i cookie per migliorare l’esperienza, analizzare il traffico e
+    supportare il marketing. Puoi accettare tutti i cookie o personalizzare le
+    tue preferenze.
+  </p>
+  <div class="flex flex-col sm:flex-row gap-2 justify-center">
+    <button
+      (click)="acceptAllCookies()"
+      class="bg-blue-400 text-white px-4 py-2 rounded hover:bg-blue-600"
+    >
+      Accetto tutti i cookie
+    </button>
+    <button
+      (click)="showModal = true"
+      class="border border-black px-4 py-2 rounded"
+    >
+      Gestisci preferenze
+    </button>
+  </div>
+</div>
+
+<div
+  *ngIf="showModal"
+  class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
+>
+  <div class="bg-white p-6 rounded-lg max-w-2xl w-full">
+    <h2 class="text-lg font-semibold mb-4">
+      Gestisci le preferenze sui cookie
+    </h2>
+
+    <div class="mb-3">
+      <label class="flex items-center gap-2">
+        <input type="checkbox" checked disabled />
+        Cookie Necessari (Obbligatori)
+      </label>
+      <p class="text-sm">
+        Essenziali per il funzionamento del sito. Non possono essere
+        disattivati.
+      </p>
+    </div>
+
+    <div class="mb-3">
+      <label class="flex items-center gap-2">
+        <input type="checkbox" [(ngModel)]="preferences.marketing" />
+        Cookie di Marketing (Meta Pixel)
+      </label>
+      <p class="text-sm">Utilizzati per annunci pubblicitari personalizzati.</p>
+    </div>
+
+    <div class="flex flex-wrap gap-2 justify-end mt-4">
+      <button
+        (click)="savePreferences()"
+        class="border border-black px-4 py-2 rounded"
+      >
+        Salva preferenze
+      </button>
+      <button (click)="rejectAllCookies()" class="border px-4 py-2 rounded">
+        Rifiuta tutti i cookie
+      </button>
+    </div>
+  </div>
+</div>
