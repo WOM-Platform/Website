@@ -4,10 +4,11 @@ import {BehaviorSubject, of, Subject} from "rxjs";
 import {CookieConsentService} from "src/app/_services/cookie-consent.service";
 import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
 import {takeUntil} from "rxjs/operators";
+import {SharedModule} from "../../shared/shared.module";
 
 @Component({
     selector: "app-cookie-banner",
-    imports: [CommonModule],
+    imports: [CommonModule, SharedModule],
     templateUrl: "./cookie-banner.component.html",
     styleUrl: "./cookie-banner.component.css",
 })
@@ -34,7 +35,6 @@ export class CookieBannerComponent implements OnInit, OnDestroy {
         this.consentService.applyConsent();
 
         this.openBanner.pipe(takeUntil(this.$destroy)).subscribe(openBanner => {
-            console.log("openBanner", openBanner);
             this.showBanner = openBanner;
         });
     }
@@ -70,6 +70,7 @@ export class CookieBannerComponent implements OnInit, OnDestroy {
 
     applyPreferences(): void {
         const consent = JSON.parse(localStorage.getItem("cookieConsent") || "{}");
+        this.consentService.applyConsent();
         // Puoi gestire qui l'inizializzazione di script esterni in base a consent.analytics / marketing
     }
 }
