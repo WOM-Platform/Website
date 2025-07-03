@@ -1,55 +1,75 @@
-import { CommonModule } from "@angular/common";
-import { Component } from "@angular/core";
-import { CookieConsentService } from "src/app/_services/cookie-consent.service";
+import {CommonModule} from "@angular/common";
+import {Component, Input, OnDestroy, OnInit, Output} from "@angular/core";
+import {BehaviorSubject, of, Subject} from "rxjs";
+import {CookieConsentService} from "src/app/_services/cookie-consent.service";
+import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
+import {takeUntil} from "rxjs/operators";
 
 @Component({
-  selector: "app-cookie-banner",
-  imports: [CommonModule],
-  templateUrl: "./cookie-banner.component.html",
-  styleUrl: "./cookie-banner.component.css",
+    selector: "app-cookie-banner",
+    imports: [CommonModule],
+    templateUrl: "./cookie-banner.component.html",
+    styleUrl: "./cookie-banner.component.css",
 })
-export class CookieBannerComponent {
-  showBanner = false;
-  showModal = false;
-  preferences = {
-    marketing: false,
-  };
+export class CookieBannerComponent implements OnInit, OnDestroy {
+    @Input() openBanner = new BehaviorSubject<boolean>(false);
 
-  constructor(private consentService: CookieConsentService) {}
-  ngOnInit(): void {
-    const savedConsent = localStorage.getItem("cookieConsent");
-    if (!savedConsent) {
-      this.showBanner = true;
-    } else {
-      this.preferences = JSON.parse(savedConsent);
+    showBanner = false;
+    showModal = false;
+    preferences = {
+        marketing: false,
+    };
+    $destroy = new Subject<boolean>();
+
+    constructor(private consentService: CookieConsentService) {
     }
-    this.consentService.applyConsent();
-  }
 
-  acceptAllCookies(): void {
-    this.preferences = { marketing: true };
-    this.saveAndApplyPreferences();
-  }
+    ngOnInit(): void {
+        const savedConsent = localStorage.getItem("cookieConsent");
+        if (!savedConsent) {
+            this.showBanner = true;
+        } else {
+            this.preferences = JSON.parse(savedConsent);
+        }
+        this.consentService.applyConsent();
 
-  rejectAllCookies(): void {
-    this.preferences = { marketing: false };
-    this.saveAndApplyPreferences();
-  }
+        this.openBanner.pipe(takeUntil(this.$destroy)).subscribe(openBanner => {
+            console.log("openBanner", openBanner);
+            this.showBanner = openBanner;
+        });
+    }
 
-  savePreferences(): void {
-    this.saveAndApplyPreferences();
-  }
+    ngOnDestroy() {
+        this.openBanner.next(false);
+        this.$destroy.next(null);
+        this.$destroy.complete();
+    }
 
-  saveAndApplyPreferences(): void {
-    localStorage.setItem("cookieConsent", JSON.stringify(this.preferences));
-    this.showBanner = false;
-    this.showModal = false;
-    this.applyPreferences();
-    window.location.reload();
-  }
+    acceptAllCookies(): void {
+        this.preferences = {marketing: true};
+        this.saveAndApplyPreferences();
+    }
 
-  applyPreferences(): void {
-    const consent = JSON.parse(localStorage.getItem("cookieConsent") || "{}");
-    // Puoi gestire qui l'inizializzazione di script esterni in base a consent.analytics / marketing
-  }
+    rejectAllCookies(): void {
+        this.preferences = {marketing: false};
+        this.saveAndApplyPreferences();
+    }
+
+    savePreferences(): void {
+        this.saveAndApplyPreferences();
+    }
+
+    saveAndApplyPreferences(): void {
+        localStorage.setItem("cookieConsent", JSON.stringify(this.preferences));
+        this.showBanner = false;
+        this.showModal = false;
+        this.openBanner.next(false);
+        this.applyPreferences();
+        window.location.reload();
+    }
+
+    applyPreferences(): void {
+        const consent = JSON.parse(localStorage.getItem("cookieConsent") || "{}");
+        // Puoi gestire qui l'inizializzazione di script esterni in base a consent.analytics / marketing
+    }
 }
