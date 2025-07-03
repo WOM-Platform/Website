@@ -2,10 +2,14 @@ import { CommonModule } from "@angular/common";
 import { Component } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 import { CookieConsentService } from "src/app/_services/cookie-consent.service";
+import { BehaviorSubject, of, Subject } from "rxjs";
+import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
+import { takeUntil } from "rxjs/operators";
+import { SharedModule } from "../../shared/shared.module";
 
 @Component({
   selector: "app-cookie-banner",
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, SharedModule],
   templateUrl: "./cookie-banner.component.html",
   styleUrl: "./cookie-banner.component.css",
 })
