@@ -1,13 +1,17 @@
 <div class="container">
-  <h1>{{ "PRIVACY.WEBSITE.TITLE" | translate }}</h1>
+    <h1>{{ "PRIVACY.WEBSITE.TITLE" | translate }}</h1>
 
-  <div
-    class="text-content"
-    [innerHTML]="'PRIVACY.WEBSITE.CONTENT' | translate | joinstrings"
-  ></div>
+    <div class="text-content"
+         [innerHTML]="'PRIVACY.WEBSITE.CONTENT' | translate | joinstrings"
+    ></div>
 
-  <p>
-    {{ "PRIVACY.LAST_UPDATE" | translate }}:
-    <strong>2 {{ "PRIVACY.MONTH.JULY" | translate }} 2025</strong>.
-  </p>
+    <p>
+        <p-button severity="info" label="Cookies" (click)="openCookieBanner()"></p-button>
+    </p>
+
+    <p>
+        {{ "PRIVACY.LAST_UPDATE" | translate }}:
+        <strong>2 {{ "PRIVACY.MONTH.JULY" | translate }} 2025</strong>.
+    </p>
 </div>
+<app-cookie-banner [openBanner]="openBanner$"></app-cookie-banner>

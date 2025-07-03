@@ -100,6 +100,7 @@ import { BtnFindOutMoreComponent } from "./components/btn-find-out-more/btn-find
 import { CarouselComponent } from "./components/carousel/carousel.component";
 import { SmallImagesCarouselComponent } from "./components/small-images-carousel/small-images-carousel.component";
 import { CookieBannerComponent } from "./components/cookie-banner/cookie-banner.component";
+import {Button} from "primeng/button";
 
 // AoT requires an exported function for factories
 export const createTranslateLoader = (http: HttpClient) =>
@@ -188,44 +189,45 @@ const httpInterceptorProviders = environment.mock
   ],
   exports: [],
   bootstrap: [AppComponent],
-  imports: [
-    appRoutingModule,
-    AnimatedNumberComponent,
-    AuthModule,
-    RouterModule.forRoot(
-      [{ path: "", component: HomeComponent, pathMatch: "full" }],
-      {
-        scrollPositionRestoration: "enabled",
-        anchorScrolling: "enabled",
-      }
-    ),
-    TranslateModule.forRoot({
-      defaultLanguage: "it",
-      loader: {
-        provide: TranslateLoader,
-        useFactory: createTranslateLoader,
-        deps: [HttpClient],
-      },
-    }),
-    AppOverlayModule,
-    BreadcrumbModule,
-    BrowserModule,
-    CarouselModule,
-    CommonModule,
-    FormsModule,
-    GoogleMapsModule,
-    OverlayModule,
-    ReactiveFormsModule,
-    SharedModule,
-    LayoutModule,
-    NgChartsModule,
-    SearchSourceComponent,
-    StoreLogosComponent,
-    BtnFindOutMoreComponent,
-    CarouselComponent,
-    SmallImagesCarouselComponent,
-    CookieBannerComponent,
-  ],
+    imports: [
+        appRoutingModule,
+        AnimatedNumberComponent,
+        AuthModule,
+        RouterModule.forRoot(
+            [{path: "", component: HomeComponent, pathMatch: "full"}],
+            {
+                scrollPositionRestoration: "enabled",
+                anchorScrolling: "enabled",
+            }
+        ),
+        TranslateModule.forRoot({
+            defaultLanguage: "it",
+            loader: {
+                provide: TranslateLoader,
+                useFactory: createTranslateLoader,
+                deps: [HttpClient],
+            },
+        }),
+        AppOverlayModule,
+        BreadcrumbModule,
+        BrowserModule,
+        CarouselModule,
+        CommonModule,
+        FormsModule,
+        GoogleMapsModule,
+        OverlayModule,
+        ReactiveFormsModule,
+        SharedModule,
+        LayoutModule,
+        NgChartsModule,
+        SearchSourceComponent,
+        StoreLogosComponent,
+        BtnFindOutMoreComponent,
+        CarouselComponent,
+        SmallImagesCarouselComponent,
+        CookieBannerComponent,
+        Button,
+    ],
   providers: [
     {
       provide: APP_INITIALIZER,
