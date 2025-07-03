@@ -21,7 +21,6 @@ export class CarouselComponent implements OnInit {
       .observe(["(max-width: 768px)"])
       .subscribe((result) => {
         this.isMobile = result.matches;
-        console.log("Is mobile view:", this.isMobile);
       });
 
     this.startAutoPlay();

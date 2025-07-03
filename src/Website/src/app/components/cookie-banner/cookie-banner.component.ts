@@ -1,10 +1,11 @@
 import { CommonModule } from "@angular/common";
 import { Component } from "@angular/core";
+import { FormsModule } from "@angular/forms";
 import { CookieConsentService } from "src/app/_services/cookie-consent.service";
 
 @Component({
   selector: "app-cookie-banner",
-  imports: [CommonModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: "./cookie-banner.component.html",
   styleUrl: "./cookie-banner.component.css",
 })
