@@ -179,16 +179,22 @@ export class DialogAnnualReportMerchantsComponent implements OnInit {
 
     // Handle background image based on the index el
     let bgImage = null;
+    let merchantPositionString = null;
     if (index === 0) {
       bgImage = "assets/images/statistics/annual-report/bestMerchant.jpg";
+      merchantPositionString = "";
     } else if (index === 1 || index === 2) {
       bgImage = "assets/images/statistics/annual-report/top3.jpg";
+      merchantPositionString = "Rientra tra i primi 3 merchant più attivi.";
     } else if (index >= 3 && index <= 9) {
       bgImage = "assets/images/statistics/annual-report/top10.jpg";
+      merchantPositionString = "Rientra tra i primi 10 merchant più attivi.";
     } else if (index >= 10 && index <= 19) {
       bgImage = "assets/images/statistics/annual-report/top20.jpg";
+      merchantPositionString = "Rientra tra i primi 20 merchant più attivi.";
     } else {
       bgImage = "assets/images/statistics/annual-report/top30.jpg";
+      merchantPositionString = "Rientra tra i primi 30 merchant più attivi.";
     }
 
     const bgImg = await fabric.FabricImage.fromURL(bgImage);
@@ -198,17 +204,20 @@ export class DialogAnnualReportMerchantsComponent implements OnInit {
     bgImg.selectable = false;
     bgImg.evented = false;
 
+    const yearCertificate = `CERTIFICATO DI IMPATTO SOCIALE ${this.selectedYear}`;
     // Add year
-    const yearToAdd = new fabric.FabricText(`${String(this.selectedYear)}`, {
-      left: 1200,
-      top: 60,
-      fontSize: 60,
+    const yearToAdd = new fabric.FabricText(yearCertificate, {
+      top: 1455,
+      textAlign: "center",
+      fontSize: 36,
       fill: "white",
       fontWeight: "600",
       fontStyle: "normal",
-      fontFamily: "Montserrat",
+      fontFamily: "HelveticaNeueBold",
       width: 1600,
+      originX: "center",
     });
+    yearToAdd.left = canvas.getWidth() / 2;
 
     // Add merchant name
     const nameMerchant = new fabric.FabricText(
@@ -220,7 +229,7 @@ export class DialogAnnualReportMerchantsComponent implements OnInit {
         fill: "black",
         fontWeight: "600",
         fontStyle: "normal",
-        fontFamily: "Montserrat",
+        fontFamily: "HelveticaNeue",
         width: 1600,
         originX: "center",
       }
@@ -230,7 +239,7 @@ export class DialogAnnualReportMerchantsComponent implements OnInit {
     // Add first line
     const firstLine = `Ha effettuato ${String(
       this.activeMerchants[index].numberTransactions
-    )}, transazioni, riconoscendo il`;
+    )}, transazioni, riconoscendo il valore sociale generato`;
     // Determine the start and end index of the dynamic number
     const numberTransactionsStr = String(
       this.activeMerchants[index].numberTransactions
@@ -242,9 +251,9 @@ export class DialogAnnualReportMerchantsComponent implements OnInit {
     const firstLineText = new fabric.Textbox(firstLine, {
       top: 766,
       width: 1600,
-      fontSize: 58,
+      fontSize: 42,
       fill: "black",
-      fontFamily: "Montserrat",
+      fontFamily: "HelveticaNeue",
       fontWeight: "300",
       textAlign: "center",
       originX: "center",
@@ -266,56 +275,45 @@ export class DialogAnnualReportMerchantsComponent implements OnInit {
 
     firstLineText.left = canvas.getWidth() / 2;
 
-    const secondLineText = new fabric.Textbox(
-      `valore sociale generato dai propri utenti con`,
-      {
-        top: 834,
-        width: 1600,
-        fontSize: 58,
-        fill: "black",
-        fontFamily: "Montserrat",
-        fontStyle: "normal",
-        fontWeight: "300",
-        textAlign: "center",
-        originX: "center",
-        styles: {
-          0: {},
-        },
-      }
-    );
-
-    secondLineText.left = canvas.getWidth() / 2;
-
-    const thirdLine = `un impegno complessivo di ${String(
+    const secondLine = `dai propri utenti con un impegno complessivo di ${String(
       this.activeMerchants[index].amount
     )} minuti.`;
 
     const amountStr = String(this.activeMerchants[index].amount);
-    const amountStart = thirdLine.indexOf(amountStr);
+    const amountStart = secondLine.indexOf(amountStr);
     const amountEnd = amountStart + amountStr.length;
 
-    // Add minutes
-    const thirdLineText = new fabric.FabricText(thirdLine, {
-      top: 902,
-      fontSize: 60,
+    const secondLineText = new fabric.FabricText(secondLine, {
+      top: 834,
+      width: 1600,
+      fontSize: 42,
+      fill: "black",
+      fontFamily: "HelveticaNeue",
+      fontStyle: "normal",
+      fontWeight: "300",
       textAlign: "center",
       originX: "center",
-      fill: "black",
-      fontWeight: "300",
-      fontFamily: "Montserrat",
-      width: 1600,
+      styles: {
+        0: {},
+      },
     });
 
-    // Apply bold font size
-    for (let i = amountStart; i < amountEnd; i++) {
-      thirdLineText.setSelectionStyles(
-        {
-          fontWeight: "bold",
-        },
-        i,
-        i + 1
-      );
-    }
+    secondLineText.left = canvas.getWidth() / 2;
+
+    const thirdLineText = new fabric.FabricText(merchantPositionString, {
+      top: 950,
+      width: 1600,
+      fontSize: 42,
+      fill: "black",
+      fontFamily: "HelveticaNeue",
+      fontStyle: "normal",
+      fontWeight: "300",
+      textAlign: "center",
+      originX: "center",
+      styles: {
+        0: {},
+      },
+    });
 
     thirdLineText.left = canvas.getWidth() / 2;
 
