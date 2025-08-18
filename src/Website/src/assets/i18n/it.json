@@ -164,12 +164,14 @@
       "SURNAME_ERROR": "Inserisci il tuo cognome"
     },
     "MERCHANT": {
+      "ACTIVATION_CODE": "Codice di attivazione",
+      "ACTIVATION_CODE_ERROR": "Inserisci un codiced di attivazione valido per il Merchant",
       "STEPPER_TITLE": "Registrazione Merchant",
       "MERCHANT_TITLE": "Registrazione Merchant",
       "TITLE": "MERCHANT",
       "CHECKBOX": "Registra un merchant",
       "NAME": "Nome Merchant/Attività",
-      "NAME_ERROR": "Inserisci un nome valido per il Merchant - 8 caratteri minimo",
+      "NAME_ERROR": "Inserisci un nome valido per il Merchant - 4 caratteri minimo",
       "CF": "Codice fiscale",
       "CF_ERROR": "Inserisci il codice fiscale corretto",
       "OPTIONAL_TEXT": "Indirizzo principale della propria attività.",

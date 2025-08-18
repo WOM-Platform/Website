@@ -164,12 +164,14 @@
       "SURNAME_ERROR": "Please provide your surname"
     },
     "MERCHANT": {
+      "ACTIVATION_CODE": "Activation code",
+      "ACTIVATION_CODE_ERROR": "Please provide a valid activation code for the Merchant",
       "STEPPER_TITLE": "Merchant registration",
       "MERCHANT_TITLE": "Merchant registration",
       "TITLE": "MERCHANT",
       "CHECKBOX": "Register a merchant",
       "NAME": "Merchant/Business Name",
-      "NAME_ERROR": "Please provide a valid name for the Merchant - 8 characters minimum",
+      "NAME_ERROR": "Please provide a valid name for the Merchant - 4 characters minimum",
       "CF": "Italian fiscal code",
       "CF_ERROR": "Please provide a valid fiscal code",
       "OPTIONAL_TEXT": "Main address of your business.",

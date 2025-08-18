@@ -87,15 +87,18 @@ export class MerchantService {
     return this.http
       .put<Merchant>(this.localUrlV1 + merchant.id, {
         name: merchant.name,
+        description: merchant.description,
+        url: merchant.url,
         fiscalCode: merchant.fiscalCode,
+        activationCode: merchant.activationCode,
         primaryActivity: merchant.primaryActivity,
         address: merchant.address,
         enabled: merchant.enabled,
+        formattedAddress: "",
+        streetNumber: "",
         zipCode: merchant.zipCode,
         city: merchant.city,
         country: merchant.country,
-        description: merchant.description,
-        url: merchant.url,
       })
       .pipe(map((response) => response));
   }
@@ -116,6 +119,7 @@ export class MerchantService {
         country: merchant.country,
         description: merchant.description,
         url: merchant.url,
+        activationCode: merchant.activationCode ? merchant.activationCode : "",
       })
       .pipe(map((response) => response));
   }
