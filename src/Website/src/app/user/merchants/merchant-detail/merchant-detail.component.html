@@ -1,115 +1,127 @@
 <div *ngIf="merchant">
-    <button
-            (click)="goBack()"
-            class="font-bold items-center flex gap-2 mt-6 hover:bg-stone-100 rounded-lg px-2"
-    >
-        <i class="fas fa-arrow-left"></i> Indietro
-    </button>
+  <button
+    (click)="goBack()"
+    class="font-bold items-center flex gap-2 mt-6 hover:bg-stone-100 rounded-lg px-2"
+  >
+    <i class="fas fa-arrow-left"></i> Indietro
+  </button>
 
-    <div *ngIf="merchant" class="bg-white w-[900px] px-4 py-6 my-6 rounded-lg">
+  <div *ngIf="merchant" class="bg-white w-[900px] px-4 py-6 my-6 rounded-lg">
+    <app-editable-element
+      [valueEl]="merchant.name"
+      [action]="action"
+      [minLength]="4"
+      [maxLength]="100"
+      (onChangeElement)="onUpdateMerchant('name', $event, true)"
+      class="font-semibold text-cyan-700 text-2xl"
+    />
+
+    <div class="merchant-data my-4">
+      <p class="merchant-element">
+        <span class="text-slate-600 font-semibold">ID</span>: {{ id }}
+      </p>
+      <p class="merchant-element">
+        <span class="text-slate-600 font-semibold">CF</span>: {{ fiscalCode }}
+      </p>
+    </div>
+    <div class="flex justify-between items-center">
+      <app-editable-element
+        [keyEl]="'Codice di attivazione'"
+        [valueEl]="merchant.activationCode ? merchant.activationCode : ''"
+        [action]="action"
+        [typeEl]="'string'"
+        (onChangeElement)="onUpdateMerchant('activationCode', $event, false)"
+        class="merchant-element"
+      ></app-editable-element>
+      <p class="flex items-center gap-2 mb-0 h-8">
+        <span class="text-slate-600 font-semibold">Abilitato: </span>
+        <label *ngIf="action === 'edit'; else viewIsEnabled" class="switch">
+          <input
+            type="checkbox"
+            [checked]="isEnabled"
+            (click)="onCheckboxClick()"
+          />
+          <span class="slider round"></span>
+        </label>
+        <ng-template #viewIsEnabled>
+          <span *ngIf="isEnabled; else notEnable">Attivo</span>
+        </ng-template>
+        <ng-template #notEnable>Disattivato</ng-template>
+      </p>
+    </div>
+
+    <div class="my-4 merchant-data">
+      <p class="mb-0">
         <app-editable-element
-                [valueEl]="merchant.name"
-                [action]="action"
-                [minLength]="8"
-                [maxLength]="100"
-                (onChangeElement)="onUpdateMerchant('name', $event, true)"
-                class="font-semibold text-cyan-700 text-2xl"
+          [keyEl]="'Attività primaria'"
+          [valueEl]="merchant.primaryActivity"
+          [action]="action"
+          [typeEl]="'list'"
+          [option]="businessList"
+          (onChangeElement)="onUpdateMerchant('primaryActivity', $event, true)"
+          class="merchant-element"
+        ></app-editable-element>
+      </p>
+      <p class="mb-0">
+        <app-editable-element
+          [keyEl]="'Indirizzo'"
+          [valueEl]="merchant.address"
+          [action]="action"
+          [typeEl]="'string'"
+          (onChangeElement)="onUpdateMerchant('address', $event, false)"
+          class="merchant-element"
+        ></app-editable-element>
+      </p>
+      <p class="mb-0">
+        <app-editable-element
+          [keyEl]="'CAP'"
+          [valueEl]="merchant.zipCode"
+          [action]="action"
+          [pattern]="'^[0-9]{5}$'"
+          (onChangeElement)="onUpdateMerchant('zipCode', $event, false)"
+          class="merchant-element"
         />
-
-        <div class="merchant-data my-4">
-            <p class="merchant-element">
-                <span class="text-slate-600 font-semibold">ID</span>: {{ id }}
-            </p>
-            <p class="merchant-element">
-                <span class="text-slate-600 font-semibold">CF</span>: {{ fiscalCode }}
-            </p>
-        </div>
-        <div>
-            <p class="flex items-center gap-2 mb-0 h-8">
-                <span class="text-slate-600 font-semibold">Abilitato: </span>
-                <label *ngIf="action === 'edit'; else viewIsEnabled" class="switch">
-                    <input
-                            type="checkbox"
-                            [checked]="isEnabled"
-                            (click)="onCheckboxClick()"
-                    />
-                    <span class="slider round"></span>
-                </label>
-                <ng-template #viewIsEnabled>
-                    <span *ngIf="isEnabled; else notEnable">Attivo</span>
-                </ng-template>
-                <ng-template #notEnable>Disattivato</ng-template>
-            </p>
-        </div>
-
-        <div class="my-4 merchant-data">
-            <p class="mb-0">
-                <app-editable-element
-                        [keyEl]="'Attività primaria'"
-                        [valueEl]="merchant.primaryActivity"
-                        [action]="action"
-                        [typeEl]="'list'"
-                        [option]="businessList"
-                        (onChangeElement)="onUpdateMerchant('primaryActivity', $event, true)"
-                        class="merchant-element"
-                ></app-editable-element>
-            </p>
-            <p class="mb-0">
-                <app-editable-element
-                        [keyEl]="'Indirizzo'"
-                        [valueEl]="merchant.address"
-                        [action]="action"
-                        [typeEl]="'string'"
-                        (onChangeElement)="onUpdateMerchant('address', $event, false)"
-                        class="merchant-element"
-                ></app-editable-element>
-            </p>
-            <p class="mb-0">
-                <app-editable-element
-                        [keyEl]="'CAP'"
-                        [valueEl]="merchant.zipCode"
-                        [action]="action"
-                        [pattern]="'^[0-9]{5}$'"
-                        (onChangeElement)="onUpdateMerchant('zipCode', $event, false)"
-                        class="merchant-element"
-                />
-            </p>
-            <p class="mb-0">
-                <app-editable-element
-                        [keyEl]="'Paese'"
-                        [valueEl]="merchant.country"
-                        [action]="action"
-                        [typeEl]="'list'"
-                        [option]="countryList"
-                        (onChangeElement)="onUpdateMerchant('country', $event, false)"
-                        class="merchant-element"
-                ></app-editable-element>
-            </p>
-            <app-editable-element
-                    [keyEl]="'URL'"
-                    [valueEl]="merchant.url"
-                    [action]="action"
-                    [pattern]="
+      </p>
+      <p class="mb-0">
+        <app-editable-element
+          [keyEl]="'Paese'"
+          [valueEl]="merchant.country"
+          [action]="action"
+          [typeEl]="'list'"
+          [option]="countryList"
+          (onChangeElement)="onUpdateMerchant('country', $event, false)"
+          class="merchant-element"
+        ></app-editable-element>
+      </p>
+      <app-editable-element
+        [keyEl]="'URL'"
+        [valueEl]="merchant.url"
+        [action]="action"
+        [pattern]="
           '^(https?:\\/\\/)?([\\da-z\\.-]+)\\.([a-z\\.]+)(:[0-9]{1,5})?(\\/[^\\s]*)?$'
         "
-                    [minLength]="10"
-                    [maxLength]="100"
-                    (onChangeElement)="onUpdateMerchant('url', $event, false)"
-                    class="merchant-element"
-            />
-            <!-- <app-editable-element [keyEl]="'WOM generati'" [valueEl]="'1000000'" [action]="action" [typeEl]="string" class="merchant-element" (onChangeElement)="onUpdateMerchant('quantity',$event)"></app-editable-element> -->
-        </div>
-        <div *ngIf="accessList && accessList.length > 0">
-            <p class="font-semibold mb-0">Gestori:</p>
-        </div>
-        <app-access-list
-                [accessList]="accessList"
-                [action]="action"
-                [showRole]="true"
-                (addAccess)="handleAccessList($event)"
-                (deleteAccess)="onDeleteAccess($event)"
-        />
-
-        <app-user-pos-list [merchantId]="merchantId" [posList]="posList" [actionMerchant]="action"/>
+        [minLength]="10"
+        [maxLength]="100"
+        (onChangeElement)="onUpdateMerchant('url', $event, false)"
+        class="merchant-element"
+      />
+      <!-- <app-editable-element [keyEl]="'WOM generati'" [valueEl]="'1000000'" [action]="action" [typeEl]="string" class="merchant-element" (onChangeElement)="onUpdateMerchant('quantity',$event)"></app-editable-element> -->
     </div>
+    <div *ngIf="accessList && accessList.length > 0">
+      <p class="font-semibold mb-0">Gestori:</p>
+    </div>
+    <app-access-list
+      [accessList]="accessList"
+      [action]="action"
+      [showRole]="true"
+      (addAccess)="handleAccessList($event)"
+      (deleteAccess)="onDeleteAccess($event)"
+    />
+
+    <app-user-pos-list
+      [merchantId]="merchantId"
+      [posList]="posList"
+      [actionMerchant]="action"
+    />
+  </div>
 </div>
