@@ -39,7 +39,7 @@ export class OffersComponent implements OnInit {
       this.action = params.get("posAction");
 
       this.posService.getOffers(this.posId).subscribe({
-        next: (offers) => {
+        next: (offers: Offer[]) => {
           offers.map((offer) => {
             this.posService
               .convertBlobToBase64(offer.imageBlob)
