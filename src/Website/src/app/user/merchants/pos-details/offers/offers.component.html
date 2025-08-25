@@ -10,7 +10,8 @@
                 ><span class="text-sm">- Titolo:</span> {{ offer.title }}</span
               >
               <span class=""
-                ><span class="text-sm">Quantità:</span> {{ offer.cost }}</span
+                ><span class="text-sm">Quantità:</span>
+                {{ offer.payment.cost }}</span
               >
               <app-badge
                 [text]="!offer.deactivated ? 'Attiva' : 'Disattivata'"
