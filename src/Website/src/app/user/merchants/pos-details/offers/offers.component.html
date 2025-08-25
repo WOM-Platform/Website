@@ -50,15 +50,15 @@
         </div>
         <div class="flex gap-4">
           <p class="text-base ml-2 text-slate-500 mt-2">
-            Ultimo aggiornamento:
+            Ultima modifica dell'offerta:
             <span class="text-xs">{{
-              offer.lastPaymentConfirmation | date : "medium"
+              offer.lastUpdate | date : "medium"
             }}</span>
           </p>
           <p class="text-base ml-2 text-slate-500 mt-2">
-            Ultimo utilizzo:
+            Ultimo utilizzo dell'offerta:
             <span class="text-xs">{{
-              offer.lastUpdate | date : "medium"
+              offer.lastPaymentConfirmation | date : "medium"
             }}</span>
           </p>
         </div>
