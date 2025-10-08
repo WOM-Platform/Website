@@ -82,6 +82,7 @@ export class BadgeDetailComponent implements OnInit {
     this.loadingService.show();
     this.badgeService.getAllChallenges().subscribe({
       next: (challenges) => {
+        console.log("Fetched challenges:", challenges);
         this.challenges = challenges;
       },
       error: (err) => {
@@ -114,7 +115,7 @@ export class BadgeDetailComponent implements OnInit {
           }),
           isPublic: [this.badge?.isPublic ?? true],
           informationUrl: [this.badge?.informationUrl || null],
-          challenge: [this.badge?.challenge || null],
+          challengeId: [this.badge?.challengeId || null],
           createdAt: [this.badge?.createdAt || ""],
         };
 
@@ -122,10 +123,10 @@ export class BadgeDetailComponent implements OnInit {
           const boundsGroup = this.badge?.simpleFilter?.bounds
             ? this.fb.group({
                 leftTop: [
-                  this.badge.simpleFilter.bounds.leftTop || [0, 0],
+                  this.badge.simpleFilter.bounds.leftTop,
                 ],
                 rightBottom: [
-                  this.badge.simpleFilter.bounds.rightBottom || [0, 0],
+                  this.badge.simpleFilter.bounds.rightBottom,
                 ],
               })
             : null;
@@ -222,6 +223,8 @@ export class BadgeDetailComponent implements OnInit {
   }
 
   onSave(): void {
+    console.log("Updated Challenge:", this.badgeForm.value.challenge);
+
     this.badgeService
       .updateBadge(this.badgeId, this.badgeForm.value)
       .subscribe((res) => {
