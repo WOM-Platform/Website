@@ -12,7 +12,6 @@ import { ReactiveFormsModule } from "@angular/forms";
 import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material/dialog";
 import { Challenge } from "src/app/_models/challenge";
 import { SimpleFilterComponent } from "../../components/simple-filter/simple-filter.component";
-import { TestTormvComponent } from "../../../components/test-tormv/test-tormv.component";
 
 @Component({
   selector: "app-dialog-create-badge",
@@ -20,7 +19,6 @@ import { TestTormvComponent } from "../../../components/test-tormv/test-tormv.co
     ReactiveFormsModule,
     CommonModule,
     SimpleFilterComponent,
-    TestTormvComponent,
   ],
   templateUrl: "./dialog-create-badge.component.html",
   styleUrl: "./dialog-create-badge.component.css",
@@ -69,23 +67,17 @@ export class DialogCreateBadgeComponent implements OnInit {
         it: [null, Validators.required],
         en: [null, Validators.required],
       }),
-      simpleFilter: this.fb.group({
-        count: [1],
-        sourceId: [null],
-        aim: [null],
-        bounds: this.fb.group({
-          leftTop: [[0, 0]],
-          rightBottom: [[0, 0]],
-        }),
-        interval: this.fb.group({
-          start: [null],
-          end: [null],
-        }),
-      }),
       imageUrl: [null],
       description: this.fb.group({
         it: [null],
         en: [null],
+      }),
+      simpleFilter: this.fb.group({
+        count: [1],
+        sourceId: [null],
+        aim: [null],
+        bounds: [null],
+        interval: [null],
       }),
       informationUrl: [null],
     });
@@ -103,39 +95,10 @@ export class DialogCreateBadgeComponent implements OnInit {
     }
   }
 
-  onFilterToggle(enabled: boolean) {
-    enabled ? this.addFilter() : this.removeFilter();
+  toggleFilter() {
+    this.isFiltering = !this.isFiltering;
   }
 
-  addFilter() {
-    this.isFiltering = true;
-
-    if (!this.badgeForm.get("simpleFilter")) {
-      const simpleFilterGroup = this.fb.group({
-        count: [1],
-        sourceId: [null],
-        aim: [null],
-        bounds: this.fb.group({
-          leftTop: [[0, 0]],
-          rightBottom: [[0, 0]],
-        }),
-        interval: this.fb.group({
-          start: [null],
-          end: [null],
-        }),
-      });
-
-      this.badgeForm.addControl("simpleFilter", simpleFilterGroup);
-    }
-  }
-
-  removeFilter() {
-    this.isFiltering = false;
-
-    if (this.badgeForm.get("simpleFilter")) {
-      this.badgeForm.removeControl("simpleFilter");
-    }
-  }
 
   onSubmit() {
     this.dialogRef.close(this.badgeForm.value);
