@@ -139,7 +139,7 @@ export class BadgeDetailComponent implements OnInit {
 
           
           formGroupConfig.simpleFilter = this.fb.group({
-            count: [1],
+            count: [this.badge?.simpleFilter?.count || 1, Validators.required],
             sourceId: [this.badge?.simpleFilter?.sourceId || null],
             aim: [this.badge?.simpleFilter?.aim || null],
             bounds: boundsGroup,
