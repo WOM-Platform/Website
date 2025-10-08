@@ -54,7 +54,7 @@ export class ChallengeDetailComponent implements OnInit {
         it: [this.challenge?.description?.it || ""],
         en: [this.challenge?.description?.en || ""],
       }),
-      informationUrl: [this.challenge?.informationUrl || ""],
+      informationUrl: [this.challenge?.informationUrl || null],
       isPublic: [this.challenge?.isPublic || false],
       level: [""],
     });
@@ -67,6 +67,21 @@ export class ChallengeDetailComponent implements OnInit {
         ...this.challengeForm.value,
       };
     }
+    this.badgeService.editBadgeChallenge(this.challengeId, this.challengeForm.value).subscribe({
+      next: (updatedChallenge) => {
+        this.challenge = updatedChallenge;
+        this.snackBarService.openSnackBar("Sfida aggiornata con successo.");
+      },
+      error: (error) => {
+        console.error("Error updating challenge:", error);
+        this.snackBarService.openSnackBar(
+          "Errore durante l'aggiornamento della sfida."
+        );
+      },
+      complete: () => {
+        this.loadingService.hide();
+      },
+    });
   }
 
   deleteChallenge(): void {

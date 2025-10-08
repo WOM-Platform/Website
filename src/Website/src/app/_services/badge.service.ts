@@ -76,6 +76,13 @@ export class BadgeService {
     );
   }
 
+  editBadgeChallenge(badgeChallengeId: string, challengeData: Challenge) {
+    return this.http.put<Challenge>(
+      `${this.localUrlV1}challenge/${badgeChallengeId}`,
+      challengeData
+    );
+  }
+
   deleteBadgeChallenge(badgeChallengeId: string) {
     return this.http.delete(`${this.localUrlV1}challenge/${badgeChallengeId}`);
   }
