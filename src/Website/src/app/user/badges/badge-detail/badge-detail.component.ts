@@ -10,6 +10,7 @@ import { ActivatedRoute, Router } from "@angular/router";
 
 import {
   FormBuilder,
+  FormControl,
   FormGroup,
   ReactiveFormsModule,
   Validators,
@@ -20,7 +21,6 @@ import { LoadingService } from "src/app/_services/loading.service";
 import { SnackBarService } from "src/app/_services/snack-bar.service";
 import { BlurhashComponent } from "../../components/blurhash/blurhash.component";
 import { SimpleFilterComponent } from "../../components/simple-filter/simple-filter.component";
-import { bounds } from "leaflet";
 
 @Component({
   selector: "app-badge-detail",
@@ -98,7 +98,6 @@ export class BadgeDetailComponent implements OnInit {
       next: (b) => {
         this.badge = b || {};
         this.isFiltering = this.badge.simpleFilter;
-
         const formGroupConfig: any = {
           sortName: [this.badge?.name?.it || ""],
           imageUrl: [this.badge?.imageUrl || null],
@@ -120,20 +119,30 @@ export class BadgeDetailComponent implements OnInit {
         };
 
         if (this.isFiltering) {
+          const boundsGroup = this.badge?.simpleFilter?.bounds
+            ? this.fb.group({
+                leftTop: [
+                  this.badge.simpleFilter.bounds.leftTop || [0, 0],
+                ],
+                rightBottom: [
+                  this.badge.simpleFilter.bounds.rightBottom || [0, 0],
+                ],
+              })
+            : null;
+          const intervalGroup = this.badge?.simpleFilter?.interval
+            ? this.fb.group({
+                start: [this.badge.simpleFilter.interval.start ?? null],
+                end: [this.badge.simpleFilter.interval.end ?? null],
+              })
+            : null;
+
+          
           formGroupConfig.simpleFilter = this.fb.group({
             count: [1],
             sourceId: [this.badge?.simpleFilter?.sourceId || null],
             aim: [this.badge?.simpleFilter?.aim || null],
-            bounds: this.fb.group({
-              leftTop: [this.badge?.simpleFilter?.bounds?.leftTop || [0, 0]],
-              rightBottom: [
-                this.badge?.simpleFilter?.bounds?.rightBottom || [0, 0],
-              ],
-            }),
-            interval: this.fb.group({
-              start: [this.badge?.simpleFilter?.interval?.start || null],
-              end: [this.badge?.simpleFilter?.interval?.end || null],
-            }),
+            bounds: boundsGroup,
+            interval: intervalGroup,
           });
         }
 
@@ -164,7 +173,7 @@ export class BadgeDetailComponent implements OnInit {
 
   addFilter() {
     this.isFiltering = true;
-
+    
     if (!this.badgeForm.get("simpleFilter")) {
       const simpleFilterGroup = this.fb.group({
         count: [1],

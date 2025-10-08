@@ -105,6 +105,10 @@ export class SimpleFilterComponent implements OnInit {
   itemsPerPage = 10;
   searchParameters = "";
 
+  activeFilters: string[] = [];
+  availableFilters = ['quantity', 'instrument', 'aim', 'date', 'geography'];
+
+
   private subscriptions: Subscription[] = [];
 
   constructor(
@@ -183,22 +187,39 @@ export class SimpleFilterComponent implements OnInit {
   }
 
   initializeForm() {
+    const boundsGroup = this.filters?.bounds
+    ? this.fb.group({
+        leftTop: [
+          this.filters?.bounds.leftTop,
+        ],
+        rightBottom: [
+          this.filters?.bounds.rightBottom,
+        ],
+      })
+    : null;
+
     this.filterForm = this.fb.group({
       count: [this.filters?.count || null, Validators.required],
       aim: [this.filters?.aim || null],
       sourceId: [this.filters?.sourceId || null],
-      bounds: this.fb.group({
-        leftTop: [this.filters?.bounds?.leftTop || null],
-        rightBottom: [this.filters?.bounds?.rightBottom || null],
-      }),
+      bounds: boundsGroup,
       period: [this.filters?.period || null],
       isPeriodic: [this.filters?.isPeriodic || false],
-      interval: this.fb.group({
-        start: [this.filters?.interval?.start || null],
-        end: [this.filters?.interval?.end || null],
-      }),
     });
 
+    if (this.filters?.interval?.start || this.filters?.interval?.end) {
+      this.filterForm.addControl(
+        'interval',
+        this.fb.group({
+          start: [this.filters.interval.start ?? null],
+          end: [this.filters.interval.end ?? null],
+        })
+      );
+    }
+    else {
+      this.filterForm.addControl('interval', new FormControl(null));
+    }
+    
     this.filterForm.get("period")?.valueChanges.subscribe((value) => {
       const isPeriodic = !!value;
       this.filterForm
@@ -210,8 +231,63 @@ export class SimpleFilterComponent implements OnInit {
       this.filteredEmit.emit(this.filterForm.value);
     });
   }
+
+  toggleFilterSelection(filter: string, checked: boolean) {
+    if (checked) {
+      if (!this.activeFilters.includes(filter)) {
+        this.activeFilters.push(filter);
+      }
+    } else {
+      this.activeFilters = this.activeFilters.filter(f => f !== filter);
+      this.clearFilterValues(filter);
+    }
+  }
+  
+  clearFilterValues(filter: string) {
+    switch (filter) {
+      case 'quantity':
+        this.filterForm.patchValue({ count: 1 });
+        break;
+  
+      case 'instrument':
+        this.filterForm.patchValue({ sourceId: null });
+        this.instrumentSearchControl.setValue('', { emitEvent: false });
+        this.instrumentList = [];
+        this.showInstrumentDropdown = false;
+        break;
+  
+      case 'aim':
+        this.filterForm.patchValue({ aim: null });
+        break;
+  
+      case 'date':
+        this.filterForm.patchValue({ interval: null });
+        
+        this.filterForm.patchValue({
+          period: null,
+          isPeriodic: false,
+        });
+        this.startDate = null;
+        this.endDate = null;
+        break;
+  
+      case 'geography':
+        const bounds = this.filterForm.get('bounds') as FormGroup;
+        if (bounds) {
+          bounds.patchValue({
+            leftTop: null,
+            rightBottom: null,
+          });
+        }
+        this.isFilteringMap = false;
+        break;
+    }
+  
+    this.emitFilterValues();
+  }
+
+
   loadInstruments() {
-    if (this.loading) return;
 
     this.loading = true;
     this.sourceService.getAllInstruments({ page: this.page }).subscribe({

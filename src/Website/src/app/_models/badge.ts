@@ -34,8 +34,8 @@ export interface SimpleFilter {
   };
   period: string;
   isPeriodic: boolean;
-  interval: {
-    start: string;
-    end: string;
-  };
+  interval?: {
+    start: string | null;
+    end: string | null;
+  } | null;
 }
