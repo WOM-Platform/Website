@@ -42,10 +42,13 @@
         />
       </div>
 
-      <div *ngIf="badgeForm.get('isPublic')?.value === false" [@fadeSlide]>
+      <div>
         <label class="block text-sm font-medium text-gray-700">Challenge</label>
-        <select formControlName="challenge" class="inputField">
-          <option *ngFor="let challenge of challengeList" [value]="challengeId">
+        <select formControlName="challengeId" class="inputField">
+          <option
+            *ngFor="let challenge of challengeList"
+            [value]="challenge.id"
+          >
             {{ challenge.name.it }}
           </option>
         </select>
@@ -94,7 +97,7 @@
       (click)="toggleFilter()"
       class="w-full py-2 px-4 bg-gray-200 text-gray-800 font-semibold rounded-md hover:bg-gray-300 transition duration-200"
     >
-      {{ isFiltering ? 'Nascondi Filtro' : 'Mostra Filtro' }}
+      {{ isFiltering ? "Nascondi Filtro" : "Mostra Filtro" }}
     </button>
     <!-- Filter -->
     <div *ngIf="isFiltering">
