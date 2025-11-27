@@ -41,7 +41,16 @@ export class AuthService {
    * Retrieve available WOM Merchants for the authenticated user
    */
   merchants(): Observable<Merchants> {
-    return this.http.post<Merchants>(this.localUrlV2 + 'merchant', {})
-        .pipe(map(value => value));
+    return this.http
+      .post<Merchants>(this.localUrlV2 + "merchant", {})
+      .pipe(map((value) => value));
+  }
+
+  createApiKey(sourceId: string, selector: string) {
+    const url = `${
+      this.localUrlV2
+    }source/${sourceId}/apikey?selector=${encodeURIComponent(selector)}`;
+    // Use your stored token here or let HttpInterceptor handle it
+    return this.http.post(url, {});
   }
 }
