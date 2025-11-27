@@ -82,7 +82,6 @@ export class BadgeDetailComponent implements OnInit {
     this.loadingService.show();
     this.badgeService.getAllChallenges().subscribe({
       next: (challenges) => {
-        console.log("Fetched challenges:", challenges);
         this.challenges = challenges;
       },
       error: (err) => {
@@ -122,12 +121,8 @@ export class BadgeDetailComponent implements OnInit {
         if (this.isFiltering) {
           const boundsGroup = this.badge?.simpleFilter?.bounds
             ? this.fb.group({
-                leftTop: [
-                  this.badge.simpleFilter.bounds.leftTop,
-                ],
-                rightBottom: [
-                  this.badge.simpleFilter.bounds.rightBottom,
-                ],
+                leftTop: [this.badge.simpleFilter.bounds.leftTop],
+                rightBottom: [this.badge.simpleFilter.bounds.rightBottom],
               })
             : null;
           const intervalGroup = this.badge?.simpleFilter?.interval
@@ -137,7 +132,6 @@ export class BadgeDetailComponent implements OnInit {
               })
             : null;
 
-          
           formGroupConfig.simpleFilter = this.fb.group({
             count: [this.badge?.simpleFilter?.count || 1, Validators.required],
             sourceId: [this.badge?.simpleFilter?.sourceId || null],
@@ -174,7 +168,7 @@ export class BadgeDetailComponent implements OnInit {
 
   addFilter() {
     this.isFiltering = true;
-    
+
     if (!this.badgeForm.get("simpleFilter")) {
       const simpleFilterGroup = this.fb.group({
         count: [1],
