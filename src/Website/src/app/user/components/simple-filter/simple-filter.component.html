@@ -6,7 +6,7 @@
       <label *ngFor="let filter of availableFilters" class="flex items-center gap-2">
         <input
           type="checkbox"
-          [value]="filter"
+          [checked]="activeFilters.includes(filter)"
           (change)="toggleFilterSelection(filter, $event.target.checked)"
         />
         {{ filter | titlecase }}

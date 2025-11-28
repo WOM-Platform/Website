@@ -94,9 +94,6 @@ export class SimpleFilterComponent implements OnInit {
 
   loading: boolean = false;
 
-  startDate: Date | null = null;
-  endDate: Date | null = null;
-
   instrumentSearchControl = new FormControl("");
 
   showInstrumentDropdown = false;
@@ -106,8 +103,7 @@ export class SimpleFilterComponent implements OnInit {
   searchParameters = "";
 
   activeFilters: string[] = [];
-  availableFilters = ['quantity', 'instrument', 'aim', 'date', 'geography'];
-
+  availableFilters = ["quantity", "instrument", "aim", "date", "geography"];
 
   private subscriptions: Subscription[] = [];
 
@@ -120,13 +116,37 @@ export class SimpleFilterComponent implements OnInit {
     private snackBarService: SnackBarService
   ) {}
 
-  onScrollToEnd() {
-    console.log("Reached end of dropdown!");
-  }
+  onScrollToEnd() {}
 
   ngOnInit() {
     this.loadInstruments();
     this.initializeForm();
+
+    for (const filter of this.availableFilters) {
+      if (this.isFilterActive(filter)) {
+        this.activeFilters.push(filter);
+      }
+    }
+
+    if (this.filterForm.get("sourceId")?.value) {
+      const sourceId = this.filterForm.get("sourceId")?.value;
+      this.sourceService.getInstrument(sourceId).subscribe({
+        next: (instrument) => {
+          if (instrument) {
+            this.instrumentSearchControl.setValue(instrument.name, {
+              emitEvent: false,
+            });
+          }
+        },
+        error: (err) => {
+          console.error("Error fetching instrument by ID:", err);
+        },
+      });
+    }
+
+    this.filterForm.get("interval")?.valueChanges.subscribe((interval) => {
+      this.filteredEmit.emit(this.filterForm.value);
+    });
 
     this.instrumentSearchControl.valueChanges
       .pipe(debounceTime(300), distinctUntilChanged())
@@ -188,15 +208,11 @@ export class SimpleFilterComponent implements OnInit {
 
   initializeForm() {
     const boundsGroup = this.filters?.bounds
-    ? this.fb.group({
-        leftTop: [
-          this.filters?.bounds.leftTop,
-        ],
-        rightBottom: [
-          this.filters?.bounds.rightBottom,
-        ],
-      })
-    : null;
+      ? this.fb.group({
+          leftTop: [this.filters?.bounds.leftTop],
+          rightBottom: [this.filters?.bounds.rightBottom],
+        })
+      : null;
 
     this.filterForm = this.fb.group({
       count: [this.filters?.count || null, Validators.required],
@@ -207,19 +223,14 @@ export class SimpleFilterComponent implements OnInit {
       isPeriodic: [this.filters?.isPeriodic || false],
     });
 
-    if (this.filters?.interval?.start || this.filters?.interval?.end) {
-      this.filterForm.addControl(
-        'interval',
-        this.fb.group({
-          start: [this.filters.interval.start ?? null],
-          end: [this.filters.interval.end ?? null],
-        })
-      );
-    }
-    else {
-      this.filterForm.addControl('interval', new FormControl(null));
-    }
-    
+    this.filterForm.addControl(
+      "interval",
+      this.fb.group({
+        start: [this.filters?.interval?.start ?? null],
+        end: [this.filters?.interval?.end ?? null],
+      })
+    );
+
     this.filterForm.get("period")?.valueChanges.subscribe((value) => {
       const isPeriodic = !!value;
       this.filterForm
@@ -232,47 +243,85 @@ export class SimpleFilterComponent implements OnInit {
     });
   }
 
+  isFilterActive(filter: string): boolean {
+    switch (filter) {
+      case "quantity":
+        return this.filters?.count && this.filters.count > 1;
+
+      case "instrument":
+        return this.filters?.sourceId != null;
+
+      case "aim":
+        return this.filters?.aim != null;
+
+      case "date":
+        return (
+          this.filters?.interval &&
+          (this.filters.interval.start != null ||
+            this.filters.interval.end != null)
+        );
+
+      case "geography":
+        return (
+          this.filters?.bounds &&
+          this.isValidCoords(this.filters.bounds.leftTop) &&
+          this.isValidCoords(this.filters.bounds.rightBottom)
+        );
+
+      default:
+        return false;
+    }
+  }
+
+  isValidCoords(coords: number[] | null | undefined): boolean {
+    return (
+      Array.isArray(coords) &&
+      coords.length === 2 &&
+      typeof coords[0] === "number" &&
+      typeof coords[1] === "number"
+    );
+  }
+
   toggleFilterSelection(filter: string, checked: boolean) {
     if (checked) {
       if (!this.activeFilters.includes(filter)) {
         this.activeFilters.push(filter);
       }
     } else {
-      this.activeFilters = this.activeFilters.filter(f => f !== filter);
+      this.activeFilters = this.activeFilters.filter((f) => f !== filter);
       this.clearFilterValues(filter);
     }
   }
-  
+
   clearFilterValues(filter: string) {
     switch (filter) {
-      case 'quantity':
+      case "quantity":
         this.filterForm.patchValue({ count: 1 });
         break;
-  
-      case 'instrument':
+
+      case "instrument":
         this.filterForm.patchValue({ sourceId: null });
-        this.instrumentSearchControl.setValue('', { emitEvent: false });
+        this.instrumentSearchControl.setValue("", { emitEvent: false });
         this.instrumentList = [];
         this.showInstrumentDropdown = false;
         break;
-  
-      case 'aim':
+
+      case "aim":
         this.filterForm.patchValue({ aim: null });
         break;
-  
-      case 'date':
+
+      case "date":
         this.filterForm.patchValue({ interval: null });
-        
+
         this.filterForm.patchValue({
           period: null,
           isPeriodic: false,
         });
-        this.startDate = null;
-        this.endDate = null;
+
         break;
-  
-      case 'geography':
-        const bounds = this.filterForm.get('bounds') as FormGroup;
+
+      case "geography":
+        const bounds = this.filterForm.get("bounds") as FormGroup;
         if (bounds) {
           bounds.patchValue({
             leftTop: null,
@@ -282,13 +331,11 @@ export class SimpleFilterComponent implements OnInit {
         this.isFilteringMap = false;
         break;
     }
-  
+
     this.emitFilterValues();
   }
 
-
   loadInstruments() {
-
     this.loading = true;
     this.sourceService.getAllInstruments({ page: this.page }).subscribe({
       next: (data) => {
@@ -321,26 +368,11 @@ export class SimpleFilterComponent implements OnInit {
   }
 
   onStartDateSelected(date: Date | null) {
-    this.startDate = date;
-    this.updateIntervalIfComplete();
+    this.filterForm.get("interval.start")?.setValue(date);
   }
 
   onEndDateSelected(date: Date | null) {
-    this.endDate = date;
-    this.updateIntervalIfComplete();
-  }
-
-  updateIntervalIfComplete() {
-    if (this.startDate && this.endDate) {
-      const intervalGroup = this.filterForm.get("interval");
-      if (intervalGroup) {
-        intervalGroup.patchValue({
-          start: this.startDate,
-          end: this.endDate,
-        });
-        this.emitFilterValues();
-      }
-    }
+    this.filterForm.get("interval.end")?.setValue(date);
   }
 
   onAimChange(aimChanged) {
