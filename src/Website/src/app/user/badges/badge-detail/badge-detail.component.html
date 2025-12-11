@@ -54,9 +54,9 @@
     </div>
     <div *ngIf="badgeForm.get('isPublic')?.value === false" [@fadeSlide]>
       <label class="block text-sm font-medium text-gray-700">Challenge</label>
-      <select formControlName="challenge" class="inputField">
-        <option *ngFor="let challenge of challenges" value="easy">
-          {{ challenge.name.it }}
+      <select formControlName="challengeId" class="inputField">
+        <option *ngFor="let c of challenges" [value]="c.id">
+          {{ c.name.it }}
         </option>
       </select>
     </div>
@@ -84,7 +84,7 @@
     <input formControlName="informationUrl" type="url" class="inputField" />
   </div>
   <!-- Filter -->
-  <div>
+  <div >
     <app-simple-filter
       [filters]="badge.simpleFilter"
       (filteredEmit)="updateFilter($event)"

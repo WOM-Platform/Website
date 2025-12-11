@@ -15,13 +15,13 @@ import { Subject } from "rxjs";
 import { StorageService } from "../../../../_services/storage.service";
 
 @Component({
-    selector: "app-form-merchant",
-    templateUrl: "./form-merchant.component.html",
-    styleUrls: [
-        "./form-merchant.component.css",
-        "../../../../_forms/forms.directive.css",
-    ],
-    standalone: false
+  selector: "app-form-merchant",
+  templateUrl: "./form-merchant.component.html",
+  styleUrls: [
+    "./form-merchant.component.css",
+    "../../../../_forms/forms.directive.css",
+  ],
+  standalone: false,
 })
 export class FormMerchantComponent implements OnInit, OnDestroy {
   countryList: string[] = countryList;
@@ -52,7 +52,7 @@ export class FormMerchantComponent implements OnInit, OnDestroy {
 
   private initForm() {
     this.form = this.fb.group({
-      name: ["", [Validators.required, Validators.minLength(8)]],
+      name: ["", [Validators.required, Validators.minLength(4)]],
       fiscalCode: [
         { value: "", disabled: this.merchant !== null },
         [
@@ -69,6 +69,7 @@ export class FormMerchantComponent implements OnInit, OnDestroy {
       url: ["", !Validators.required],
       description: ["", !Validators.required],
       enabled: [this.merchant ? this.merchant.enabled : false],
+      activationCode: [""],
     });
   }
 

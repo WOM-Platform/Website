@@ -26,10 +26,7 @@ export class BadgeService {
     return this.http.get<Badge>(`${this.localUrlV1}${id}`);
   }
 
-  createBadge(badge: Badge, image: File | null = null): Observable<Badge> {
-    if (image) {
-      console.log("Creating badge with image upload");
-    }
+  createBadge(badge: Badge): Observable<Badge> {
     return this.http.post<Badge>(this.localUrlV1, {
       name: badge.name,
       challengeId: badge.challengeId,
@@ -73,6 +70,13 @@ export class BadgeService {
   getBadgeChallenge(badgeChallengeId: string): Observable<Challenge> {
     return this.http.get<Challenge>(
       `${this.localUrlV1}challenge/${badgeChallengeId}`
+    );
+  }
+
+  editBadgeChallenge(badgeChallengeId: string, challengeData: Challenge) {
+    return this.http.put<Challenge>(
+      `${this.localUrlV1}challenge/${badgeChallengeId}`,
+      challengeData
     );
   }
 

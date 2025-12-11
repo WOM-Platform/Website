@@ -185,6 +185,9 @@ export class ConsumerStatisticsComponent implements OnInit, OnChanges {
   consumptionVoucherData(merchantFilters?: MerchantFilter) {
     this.isConsumedDataReady = false; // Reset data flag
 
+    if (merchantFilters) {
+      this.filters = merchantFilters;
+    }
     this.emitFilters();
 
     this.statsService

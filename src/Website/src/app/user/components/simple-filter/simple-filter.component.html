@@ -2,21 +2,25 @@
   <div class="mt-2">
     <h2 class="text-center">Filtri</h2>
 
+    <div class="flex gap-4">
+      <label *ngFor="let filter of availableFilters" class="flex items-center gap-2">
+        <input
+          type="checkbox"
+          [checked]="activeFilters.includes(filter)"
+          (change)="toggleFilterSelection(filter, $event.target.checked)"
+        />
+        {{ filter | titlecase }}
+      </label>
+    </div>
+    
     <div class="mt-6">
       <div class="flex flex-col gap-4 mt-12">
-        <div class="flex gap-2">
-          <h3 class="mb-0 font-bold">
-            Quantità:<span class="text-red-600">*</span
-            ><small class="font-montserrat font-normal">(tra 1 e 256)</small>
-          </h3>
-          <input
-            type="number"
-            formControlName="count"
-            class="inputField w-[100px] border"
-          />
+        <div class="flex gap-2" *ngIf="activeFilters.includes('quantity')">
+          <h3 class="mb-0 font-bold">Quantità:<span class="text-red-600">*</span></h3>
+          <input type="number" formControlName="count" class="inputField w-[100px] border" />
         </div>
 
-        <div class="flex flex-col w-72 relative" id="instrument-wrapper">
+        <div *ngIf="activeFilters.includes('instrument')" class="flex flex-col w-72 relative" id="instrument-wrapper">
           <label for="instrument-search" class="block mb-1 font-medium">
             Seleziona Instrument:
           </label>
@@ -44,11 +48,13 @@
         </div>
 
         <app-aims-select
+        *ngIf="activeFilters.includes('aim')"
           [selectedAim]="filterForm.get('aim').value"
           (aimCodeSelected)="onAimChange($event)"
         ></app-aims-select>
       </div>
-      <div class="mt-6">
+      <div  class="mt-6">
+        <div *ngIf="activeFilters.includes('date')">
         <h3>Seleziona Data<span class="text-red-600">*</span></h3>
         <div class="flex gap-2 items-start">
           <div class="flex gap-2 items-start">
@@ -98,7 +104,8 @@
             (dateSelected)="onEndDateSelected($event)"
           ></app-date-time-picker>
         </div>
-        <div class="relative mt-6 flex flex-col">
+        </div>
+        <div *ngIf="activeFilters.includes('geography')" class="relative mt-6 flex flex-col">
           <h3>Area geografica</h3>
           <small class="text-gray-500 mb-4">
             Se impostato, accetterai solo i voucher WOM generati all'interno di

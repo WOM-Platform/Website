@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from "@angular/core";
 import { Offer } from "../../../../_models/offer";
-import { NgForOf, NgIf } from "@angular/common";
+import { CommonModule, NgForOf, NgIf } from "@angular/common";
 import { MatDialog, MatDialogModule } from "@angular/material/dialog";
 import { CreateEditOfferComponent } from "./create-edit-offer/create-edit-offer.component";
 import { BadgeComponent } from "../../../../components/badge/badge.component";
@@ -11,7 +11,7 @@ import { SnackBarService } from "../../../../_services/snack-bar.service";
 
 @Component({
   selector: "app-offers",
-  imports: [NgForOf, NgIf, MatDialogModule, BadgeComponent],
+  imports: [NgForOf, CommonModule, MatDialogModule, BadgeComponent],
   standalone: true,
   templateUrl: "./offers.component.html",
   styleUrl: "./offers.component.css",
@@ -39,7 +39,7 @@ export class OffersComponent implements OnInit {
       this.action = params.get("posAction");
 
       this.posService.getOffers(this.posId).subscribe({
-        next: (offers) => {
+        next: (offers: Offer[]) => {
           offers.map((offer) => {
             this.posService
               .convertBlobToBase64(offer.imageBlob)

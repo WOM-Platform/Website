@@ -130,26 +130,34 @@ export class BadgesComponent implements OnInit {
     dialogRef.afterClosed().subscribe((result) => {
       console.log("Dialog closed with result:", result);
       if (result) {
-        const { image, ...badgeData } = result;
+        const { imageUrl, ...badgeData } = result;
 
         this.badgeService.createBadge(badgeData).subscribe({
           next: (badge) => {
             this.loadingService.show();
 
-            if (image) {
-              this.badgeService.uploadBadgeImage(badge.id, image).subscribe({
-                next: () => {},
+            if (imageUrl) {
+              this.badgeService.uploadBadgeImage(badge.id, imageUrl).subscribe({
+                next: () => {
+                  this.snackBarService.openSnackBar(
+                    "Badge creato con successo!"
+                  );
+                },
                 error: () => {
                   this.snackBarService.openSnackBar(
                     "Errore durante il caricamento dell'immagine."
                   );
                 },
+                complete: () => {
+                  this.loadBadges();
+                  this.loadingService.hide();
+                },
               });
+            } else {
+              this.snackBarService.openSnackBar("Badge creato con successo!");
+              this.loadBadges();
+              this.loadingService.hide();
             }
-
-            this.snackBarService.openSnackBar("Badge creato con successo!");
-
-            this.loadBadges();
           },
           error: (error) => {
             this.snackBarService.openSnackBar(

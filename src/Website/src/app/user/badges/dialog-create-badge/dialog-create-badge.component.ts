@@ -12,16 +12,10 @@ import { ReactiveFormsModule } from "@angular/forms";
 import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material/dialog";
 import { Challenge } from "src/app/_models/challenge";
 import { SimpleFilterComponent } from "../../components/simple-filter/simple-filter.component";
-import { TestTormvComponent } from "../../../components/test-tormv/test-tormv.component";
 
 @Component({
   selector: "app-dialog-create-badge",
-  imports: [
-    ReactiveFormsModule,
-    CommonModule,
-    SimpleFilterComponent,
-    TestTormvComponent,
-  ],
+  imports: [ReactiveFormsModule, CommonModule, SimpleFilterComponent],
   templateUrl: "./dialog-create-badge.component.html",
   styleUrl: "./dialog-create-badge.component.css",
   animations: [
@@ -62,33 +56,63 @@ export class DialogCreateBadgeComponent implements OnInit {
 
   ngOnInit(): void {
     this.challengeList = this.data.challenges || [];
+
+    const initialIsPublic = true;
+
     this.badgeForm = this.fb.group({
-      challengeId: [null],
-      isPublic: [true, Validators.required],
+      challengeId: [{ value: null, disabled: initialIsPublic }],
+      isPublic: [initialIsPublic, Validators.required],
       name: this.fb.group({
         it: [null, Validators.required],
         en: [null, Validators.required],
-      }),
-      simpleFilter: this.fb.group({
-        count: [1],
-        sourceId: [null],
-        aim: [null],
-        bounds: this.fb.group({
-          leftTop: [[0, 0]],
-          rightBottom: [[0, 0]],
-        }),
-        interval: this.fb.group({
-          start: [null],
-          end: [null],
-        }),
       }),
       imageUrl: [null],
       description: this.fb.group({
         it: [null],
         en: [null],
       }),
+      simpleFilter: this.fb.group({
+        count: [1],
+        sourceId: [null],
+        aim: [null],
+        bounds: [null],
+        interval: [null],
+      }),
       informationUrl: [null],
     });
+
+    // set validators for challengeId depending on its enabled/disabled state
+    const challengeCtrl = this.badgeForm.get("challengeId");
+    if (challengeCtrl && !challengeCtrl.disabled) {
+      challengeCtrl.setValidators([Validators.required]);
+      challengeCtrl.updateValueAndValidity({
+        onlySelf: true,
+        emitEvent: false,
+      });
+    }
+
+    // Subscribe to isPublic changes to enable/disable the control properly
+    this.badgeForm
+      .get("isPublic")
+      ?.valueChanges.subscribe((isPublic: boolean) => {
+        const ctrl = this.badgeForm.get("challengeId");
+
+        if (!ctrl) {
+          return;
+        }
+
+        if (isPublic) {
+          // disable and clear validation/value when public
+          ctrl.clearValidators();
+          ctrl.reset(null);
+          ctrl.disable({ onlySelf: true, emitEvent: false });
+        } else {
+          // enable and require selection when not public
+          ctrl.enable({ onlySelf: true, emitEvent: false });
+          ctrl.setValidators([Validators.required]);
+          ctrl.updateValueAndValidity({ onlySelf: true, emitEvent: false });
+        }
+      });
   }
 
   onCheckboxClick(): void {
@@ -103,38 +127,8 @@ export class DialogCreateBadgeComponent implements OnInit {
     }
   }
 
-  onFilterToggle(enabled: boolean) {
-    enabled ? this.addFilter() : this.removeFilter();
-  }
-
-  addFilter() {
-    this.isFiltering = true;
-
-    if (!this.badgeForm.get("simpleFilter")) {
-      const simpleFilterGroup = this.fb.group({
-        count: [1],
-        sourceId: [null],
-        aim: [null],
-        bounds: this.fb.group({
-          leftTop: [[0, 0]],
-          rightBottom: [[0, 0]],
-        }),
-        interval: this.fb.group({
-          start: [null],
-          end: [null],
-        }),
-      });
-
-      this.badgeForm.addControl("simpleFilter", simpleFilterGroup);
-    }
-  }
-
-  removeFilter() {
-    this.isFiltering = false;
-
-    if (this.badgeForm.get("simpleFilter")) {
-      this.badgeForm.removeControl("simpleFilter");
-    }
+  toggleFilter() {
+    this.isFiltering = !this.isFiltering;
   }
 
   onSubmit() {
@@ -142,9 +136,10 @@ export class DialogCreateBadgeComponent implements OnInit {
   }
 
   onFileChange(event: any) {
-    const file = event.target.files[0];
-    if (file) {
-      this.badgeForm.patchValue({ imageUrl: file });
+    const file = event.target.files[0] ?? null;
+    this.badgeForm.patchValue({ imageUrl: file });
+    if (!file) {
+      this.badgeForm.get("imageUrl")?.reset();
     }
   }
 }

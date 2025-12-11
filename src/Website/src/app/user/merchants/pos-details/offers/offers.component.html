@@ -1,49 +1,79 @@
 <div class="mt-11">
-
-    <div *ngIf="offers && offers.length > 0; else noOffers">
-        <h2 class="text-xl">Le offerte: </h2>
-        <ul *ngFor="let offer of offers">
-            <li class="flex justify-between items-center">
-                <div class="flex flex-col justify-center mt-4">
-                    <div class="flex gap-2"><span class="flex items-center gap-1"><span
-                            class="text-sm">- Titolo:</span> {{ offer.title }}</span>
-                        <span class="flex items-center gap-1"><span
-                                class="text-sm">Quantità:</span> {{ offer.cost }}</span>
-                        <app-badge [text]="!offer.deactivated ? 'Attiva' : 'Disattivata'"
-                                   [textColor]="!offer.deactivated ? 'text-green-600' : 'text-red-600'"
-                                   [bgColor]="!offer.deactivated ? 'bg-green-200 ' : 'bg-red-200 '"/>
-                        <app-badge [text]="offer.filter ? 'Filtrata': ''"
-                                   [textColor]="offer.filter ? 'text-violet-600': ''"
-                                   [bgColor]="offer.filter ? 'bg-violet-200': ''"/>
-
-                    </div>
-                    <div class="ml-2" *ngIf="offer.imageString">
-                        <a
-                                class="underline text-sm"
-                                [href]="offer.imageString"
-                                [attr.download]="offer.title + '.jpg'"
-                                target="_blank"
-                        >
-                            Scarica QRcode</a
-                        >
-                    </div>
-                </div>
-                <div *ngIf="posAction === 'edit'" class="flex gap-2">
-                    <div class="cursor-pointer" (click)="onEditOffer(offer)">
-                        <i class="fa-solid fa-edit text-sm text-blue-400"></i>
-                    </div>
-                    <div class="cursor-pointer" (click)="onDeleteOffer(offer.id)">
-                        <i class="fa-solid fa-trash text-sm text-red-400"></i>
-                    </div>
-                </div>
-            </li>
-        </ul>
-    </div>
-    <ng-template #noOffers>
-        <p class="text-sm text-slate-600">Ancora nessuna offerta creata</p>
-    </ng-template>
-    <button *ngIf="posAction !== 'view'" (click)="addNewOffer()" class="btn-rounded-outline mt-6"><i
-            class="fa-solid fa-plus"></i>Nuova
-        Offerta
-    </button>
+  <div *ngIf="offers && offers.length > 0; else noOffers">
+    <h2 class="text-xl">Le offerte:</h2>
+    <ul *ngFor="let offer of offers">
+      <li class="flex flex-col">
+        <div class="flex justify-between items-center w-full px-10">
+          <div class="flex flex-col justify-center mt-4 w-2/3">
+            <div class="flex gap-2">
+              <span class=""
+                ><span class="text-sm">- Titolo:</span> {{ offer.title }}</span
+              >
+              <span class=""
+                ><span class="text-sm">Quantità:</span>
+                {{ offer.payment.cost }}</span
+              >
+              <app-badge
+                [text]="!offer.deactivated ? 'Attiva' : 'Disattivata'"
+                [textColor]="
+                  !offer.deactivated ? 'text-green-600' : 'text-red-600'
+                "
+                [bgColor]="!offer.deactivated ? 'bg-green-200 ' : 'bg-red-200 '"
+              />
+              <app-badge
+                [text]="offer.filter ? 'Filtrata' : ''"
+                [textColor]="offer.filter ? 'text-violet-600' : ''"
+                [bgColor]="offer.filter ? 'bg-violet-200' : ''"
+              />
+            </div>
+            <div class="ml-2 flex justify-between" *ngIf="offer.imageString">
+              <a
+                class="underline text-sm"
+                [href]="offer.imageString"
+                [attr.download]="offer.title + '.jpg'"
+                target="_blank"
+              >
+                Scarica QRcode</a
+              >
+            </div>
+          </div>
+          <div
+            *ngIf="posAction === 'edit'"
+            class="flex gap-2 w-1/3 items-end justify-end"
+          >
+            <div class="cursor-pointer" (click)="onEditOffer(offer)">
+              <i class="fa-solid fa-edit text-sm text-blue-400"></i>
+            </div>
+            <div class="cursor-pointer" (click)="onDeleteOffer(offer.id)">
+              <i class="fa-solid fa-trash text-sm text-red-400"></i>
+            </div>
+          </div>
+        </div>
+        <div class="flex gap-4">
+          <p class="text-base ml-2 text-slate-500 mt-2">
+            Ultima modifica dell'offerta:
+            <span class="text-xs">{{
+              offer.lastUpdate | date : "medium"
+            }}</span>
+          </p>
+          <p class="text-base ml-2 text-slate-500 mt-2">
+            Ultimo utilizzo dell'offerta:
+            <span class="text-xs">{{
+              offer.lastPaymentConfirmation | date : "medium"
+            }}</span>
+          </p>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <ng-template #noOffers>
+    <p class="text-sm text-slate-600">Ancora nessuna offerta creata</p>
+  </ng-template>
+  <button
+    *ngIf="posAction !== 'view'"
+    (click)="addNewOffer()"
+    class="btn-rounded-outline mt-6"
+  >
+    <i class="fa-solid fa-plus"></i>Nuova Offerta
+  </button>
 </div>
