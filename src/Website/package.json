@@ -38,7 +38,7 @@
     "@zip.js/zip.js": "^2.7.61",
     "blurhash": "^2.0.5",
     "chart.js": "^4.3.0",
-    "fabric": "^6.6.4",
+    "fabric": "^7.1.0",
     "html-to-image": "^1.11.13",
     "html2canvas": "^1.4.1",
     "jquery": "^3.7.1",
@@ -61,7 +61,7 @@
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^19.2.10",
-    "@angular/cli": "^19.1.4",
+    "@angular/cli": "^21.1.0",
     "@angular/compiler-cli": "19.2.3",
     "@angular/ssr": "^19.2.15",
     "@types/jasmine": "^5.1.5",
