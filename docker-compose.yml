@@ -16,9 +16,14 @@ services:
     - "traefik.http.routers.wom-web.rule=Host(`wom.social`)"
     - "traefik.http.routers.wom-web.entrypoints=websecure"
 
-    - "traefik.http.routers.wom-web-insecure.rule=Host(`wom-social`)"
+    - "traefik.http.routers.wom-web-insecure.rule=Host(`wom.social`)"
     - "traefik.http.routers.wom-web-insecure.entrypoints=web"
     - "traefik.http.routers.wom-web-insecure.middlewares=wom-web-redirect"
     - "traefik.http.middlewares.wom-web-redirect.redirectscheme.scheme=https"
     - "traefik.http.middlewares.wom-web-redirect.redirectscheme.permanent=true"
+
+    - "traefik.http.routers.wom-web-www.rule=Host(`www.wom.social`)"
+    - "traefik.http.routers.wom-web-www.middlewares=wom-web-www-redirect"
+    - "traefik.http.middlewares.wom-web-www-redirect.redirectregex.regex=^https?://www.wom.social/(.*)"
+    - "traefik.http.middlewares.wom-web-www-redirect.redirectregex.replacement=https://wom.social/$${1}"
     restart: unless-stopped
