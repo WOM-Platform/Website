@@ -159,4 +159,10 @@ export class MerchantService {
       .get(`${this.localUrlV1}${idMerchant}/pos`)
       .pipe(map((res) => res));
   }
+
+  downloadMerchantsReport(): Observable<Blob> {
+    return this.http.get(`${this.localUrlV1}download-merchants-report`, {
+      responseType: "blob", // Indica che la risposta è un file, non un JSON
+    });
+  }
 }

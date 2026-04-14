@@ -1,14 +1,20 @@
 <div class="flex justify-between mt-6">
   <h2>Lista Merchants</h2>
-  <app-create-button
-    [label]="'Nuovo Merchant'"
-    (clicked)="onCreateMerchant()"
-  />
+  <div class="flex flex-col gap-4">
+    <app-create-button
+      [label]="'Nuovo Merchant'"
+      (clicked)="onCreateMerchant()"
+    />
+    <button class="btn btn-primary" (click)="downloadCsv()">
+      <i class="fa fa-download"></i> Scarica Report CSV
+    </button>
+  </div>
 </div>
 <app-filters
   [itemsPage]="itemsPerPage ? itemsPerPage : '10'"
   (filterEmit)="filterUpdate($event)"
 />
+
 <div *ngIf="merchantsList">
   <app-admin-table
     [tableData]="merchantsList"
