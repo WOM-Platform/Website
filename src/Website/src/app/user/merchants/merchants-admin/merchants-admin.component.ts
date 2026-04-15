@@ -241,4 +241,23 @@ export class MerchantsAdminComponent implements OnInit {
       this.getMerchantsList();
     }
   }
+
+  downloadCsv(): void {
+    this.merchantService.downloadMerchantsReport().subscribe({
+      next: (data: Blob) => {
+        const blob = new Blob([data], { type: "text/csv" });
+        const url = window.URL.createObjectURL(blob);
+        const link = document.createElement("a");
+
+        link.href = url;
+        link.download = `merchants_report_${new Date().getTime()}.csv`;
+        link.click();
+
+        window.URL.revokeObjectURL(url);
+      },
+      error: (err) => {
+        console.error("Errore durante il download del CSV", err);
+      },
+    });
+  }
 }
