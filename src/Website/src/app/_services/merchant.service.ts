@@ -33,6 +33,7 @@ export class MerchantService {
    * @param {string} [options.search] - The search term to filter merchants by name (optional).
    * @param {number} [options.page=1] - The current page of the pagination (optional, default is 1).
    * @param {string} [options.itemsPerPage="10"] - The number of items per page (optional, default is "10").
+   * @param {boolean} [options.enabled] - Filter merchants by enabled status (optional).
    *
    * @returns {Observable<any>} An observable of the merchant list, optionally paginated and filtered by search term.
    */
@@ -41,14 +42,23 @@ export class MerchantService {
       search?: string;
       page?: number;
       itemsPerPage?: string;
+      enabled?: boolean;
     } = {}
   ): Observable<any> {
-    const { search = "", page = 1, itemsPerPage = "10" } = options;
+    const {
+      search = "",
+      page = 1,
+      itemsPerPage = "10",
+      enabled = null,
+    } = options;
 
-    const params = new HttpParams()
+    let params = new HttpParams()
       .set("search", search)
       .set("page", page.toString())
       .set("pageSize", itemsPerPage);
+    if (enabled !== null && enabled !== undefined) {
+      params = params.set("enabled", enabled.toString());
+    }
 
     if (search) {
       return this.http.get(`${this.localUrlV1}`, { params }).pipe(
