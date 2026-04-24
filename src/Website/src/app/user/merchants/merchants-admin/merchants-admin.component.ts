@@ -48,7 +48,6 @@ export class MerchantsAdminComponent implements OnInit {
   itemsPerPage: string;
   pageCount: number;
   totalItems: number;
-  enabledList: boolean = true;
   hasNext: boolean;
   hasPrev: boolean;
 
