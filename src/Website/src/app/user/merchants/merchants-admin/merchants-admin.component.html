@@ -10,10 +10,24 @@
     </button>
   </div>
 </div>
-<app-filters
-  [itemsPage]="itemsPerPage ? itemsPerPage : '10'"
-  (filterEmit)="filterUpdate($event)"
-/>
+<div>
+  <app-filters
+    [itemsPage]="itemsPerPage ? itemsPerPage : '10'"
+    (filterEmit)="filterUpdate($event)"
+  />
+  <div class="mt-4 flex justify-end items-center gap-3">
+    Stato Merchant:
+    <select
+      class="btn border rounded px-3 py-2"
+      [(ngModel)]="statusFilter"
+      (change)="onStatusFilterChange()"
+    >
+      <option value="all">Tutti</option>
+      <option value="enabledOnly">Attivi</option>
+      <option value="disabledOnly">Disattivati</option>
+    </select>
+  </div>
+</div>
 
 <div *ngIf="merchantsList">
   <app-admin-table

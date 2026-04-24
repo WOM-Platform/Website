@@ -58,6 +58,8 @@ export class MerchantsAdminComponent implements OnInit {
 
   subscriptions = new Subscription();
 
+  statusFilter: "all" | "enabledOnly" | "disabledOnly" = "enabledOnly";
+
   constructor(
     public matDialog: MatDialog,
     private merchantService: MerchantService,
@@ -81,6 +83,7 @@ export class MerchantsAdminComponent implements OnInit {
         search: this.searchParameters,
         page: this.currentPage,
         itemsPerPage: this.itemsPerPage,
+        enabled: this.mapStatusToEnabled(),
       })
       .pipe(
         finalize(() => {
@@ -259,5 +262,21 @@ export class MerchantsAdminComponent implements OnInit {
         console.error("Errore durante il download del CSV", err);
       },
     });
+  }
+
+  onStatusFilterChange() {
+    this.storageService.clearCache("merchantsList");
+
+    if (this.currentPage !== 1) {
+      this.currentPage = 1;
+    }
+
+    this.getMerchantsList();
+  }
+
+  private mapStatusToEnabled(): boolean | null {
+    if (this.statusFilter === "enabledOnly") return true;
+    if (this.statusFilter === "disabledOnly") return false;
+    return null;
   }
 }
