@@ -354,34 +354,32 @@
     }
   },
   "HOME": {
-    "SECTION_INTRO": {
-      "TITLE": "Introduzione",
-      "A": "<b>WOM - \"Worth One Minute\"</b> è una piattaforma di ricompensa general-purpose basata su un sistema di scambio di voucher.\nMolte azioni e attività compiute dagli individui hanno un valore sociale intrinseco, un effetto noto in economia come <b>\"esternalità positiva\"</b>.\nWOM mira a riconoscere tutte quelle azioni che costituiscono un contributo socialmente prezioso per un obiettivo comune, <b>premiando il tempo che le persone dedicano a queste attività</b> attraverso la generazione di voucher sociali digitali.\nI voucher WOM premiano ogni minuto di impegno sociale.",
-      "B": "DIGIT srl è uno <b>spin-off dell’Università di Urbino</b> che ha come obiettivo <b>creare un valore sociale attraverso la consapevolezza digitale</b>. DIGIT srl è stata fondata sulla convinzione che alla base della tecnologia, delle piattaforme e dei software ci debbano essere gli interessi dell’uomo e della società e che innovazione sociale e digitale siano indissolubilmente legate."
+    "HERO_ALT": "sfondo home",
+    "VALORIZE_TITLE": "l'app<br />che valorizza<br />il tuo tempo",
+    "DOWNLOAD_APP": "scarica l'app",
+    "INFO_WOM": "<span class=\"womWord\">WOM</span> - \"Worth One Minute\" è una piattaforma di ricompensa general-purpose basata su un sistema di scambio di voucher. Molte azioni e attività compiute dagli individui hanno un valore sociale intrinseco, un effetto noto in economia come \"esternalità positiva\". WOM mira a riconoscere tutte quelle azioni che costituiscono un contributo socialmente prezioso per un obiettivo comune, premiando il tempo che le persone dedicano a queste attività attraverso la generazione di voucher sociali digitali. I voucher WOM premiano ogni minuto di impegno sociale.",
+    "HOW_TO_EARN": "come guadagnare WOM",
+    "SQUARES": {
+      "ACTIONS": {
+        "TITLE": "azioni",
+        "DESC": "Compiendo azioni socialmente valide, ogni utente guadagna WOM. Gli Utenti possono gestire i loro voucher WOM tramite un’app, \"WOM Pocket\", che possono installare sul proprio dispositivo. L’applicazione consente di raccogliere i propri voucher, conservarli e spenderli."
+      },
+      "OFFERS": {
+        "TITLE": "offerte",
+        "DESC": "I negozi locali possono offrire agli utenti servizi e sconti in cambio di WOM.<br />Puoi trovare i negozi che aderiscono al progetto nella sezione \"offerte\" di \"WOM Pocket\". <br /><br />Se sei un negoziante e vuoi entrare nel progetto WOM clicca sul pulsante scopri di più"
+      },
+      "VALUE": {
+        "TITLE": "valore",
+        "DESC": "Molte azioni hanno un valore sociale intrinseco.<br />WOM riconosce l’impatto di queste azioni e fornisce uno strumento per premiare queste esternalità positive mediante l’emissione di WOM."
+      },
+      "CHALLENGES": {
+        "TITLE": "sfide",
+        "DESC": "Sfida te stesso e collezione i badge WOM. Accedi alla sezione \"traguardi\" sull'app \"WOM Pocket\" e scopri le sfide che ti circondano."
+      }
     },
-    "SECTION_VOL": {
-      "TITLE": "Utenti",
-      "MESSAGE": "Compiendo azioni socialmente valide, ogni utente guadagna WOM e diventa un <b>Volontario</b>. I Volontari possono gestire i loro voucher WOM tramite un’app, <b>\"WOM Pocket\"</b>, che possono installare sul proprio dispositivo. L’applicazione consente ai Volontari di raccogliere i propri voucher, conservarli e spenderli."
-    },
-    "SECTION_MERCH": {
-      "TITLE": "Merchant",
-      "MESSAGE": "I negozi locali possono partecipare al progetto diventando <b>Merchants</b>. I Merchants sono componenti di sistema che possono <b>creare istanze di pagamento</b>. Possono accettare i voucher WOM in cambio di servizi e sconti. I Merchants utilizzano un’applicazione diversa, il <b>\"WOM POS\"</b>, o un software di integrazione personalizzato. Questi componenti software consentono ai Merchants di creare nuove transazioni, applicando filtri ai voucher WOM raccolti."
-    },
-    "SECTION_INSTR": {
-      "TITLE": "Instrument",
-      "MESSAGE": "Gli <b>Instruments</b> sono i proprietari di un’attività sociale o di un’iniziativa con finalità sociale riconosciuta dalla piattaforma. Gli Instruments <b>consentono ai volontari di intraprendere azioni sociali</b>.\nI titolari di questo tipo di attività, come organizzazioni no profit, associazioni o privati, possono contattare info@wom.social per essere valutati dal comitato etico della piattaforma e inseriti nella lista dei <b>WOM Instrument</b> che possono generare voucher e premiare i contributori."
-    },
-    "SECTION_REG": {
-      "TITLE": "Registry",
-      "MESSAGE": "Il Registry è l’entità centrale che <b>genera i WOM</b> su richiesta degli Instrument, ne <b>verifica l’autenticità</b> quando devono essere usati presso un Merchant e ne <b>impedisce la duplicazione</b> o il doppio utilizzo."
-    },
-    "SECTION_TECH": {
-      "TITLE": "Tecnico",
-      "MESSAGE": "WOM è una <b>technologia open</b> fornita come software open source, rilasciata sotto la licenza <a href=\"https://opensource.org/licenses/MIT\">MIT</a>.\n È sviluppata in modo aperto su GitHub, <a href=\"https://github.com/WOM-Platform\">dagli un’occhiata</a>."
-    },
-    "SECTION_CONTACT": {
-      "TITLE": "Rimaniamo in contatto!&nbsp;\uD83D\uDCEB",
-      "MESSAGE": "Per sviluppare nuove integrazioni WOM, connettori POS o per qualsiasi altra domanda, contattaci a <a href=\"mailto:info@wom.social\">info@wom.social</a>."
+    "FOOTER": {
+      "DIGIT_DESC": "DIGIT srl è uno spin-off dell’Università di Urbino che ha come obiettivo creare un valore sociale attraverso la consapevolezza digitale. DIGIT srl è stata fondata sulla convinzione che alla base della tecnologia, delle piattaforme e dei software ci debbano essere gli interessi dell’uomo e della società e che innovazione sociale e digitale siano indissolubilmente legate.",
+      "CTE_DESC": "CTE Square, Casa delle Tecnologie Emergenti ha lo scopo di supportare progetti di ricerca e sperimentazione con l’intento di trasferire know-how tecnologico verso le piccole e medie imprese per produrre sempre più servizi di qualità."
     }
   },
   "ABOUT": {
@@ -418,6 +416,45 @@
   },
   "FAQ": {
     "OPEN_PAGE_FAQ": "Apri la pagina con tutte le FAQ"
+  },
+  "CHALLENGES": {
+    "TITLE": "<em>Challenge</em> – Accetta la sfida, conquista i badge!",
+    "INTRO": "Le <b class=\"text-[#009FE3]\">Challenge</b> sono sfide speciali pensate per rendere l’esperienza su <b>Pocket</b> ancora più coinvolgente, dinamica e interattiva.",
+    "HOW_IT_WORKS": {
+      "TITLE": "Come funzionano?",
+      "DESC_1": "Partecipare è semplicissimo: ti basta <b>scansionare un QR Code</b> associato a una challenge. Una volta scansionato, la sfida verrà attivata automaticamente all’interno dell’app <b>Pocket</b>, e potrai iniziare a <b>sbloccare badge esclusivi</b>!",
+      "DESC_2": "Ogni challenge ha i suoi obiettivi: più ti impegni, più badge conquisti."
+    },
+    "MISSION_NATALE": {
+      "TITLE": "Partecipa alla <em>Challenge Missione Natale</em> 🎄",
+      "SUBTITLE": "Vivi lo spirito natalizio e sblocca i badge esclusi!",
+      "DESC": "In questa challenge l’obiettivo è semplice: <b>guadagnare WOM durante il periodo natalizio, compiendo delle semplici azioni per vivere la città di Pesaro!</b><br>Questi sono i traguardi:",
+      "LIST": {
+        "SANTA_TITLE": "Unsecret Santa",
+        "SANTA_DESC": "scambia i contatti con almeno 5 amici",
+        "ART_TITLE": "Arte sotto l’Albero",
+        "ART_DESC": "Visita un museo a Pesaro",
+        "WALK_TITLE": "Cammino Addobbato",
+        "WALK_DESC": "Cammina e raccogli 300 WOM sull’app WOMFit",
+        "TRAVEL_TITLE": "Viaggio tra le feste",
+        "TRAVEL_DESC": "Prendi 2 autobus urbani o 1 interurbano",
+        "OPENSTAGE_TITLE": "Anima il Natale con Openstage",
+        "OPENSTAGE_DESC": "Partecipa a 4 spettacoli o prendi parte ad almeno 2 esibizioni",
+        "SPIRIT_TITLE": "Spirito del Natale",
+        "SPIRIT_DESC": "Diventa il Campione del Natale accumulando 1000 WOM durante il periodo natalizio"
+      },
+      "PARTICIPATE": "Per partecipare, scansiona il QR Code qui sotto utilizzando l'app \"WOM Pocket\" o",
+      "CLICK_HERE": "clicca qui",
+      "QR_ALT": "QR Code Sfida di Natale",
+      "FOOTER_NOTE": "Vedrai comparire i 6 badge associati alla challenge di Natale e potrai sbloccarli completando tutte le sfide!"
+    },
+    "TYPES": {
+      "TITLE": "Badge standard vs. badge esclusivi",
+      "INTRO": "Nell’app Pocket esistono due categorie di badge:",
+      "PUBLIC": "<b>Badge pubblici</b>: visibili a tutti, si ottengono semplicemente usando l’app, senza aderire a una challenge.",
+      "PRIVATE": "<b>Badge privati</b>: si sbloccano <em>solo</em> partecipando attivamente a una challenge tramite QR Code.",
+      "FOOTER": "Le challenge sono quindi l’unico modo per ottenere badge esclusivi e dimostrare la tua voglia di giocare, esplorare e connetterti!"
+    }
   },
   "PESARO": {
     "CITIZENS": {

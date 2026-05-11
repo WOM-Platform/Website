@@ -1,11 +1,10 @@
 <!-- carousel -->
 <div class="relative w-full">
-  <!-- Carousel component -->
   <app-carousel [images]="slidesList" />
   <img
     class="absolute top-0 left-1/2 transform -translate-x-1/2 w-3/5 h-full object-contain"
     src="../../../assets/images/home/generazioneValore.webp"
-    alt="home background"
+    [attr.alt]="'HOME.HERO_ALT' | translate"
   />
 </div>
 
@@ -13,9 +12,10 @@
 <div
   class="px-6 md:px-20 pb-3 pt-16 md:pb-12 md:pt-8 my-12 bg-[#F2F2F2] relative"
 >
-  <h3 class="homeH3 absolute px-20 -top-6 sm:-top-9 left-0 text-[#1F1F1D]">
-    l'app<br />che valorizza<br />il tuo tempo
-  </h3>
+  <h3
+    class="homeH3 absolute px-20 -top-6 sm:-top-9 left-0 text-[#1F1F1D]"
+    [innerHTML]="'HOME.VALORIZE_TITLE' | translate"
+  ></h3>
   <div class="relative flex justify-center md:justify-end items-center">
     <app-store-logos
       [appName]="'WOM POCKET'"
@@ -30,89 +30,68 @@
   <h3
     class="homeH3 absolute px-20 -bottom-3 sm:-bottom-6 right-0 text-[#CCCCCC]"
   >
-    scarica l'app
+    {{ "HOME.DOWNLOAD_APP" | translate }}
   </h3>
 </div>
+
 <div class="mx-6 md:mx-20">
   <div class="mb-8">
     <!-- info wom -->
-    <p>
-      <span class="womWord">WOM</span> - "Worth One Minute" è una piattaforma di
-      ricompensa general-purpose basata su un sistema di scambio di voucher.
-      Molte azioni e attività compiute dagli individui hanno un valore sociale
-      intrinseco, un effetto noto in economia come "esternalità positiva". WOM
-      mira a riconoscere tutte quelle azioni che costituiscono un contributo
-      socialmente prezioso per un obiettivo comune, premiando il tempo che le
-      persone dedicano a queste attività attraverso la generazione di voucher
-      sociali digitali. I voucher WOM premiano ogni minuto di impegno sociale.
-    </p>
-    <!-- <app-btn-find-out-more /> -->
+    <p [innerHTML]="'HOME.INFO_WOM' | translate"></p>
   </div>
 
   <div class="flex flex-col gap-4">
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      <!-- Azioni -->
       <div class="square-info">
-        <h3 class="square-title">azioni</h3>
-
+        <h3 class="square-title">
+          {{ "HOME.SQUARES.ACTIONS.TITLE" | translate }}
+        </h3>
         <div class="text-square">
           <hr class="hr-line w-[48px]" />
-          <p>
-            Compiendo azioni socialmente valide, ogni utente guadagna WOM. Gli
-            Utenti possono gestire i loro voucher WOM tramite un’app, "WOM
-            Pocket", che possono installare sul proprio dispositivo.
-            L’applicazione consente di raccogliere i propri voucher, conservarli
-            e spenderli.
-          </p>
+          <p>{{ "HOME.SQUARES.ACTIONS.DESC" | translate }}</p>
         </div>
         <div class="mt-auto flex justify-end text-square">
           <app-btn-find-out-more [ref]="'/users'" />
         </div>
       </div>
+      <!-- Offerte -->
       <div class="square-info">
-        <h3 class="square-title">offerte</h3>
-
+        <h3 class="square-title">
+          {{ "HOME.SQUARES.OFFERS.TITLE" | translate }}
+        </h3>
         <div class="text-square">
           <hr class="hr-line w-[90px]" />
-          <p>
-            I negozi locali possono offrire agli utenti servizi e sconti in
-            cambio di WOM.<br />
-            Puoi trovare i negozi che aderiscono al progetto nella sezione
-            "offerte" di "WOM Pocket". <br /><br />Se sei un negoziante e vuoi
-            entrare nel progetto WOM clicca sul pulsante scopri di più
-          </p>
+          <p [innerHTML]="'HOME.SQUARES.OFFERS.DESC' | translate"></p>
         </div>
         <div class="mt-auto flex justify-end text-square">
           <app-btn-find-out-more [ref]="'/merchant'" />
         </div>
       </div>
     </div>
-    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-      <div class="square-info">
-        <h3 class="square-title">valore</h3>
 
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      <!-- Valore -->
+      <div class="square-info">
+        <h3 class="square-title">
+          {{ "HOME.SQUARES.VALUE.TITLE" | translate }}
+        </h3>
         <div class="text-square">
           <hr class="hr-line w-[106px]" />
-          <p>
-            Molte azioni hanno un valore sociale intrinseco.<br />
-            WOM riconosce l’impatto di queste azioni e fornisce uno strumento
-            per premiare queste esternalità positive mediante l’emissione di
-            WOM.
-          </p>
+          <p [innerHTML]="'HOME.SQUARES.VALUE.DESC' | translate"></p>
         </div>
         <div class="mt-auto flex justify-end text-square">
           <app-btn-find-out-more [ref]="'/about-section/about'" />
         </div>
       </div>
+      <!-- Sfide -->
       <div class="square-info">
-        <h3 class="square-title">sfide</h3>
-
+        <h3 class="square-title">
+          {{ "HOME.SQUARES.CHALLENGES.TITLE" | translate }}
+        </h3>
         <div class="text-square">
           <hr class="hr-line w-[70px]" />
-          <p>
-            Sfida te stesso e collezione i badge WOM. Accedi alla sezione
-            "traguardi" sull'app "WOM Pocket" e scopri le sfide che ti
-            circondano.
-          </p>
+          <p>{{ "HOME.SQUARES.CHALLENGES.DESC" | translate }}</p>
         </div>
         <div class="mt-auto flex justify-end text-square">
           <app-btn-find-out-more [ref]="'/challenge'" />
@@ -120,13 +99,15 @@
       </div>
     </div>
   </div>
-  <!-- Carousel how to earn wom -->
+
   <div class="col-span-full relative">
-    <h3 class="text-[#1F1F1D] mt-6 mb-3 homeH3">come guadagnare WOM</h3>
+    <h3 class="text-[#1F1F1D] mt-6 mb-3 homeH3">
+      {{ "HOME.HOW_TO_EARN" | translate }}
+    </h3>
     <app-small-images-carousel [images]="squareList" />
   </div>
 
-  <!-- app loghi -->
+  <!-- Logos Section (Alts only) -->
   <div
     class="flex flex-wrap justify-center items-center gap-4 mt-8 relative w-full"
   >
@@ -153,7 +134,8 @@
     />
   </div>
 </div>
-<!-- trafiletto digit -->
+
+<!-- DIGIT section -->
 <a
   href="https://digit.srl/"
   target="_blank"
@@ -163,18 +145,12 @@
   <img
     class="h-auto max-w-28 md:max-w-full md:max-h-24 w-auto"
     src="../../../assets/images/digit_logo.png"
-    alt="srl logo"
+    alt="Digit logo"
   />
-
-  <p class="font-light">
-    DIGIT srl è uno spin-off dell’Università di Urbino che ha come obiettivo
-    creare un valore sociale attraverso la consapevolezza digitale. DIGIT srl è
-    stata fondata sulla convinzione che alla base della tecnologia, delle
-    piattaforme e dei software ci debbano essere gli interessi dell’uomo e della
-    società e che innovazione sociale e digitale siano indissolubilmente legate.
-  </p>
+  <p class="font-light">{{ "HOME.FOOTER.DIGIT_DESC" | translate }}</p>
 </a>
-<!-- trafiletto pesaro -->
+
+<!-- CTE section -->
 <div class="border-t-2 border-[#CCCCCC]"></div>
 <a
   href="https://ctesquare.it/"
@@ -182,12 +158,7 @@
   rel="noopener noreferrer"
   class="px-6 md:px-20 py-3 md:py-6 bg-[#F2F2F2] relative flex items-center flex-col md:flex-row gap-4 md:gap-12"
 >
-  <p class="font-light">
-    CTE Square, Casa delle Tecnologie Emergenti ha lo scopo di supportare
-    progetti di ricerca e sperimentazione con l’intento di trasferire know-how
-    tecnologico verso le piccole e medie imprese per produrre sempre più servizi
-    di qualità.
-  </p>
+  <p class="font-light">{{ "HOME.FOOTER.CTE_DESC" | translate }}</p>
   <img
     class="max-w-28 md:max-w-[200px] w-full h-auto"
     src="../../../assets/images/pesaro/logo-cte-square.png"
