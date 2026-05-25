@@ -61,6 +61,7 @@ export class FormMerchantComponent implements OnInit, OnDestroy {
           Validators.maxLength(16),
         ],
       ],
+      phoneNumber: ["", [Validators.pattern("^[0-9+\\s]{6,20}$")]],
       address: ["", Validators.required],
       zipCode: ["", Validators.required],
       city: ["", Validators.required],

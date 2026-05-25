@@ -1,9 +1,9 @@
 <!-- <h1 class="py-6">{{ 'SIGN_UP.MERCHANT.TITLE' | translate }}</h1> -->
 <form [formGroup]="form">
   <!-- MERCHANT DATA -->
-  <div class="flex justify-between gap-4">
+  <div class="flex justify-between flex-wrap gap-4">
     <div class="flex flex-col justify-start gap-2 items-start">
-      <label class="w-52"
+      <label class=""
         >{{ "SIGN_UP.MERCHANT.NAME" | translate
         }}<span class="text-red-600">*</span>:</label
       >
@@ -21,7 +21,7 @@
       </div>
     </div>
     <div class="flex flex-col justify-start gap-2 items-start">
-      <label class="w-52"
+      <label class=""
         >{{ "SIGN_UP.MERCHANT.CF" | translate
         }}<span class="text-red-600">*</span>:</label
       >
@@ -45,11 +45,34 @@
         {{ "SIGN_UP.MERCHANT.CF_ERROR" | translate }}
       </div>
     </div>
+
+    <div class="flex flex-col justify-start gap-2 items-start">
+      <label class="">
+        {{ "SIGN_UP.MERCHANT.PHONE" | translate
+        }}<span class="text-red-600">*</span>:
+      </label>
+
+      <input
+        type="text"
+        formControlName="phoneNumber"
+        class="input-create w-96"
+        [ngClass]="{
+          'invalid-input': isControlInvalidAndTouched('phoneNumber')
+        }"
+      />
+
+      <div
+        class="text-red-600 text-xs pl-4"
+        *ngIf="isControlInvalidAndTouched('phoneNumber')"
+      >
+        {{ "SIGN_UP.MERCHANT.PHONE_ERROR" | translate }}
+      </div>
+    </div>
   </div>
   <div>
     <div class="flex gap-4 items-center" *ngIf="isAdmin">
       <div class="flex flex-col justify-start gap-2 items-start">
-        <label class="w-52"
+        <label class=""
           >{{ "SIGN_UP.MERCHANT.ACTIVATION_CODE" | translate }}:</label
         >
         <input
@@ -84,7 +107,7 @@
   ></p>
   <div class="flex flex-wrap justify-start gap-4">
     <div class="flex flex-col justify-start gap-2 items-start">
-      <label class="w-52"
+      <label class=""
         >{{ "SIGN_UP.MERCHANT.ADDRESS" | translate
         }}<span class="text-red-600">*</span>:</label
       >
@@ -103,7 +126,7 @@
     </div>
 
     <div class="flex flex-col justify-start gap-2 items-start">
-      <label class="w-52"
+      <label class=""
         >{{ "SIGN_UP.MERCHANT.CAP" | translate
         }}<span class="text-red-600">*</span>:</label
       >
@@ -125,7 +148,7 @@
   </div>
   <div class="flex flex-wrap justify-start gap-4">
     <div class="flex flex-col justify-start gap-2 items-start">
-      <label class="w-52"
+      <label class=""
         >{{ "SIGN_UP.MERCHANT.CITY" | translate
         }}<span class="text-red-600">*</span>:</label
       >

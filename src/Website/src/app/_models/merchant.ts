@@ -5,6 +5,7 @@ export class Merchant {
   id: string;
   name: string;
   fiscalCode: string;
+  phoneNumber: string;
   primaryActivity: string;
   address: string;
   addressDetails: AddressDetails;

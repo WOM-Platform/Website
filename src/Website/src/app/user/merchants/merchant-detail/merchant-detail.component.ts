@@ -20,29 +20,18 @@ import { SnackBarService } from "../../../_services/snack-bar.service";
   standalone: false,
 })
 export class MerchantDetailComponent implements OnInit, OnDestroy {
-  id: string;
-  name: string;
-  fiscalCode: string;
-  activationCode: string;
-  primaryActivity: string;
+  merchantId: string;
+  action: string;
+
+  merchant: Merchant = new Merchant();
+
   posList: any[] = [];
   accessList: Access[] = [];
-  address: string;
-  isEnabled: boolean;
-  zipCode: string;
-  country: string;
-  action: string;
 
   businessList: string[] = primaryActivityType;
   countryList: string[] = countryList;
 
-  subscription: Subscription;
-
-  merchantId: string;
-
-  merchant: Merchant = new Merchant();
-
-  subscriptions = new Subscription();
+  private subscriptions = new Subscription();
 
   constructor(
     private cd: ChangeDetectorRef,
@@ -59,44 +48,41 @@ export class MerchantDetailComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.route.params.subscribe((params) => {
-      this.merchantId = params["id"];
-      this.action = params["action"];
-      this.loadingService.show();
-      const observable = forkJoin({
-        merchantData: this.merchantService.getMerchantById(this.merchantId),
-        accessData: this.merchantService.getAccessList(this.merchantId),
-        posData: this.merchantService.getMerchantPos(this.merchantId),
-      });
-      observable
+    this.subscriptions.add(
+      this.route.params
         .pipe(
-          finalize(() => {
-            this.loadingService.hide();
-          })
+          tap((params) => {
+            this.merchantId = params["id"];
+            this.action = params["action"];
+            this.loadingService.show();
+          }),
+          switchMap(() =>
+            forkJoin({
+              merchantData: this.merchantService.getMerchantById(
+                this.merchantId
+              ),
+              accessData: this.merchantService.getAccessList(this.merchantId),
+              posData: this.merchantService.getMerchantPos(this.merchantId),
+            }).pipe(finalize(() => this.loadingService.hide()))
+          )
         )
-        .subscribe(({ merchantData, accessData, posData }) => {
-          this.merchant = merchantData;
-          this.id = merchantData.id;
-          this.name = merchantData.name;
-          this.fiscalCode = merchantData.fiscalCode;
-          this.activationCode = merchantData.activationCode;
-          this.isEnabled = merchantData.enabled;
-          this.primaryActivity = merchantData.primaryActivity;
-          this.address = merchantData.address;
-          this.zipCode = merchantData.zipCode;
-          this.country = merchantData.country;
-          this.accessList = accessData["users"] || [];
-          this.posList = posData["pos"] || [];
+        .subscribe({
+          next: ({ merchantData, accessData, posData }) => {
+            this.merchant = merchantData;
+            this.accessList = accessData?.users || [];
+            this.posList = posData?.["pos"] || [];
 
-          this.cd.detectChanges();
-        });
-    });
+            this.cd.detectChanges();
+          },
+          error: () => {
+            this.loadingService.hide();
+          },
+        })
+    );
   }
 
   ngOnDestroy(): void {
-    if (this.subscription) {
-      this.subscription.unsubscribe();
-    }
+    this.subscriptions.unsubscribe();
   }
 
   goBack(): void {
@@ -104,40 +90,29 @@ export class MerchantDetailComponent implements OnInit, OnDestroy {
   }
 
   onUpdateMerchant(key: string, value: any, isTableToUpdate: boolean) {
-    const updatedMerchant = { ...this.merchant };
+    const updatedMerchant = {
+      ...this.merchant,
+      [key]: value,
+    };
 
-    updatedMerchant[key] = value;
+    this.merchantService
+      .update(updatedMerchant)
+      .pipe(switchMap(() => this.userService.me()))
+      .subscribe({
+        next: (res) => {
+          if (isTableToUpdate) {
+            this.storageService.clearCache("merchantsList");
+          }
 
-    this.merchantService.update(updatedMerchant).subscribe({
-      next: () => {
-        this.userService.me().subscribe({
-          next: (res) => {
-            // update admin table if a field of the one shown is edited
-            if (isTableToUpdate)
-              this.storageService.clearCache("merchantsList");
+          this.userService.updateUserOwnership(res);
+          this.merchant = updatedMerchant;
 
-            this.accessList.map((accessToCheck) => {
-              this.checkAccessCurrentUser(accessToCheck);
-            });
-
-            this.userService.updateUserOwnership(res);
-            this.merchant = updatedMerchant;
-          },
-          error: (err) => {
-            console.error(err);
-
-            let ref = this.snackBarService.openSnackBar(
-              "Errore durante l'aggiornamento dei dati"
-            );
-            ref.afterDismissed().subscribe();
-          },
-        });
-      },
-      error: (err) => {
-        console.error(err);
-        this.snackBarService.openSnackBar("Errore durante la modifica");
-      },
-    });
+          this.accessList.forEach((acc) => this.checkAccessCurrentUser(acc));
+        },
+        error: () => {
+          this.snackBarService.openSnackBar("Errore durante la modifica");
+        },
+      });
   }
 
   handleAccessList(user): void {
@@ -145,7 +120,7 @@ export class MerchantDetailComponent implements OnInit, OnDestroy {
     const access = user.access;
 
     const addAccessSub = this.merchantService
-      .addAccess(this.id, access.id, role)
+      .addAccess(this.merchant.id, access.id, role)
       .pipe(
         switchMap(() => this.updateAccessList()) // Ensure the access list is updated
       )
@@ -177,7 +152,7 @@ export class MerchantDetailComponent implements OnInit, OnDestroy {
 
     dialogRef.afterClosed().subscribe(() => {
       this.merchantService
-        .deleteAccess(this.id, access.userId)
+        .deleteAccess(this.merchant.id, access.userId)
         .pipe(
           switchMap(() => this.updateAccessList()) // Ensure the access list is updated
         )
@@ -191,17 +166,26 @@ export class MerchantDetailComponent implements OnInit, OnDestroy {
     });
   }
 
+  private syncCurrentUserIfNeeded() {
+    this.userService.me().subscribe({
+      next: (res) => {
+        this.userService.updateUserOwnership(res);
+        this.accessList.forEach((acc) => this.checkAccessCurrentUser(acc));
+      },
+      error: () => {
+        this.snackBarService.openSnackBar("Errore aggiornamento utente");
+      },
+    });
+  }
+
   onCheckboxClick(): void {
-    this.isEnabled = !this.isEnabled;
-    this.onUpdateMerchant("enabled", this.isEnabled, false);
+    this.onUpdateMerchant("enabled", !this.merchant.enabled, false);
   }
 
   updateAccessList(): Observable<any> {
-    return this.merchantService.getAccessList(this.merchantId).pipe(
-      tap((res) => {
-        this.accessList = res["users"];
-      })
-    );
+    return this.merchantService
+      .getAccessList(this.merchantId)
+      .pipe(tap((res) => (this.accessList = res?.users || [])));
   }
 
   updatePosList() {
@@ -214,7 +198,6 @@ export class MerchantDetailComponent implements OnInit, OnDestroy {
     const currentUser = this.storageService.load("currentUser");
 
     if (access.userId === currentUser.userId) {
-      /*this.userService.updateCurrentUser(access, actionOnUser)*/
       this.storageService.clear("currentUser");
       this.userService.me().subscribe((res) => {
         this.userService.updateUserOwnership(res);
