@@ -33,18 +33,44 @@
 
   <!-- Calendar -->
   <div class="calendar" *ngIf="calendarVisible">
-    <div class="header flex justify-between items-center my-2">
-      <button (click)="previousMonth()">&#9664;</button>
-      <span class="capitalize">{{ currentMonth | date : "MMMM yyyy" }}</span>
-      <button
-        (click)="nextMonth()"
-        [disabled]="
-          currentMonth.getMonth() === today.getMonth() &&
-          currentMonth.getYear() === today.getYear()
-        "
-      >
-        &#9654;
-      </button>
+    <div class="header flex flex-col justify-between items-center my-2">
+      <div class="flex justify-between items-center w-full mt-2">
+        <!-- Arrows -->
+        <button (click)="previousMonth()">&#9664;</button>
+        <div class="flex justify-center items-start w-full space-x-2">
+          <!-- Month -->
+          <select
+            class="border rounded px-2 py-1 capitalize"
+            [ngModel]="currentMonth.getMonth()"
+            (ngModelChange)="changeMonth($event)"
+          >
+            <option *ngFor="let m of months; let i = index" [ngValue]="i">
+              {{ m }}
+            </option>
+          </select>
+
+          <!-- Year -->
+          <select
+            class="border rounded px-2 py-1"
+            [ngModel]="currentMonth.getFullYear()"
+            (ngModelChange)="changeYear($event)"
+          >
+            <option *ngFor="let y of years" [ngValue]="y">
+              {{ y }}
+            </option>
+          </select>
+        </div>
+
+        <button
+          (click)="nextMonth()"
+          [disabled]="
+            currentMonth.getMonth() === today.getMonth() &&
+            currentMonth.getFullYear() === today.getFullYear()
+          "
+        >
+          &#9654;
+        </button>
+      </div>
     </div>
     <div class="days grid grid-cols-7 gap-1">
       <div
