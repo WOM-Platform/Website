@@ -4,7 +4,6 @@ import { environment } from "../../environments/environment";
 import { HttpClient, HttpParams } from "@angular/common/http";
 import { Badge } from "../_models/badge";
 import { Challenge } from "../_models/challenge";
-import { b } from "@angular/core/navigation_types.d-u4EOrrdZ";
 
 @Injectable({
   providedIn: "root",
