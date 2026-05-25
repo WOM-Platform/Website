@@ -26,48 +26,62 @@ export class EditableElementComponent implements OnInit, OnChanges {
   @Input() typeEl: any;
   @Input() option: any;
   @Input() action: string;
-  @Input() pattern: string; // for regex pattern validation
-  @Input() minLength: number; // for minimum length validation
-  @Input() maxLength: number; // for maximum length validation
+
+  @Input() displayType: "text" | "url" | "phone" = "text";
+
+  @Input() pattern: string;
+  @Input() minLength: number;
+  @Input() maxLength: number;
 
   @Output() onChangeElement = new EventEmitter<any>();
 
-  isEditing: boolean = false; // to check if user is editing the field
-  isDirty: boolean = false;
-  isValid: boolean = true;
-  validationMessage: string = "";
+  isEditing = false;
+  isDirty = false;
+  isValid = true;
+  validationMessage = "";
+
   originalValue: any;
   newValue: any;
 
   constructor(private cd: ChangeDetectorRef) {}
 
   ngOnInit() {
-    if (this.typeEl === "list") {
-      if (this.option.includes(this.valueEl)) {
-        this.newValue = this.valueEl;
-      } else {
-        this.newValue = this.option[0]; // Fallback to the first option if existing value is not in the options
-      }
-    }
+    this.syncValue();
   }
 
-  ngOnChanges() {}
+  ngOnChanges() {
+    this.syncValue();
+  }
+
+  private syncValue() {
+    this.originalValue = this.valueEl;
+
+    if (this.typeEl === "list" && this.option?.length) {
+      this.newValue = this.option.includes(this.valueEl)
+        ? this.valueEl
+        : this.option[0];
+    } else {
+      this.newValue = this.valueEl;
+    }
+  }
 
   startEditing(): void {
     this.isEditing = true;
     this.isDirty = false;
-    // set starting point and original value in case user cancel editing
-    this.newValue = this.originalValue = this.valueEl;
+    this.newValue = this.originalValue;
   }
 
   stopEditing(): void {
     this.validateValue();
+
     if (this.isValid) {
       this.isEditing = false;
+
       if (this.isDirty) {
         this.onChangeElement.emit(this.newValue);
       }
     }
+
     this.cd.detectChanges();
   }
 
@@ -75,42 +89,38 @@ export class EditableElementComponent implements OnInit, OnChanges {
     this.valueEl = this.originalValue;
     this.newValue = this.originalValue;
     this.isEditing = false;
-    this.cd.detectChanges();
-  }
-
-  calculateInputWidth(): string {
-    // Adding 1ch to ensure there is some extra space
-    const width = this.newValue.length + 2;
-    return `${width}ch`;
   }
 
   validateValue(): void {
-    this.isDirty = this.newValue !== this.originalValue;
+    const value = this.newValue ?? "";
+
+    this.isDirty = value !== this.originalValue;
     this.isValid = true;
     this.validationMessage = "";
 
     if (this.pattern) {
       const regex = new RegExp(this.pattern);
-      if (!regex.test(this.newValue)) {
+      if (!regex.test(value)) {
         this.isValid = false;
         this.validationMessage = "Invalid format.";
         return;
       }
     }
 
-    if (this.minLength && this.newValue.length < this.minLength) {
+    if (this.minLength && value.length < this.minLength) {
       this.isValid = false;
       this.validationMessage = `Minimum length is ${this.minLength}.`;
       return;
     }
 
-    if (this.maxLength && this.newValue.length > this.maxLength) {
+    if (this.maxLength && value.length > this.maxLength) {
       this.isValid = false;
       this.validationMessage = `Maximum length is ${this.maxLength}.`;
-      this.newValue = this.newValue.substr(0, this.maxLength);
-      return;
+      this.newValue = value.substring(0, this.maxLength);
     }
+  }
 
-    /*this.valueEl = this.newValue;*/
+  calculateInputWidth(): string {
+    return `${(this.newValue?.length || 1) + 2}ch`;
   }
 }

@@ -100,6 +100,7 @@ export class MerchantService {
         description: merchant.description,
         url: merchant.url,
         fiscalCode: merchant.fiscalCode,
+        phoneNumber: merchant.phoneNumber,
         activationCode: merchant.activationCode,
         primaryActivity: merchant.primaryActivity,
         address: merchant.address,
@@ -118,20 +119,24 @@ export class MerchantService {
    * @param merchant data of merchant to create
    */
   register(merchant: Merchant): Observable<Merchant> {
-    return this.http
-      .post<Merchant>(this.localUrlV1, {
-        name: merchant.name,
-        fiscalCode: merchant.fiscalCode,
-        primaryActivity: merchant.primaryActivity,
-        address: merchant.address,
-        zipCode: merchant.zipCode,
-        city: merchant.city,
-        country: merchant.country,
-        description: merchant.description,
-        url: merchant.url,
-        activationCode: merchant.activationCode ? merchant.activationCode : "",
-      })
-      .pipe(map((response) => response));
+    return this.http.post<Merchant>(this.localUrlV1, {
+      name: merchant.name,
+      fiscalCode: merchant.fiscalCode,
+
+      phoneNumber: merchant.phoneNumber,
+
+      primaryActivity: merchant.primaryActivity,
+
+      address: merchant.address,
+      zipCode: merchant.zipCode,
+      city: merchant.city,
+      country: merchant.country,
+
+      description: merchant.description,
+      url: merchant.url,
+
+      activationCode: merchant.activationCode ?? "",
+    });
   }
 
   deleteMerchant(merchantId: string) {

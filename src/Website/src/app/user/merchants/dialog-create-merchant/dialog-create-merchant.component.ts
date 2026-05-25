@@ -78,6 +78,7 @@ export class DialogCreateMerchant implements OnInit {
     this.formInputError = this.formMerchant === undefined;
     const merchant: Merchant = new Merchant();
     merchant.fiscalCode = this.formMerchant.controls.fiscalCode.value;
+    merchant.phoneNumber = this.formMerchant.controls.phoneNumber.value;
     merchant.country = this.formMerchant.controls.country.value;
     merchant.city = this.formMerchant.controls.city.value;
     merchant.zipCode = this.formMerchant.controls.zipCode.value;
@@ -94,6 +95,38 @@ export class DialogCreateMerchant implements OnInit {
       merchant.description = this.formMerchant.controls.description.value;
     }
     return merchant;
+  }
+
+  get isCreate(): boolean {
+    return this.data.type === this.dialogTypes.create;
+  }
+
+  get titleKey(): string {
+    return this.isCreate
+      ? "USER.ADD_MERCHANT.TITLE"
+      : "USER.EDIT_MERCHANT.TITLE";
+  }
+
+  get inputErrorKey(): string {
+    return this.isCreate
+      ? "USER.ADD_MERCHANT.INPUT_ERROR"
+      : "USER.EDIT_MERCHANT.INPUT_ERROR";
+  }
+
+  get apiErrorKey(): string {
+    return this.isCreate
+      ? "USER.ADD_MERCHANT.API_ERROR"
+      : "USER.EDIT_MERCHANT.API_ERROR";
+  }
+
+  get cancelKey(): string {
+    return this.isCreate
+      ? "USER.ADD_MERCHANT.CANCEL"
+      : "USER.EDIT_MERCHANT.CANCEL";
+  }
+
+  get submitKey(): string {
+    return this.isCreate ? "USER.ADD_MERCHANT.ADD" : "USER.EDIT_MERCHANT.SAVE";
   }
 }
 
