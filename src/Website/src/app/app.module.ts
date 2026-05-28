@@ -57,7 +57,6 @@ import { ApplicationsAworldComponent } from "./pages/users/applications/aworld/a
 import { ApplicationsBalanceComponent } from "./pages/users/applications/balance/balance.component";
 import { ApplicationsCodymazeComponent } from "./pages/users/applications/codymaze/codymaze.component";
 import { ApplicationsComponent } from "./pages/users/applications/applications.component";
-import { ApplicationsLibrariesComponent } from "./pages/users/applications/libraries/libraries.component";
 import { ApplicationsOverviewComponent } from "./pages/users/applications/overview/overview.component";
 import { ApplicationsUniversitiesComponent } from "./pages/users/applications/universities/universities.component";
 import { AppOverlayModule } from "./_overlay/overlay.module";
@@ -75,7 +74,6 @@ import { environment } from "../environments/environment";
 import { GoogleMapsModule } from "@angular/google-maps";
 import { InstrumentComponent } from "./pages/instrument/instrument.component";
 import { LogInErrorDialogComponent } from "./authentication/signup/signup-login-error.directive";
-import { MerchantComponent } from "./pages/merchant/merchant.component";
 import { OverlayModule } from "@angular/cdk/overlay";
 import { PageNotFoundComponent } from "./pageNotFound/page-not-found.component";
 import { ProgressSpinnerComponent } from "./_progressSpinner/progress-spinner.component";
@@ -100,7 +98,7 @@ import { BtnFindOutMoreComponent } from "./components/btn-find-out-more/btn-find
 import { CarouselComponent } from "./components/carousel/carousel.component";
 import { SmallImagesCarouselComponent } from "./components/small-images-carousel/small-images-carousel.component";
 import { CookieBannerComponent } from "./components/cookie-banner/cookie-banner.component";
-import {Button} from "primeng/button";
+import { Button } from "primeng/button";
 
 // AoT requires an exported function for factories
 export const createTranslateLoader = (http: HttpClient) =>
@@ -149,7 +147,6 @@ const httpInterceptorProviders = environment.mock
     ApplicationsBalanceComponent,
     ApplicationsCodymazeComponent,
     ApplicationsComponent,
-    ApplicationsLibrariesComponent,
     ApplicationsOverviewComponent,
     ApplicationsWomFitComponent,
     ApplicationsUniversitiesComponent,
@@ -164,7 +161,6 @@ const httpInterceptorProviders = environment.mock
     JoinstringsPipe,
     LogInErrorDialogComponent,
     LogoutDialogComponent,
-    MerchantComponent,
     MerchantSignUpComponent,
     NavComponent,
     PageNotFoundComponent,
@@ -189,45 +185,45 @@ const httpInterceptorProviders = environment.mock
   ],
   exports: [],
   bootstrap: [AppComponent],
-    imports: [
-        appRoutingModule,
-        AnimatedNumberComponent,
-        AuthModule,
-        RouterModule.forRoot(
-            [{path: "", component: HomeComponent, pathMatch: "full"}],
-            {
-                scrollPositionRestoration: "enabled",
-                anchorScrolling: "enabled",
-            }
-        ),
-        TranslateModule.forRoot({
-            defaultLanguage: "it",
-            loader: {
-                provide: TranslateLoader,
-                useFactory: createTranslateLoader,
-                deps: [HttpClient],
-            },
-        }),
-        AppOverlayModule,
-        BreadcrumbModule,
-        BrowserModule,
-        CarouselModule,
-        CommonModule,
-        FormsModule,
-        GoogleMapsModule,
-        OverlayModule,
-        ReactiveFormsModule,
-        SharedModule,
-        LayoutModule,
-        NgChartsModule,
-        SearchSourceComponent,
-        StoreLogosComponent,
-        BtnFindOutMoreComponent,
-        CarouselComponent,
-        SmallImagesCarouselComponent,
-        CookieBannerComponent,
-        Button,
-    ],
+  imports: [
+    appRoutingModule,
+    AnimatedNumberComponent,
+    AuthModule,
+    RouterModule.forRoot(
+      [{ path: "", component: HomeComponent, pathMatch: "full" }],
+      {
+        scrollPositionRestoration: "enabled",
+        anchorScrolling: "enabled",
+      }
+    ),
+    TranslateModule.forRoot({
+      defaultLanguage: "it",
+      loader: {
+        provide: TranslateLoader,
+        useFactory: createTranslateLoader,
+        deps: [HttpClient],
+      },
+    }),
+    AppOverlayModule,
+    BreadcrumbModule,
+    BrowserModule,
+    CarouselModule,
+    CommonModule,
+    FormsModule,
+    GoogleMapsModule,
+    OverlayModule,
+    ReactiveFormsModule,
+    SharedModule,
+    LayoutModule,
+    NgChartsModule,
+    SearchSourceComponent,
+    StoreLogosComponent,
+    BtnFindOutMoreComponent,
+    CarouselComponent,
+    SmallImagesCarouselComponent,
+    CookieBannerComponent,
+    Button,
+  ],
   providers: [
     {
       provide: APP_INITIALIZER,

@@ -16,10 +16,6 @@ export const applicationsList: { name: string; path: string }[] = [
     path: "codymaze",
   },
   {
-    name: "APPLICATIONS.SIDENAV.LIBRARIES",
-    path: "libraries",
-  },
-  {
     name: "APPLICATIONS.SIDENAV.UNIVERSITIES",
     path: "universities",
   },
