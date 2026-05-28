@@ -10,25 +10,46 @@ import {
 import { GoogleMap, MapInfoWindow, MapMarker } from "@angular/google-maps";
 import { MapService } from "../../_services";
 import { PosMap } from "../../_models";
-import { MatSelectionListChange } from "@angular/material/list";
+import {
+  MatSelectionList,
+  MatSelectionListChange,
+} from "@angular/material/list";
+import { TranslateModule } from "@ngx-translate/core";
+import { StoreLogosComponent } from "src/app/components/store-logos/store-logos.component";
+import { CommonModule } from "@angular/common";
+import { PosWithOffers } from "src/app/_models/offer";
 
 @Component({
-    selector: "app-merchant",
-    templateUrl: "./merchant.component.html",
-    styleUrls: ["./merchant.component.css"],
-    standalone: false
+  selector: "app-merchant",
+  templateUrl: "./merchant.component.html",
+  styleUrls: ["./merchant.component.css"],
+  imports: [
+    CommonModule,
+    GoogleMap,
+    MapInfoWindow,
+    MapMarker,
+    TranslateModule,
+    MatSelectionList,
+    StoreLogosComponent,
+  ],
+  standalone: true,
 })
 export class MerchantComponent implements OnInit, AfterViewInit {
-  @ViewChild(GoogleMap, { static: false }) map: GoogleMap;
-  @ViewChild(MapInfoWindow, { static: false }) infoWindow: MapInfoWindow;
-  @ViewChild("mapSearchField") searchField: ElementRef;
-  @ViewChildren("markerElem") mapMarkerElem: QueryList<MapMarker>;
+  @ViewChild(GoogleMap) map!: GoogleMap;
+  @ViewChild(MapInfoWindow) infoWindow!: MapInfoWindow;
+  @ViewChild("mapSearchField") searchField!: ElementRef<HTMLInputElement>;
+  @ViewChildren("markerElem") mapMarkerElem!: QueryList<MapMarker>;
 
   mapLoaded = false;
   searchBox: google.maps.places.SearchBox;
   infoContent = "";
-  markers: google.maps.Marker[] = [];
-  posList: PosMap[] = [];
+  markers: {
+    position: google.maps.LatLngLiteral;
+    title: string;
+    info?: string;
+    options?: google.maps.MarkerOptions;
+  }[] = [];
+  posList: PosWithOffers[] = [];
   zoom = 12;
   center: google.maps.LatLngLiteral = {
     lat: 43.72639929907197,
@@ -69,10 +90,12 @@ export class MerchantComponent implements OnInit, AfterViewInit {
 
     this.searchBox.addListener("places_changed", () => {
       const places = this.searchBox.getPlaces();
-      if (places.length === 0) {
+
+      if (!places || places.length === 0) {
         return;
       }
-      if (google === undefined) return;
+
+      if (typeof google === "undefined") return;
 
       const bounds = new google.maps.LatLngBounds();
       places.forEach((place) => {
@@ -90,10 +113,14 @@ export class MerchantComponent implements OnInit, AfterViewInit {
       this.boundsChanged();
     });
 
-    this.map.googleMap.addListener("idle", () => {
+    this.map.googleMap?.addListener("idle", () => {
       if (!this.mapLoaded) {
         setTimeout(() => {
-          this.map.googleMap.setZoom(this.map.googleMap.getZoom() - 1);
+          const currentZoom = this.map.googleMap?.getZoom();
+
+          if (currentZoom != null) {
+            this.map.googleMap?.setZoom(currentZoom - 1);
+          }
         }, 1000);
       }
     });
@@ -115,39 +142,39 @@ export class MerchantComponent implements OnInit, AfterViewInit {
     // console.log(JSON.stringify(this.map.getCenter()));
   }
 
-  addMarker(posData: PosMap): void {
-    var icon = {
-      url: "assets/images/wom_map_pin.png", // url
-      scaledSize: new google.maps.Size(30, 50), // scaled size
-      //origin: new google.maps.Point(0,0), // origin
-      anchor: new google.maps.Point(15, 50), // anchor
-    };
-    const marker: google.maps.Marker = new google.maps.Marker({
+  addMarker(posData: PosWithOffers): void {
+    this.markers.push({
       title: posData.name,
-      clickable: true,
-      icon: icon,
+      info: posData.url,
       position: {
         lat: posData.position.latitude,
         lng: posData.position.longitude,
       },
+      options: {
+        icon: {
+          url: "assets/images/pin-wom.png",
+          scaledSize: new google.maps.Size(30, 50),
+          anchor: new google.maps.Point(15, 50),
+        },
+      },
     });
-    marker.setValues({
-      info: posData.url,
-    });
-    this.markers.push(marker);
   }
 
-  openInfo(marker: MapMarker, content: google.maps.Marker): void {
-    this.infoContent = "<b>" + content.getTitle() + "</b>";
-    if (content.get("info") !== null) {
-      this.infoContent +=
-        "<br><br>" +
-        '<a href="' +
-        content.get("info") +
-        ' "target="_blank">' +
-        content.get("info") +
-        "</a>";
+  openInfo(
+    marker: MapMarker,
+    content: {
+      title: string;
+      info?: string;
     }
+  ): void {
+    this.infoContent = `<b>${content.title}</b>`;
+
+    if (content.info) {
+      this.infoContent +=
+        `<br><br><a href="${content.info}" target="_blank">` +
+        `${content.info}</a>`;
+    }
+
     this.infoWindow.open(marker);
   }
 
@@ -163,20 +190,21 @@ export class MerchantComponent implements OnInit, AfterViewInit {
 
     const bounds = this.map.getBounds().toJSON();
     this.mapService
-      .getPosList(
+      .getPosWithOffers(
         bounds.west.toString(),
         bounds.east.toString(),
         bounds.south.toString(),
         bounds.north.toString()
       )
-      .subscribe((res) => {
+      .subscribe((res: PosWithOffers[]) => {
         this.markers = [];
-        if (res == null) {
-          return;
-        }
-        this.posList = res.pos;
-        for (const i of res.pos) {
-          this.addMarker(i);
+
+        if (!res) return;
+
+        this.posList = res;
+
+        for (const pos of res) {
+          this.addMarker(pos);
         }
 
         /*
@@ -189,17 +217,18 @@ export class MerchantComponent implements OnInit, AfterViewInit {
   }
 
   onPosSelection(event: MatSelectionListChange) {
-    const pos: PosMap = event.options[0].value;
-    const marker: google.maps.Marker = this.markers.find(
-      (m) => m.getTitle() === pos.name
-    );
-    this.openInfo(
-      this.mapMarkerElem.find((mm) => mm.getTitle() === pos.name),
-      marker
+    const pos: PosWithOffers = event.options[0].value;
+
+    const markerData = this.markers.find((m) => m.title === pos.name);
+
+    const markerElem = this.mapMarkerElem.find(
+      (mm) => mm.getTitle() === pos.name
     );
 
-    google.maps.event.trigger(marker, "click", {
-      latLng: marker.getPosition(),
-    });
+    if (!markerData || !markerElem) {
+      return;
+    }
+
+    this.openInfo(markerElem, markerData);
   }
 }
