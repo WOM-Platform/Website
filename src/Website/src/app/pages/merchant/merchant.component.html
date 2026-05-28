@@ -40,10 +40,9 @@
         <map-marker
           #markerElem="mapMarker"
           *ngFor="let marker of markers"
-          [position]="marker.getPosition()"
-          [label]="marker.getLabel()"
-          [title]="marker.getTitle()"
-          [icon]="marker.getIcon()"
+          [position]="marker.position"
+          [title]="marker.title"
+          [icon]="marker.options?.icon"
           (mapClick)="openInfo(markerElem, marker)"
         >
         </map-marker>
@@ -79,10 +78,9 @@
         <map-marker
           #markerElem="mapMarker"
           *ngFor="let marker of markers"
-          [position]="marker.getPosition()"
-          [label]="marker.getLabel()"
-          [title]="marker.getTitle()"
-          [icon]="marker.getIcon()"
+          [position]="marker.position"
+          [title]="marker.title"
+          [icon]="marker.options?.icon"
           (mapClick)="openInfo(markerElem, marker)"
         >
         </map-marker>
