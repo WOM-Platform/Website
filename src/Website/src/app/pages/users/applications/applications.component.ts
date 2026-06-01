@@ -1,25 +1,52 @@
-import {ChangeDetectorRef, Component, OnDestroy, OnInit} from '@angular/core';
-import {MediaMatcher} from "@angular/cdk/layout";
+import { ChangeDetectorRef, Component, OnDestroy, OnInit } from "@angular/core";
+import { MediaMatcher } from "@angular/cdk/layout";
 
-import {applicationsList} from "./applications-list"
+import { applicationsList } from "./applications-list";
+import { TranslateModule } from "@ngx-translate/core";
+import {
+  MatSidenav,
+  MatSidenavContainer,
+  MatSidenavContent,
+} from "@angular/material/sidenav";
+import { MatToolbar } from "@angular/material/toolbar";
+import { MatIcon } from "@angular/material/icon";
+import { MatListItem, MatNavList } from "@angular/material/list";
+import { RouterModule, RouterOutlet } from "@angular/router";
+import { MatIconButton } from "@angular/material/button";
 
 @Component({
-    selector: 'app-applications',
-    templateUrl: './applications.component.html',
-    styleUrls: ['./applications.component.css'],
-    standalone: false
+  selector: "app-applications",
+  templateUrl: "./applications.component.html",
+  styleUrls: ["./applications.component.css"],
+  standalone: true,
+  imports: [
+    TranslateModule,
+    MatSidenav,
+    MatToolbar,
+    MatIcon,
+    MatIconButton,
+    MatSidenavContainer,
+    MatNavList,
+    MatListItem,
+    MatSidenavContent,
+    RouterOutlet,
+    RouterModule,
+  ],
 })
-export class ApplicationsComponent implements OnInit, OnDestroy{
+export class ApplicationsComponent implements OnInit, OnDestroy {
   mobileQuery: MediaQueryList;
   snavOpened: boolean;
   _mobileQueryListener: () => void;
 
   applicationsList = applicationsList;
-  
+
   constructor(changeDetectorRef: ChangeDetectorRef, media: MediaMatcher) {
-    this.mobileQuery = media.matchMedia('(max-width: 600px)');
+    this.mobileQuery = media.matchMedia("(max-width: 600px)");
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
-    this.mobileQuery.addEventListener("change", () => this._mobileQueryListener);
+    this.mobileQuery.addEventListener(
+      "change",
+      () => this._mobileQueryListener
+    );
   }
 
   ngOnInit() {
@@ -27,6 +54,9 @@ export class ApplicationsComponent implements OnInit, OnDestroy{
   }
 
   ngOnDestroy(): void {
-    this.mobileQuery.removeEventListener("change", () => this._mobileQueryListener);
+    this.mobileQuery.removeEventListener(
+      "change",
+      () => this._mobileQueryListener
+    );
   }
 }

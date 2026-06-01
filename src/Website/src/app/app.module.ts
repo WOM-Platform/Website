@@ -8,10 +8,8 @@ import {
 import { Router } from "@angular/router";
 
 import { AppComponent } from "./app.component";
-import { ApplicationConfig } from "@angular/core";
 import { provideAnimationsAsync } from "@angular/platform-browser/animations/async";
 import { providePrimeNG } from "primeng/config";
-import Aura from "@primeng/themes/aura";
 import Nora from "@primeng/themes/nora";
 
 import { TranslateHttpLoader } from "@ngx-translate/http-loader";
@@ -50,15 +48,8 @@ import { SignInComponent } from "./authentication/signin/signin.component";
 
 import { FanoComponent } from "./pages/about/fano/fano.component";
 import { SharedModule } from "./shared/shared.module";
-import { UrbinoComponent } from "./pages/about/urbino/urbino.component";
 import { AboutComponent } from "./pages/about/about/about.component";
 import { AboutSectionComponent } from "./pages/about/about-section.component";
-import { ApplicationsAworldComponent } from "./pages/users/applications/aworld/aworld.component";
-import { ApplicationsBalanceComponent } from "./pages/users/applications/balance/balance.component";
-import { ApplicationsCodymazeComponent } from "./pages/users/applications/codymaze/codymaze.component";
-import { ApplicationsComponent } from "./pages/users/applications/applications.component";
-import { ApplicationsOverviewComponent } from "./pages/users/applications/overview/overview.component";
-import { ApplicationsUniversitiesComponent } from "./pages/users/applications/universities/universities.component";
 import { AppOverlayModule } from "./_overlay/overlay.module";
 import { BillingCancelComponent } from "./billing/cancel/cancel.component";
 import { BillingCheckoutComponent } from "./billing/checkout/checkout.component";
@@ -82,7 +73,6 @@ import { ResetPasswordComponent } from "./authentication/reset-password/reset-pa
 import { TokenInterceptorService } from "./_helpers/httpInterceptor";
 import { UserFormComponent } from "./_forms/user/forms-user.directive";
 import { UsersComponent } from "./pages/users/users/users.component";
-import { PdfViewerContainerComponent } from "./components/pdf-viewer-container/pdf-viewer-container.component";
 import { LayoutModule } from "@angular/cdk/layout";
 import { AuthModule } from "./user/auth.module";
 import { ReteDelleRetiComponent } from "./pages/projects/rete-delle-reti/rete-delle-reti-component";
@@ -93,7 +83,6 @@ import { SearchSourceComponent } from "./user/components/user-access-list/search
 import localeIt from "@angular/common/locales/it";
 import { StoreLogosComponent } from "./components/store-logos/store-logos.component";
 import { AnimatedNumberComponent } from "./components/animated-number/animated-number.component";
-import { ApplicationsWomFitComponent } from "./pages/users/applications/womfit/womfit.component";
 import { BtnFindOutMoreComponent } from "./components/btn-find-out-more/btn-find-out-more.component";
 import { CarouselComponent } from "./components/carousel/carousel.component";
 import { SmallImagesCarouselComponent } from "./components/small-images-carousel/small-images-carousel.component";
@@ -143,13 +132,6 @@ const httpInterceptorProviders = environment.mock
     AboutComponent,
     AboutSectionComponent,
     AppComponent,
-    ApplicationsAworldComponent,
-    ApplicationsBalanceComponent,
-    ApplicationsCodymazeComponent,
-    ApplicationsComponent,
-    ApplicationsOverviewComponent,
-    ApplicationsWomFitComponent,
-    ApplicationsUniversitiesComponent,
     BillingCancelComponent,
     BillingCheckoutComponent,
     BillingSuccessComponent,
@@ -164,7 +146,6 @@ const httpInterceptorProviders = environment.mock
     MerchantSignUpComponent,
     NavComponent,
     PageNotFoundComponent,
-    PdfViewerContainerComponent,
     Pesaro2024Component,
     PrivacyComponent,
     PrivacyInstrumentComponent,
@@ -178,7 +159,6 @@ const httpInterceptorProviders = environment.mock
     ResetPasswordComponent,
     ReteDelleRetiComponent,
     SignInComponent,
-    UrbinoComponent,
     UserFormComponent,
     UsersComponent,
     Pesaro2024SectionComponent,
@@ -224,6 +204,7 @@ const httpInterceptorProviders = environment.mock
     CookieBannerComponent,
     Button,
   ],
+
   providers: [
     {
       provide: APP_INITIALIZER,

@@ -1,37 +1,55 @@
-<div class="basis-full">
-  <nav class="flex justify-between" *ngIf="isLoaded">
-    <button
-      mat-flat-button
-      (click)="prevPage()"
-      [disabled]="page === 1"
-      class="previous"
-    >
-      Prev
-    </button>
-    <button
-      mat-flat-button
-      (click)="nextPage()"
-      [disabled]="page === totalPages"
-      class="next"
-    >
-      Next
-    </button>
-  </nav>
-  <pdf-viewer
-    [src]="source"
-    [original-size]="original_size"
-    [render-text]="render_text"
-    [rotation]="rotation"
-    [show-all]="show_all"
-    [fit-to-page]="fit_to_page"
-    [zoom]="zoom"
-    [zoom-scale]="zoom_scale"
-    [external-link-target]="external_link_target"
-    [autoresize]="autoresize"
-    [show-borders]="show_borders"
-    class="pdf-viewer"
-    [page]="isLoaded ? page : 1"
-    (after-load-complete)="afterLoadComplete($event)"
-    (onError)="onPdfError($event)"
-  ></pdf-viewer>
+<div class="pdf-container-wrapper">
+  @if (!isLoaded && !errorMessage) {
+  <div class="loading-shade">
+    <mat-spinner diameter="40"></mat-spinner>
+    <p>Loading document...</p>
+  </div>
+  } @if (errorMessage) {
+  <div class="error-shade">
+    <mat-icon color="warn">error</mat-icon>
+    <p>{{ errorMessage }}</p>
+  </div>
+  }
+  <div class="flex flex-col w-full" [class.hidden]="!isLoaded">
+    <div class="flex justify-between items-center gap-4 mb-2">
+      @if(isLoaded) {
+      <button
+        mat-icon-button
+        (click)="prevPage()"
+        [disabled]="page === 1"
+        matTooltip="Previous Page"
+      >
+        <mat-icon>navigate_before</mat-icon>
+      </button>
+
+      <span class="page-counter"> {{ page }} / {{ totalPages }} </span>
+
+      <button
+        mat-icon-button
+        (click)="nextPage()"
+        [disabled]="page === totalPages"
+        matTooltip="Next Page"
+      >
+        <mat-icon>navigate_next</mat-icon>
+      </button>
+      }
+    </div>
+    <pdf-viewer
+      [src]="source"
+      [original-size]="original_size"
+      [render-text]="render_text"
+      [rotation]="rotation"
+      [show-all]="show_all"
+      [fit-to-page]="fit_to_page"
+      [zoom]="zoom"
+      [zoom-scale]="zoom_scale"
+      [external-link-target]="external_link_target"
+      [autoresize]="autoresize"
+      [show-borders]="show_borders"
+      class="pdf-viewer"
+      [page]="page"
+      (after-load-complete)="afterLoadComplete($event)"
+      (onError)="onPdfError($event)"
+    ></pdf-viewer>
+  </div>
 </div>
