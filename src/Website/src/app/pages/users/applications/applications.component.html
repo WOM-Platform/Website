@@ -12,14 +12,15 @@
       [mode]="mobileQuery.matches ? 'over' : 'side'"
     >
       <mat-nav-list>
+        @for (app of applicationsList; track app.path) {
         <a
-          *ngFor="let app of applicationsList"
           mat-list-item
           [routerLink]="'/applications/' + app.path"
           routerLinkActive="active-link"
           (click)="mobileQuery.matches ? snav.toggle() : null"
           >{{ app.name | translate }}</a
         >
+        }
       </mat-nav-list>
     </mat-sidenav>
     <mat-sidenav-content>
