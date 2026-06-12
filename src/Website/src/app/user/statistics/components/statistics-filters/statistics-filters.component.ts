@@ -1,5 +1,5 @@
 import { Component, EventEmitter, OnInit, Output, Input } from "@angular/core";
-import { DatePipe, NgFor, NgIf } from "@angular/common";
+import { DatePipe } from "@angular/common";
 import { DatepickerComponent } from "../../../../components/datepicker/datepicker.component";
 import { UserService } from "../../../../_services";
 import { UserMe } from "../../../../_models";
@@ -8,7 +8,7 @@ import { CombinedFilters, DateFilter } from "src/app/_models/filter";
 
 @Component({
   selector: "app-statistics-filters",
-  imports: [DatepickerComponent, NgIf],
+  imports: [DatepickerComponent],
   standalone: true,
   templateUrl: "./statistics-filters.component.html",
   styleUrl: "./statistics-filters.component.css",

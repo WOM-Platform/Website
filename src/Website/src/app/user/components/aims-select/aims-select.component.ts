@@ -2,11 +2,11 @@ import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 import { AimsService } from "../../../_services";
 import { Aim } from "../../../_models";
 import { SnackBarService } from "../../../_services/snack-bar.service";
-import { NgFor } from "@angular/common";
+
 
 @Component({
   selector: "app-aims-select",
-  imports: [NgFor],
+  imports: [],
   standalone: true,
   templateUrl: "./aims-select.component.html",
   styleUrls: ["./aims-select.component.css"],

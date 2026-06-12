@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
-import { NgClass, NgIf } from "@angular/common";
+import { NgClass } from "@angular/common";
 import { FormBuilder, FormGroup } from "@angular/forms";
 
 import { MatSliderModule } from "@angular/material/slider";
@@ -12,14 +12,13 @@ import { Filter } from "../../../../../../_models/filter";
 @Component({
   selector: "app-offer-filters",
   imports: [
-    NgIf,
     MatSliderModule,
     ValiditySliderComponent,
     TranslateModule,
     MapComponent,
     AimsSelectComponent,
-    NgClass,
-  ],
+    NgClass
+],
   standalone: true,
   templateUrl: "./offer-filters.component.html",
   styleUrl: "./offer-filters.component.css",

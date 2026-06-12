@@ -16,7 +16,7 @@ import { debounceTime, distinctUntilChanged } from "rxjs/operators";
 import { PaginatorModule } from "primeng/paginator";
 import { Subscription } from "rxjs";
 import { MatIcon } from "@angular/material/icon";
-import { NgClass, NgIf } from "@angular/common";
+import { NgClass } from "@angular/common";
 import { TranslateModule } from "@ngx-translate/core";
 import { UserFormComponent } from "../../user-form/user-form.component";
 import { User } from "../../../../_models";
@@ -28,11 +28,10 @@ import { User } from "../../../../_models";
     PaginatorModule,
     ReactiveFormsModule,
     MatIcon,
-    NgIf,
     NgClass,
     TranslateModule,
-    UserFormComponent,
-  ],
+    UserFormComponent
+],
   standalone: true,
   templateUrl: "./search-source.component.html",
   styleUrl: "./search-source.component.css",

@@ -1,4 +1,4 @@
-import { CommonModule } from "@angular/common";
+
 import { Component, Input, OnDestroy, OnInit } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 import { BehaviorSubject, Subject, takeUntil } from "rxjs";
@@ -6,7 +6,7 @@ import { CookieConsentService } from "src/app/_services/cookie-consent.service";
 
 @Component({
   selector: "app-cookie-banner",
-  imports: [CommonModule, FormsModule],
+  imports: [FormsModule],
   templateUrl: "./cookie-banner.component.html",
   styleUrl: "./cookie-banner.component.css",
   standalone: true,

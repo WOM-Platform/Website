@@ -6,7 +6,7 @@ import {
   Output,
 } from "@angular/core";
 import { SearchComponent } from "../../search/search.component";
-import { NgClass, NgFor, NgIf } from "@angular/common";
+import { NgClass } from "@angular/common";
 import { MerchantService } from "src/app/_services";
 import { LazySearchComponent } from "../../lazy-search/lazy-search.component";
 import { Merchant } from "src/app/_models";
@@ -23,11 +23,9 @@ import { MatIcon } from "@angular/material/icon";
   imports: [
     SearchComponent,
     MatIcon,
-    NgIf,
-    NgFor,
     NgClass,
-    LazySearchComponent,
-  ],
+    LazySearchComponent
+],
   templateUrl: "./entity-search.component.html",
   styleUrl: "./entity-search.component.css",
 })

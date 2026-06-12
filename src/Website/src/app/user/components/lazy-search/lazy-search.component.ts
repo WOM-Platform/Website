@@ -6,13 +6,13 @@ import {
   Output,
 } from "@angular/core";
 
-import { NgFor, NgIf } from "@angular/common";
+
 import { Source } from "postcss";
 import { Merchant } from "../../../_models";
 
 @Component({
   selector: "app-lazy-search",
-  imports: [NgIf, NgFor],
+  imports: [],
   standalone: true,
   templateUrl: "./lazy-search.component.html",
   styleUrl: "./lazy-search.component.css",

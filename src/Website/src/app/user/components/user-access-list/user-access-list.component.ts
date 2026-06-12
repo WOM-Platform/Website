@@ -11,14 +11,14 @@ import { SearchSourceComponent } from "./search-source/search-source.component";
 import { UserService } from "../../../_services";
 import { animate, style, transition, trigger } from "@angular/animations";
 import { Subscription } from "rxjs";
-import { NgFor, NgIf } from "@angular/common";
+
 import { MatIcon } from "@angular/material/icon";
 import { FormsModule } from "@angular/forms";
 
 @Component({
   selector: "app-user-access-list",
   templateUrl: "./user-access-list.component.html",
-  imports: [NgIf, NgFor, FormsModule, MatIcon, SearchSourceComponent],
+  imports: [FormsModule, MatIcon, SearchSourceComponent],
   styleUrl: "./user-access-list.component.css",
   animations: [
     trigger("fadeInOut", [

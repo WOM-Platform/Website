@@ -1,38 +1,46 @@
 <ul class="access-list">
-    <li *ngFor="let access of accessList">
-        <div class="access-item">
-            <div class="access-details">
-                <div>
-                    <span class="text-slate-600 font-semibold">Name</span>:
-                    {{ access.name }} {{ access.surname }}
-                </div>
-                <div>
-                    <span class="text-slate-600 font-semibold">Email</span>:
-                    {{ access.email }}
-                </div>
-                <div *ngIf="showRole">
-                    <span class="text-slate-600 font-semibold">Ruolo</span>:
-                    {{ access.role }}
-                </div>
+  @for (access of accessList; track access) {
+    <li>
+      <div class="access-item">
+        <div class="access-details">
+          <div>
+            <span class="text-slate-600 font-semibold">Name</span>:
+            {{ access.name }} {{ access.surname }}
+          </div>
+          <div>
+            <span class="text-slate-600 font-semibold">Email</span>:
+            {{ access.email }}
+          </div>
+          @if (showRole) {
+            <div>
+              <span class="text-slate-600 font-semibold">Ruolo</span>:
+              {{ access.role }}
             </div>
-            <ng-container *ngIf="action === 'edit'">
-                <button
-                        class="flex items-center justify-center p-0"
-                        (click)="onDelete(access)"
-                >
-                    <i
-                            class="fas fa-trash text-red-500 text-base flex items-center justify-center w-8 h-8 hover:bg-red-100 hover:rounded-full"
-                    ></i>
-                </button>
-            </ng-container>
+          }
         </div>
+        @if (action === 'edit') {
+          <button
+            class="flex items-center justify-center p-0"
+            (click)="onDelete(access)"
+            >
+            <i
+              class="fas fa-trash text-red-500 text-base flex items-center justify-center w-8 h-8 hover:bg-red-100 hover:rounded-full"
+            ></i>
+          </button>
+        }
+      </div>
     </li>
+  }
 </ul>
-<div *ngIf="action === 'edit'">
-    <div *ngIf="!createNewAccess" class="mt-6">
+@if (action === 'edit') {
+  <div>
+    @if (!createNewAccess) {
+      <div class="mt-6">
         <app-user-access-list
-                [isRoleAccessRequired]="showRole"
-                (accessToAdd)="handleAccessList($event)"
+          [isRoleAccessRequired]="showRole"
+          (accessToAdd)="handleAccessList($event)"
         ></app-user-access-list>
-    </div>
-</div>
+      </div>
+    }
+  </div>
+}

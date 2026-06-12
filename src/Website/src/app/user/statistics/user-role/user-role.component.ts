@@ -2,7 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { Merchant } from "../../../_models";
 import { StorageService } from "../../../_services/storage.service";
 import { StatsService, UserService } from "../../../_services";
-import { NgFor, NgIf } from "@angular/common";
+
 import { Instrument } from "../../../_models/instrument";
 
 import { BarChartModule, PieChartModule } from "@swimlane/ngx-charts";

@@ -16,11 +16,13 @@
           [disabled]="isEditing"
           (input)="onSliderChange()"
           class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-blue-600"
-        />
+          />
 
         <!-- Tick Marks -->
         <div class="flex justify-between text-xs mt-1 px-1 text-gray-600">
-          <span *ngFor="let val of tickValues">{{ val }}</span>
+          @for (val of tickValues; track val) {
+            <span>{{ val }}</span>
+          }
         </div>
 
         <!-- Label Display -->

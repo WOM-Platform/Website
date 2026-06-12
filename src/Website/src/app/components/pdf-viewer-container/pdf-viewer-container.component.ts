@@ -1,4 +1,4 @@
-import { NgIf } from "@angular/common";
+
 import { Component, Input, OnInit } from "@angular/core";
 import { PdfViewerModule } from "ng2-pdf-viewer";
 import { MatIconButton } from "@angular/material/button";

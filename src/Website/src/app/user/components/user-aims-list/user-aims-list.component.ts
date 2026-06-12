@@ -4,13 +4,13 @@ import {Aim, AimEditing, AimWithChecked} from "src/app/_models";
 import {AimsService} from "src/app/_services";
 import {MatIconModule} from "@angular/material/icon";
 import {FormsModule} from "@angular/forms";
-import {NgFor, NgIf} from "@angular/common";
+
 
 @Component({
     selector: "app-user-aims-list",
     templateUrl: "./user-aims-list.component.html",
     styleUrls: ["./user-aims-list.component.css"],
-    imports: [NgIf, NgFor, FormsModule, MatIconModule],
+    imports: [FormsModule, MatIconModule],
     animations: [
         trigger("fadeInOut", [
             transition(":enter", [

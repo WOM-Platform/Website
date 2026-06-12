@@ -27,7 +27,7 @@ import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatCheckboxModule } from "@angular/material/checkbox";
 import { EditableElementComponent } from "../../../components/editable-element/editable-element.component";
 import { PosService } from "../../../../_services";
-import { NgIf } from "@angular/common";
+
 import { MatTooltipModule } from "@angular/material/tooltip";
 import { SnackBarService } from "../../../../_services/snack-bar.service";
 
@@ -41,9 +41,8 @@ import { SnackBarService } from "../../../../_services/snack-bar.service";
     MatCheckboxModule,
     MatTooltipModule,
     GoogleMapsModule,
-    EditableElementComponent,
-    NgIf,
-  ],
+    EditableElementComponent
+],
   standalone: true,
   styleUrls: [
     "./forms-pos.component.css",

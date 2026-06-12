@@ -1,13 +1,18 @@
 <div class="mx-auto max-w-[1000px]">
-  <mat-tab-group *ngIf="currentUser" class="min-w-[800px]" #tabGroup>
-    <mat-tab *ngIf="currentUser.role === 'Admin'" label="Lista Instruments">
-      <app-admin-managment-instruments />
-    </mat-tab>
-    <mat-tab
-      *ngIf="myInstruments && myInstruments.length > 0"
-      label="I miei Instruments"
-    >
-      <app-my-instruments-collection />
-    </mat-tab>
-  </mat-tab-group>
+  @if (currentUser) {
+    <mat-tab-group class="min-w-[800px]" #tabGroup>
+      @if (currentUser.role === 'Admin') {
+        <mat-tab label="Lista Instruments">
+          <app-admin-managment-instruments />
+        </mat-tab>
+      }
+      @if (myInstruments && myInstruments.length > 0) {
+        <mat-tab
+          label="I miei Instruments"
+          >
+          <app-my-instruments-collection />
+        </mat-tab>
+      }
+    </mat-tab-group>
+  }
 </div>

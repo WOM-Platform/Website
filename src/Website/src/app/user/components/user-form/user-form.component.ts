@@ -1,6 +1,6 @@
 import {ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {AbstractControl, FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
-import {NgClass, NgIf} from "@angular/common";
+import { NgClass } from "@angular/common";
 import {LoadingService} from "../../../_services/loading.service";
 import {UserService} from "../../../_services";
 import {User} from "../../../_models";
@@ -9,11 +9,10 @@ import {StorageService} from "../../../_services/storage.service";
 @Component({
     selector: 'app-user-form',
     imports: [
-        FormsModule,
-        ReactiveFormsModule,
-        NgClass,
-        NgIf
-    ],
+    FormsModule,
+    ReactiveFormsModule,
+    NgClass
+],
     templateUrl: './user-form.component.html',
     styleUrl: './user-form.component.css'
 })

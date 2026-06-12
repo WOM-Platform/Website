@@ -3,7 +3,7 @@
     [formGroup]="badgeForm"
     (ngSubmit)="onSubmit()"
     class="bg-white p-8 rounded-xl shadow-md mx-auto space-y-6"
-  >
+    >
     <h2 class="text-2xl font-semibold text-gray-800">Creazione Badge</h2>
 
     <!-- Nome -->
@@ -12,107 +12,110 @@
         <div class="flex gap-2 items-start">
           <label class="block text-sm font-medium text-gray-700"
             >Nome (IT)</label
-          ><span class="text-red-600">*</span>
+            ><span class="text-red-600">*</span>
+          </div>
+          <input formControlName="it" type="text" class="inputField" />
         </div>
-        <input formControlName="it" type="text" class="inputField" />
-      </div>
-      <div>
-        <div class="flex gap-2 items-start">
-          <label class="block text-sm font-medium text-gray-700"
-            >Nome (EN)</label
-          ><span class="text-red-600">*</span>
+        <div>
+          <div class="flex gap-2 items-start">
+            <label class="block text-sm font-medium text-gray-700"
+              >Nome (EN)</label
+              ><span class="text-red-600">*</span>
+            </div>
+            <input formControlName="en" type="text" class="inputField" />
+          </div>
         </div>
-        <input formControlName="en" type="text" class="inputField" />
-      </div>
-    </div>
-    <!-- Is Public e challenge-->
-    <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
-      <div>
-        <div class="flex gap-2 items-start">
-          <label for="isPublic" class="block text-sm text-gray-700"
-            >Pubblico?</label
-          >
-          <span class="text-red-600">*</span>
-        </div>
-        <input
-          type="checkbox"
-          formControlName="isPublic"
-          id="isPublic"
-          class="h-4 w-4 text-blue-600 border-gray-300 rounded"
-        />
-      </div>
+        <!-- Is Public e challenge-->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+          <div>
+            <div class="flex gap-2 items-start">
+              <label for="isPublic" class="block text-sm text-gray-700"
+                >Pubblico?</label
+                >
+                <span class="text-red-600">*</span>
+              </div>
+              <input
+                type="checkbox"
+                formControlName="isPublic"
+                id="isPublic"
+                class="h-4 w-4 text-blue-600 border-gray-300 rounded"
+                />
+            </div>
 
-      <div>
-        <label class="block text-sm font-medium text-gray-700">Challenge</label>
-        <select formControlName="challengeId" class="inputField">
-          <option
-            *ngFor="let challenge of challengeList"
-            [value]="challenge.id"
-          >
-            {{ challenge.name.it }}
-          </option>
-        </select>
-      </div>
-    </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-700">Challenge</label>
+              <select formControlName="challengeId" class="inputField">
+                @for (challenge of challengeList; track challenge) {
+                  <option
+                    [value]="challenge.id"
+                    >
+                    {{ challenge.name.it }}
+                  </option>
+                }
+              </select>
+            </div>
+          </div>
 
-    <!-- Image Upload -->
-    <div>
-      <label class="block text-sm font-medium text-gray-700"
-        >Carica Immagine</label
-      >
-      <input
-        type="file"
-        (change)="onFileChange($event)"
-        class="mt-1 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
-      />
-    </div>
+          <!-- Image Upload -->
+          <div>
+            <label class="block text-sm font-medium text-gray-700"
+              >Carica Immagine</label
+              >
+              <input
+                type="file"
+                (change)="onFileChange($event)"
+                class="mt-1 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
+                />
+            </div>
 
-    <!-- Descrizione -->
-    <div
-      formGroupName="description"
-      class="grid grid-cols-1 md:grid-cols-2 gap-4"
-    >
-      <div>
-        <label class="block text-sm font-medium text-gray-700"
-          >Descrizione (IT)</label
-        >
-        <textarea formControlName="it" rows="3" class="inputField"></textarea>
-      </div>
-      <div>
-        <label class="block text-sm font-medium text-gray-700"
-          >Descrizione (EN)</label
-        >
-        <textarea formControlName="en" rows="3" class="inputField"></textarea>
-      </div>
-    </div>
+            <!-- Descrizione -->
+            <div
+              formGroupName="description"
+              class="grid grid-cols-1 md:grid-cols-2 gap-4"
+              >
+              <div>
+                <label class="block text-sm font-medium text-gray-700"
+                  >Descrizione (IT)</label
+                  >
+                  <textarea formControlName="it" rows="3" class="inputField"></textarea>
+                </div>
+                <div>
+                  <label class="block text-sm font-medium text-gray-700"
+                    >Descrizione (EN)</label
+                    >
+                    <textarea formControlName="en" rows="3" class="inputField"></textarea>
+                  </div>
+                </div>
 
-    <!-- Info URL -->
-    <div>
-      <label class="block text-sm font-medium text-gray-700">Info URL</label>
-      <input formControlName="informationUrl" type="url" class="inputField" />
-    </div>
+                <!-- Info URL -->
+                <div>
+                  <label class="block text-sm font-medium text-gray-700">Info URL</label>
+                  <input formControlName="informationUrl" type="url" class="inputField" />
+                </div>
 
-    <button
-      type="button"
-      (click)="toggleFilter()"
-      class="w-full py-2 px-4 bg-gray-200 text-gray-800 font-semibold rounded-md hover:bg-gray-300 transition duration-200"
-    >
-      {{ isFiltering ? "Nascondi Filtro" : "Mostra Filtro" }}
-    </button>
-    <!-- Filter -->
-    <div *ngIf="isFiltering">
-      <app-simple-filter
-        (filteredEmit)="updateFilter($event)"
-        (filterToggled)="onFilterToggle($event)"
-      />
-    </div>
-    <!-- Submit Button -->
-    <button
-      type="submit"
-      [disabled]="badgeForm.invalid"
-      class="w-full py-2 px-4 bg-blue-600 text-white font-semibold rounded-md hover:bg-blue-700 transition duration-200 disabled:opacity-50"
-    >
-      Submit
-    </button>
-  </form>
-</div>
+                <button
+                  type="button"
+                  (click)="toggleFilter()"
+                  class="w-full py-2 px-4 bg-gray-200 text-gray-800 font-semibold rounded-md hover:bg-gray-300 transition duration-200"
+                  >
+                  {{ isFiltering ? "Nascondi Filtro" : "Mostra Filtro" }}
+                </button>
+                <!-- Filter -->
+                @if (isFiltering) {
+                  <div>
+                    <app-simple-filter
+                      (filteredEmit)="updateFilter($event)"
+                      (filterToggled)="onFilterToggle($event)"
+                      />
+                  </div>
+                }
+                <!-- Submit Button -->
+                <button
+                  type="submit"
+                  [disabled]="badgeForm.invalid"
+                  class="w-full py-2 px-4 bg-blue-600 text-white font-semibold rounded-md hover:bg-blue-700 transition duration-200 disabled:opacity-50"
+                  >
+                  Submit
+                </button>
+              </form>
+            </div>

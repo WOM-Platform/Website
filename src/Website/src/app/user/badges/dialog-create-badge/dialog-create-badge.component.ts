@@ -5,7 +5,7 @@ import {
   transition,
   trigger,
 } from "@angular/animations";
-import { CommonModule, NgIf } from "@angular/common";
+
 import { Component, Inject, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { ReactiveFormsModule } from "@angular/forms";
@@ -15,7 +15,7 @@ import { SimpleFilterComponent } from "../../components/simple-filter/simple-fil
 
 @Component({
   selector: "app-dialog-create-badge",
-  imports: [ReactiveFormsModule, CommonModule, SimpleFilterComponent],
+  imports: [ReactiveFormsModule, SimpleFilterComponent],
   templateUrl: "./dialog-create-badge.component.html",
   styleUrl: "./dialog-create-badge.component.css",
   animations: [

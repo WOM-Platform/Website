@@ -1,4 +1,4 @@
-import { NgFor } from "@angular/common";
+
 import { Component, OnChanges, OnInit, SimpleChanges } from "@angular/core";
 import { MatDialogRef } from "@angular/material/dialog";
 import { MatIcon } from "@angular/material/icon";
@@ -10,7 +10,7 @@ import { AimsService } from "src/app/_services";
 @Component({
     selector: "app-dialog-filter-aims",
     providers: [AimsService],
-    imports: [NgFor, MatIcon],
+    imports: [MatIcon],
     templateUrl: "./dialog-filter-aims.component.html",
     styleUrls: ["./dialog-filter-aims.component.css"]
 })

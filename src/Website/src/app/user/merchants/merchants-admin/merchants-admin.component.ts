@@ -8,7 +8,7 @@ import { DialogType } from "../../../_models/dialogType";
 import { first } from "rxjs/operators";
 import { MatDialog } from "@angular/material/dialog";
 import { AdminTableComponent } from "../../components/admin-table/admin-table.component";
-import { NgIf } from "@angular/common";
+
 import { SharedModule } from "../../../shared/shared.module";
 import { Merchant } from "../../../_models";
 import { MerchantService, UserService } from "../../../_services";
@@ -25,11 +25,10 @@ import { CreateButtonComponent } from "../../components/create-button/create-but
   selector: "app-merchants-admin",
   imports: [
     AdminTableComponent,
-    NgIf,
     SharedModule,
     FiltersComponent,
-    CreateButtonComponent,
-  ],
+    CreateButtonComponent
+],
   standalone: true,
   templateUrl: "./merchants-admin.component.html",
   styleUrl: "./merchants-admin.component.css",

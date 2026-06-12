@@ -1,11 +1,11 @@
 import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 import { MatIcon } from "@angular/material/icon";
-import { NgClass, NgForOf, NgIf, TitleCasePipe } from "@angular/common";
+import { NgClass, TitleCasePipe } from "@angular/common";
 import { SharedModule } from "../../../shared/shared.module";
 
 @Component({
   selector: "app-admin-table",
-  imports: [MatIcon, NgForOf, NgIf, NgClass, SharedModule],
+  imports: [MatIcon, NgClass, SharedModule],
   standalone: true,
   templateUrl: "./admin-table.component.html",
   styleUrl: "./admin-table.component.css",

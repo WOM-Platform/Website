@@ -1,4 +1,4 @@
-import { CommonModule, NgFor, NgIf } from "@angular/common";
+
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 import { CreateButtonComponent } from "../components/create-button/create-button.component";
@@ -14,7 +14,7 @@ import { Challenge } from "src/app/_models/challenge";
 
 @Component({
   selector: "app-badges",
-  imports: [CommonModule, CreateButtonComponent, BlurhashComponent],
+  imports: [CreateButtonComponent, BlurhashComponent],
   templateUrl: "./badges.component.html",
   styleUrl: "./badges.component.css",
 })

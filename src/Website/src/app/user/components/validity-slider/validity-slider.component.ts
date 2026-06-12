@@ -1,4 +1,4 @@
-import { CommonModule } from "@angular/common";
+
 import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 import {
   FormBuilder,
@@ -10,7 +10,7 @@ import { MatSliderModule } from "@angular/material/slider";
 
 @Component({
   selector: "app-validity-slider",
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [ReactiveFormsModule],
 
   standalone: true,
   templateUrl: "./validity-slider.component.html",

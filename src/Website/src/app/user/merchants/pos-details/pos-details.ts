@@ -7,7 +7,7 @@ import { StorageService } from "../../../_services/storage.service";
 import { MatDialog, MatDialogModule } from "@angular/material/dialog";
 import { decodeBlurHash } from "../../../utils/blurhash-utils";
 import { UploadImageComponent } from "../../../components/upload-image/upload-image.component";
-import { CommonModule, Location } from "@angular/common";
+import { Location } from "@angular/common";
 import { MatButtonModule } from "@angular/material/button";
 import { MatIconModule } from "@angular/material/icon";
 import { TranslateModule } from "@ngx-translate/core";
@@ -20,15 +20,14 @@ import { SnackBarService } from "../../../_services/snack-bar.service";
 @Component({
   selector: "app-pos-details",
   imports: [
-    CommonModule,
     MatDialogModule,
     MatButtonModule,
     MatFormFieldModule,
     MatIconModule,
     TranslateModule,
     PosFormComponent,
-    OffersComponent,
-  ],
+    OffersComponent
+],
   standalone: true,
   templateUrl: "pos-details.html",
   styleUrls: ["pos-details.css"],

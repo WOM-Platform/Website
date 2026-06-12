@@ -1,4 +1,4 @@
-import { CommonModule } from "@angular/common";
+
 import { Component } from "@angular/core";
 import { TranslateModule } from "@ngx-translate/core";
 import { StoreLogosComponent } from "src/app/components/store-logos/store-logos.component";
@@ -11,12 +11,11 @@ import { FaqListComponent } from "../../../components/faq-list/faq-list.componen
   styleUrls: ["./esercenti.component.css"],
   animations: [],
   imports: [
-    CommonModule,
     TranslateModule,
     StoreLogosComponent,
     BtnFaqComponent,
-    FaqListComponent,
-  ],
+    FaqListComponent
+],
   standalone: true,
 })
 export class EsercentiComponent {

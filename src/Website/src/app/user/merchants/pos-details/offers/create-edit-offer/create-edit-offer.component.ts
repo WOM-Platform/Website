@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit } from "@angular/core";
-import { NgIf } from "@angular/common";
+
 import { PaginatorModule } from "primeng/paginator";
 import {
   AbstractControl,
@@ -16,7 +16,7 @@ import { Filter } from "../../../../../_models/filter";
 
 @Component({
   selector: "app-create-offer",
-  imports: [NgIf, PaginatorModule, ReactiveFormsModule, OfferFiltersComponent],
+  imports: [PaginatorModule, ReactiveFormsModule, OfferFiltersComponent],
   standalone: true,
   templateUrl: "./create-edit-offer.component.html",
   styleUrl: "./create-edit-offer.component.css",

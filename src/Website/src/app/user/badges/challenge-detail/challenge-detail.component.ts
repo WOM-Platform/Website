@@ -1,4 +1,4 @@
-import { CommonModule } from "@angular/common";
+
 import { Component, Input, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, ReactiveFormsModule } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
@@ -10,7 +10,7 @@ import { SnackBarService } from "src/app/_services/snack-bar.service";
 @Component({
   selector: "app-challenge-detail",
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [ReactiveFormsModule],
   templateUrl: "./challenge-detail.component.html",
   styleUrls: ["./challenge-detail.component.css"],
 })

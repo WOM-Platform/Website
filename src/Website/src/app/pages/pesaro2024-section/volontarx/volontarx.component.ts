@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { CommonModule, NgForOf, NgIf } from "@angular/common";
+import { CommonModule } from "@angular/common";
 import { TranslateModule, TranslateService } from "@ngx-translate/core";
 import { DomSanitizer } from "@angular/platform-browser";
 import { StoreLogosComponent } from "src/app/components/store-logos/store-logos.component";

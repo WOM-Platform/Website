@@ -27,7 +27,7 @@ import { TranslateModule } from "@ngx-translate/core";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatCheckboxModule } from "@angular/material/checkbox";
 import { MatTooltipModule } from "@angular/material/tooltip";
-import { NgIf } from "@angular/common";
+
 
 @Component({
   selector: "app-pos-create-dialog",
@@ -40,9 +40,8 @@ import { NgIf } from "@angular/common";
     ReactiveFormsModule,
     MatCheckboxModule,
     MatTooltipModule,
-    GoogleMapsModule,
-    NgIf,
-  ],
+    GoogleMapsModule
+],
   standalone: true,
 })
 export class PosCreateDialogComponent implements OnInit {

@@ -6,7 +6,7 @@ import {
   OnChanges,
   SimpleChanges,
 } from "@angular/core";
-import { NgIf } from "@angular/common";
+
 import { FormBuilder, FormGroup, ReactiveFormsModule } from "@angular/forms";
 
 @Component({

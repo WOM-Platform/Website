@@ -16,7 +16,7 @@ import {
 } from "@angular/material/list";
 import { TranslateModule } from "@ngx-translate/core";
 import { StoreLogosComponent } from "src/app/components/store-logos/store-logos.component";
-import { CommonModule } from "@angular/common";
+
 import { PosWithOffers } from "src/app/_models/offer";
 
 @Component({
@@ -24,14 +24,13 @@ import { PosWithOffers } from "src/app/_models/offer";
   templateUrl: "./merchant.component.html",
   styleUrls: ["./merchant.component.css"],
   imports: [
-    CommonModule,
     GoogleMap,
     MapInfoWindow,
     MapMarker,
     TranslateModule,
     MatSelectionList,
-    StoreLogosComponent,
-  ],
+    StoreLogosComponent
+],
   standalone: true,
 })
 export class MerchantComponent implements OnInit, AfterViewInit {

@@ -2,12 +2,12 @@ import {Component, Inject, OnInit} from '@angular/core';
 import {PosService} from "../../_services";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import { HttpEvent, HttpEventType } from "@angular/common/http";
-import {NgIf} from "@angular/common";
+
 
 
 @Component({
     selector: 'app-upload-image',
-    imports: [NgIf],
+    imports: [],
     templateUrl: './upload-image.component.html',
     styleUrl: './upload-image.component.css'
 })

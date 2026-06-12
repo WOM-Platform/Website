@@ -1,11 +1,11 @@
-import { NgFor, NgIf } from "@angular/common";
+
 import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 import { filter } from "rxjs";
 import { MerchantFilter } from "src/app/_models/filter";
 
 @Component({
   selector: "app-entity-search-user",
-  imports: [NgFor, NgIf],
+  imports: [],
   templateUrl: "./entity-search-user.component.html",
   styleUrl: "./entity-search-user.component.css",
 })

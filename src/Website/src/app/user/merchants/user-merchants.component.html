@@ -1,8 +1,10 @@
 <div class="mx-auto max-w-[1000px]">
   <mat-tab-group class="min-w-[800px]" #tabGroup>
-    <mat-tab *ngIf="currentUser.role === 'Admin'" label="Lista Merchant">
-      <app-merchants-admin></app-merchants-admin>
-    </mat-tab>
+    @if (currentUser.role === 'Admin') {
+      <mat-tab label="Lista Merchant">
+        <app-merchants-admin></app-merchants-admin>
+      </mat-tab>
+    }
     <mat-tab label="I tuoi Merchant">
       <app-my-merchants-collection />
     </mat-tab>

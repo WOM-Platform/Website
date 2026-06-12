@@ -15,7 +15,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from "@angular/forms";
-import { NgFor, NgIf } from "@angular/common";
+
 import { BadgeService } from "src/app/_services/badge.service";
 import { LoadingService } from "src/app/_services/loading.service";
 import { SnackBarService } from "src/app/_services/snack-bar.service";
@@ -25,12 +25,10 @@ import { SimpleFilterComponent } from "../../components/simple-filter/simple-fil
 @Component({
   selector: "app-badge-detail",
   imports: [
-    NgIf,
-    NgFor,
     ReactiveFormsModule,
     BlurhashComponent,
-    SimpleFilterComponent,
-  ],
+    SimpleFilterComponent
+],
   templateUrl: "./badge-detail.component.html",
   styleUrl: "./badge-detail.component.css",
   animations: [

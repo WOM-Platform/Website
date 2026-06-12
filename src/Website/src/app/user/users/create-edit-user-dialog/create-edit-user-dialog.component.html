@@ -1,10 +1,11 @@
 <div class="px-4 py-2">
-    <div *ngIf="!dialogData; else editUser">
-        <p class="font-semibold text-cyan-700 text-center">Nuovo Utente</p>
-        <app-user-form (userSaved)="onCreatedUser($event)"/>
+  @if (!dialogData) {
+    <div>
+      <p class="font-semibold text-cyan-700 text-center">Nuovo Utente</p>
+      <app-user-form (userSaved)="onCreatedUser($event)"/>
     </div>
-    <ng-template #editUser>
-        <p class="font-semibold text-cyan-700 text-center">Modifica Utente</p>
-        <app-user-form [userToEdit]="dialogData" (userSaved)="onEditUser($event)"/>
-    </ng-template>
+  } @else {
+    <p class="font-semibold text-cyan-700 text-center">Modifica Utente</p>
+    <app-user-form [userToEdit]="dialogData" (userSaved)="onEditUser($event)"/>
+  }
 </div>

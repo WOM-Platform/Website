@@ -3,57 +3,59 @@
     <app-statistics-filters
       [dateFilters]="dateFilters"
       (onDateFilter)="onDatesSelected($event)"
-    />
-    <div *ngIf="currentUser.role === 'Admin'" class="flex items-center gap-2">
-      <button
-        class="cursor-help text-gray-600 focus:outline-none focus:ring-2 focus:ring-slate-400"
-        [matTooltip]="activeFiltersSummary"
-        matTooltipShowDelay="200"
-        aria-label="Informazioni sui filtri attivi"
-      >
-        <span
-          class="material-symbols-outlined rounded-full p-2 hover:bg-slate-100"
-          >info</span
-        >
-      </button>
+      />
+    @if (currentUser.role === 'Admin') {
+      <div class="flex items-center gap-2">
+        <button
+          class="cursor-help text-gray-600 focus:outline-none focus:ring-2 focus:ring-slate-400"
+          [matTooltip]="activeFiltersSummary"
+          matTooltipShowDelay="200"
+          aria-label="Informazioni sui filtri attivi"
+          >
+          <span
+            class="material-symbols-outlined rounded-full p-2 hover:bg-slate-100"
+            >info</span
+            >
+          </button>
+          <!-- Scarica report annuale -->
+          <button
+            (click)="openModalReport()"
+            class="text-gray-600 transition focus:outline-none focus:ring-2 focus:ring-slate-400"
+            aria-label="Apri il report annuale"
+            >
+            <span
+              class="rounded-full p-2 hover:bg-slate-100 material-symbols-outlined"
+              >assignment</span
+              >
+            </button>
+            <!-- Scarica CSV -->
+            <app-csv-download [filters]="filters" />
+          </div>
+        }
+      </div>
+      <header class="w-full h-[5px] bg-[#739cf4] my-6"></header>
 
-      <!-- Scarica report annuale -->
-
-      <button
-        (click)="openModalReport()"
-        class="text-gray-600 transition focus:outline-none focus:ring-2 focus:ring-slate-400"
-        aria-label="Apri il report annuale"
-      >
-        <span
-          class="rounded-full p-2 hover:bg-slate-100 material-symbols-outlined"
-          >assignment</span
-        >
-      </button>
-
-      <!-- Scarica CSV -->
-      <app-csv-download [filters]="filters" />
+      @if (currentUser.role === 'Admin' || currentUser.merchants.length > 0) {
+        <div>
+          <app-consumer-statistics
+            [dateFilters]="dateFilters"
+            [currentUser]="currentUser"
+            (filtersEmit)="onMerchantSelected($event)"
+            >
+          </app-consumer-statistics>
+        </div>
+      }
+      <!-- WOM Generati Section -->
+      @if (currentUser.role === 'Admin' || currentUser.sources.length > 0) {
+        <div
+          class="mt-10"
+          >
+          <app-generator-statistics-component
+            [dateFilters]="dateFilters"
+            [currentUser]="currentUser"
+            (filtersEmit)="onSourceSelected($event)"
+            >
+          </app-generator-statistics-component>
+        </div>
+      }
     </div>
-  </div>
-  <header class="w-full h-[5px] bg-[#739cf4] my-6"></header>
-
-  <div *ngIf="currentUser.role === 'Admin' || currentUser.merchants.length > 0">
-    <app-consumer-statistics
-      [dateFilters]="dateFilters"
-      [currentUser]="currentUser"
-      (filtersEmit)="onMerchantSelected($event)"
-    >
-    </app-consumer-statistics>
-  </div>
-  <!-- WOM Generati Section -->
-  <div
-    *ngIf="currentUser.role === 'Admin' || currentUser.sources.length > 0"
-    class="mt-10"
-  >
-    <app-generator-statistics-component
-      [dateFilters]="dateFilters"
-      [currentUser]="currentUser"
-      (filtersEmit)="onSourceSelected($event)"
-    >
-    </app-generator-statistics-component>
-  </div>
-</div>

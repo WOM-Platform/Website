@@ -1,4 +1,4 @@
-import { CommonModule } from "@angular/common";
+
 import {
   Component,
   Input,
@@ -10,7 +10,7 @@ import {
 @Component({
   selector: "app-small-images-carousel",
   standalone: true,
-  imports: [CommonModule],
+  imports: [],
   templateUrl: "./small-images-carousel.component.html",
   styleUrl: "./small-images-carousel.component.css",
 })

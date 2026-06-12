@@ -7,14 +7,14 @@ import { MatDialog } from "@angular/material/dialog";
 import { MerchantService, PosService } from "../../../_services";
 import { TranslateService } from "@ngx-translate/core";
 import { MatSnackBar } from "@angular/material/snack-bar";
-import { NgFor, NgIf } from "@angular/common";
+
 import { MatIcon } from "@angular/material/icon";
 import { ActivatedRoute, Router } from "@angular/router";
 import { PosCreateDialogComponent } from "../pos-create-dialog/pos-create-dialog.component";
 
 @Component({
   selector: "app-user-pos-list",
-  imports: [NgIf, NgFor, MatIcon],
+  imports: [MatIcon],
   standalone: true,
   templateUrl: "./user-pos-list.component.html",
   styleUrl: "./user-pos-list.component.css",

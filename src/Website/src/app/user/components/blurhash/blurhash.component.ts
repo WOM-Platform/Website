@@ -1,11 +1,11 @@
-import { CommonModule } from "@angular/common";
+
 import { Component, ElementRef, Input, OnInit, ViewChild } from "@angular/core";
 import { decode } from "blurhash";
 import { ImageBadge } from "src/app/_models/badge";
 
 @Component({
   selector: "app-blurhash",
-  imports: [CommonModule],
+  imports: [],
   templateUrl: "./blurhash.component.html",
   styleUrl: "./blurhash.component.css",
 })

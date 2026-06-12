@@ -1,4 +1,4 @@
-import { NgFor, NgIf } from "@angular/common";
+
 import {
   ChangeDetectorRef,
   Component,
@@ -19,7 +19,7 @@ import { SnackBarService } from "src/app/_services/snack-bar.service";
 
 @Component({
   selector: "app-dialog-annual-report-merchants",
-  imports: [NgFor, NgIf],
+  imports: [],
   templateUrl: "./dialog-annual-report-merchants.component.html",
   styleUrl: "./dialog-annual-report-merchants.component.css",
 })

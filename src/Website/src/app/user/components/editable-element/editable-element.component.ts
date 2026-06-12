@@ -1,4 +1,4 @@
-import { NgIf, NgFor, NgStyle } from "@angular/common";
+import { NgStyle } from "@angular/common";
 import {
   ChangeDetectorRef,
   Component,
@@ -14,7 +14,7 @@ import { TranslateModule } from "@ngx-translate/core";
 
 @Component({
   selector: "app-editable-element",
-  imports: [NgIf, NgFor, FormsModule, NgStyle, MatTooltip, TranslateModule],
+  imports: [FormsModule, NgStyle, MatTooltip, TranslateModule],
   standalone: true,
   templateUrl: "./editable-element.component.html",
   styleUrls: ["./editable-element.component.css"],

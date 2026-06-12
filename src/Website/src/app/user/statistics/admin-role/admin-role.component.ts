@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, OnDestroy, OnInit } from "@angular/core";
-import { CommonModule, DatePipe } from "@angular/common";
+import { DatePipe } from "@angular/common";
 import { SharedModule } from "../../../shared/shared.module";
 import { Aim, Merchants, UserMe } from "../../../_models";
 import { filter, Subscription } from "rxjs";
@@ -24,12 +24,11 @@ import { MatDialog } from "@angular/material/dialog";
   imports: [
     SharedModule,
     CsvDownloadComponent,
-    CommonModule,
     StatisticsFiltersComponent,
     MatTooltip,
     GeneratorStatisticsComponentComponent,
-    ConsumerStatisticsComponent,
-  ],
+    ConsumerStatisticsComponent
+],
   standalone: true,
   templateUrl: "./admin-role.component.html",
   styleUrl: "./admin-role.component.css",

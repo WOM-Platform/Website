@@ -1,4 +1,4 @@
-import { CommonModule } from "@angular/common";
+
 import { Component, OnInit } from "@angular/core";
 import { DomSanitizer, SafeHtml } from "@angular/platform-browser";
 import { TranslateModule, TranslateService } from "@ngx-translate/core";
@@ -11,12 +11,11 @@ import { BtnFaqComponent } from "../../../components/btn-faq/btn-faq.component";
   templateUrl: "./cittadini.component.html",
   styleUrls: ["./cittadini.component.css"],
   imports: [
-    CommonModule,
     TranslateModule,
     StoreLogosComponent,
     FaqListComponent,
-    BtnFaqComponent,
-  ],
+    BtnFaqComponent
+],
   standalone: true,
 })
 export class CittadiniComponent implements OnInit {

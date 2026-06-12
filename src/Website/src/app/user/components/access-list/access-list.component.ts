@@ -1,11 +1,11 @@
 import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
-import { NgFor, NgIf } from "@angular/common";
+
 import { Access } from "src/app/_models/instrument";
 import { UserAccessListComponent } from "../user-access-list/user-access-list.component";
 
 @Component({
   selector: "app-access-list",
-  imports: [NgIf, NgFor, UserAccessListComponent],
+  imports: [UserAccessListComponent],
   standalone: true,
   templateUrl: "./access-list.component.html",
   styleUrls: ["./access-list.component.css"],
