@@ -19,69 +19,14 @@
           <span class="material-symbols-outlined icon-mb"> home </span>
           <span>{{ "NAV.HOME" | translate }}</span>
         </a>
-        <div>
-          <div
-            class="menu-item-accordion"
-            (click)="isAboutOpen = !isAboutOpen"
-            [ngClass]="{ ' bg-slate-200 rounded-full': isAboutOpen }"
-          >
-            <div
-              class="flex items-center gap-2"
-              [ngClass]="{ 'text-blue-600 ': isAboutOpen }"
-            >
-              <span
-                class="material-symbols-outlined icon-mb"
-                [ngClass]="{ 'text-blue-600 bg-white ': isAboutOpen }"
-              >
-                info
-              </span>
-              <span>{{ "NAV.ABOUT.TITLE" | translate }}</span>
-            </div>
-            <span
-              class="material-symbols-outlined transition-transform duration-300"
-              [ngClass]="{
-                'rotate-90': isAboutOpen,
-                'text-blue-600': isAboutOpen
-              }"
-            >
-              chevron_right
-            </span>
-          </div>
-
-          <!-- Toggleable content -->
-          <div
-            class="flex flex-col gap-1 overflow-hidden transition-all duration-300 px-2"
-            *ngIf="isAboutOpen"
-          >
-            <a
-              [routerLink]="['about-section/about']"
-              (click)="drawer.toggle()"
-              routerLinkActive="active"
-              class="menu-item-a"
-            >
-              <span class="material-symbols-outlined icon-mb"> info </span>
-              <span>{{ "NAV.ABOUT.ABOUT" | translate }}</span>
-            </a>
-            <a
-              [routerLink]="['pesaro']"
-              (click)="drawer.toggle()"
-              routerLinkActive="active"
-              class="menu-item-a"
-            >
-              <span class="material-symbols-outlined icon-mb"> apartment </span>
-              <span>{{ "NAV.ABOUT.PESARO" | translate }}</span>
-            </a>
-            <a
-              [routerLink]="['about-section/urbino']"
-              (click)="drawer.toggle()"
-              routerLinkActive="active"
-              class="menu-item-a"
-            >
-              <span class="material-symbols-outlined icon-mb"> apartment </span>
-              <span>{{ "NAV.ABOUT.URBINO" | translate }}</span>
-            </a>
-          </div>
-        </div>
+        <a
+          [routerLink]="['about-section/about']"
+          routerLinkActive="active"
+          class="menu-item-a"
+        >
+          <span class="material-symbols-outlined icon-mb"> info </span>
+          <span>{{ "NAV.ABOUT.TITLE" | translate }}</span>
+        </a>
 
         <div
           class="menu-item-accordion"
@@ -200,38 +145,9 @@
             {{ "NAV.HOME" | translate }}
           </button>
           <!-- About -->
-          <div class="relative group inline-block">
-            <button class="menu-item">
-              <span>{{ "NAV.ABOUT.TITLE" | translate }}</span>
-              <span
-                class="material-symbols-outlined ransform transition-transform duration-300 group-hover:rotate-180"
-              >
-                keyboard_arrow_down</span
-              >
-            </button>
-            <div class="submenu">
-              <button
-                (click)="navigate('about-section/about')"
-                class="block w-full text-left px-4 py-2 text-gray-800 hover:bg-gray-100"
-              >
-                {{ "NAV.ABOUT.ABOUT" | translate }}
-              </button>
-
-              <button
-                (click)="navigate('pesaro')"
-                class="block w-full text-left px-4 py-2 text-gray-800 hover:bg-gray-100"
-              >
-                {{ "NAV.ABOUT.PESARO" | translate }}
-              </button>
-
-              <button
-                (click)="navigate('about-section/urbino')"
-                class="block w-full text-left px-4 py-2 text-gray-800 hover:bg-gray-100"
-              >
-                {{ "NAV.ABOUT.URBINO" | translate }}
-              </button>
-            </div>
-          </div>
+          <button (click)="navigate('about-section/about')" class="menu-item">
+            {{ "NAV.ABOUT.TITLE" | translate }}
+          </button>
 
           <!-- users -->
           <div class="relative group inline-block">
