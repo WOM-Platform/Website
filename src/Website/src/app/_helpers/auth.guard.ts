@@ -7,7 +7,7 @@ import {
 } from "@angular/router";
 import { UserService } from "../_services";
 import { Observable } from "rxjs";
-import { UserMe } from "../_models";
+import { UserMe, UserLogin } from "../_models";
 import { isTokenValid } from "./token.helper";
 
 export const authGuard: CanActivateFn = (
@@ -17,7 +17,8 @@ export const authGuard: CanActivateFn = (
   const router = inject(Router);
   const userService = inject(UserService);
   const currentUser = userService.currentUserValue;
-  const currentUserLogin: UserMe = userService.currentUserLoginValue;
+
+  const currentUserLogin: UserLogin | null = userService.currentUserLoginValue;
 
   // User is logged
   if (currentUserLogin) {
@@ -44,7 +45,12 @@ export const authGuard: CanActivateFn = (
     }
     // Check for admin access
     const requiredRoles = route.data["roles"] as Array<string>;
-    if (requiredRoles && !requiredRoles.includes(currentUser.role)) {
+
+    if (
+      requiredRoles &&
+      currentUser &&
+      !requiredRoles.includes(currentUser.role)
+    ) {
       // Role not authorised so redirect to home page
       router.navigate(["/user/home"]);
       return false;

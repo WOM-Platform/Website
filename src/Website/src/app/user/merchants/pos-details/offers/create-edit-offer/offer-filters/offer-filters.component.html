@@ -1,93 +1,82 @@
 @if (isEditing && !filters) {
-  <div></div>
+<div></div>
 } @else {
-  <small class="text-gray-500 text-xs"
-    >Se vuoi limitare l'uso di questa offerta a degli specifici WOM puoi
-    aggiungere i filtri.<br />
-    Questa azione non è consigliata per i nuovi utenti</small
-    >
-    @if (!newFilter) {
+<small class="text-gray-500 text-xs"
+  >Se vuoi limitare l'uso di questa offerta a degli specifici WOM puoi
+  aggiungere i filtri.<br />
+  Questa azione non è consigliata per i nuovi utenti</small
+>
+@if (!newFilter) {
+<div>
+  <button (click)="newFilter = !newFilter" class="btn-rounded-outline">
+    <i class="fa-solid fa-plus"></i>
+    Aggiungi filtro
+  </button>
+</div>
+} @else {
+<div class="">
+  <button
+    (click)="newFilter = !newFilter"
+    class="btn-rounded-outline"
+    [ngClass]="{ invisible: isEditing }"
+  >
+    <i class="fa-solid fa-xmark"></i>
+    Annulla
+  </button>
+  @if (!isEditing) {
+  <p class="mt-6 mb-0 font-semibold mb-4">Filtri</p>
+  } @else {
+  <p class="mt-6 mb-0 font-semibold mb-4">Filtri impostati</p>
+  }
+  <div class="flex flex-col gap-4">
+    @if ((isEditing && filterForm.get('aim')?.value) || !isEditing) {
+    <app-aims-select
+      (aimCodeSelected)="aimsFiltered($event)"
+      class="border-2 border-black rounded-xl p-4"
+      [selectedAim]="filterForm.get('aim')?.value"
+      [isEditing]="isEditing"
+    ></app-aims-select>
+    } @if ((isEditing && filterForm.get('maxAge')?.value) || !isEditing) {
+    <app-validity-slider
+      (validitySelected)="validityFiltered($event)"
+      [selectedValidity]="filterForm.get('maxAge')?.value"
+      [isEditing]="isEditing"
+    ></app-validity-slider>
+    } @if ((isEditing && filterForm.get('bounds')?.value) || !isEditing) {
+    <div class="relative border-2 border-black rounded-xl p-4 flex flex-col">
+      <h2>Area geografica</h2>
+      <small class="text-gray-500 mb-4"
+        >Se impostato, accetterai solo i voucher WOM generati all'interno di
+        quella specifica area geografica.</small
+      >
+      @if ( isFilteringMap || filterForm.get('bounds')?.value) {
       <div>
-        <button (click)="newFilter = !newFilter" class="btn-rounded-outline">
-          <i class="fa-solid fa-plus"></i>
-          Aggiungi filtro
-        </button>
-      </div>
-    } @else {
-      <div class="">
-        <button
-          (click)="newFilter = !newFilter"
-          class="btn-rounded-outline"
-          [ngClass]="{ invisible: isEditing }"
+        <div class="flex flex-col gap-2">
+          @if (!isEditing) {
+          <button
+            class="btn-rounded-outline"
+            (click)="isFilteringMap = !isFilteringMap"
           >
-          <i class="fa-solid fa-xmark"></i>
-          Annulla
-        </button>
-        @if (!isEditing) {
-          <p class="mt-6 mb-0 font-semibold mb-4">
-            Filtri
-          </p>
-        } @else {
-          <p class="mt-6 mb-0 font-semibold mb-4">
-            Filtri impostati
-          </p>
-        }
-        <div class="flex flex-col gap-4">
-          @if ((isEditing && filterForm.get('aim').value) || !isEditing) {
-            <app-aims-select
-              (aimCodeSelected)="aimsFiltered($event)"
-              class="border-2 border-black rounded-xl p-4"
-              [selectedAim]="filterForm.get('aim').value"
-              [isEditing]="isEditing"
-            ></app-aims-select>
+            Annulla
+          </button>
           }
-          @if ((isEditing && filterForm.get('maxAge').value) || !isEditing) {
-            <app-validity-slider
-              (validitySelected)="validityFiltered($event)"
-              [selectedValidity]="filterForm.get('maxAge').value"
-              [isEditing]="isEditing"
-            ></app-validity-slider>
-          }
-          @if ((isEditing && filterForm.get('bounds').value) || !isEditing) {
-            <div
-              class="relative border-2 border-black rounded-xl p-4 flex flex-col"
-              >
-              <h2>Area geografica</h2>
-              <small class="text-gray-500 mb-4"
-                >Se impostato, accetterai solo i voucher WOM generati all'interno di
-                quella specifica area geografica.</small
-                >
-                @if (
-                  isFilteringMap || filterForm.get('bounds').value) {
-                  <div
-                    >
-                    <div class="flex flex-col gap-2">
-                      @if (!isEditing) {
-                        <button
-                          class="btn-rounded-outline"
-                          (click)="isFilteringMap = !isFilteringMap"
-                          >
-                          Annulla
-                        </button>
-                      }
-                      <app-map
-                        (bounds)="mapFiltered($event)"
-                        [selectedBounds]="filterForm.get('bounds').value"
-                        [isEditing]="isEditing"
-                      ></app-map>
-                    </div>
-                  </div>
-                } @else {
-                  <button
-                    class="btn-rounded-outline"
-                    (click)="isFilteringMap = !isFilteringMap"
-                    >
-                    Imposta
-                  </button>
-                }
-              </div>
-            }
-          </div>
+          <app-map
+            (bounds)="mapFiltered($event)"
+            [selectedBounds]="filterForm.get('bounds')?.value"
+            [isEditing]="isEditing"
+          ></app-map>
         </div>
+      </div>
+      } @else {
+      <button
+        class="btn-rounded-outline"
+        (click)="isFilteringMap = !isFilteringMap"
+      >
+        Imposta
+      </button>
       }
+    </div>
     }
+  </div>
+</div>
+} }

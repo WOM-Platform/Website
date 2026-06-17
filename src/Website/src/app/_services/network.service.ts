@@ -14,7 +14,7 @@ export class NetworkService {
     window.addEventListener("offline", () => this.updateOnlineStatus(false));
   }
 
-  private updateOnlineStatus(isOnline) {
+  private updateOnlineStatus(isOnline: boolean) {
     this.onlineSubject.next(isOnline);
   }
 

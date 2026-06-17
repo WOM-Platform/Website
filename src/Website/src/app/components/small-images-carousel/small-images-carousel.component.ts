@@ -5,6 +5,7 @@ import {
   OnInit,
   HostListener,
   AfterViewInit,
+  ChangeDetectionStrategy
 } from "@angular/core";
 
 @Component({
@@ -12,6 +13,7 @@ import {
   standalone: true,
   imports: [],
   templateUrl: "./small-images-carousel.component.html",
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: "./small-images-carousel.component.css",
 })
 export class SmallImagesCarouselComponent implements OnInit, AfterViewInit {

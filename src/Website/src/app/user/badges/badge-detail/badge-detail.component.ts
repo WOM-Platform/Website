@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ChangeDetectionStrategy } from "@angular/core";
 import {
   animate,
   state,
@@ -24,13 +24,10 @@ import { SimpleFilterComponent } from "../../components/simple-filter/simple-fil
 
 @Component({
   selector: "app-badge-detail",
-  imports: [
-    ReactiveFormsModule,
-    BlurhashComponent,
-    SimpleFilterComponent
-],
+  imports: [ReactiveFormsModule, BlurhashComponent, SimpleFilterComponent],
   templateUrl: "./badge-detail.component.html",
   styleUrl: "./badge-detail.component.css",
+  changeDetection: ChangeDetectionStrategy.Eager,
   animations: [
     trigger("fadeSlide", [
       state(
@@ -56,12 +53,13 @@ import { SimpleFilterComponent } from "../../components/simple-filter/simple-fil
   ],
 })
 export class BadgeDetailComponent implements OnInit {
-  badge;
-  badgeForm: FormGroup;
-  badgeId: string;
-  challenges = [];
+  badge: any;
+  badgeForm!: FormGroup;
+  badgeId!: string;
+  challenges: any[] = [];
 
-  isFiltering: boolean;
+  isFiltering: boolean = false;
+
   constructor(
     private badgeService: BadgeService,
     private loadingService: LoadingService,
@@ -72,7 +70,7 @@ export class BadgeDetailComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.badgeId = this.route.snapshot.paramMap.get("id");
+    this.badgeId = this.route.snapshot.paramMap.get("id") ?? "";
     this.loadBadge(this.badgeId);
   }
 

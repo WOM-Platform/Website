@@ -1,4 +1,9 @@
-import { Component, OnDestroy, OnInit } from "@angular/core";
+import {
+  Component,
+  OnDestroy,
+  OnInit,
+  ChangeDetectionStrategy,
+} from "@angular/core";
 import { UserService } from "../../_services";
 import { TranslateService } from "@ngx-translate/core";
 import { NavigationExtras, Router } from "@angular/router";
@@ -12,11 +17,12 @@ import { SnackBarService } from "../../_services/snack-bar.service";
   selector: "app-user-home",
   templateUrl: "./user-home.component.html",
   styleUrls: ["./user-home.component.css"],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class UserHomeComponent implements OnInit, OnDestroy {
   userData: any;
-  userDataSubscription: Subscription;
+  userDataSubscription: Subscription = Subscription.EMPTY;
   role: string = "";
 
   constructor(

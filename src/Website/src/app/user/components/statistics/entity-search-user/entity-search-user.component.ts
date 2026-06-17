@@ -1,5 +1,11 @@
-
-import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  ChangeDetectionStrategy,
+} from "@angular/core";
 import { filter } from "rxjs";
 import { MerchantFilter } from "src/app/_models/filter";
 
@@ -7,19 +13,23 @@ import { MerchantFilter } from "src/app/_models/filter";
   selector: "app-entity-search-user",
   imports: [],
   templateUrl: "./entity-search-user.component.html",
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: "./entity-search-user.component.css",
 })
 export class EntitySearchUserComponent implements OnInit {
-  @Input() entities = [];
+  @Input() entities: any[] = [];
   @Input() entityType: string = "";
   @Output() voucherData = new EventEmitter<{
     filter: MerchantFilter;
     index: number;
   }>();
 
-  selectedEntityId: string = this.entities[0]?.id;
+  selectedEntityId: string = "";
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.selectedEntityId = this.entities[0]?.id || "";
+  }
+
   onEntitySelect(merchantId: string) {
     const index = this.entities.findIndex(
       (merchant) => merchant.id == merchantId

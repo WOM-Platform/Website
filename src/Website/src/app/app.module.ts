@@ -18,6 +18,7 @@ import {
   HttpClient,
   provideHttpClient,
   withInterceptorsFromDi,
+  withXhr
 } from "@angular/common/http";
 import { appRoutingModule } from "./app.routing";
 import { RouterModule } from "@angular/router";
@@ -231,7 +232,7 @@ const httpInterceptorProviders = environment.mock
     }),
     ...httpInterceptorProviders,
     CookieService,
-    provideHttpClient(withInterceptorsFromDi()),
+    provideHttpClient(withXhr(), withInterceptorsFromDi()),
     { provide: LOCALE_ID, useValue: "it-IT" },
     {
       provide: ErrorHandler,

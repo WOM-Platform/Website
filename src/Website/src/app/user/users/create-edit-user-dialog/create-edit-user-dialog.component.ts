@@ -1,4 +1,4 @@
-import {Component, Inject, OnInit} from '@angular/core';
+import {Component, Inject, OnInit, ChangeDetectionStrategy} from '@angular/core';
 import {UserFormComponent} from "../../components/user-form/user-form.component";
 import {User} from "../../../_models";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
@@ -10,6 +10,7 @@ import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
     UserFormComponent
 ],
     templateUrl: './create-edit-user-dialog.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     styleUrl: './create-edit-user-dialog.component.css'
 })
 export class CreateEditUserDialogComponent implements OnInit {

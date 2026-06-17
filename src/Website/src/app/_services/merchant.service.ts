@@ -145,7 +145,7 @@ export class MerchantService {
       .pipe(map((res) => res));
   }
 
-  getAccessList(idMerchant): Observable<any> {
+  getAccessList(idMerchant: string): Observable<any> {
     return this.http
       .get(`${this.localUrlV1}${idMerchant}/access`)
       .pipe(map((res) => res));

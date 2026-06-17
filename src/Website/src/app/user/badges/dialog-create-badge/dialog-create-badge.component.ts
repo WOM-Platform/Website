@@ -6,7 +6,12 @@ import {
   trigger,
 } from "@angular/animations";
 
-import { Component, Inject, OnInit } from "@angular/core";
+import {
+  Component,
+  Inject,
+  OnInit,
+  ChangeDetectionStrategy,
+} from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { ReactiveFormsModule } from "@angular/forms";
 import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material/dialog";
@@ -18,6 +23,7 @@ import { SimpleFilterComponent } from "../../components/simple-filter/simple-fil
   imports: [ReactiveFormsModule, SimpleFilterComponent],
   templateUrl: "./dialog-create-badge.component.html",
   styleUrl: "./dialog-create-badge.component.css",
+  changeDetection: ChangeDetectionStrategy.Eager,
   animations: [
     trigger("fadeSlide", [
       state(
@@ -43,8 +49,8 @@ import { SimpleFilterComponent } from "../../components/simple-filter/simple-fil
   ],
 })
 export class DialogCreateBadgeComponent implements OnInit {
-  isEnabled: boolean;
-  badgeForm: FormGroup;
+  isEnabled: boolean = false;
+  badgeForm!: FormGroup;
   challengeList: Challenge[] = [];
   isFiltering: boolean = false;
 

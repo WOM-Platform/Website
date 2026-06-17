@@ -1,25 +1,37 @@
-import { Component, EventEmitter, OnInit, Output, Input } from "@angular/core";
+import {
+  Component,
+  EventEmitter,
+  OnInit,
+  Output,
+  Input,
+  ChangeDetectionStrategy,
+} from "@angular/core";
 import { DatePipe } from "@angular/common";
 import { DatepickerComponent } from "../../../../components/datepicker/datepicker.component";
 import { UserService } from "../../../../_services";
 import { UserMe } from "../../../../_models";
 import { filter } from "rxjs";
 import { CombinedFilters, DateFilter } from "src/app/_models/filter";
+import { User } from "@sentry/angular";
 
 @Component({
   selector: "app-statistics-filters",
   imports: [DatepickerComponent],
   standalone: true,
   templateUrl: "./statistics-filters.component.html",
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: "./statistics-filters.component.css",
 })
 export class StatisticsFiltersComponent implements OnInit {
   @Output() onDateFilter = new EventEmitter();
   @Output() onDownload = new EventEmitter();
 
-  @Input() dateFilters: DateFilter;
+  @Input() dateFilters: DateFilter = {
+    startDate: null,
+    endDate: null,
+  };
 
-  currentUser: UserMe;
+  currentUser: User | null = null;
   isDateFiltering: boolean = true;
 
   constructor(private userService: UserService) {}
@@ -41,8 +53,8 @@ export class StatisticsFiltersComponent implements OnInit {
   }
 
   cancelDataFilter() {
-    this.dateFilters.startDate = undefined;
-    this.dateFilters.endDate = undefined;
+    this.dateFilters.startDate = null;
+    this.dateFilters.endDate = null;
     this.isDateFiltering = !this.isDateFiltering;
     this.onDateFilter.emit(this.dateFilters);
   }

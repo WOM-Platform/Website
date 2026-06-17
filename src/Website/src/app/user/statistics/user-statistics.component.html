@@ -1,11 +1,10 @@
-@if (currentUser.role && currentUser.role === 'Admin') {
-  <div>
-    <app-admin-role />
-  </div>
-}
-@if (currentUser.role && currentUser.role === 'User') {
-  <div>
-    <app-admin-role />
-    <!-- <app-user-role /> -->
-  </div>
+@if (currentUser?.role && currentUser?.role === 'Admin') {
+<div>
+  <app-admin-role />
+</div>
+} @if (currentUser?.role && currentUser?.role === 'User') {
+<div>
+  <app-admin-role />
+  <!-- <app-user-role /> -->
+</div>
 }

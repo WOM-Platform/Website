@@ -5,17 +5,13 @@
     class="flex flex-col gap-4 mt-6"
     [formGroup]="newSource"
     (ngSubmit)="onSubmit()"
-    >
+  >
     <div class="flex flex-row justify-start gap-6 items-center">
       <label class="w-20">Nome<span class="text-red-600">*</span>:</label>
 
-      <input type="text" formControlName="name" class="input-create"/>
-      @if (newSource.get('name').invalid && newSource.get('name').touched) {
-        <div
-          class="text-red-600"
-          >
-          Inserire il nome<br/>(min 4 caratteri)
-        </div>
+      <input type="text" formControlName="name" class="input-create" />
+      @if (newSource.get('name')?.invalid && newSource.get('name')?.touched) {
+      <div class="text-red-600">Inserire il nome<br />(min 4 caratteri)</div>
       }
     </div>
 
@@ -26,55 +22,49 @@
         formControlName="url"
         class="input-create"
         placeholder="https://example.com"
-        />
-      @if (newSource.get('url').invalid && newSource.get('url').touched) {
-        <div
-          class="text-red-600"
-          >
-          Inserire l'url
-        </div>
+      />
+      @if (newSource.get('url')?.invalid && newSource.get('url')?.touched) {
+      <div class="text-red-600">Inserire l'url</div>
       }
     </div>
   </form>
-  <app-aims-list [aimList]="aimList"/>
+  <app-aims-list [aimList]="aimList" />
 
   @if (showAddAccessButton) {
-    <div class="mt-11">
-      <app-user-aims-list
-        [instrumentAims]="newSource.get('aims').value"
-        (aimsEmit)="onUpdateSourceField('aims', $event, false)"
-        />
-    </div>
-  }
-  @if (newSource.get('access').value.length > 0) {
-    <div class="mt-10">
-      <p class="font-semibold mb-0">Gestori da aggiungere:</p>
-      <ul class="access-list">
-        @for (toAdd of newSource.get('access').value; track toAdd) {
-          <li>
-            <div class="access-item">
-              <div class="access-details">
-                <div>
-                  <span class="text-slate-600 font-semibold">Name</span>:
-                  {{ toAdd.name }} {{ toAdd.surname }}
-                </div>
-                <div>
-                  <span class="text-slate-600 font-semibold">Email</span>:
-                  {{ toAdd.email }}
-                </div>
-              </div>
+  <div class="mt-11">
+    <app-user-aims-list
+      [instrumentAims]="newSource.get('aims')?.value"
+      (aimsEmit)="onUpdateSourceField('aims', $event, false)"
+    />
+  </div>
+  } @if (newSource.get('access')?.value.length > 0) {
+  <div class="mt-10">
+    <p class="font-semibold mb-0">Gestori da aggiungere:</p>
+    <ul class="access-list">
+      @for (toAdd of newSource.get('access')?.value; track toAdd) {
+      <li>
+        <div class="access-item">
+          <div class="access-details">
+            <div>
+              <span class="text-slate-600 font-semibold">Name</span>:
+              {{ toAdd.name }} {{ toAdd.surname }}
             </div>
-          </li>
-        }
-      </ul>
-    </div>
-  }
-  @if (showAddAccessButton) {
-    <div class="mt-11">
-      <app-user-access-list
-        (accessToAdd)="handleAccessList($event)"
-      ></app-user-access-list>
-    </div>
+            <div>
+              <span class="text-slate-600 font-semibold">Email</span>:
+              {{ toAdd.email }}
+            </div>
+          </div>
+        </div>
+      </li>
+      }
+    </ul>
+  </div>
+  } @if (showAddAccessButton) {
+  <div class="mt-11">
+    <app-user-access-list
+      (accessToAdd)="handleAccessList($event)"
+    ></app-user-access-list>
+  </div>
   }
   <div class="flex justify-end gap-2 mt-11">
     <button (click)="onNoClick()" class="btn-cancel">Annulla</button>
@@ -84,7 +74,7 @@
       (click)="onSubmit()"
       class="text-gray-400 px-4 py-2"
       [ngClass]="{ 'btn-submit': !newSource.invalid }"
-      >
+    >
       Crea
     </button>
   </div>

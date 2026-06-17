@@ -2,25 +2,25 @@ import { Pos } from "./pos";
 import { Access } from "./instrument";
 
 export class Merchant {
-  id: string;
-  name: string;
-  fiscalCode: string;
-  phoneNumber: string;
-  primaryActivity: string;
-  address: string;
-  addressDetails: AddressDetails;
-  activationCode: string;
-  pos: Pos[];
-  access: string;
-  accessList: Access[];
-  zipCode: string;
-  city: string;
-  country: string;
-  description: string;
-  url: string;
-  enabled: boolean;
+  id: string = "";
+  name: string = "";
+  fiscalCode: string = "";
+  phoneNumber: string = "";
+  primaryActivity: string = "";
+  address: string = "";
+  addressDetails?: AddressDetails;
+  activationCode: string = "";
+  pos: Pos[] = [];
+  access: string = "";
+  accessList: Access[] = [];
+  zipCode: string = "";
+  city: string = "";
+  country: string = "";
+  description: string = "";
+  url: string = "";
+  enabled: boolean = false;
 
-  public static fromJson(json): any {
+  public static fromJson(json: any): any {
     if (json === null) {
       return null;
     }
@@ -33,13 +33,13 @@ export interface UIMerchant extends Merchant {
 }
 
 export class AddressDetails {
-  formattedAddress: string;
+  formattedAddress: string = "";
 }
 
 export class MerchantContainer extends Merchant {
-  pos: Pos[];
+  pos: Pos[] = [];
 
-  public static fromJson(json): any {
+  public static fromJson(json: any): any {
     if (json === null) {
       return null;
     }
@@ -48,12 +48,12 @@ export class MerchantContainer extends Merchant {
 }
 
 export class Merchants {
-  name: string;
-  surname: string;
-  email: string;
-  merchants: MerchantContainer[];
+  name: string = "";
+  surname: string = "";
+  email: string = "";
+  merchants: MerchantContainer[] = [];
 
-  public static fromJson(json): any {
+  public static fromJson(json: any): any {
     if (json === null) {
       return null;
     }

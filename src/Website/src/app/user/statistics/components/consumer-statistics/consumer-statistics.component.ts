@@ -8,9 +8,9 @@ import {
   OnInit,
   Output,
   SimpleChanges,
+  ChangeDetectionStrategy,
 } from "@angular/core";
 import { NgxChartsModule, PieChartModule } from "@swimlane/ngx-charts";
-import { SharedModule } from "primeng/api";
 import { tap } from "rxjs";
 import { Merchant, UserMe } from "src/app/_models";
 import { MerchantFilter, DateFilter } from "src/app/_models/filter";
@@ -26,14 +26,15 @@ import { SkeletonLoaderComponent } from "../../../components/skeleton-loader/ske
 import { SnackBarService } from "src/app/_services/snack-bar.service";
 import { EntitySearchUserComponent } from "../../../components/statistics/entity-search-user/entity-search-user.component";
 import { animate, style, transition, trigger } from "@angular/animations";
+import { NgxSkeletonLoaderModule } from "ngx-skeleton-loader";
 
 @Component({
   selector: "app-consumer-statistics",
   imports: [
     AnimatedNumberComponent,
-    SharedModule,
     PieChartModule,
     NgxChartsModule,
+    NgxSkeletonLoaderModule,
     NgClass,
     CommonModule,
     EntitySearchComponent,
@@ -58,11 +59,25 @@ import { animate, style, transition, trigger } from "@angular/animations";
     ]),
   ],
   templateUrl: "./consumer-statistics.component.html",
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: "./consumer-statistics.component.css",
 })
 export class ConsumerStatisticsComponent implements OnInit, OnChanges {
-  @Input() dateFilters: DateFilter;
-  @Input() currentUser: UserMe;
+  @Input() dateFilters: DateFilter = {
+    startDate: null,
+    endDate: null,
+  };
+  @Input() currentUser: UserMe = {
+    email: "",
+    id: "",
+    merchants: [],
+    name: "",
+    surname: "",
+    role: "",
+    sources: [],
+    verified: false,
+    token: "",
+  };
   @Output() filtersEmit: EventEmitter<MerchantFilter> = new EventEmitter();
 
   consumedStats: ConsumedStatsApiResponse = {
@@ -74,13 +89,13 @@ export class ConsumerStatisticsComponent implements OnInit, OnChanges {
     totalConsumedOverTime: [],
   };
 
-  availableVouchers: number;
+  availableVouchers: number = 0;
   totalConsumedOverTime: ChartDataSwimlane[] = [];
   isConsumedDataReady = false;
   offerConsumedVouchers: any;
 
   isOffersShown: boolean = false;
-  nActiveOffers: number = undefined;
+  nActiveOffers: number = 0;
   activeOffers: any[] = [];
 
   filters: MerchantFilter = {
@@ -148,7 +163,7 @@ export class ConsumerStatisticsComponent implements OnInit, OnChanges {
     }
   }
 
-  onDatesSelected(date) {
+  onDatesSelected(date: DateFilter) {
     this.isConsumedDataReady = false;
 
     this.loadData();
@@ -215,6 +230,7 @@ export class ConsumerStatisticsComponent implements OnInit, OnChanges {
             }));
           // All requests are done, now set isConsumedDataReady to true
           this.isConsumedDataReady = true;
+          this.cdr.detectChanges();
         },
         error: (error) => {
           this.isConsumedDataReady = true;
@@ -262,7 +278,7 @@ export class ConsumerStatisticsComponent implements OnInit, OnChanges {
         },
         error: (error) => {
           this.activeOffers = [];
-          this.nActiveOffers = undefined;
+          this.nActiveOffers = 0;
           console.error("Error fetching aims:", error);
         },
       });
@@ -273,7 +289,7 @@ export class ConsumerStatisticsComponent implements OnInit, OnChanges {
     return (element as Merchant).name !== undefined;
   }
 
-  clearElementFilter(event: { name?: string; id?: string }) {
+  clearElementFilter(event: any) {
     const { name, id } = event;
     if (name && id) {
       this.filters.merchantNames = this.filters.merchantNames.filter(
@@ -289,6 +305,10 @@ export class ConsumerStatisticsComponent implements OnInit, OnChanges {
 
     // Update active filters state
     this.hasActiveFilters();
+  }
+
+  onSelect(event: any) {
+    console.log("Chart item selected:", event);
   }
 
   private emitFilters() {

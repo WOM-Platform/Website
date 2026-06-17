@@ -1,11 +1,12 @@
 import { BreakpointObserver } from "@angular/cdk/layout";
 import { CommonModule } from "@angular/common";
-import { Component, Input, OnInit } from "@angular/core";
+import { Component, Input, OnInit, ChangeDetectionStrategy } from "@angular/core";
 
 @Component({
   selector: "app-carousel",
   imports: [CommonModule],
   templateUrl: "./carousel.component.html",
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: "./carousel.component.css",
 })
 export class CarouselComponent implements OnInit {

@@ -6,40 +6,35 @@
   </div>
 
   @if (formInputError) {
-    <mat-error>
-      @if (data.isEdit) {
-        {{ "USER.EDIT_POS.INPUT_ERROR" | translate }}
-      } @else {
-        {{ "USER.ADD_POS.INPUT_ERROR" | translate }}
-      }
-    </mat-error>
-  }
-  @if (formApiError) {
-    <mat-error>
-      @if (data.isEdit) {
-        {{ "USER.EDIT_POS.API_ERROR" | translate }}
-      } @else {
-        {{ "USER.ADD_POS.API_ERROR" | translate }}
-      }
-    </mat-error>
+  <mat-error>
+    @if (data.isEdit) {
+    {{ "USER.EDIT_POS.INPUT_ERROR" | translate }}
+    } @else {
+    {{ "USER.ADD_POS.INPUT_ERROR" | translate }}
+    }
+  </mat-error>
+  } @if (formApiError) {
+  <mat-error>
+    @if (data.isEdit) {
+    {{ "USER.EDIT_POS.API_ERROR" | translate }}
+    } @else {
+    {{ "USER.ADD_POS.API_ERROR" | translate }}
+    }
+  </mat-error>
   }
 
   <form
-    class="flex flex-col gap-4 mt-6 "
+    class="flex flex-col gap-4 mt-6"
     [formGroup]="newPos"
     (ngSubmit)="onSubmit()"
-    >
+  >
     <ng-template matStepLabel>Inserirsci POS</ng-template>
     <div class="flex flex-row justify-start gap-6 items-center">
       <label class="w-20">Nome<span class="text-red-600">*</span>:</label>
 
-      <input type="text" formControlName="name" class="input-create"/>
-      @if (newPos.get('name').invalid && newPos.get('name').touched) {
-        <div
-          class="text-red-600"
-          >
-          Inserire il nome<br/>(min 4 caratteri)
-        </div>
+      <input type="text" formControlName="name" class="input-create" />
+      @if (newPos.get('name')?.invalid && newPos.get('name')?.touched) {
+      <div class="text-red-600">Inserire il nome<br />(min 4 caratteri)</div>
       }
     </div>
 
@@ -50,15 +45,10 @@
         formControlName="url"
         class="input-create"
         placeholder="https://example.com"
-        />
-      @if (newPos.get('url').invalid && newPos.get('url').touched) {
-        <div
-          class="text-red-600"
-          >
-          Inserire l'url
-        </div>
+      />
+      @if (newPos.get('url')?.invalid && newPos.get('url')?.touched) {
+      <div class="text-red-600">Inserire l'url</div>
       }
-
     </div>
     <div class="basis-full">
       <label>Seleziona l'indirizzo della tua attività:</label>
@@ -67,7 +57,7 @@
         #mapSearchField
         placeholder="{{ 'MERCHANT.FILTERS.SEARCH.PLACEHOLDER' | translate }}"
         type="text"
-        />
+      />
 
       <!--   <div class="flex flex-row gap-4">
       <label>Latitdine</label>
@@ -77,11 +67,13 @@
       <label>Longitudine</label>
       <input type="text" formControlName="longitude"/>
     </div>-->
-    <google-map [options]="options" (mapClick)="mapClick($event)"></google-map>
-
-  </div>
-</form>
-<!-- <div class="mt-4">
+      <google-map
+        [options]="options"
+        (mapClick)="mapClick($event)"
+      ></google-map>
+    </div>
+  </form>
+  <!-- <div class="mt-4">
 <div *ngIf="isCeatingOffer; else btnToCreateOffer">
   <button class="px-4 py-2 border-2 border-black rounded-full" (click)="isCeatingOffer = !isCeatingOffer">
     Annulla
@@ -97,13 +89,12 @@
   </button>
 </ng-template>
 </div>-->
-<div class="flex justify-end gap-4">
-  <button class="text-slate-600" mat-dialog-close>
-    {{ "USER.ADD_POS.CANCEL" | translate }}
-  </button>
-  <button [disabled]="!newPos.valid" class="blue-wom" (click)="onSubmit()">
-    {{ "USER.ADD_POS.ADD" | translate }}
-  </button>
-
-</div>
+  <div class="flex justify-end gap-4">
+    <button class="text-slate-600" mat-dialog-close>
+      {{ "USER.ADD_POS.CANCEL" | translate }}
+    </button>
+    <button [disabled]="!newPos.valid" class="blue-wom" (click)="onSubmit()">
+      {{ "USER.ADD_POS.ADD" | translate }}
+    </button>
+  </div>
 </div>

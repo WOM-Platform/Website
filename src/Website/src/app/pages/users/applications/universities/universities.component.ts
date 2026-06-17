@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component, ChangeDetectionStrategy } from "@angular/core";
 import { MatIcon } from "@angular/material/icon";
 import { MatList } from "@angular/material/list";
 import { TranslateModule } from "@ngx-translate/core";
@@ -7,6 +7,7 @@ import { TranslateModule } from "@ngx-translate/core";
   selector: "app-applications-universities",
   templateUrl: "./universities.component.html",
   standalone: true,
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [TranslateModule, MatList, MatIcon],
 })
 export class ApplicationsUniversitiesComponent {

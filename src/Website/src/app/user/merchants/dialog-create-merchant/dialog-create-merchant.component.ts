@@ -1,4 +1,10 @@
-import { ChangeDetectorRef, Component, Inject, OnInit } from "@angular/core";
+import {
+  ChangeDetectorRef,
+  Component,
+  Inject,
+  OnInit,
+  ChangeDetectionStrategy,
+} from "@angular/core";
 import { Merchant } from "../../../_models";
 import { first } from "rxjs/operators";
 import { UntypedFormGroup } from "@angular/forms";
@@ -11,16 +17,17 @@ import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material/dialog";
   selector: "app-form-merchant-dialog",
   templateUrl: "dialog-create-merchant.html",
   styleUrls: ["dialog-create-merchant.css"],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class DialogCreateMerchant implements OnInit {
-  formMerchant: UntypedFormGroup;
-  formInputError: boolean;
-  formApiError: boolean;
+  formMerchant!: UntypedFormGroup;
+  formInputError: boolean = false;
+  formApiError: boolean = false;
   dialogTypes = DialogType;
-  merchantData: Merchant;
+  merchantData!: Merchant;
 
-  isAdmin: boolean;
+  isAdmin: boolean = false;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: MerchantDialogData,
@@ -32,7 +39,7 @@ export class DialogCreateMerchant implements OnInit {
 
   ngOnInit(): any {
     this.merchantData = this.data.data;
-    this.isAdmin = this.data.isAdmin;
+    this.isAdmin = this.data.isAdmin ?? false;
 
     this.cd.detectChanges();
   }
@@ -131,7 +138,7 @@ export class DialogCreateMerchant implements OnInit {
 }
 
 export class MerchantDialogData {
-  type: DialogType;
-  data: Merchant;
+  type!: DialogType;
+  data!: Merchant;
   isAdmin?: boolean;
 }

@@ -4,78 +4,74 @@
     <app-create-button [label]="'Nuovo Badge'" (clicked)="newBadge()" />
   </div>
   @if (badges) {
+  <div>
     <div>
-      <div>
-        <h2 class="text-xl font-bold text-gray-800 mb-4">Lista Badge</h2>
-        <div class="flex flex-wrap gap-5">
-          @for (badge of isPublicBadges; track badge) {
-            <a
-              (click)="openBadgeDetails(badge, 'edit')"
-              class="relative group cursor-pointer hover:border-blue-600 border border-white rounded-2xl transition duration-300 p-4"
-              >
-              <app-blurhash
-                [image]="badge.image"
-                [alt]="badge.name.it"
-                [imageSize]="'squareThumbnailUrl'"
-                [width]="200"
-                [height]="200"
-                />
-            </a>
-          }
-        </div>
+      <h2 class="text-xl font-bold text-gray-800 mb-4">Lista Badge</h2>
+      <div class="flex flex-wrap gap-5">
+        @for (badge of isPublicBadges; track badge) {
+        <a
+          (click)="openBadgeDetails(badge, 'edit')"
+          class="relative group cursor-pointer hover:border-blue-600 border border-white rounded-2xl transition duration-300 p-4"
+        >
+          <app-blurhash
+            [image]="badge.image"
+            [alt]="badge.name.it"
+            [imageSize]="'squareThumbnailUrl'"
+            [width]="200"
+            [height]="200"
+          />
+        </a>
+        }
       </div>
     </div>
-  }
-  @if (challengeList) {
+  </div>
+  } @if (challengeList) {
+  <div>
+    @if (challengeList.length === 0) {
+    <div class="text-gray-600">Nessuna sfida disponibile.</div>
+    } @else {
+    <ng-template [ngTemplateOutlet]="challengsToShow"></ng-template>
+    }
     <div>
-      @if (challengeList.length === 0) {
-        <div
-          class="text-gray-600"
+      <h2 class="text-xl font-bold text-gray-800 mb-4">Lista Sfide</h2>
+      <div class="">
+        @for (challenge of challengeList; track challenge) {
+        <div>
+          <a
+            (click)="openChallengeDetails(challenge)"
+            class="relative group cursor-pointer flex mt-6"
           >
-          Nessuna sfida disponibile.
-        </div>
-      } @else {
-        <ng-template [ngTemplateOutlet]="challengsToShow"></ng-template>
-      }
-      <div>
-        <h2 class="text-xl font-bold text-gray-800 mb-4">Lista Sfide</h2>
-        <div class="">
-          @for (challenge of challengeList; track challenge) {
-            <div>
+            <h3 class="text-3xl hover:text-blue-600 transition duration-300">
+              {{ challenge.name.it }}
+              <span class="text-base">- {{ challenge.id }}</span>
+            </h3>
+            <p></p>
+          </a>
+          @if (challengeBadges[challenge.id]) {
+          <div>
+            <div class="flex flex-wrap gap-5 mt-2">
+              @for (badge of challengeBadges[challenge.id].badges; track badge)
+              {
               <a
-                (click)="openChallengeDetails(challenge, 'edit')"
-                class="relative group cursor-pointer flex mt-6"
-                >
-                <h3 class="text-3xl hover:text-blue-600 transition duration-300">
-                  {{ challenge.name.it }}
-                  <span class="text-base">- {{ challenge.id }}</span>
-                </h3>
-                <p></p>
+                (click)="openBadgeDetails(badge, 'edit')"
+                class="relative group cursor-pointer hover:border-blue-600 border border-white rounded-2xl transition duration-300 p-4"
+              >
+                <app-blurhash
+                  [image]="badge.image"
+                  [alt]="badge.name.it"
+                  [imageSize]="'squareThumbnailUrl'"
+                  [width]="200"
+                  [height]="200"
+                />
               </a>
-              @if (challengeBadges[challenge.id]) {
-                <div>
-                  <div class="flex flex-wrap gap-5 mt-2">
-                    @for (badge of challengeBadges[challenge.id].badges; track badge) {
-                      <a
-                        (click)="openBadgeDetails(badge, 'edit')"
-                        class="relative group cursor-pointer hover:border-blue-600 border border-white rounded-2xl transition duration-300 p-4"
-                        >
-                        <app-blurhash
-                          [image]="badge.image"
-                          [alt]="badge.name.it"
-                          [imageSize]="'squareThumbnailUrl'"
-                          [width]="200"
-                          [height]="200"
-                          />
-                      </a>
-                    }
-                  </div>
-                </div>
               }
             </div>
+          </div>
           }
         </div>
+        }
       </div>
     </div>
+  </div>
   }
 </div>

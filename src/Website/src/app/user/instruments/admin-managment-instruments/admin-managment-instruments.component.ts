@@ -1,4 +1,10 @@
-import { ChangeDetectorRef, Component, OnDestroy, OnInit } from "@angular/core";
+import {
+  ChangeDetectorRef,
+  Component,
+  OnDestroy,
+  OnInit,
+  ChangeDetectionStrategy,
+} from "@angular/core";
 import { finalize, forkJoin, of, Subject, Subscription } from "rxjs";
 import { DialogCreateSourceComponent } from "../dialog-create-instrument/dialog-create-instrument.component";
 import { DialogViewEditInstrumentComponent } from "../dialog-view-edit-instrument/dialog-view-edit-instrument.component";
@@ -15,6 +21,7 @@ import { SnackBarService } from "../../../_services/snack-bar.service";
   selector: "app-admin-managment-instruments",
   templateUrl: "./admin-managment-instruments.component.html",
   styleUrl: "./admin-managment-instruments.component.css",
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class AdminManagmentInstrumentsComponent implements OnInit, OnDestroy {
@@ -22,11 +29,12 @@ export class AdminManagmentInstrumentsComponent implements OnInit, OnDestroy {
   searchTerms = new Subject<string>();
 
   currentPage: number = 1;
-  itemsPerPage: string;
-  pageCount: number;
-  totalItems: number;
-  hasNext: boolean;
-  hasPrev: boolean;
+
+  itemsPerPage: string = "10";
+  pageCount: number = 0;
+  totalItems: number = 0;
+  hasNext: boolean = false;
+  hasPrev: boolean = false;
 
   tableToUpdate: boolean = false;
 
@@ -97,7 +105,7 @@ export class AdminManagmentInstrumentsComponent implements OnInit, OnDestroy {
     );
   }
 
-  private assignInstrumentData(data) {
+  private assignInstrumentData(data: any) {
     this.totalItems = data.totalCount;
     this.pageCount = data.pageCount;
     this.itemsPerPage = data.pageSize;
@@ -157,14 +165,14 @@ export class AdminManagmentInstrumentsComponent implements OnInit, OnDestroy {
     this.getSourcesList();
   }
 
-  private processAccess(user, result) {
+  private processAccess(user: any, result: any) {
     if (result.access && result.access.length > 0) {
       this.subscriptions.push(
         this.sourceService
           .addAccessSequentially(user.id, result.access)
           .subscribe({
             next: () => {
-              result.access.some((element) => element === user);
+              result.access.some((element: any) => element === user);
             },
             error: (err) => {
               console.error("Error adding access rights:", err);
@@ -196,7 +204,7 @@ export class AdminManagmentInstrumentsComponent implements OnInit, OnDestroy {
     this.openDialogViewEdit(user, "edit");
   }
 
-  openDialogViewEdit(user, action: string) {
+  openDialogViewEdit(user: any, action: string) {
     this.loadingService.show();
 
     forkJoin({
@@ -211,6 +219,7 @@ export class AdminManagmentInstrumentsComponent implements OnInit, OnDestroy {
       )
       .subscribe((res) => {
         this.loadingService.hide();
+        if (!res) return;
 
         const data = res.dataInstrument;
 
@@ -270,7 +279,9 @@ export class AdminManagmentInstrumentsComponent implements OnInit, OnDestroy {
               let isMyInstrumentToUpdate: boolean = false;
 
               const currentUser = this.storageService.load("currentUser");
-              if (accessList.find((acc) => acc.userId === currentUser.id)) {
+              if (
+                accessList.find((acc: any) => acc.userId === currentUser.id)
+              ) {
                 isMyInstrumentToUpdate = true;
               }
 
@@ -330,7 +341,7 @@ export class AdminManagmentInstrumentsComponent implements OnInit, OnDestroy {
     this.getSourcesList();
   }
 
-  filterUpdate(filter) {
+  filterUpdate(filter: any) {
     this.storageService.clearCache("instrumentsList");
     if (this.currentPage != 1) this.currentPage = 1;
     this.itemsPerPage = filter.itemsPerPage;

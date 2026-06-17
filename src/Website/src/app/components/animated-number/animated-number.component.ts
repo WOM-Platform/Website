@@ -4,6 +4,9 @@ import {
   OnChanges,
   OnDestroy,
   SimpleChanges,
+  ChangeDetectionStrategy,
+  signal,
+  computed,
 } from "@angular/core";
 import { interval, Subscription } from "rxjs";
 import { map, takeWhile } from "rxjs/operators";
@@ -11,40 +14,38 @@ import { map, takeWhile } from "rxjs/operators";
 @Component({
   selector: "app-animated-number",
   template: `<p class="mb-0">
-    <strong>{{ formattedDisplayNumber }}</strong>
+    <strong>{{ formattedDisplayNumber() }}</strong>
   </p>`,
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: true,
 })
 export class AnimatedNumberComponent implements OnChanges, OnDestroy {
-  @Input() finalNumber: number;
+  @Input() finalNumber: number = 0;
   @Input() duration: number = 1000;
-  displayNumber: number = 0;
 
-  get formattedDisplayNumber(): string {
-    // Formatta il numero come stringa con il punto come separatore delle migliaia
-    return this.displayNumber.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-  }
+  displayNumber = signal<number>(0);
 
-  private animationSubscription: Subscription;
+  formattedDisplayNumber = computed(() => {
+    return this.displayNumber()
+      .toFixed(0)
+      .replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+  });
+
+  private animationSubscription: Subscription | null = null;
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes["finalNumber"]) {
-      if (this.animationSubscription) {
-        this.animationSubscription.unsubscribe(); // Stop the current animation if it's running
-      }
-      this.displayNumber = 0; // Reset to 0 before starting a new animation
+      this.animationSubscription?.unsubscribe();
+      this.displayNumber.set(0);
       this.animateNumber();
     }
   }
-
   ngOnDestroy() {
-    if (this.animationSubscription) {
-      this.animationSubscription.unsubscribe();
-    }
+    this.animationSubscription?.unsubscribe();
   }
 
   private animateNumber() {
-    const intervalTime = 50;
+    const intervalTime = 30;
     const steps = this.duration / intervalTime;
     const increment = this.finalNumber / steps;
 
@@ -54,8 +55,8 @@ export class AnimatedNumberComponent implements OnChanges, OnDestroy {
         takeWhile((value) => value <= this.finalNumber, true)
       )
       .subscribe({
-        next: (value) => (this.displayNumber = value),
-        complete: () => (this.displayNumber = this.finalNumber),
+        next: (value) => this.displayNumber.set(value),
+        complete: () => this.displayNumber.set(this.finalNumber),
       });
   }
 }

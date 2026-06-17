@@ -1,5 +1,9 @@
-
-import { Component, Input, OnInit } from "@angular/core";
+import {
+  Component,
+  Input,
+  OnInit,
+  ChangeDetectionStrategy,
+} from "@angular/core";
 import { FormBuilder, FormGroup, ReactiveFormsModule } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
 import { Challenge } from "src/app/_models/challenge";
@@ -12,6 +16,7 @@ import { SnackBarService } from "src/app/_services/snack-bar.service";
   standalone: true,
   imports: [ReactiveFormsModule],
   templateUrl: "./challenge-detail.component.html",
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrls: ["./challenge-detail.component.css"],
 })
 export class ChallengeDetailComponent implements OnInit {
@@ -29,7 +34,7 @@ export class ChallengeDetailComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.challengeId = this.route.snapshot.paramMap.get("id");
+    this.challengeId = this.route.snapshot.paramMap.get("id") ?? "";
     this.loadingService.show();
     this.badgeService.getBadgeChallenge(this.challengeId).subscribe({
       next: (challenge) => {
@@ -67,21 +72,23 @@ export class ChallengeDetailComponent implements OnInit {
         ...this.challengeForm.value,
       };
     }
-    this.badgeService.editBadgeChallenge(this.challengeId, this.challengeForm.value).subscribe({
-      next: (updatedChallenge) => {
-        this.challenge = updatedChallenge;
-        this.snackBarService.openSnackBar("Sfida aggiornata con successo.");
-      },
-      error: (error) => {
-        console.error("Error updating challenge:", error);
-        this.snackBarService.openSnackBar(
-          "Errore durante l'aggiornamento della sfida."
-        );
-      },
-      complete: () => {
-        this.loadingService.hide();
-      },
-    });
+    this.badgeService
+      .editBadgeChallenge(this.challengeId, this.challengeForm.value)
+      .subscribe({
+        next: (updatedChallenge) => {
+          this.challenge = updatedChallenge;
+          this.snackBarService.openSnackBar("Sfida aggiornata con successo.");
+        },
+        error: (error) => {
+          console.error("Error updating challenge:", error);
+          this.snackBarService.openSnackBar(
+            "Errore durante l'aggiornamento della sfida."
+          );
+        },
+        complete: () => {
+          this.loadingService.hide();
+        },
+      });
   }
 
   deleteChallenge(): void {

@@ -1,7 +1,6 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
-    "baseUrl": "./",
     "outDir": "./dist/out-tsc",
     "sourceMap": true,
     "esModuleInterop": true,
@@ -14,10 +13,18 @@
     "resolveJsonModule": true,
     "useDefineForClassFields": false,
     "paths": {
-      "@assets/*": [
-        "./src/assets/*"
-      ]
+      "src/*": ["./src/*"],
+      "@assets/*": ["./src/assets/*"]
     },
     "skipLibCheck": true
+  },
+  "angularCompilerOptions": {
+    "strictTemplates": true,
+    "extendedDiagnostics": {
+      "checks": {
+        "missingControlFlowDirective": "warning"
+      },
+      "default": "warning"
+    }
   }
 }

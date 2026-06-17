@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ChangeDetectionStrategy } from "@angular/core";
 import { TranslateModule } from "@ngx-translate/core";
 import { PdfViewerContainerComponent } from "src/app/components/pdf-viewer-container/pdf-viewer-container.component";
 
@@ -7,6 +7,7 @@ import { PdfViewerContainerComponent } from "src/app/components/pdf-viewer-conta
   templateUrl: "./urbino.component.html",
   styleUrls: ["./urbino.component.css"],
   standalone: true,
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [PdfViewerContainerComponent, TranslateModule],
 })
 export class UrbinoComponent implements OnInit {

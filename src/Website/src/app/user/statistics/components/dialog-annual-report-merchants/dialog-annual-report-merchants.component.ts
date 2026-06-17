@@ -1,4 +1,3 @@
-
 import {
   ChangeDetectorRef,
   Component,
@@ -7,6 +6,7 @@ import {
   OnInit,
   QueryList,
   ViewChildren,
+  ChangeDetectionStrategy,
 } from "@angular/core";
 import { BlobReader, BlobWriter, ZipWriter } from "@zip.js/zip.js";
 import { MAT_DIALOG_DATA } from "@angular/material/dialog";
@@ -21,17 +21,22 @@ import { SnackBarService } from "src/app/_services/snack-bar.service";
   selector: "app-dialog-annual-report-merchants",
   imports: [],
   templateUrl: "./dialog-annual-report-merchants.component.html",
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: "./dialog-annual-report-merchants.component.css",
 })
 export class DialogAnnualReportMerchantsComponent implements OnInit {
   @ViewChildren("hiddenCaptureArea") hiddenCaptureAreas!: QueryList<ElementRef>;
 
-  filters: CombinedFilters;
+  filters: CombinedFilters = {
+    dateFilters: { startDate: null, endDate: null },
+    merchantFilters: { merchantIds: [], merchantNames: [] },
+    sourceFilters: { sourceId: [], sourceNames: [], aimListFilter: [] },
+  };
   activeMerchants: any;
   canvasesForCertificates: fabric.Canvas[] = [];
   currentYear = String(new Date().getFullYear());
 
-  selectedYear = null;
+  selectedYear: number | null = null;
   years: number[] = Array.from(
     { length: 10 },
     (_, i) => new Date().getFullYear() - i
@@ -58,6 +63,11 @@ export class DialogAnnualReportMerchantsComponent implements OnInit {
     }
 
     this.currentYear = this.selectedYear.toString();
+
+    if (!this.filters.dateFilters) {
+      this.filters.dateFilters = { startDate: null, endDate: null };
+    }
+
     this.filters.dateFilters.startDate = new Date(this.selectedYear, 0, 1);
     this.filters.dateFilters.endDate = new Date(this.selectedYear, 11, 31);
 
@@ -65,27 +75,33 @@ export class DialogAnnualReportMerchantsComponent implements OnInit {
   }
 
   loadDataTable() {
+    const currentMerchants = this.filters.merchantFilters;
+    const currentDates = this.filters.dateFilters;
+
+    if (!currentDates || !currentMerchants) {
+      console.warn(
+        "Filtri temporali o filtri merchant non pronti o non configurati."
+      );
+      return;
+    }
+
     this.loadingService.show();
     this.statsService
-      .getAnnualReportMerchants(
-        this.filters.dateFilters,
-        this.filters.merchantFilters
-      )
+      .getAnnualReportMerchants(currentDates, currentMerchants)
       .pipe(
-        switchMap((merchants) => {
+        switchMap((merchants: any[]) => {
           // Assign merchants to activeMerchants
           this.activeMerchants = merchants;
 
           // Create an array for access lists
-          const accessListRequests = merchants.map((merchant) =>
+          const accessListRequests = merchants.map((merchant: any) =>
             this.merchantService.getAccessList(merchant.id)
           );
 
           // Execute all access list requests in parallel
           return forkJoin(accessListRequests).pipe(
-            map((accessLists) => {
-              // Merge access lists into merchants
-              return merchants.map((merchant, index) => ({
+            map((accessLists: any[]) => {
+              return merchants.map((merchant: any, index: number) => ({
                 ...merchant,
                 users: accessLists[index].users,
               }));

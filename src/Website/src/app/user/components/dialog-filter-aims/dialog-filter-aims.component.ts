@@ -1,5 +1,5 @@
 
-import { Component, OnChanges, OnInit, SimpleChanges } from "@angular/core";
+import { Component, OnChanges, OnInit, SimpleChanges, ChangeDetectionStrategy } from "@angular/core";
 import { MatDialogRef } from "@angular/material/dialog";
 import { MatIcon } from "@angular/material/icon";
 import { MAT_DIALOG_DATA } from "@angular/material/dialog";
@@ -12,6 +12,7 @@ import { AimsService } from "src/app/_services";
     providers: [AimsService],
     imports: [MatIcon],
     templateUrl: "./dialog-filter-aims.component.html",
+    changeDetection: ChangeDetectionStrategy.Eager,
     styleUrls: ["./dialog-filter-aims.component.css"]
 })
 export class DialogFilterAimsComponent implements OnInit {

@@ -6,32 +6,37 @@ import {
   TemplateRef,
   ViewContainerRef,
   DoCheck,
+  ChangeDetectionStrategy,
 } from "@angular/core";
 import { OverlayRef } from "@angular/cdk/overlay";
 import { OverlayService, AppOverlayConfig } from "../_overlay/overlay.service";
 import { ThemePalette } from "@angular/material/core";
-import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
+import {
+  MatProgressSpinnerModule,
+  ProgressSpinnerMode,
+} from "@angular/material/progress-spinner";
 
 @Component({
-    selector: "app-progress-spinner",
-    templateUrl: "./progress-spinner.component.html",
-    styleUrls: ["./progress-spinner.component.css"],
-    standalone: false
+  selector: "app-progress-spinner",
+  templateUrl: "./progress-spinner.component.html",
+  styleUrls: ["./progress-spinner.component.css"],
+  changeDetection: ChangeDetectionStrategy.Eager,
+  standalone: false,
 })
 export class ProgressSpinnerComponent implements OnInit, DoCheck {
   @Input() color?: ThemePalette;
   @Input() diameter? = 100;
-  @Input() mode?: MatProgressSpinnerModule;
+  @Input() mode: ProgressSpinnerMode = "indeterminate";
   @Input() strokeWidth?: number;
   @Input() value?: number;
   @Input() backdropEnabled = true;
   @Input() positionGloballyCenter = true;
-  @Input() displayProgressSpinner: boolean;
+  @Input() displayProgressSpinner: boolean = false;
 
   @ViewChild("progressSpinnerRef")
-  private progressSpinnerRef: TemplateRef<any>;
-  private progressSpinnerOverlayConfig: AppOverlayConfig;
-  private overlayRef: OverlayRef;
+  private progressSpinnerRef!: TemplateRef<any>;
+  private progressSpinnerOverlayConfig!: AppOverlayConfig;
+  private overlayRef!: OverlayRef;
   constructor(
     private vcRef: ViewContainerRef,
     private overlayService: OverlayService

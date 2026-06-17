@@ -1,10 +1,11 @@
-import { Component } from "@angular/core";
+import { Component, ChangeDetectionStrategy } from "@angular/core";
 import { RouterLink } from "@angular/router";
 import { TranslateModule } from "@ngx-translate/core";
 
 @Component({
   selector: "app-btn-faq",
   imports: [RouterLink, TranslateModule],
+  changeDetection: ChangeDetectionStrategy.Eager,
   template: `
     <div class="flex flex-col items-center mt-6 gap-6">
       <a

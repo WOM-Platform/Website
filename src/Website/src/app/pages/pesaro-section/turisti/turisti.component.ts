@@ -1,10 +1,10 @@
-
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ChangeDetectionStrategy } from "@angular/core";
 import { DomSanitizer, SafeHtml } from "@angular/platform-browser";
 import { TranslateModule, TranslateService } from "@ngx-translate/core";
 import { StoreLogosComponent } from "src/app/components/store-logos/store-logos.component";
 import { FaqListComponent } from "../../../components/faq-list/faq-list.component";
 import { BtnFaqComponent } from "../../../components/btn-faq/btn-faq.component";
+import { FaqItem } from "src/app/_models/faq";
 
 @Component({
   selector: "app-turisti",
@@ -14,12 +14,13 @@ import { BtnFaqComponent } from "../../../components/btn-faq/btn-faq.component";
     TranslateModule,
     StoreLogosComponent,
     FaqListComponent,
-    BtnFaqComponent
-],
+    BtnFaqComponent,
+  ],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: true,
 })
 export class TuristiComponent implements OnInit {
-  faqs = [];
+  faqs: FaqItem[] = [];
   translatedTitle = this.translate.instant("PESARO.TOURISTS.TITLE");
 
   constructor(

@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ChangeDetectionStrategy } from "@angular/core";
 import { StatsService } from "../../_services";
 import { Stats } from "../../_models/stats";
 import { LangChangeEvent, TranslateService } from "@ngx-translate/core";
@@ -7,6 +7,7 @@ import { LangChangeEvent, TranslateService } from "@ngx-translate/core";
   selector: "app-instrument",
   templateUrl: "./instrument.component.html",
   styleUrls: ["./instrument.component.css"],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class InstrumentComponent implements OnInit {

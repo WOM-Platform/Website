@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, ChangeDetectionStrategy} from '@angular/core';
 import {StoreLogosComponent} from "../../../components/store-logos/store-logos.component";
 
 
@@ -6,6 +6,7 @@ import {StoreLogosComponent} from "../../../components/store-logos/store-logos.c
     selector: 'app-sharper2024',
     imports: [StoreLogosComponent],
     templateUrl: './sharper2024.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     styleUrl: './sharper2024.component.css'
 })
 export class Sharper2024Component {

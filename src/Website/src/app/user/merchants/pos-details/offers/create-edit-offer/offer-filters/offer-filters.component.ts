@@ -1,4 +1,11 @@
-import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  ChangeDetectionStrategy,
+} from "@angular/core";
 import { NgClass } from "@angular/common";
 import { FormBuilder, FormGroup } from "@angular/forms";
 
@@ -17,10 +24,11 @@ import { Filter } from "../../../../../../_models/filter";
     TranslateModule,
     MapComponent,
     AimsSelectComponent,
-    NgClass
-],
+    NgClass,
+  ],
   standalone: true,
   templateUrl: "./offer-filters.component.html",
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: "./offer-filters.component.css",
 })
 export class OfferFiltersComponent implements OnInit {
@@ -30,7 +38,7 @@ export class OfferFiltersComponent implements OnInit {
 
   newFilter: boolean = false;
 
-  filterForm: FormGroup;
+  filterForm: FormGroup = new FormGroup({});
   isFilteringMap: boolean = false;
 
   constructor(private fb: FormBuilder) {}

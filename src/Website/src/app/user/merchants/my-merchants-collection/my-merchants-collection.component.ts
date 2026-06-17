@@ -1,4 +1,9 @@
-import { ChangeDetectorRef, Component, OnInit } from "@angular/core";
+import {
+  ChangeDetectorRef,
+  Component,
+  OnInit,
+  ChangeDetectionStrategy,
+} from "@angular/core";
 import {
   countryList,
   Merchant,
@@ -57,13 +62,14 @@ import { Access } from "../../../_models/instrument";
       transition("open <=> closed", [animate("300ms ease-in-out")]),
     ]),
   ],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class MyMerchantsCollectionComponent implements OnInit {
-  currentUser: UserMe;
-  merchants: UIMerchant[];
+  currentUser: UserMe = {} as UserMe;
+  merchants: UIMerchant[] = [];
 
-  subscriptions: Subscription;
+  subscriptions: Subscription = Subscription.EMPTY;
   actions: string[] = [];
 
   constructor(
@@ -112,7 +118,7 @@ export class MyMerchantsCollectionComponent implements OnInit {
   onCreateMerchant() {
     const merchantDialogData = new MerchantDialogData();
 
-    merchantDialogData.data = null;
+    merchantDialogData.data = null as any as Merchant;
     merchantDialogData.type = DialogType.create;
     merchantDialogData.isAdmin = false;
 
@@ -127,10 +133,10 @@ export class MyMerchantsCollectionComponent implements OnInit {
           .subscribe({
             next: (result: Merchant) => {
               if (result) {
-                this.merchantService.addAccess(
-                  result.id,
-                  this.userService.currentUserValue.id
-                );
+                const currentUserId =
+                  this.userService.currentUserValue?.id ?? "";
+
+                this.merchantService.addAccess(result.id, currentUserId);
                 this.loadData();
                 this.translate
                   .get("USER.ADD_MERCHANT.SUCCESS")
@@ -208,7 +214,7 @@ export class MyMerchantsCollectionComponent implements OnInit {
   onUpdateMerchant(index: number, key: string, value: any) {
     const updatedMerchant = this.merchants[index];
 
-    updatedMerchant[key] = value;
+    (updatedMerchant as Record<string, any>)[key] = value;
 
     this.merchantService.update(updatedMerchant).subscribe({
       next: () => {
@@ -268,12 +274,12 @@ export class MyMerchantsCollectionComponent implements OnInit {
   }
 
   openSnackBar(message = "null"): any {
-    this.snackBar.open(message, null, {
+    this.snackBar.open(message, undefined, {
       duration: 5000,
     });
   }
 
-  handleAccessList(user, merchantId, idx): void {
+  handleAccessList(user: any, merchantId: string, idx: number): void {
     const role = user.role;
     const access = user.access;
 
@@ -290,7 +296,7 @@ export class MyMerchantsCollectionComponent implements OnInit {
     this.subscriptions.add(addAccessSub);
   }
 
-  onDeleteAccess(access: Access, merchantId, idx) {
+  onDeleteAccess(access: Access, merchantId: string, idx: number) {
     const dialogRef = this.matDialog.open(DialogConfirmCancelComponent, {
       width: "500px",
       data: {
@@ -311,7 +317,7 @@ export class MyMerchantsCollectionComponent implements OnInit {
     });
   }
 
-  updateAccessList(merchantId, idx) {
+  updateAccessList(merchantId: string, idx: number) {
     this.merchantService
       .getAccessList(merchantId)
       .subscribe((res) => (this.merchants[idx].accessList = res["users"]));

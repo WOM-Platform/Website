@@ -1,23 +1,23 @@
 @if (aimList && aimList.length > 0) {
-  <div class="mt-10">
-    <p class="font-semibold mb-0">Aims:</p>
-    <ul class="access-list">
-      @for (aim of aimList; track aim) {
-        <li class="">
-          <div class="access-item">
-            <div class="access-details">
-              <div>
-                <span class="text-slate-600 font-semibold">Code</span>:
-                {{ aim.code }}
-              </div>
-              <div>
-                <span class="text-slate-600 font-semibold">Name</span>:
-                {{ aim.titles["it"] }} | {{ aim.titles["en"] }}
-              </div>
-            </div>
+<div class="mt-10">
+  <p class="font-semibold mb-0">Aims:</p>
+  <ul class="access-list">
+    @for (aim of aimList; track aim) {
+    <li class="">
+      <div class="access-item">
+        <div class="access-details">
+          <div>
+            <span class="text-slate-600 font-semibold">Code</span>:
+            {{ aim.code }}
           </div>
-        </li>
-      }
-    </ul>
-  </div>
+          <div>
+            <span class="text-slate-600 font-semibold">Name</span>:
+            {{ aim.titles?.it }} | {{ aim.titles?.en }}
+          </div>
+        </div>
+      </div>
+    </li>
+    }
+  </ul>
+</div>
 }

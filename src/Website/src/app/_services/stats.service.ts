@@ -3,7 +3,11 @@ import { Injectable } from "@angular/core";
 import { HttpClient, HttpParams, HttpResponse } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { map } from "rxjs/operators";
-import { Stats } from "../_models/stats";
+import {
+  ConsumedStatsApiResponse,
+  GenerationRedeemedStatsApiResponse,
+  Stats,
+} from "../_models/stats";
 import { LocationParams } from "../_models/LocationParams";
 import {
   MerchantFilter,
@@ -25,7 +29,7 @@ export class StatsService {
   fetchVouchersGeneratedAndRedeemedStats(
     dateFilters: DateFilter,
     sourceFilters: InstrumentFilter
-  ) {
+  ): Observable<GenerationRedeemedStatsApiResponse> {
     let requestData = {
       startDate: dateFilters.startDate
         ? this.convertToLocalISOString(dateFilters.startDate)
@@ -37,7 +41,7 @@ export class StatsService {
       aimListFilter: sourceFilters?.aimListFilter || null,
     };
 
-    return this.http.post(
+    return this.http.post<GenerationRedeemedStatsApiResponse>(
       `${this.localUrlV1}vouchers/generated-redeemed-statistics`,
       requestData
     );
@@ -47,7 +51,7 @@ export class StatsService {
     dateFilters: DateFilter,
     merchantFilters: MerchantFilter,
     location?: LocationParams
-  ) {
+  ): Observable<ConsumedStatsApiResponse> {
     let requestData;
     requestData = {
       startDate: dateFilters.startDate
@@ -75,7 +79,7 @@ export class StatsService {
         requestData = { ...requestData, radius: location.radius.toString() };
       }
     }
-    return this.http.post(
+    return this.http.post<ConsumedStatsApiResponse>(
       `${this.localUrlV1}vouchers/consumed-statistics`,
       requestData
     );
@@ -84,7 +88,7 @@ export class StatsService {
   getAmountOfAvailableVouchers(
     locationParams: LocationParams,
     merchantIds: string[]
-  ) {
+  ): Observable<number> {
     let requestData = {};
 
     if (locationParams.latitude != null) {
@@ -107,7 +111,10 @@ export class StatsService {
     }
     if (merchantIds) requestData = { ...requestData, merchantIds: merchantIds };
 
-    return this.http.post(`${this.localUrlV1}voucher/available`, requestData);
+    return this.http.post<number>(
+      `${this.localUrlV1}voucher/available`,
+      requestData
+    );
   }
 
   getActiveOffers(
@@ -143,9 +150,10 @@ export class StatsService {
   ): Observable<any> {
     const { startDate, endDate } = dateFilters;
     const { merchantIds, merchantNames } = merchantFilters;
+
     let requestData = {
-      startDate: this.convertToLocalISOString(startDate) || null,
-      endDate: this.convertToLocalISOString(endDate) || null,
+      startDate: startDate ? this.convertToLocalISOString(startDate) : null,
+      endDate: endDate ? this.convertToLocalISOString(endDate) : null,
       merchantIds: merchantIds || null,
       merchantNames: merchantNames || null,
     };
@@ -156,9 +164,16 @@ export class StatsService {
   }
 
   downloadCsv(filters: CombinedFilters): Observable<HttpResponse<Blob>> {
-    const { startDate, endDate } = filters.dateFilters;
-    const { merchantIds, merchantNames } = filters.merchantFilters;
-    const { sourceId, sourceNames, aimListFilter } = filters.sourceFilters;
+    const startDate = filters.dateFilters?.startDate;
+    const endDate = filters.dateFilters?.endDate;
+
+    const merchantIds = filters.merchantFilters?.merchantIds;
+    const merchantNames = filters.merchantFilters?.merchantNames;
+
+    const sourceId = filters.sourceFilters?.sourceId;
+    const sourceNames = filters.sourceFilters?.sourceNames;
+    const aimListFilter = filters.sourceFilters?.aimListFilter;
+
     let requestData = {
       startDate: startDate ? this.convertToLocalISOString(startDate) : null,
       endDate: endDate ? this.convertToLocalISOString(endDate) : null,
@@ -184,11 +199,11 @@ export class StatsService {
 
   // SERVER STATISTICHE
   getAdminCreatedAmountByPosition(
-    north,
-    south,
-    east,
-    west,
-    zoomLevel
+    north: number | string,
+    south: number | string,
+    east: number | string,
+    west: number | string,
+    zoomLevel: number | string
   ): Observable<any> {
     const params: HttpParams = new HttpParams()
       .set("north", north.toString())

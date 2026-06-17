@@ -4,23 +4,20 @@
     <small class="text-gray-500 mb-4"
       >Se impostato accetterai soltanto i voucher WOM generati per lo specifico
       scopo selezionato</small
-      >
-      <select
-        name="aims"
-        id="aims"
-        (change)="onSelectAim($event)"
-        class="w-[250px] border border-gray-200 py-2 px-1 rounded-sm"
-        [disabled]="isEditing"
-        >
-        <option value="all" [selected]="selectedAim === ''">Tutti validi</option>
-        @for (aim of aimsList; track aim) {
-          <option
-            [value]="aim.code"
-            [selected]="aim.code === selectedAim"
-            >
-            {{ aim.titles.it }}
-          </option>
-        }
-      </select>
-    </div>
+    >
+    <select
+      name="aims"
+      id="aims"
+      (change)="onSelectAim($event)"
+      class="w-[250px] border border-gray-200 py-2 px-1 rounded-sm"
+      [disabled]="isEditing"
+    >
+      <option value="all" [selected]="selectedAim === ''">Tutti validi</option>
+      @for (aim of aimsList; track aim) {
+      <option [value]="aim.code" [selected]="aim.code === selectedAim">
+        {{ aim.titles?.it }}
+      </option>
+      }
+    </select>
   </div>
+</div>

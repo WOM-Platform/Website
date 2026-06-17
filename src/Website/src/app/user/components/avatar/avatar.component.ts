@@ -1,19 +1,22 @@
-import {Component, Input, OnInit} from "@angular/core";
+import {
+  Component,
+  Input,
+  OnInit,
+  ChangeDetectionStrategy,
+} from "@angular/core";
 
 @Component({
-    selector: "app-avatar",
-    templateUrl: "./avatar.component.html",
-    styleUrls: ["./avatar.component.css"],
-    standalone: false
+  selector: "app-avatar",
+  templateUrl: "./avatar.component.html",
+  styleUrls: ["./avatar.component.css"],
+  changeDetection: ChangeDetectionStrategy.Eager,
+  standalone: false,
 })
 export class AvatarComponent implements OnInit {
-    @Input() startingLetter: string;
-    @Input() fullName: string;
-    @Input() role: string;
+  @Input() fullName: string = "";
+  @Input() role: string = "";
 
-    constructor() {
-    }
+  constructor() {}
 
-    ngOnInit() {
-    }
+  ngOnInit() {}
 }

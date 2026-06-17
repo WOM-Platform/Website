@@ -1,4 +1,9 @@
-import { Component, Input, OnInit } from "@angular/core";
+import {
+  Component,
+  Input,
+  OnInit,
+  ChangeDetectionStrategy,
+} from "@angular/core";
 import faqData from "../../../assets/json/faq.json";
 import { CommonModule } from "@angular/common";
 import { TranslateModule, TranslateService } from "@ngx-translate/core";
@@ -16,6 +21,7 @@ import {
   templateUrl: "./faq-list.component.html",
   styleUrl: "./faq-list.component.css",
   standalone: true,
+  changeDetection: ChangeDetectionStrategy.Eager,
   animations: [
     trigger("expandCollapse", [
       state(
@@ -54,7 +60,11 @@ export class FaqListComponent implements OnInit {
     });
   }
 
-  toggleFaq(type: string, index: number) {
-    this.faqs[type].list[index].isOpen = !this.faqs[type].list[index].isOpen;
+  toggleFaq(type: number, index: number) {
+    const targetFaqGroup = this.faqs.find((faq) => faq.type === type);
+
+    if (targetFaqGroup && targetFaqGroup.list && targetFaqGroup.list[index]) {
+      targetFaqGroup.list[index].isOpen = !targetFaqGroup.list[index].isOpen;
+    }
   }
 }

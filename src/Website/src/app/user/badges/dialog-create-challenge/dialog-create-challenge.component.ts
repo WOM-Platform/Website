@@ -5,7 +5,7 @@ import {
   transition,
   trigger,
 } from "@angular/animations";
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ChangeDetectionStrategy } from "@angular/core";
 import {
   FormBuilder,
   FormGroup,
@@ -19,6 +19,7 @@ import { MatDialogRef } from "@angular/material/dialog";
   imports: [ReactiveFormsModule],
   templateUrl: "./dialog-create-challenge.component.html",
   styleUrl: "./dialog-create-challenge.component.css",
+  changeDetection: ChangeDetectionStrategy.Eager,
   animations: [
     trigger("fadeSlide", [
       state(
@@ -44,13 +45,21 @@ import { MatDialogRef } from "@angular/material/dialog";
   ],
 })
 export class DialogCreateChallengeComponent implements OnInit {
-  form: FormGroup;
+  form!: FormGroup;
+
+  challengeList: any[] = [];
 
   constructor(
     private dialogRef: MatDialogRef<DialogCreateChallengeComponent>,
     private fb: FormBuilder
   ) {}
   ngOnInit(): void {
+    // ESEMPIO DI TEST
+    this.challengeList = [
+      { id: "1", name: { it: "Sfida Autunno", en: "Autumn Challenge" } },
+      { id: "2", name: { it: "Sfida Velocità", en: "Speed Challenge" } },
+    ];
+
     this.form = this.fb.group({
       name: this.fb.group({
         it: [null, Validators.required],

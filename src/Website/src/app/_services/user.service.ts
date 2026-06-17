@@ -22,25 +22,22 @@ export class UserService {
 
   private tokenCheckInterval: Subscription | null = null;
   // Login data
-  public currentUserLogin: Observable<UserMe>;
-  private currentUserLoginSubject: BehaviorSubject<UserMe>;
+  public currentUserLogin: Observable<UserLogin | null>;
+  private currentUserLoginSubject: BehaviorSubject<UserLogin | null>;
 
-  // User data
-  public currentUser: Observable<UserMe>;
-  private currentUserSubject: BehaviorSubject<UserMe>;
+  public currentUser: Observable<UserMe | null>;
+  private currentUserSubject: BehaviorSubject<UserMe | null>;
 
   private userOwnership: BehaviorSubject<any> = new BehaviorSubject<any>({});
-
   public userOwnershipStatus = this.userOwnership.asObservable();
 
-  // Merchants and Sources cache
   private merchantsCacheSubject: BehaviorSubject<any[]>;
   public merchantsCache$: Observable<any[]>;
 
   private sourcesCacheSubject: BehaviorSubject<any[]>;
   public sourcesCache$: Observable<any[]>;
 
-  currentUserData: Partial<UserMe>;
+  currentUserData: Partial<UserMe> = {};
 
   constructor(
     private http: HttpClient,
@@ -49,14 +46,15 @@ export class UserService {
     private storageService: StorageService
   ) {
     const localStorageUserLogin = this.storageService.load("currentUserLogin");
-    this.currentUserLoginSubject = new BehaviorSubject<UserMe>(
+
+    this.currentUserLoginSubject = new BehaviorSubject<UserLogin | null>(
       localStorageUserLogin ? UserLogin.fromJson(localStorageUserLogin) : null
     );
     this.currentUserLogin = this.currentUserLoginSubject.asObservable();
 
     const localStorageUser = this.storageService.load("currentUser");
-    this.currentUserSubject = new BehaviorSubject<UserMe>(
-      localStorageUser ? User.fromJson(localStorageUser) : null
+    this.currentUserSubject = new BehaviorSubject<UserMe | null>(
+      localStorageUser ? (localStorageUser as UserMe) : null
     );
     this.currentUser = this.currentUserSubject.asObservable();
 
@@ -73,11 +71,11 @@ export class UserService {
     this.sourcesCache$ = this.sourcesCacheSubject.asObservable();
   }
 
-  public get currentUserValue(): UserMe {
+  public get currentUserValue(): UserMe | null {
     return this.currentUserSubject.value;
   }
 
-  public get currentUserLoginValue(): UserMe {
+  public get currentUserLoginValue(): UserLogin | null {
     return this.currentUserLoginSubject.value;
   }
 
@@ -90,8 +88,9 @@ export class UserService {
 
   getToken(): string | null {
     const currentUser = this.currentUserLoginValue;
-    return currentUser.token;
+    return currentUser ? currentUser.token : null;
   }
+
   // Decode token to check expiry
   decodeToken(token: string): any {
     try {
@@ -245,16 +244,17 @@ export class UserService {
    * @param data user data
    */
   update(data: UserRegistrationPayload): Observable<User> {
+    const currentUserId = this.currentUserLoginSubject.value?.id ?? "";
     return this.http
-      .post<User>(this.localUrlV1 + this.currentUserLoginSubject.value.id, data)
+      .post<User>(this.localUrlV1 + currentUserId, data)
       .pipe(map((response) => response));
   }
 
   /**
    * verify status of user account
    */
-  verify(userId: string = null): Observable<any> {
-    const id = userId != null ? userId : this.currentUserLoginSubject.value.id;
+  verify(userId: string | null = null): Observable<any> {
+    const id = userId != null ? userId : this.currentUserLoginSubject.value?.id;
     return this.http
       .post<any>(this.localUrlV1 + id + "/verify", {})
       .pipe(map((response) => response));
@@ -272,8 +272,8 @@ export class UserService {
   /**
    * request new verification email using user id
    */
-  requestVerificationEmailById(userId: string = null): Observable<any> {
-    const id = userId != null ? userId : this.currentUserLoginSubject.value.id;
+  requestVerificationEmailById(userId: string | null = null): Observable<any> {
+    const id = userId != null ? userId : this.currentUserLoginSubject.value?.id;
     return this.http
       .post<any>(this.localUrlV1 + id + "/request-verification", {})
       .pipe(map((response) => response));
@@ -282,8 +282,10 @@ export class UserService {
   /**
    * request new verification using e-mail
    */
-  requestVerificationEmailByEmail(email: string = null): Observable<any> {
-    const e = email != null ? email : this.currentUserValue.email;
+  requestVerificationEmailByEmail(
+    email: string | null = null
+  ): Observable<any> {
+    const e = email != null ? email : this.currentUserValue?.email;
     return this.http
       .post<any>(this.localUrlV1 + "request-verification", {
         email: e,

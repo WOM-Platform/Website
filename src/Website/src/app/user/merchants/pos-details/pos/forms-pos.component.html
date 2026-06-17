@@ -8,7 +8,7 @@
   <div class="flex flex-wrap gap-2.5">
     <div class="w-full">
       <app-editable-element
-        [valueEl]="form.get('name').value"
+        [valueEl]="form.get('name')?.value"
         [action]="action"
         [minLength]="4"
         [maxLength]="100"
@@ -21,22 +21,18 @@
       <p class="flex items-center gap-2 mb-0 h-8">
         <span class="text-slate-600 font-semibold">Abilitato: </span>
         @if (action === 'edit') {
-          <label class="switch">
-            <input
-              type="checkbox"
-              formControlName="isActive"
-              [checked]="isActive"
-              (click)="toggleIsActive($event)"
-              />
-            <span class="slider round"></span>
-          </label>
-        } @else {
-          @if (isActive) {
-            <span>Attivo</span>
-          } @else {
-            Disattivato
-          }
-        }
+        <label class="switch">
+          <input
+            type="checkbox"
+            formControlName="isActive"
+            [checked]="isActive"
+            (click)="toggleIsActive($event)"
+          />
+          <span class="slider round"></span>
+        </label>
+        } @else { @if (isActive) {
+        <span>Attivo</span>
+        } @else { Disattivato } }
       </p>
 
       <div class="merchant-element">
@@ -46,83 +42,92 @@
       </div>
     </div>
 
-
     <!--   <div class="w-full">
     <p class="description">{{ 'SIGN_UP.POS.NAME_TEXT' | translate }}</p>
   </div>-->
 
-  <!--        <div class="w-full md:w-1/2" [hidden]="!pos">
+    <!--        <div class="w-full md:w-1/2" [hidden]="!pos">
   <mat-checkbox formControlName="isActive" [(ngModel)]="isActive" (change)="onIsActiveChanged($event)">
     {{ 'SIGN_UP.POS.IS_ACTIVE_TEXT' | translate }}
   </mat-checkbox>
 </div>-->
 
-<div class="w-full">
-  <!--       <button class="flex justify-center items-center gap-2 cursor-default"
+    <div class="w-full">
+      <!--       <button class="flex justify-center items-center gap-2 cursor-default"
   matTooltip="{{ 'SIGN_UP.POS.URL_OPTIONAL_TEXT' | translate }}">URL
   <i class="fa-solid fa-info text-[0.5rem] rounded-full border-black border-[1px] w-4 h-4 p-0.5"></i>
 </button>-->
-<p>
-  <app-editable-element
-    [keyEl]="'URL'"
-    [tooltipText]=" 'SIGN_UP.POS.URL_OPTIONAL_TEXT' | translate "
-    [valueEl]="form.get('url').value"
-    [action]="action"
-    [pattern]="'^(https?:\\/\\/)?([\\da-z\\.-]+)\\.([a-z\\.]+)(:[0-9]{1,5})?(\\/[^\\s]*)?$'"
-    [minLength]="10"
-    [maxLength]="100"
-    (onChangeElement)="updatePosField('url', $event)"
-    (click)="$event.stopPropagation()"
-    class="merchant-element text-base"/>
-</p>
-<!--   <mat-form-field class="w-full">
+      <p>
+        <app-editable-element
+          [keyEl]="'URL'"
+          [tooltipText]="'SIGN_UP.POS.URL_OPTIONAL_TEXT' | translate"
+          [valueEl]="form.get('url')?.value"
+          [action]="action"
+          [pattern]="
+            '^(https?:\\/\\/)?([\\da-z\\.-]+)\\.([a-z\\.]+)(:[0-9]{1,5})?(\\/[^\\s]*)?$'
+          "
+          [minLength]="10"
+          [maxLength]="100"
+          (onChangeElement)="updatePosField('url', $event)"
+          (click)="$event.stopPropagation()"
+          class="merchant-element text-base"
+        />
+      </p>
+      <!--   <mat-form-field class="w-full">
 <mat-label>{{ 'SIGN_UP.POS.URL' | translate }}</mat-label>
 <input matInput type="text" formControlName="url"/>
 </mat-form-field>-->
-</div>
-<div class="w-full flex justify-start gap-x-6">
-  <p class="mb-0">
-    <app-editable-element
-      [keyEl]="'SIGN_UP.POS.LAT' | translate"
-      [valueEl]="form.get('latitude').value"
-      [action]="action"
-      (onChangeElement)="updatePosField('latitude', $event)"
-      (click)="$event.stopPropagation()"
-      class="merchant-element text-base"/>
-  </p>
-  <p class="mb-0">
-    <app-editable-element
-      [keyEl]="'SIGN_UP.POS.LON' | translate"
-      [valueEl]="form.get('longitude').value"
-      [action]="action"
-      (onChangeElement)="updatePosField('longitude', $event)"
-      (click)="$event.stopPropagation()"
-      class="merchant-element text-base"/>
-  </p>
-  <!-- <mat-form-field class="w-full">
+    </div>
+    <div class="w-full flex justify-start gap-x-6">
+      <p class="mb-0">
+        <app-editable-element
+          [keyEl]="'SIGN_UP.POS.LAT' | translate"
+          [valueEl]="form.get('latitude')?.value"
+          [action]="action"
+          (onChangeElement)="updatePosField('latitude', $event)"
+          (click)="$event.stopPropagation()"
+          class="merchant-element text-base"
+        />
+      </p>
+      <p class="mb-0">
+        <app-editable-element
+          [keyEl]="'SIGN_UP.POS.LON' | translate"
+          [valueEl]="form.get('longitude')?.value"
+          [action]="action"
+          (onChangeElement)="updatePosField('longitude', $event)"
+          (click)="$event.stopPropagation()"
+          class="merchant-element text-base"
+        />
+      </p>
+      <!-- <mat-form-field class="w-full">
   <mat-label></mat-label>
   <input matInput type="text" [value]="posLat" formControlName="latitude"/>
   <mat-error>{{ 'SIGN_UP.POS.LAT_ERROR' | translate }}</mat-error>
 </mat-form-field>-->
-</div>
-<div class="w-full md:w-1/2">
-  <input #mapSearchField placeholder="{{ 'MERCHANT.FILTERS.SEARCH.PLACEHOLDER' | translate }}" type="text"
-    class="w-full"/>
-</div>
+    </div>
+    <div class="w-full md:w-1/2">
+      <input
+        #mapSearchField
+        placeholder="{{ 'MERCHANT.FILTERS.SEARCH.PLACEHOLDER' | translate }}"
+        type="text"
+        class="w-full"
+      />
+    </div>
 
-<div class="w-full">
-  {{ 'SIGN_UP.POS.MAP_TITLE' | translate }}
-  <google-map [options]="options" (mapClick)="mapClick($event)"></google-map>
-</div>
+    <div class="w-full">
+      {{ "SIGN_UP.POS.MAP_TITLE" | translate }}
+      <google-map
+        [options]="options"
+        (mapClick)="mapClick($event)"
+      ></google-map>
+    </div>
 
-
-<div class="w-full md:w-1/2">
-  <!--      <mat-form-field class="w-full">
+    <div class="w-full md:w-1/2">
+      <!--      <mat-form-field class="w-full">
   <mat-label>{{ 'SIGN_UP.POS.LON' | translate }}</mat-label>
   <input matInput type="text" [value]="posLon" formControlName="longitude"/>
   <mat-error>{{ 'SIGN_UP.POS.LON_ERROR' | translate }}</mat-error>
 </mat-form-field>-->
-</div>
-</div>
-
+    </div>
+  </div>
 </form>

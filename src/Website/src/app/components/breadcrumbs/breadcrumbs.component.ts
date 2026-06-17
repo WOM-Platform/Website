@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ChangeDetectionStrategy } from "@angular/core";
 import { ActivatedRoute, NavigationEnd, Router } from "@angular/router";
 import { MenuItem } from "primeng/api";
 import { filter } from "rxjs/operators";
@@ -7,12 +7,14 @@ import { TranslateService } from "@ngx-translate/core";
 @Component({
   selector: "app-breadcrumbs",
   templateUrl: "./breadcrumbs.component.html",
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class BreadcrumbsComponent implements OnInit {
   static readonly ROUTE_DATA_BREADCRUMB = "breadcrumb";
   readonly home = { icon: "pi pi-home", url: "home" };
-  menuItems: MenuItem[];
+
+  menuItems: MenuItem[] = [];
 
   constructor(
     private router: Router,
@@ -37,7 +39,7 @@ export class BreadcrumbsComponent implements OnInit {
     const children: ActivatedRoute[] = route.children;
     const menu: MenuItem[] = [];
     breadcrumbs.forEach((b) => {
-      const label: string = this.translate.instant(b.label);
+      const label: string = this.translate.instant(b.label ?? "");
       menu.push({ label, url: b.url });
     });
 
@@ -61,5 +63,6 @@ export class BreadcrumbsComponent implements OnInit {
       }
       return this.createBreadcrumbs(child, url, menu);
     }
+    return menu;
   }
 }

@@ -1,15 +1,23 @@
-import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  ChangeDetectionStrategy,
+} from "@angular/core";
 
 @Component({
   selector: "app-expandable-card",
   standalone: true,
   templateUrl: "./expandable-card.component.html",
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: "./expandable-card.component.css",
 })
 export class ExpandableCardComponent implements OnInit {
-  @Input() name: string;
-  @Input() role: string;
-  @Input() data;
+  @Input() name: string = "";
+  @Input() role: string = "";
+  @Input() data: any;
   @Output() updateInstrument: EventEmitter<any> = new EventEmitter<any>();
 
   action = "view";

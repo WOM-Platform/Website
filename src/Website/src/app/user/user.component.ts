@@ -1,24 +1,40 @@
-import { ChangeDetectorRef, Component, OnDestroy, OnInit } from "@angular/core";
-import { UserService } from "../_services";
-import { UserMe } from "../_models";
+import {
+  ChangeDetectorRef,
+  Component,
+  OnDestroy,
+  OnInit,
+  ChangeDetectionStrategy,
+} from "@angular/core";
 import { Subscription } from "rxjs";
 import { LoadingService } from "../_services/loading.service";
+import { UserMe } from "../_models/user";
 import { Instrument } from "../_models/instrument";
-import { StorageService } from "../_services/storage.service";
+import { UserService } from "../_services/user.service";
 
 @Component({
   selector: "app-user",
   templateUrl: "./user.component.html",
   styleUrl: "./user.component.css",
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class UserComponent implements OnInit, OnDestroy {
-  username: string;
+  username: string = "";
   role: string = "";
-  userData: UserMe;
+  userData: UserMe = {
+    email: "",
+    id: "",
+    merchants: [],
+    name: "",
+    surname: "",
+    role: "",
+    sources: [],
+    verified: false,
+    token: "",
+  };
 
-  userDataSubscription: Subscription;
-  isLoading = false;
+  userDataSubscription: Subscription = new Subscription();
+  isLoading: boolean = false;
   instruments: Instrument[] = [];
 
   navLinks = [
@@ -72,7 +88,13 @@ export class UserComponent implements OnInit, OnDestroy {
       adminOnly: false,
     },
   ];
-  filteredNavLinks = [];
+  filteredNavLinks: {
+    path: string;
+    text: string;
+    icon: string;
+    isActive: boolean;
+    adminOnly: boolean;
+  }[] = [];
 
   constructor(
     private userService: UserService,
@@ -139,7 +161,7 @@ export class UserComponent implements OnInit, OnDestroy {
     });
   }
 
-  onLoading(loading) {
+  onLoading(loading: boolean): void {
     this.isLoading = loading;
   }
 }

@@ -1,5 +1,11 @@
-
-import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  ChangeDetectionStrategy,
+} from "@angular/core";
 import {
   FormBuilder,
   FormGroup,
@@ -14,6 +20,7 @@ import { MatSliderModule } from "@angular/material/slider";
 
   standalone: true,
   templateUrl: "./validity-slider.component.html",
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrls: ["./validity-slider.component.css"],
 })
 export class ValiditySliderComponent implements OnInit {
@@ -25,7 +32,7 @@ export class ValiditySliderComponent implements OnInit {
   tickValues = [0, 1, 2, 3, 4, 5, 6];
   qntDays: number = -1; // to save the number of WOM days validity to retrieve to the API
 
-  sliderValueSave;
+  sliderValueSave = 0; // to save the slider value to show in the slider when editing
 
   constructor(private fb: FormBuilder) {
     this.validityForm = this.fb.group({

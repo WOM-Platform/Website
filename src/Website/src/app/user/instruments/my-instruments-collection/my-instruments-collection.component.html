@@ -1,60 +1,73 @@
 @if (uiInstruments && uiInstruments.length > 0) {
-  <div>
-    @for (instrument of uiInstruments; track instrument) {
-      <div class="my-6">
-        <div
-          class="bg-white rounded-lg shadow-md p-6 cursor-pointer"
-          (click)="instrument.isOpen = !instrument.isOpen"
-          >
-          <app-editable-element
-            [valueEl]="instrument.name"
-            [action]="action"
-            [minLength]="4"
-            [maxLength]="100"
-            (onChangeElement)="updateInstrumentField(findEditingInstrumentById(instrument.id), {key: 'name', value:$event, isTableToUpdate:true})"
-            (click)="$event.stopPropagation()"
-            class="font-semibold text-cyan-700 text-2xl"
-            />
-          <div class="mt-4 flex justify-between">
-            <app-editable-element
-              [keyEl]="'URL'"
-              [valueEl]="instrument.url"
-              [action]="action"
-              [pattern]="'^(https?:\\/\\/)?([\\da-z\\.-]+)\\.([a-z\\.]+)(:[0-9]{1,5})?(\\/[^\\s]*)?$'"
-              [minLength]="10"
-              [maxLength]="100"
-              (onChangeElement)="updateInstrumentField(findEditingInstrumentById(instrument.id), {key: 'url', value:$event, isTableToUpdate:true})"
-              (click)="$event.stopPropagation()"
-              class="merchant-element"
-              />
-            <div class="flex justify-end">
-              <i class="fa-solid fa-arrow-down p-4 rounded-full bg-blue-400 text-white font-semibold flex items-center justify-center"
-              style="width: 40px; height: 40px;" [@rotateArrow]="instrument.isOpen ? 'open' : 'closed'"></i>
-            </div>
-          </div>
-          <!--       <app-expandable-card
-          [name]="instrument.name"
-          [role]="'Admin'"
-          [data]="instrument"
-          (updateInstrument)="updateInstrumentField(findEditingInstrumentById(instrument.id), $event)"
+<div>
+  @for (instrument of uiInstruments; track instrument.id) {
+  <div class="my-6">
+    <div
+      class="bg-white rounded-lg shadow-md p-6 cursor-pointer"
+      (click)="instrument.isOpen = !instrument.isOpen"
+    >
+      <app-editable-element
+        [valueEl]="instrument.name"
+        [action]="action"
+        [minLength]="4"
+        [maxLength]="100"
+        (onChangeElement)="
+          updateInstrumentField(instrument, {
+            key: 'name',
+            value: $event,
+            isTableToUpdate: true
+          })
+        "
+        (click)="$event.stopPropagation()"
+        class="font-semibold text-cyan-700 text-2xl"
+      />
+      <div class="mt-4 flex justify-between">
+        <app-editable-element
+          [keyEl]="'URL'"
+          [valueEl]="instrument.url"
+          [action]="action"
+          [pattern]="
+            '^(https?:\\/\\/)?([\\da-z\\.-]+)\\.([a-z\\.]+)(:[0-9]{1,5})?(\\/[^\\s]*)?$'
+          "
+          [minLength]="10"
+          [maxLength]="100"
+          (onChangeElement)="
+            updateInstrumentField(instrument, {
+              key: 'url',
+              value: $event,
+              isTableToUpdate: true
+            })
+          "
           (click)="$event.stopPropagation()"
-        ></app-expandable-card>-->
-        <div [@slideToggle]="instrument.isOpen ? 'open' : 'closed'">
-          <app-aims-list [aimList]="instrument.aims"></app-aims-list>
-          @if (instrument.access && instrument.access.length > 0) {
-            <div class="mt-10">
-              <p class="font-semibold mb-0">Gestori:</p>
-              <app-access-list (click)="$event.stopPropagation()"
-              [accessList]="instrument.access"></app-access-list>
-            </div>
-          }
+          class="merchant-element"
+        />
+        <div class="flex justify-end">
+          <i
+            class="fa-solid fa-arrow-down p-4 rounded-full bg-blue-400 text-white font-semibold flex items-center justify-center"
+            style="width: 40px; height: 40px"
+            [@rotateArrow]="instrument.isOpen ? 'open' : 'closed'"
+          ></i>
         </div>
       </div>
+
+      <div [@slideToggle]="instrument.isOpen ? 'open' : 'closed'">
+        <app-aims-list [aimList]="instrument.aims"></app-aims-list>
+        @if (instrument.access && instrument.access.length > 0) {
+        <div class="mt-10">
+          <p class="font-semibold mb-0">Gestori:</p>
+          <app-access-list
+            (click)="$event.stopPropagation()"
+            [accessList]="instrument.access"
+          ></app-access-list>
+        </div>
+        }
+      </div>
     </div>
+  </div>
   }
 </div>
 } @else {
-  <div class="flex justify-center items-center">
-    <h2>No instrument</h2>
-  </div>
+<div class="flex justify-center items-center">
+  <h2>No instrument</h2>
+</div>
 }

@@ -1,5 +1,10 @@
-
-import { Component, Input, OnDestroy, OnInit } from "@angular/core";
+import {
+  Component,
+  Input,
+  OnDestroy,
+  OnInit,
+  ChangeDetectionStrategy,
+} from "@angular/core";
 import { FormsModule } from "@angular/forms";
 import { BehaviorSubject, Subject, takeUntil } from "rxjs";
 import { CookieConsentService } from "src/app/_services/cookie-consent.service";
@@ -9,6 +14,7 @@ import { CookieConsentService } from "src/app/_services/cookie-consent.service";
   imports: [FormsModule],
   templateUrl: "./cookie-banner.component.html",
   styleUrl: "./cookie-banner.component.css",
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: true,
 })
 export class CookieBannerComponent implements OnInit, OnDestroy {
@@ -20,7 +26,7 @@ export class CookieBannerComponent implements OnInit, OnDestroy {
     marketing: false,
   };
 
-  $destroy = new Subject<boolean>();
+  $destroy = new Subject<void>();
 
   constructor(private consentService: CookieConsentService) {}
 
@@ -41,7 +47,7 @@ export class CookieBannerComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.openBanner.next(false);
-    this.$destroy.next(null);
+    this.$destroy.next();
     this.$destroy.complete();
   }
 

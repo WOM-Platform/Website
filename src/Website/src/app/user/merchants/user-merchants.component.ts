@@ -1,4 +1,10 @@
-import { Component, OnDestroy, OnInit, ViewChild } from "@angular/core";
+import {
+  Component,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+  ChangeDetectionStrategy,
+} from "@angular/core";
 import { UserService } from "../../_services";
 import { MatDialog } from "@angular/material/dialog";
 import { MatSnackBar } from "@angular/material/snack-bar";
@@ -11,15 +17,16 @@ import { MatTabGroup } from "@angular/material/tabs";
   selector: "app-user-merchant",
   templateUrl: "./user-merchants.component.html",
   styleUrls: ["./user-merchants.component.css"],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class UserMerchantsComponent implements OnInit, OnDestroy {
-  username: string;
+  username: string = "";
 
   currentUser: any;
   @ViewChild("tabGroup", { static: true }) tabGroup!: MatTabGroup;
 
-  subscriptions: Subscription;
+  subscriptions: Subscription = Subscription.EMPTY;
 
   constructor(
     public dialog: MatDialog,
@@ -38,10 +45,9 @@ export class UserMerchantsComponent implements OnInit, OnDestroy {
       }
     });
 
-    this.username =
-      this.userService.currentUserValue.name +
-      " " +
-      this.userService.currentUserValue.surname;
+    const user = this.userService.currentUserValue;
+
+    this.username = user ? `${user.name} ${user.surname}` : "";
     this.loadData();
   }
 
@@ -58,7 +64,7 @@ export class UserMerchantsComponent implements OnInit, OnDestroy {
   }
 
   openSnackBar(message = "null"): any {
-    this.snackBar.open(message, null, {
+    this.snackBar.open(message, undefined, {
       duration: 5000,
     });
   }

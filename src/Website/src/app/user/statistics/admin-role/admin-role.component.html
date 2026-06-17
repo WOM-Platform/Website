@@ -1,61 +1,62 @@
 <div class="relative mx-auto py-10 px-4 max-w-full">
+  @if (currentUser) {
   <div class="flex justify-between items-center">
     <app-statistics-filters
-      [dateFilters]="dateFilters"
+      [dateFilters]="filters.dateFilters ?? { startDate: null, endDate: null }"
       (onDateFilter)="onDatesSelected($event)"
-      />
-    @if (currentUser.role === 'Admin') {
-      <div class="flex items-center gap-2">
-        <button
-          class="cursor-help text-gray-600 focus:outline-none focus:ring-2 focus:ring-slate-400"
-          [matTooltip]="activeFiltersSummary"
-          matTooltipShowDelay="200"
-          aria-label="Informazioni sui filtri attivi"
-          >
-          <span
-            class="material-symbols-outlined rounded-full p-2 hover:bg-slate-100"
-            >info</span
-            >
-          </button>
-          <!-- Scarica report annuale -->
-          <button
-            (click)="openModalReport()"
-            class="text-gray-600 transition focus:outline-none focus:ring-2 focus:ring-slate-400"
-            aria-label="Apri il report annuale"
-            >
-            <span
-              class="rounded-full p-2 hover:bg-slate-100 material-symbols-outlined"
-              >assignment</span
-              >
-            </button>
-            <!-- Scarica CSV -->
-            <app-csv-download [filters]="filters" />
-          </div>
-        }
-      </div>
-      <header class="w-full h-[5px] bg-[#739cf4] my-6"></header>
+    />
 
-      @if (currentUser.role === 'Admin' || currentUser.merchants.length > 0) {
-        <div>
-          <app-consumer-statistics
-            [dateFilters]="dateFilters"
-            [currentUser]="currentUser"
-            (filtersEmit)="onMerchantSelected($event)"
-            >
-          </app-consumer-statistics>
-        </div>
-      }
-      <!-- WOM Generati Section -->
-      @if (currentUser.role === 'Admin' || currentUser.sources.length > 0) {
-        <div
-          class="mt-10"
-          >
-          <app-generator-statistics-component
-            [dateFilters]="dateFilters"
-            [currentUser]="currentUser"
-            (filtersEmit)="onSourceSelected($event)"
-            >
-          </app-generator-statistics-component>
-        </div>
-      }
+    @if (currentUser.role === 'Admin') {
+    <div class="flex items-center gap-2">
+      <button
+        class="cursor-help text-gray-600 focus:outline-none focus:ring-2 focus:ring-slate-400"
+        [matTooltip]="activeFiltersSummary"
+        matTooltipShowDelay="200"
+        aria-label="Informazioni sui filtri attivi"
+      >
+        <span
+          class="material-symbols-outlined rounded-full p-2 hover:bg-slate-100"
+          >info</span
+        >
+      </button>
+
+      <button
+        (click)="openModalReport()"
+        class="text-gray-600 transition focus:outline-none focus:ring-2 focus:ring-slate-400"
+        aria-label="Apri il report annuale"
+      >
+        <span
+          class="rounded-full p-2 hover:bg-slate-100 material-symbols-outlined"
+          >assignment</span
+        >
+      </button>
+
+      <app-csv-download [filters]="filters" />
     </div>
+    }
+  </div>
+
+  <header class="w-full h-[5px] bg-[#739cf4] my-6"></header>
+
+  @if (currentUser.role === 'Admin' || currentUser.merchants.length > 0) {
+  <div>
+    <app-consumer-statistics
+      [dateFilters]="filters.dateFilters ?? { startDate: null, endDate: null }"
+      [currentUser]="currentUser"
+      (filtersEmit)="onMerchantSelected($event)"
+    ></app-consumer-statistics>
+  </div>
+  } @if (currentUser.role === 'Admin' || currentUser.sources.length > 0) {
+  <div class="mt-10">
+    <app-generator-statistics-component
+      [dateFilters]="filters.dateFilters ?? { startDate: null, endDate: null }"
+      [currentUser]="currentUser"
+      (filtersEmit)="onSourceSelected($event)"
+    ></app-generator-statistics-component>
+  </div>
+  } } @else {
+  <div class="flex justify-center py-10">
+    <p class="text-gray-500">Caricamento dati utente in corso...</p>
+  </div>
+  }
+</div>

@@ -1,138 +1,132 @@
 @if (merchant) {
-  <div>
-    <div class="flex items-center justify-between mt-6 mb-4">
-      <button
-        (click)="goBack()"
-        class="font-bold flex items-center gap-2 hover:bg-stone-100 rounded-lg px-2 py-1"
-        >
-        <i class="fas fa-arrow-left"></i> Indietro
-      </button>
+<div>
+  <div class="flex items-center justify-between mt-6 mb-4">
+    <button
+      (click)="goBack()"
+      class="font-bold flex items-center gap-2 hover:bg-stone-100 rounded-lg px-2 py-1"
+    >
+      <i class="fas fa-arrow-left"></i> Indietro
+    </button>
+  </div>
+  <div class="bg-white w-[900px] px-6 py-6 my-6 rounded-lg shadow-sm">
+    <!-- Identity -->
+    <div class="mb-6">
+      <app-editable-element
+        [valueEl]="merchant.name"
+        [action]="action"
+        [minLength]="4"
+        [maxLength]="100"
+        (onChangeElement)="onUpdateMerchant('name', $event, true)"
+        class="text-2xl font-semibold text-cyan-700"
+      />
+      <div class="text-sm text-slate-500 bg-slate-50 p-3 rounded-lg mt-3">
+        <p><span class="font-semibold">ID:</span> {{ merchant.id }}</p>
+        <p><span class="font-semibold">CF:</span> {{ merchant.fiscalCode }}</p>
+      </div>
     </div>
-    <div class="bg-white w-[900px] px-6 py-6 my-6 rounded-lg shadow-sm">
-      <!-- Identity -->
-      <div class="mb-6">
-        <app-editable-element
-          [valueEl]="merchant.name"
-          [action]="action"
-          [minLength]="4"
-          [maxLength]="100"
-          (onChangeElement)="onUpdateMerchant('name', $event, true)"
-          class="text-2xl font-semibold text-cyan-700"
+    <!-- Status / Activation -->
+    <div
+      class="flex items-center justify-between bg-slate-50 p-3 rounded-lg mb-6"
+    >
+      <app-editable-element
+        [keyEl]="'Codice di attivazione'"
+        [valueEl]="merchant.activationCode || ''"
+        [action]="action"
+        [typeEl]="'string'"
+        (onChangeElement)="onUpdateMerchant('activationCode', $event, false)"
+      />
+      <div class="flex items-center gap-2">
+        <span class="text-slate-600 font-semibold">Abilitato:</span>
+        @if (action === 'edit') {
+        <label class="switch">
+          <input
+            type="checkbox"
+            [checked]="merchant.enabled"
+            (click)="onCheckboxClick()"
           />
-        <div class="text-sm text-slate-500 bg-slate-50 p-3 rounded-lg mt-3">
-          <p><span class="font-semibold">ID:</span> {{ merchant.id }}</p>
-          <p><span class="font-semibold">CF:</span> {{ merchant.fiscalCode }}</p>
-        </div>
+          <span class="slider round"></span>
+        </label>
+        } @else { @if (merchant.enabled) {
+        <span>Attivo</span>
+        } @else { Disattivato } }
       </div>
-      <!-- Status / Activation -->
-      <div
-        class="flex items-center justify-between bg-slate-50 p-3 rounded-lg mb-6"
-        >
-        <app-editable-element
-          [keyEl]="'Codice di attivazione'"
-          [valueEl]="merchant.activationCode || ''"
-          [action]="action"
-          [typeEl]="'string'"
-          (onChangeElement)="onUpdateMerchant('activationCode', $event, false)"
-          />
-        <div class="flex items-center gap-2">
-          <span class="text-slate-600 font-semibold">Abilitato:</span>
-          @if (action === 'edit') {
-            <label class="switch">
-              <input
-                type="checkbox"
-                [checked]="merchant.isEnabled"
-                (click)="onCheckboxClick()"
-                />
-              <span class="slider round"></span>
-            </label>
-          } @else {
-            @if (merchant.isEnabled) {
-              <span>Attivo</span>
-            } @else {
-              Disattivato
-            }
-          }
-        </div>
-      </div>
-      <!-- Business Info -->
-      <h3 class="text-slate-500 font-semibold mb-3">Dati attività</h3>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-        <app-editable-element
-          [keyEl]="'Attività primaria'"
-          [valueEl]="merchant.primaryActivity"
-          [action]="action"
-          [typeEl]="'list'"
-          [option]="businessList"
-          (onChangeElement)="onUpdateMerchant('primaryActivity', $event, true)"
-          />
-        <app-editable-element
-          [keyEl]="'Paese'"
-          [valueEl]="merchant.country"
-          [action]="action"
-          [typeEl]="'list'"
-          [option]="countryList"
-          (onChangeElement)="onUpdateMerchant('country', $event, false)"
-          />
-      </div>
-      <!-- Contacts -->
-      <h3 class="text-slate-500 font-semibold mb-3">Contatti</h3>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-        <app-editable-element
-          [keyEl]="'Indirizzo'"
-          [valueEl]="merchant.address"
-          [action]="action"
-          (onChangeElement)="onUpdateMerchant('address', $event, false)"
-          />
-        <app-editable-element
-          [keyEl]="'CAP'"
-          [valueEl]="merchant.zipCode"
-          [action]="action"
-          [pattern]="'^[0-9]{5}$'"
-          (onChangeElement)="onUpdateMerchant('zipCode', $event, false)"
-          />
-        <app-editable-element
-          [keyEl]="'Telefono'"
-          [valueEl]="merchant.phoneNumber"
-          [displayType]="'phone'"
-          [action]="action"
-          [pattern]="'^[0-9+\\s]{6,20}$'"
-          (onChangeElement)="onUpdateMerchant('phoneNumber', $event, false)"
-          />
-        <app-editable-element
-          [keyEl]="'URL'"
-          [valueEl]="merchant.url"
-          [displayType]="'url'"
-          [action]="action"
+    </div>
+    <!-- Business Info -->
+    <h3 class="text-slate-500 font-semibold mb-3">Dati attività</h3>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+      <app-editable-element
+        [keyEl]="'Attività primaria'"
+        [valueEl]="merchant.primaryActivity"
+        [action]="action"
+        [typeEl]="'list'"
+        [option]="businessList"
+        (onChangeElement)="onUpdateMerchant('primaryActivity', $event, true)"
+      />
+      <app-editable-element
+        [keyEl]="'Paese'"
+        [valueEl]="merchant.country"
+        [action]="action"
+        [typeEl]="'list'"
+        [option]="countryList"
+        (onChangeElement)="onUpdateMerchant('country', $event, false)"
+      />
+    </div>
+    <!-- Contacts -->
+    <h3 class="text-slate-500 font-semibold mb-3">Contatti</h3>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+      <app-editable-element
+        [keyEl]="'Indirizzo'"
+        [valueEl]="merchant.address"
+        [action]="action"
+        (onChangeElement)="onUpdateMerchant('address', $event, false)"
+      />
+      <app-editable-element
+        [keyEl]="'CAP'"
+        [valueEl]="merchant.zipCode"
+        [action]="action"
+        [pattern]="'^[0-9]{5}$'"
+        (onChangeElement)="onUpdateMerchant('zipCode', $event, false)"
+      />
+      <app-editable-element
+        [keyEl]="'Telefono'"
+        [valueEl]="merchant.phoneNumber"
+        [displayType]="'phone'"
+        [action]="action"
+        [pattern]="'^[0-9+\\s]{6,20}$'"
+        (onChangeElement)="onUpdateMerchant('phoneNumber', $event, false)"
+      />
+      <app-editable-element
+        [keyEl]="'URL'"
+        [valueEl]="merchant.url"
+        [displayType]="'url'"
+        [action]="action"
         [pattern]="
           '^(https?:\\/\\/)?([\\da-z\\.-]+)\\.([a-z\\.]+)(:[0-9]{1,5})?(\\/[^\\s]*)?$'
         "
-          [minLength]="10"
-          [maxLength]="100"
-          (onChangeElement)="onUpdateMerchant('url', $event, false)"
-          />
-      </div>
-      <!-- Access -->
-      @if (accessList?.length) {
-        <h3 class="text-slate-500 font-semibold mb-3">
-          Gestori
-        </h3>
-      }
-      <app-access-list
-        [accessList]="accessList"
-        [action]="action"
-        [showRole]="true"
-        (addAccess)="handleAccessList($event)"
-        (deleteAccess)="onDeleteAccess($event)"
-        />
-      <!-- POS -->
-      <div class="mt-6">
-        <app-user-pos-list
-          [merchantId]="merchant?.id"
-          [posList]="posList"
-          [actionMerchant]="action"
-          />
-      </div>
+        [minLength]="10"
+        [maxLength]="100"
+        (onChangeElement)="onUpdateMerchant('url', $event, false)"
+      />
+    </div>
+    <!-- Access -->
+    @if (accessList?.length) {
+    <h3 class="text-slate-500 font-semibold mb-3">Gestori</h3>
+    }
+    <app-access-list
+      [accessList]="accessList"
+      [action]="action"
+      [showRole]="true"
+      (addAccess)="handleAccessList($event)"
+      (deleteAccess)="onDeleteAccess($event)"
+    />
+    <!-- POS -->
+    <div class="mt-6">
+      <app-user-pos-list
+        [merchantId]="$safeNavigationMigration(merchant?.id)"
+        [posList]="posList"
+        [actionMerchant]="action"
+      />
     </div>
   </div>
+</div>
 }

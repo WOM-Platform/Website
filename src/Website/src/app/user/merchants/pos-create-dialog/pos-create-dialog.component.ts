@@ -4,11 +4,14 @@ import {
   Inject,
   OnInit,
   ViewChild,
+  ChangeDetectionStrategy,
 } from "@angular/core";
 import {
+  AbstractControl,
   FormBuilder,
   FormGroup,
   ReactiveFormsModule,
+  ValidationErrors,
   Validators,
 } from "@angular/forms";
 import {
@@ -28,7 +31,6 @@ import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatCheckboxModule } from "@angular/material/checkbox";
 import { MatTooltipModule } from "@angular/material/tooltip";
 
-
 @Component({
   selector: "app-pos-create-dialog",
   templateUrl: "./pos-create-dialog.component.html",
@@ -40,26 +42,28 @@ import { MatTooltipModule } from "@angular/material/tooltip";
     ReactiveFormsModule,
     MatCheckboxModule,
     MatTooltipModule,
-    GoogleMapsModule
-],
+    GoogleMapsModule,
+  ],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: true,
 })
 export class PosCreateDialogComponent implements OnInit {
-  @ViewChild(GoogleMap, { static: false }) map: GoogleMap;
-  @ViewChild("mapSearchField") searchField: ElementRef;
+  @ViewChild(GoogleMap, { static: false }) map!: GoogleMap;
+  @ViewChild("mapSearchField") searchField!: ElementRef;
 
   unsubscribe = new Subject<void>();
   isCeatingOffer: boolean = false;
 
-  marker: google.maps.Marker;
+  marker: google.maps.Marker | null = null;
   options: google.maps.MapOptions = {
     center: { lat: 45.788, lng: 12.5 },
     zoom: 5,
     mapTypeId: MapTypeId.ROADMAP,
   };
-  newPos: FormGroup;
-  formInputError: boolean;
-  formApiError: boolean;
+
+  newPos: FormGroup = new FormGroup({});
+  formInputError: boolean = false;
+  formApiError: boolean = false;
 
   firstFormGroup = this.fb.group({
     firstCtrl: ["", Validators.required],
@@ -97,12 +101,12 @@ export class PosCreateDialogComponent implements OnInit {
     });
   }
 
-  latLonValidator(control) {
+  latLonValidator(control: AbstractControl): ValidationErrors | null {
     const value = control.value;
     if (value !== 0) {
-      return null; // Value is valid
+      return null;
     } else {
-      return { nonZero: true }; // Value is not valid
+      return { nonZero: true };
     }
   }
 
@@ -187,9 +191,11 @@ export class PosCreateDialogComponent implements OnInit {
       });
   }
 
-  mapClick(event): any {
+  mapClick(event: google.maps.MapMouseEvent): any {
     const clickedLocation = event.latLng;
-    this.setMarker(clickedLocation);
+    if (clickedLocation) {
+      this.setMarker(clickedLocation);
+    }
   }
 
   setMarker(latLng: google.maps.LatLng): void {
@@ -209,15 +215,19 @@ export class PosCreateDialogComponent implements OnInit {
   }
 
   markerLocation(): any {
+    if (!this.marker) return;
+
     const currentLocation = this.marker.getPosition();
 
-    this.newPos.controls.latitude.setValue(currentLocation.lat());
-    this.newPos.controls.longitude.setValue(currentLocation.lng());
+    if (currentLocation) {
+      this.newPos.controls.latitude.setValue(currentLocation.lat());
+      this.newPos.controls.longitude.setValue(currentLocation.lng());
+    }
   }
 }
 
 export class PosDialogData {
-  merchantId: string;
-  isEdit: boolean;
-  pos: Pos;
+  merchantId: string = "";
+  isEdit: boolean = false;
+  pos: Pos = {} as Pos;
 }

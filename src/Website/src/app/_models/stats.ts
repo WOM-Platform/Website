@@ -1,11 +1,11 @@
 export class Stats {
-  totalVouchersGenerated: number;
-  totalVouchersRedeemed: number;
-  totalVouchersAvailable: number;
-  totalVouchersSpent: number;
-  aims: RootAims;
+  totalVouchersGenerated: number = 0;
+  totalVouchersRedeemed: number = 0;
+  totalVouchersAvailable: number = 0;
+  totalVouchersSpent: number = 0;
+  aims?: RootAims;
 
-  public static fromJson(json): any {
+  public static fromJson(json: any): any {
     if (json === null) {
       return null;
     }
@@ -18,10 +18,10 @@ export class RootAims {
 }
 
 export class AimStats {
-  generated: number;
-  redeemed: number;
-  available: number;
-  spent: number;
+  generated: number = 0;
+  redeemed: number = 0;
+  available: number = 0;
+  spent: number = 0;
 }
 
 export interface ChartDataSwimlane {

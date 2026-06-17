@@ -1,4 +1,10 @@
-import { ChangeDetectorRef, Component, OnDestroy, OnInit } from "@angular/core";
+import {
+  ChangeDetectorRef,
+  Component,
+  OnDestroy,
+  OnInit,
+  ChangeDetectionStrategy,
+} from "@angular/core";
 import { countryList, Merchant, primaryActivityType } from "../../../_models";
 import { MerchantService, PosService, UserService } from "src/app/_services";
 import { ActivatedRoute } from "@angular/router";
@@ -17,12 +23,12 @@ import { SnackBarService } from "../../../_services/snack-bar.service";
   selector: "app-merchant-detail",
   templateUrl: "./merchant-detail.component.html",
   styleUrl: "./merchant-detail.component.css",
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class MerchantDetailComponent implements OnInit, OnDestroy {
-  merchantId: string;
-  action: string;
-
+  merchantId: string = "";
+  action: string = "";
   merchant: Merchant = new Merchant();
 
   posList: any[] = [];
@@ -70,7 +76,7 @@ export class MerchantDetailComponent implements OnInit, OnDestroy {
           next: ({ merchantData, accessData, posData }) => {
             this.merchant = merchantData;
             this.accessList = accessData?.users || [];
-            this.posList = posData?.["pos"] || [];
+            this.posList = (posData as any)?.["pos"] || [];
 
             this.cd.detectChanges();
           },
@@ -115,7 +121,7 @@ export class MerchantDetailComponent implements OnInit, OnDestroy {
       });
   }
 
-  handleAccessList(user): void {
+  handleAccessList(user: any): void {
     const role = user.role;
     const access = user.access;
 
@@ -127,10 +133,12 @@ export class MerchantDetailComponent implements OnInit, OnDestroy {
       .subscribe({
         next: () => {
           // search for the access id to have the access type
-          const accessToCheck: Access = this.accessList.find(
+          const accessToCheck: Access | undefined = this.accessList.find(
             (acc) => acc.userId === access.id
           );
-          this.checkAccessCurrentUser(accessToCheck);
+          if (accessToCheck) {
+            this.checkAccessCurrentUser(accessToCheck);
+          }
         },
         error: (err) =>
           console.error("Error adding new instrument access:", err),
@@ -191,7 +199,7 @@ export class MerchantDetailComponent implements OnInit, OnDestroy {
   updatePosList() {
     this.merchantService
       .getMerchantPos(this.merchantId)
-      .subscribe((res) => (this.posList = res["pos"]));
+      .subscribe((res: any) => (this.posList = res["pos"]));
   }
 
   checkAccessCurrentUser(access: Access) {

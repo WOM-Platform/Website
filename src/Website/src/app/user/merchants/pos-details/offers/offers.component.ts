@@ -1,4 +1,9 @@
-import { Component, Input, OnInit } from "@angular/core";
+import {
+  Component,
+  Input,
+  OnInit,
+  ChangeDetectionStrategy,
+} from "@angular/core";
 import { Offer } from "../../../../_models/offer";
 import { CommonModule } from "@angular/common";
 import { MatDialog, MatDialogModule } from "@angular/material/dialog";
@@ -14,13 +19,14 @@ import { SnackBarService } from "../../../../_services/snack-bar.service";
   imports: [CommonModule, MatDialogModule, BadgeComponent],
   standalone: true,
   templateUrl: "./offers.component.html",
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: "./offers.component.css",
 })
 export class OffersComponent implements OnInit {
   @Input() posAction: string = "";
   offers: Offer[] = [];
-  posId: string;
-  action: string;
+  posId: string = "";
+  action: string = "";
 
   constructor(
     private dialog: MatDialog,
@@ -35,8 +41,8 @@ export class OffersComponent implements OnInit {
 
   loadData() {
     this.route.paramMap.subscribe((params) => {
-      this.posId = params.get("posId");
-      this.action = params.get("posAction");
+      this.posId = params.get("posId") ?? "";
+      this.action = params.get("posAction") ?? "";
 
       this.posService.getOffers(this.posId).subscribe({
         next: (offers: Offer[]) => {
@@ -143,10 +149,13 @@ export class OffersComponent implements OnInit {
               editedOffer.deactivated
             )
             .subscribe({
-              next: (updated: Offer) => {
-                const index = this.offers.findIndex((o) => o.id === updated.id);
+              next: (updated: any) => {
+                const updatedOffer = updated as Offer;
+                const index = this.offers.findIndex(
+                  (o) => o.id === updatedOffer.id
+                );
                 if (index !== -1) {
-                  this.offers[index].deactivated = updated.deactivated;
+                  this.offers[index].deactivated = updatedOffer.deactivated;
                 }
               },
               error: (err) => {

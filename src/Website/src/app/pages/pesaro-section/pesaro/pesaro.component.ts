@@ -1,5 +1,5 @@
 
-import { Component } from "@angular/core";
+import { Component, ChangeDetectionStrategy } from "@angular/core";
 import { TranslateModule, TranslateService } from "@ngx-translate/core";
 import { StoreLogosComponent } from "src/app/components/store-logos/store-logos.component";
 import { FaqListComponent } from "../../../components/faq-list/faq-list.component";
@@ -17,6 +17,7 @@ import { BtnFaqComponent } from "../../../components/btn-faq/btn-faq.component";
     FaqListComponent,
     BtnFaqComponent
 ],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: true,
 })
 export class PesaroComponent {}
