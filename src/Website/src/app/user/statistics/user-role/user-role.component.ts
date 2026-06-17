@@ -4,8 +4,6 @@ import { StorageService } from "../../../_services/storage.service";
 import { StatsService, UserService } from "../../../_services";
 
 import { Instrument } from "../../../_models/instrument";
-
-import { BarChartModule, PieChartModule } from "@swimlane/ngx-charts";
 import { NgxSkeletonLoaderModule } from "ngx-skeleton-loader";
 import { SharedModule } from "../../../shared/shared.module";
 import {
@@ -26,13 +24,7 @@ import { StatisticsFiltersComponent } from "../components/statistics-filters/sta
 
 @Component({
   selector: "app-user-role",
-  imports: [
-    StatisticsFiltersComponent,
-    BarChartModule,
-    NgxSkeletonLoaderModule,
-    PieChartModule,
-    SharedModule,
-  ],
+  imports: [StatisticsFiltersComponent, NgxSkeletonLoaderModule, SharedModule],
   standalone: true,
   templateUrl: "./user-role.component.html",
   changeDetection: ChangeDetectionStrategy.Eager,

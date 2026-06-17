@@ -60,7 +60,7 @@
     @if (totalCreatedAmount && totalCreatedAmount > 0) {
 
     <p class="mt-6 font-semibold">Generati e riscossi nel tempo</p>
-    <ngx-charts-bar-vertical-2d
+    <!-- <ngx-charts-bar-vertical-2d
       [view]="view"
       [scheme]="blueAndYellowWom"
       [results]="totalGeneratedOverTime"
@@ -73,7 +73,7 @@
       [yAxisLabel]="'Quantità'"
       (select)="onSelect($event)"
     >
-    </ngx-charts-bar-vertical-2d>
+    </ngx-charts-bar-vertical-2d> -->
     }
   </div>
 
@@ -82,7 +82,7 @@
     @if (chartCreatedAmountByAim && chartCreatedAmountByAim.length > 0) {
 
     <p class="mt-2 font-semibold">Divisi per AIM:</p>
-    <ngx-charts-pie-chart
+    <!-- <ngx-charts-pie-chart
       [view]="pieView"
       [scheme]="colorscheme"
       [results]="chartCreatedAmountByAim"
@@ -97,7 +97,7 @@
           </p>
         </div>
       </ng-template>
-    </ngx-charts-pie-chart>
+    </ngx-charts-pie-chart> -->
     }
   </div>
 </div>

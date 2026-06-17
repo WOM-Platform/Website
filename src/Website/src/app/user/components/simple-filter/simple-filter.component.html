@@ -109,18 +109,12 @@
           <div class="flex gap-6">
             <app-date-time-picker
               [textContent]="'Data di inizio'"
-              [inputDate]="
-                $safeNavigationMigration(
-                  filterForm.get('interval.start')?.value
-                )
-              "
+              [inputDate]="filterForm.get('interval.start')?.value"
               (dateSelected)="onStartDateSelected($event)"
             ></app-date-time-picker>
             <app-date-time-picker
               [textContent]="'Data di fine'"
-              [inputDate]="
-                $safeNavigationMigration(filterForm.get('interval.end')?.value)
-              "
+              [inputDate]="filterForm.get('interval.end')?.value"
               (dateSelected)="onEndDateSelected($event)"
             ></app-date-time-picker>
           </div>

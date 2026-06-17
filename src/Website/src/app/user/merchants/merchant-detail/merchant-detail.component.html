@@ -122,7 +122,7 @@
     <!-- POS -->
     <div class="mt-6">
       <app-user-pos-list
-        [merchantId]="$safeNavigationMigration(merchant?.id)"
+        [merchantId]="merchant?.id"
         [posList]="posList"
         [actionMerchant]="action"
       />

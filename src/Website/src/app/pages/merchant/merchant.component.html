@@ -42,7 +42,7 @@
           #markerElem="mapMarker"
           [position]="marker.position"
           [title]="marker.title"
-          [icon]="$safeNavigationMigration(marker.options!.icon!)"
+          [icon]="marker.options!.icon!"
           (mapClick)="openInfo(markerElem, marker)"
         >
         </map-marker>
@@ -81,7 +81,7 @@
           #markerElem="mapMarker"
           [position]="marker.position"
           [title]="marker.title"
-          [icon]="$safeNavigationMigration(marker.options!.icon!)"
+          [icon]="marker.options!.icon!"
           (mapClick)="openInfo(markerElem, marker)"
         >
         </map-marker>

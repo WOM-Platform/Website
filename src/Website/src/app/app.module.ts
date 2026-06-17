@@ -10,7 +10,6 @@ import { Router } from "@angular/router";
 import { AppComponent } from "./app.component";
 import { provideAnimationsAsync } from "@angular/platform-browser/animations/async";
 import { providePrimeNG } from "primeng/config";
-import Nora from "@primeng/themes/nora";
 
 import { TranslateHttpLoader } from "@ngx-translate/http-loader";
 import {
@@ -18,7 +17,6 @@ import {
   HttpClient,
   provideHttpClient,
   withInterceptorsFromDi,
-  withXhr
 } from "@angular/common/http";
 import { appRoutingModule } from "./app.routing";
 import { RouterModule } from "@angular/router";
@@ -220,19 +218,9 @@ const httpInterceptorProviders = environment.mock
       multi: true,
     },
     provideAnimationsAsync(),
-    providePrimeNG({
-      theme: {
-        preset: Nora,
-        options: {
-          prefix: "p",
-          darkModeSelector: "light",
-          cssLayer: false,
-        },
-      },
-    }),
     ...httpInterceptorProviders,
     CookieService,
-    provideHttpClient(withXhr(), withInterceptorsFromDi()),
+    provideHttpClient(withInterceptorsFromDi()),
     { provide: LOCALE_ID, useValue: "it-IT" },
     {
       provide: ErrorHandler,

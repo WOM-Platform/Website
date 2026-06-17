@@ -10,7 +10,7 @@ import {
   SimpleChanges,
   ChangeDetectionStrategy,
 } from "@angular/core";
-import { NgxChartsModule, PieChartModule } from "@swimlane/ngx-charts";
+// import { NgxChartsModule, PieChartModule } from "@swimlane/ngx-charts";
 import { tap } from "rxjs";
 import { Merchant, UserMe } from "src/app/_models";
 import { MerchantFilter, DateFilter } from "src/app/_models/filter";
@@ -32,8 +32,8 @@ import { NgxSkeletonLoaderModule } from "ngx-skeleton-loader";
   selector: "app-consumer-statistics",
   imports: [
     AnimatedNumberComponent,
-    PieChartModule,
-    NgxChartsModule,
+    // PieChartModule,
+    // NgxChartsModule,
     NgxSkeletonLoaderModule,
     NgClass,
     CommonModule,

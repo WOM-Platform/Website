@@ -1,26 +1,26 @@
 <div class="relative inline-block">
   @if (image) {
-    <div>
-      @if (!loaded) {
-        <img
-          [alt]="alt"
-          [src]="blurDataUrl"
-          [width]="width"
-          [height]="height"
-          class="absolute top-0 left-0"
-          />
-      }
-      <img
-        [src]="$safeNavigationMigration(image?.[imageSize])"
-        [alt]="alt"
-        (load)="onLoad()"
-        [style.opacity]="loaded ? '1' : '0'"
-        [style.transition]="'opacity 0.7s ease-in-out'"
-        [width]="width"
-        [height]="height"
-        />
-    </div>
+  <div>
+    @if (!loaded) {
+    <img
+      [alt]="alt"
+      [src]="blurDataUrl"
+      [width]="width"
+      [height]="height"
+      class="absolute top-0 left-0"
+    />
+    }
+    <img
+      [src]="image?.[imageSize]"
+      [alt]="alt"
+      (load)="onLoad()"
+      [style.opacity]="loaded ? '1' : '0'"
+      [style.transition]="'opacity 0.7s ease-in-out'"
+      [width]="width"
+      [height]="height"
+    />
+  </div>
   } @else {
-    <img [src]="defaultImg" [alt]="alt" [width]="width" [height]="height" />
+  <img [src]="defaultImg" [alt]="alt" [width]="width" [height]="height" />
   }
 </div>

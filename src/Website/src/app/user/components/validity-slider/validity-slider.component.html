@@ -16,18 +16,18 @@
           [disabled]="isEditing"
           (input)="onSliderChange()"
           class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-blue-600"
-          />
+        />
 
         <!-- Tick Marks -->
         <div class="flex justify-between text-xs mt-1 px-1 text-gray-600">
           @for (val of tickValues; track val) {
-            <span>{{ val }}</span>
+          <span>{{ val }}</span>
           }
         </div>
 
         <!-- Label Display -->
         <div class="mt-2 text-sm text-gray-700">
-          {{ formatLabel($safeNavigationMigration(validityForm.get("validity")?.value)) }}
+          {{ formatLabel(validityForm.get("validity")?.value) }}
         </div>
       </div>
     </div>

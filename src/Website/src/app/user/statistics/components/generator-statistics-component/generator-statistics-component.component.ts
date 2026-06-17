@@ -23,20 +23,21 @@ import {
 } from "src/app/_models/stats";
 import { StatsService } from "src/app/_services";
 import { SourceService } from "src/app/_services/source.service";
-import { PieChartModule } from "@swimlane/ngx-charts";
 import { AnimatedNumberComponent } from "src/app/components/animated-number/animated-number.component";
 import { SnackBarService } from "src/app/_services/snack-bar.service";
 import { FormControl } from "@angular/forms";
 import { EntitySearchComponent } from "../../../components/statistics/entity-search/entity-search.component";
 import { SkeletonLoaderComponent } from "../../../components/skeleton-loader/skeleton-loader.component";
-import { NgxChartsModule } from "@swimlane/ngx-charts";
+import { NgClass } from "@angular/common";
+// import { NgxChartsModule, PieChartModule } from "@swimlane/ngx-charts";
 
 @Component({
   selector: "app-generator-statistics-component",
   imports: [
     AnimatedNumberComponent,
-    NgxChartsModule,
-    PieChartModule,
+    NgClass,
+    // NgxChartsModule,
+    // PieChartModule,
     EntitySearchComponent,
     SkeletonLoaderComponent,
   ],
