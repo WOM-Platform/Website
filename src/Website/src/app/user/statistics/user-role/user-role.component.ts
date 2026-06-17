@@ -7,8 +7,6 @@ import { Instrument } from "../../../_models/instrument";
 import { NgxSkeletonLoaderModule } from "ngx-skeleton-loader";
 import { SharedModule } from "../../../shared/shared.module";
 import {
-  ChartDataSwimlane,
-  ChartDataSwimlaneSeries,
   ConsumedStatsApiResponse,
   GenerationRedeemedStatsApiResponse,
   MerchantRankDTO,
@@ -60,16 +58,11 @@ export class UserRoleComponent implements OnInit {
   totalCreatedAmount: number = 0;
   totalRedeemedAmount: number = 0;
   totalConsumedAmount: number = 0;
-  totalConsumedOverTime: ChartDataSwimlane[] = [];
-  totalGeneratedOverTime: ChartDataSwimlaneSeries[] = [];
 
   totalCreatedAmountByAim: VoucherByAimDTO[] = [];
   rankMerchants: MerchantRankDTO[] = [];
   offerConsumedVouchers: any = null;
   availableVouchers: number = 0;
-
-  chartCreatedAmountByAim: ChartDataSwimlane[] = [];
-  chartConsumedAmountByAim: ChartDataSwimlane[] = [];
 
   constructor(
     private statsService: StatsService,
@@ -135,11 +128,6 @@ export class UserRoleComponent implements OnInit {
 
         // Get rank of merchants
         this.rankMerchants = data.merchantRanks;
-        // Get total consumed over time
-        this.totalConsumedOverTime = data.totalConsumedOverTime.map((data) => ({
-          name: data.date,
-          value: data.total,
-        }));
 
         // requests are done
         this.isConsumedDataReady = true;
@@ -187,30 +175,8 @@ export class UserRoleComponent implements OnInit {
         this.totalRedeemedAmount = data.redeemedInPeriod;
         this.totalCreatedAmountByAim = data.voucherByAim;
 
-        this.chartCreatedAmountByAim = this.totalCreatedAmountByAim.map(
-          (item) => ({
-            name: item.aimCode,
-            value: item.amount,
-          })
-        );
-
         this.availableVouchers = data.voucherAvailable;
         this.isGeneratedDataReady = true;
-
-        this.totalGeneratedOverTime =
-          data.totalGeneratedAndRedeemedOverTime.map((item) => ({
-            name: item.date,
-            series: [
-              {
-                name: "Voucher Redeemed",
-                value: item.totalRedeemed ? Number(item.totalRedeemed) : 0, // Ensure value is a number or 0
-              },
-              {
-                name: "Voucher Generated",
-                value: item.totalGenerated ? Number(item.totalGenerated) : 0, // Ensure value is a number or 0
-              },
-            ],
-          }));
       });
   }
 

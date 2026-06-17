@@ -15,8 +15,6 @@ import { DateFilter, InstrumentFilter } from "src/app/_models/filter";
 import { Instrument } from "src/app/_models/instrument";
 import { LocationParams } from "src/app/_models/LocationParams";
 import {
-  ChartDataSwimlane,
-  ChartDataSwimlaneSeries,
   GenerationRedeemedStatsApiResponse,
   SourceRankDTO,
   VoucherByAimDTO,
@@ -29,6 +27,7 @@ import { FormControl } from "@angular/forms";
 import { EntitySearchComponent } from "../../../components/statistics/entity-search/entity-search.component";
 import { SkeletonLoaderComponent } from "../../../components/skeleton-loader/skeleton-loader.component";
 import { NgClass } from "@angular/common";
+import { NgChartsModule } from "ng2-charts";
 // import { NgxChartsModule, PieChartModule } from "@swimlane/ngx-charts";
 
 @Component({
@@ -36,8 +35,7 @@ import { NgClass } from "@angular/common";
   imports: [
     AnimatedNumberComponent,
     NgClass,
-    // NgxChartsModule,
-    // PieChartModule,
+    NgChartsModule,
     EntitySearchComponent,
     SkeletonLoaderComponent,
   ],
@@ -90,10 +88,28 @@ export class GeneratorStatisticsComponentComponent
 
   rankSources: SourceRankDTO[] = [];
 
-  totalCreatedAmountByAim: VoucherByAimDTO[] = [];
+  barChartData = {
+    labels: [] as string[],
+    datasets: [
+      {
+        label: "Generated",
+        data: [] as number[],
+      },
+      {
+        label: "Redeemed",
+        data: [] as number[],
+      },
+    ],
+  };
 
-  chartCreatedAmountByAim: ChartDataSwimlane[] = [];
-  totalGeneratedOverTime: ChartDataSwimlaneSeries[] = [];
+  pieChartData = {
+    labels: [] as string[],
+    datasets: [
+      {
+        data: [] as number[],
+      },
+    ],
+  };
 
   view: [number, number] = [500, 400];
   pieView: [number, number] = [520, 400];
@@ -170,31 +186,30 @@ export class GeneratorStatisticsComponentComponent
           this.totalEverCreatedAmount = data.totalGenerated;
           this.totalRedeemedAmount = data.redeemedInPeriod;
           this.totalEverRedeemedAmount = data.totalRedeemed;
-          this.totalCreatedAmountByAim = data.voucherByAim;
-          this.chartCreatedAmountByAim = this.totalCreatedAmountByAim.map(
-            (item: VoucherByAimDTO) => ({
-              name: item.aimName,
-              value: item.amount,
-            })
+
+          const voucherByAim = data.voucherByAim;
+
+          this.pieChartData.labels = voucherByAim.map((x) => x.aimName);
+
+          this.pieChartData.datasets[0].data = voucherByAim.map(
+            (x) => x.amount
           );
-          this.rankSources = data.sourceRank;
+
+          this.barChartData.labels = data.totalGeneratedAndRedeemedOverTime.map(
+            (item) => item.date
+          );
+
+          this.barChartData.datasets[0].data =
+            data.totalGeneratedAndRedeemedOverTime.map((item) =>
+              item.totalGenerated ? Number(item.totalGenerated) : 0
+            );
+
+          this.barChartData.datasets[1].data =
+            data.totalGeneratedAndRedeemedOverTime.map((item) =>
+              item.totalRedeemed ? Number(item.totalRedeemed) : 0
+            );
 
           this.isGeneratedDataReady = true;
-
-          this.totalGeneratedOverTime =
-            data.totalGeneratedAndRedeemedOverTime.map((item) => ({
-              name: item.date,
-              series: [
-                {
-                  name: "Voucher Generated",
-                  value: item.totalGenerated ? Number(item.totalGenerated) : 0,
-                },
-                {
-                  name: "Voucher Redeemed",
-                  value: item.totalRedeemed ? Number(item.totalRedeemed) : 0,
-                },
-              ],
-            }));
         },
         error: (error) => {
           this.isError = true;

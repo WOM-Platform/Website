@@ -24,20 +24,10 @@ export class AimStats {
   spent: number = 0;
 }
 
-export interface ChartDataSwimlane {
-  name: string;
-  value: number;
-}
-
 export interface VoucherByAimDTO {
   aimCode: string;
   aimName: string;
   amount: number;
-}
-
-export interface ChartDataSwimlaneSeries {
-  name: string;
-  series: ChartDataSwimlane[];
 }
 
 export interface TotalGeneratedRedeemedOverTime {
