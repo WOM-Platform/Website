@@ -5,8 +5,8 @@
 
   <div class="flex items-center gap-2">
     <!-- Aim filter -->
+    @if (entityType === 'instrument') {
     <div
-      *ngIf="entityType === 'instrument'"
       [ngClass]="{
         'bg-white': instrumentFilter.aimListFilter.length === 0,
         'bg-green-200': instrumentFilter.aimListFilter.length > 0
@@ -14,18 +14,18 @@
       class="flex gap-2 justify-center items-center py-2 px-4 border border-black rounded-full hover:bg-slate-300 cursor-pointer"
       (click)="openDialogAimsSelected()"
     >
-      <span
-        *ngIf="instrumentFilter.aimListFilter.length === 0"
-        class="flex items-center gap-1"
-      >
+      @if (instrumentFilter.aimListFilter.length === 0) {
+      <span class="flex items-center gap-1">
         <mat-icon>filter_list</mat-icon>
         per AIM
       </span>
-
-      <span *ngIf="instrumentFilter.aimListFilter.length > 0">
+      } @if (instrumentFilter.aimListFilter.length > 0) {
+      <span>
         {{ instrumentFilter.aimListFilter.length }} filtro/i selezionati
       </span>
+      }
     </div>
+    }
     <div class="relative">
       <app-search
         [placeholder]="searchPlaceholder"
@@ -40,21 +40,23 @@
             : searchSource($event)
         "
       ></app-search>
-      <ng-container *ngIf="dataFetched && dataFetched.length > 0">
-        <app-lazy-search
-          [fetchData]="dataFetched"
-          (selectEmit)="onElementSelected($event)"
-          class="absolute top-full mt-2 w-full z-10 bg-white shadow-md border rounded-lg"
-        ></app-lazy-search>
-      </ng-container>
+      @if (dataFetched && dataFetched.length > 0) {
+      <app-lazy-search
+        [fetchData]="dataFetched"
+        (selectEmit)="onElementSelected($event)"
+        class="absolute top-full mt-2 w-full z-10 bg-white shadow-md border rounded-lg"
+      ></app-lazy-search>
+      }
     </div>
   </div>
 </div>
 <div class="flex flex-row justify-end gap-4 my-3">
-  <div *ngFor="let merchantName of merchantFilter.merchantNames; let i = index">
+  @for (merchantName of merchantFilter.merchantNames; track merchantName; let i
+  = $index) {
+  <div>
     <p class="filter-selected-el">
+      @if (currentUser?.role === 'Admin') {
       <button
-        *ngIf="currentUser.role === 'Admin'"
         (click)="
           clearFilterElement(merchantName, merchantFilter.merchantIds[i])
         "
@@ -62,17 +64,22 @@
         <i class="fa-solid fa-xmark text-red-500"></i>
         {{ merchantName }}
       </button>
+      }
     </p>
   </div>
-  <div *ngFor="let sourceName of instrumentFilter.sourceNames; let i = index">
+  } @for (sourceName of instrumentFilter.sourceNames; track sourceName; let i =
+  $index) {
+  <div>
     <p class="filter-selected-el">
+      @if (currentUser?.role === 'Admin') {
       <button
-        *ngIf="currentUser.role === 'Admin'"
         (click)="clearFilterElement(sourceName, instrumentFilter.sourceId[i])"
       >
         <i class="fa-solid fa-xmark text-red-500"></i>
         {{ sourceName }}
       </button>
+      }
     </p>
   </div>
+  }
 </div>

@@ -1,21 +1,28 @@
-import { CommonModule } from "@angular/common";
-import { Component, ElementRef, Input, OnInit, ViewChild } from "@angular/core";
+import {
+  Component,
+  ElementRef,
+  Input,
+  OnInit,
+  ViewChild,
+  ChangeDetectionStrategy,
+} from "@angular/core";
 import { decode } from "blurhash";
 import { ImageBadge } from "src/app/_models/badge";
 
 @Component({
   selector: "app-blurhash",
-  imports: [CommonModule],
+  imports: [],
   templateUrl: "./blurhash.component.html",
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: "./blurhash.component.css",
 })
 export class BlurhashComponent implements OnInit {
-  @Input() image: ImageBadge;
+  @Input() image!: ImageBadge;
   @Input() alt: string = "";
-  @Input() imageSize: string = "fullSizeUrl";
+  @Input() imageSize: keyof ImageBadge = "fullSizeUrl";
   @Input() width = 32;
   @Input() height = 32;
-  blurDataUrl: string;
+  blurDataUrl: string = "";
   loaded = false;
   defaultImg = "assets/images/user/badges/badgeEmpty.png";
   @ViewChild("placeholderCanvas") canvasRef!: ElementRef<HTMLCanvasElement>;

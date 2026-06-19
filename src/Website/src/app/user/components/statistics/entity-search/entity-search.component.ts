@@ -4,12 +4,13 @@ import {
   EventEmitter,
   Input,
   Output,
+  ChangeDetectionStrategy,
 } from "@angular/core";
 import { SearchComponent } from "../../search/search.component";
-import { NgClass, NgFor, NgIf } from "@angular/common";
+import { NgClass } from "@angular/common";
 import { MerchantService } from "src/app/_services";
 import { LazySearchComponent } from "../../lazy-search/lazy-search.component";
-import { Merchant } from "src/app/_models";
+import { Merchant, UserMe } from "src/app/_models";
 import { Instrument } from "src/app/_models/instrument";
 import { InstrumentFilter, MerchantFilter } from "src/app/_models/filter";
 import { FormControl } from "@angular/forms";
@@ -20,20 +21,14 @@ import { MatIcon } from "@angular/material/icon";
 
 @Component({
   selector: "app-entity-search",
-  imports: [
-    SearchComponent,
-    MatIcon,
-    NgIf,
-    NgFor,
-    NgClass,
-    LazySearchComponent,
-  ],
+  imports: [SearchComponent, MatIcon, NgClass, LazySearchComponent],
   templateUrl: "./entity-search.component.html",
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: "./entity-search.component.css",
 })
 export class EntitySearchComponent {
-  @Input() currentUser;
-  @Input() entityType: string;
+  @Input() currentUser: UserMe | null = null;
+  @Input() entityType: string = "";
   @Output() voucherData = new EventEmitter<any>();
   @Output() clearElementFilter = new EventEmitter<any>();
 
@@ -67,7 +62,9 @@ export class EntitySearchComponent {
   }
 
   // search for merchant user
-  searchMerchant(merchantName: string = this.searchMerchantControl.value) {
+  searchMerchant(
+    merchantName: string = this.searchMerchantControl.value || ""
+  ) {
     if (merchantName.length >= 3) {
       this.merchantService.getAllMerchants({ search: merchantName }).subscribe({
         next: (data) => {
@@ -83,7 +80,7 @@ export class EntitySearchComponent {
   }
 
   // search for source user
-  searchSource(sourceName: string = this.searchSourceControl.value) {
+  searchSource(sourceName: string = this.searchSourceControl.value || "") {
     if (sourceName.length >= 3) {
       // Call the service to fetch the data
       this.sourceService.getAllInstruments({ search: sourceName }).subscribe({
@@ -170,18 +167,30 @@ export class EntitySearchComponent {
   }) {
     const entityActions: { [key: string]: () => void } = {
       merchant: () => {
-        if (!this.merchantFilter.merchantNames.includes(merchant.name)) {
+        if (
+          merchant &&
+          !this.merchantFilter.merchantNames.includes(merchant.name)
+        ) {
           this.merchantFilter.merchantNames.push(merchant.name);
         }
-        if (!this.merchantFilter.merchantIds.includes(merchant.id)) {
+        if (
+          merchant &&
+          !this.merchantFilter.merchantIds.includes(merchant.id)
+        ) {
           this.merchantFilter.merchantIds.push(merchant.id);
         }
       },
       instrument: () => {
-        if (!this.instrumentFilter.sourceNames.includes(instrument.name)) {
+        if (
+          instrument &&
+          !this.instrumentFilter.sourceNames.includes(instrument.name)
+        ) {
           this.instrumentFilter.sourceNames.push(instrument.name);
         }
-        if (!this.instrumentFilter.sourceId.includes(instrument.id)) {
+        if (
+          instrument &&
+          !this.instrumentFilter.sourceId.includes(instrument.id)
+        ) {
           this.instrumentFilter.sourceId.push(instrument.id);
         }
       },

@@ -9,6 +9,9 @@ export interface Offer {
   filter: Filter[];
   imageBlob: Blob;
   imageString: string;
+  lastUpdate?: Date;
+  lastPaymentConfirmation?: Date;
+  payment: Payment;
 }
 
 export interface PosWithOffers {
@@ -26,4 +29,8 @@ export interface PosWithOffers {
     description: string;
     cost: number;
   }[];
+}
+
+export interface Payment {
+  cost: number;
 }

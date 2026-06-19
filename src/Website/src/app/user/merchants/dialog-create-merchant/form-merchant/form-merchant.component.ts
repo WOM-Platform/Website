@@ -1,4 +1,11 @@
-import { Component, Input, OnDestroy, OnInit, Output } from "@angular/core";
+import {
+  Component,
+  Input,
+  OnDestroy,
+  OnInit,
+  Output,
+  ChangeDetectionStrategy,
+} from "@angular/core";
 import {
   UntypedFormBuilder,
   UntypedFormGroup,
@@ -21,6 +28,7 @@ import { StorageService } from "../../../../_services/storage.service";
     "./form-merchant.component.css",
     "../../../../_forms/forms.directive.css",
   ],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class FormMerchantComponent implements OnInit, OnDestroy {
@@ -28,9 +36,9 @@ export class FormMerchantComponent implements OnInit, OnDestroy {
   businessList: string[] = primaryActivityType;
   private unsubscribe = new Subject<void>();
 
-  @Input() form: UntypedFormGroup;
-  @Input() merchant: Merchant;
-  @Input() isAdmin: boolean;
+  @Input() form!: UntypedFormGroup;
+  @Input() merchant!: Merchant;
+  @Input() isAdmin!: boolean;
   @Output() formChange = new EventEmitter<UntypedFormGroup>();
   @Output() formValidity = new EventEmitter<boolean>();
 
@@ -75,6 +83,8 @@ export class FormMerchantComponent implements OnInit, OnDestroy {
   }
 
   private setupSubscriptions(): void {
+    if (!this.form) return;
+
     this.form.valueChanges
       .pipe(debounceTime(500), takeUntil(this.unsubscribe))
       .subscribe(() => {
@@ -84,8 +94,8 @@ export class FormMerchantComponent implements OnInit, OnDestroy {
       });
 
     this.form
-      .get("url")
-      .valueChanges.pipe(takeUntil(this.unsubscribe))
+      ?.get("url")
+      ?.valueChanges.pipe(takeUntil(this.unsubscribe))
       .subscribe((value) => {
         const validators = value
           ? [Validators.required, Validators.pattern(this.getUrlPattern())]
@@ -114,6 +124,8 @@ export class FormMerchantComponent implements OnInit, OnDestroy {
 
   isControlInvalidAndTouched(control: string): boolean {
     const controlToCheck = this.form.get(control);
-    return controlToCheck.invalid && controlToCheck.touched;
+    return controlToCheck
+      ? controlToCheck.invalid && controlToCheck.touched
+      : false;
   }
 }

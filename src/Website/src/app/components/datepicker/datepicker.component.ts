@@ -1,13 +1,20 @@
-import { Component, EventEmitter, Input, Output } from "@angular/core";
-import { DatePipe, NgFor, NgIf } from "@angular/common";
+import {
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+  ChangeDetectionStrategy,
+} from "@angular/core";
+import { DatePipe } from "@angular/common";
 import { FormsModule } from "@angular/forms";
 
 @Component({
   selector: "app-datepicker",
-  imports: [NgIf, NgFor, DatePipe, FormsModule],
+  imports: [DatePipe, FormsModule],
   standalone: true,
   providers: [DatePipe],
   templateUrl: "./datepicker.component.html",
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: "./datepicker.component.css",
 })
 export class DatepickerComponent {

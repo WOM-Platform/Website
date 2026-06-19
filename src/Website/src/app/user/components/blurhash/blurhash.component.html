@@ -1,13 +1,15 @@
 <div class="relative inline-block">
-  <div *ngIf="image; else defaultImage">
+  @if (image) {
+  <div>
+    @if (!loaded) {
     <img
-      *ngIf="!loaded"
       [alt]="alt"
       [src]="blurDataUrl"
       [width]="width"
       [height]="height"
       class="absolute top-0 left-0"
     />
+    }
     <img
       [src]="image?.[imageSize]"
       [alt]="alt"
@@ -18,7 +20,7 @@
       [height]="height"
     />
   </div>
-  <ng-template #defaultImage>
-    <img [src]="defaultImg" [alt]="alt" [width]="width" [height]="height" />
-  </ng-template>
+  } @else {
+  <img [src]="defaultImg" [alt]="alt" [width]="width" [height]="height" />
+  }
 </div>

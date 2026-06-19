@@ -7,21 +7,23 @@
   <app-filters
     [itemsPage]="itemsPerPage ? itemsPerPage : '10'"
     (filterEmit)="filterUpdate($event)"
-  />
-  <div *ngIf="userList">
-    <app-admin-table
-      [tableData]="userList"
-      [tableColumns]="usersTableColumns"
-      [isActions]="true"
-      [currentPage]="currentPage"
-      [itemsPerPage]="itemsPerPage"
-      [totalItems]="totalItems"
-      [pageCount]="pageCount"
-      [hasNext]="hasNext"
-      [hasPrev]="hasPrev"
-      (deleteItem)="onDeleteUser($event)"
-      (editItem)="onEditUser($event)"
-      (pageChanged)="onPageChange($event)"
-    ></app-admin-table>
-  </div>
+    />
+  @if (userList) {
+    <div>
+      <app-admin-table
+        [tableData]="userList"
+        [tableColumns]="usersTableColumns"
+        [isActions]="true"
+        [currentPage]="currentPage"
+        [itemsPerPage]="itemsPerPage"
+        [totalItems]="totalItems"
+        [pageCount]="pageCount"
+        [hasNext]="hasNext"
+        [hasPrev]="hasPrev"
+        (deleteItem)="onDeleteUser($event)"
+        (editItem)="onEditUser($event)"
+        (pageChanged)="onPageChange($event)"
+      ></app-admin-table>
+    </div>
+  }
 </div>

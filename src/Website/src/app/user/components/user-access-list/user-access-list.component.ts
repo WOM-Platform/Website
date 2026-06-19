@@ -6,20 +6,23 @@ import {
   OnDestroy,
   Output,
   ViewChild,
+  ChangeDetectionStrategy,
 } from "@angular/core";
 import { SearchSourceComponent } from "./search-source/search-source.component";
 import { UserService } from "../../../_services";
 import { animate, style, transition, trigger } from "@angular/animations";
 import { Subscription } from "rxjs";
-import { NgFor, NgIf } from "@angular/common";
+
 import { MatIcon } from "@angular/material/icon";
 import { FormsModule } from "@angular/forms";
+import { Access } from "src/app/_models/instrument";
 
 @Component({
   selector: "app-user-access-list",
   templateUrl: "./user-access-list.component.html",
-  imports: [NgIf, NgFor, FormsModule, MatIcon, SearchSourceComponent],
+  imports: [FormsModule, MatIcon, SearchSourceComponent],
   styleUrl: "./user-access-list.component.css",
+  changeDetection: ChangeDetectionStrategy.Eager,
   animations: [
     trigger("fadeInOut", [
       transition(":enter", [
@@ -38,9 +41,9 @@ export class UserAccessListComponent implements OnDestroy {
   @Input() isRoleAccessRequired: boolean = false;
   @Output() accessToAdd = new EventEmitter<any>();
   @ViewChild(SearchSourceComponent)
-  searchSourceComponent: SearchSourceComponent;
+  searchSourceComponent!: SearchSourceComponent;
 
-  listAccess = [];
+  listAccess: Access[] = [];
   addAccess: boolean = false;
 
   noResults: boolean = false;
@@ -109,7 +112,7 @@ export class UserAccessListComponent implements OnDestroy {
     this.cd.markForCheck();
   }
 
-  handleSelection(access) {
+  handleSelection(access: any) {
     if (this.searchSourceComponent) {
       this.searchSourceComponent.clearForm();
       this.listAccess = [];
@@ -124,7 +127,7 @@ export class UserAccessListComponent implements OnDestroy {
     this.cd.detectChanges();
   }
 
-  addUserToAccessList(access, role = "") {
+  addUserToAccessList(access: any, role = "") {
     this.addAccess = !this.addAccess;
     this.selectedAccess = "";
     this.accessToAdd.emit({ access: access, role: role });
@@ -135,7 +138,7 @@ export class UserAccessListComponent implements OnDestroy {
     this.createUserAccess = !this.createUserAccess;
   }
 
-  trackByAccess(index, access) {
+  trackByAccess(index: number, access: any) {
     return access.id; // Assuming each access has a unique ID
   }
 }

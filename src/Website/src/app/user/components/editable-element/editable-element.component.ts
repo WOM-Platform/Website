@@ -1,4 +1,4 @@
-import { NgIf, NgFor, NgStyle } from "@angular/common";
+import { NgStyle } from "@angular/common";
 import {
   ChangeDetectorRef,
   Component,
@@ -7,6 +7,7 @@ import {
   OnChanges,
   OnInit,
   Output,
+  ChangeDetectionStrategy,
 } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 import { MatTooltip } from "@angular/material/tooltip";
@@ -14,24 +15,25 @@ import { TranslateModule } from "@ngx-translate/core";
 
 @Component({
   selector: "app-editable-element",
-  imports: [NgIf, NgFor, FormsModule, NgStyle, MatTooltip, TranslateModule],
+  imports: [FormsModule, NgStyle, MatTooltip, TranslateModule],
   standalone: true,
   templateUrl: "./editable-element.component.html",
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrls: ["./editable-element.component.css"],
 })
 export class EditableElementComponent implements OnInit, OnChanges {
-  @Input() keyEl: string;
-  @Input() tooltipText: string;
+  @Input() keyEl: string = "";
+  @Input() tooltipText: string = "";
   @Input() valueEl: any;
   @Input() typeEl: any;
   @Input() option: any;
-  @Input() action: string;
+  @Input() action: string = "";
 
   @Input() displayType: "text" | "url" | "phone" = "text";
 
-  @Input() pattern: string;
-  @Input() minLength: number;
-  @Input() maxLength: number;
+  @Input() pattern: string = "";
+  @Input() minLength: number = 0;
+  @Input() maxLength: number = 0;
 
   @Output() onChangeElement = new EventEmitter<any>();
 

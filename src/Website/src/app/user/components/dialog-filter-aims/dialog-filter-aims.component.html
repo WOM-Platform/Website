@@ -2,23 +2,25 @@
   <h2>Filtra per AIM</h2>
   <div class="mt-6">
     <ul class="flex flex-wrap gap-4">
-      <li *ngFor="let aim of listAims">
-        <label>
-          <input
-            type="checkbox"
-            [checked]="aim.isChecked"
-            (change)="onAimChange(aim.code)"
-          />
-          <span class="font-semibold ml-2">{{ aim.code }}</span> -
-          {{ aim.titles["it"] }}
-        </label>
-      </li>
+      @for (aim of listAims; track aim) {
+        <li>
+          <label>
+            <input
+              type="checkbox"
+              [checked]="aim.isChecked"
+              (change)="onAimChange(aim.code)"
+              />
+            <span class="font-semibold ml-2">{{ aim.code }}</span> -
+            {{ aim.titles["it"] }}
+          </label>
+        </li>
+      }
     </ul>
     <button
       [disabled]="!hasChanges"
       (click)="onCloseDialog()"
       class="btn-default mt-4"
-    >
+      >
       <mat-icon>check</mat-icon>
       Conferma selezione
     </button>

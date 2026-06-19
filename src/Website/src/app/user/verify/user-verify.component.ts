@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ChangeDetectionStrategy } from "@angular/core";
 import { UserService } from "../../_services";
 import { ActivatedRoute, Router } from "@angular/router";
 import { TranslateService } from "@ngx-translate/core";
@@ -8,11 +8,12 @@ import { MatSnackBar } from "@angular/material/snack-bar";
   selector: "app-user-verify",
   templateUrl: "./user-verify.component.html",
   styleUrls: ["./user-verify.component.css"],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class UserVerifyComponent implements OnInit {
-  workingText: string;
-  userId: string;
+  workingText: string = "";
+  userId: string = "";
   email = "";
   error = false;
   errorText = "";
@@ -94,9 +95,9 @@ export class UserVerifyComponent implements OnInit {
     });
   }
 
-  openSnackBar(message = "null", route = null): any {
+  openSnackBar(message = "null", route: string | null = null): any {
     this.snackBar
-      .open(message, null, {
+      .open(message, undefined, {
         duration: 5000,
       })
       .afterDismissed()

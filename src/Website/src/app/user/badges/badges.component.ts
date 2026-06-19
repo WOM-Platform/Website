@@ -1,5 +1,5 @@
-import { CommonModule, NgFor, NgIf } from "@angular/common";
-import { Component, OnInit } from "@angular/core";
+
+import { Component, OnInit, ChangeDetectionStrategy } from "@angular/core";
 import { Router } from "@angular/router";
 import { CreateButtonComponent } from "../components/create-button/create-button.component";
 import { Badge } from "src/app/_models/badge";
@@ -14,8 +14,9 @@ import { Challenge } from "src/app/_models/challenge";
 
 @Component({
   selector: "app-badges",
-  imports: [CommonModule, CreateButtonComponent, BlurhashComponent],
+  imports: [CreateButtonComponent, BlurhashComponent],
   templateUrl: "./badges.component.html",
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: "./badges.component.css",
 })
 export class BadgesComponent implements OnInit {

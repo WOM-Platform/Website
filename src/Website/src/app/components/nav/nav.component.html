@@ -7,7 +7,7 @@
       [opened]="(isHandset$ | async) === false"
       class="sidenav"
       fixedInViewport
-    >
+      >
       <mat-toolbar>Menu</mat-toolbar>
       <nav class="flex flex-col p-4 gap-2 text-lg">
         <a
@@ -15,7 +15,7 @@
           (click)="drawer.toggle()"
           routerLinkActive="active"
           class="menu-item-a"
-        >
+          >
           <span class="material-symbols-outlined icon-mb"> home </span>
           <span>{{ "NAV.HOME" | translate }}</span>
         </a>
@@ -23,7 +23,7 @@
           [routerLink]="['about-section/about']"
           routerLinkActive="active"
           class="menu-item-a"
-        >
+          >
           <span class="material-symbols-outlined icon-mb"> info </span>
           <span>{{ "NAV.ABOUT.TITLE" | translate }}</span>
         </a>
@@ -32,15 +32,15 @@
           class="menu-item-accordion"
           (click)="isVolunteersOpen = !isVolunteersOpen"
           [ngClass]="{ ' bg-slate-200 rounded-full': isVolunteersOpen }"
-        >
+          >
           <div
             class="flex items-center gap-2"
             [ngClass]="{ 'text-blue-600 ': isVolunteersOpen }"
-          >
+            >
             <span
               class="material-symbols-outlined icon-mb"
               [ngClass]="{ 'text-blue-600 bg-white ': isVolunteersOpen }"
-            >
+              >
               group
             </span>
             <span>{{ "NAV.USERS.TITLE" | translate }}</span>
@@ -51,51 +51,50 @@
               'rotate-90': isVolunteersOpen,
               'text-blue-600': isVolunteersOpen
             }"
-          >
+            >
             chevron_right
           </span>
         </div>
-        <div
-          class="flex flex-col gap-1 overflow-hidden transition-all duration-300 px-2"
-          *ngIf="isVolunteersOpen"
-        >
-          <a
-            [routerLink]="['/users']"
-            (click)="drawer.toggle()"
-            routerLinkActive="active"
-            class="menu-item-a"
-          >
-            <span class="material-symbols-outlined icon-mb"> badge </span>
-            <span>{{ "NAV.USERS.WHO_ARE" | translate }}</span>
-          </a>
-
-          <a
-            [routerLink]="['/challenge']"
-            (click)="drawer.toggle()"
-            routerLinkActive="active"
-            class="menu-item-a"
-          >
-            <span class="material-symbols-outlined icon-mb"> license </span>
-            <span>{{ "NAV.USERS.CHALLENGES" | translate }}</span>
-          </a>
-
-          <a
-            [routerLink]="['/applications']"
-            (click)="drawer.toggle()"
-            routerLinkActive="active"
-            class="menu-item-a whitespace-normal overflow-hidden"
-          >
-            <span class="material-symbols-outlined icon-mb"> description </span>
-            <span>{{ "NAV.USERS.APPLICATIONS" | translate }}</span>
-          </a>
-        </div>
+        @if (isVolunteersOpen) {
+          <div
+            class="flex flex-col gap-1 overflow-hidden transition-all duration-300 px-2"
+            >
+            <a
+              [routerLink]="['/users']"
+              (click)="drawer.toggle()"
+              routerLinkActive="active"
+              class="menu-item-a"
+              >
+              <span class="material-symbols-outlined icon-mb"> badge </span>
+              <span>{{ "NAV.USERS.WHO_ARE" | translate }}</span>
+            </a>
+            <a
+              [routerLink]="['/challenge']"
+              (click)="drawer.toggle()"
+              routerLinkActive="active"
+              class="menu-item-a"
+              >
+              <span class="material-symbols-outlined icon-mb"> license </span>
+              <span>{{ "NAV.USERS.CHALLENGES" | translate }}</span>
+            </a>
+            <a
+              [routerLink]="['/applications']"
+              (click)="drawer.toggle()"
+              routerLinkActive="active"
+              class="menu-item-a whitespace-normal overflow-hidden"
+              >
+              <span class="material-symbols-outlined icon-mb"> description </span>
+              <span>{{ "NAV.USERS.APPLICATIONS" | translate }}</span>
+            </a>
+          </div>
+        }
 
         <a
           [routerLink]="['/merchant']"
           (click)="drawer.toggle()"
           routerLinkActive="active"
           class="menu-item-a"
-        >
+          >
           <span class="material-symbols-outlined icon-mb"> storefront </span>
           <span>{{ "NAV.MERCHANT" | translate }}</span>
         </a>
@@ -104,32 +103,34 @@
           (click)="drawer.toggle()"
           routerLinkActive="active"
           class="menu-item-a"
-        >
+          >
           <span class="material-symbols-outlined icon-mb"> timer </span>
           <span>{{ "NAV.INSTRUMENT" | translate }}</span>
         </a>
 
-        <a
-          *ngIf="isLogged"
-          [routerLink]="['/user/home']"
-          (click)="drawer.toggle()"
-          routerLinkActive="active"
-          class="menu-item-a"
-        >
-          <span class="material-symbols-outlined icon-mb"> person </span>
-          <span>{{ "NAV.PROFILE" | translate }}</span>
-        </a>
+        @if (isLogged) {
+          <a
+            [routerLink]="['/user/home']"
+            (click)="drawer.toggle()"
+            routerLinkActive="active"
+            class="menu-item-a"
+            >
+            <span class="material-symbols-outlined icon-mb"> person </span>
+            <span>{{ "NAV.PROFILE" | translate }}</span>
+          </a>
+        }
 
-        <a
-          *ngIf="isLogged"
-          (click)="logout()"
-          (click)="drawer.toggle()"
-          [routerLinkActive]="['active']"
-          class="menu-item-a"
-        >
-          <span class="material-symbols-outlined icon-mb"> logout </span>
-          <span>{{ "NAV.SIGN_OUT" | translate }}</span>
-        </a>
+        @if (isLogged) {
+          <a
+            (click)="logout()"
+            (click)="drawer.toggle()"
+            [routerLinkActive]="['active']"
+            class="menu-item-a"
+            >
+            <span class="material-symbols-outlined icon-mb"> logout </span>
+            <span>{{ "NAV.SIGN_OUT" | translate }}</span>
+          </a>
+        }
       </nav>
     </mat-sidenav>
   </mat-sidenav-container>
@@ -155,75 +156,81 @@
               <span>{{ "NAV.USERS.TITLE" | translate }}</span>
               <span
                 class="material-symbols-outlined ransform transition-transform duration-300 group-hover:rotate-180"
-              >
+                >
                 keyboard_arrow_down</span
-              >
-            </button>
-            <div class="submenu">
-              <button
-                (click)="navigate('users')"
-                class="block w-full text-left px-4 py-2 text-gray-800 hover:bg-gray-100"
-              >
-                <span>{{ "NAV.USERS.WHO_ARE" | translate }}</span>
+                >
               </button>
-              <button
-                (click)="navigate('challenge')"
-                class="block w-full text-left px-4 py-2 text-gray-800 hover:bg-gray-100"
-              >
-                <span>{{ "NAV.USERS.CHALLENGES" | translate }}</span>
-              </button>
-              <button
-                (click)="navigate('applications')"
-                class="block w-full text-left px-4 py-2 text-gray-800 hover:bg-gray-100"
-              >
-                <span>{{ "NAV.USERS.APPLICATIONS" | translate }}</span>
-              </button>
+              <div class="submenu">
+                <button
+                  (click)="navigate('users')"
+                  class="block w-full text-left px-4 py-2 text-gray-800 hover:bg-gray-100"
+                  >
+                  <span>{{ "NAV.USERS.WHO_ARE" | translate }}</span>
+                </button>
+                <button
+                  (click)="navigate('challenge')"
+                  class="block w-full text-left px-4 py-2 text-gray-800 hover:bg-gray-100"
+                  >
+                  <span>{{ "NAV.USERS.CHALLENGES" | translate }}</span>
+                </button>
+                <button
+                  (click)="navigate('applications')"
+                  class="block w-full text-left px-4 py-2 text-gray-800 hover:bg-gray-100"
+                  >
+                  <span>{{ "NAV.USERS.APPLICATIONS" | translate }}</span>
+                </button>
+              </div>
             </div>
+            <button class="menu-item" (click)="navigate('merchant')">
+              <span>{{ "NAV.MERCHANT" | translate }}</span>
+            </button>
+            <button class="menu-item" (click)="navigate('instrument')">
+              <span>{{ "NAV.INSTRUMENT" | translate }}</span>
+            </button>
+            @if (isLogged) {
+              <button
+                class="menu-item"
+                (click)="navigate('user/home')"
+                >
+                <span>{{ "NAV.PROFILE" | translate }}</span>
+              </button>
+            }
+
+            @if (isLogged) {
+              <button class="menu-item" (click)="logout()">
+                <span>{{ "NAV.SIGN_OUT" | translate }}</span>
+              </button>
+            }
           </div>
-          <button class="menu-item" (click)="navigate('merchant')">
-            <span>{{ "NAV.MERCHANT" | translate }}</span>
-          </button>
-          <button class="menu-item" (click)="navigate('instrument')">
-            <span>{{ "NAV.INSTRUMENT" | translate }}</span>
-          </button>
-          <button
-            *ngIf="isLogged"
-            class="menu-item"
-            (click)="navigate('user/home')"
-          >
-            <span>{{ "NAV.PROFILE" | translate }}</span>
-          </button>
+          <div class="px-2 border-l border-[#A4A4A4]"></div>
+          <!-- end menu pc-->
+          <select
+            class="lang-select"
+            [(ngModel)]="selectLang"
+            (change)="setTransLanguage()"
+            >
+            @for (lang of TransLang; track lang) {
+              <option value="{{ lang }}">
+                {{ lang }}
+              </option>
+            }
+          </select>
 
-          <button class="menu-item" *ngIf="isLogged" (click)="logout()">
-            <span>{{ "NAV.SIGN_OUT" | translate }}</span>
-          </button>
+          @if (isHandset$ | async) {
+            <button
+              type="button"
+              aria-label="Toggle drawer"
+              mat-icon-button
+              (click)="drawer.toggle()"
+              >
+              <mat-icon style="color: black" aria-label="Side nav toggle icon"
+                >menu
+              </mat-icon>
+            </button>
+          }
         </div>
-        <div class="px-2 border-l border-[#A4A4A4]"></div>
-        <!-- end menu pc-->
-        <select
-          class="lang-select"
-          [(ngModel)]="selectLang"
-          (change)="setTransLanguage()"
-        >
-          <option *ngFor="let lang of TransLang" value="{{ lang }}">
-            {{ lang }}
-          </option>
-        </select>
-
-        <button
-          type="button"
-          aria-label="Toggle drawer"
-          mat-icon-button
-          (click)="drawer.toggle()"
-          *ngIf="isHandset$ | async"
-        >
-          <mat-icon style="color: black" aria-label="Side nav toggle icon"
-            >menu
-          </mat-icon>
-        </button>
       </div>
+      <!-- Add Content Here -->
+      <ng-content></ng-content>
     </div>
-    <!-- Add Content Here -->
-    <ng-content></ng-content>
   </div>
-</div>

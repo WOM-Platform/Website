@@ -1,4 +1,10 @@
-import { ChangeDetectorRef, Component, OnDestroy, OnInit } from "@angular/core";
+import {
+  ChangeDetectorRef,
+  Component,
+  OnDestroy,
+  OnInit,
+  ChangeDetectionStrategy,
+} from "@angular/core";
 import { MediaMatcher } from "@angular/cdk/layout";
 
 import { applicationsList } from "./applications-list";
@@ -19,6 +25,7 @@ import { MatIconButton } from "@angular/material/button";
   templateUrl: "./applications.component.html",
   styleUrls: ["./applications.component.css"],
   standalone: true,
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [
     TranslateModule,
     MatSidenav,
@@ -34,8 +41,8 @@ import { MatIconButton } from "@angular/material/button";
   ],
 })
 export class ApplicationsComponent implements OnInit, OnDestroy {
-  mobileQuery: MediaQueryList;
-  snavOpened: boolean;
+  mobileQuery: MediaQueryList = {} as MediaQueryList;
+  snavOpened: boolean = false;
   _mobileQueryListener: () => void;
 
   applicationsList = applicationsList;

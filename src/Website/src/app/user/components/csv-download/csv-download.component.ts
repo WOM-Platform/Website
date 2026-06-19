@@ -1,4 +1,10 @@
-import { Component, Input, OnChanges, SimpleChanges } from "@angular/core";
+import {
+  Component,
+  Input,
+  OnChanges,
+  SimpleChanges,
+  ChangeDetectionStrategy,
+} from "@angular/core";
 import { finalize } from "rxjs";
 import { LoadingService } from "../../../_services/loading.service";
 import { StatsService } from "../../../_services";
@@ -9,6 +15,7 @@ import { CombinedFilters, DateFilter, Filter } from "src/app/_models/filter";
   imports: [],
   standalone: true,
   templateUrl: "./csv-download.component.html",
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: "./csv-download.component.css",
 })
 export class CsvDownloadComponent {
@@ -34,6 +41,11 @@ export class CsvDownloadComponent {
         })
       )
       .subscribe((blob) => {
+        if (!blob || !blob.body) {
+          console.error("Il corpo della risposta CSV è vuoto o nullo.");
+          return;
+        }
+
         const url = URL.createObjectURL(blob.body);
         // Estrai l'intestazione Content-Disposition
         const contentDisposition = blob.headers.get("Content-Disposition");

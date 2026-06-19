@@ -1,65 +1,87 @@
 <div class="">
-    <form
-            class="p-6"
-            [formGroup]="newOffer"
-            (ngSubmit)="onSubmit()"
-    >
-        <div class="bg-slate-200 rounded-xl flex flex-col gap-4 px-6 py-4">
-            <div class="grid grid-cols-2 gap-4">
-                <div class="flex flex-col">
-                    <label class="w-full">Titolo<span class="text-red-600">*</span>:</label>
-                    <div class="flex flex-col">
-                        <small class="text-gray-500">Inserisci il titolo dell'offerta (min 6 caratteri)</small>
-                        <input type="text" formControlName="title" class="input-create"/>
-                    </div>
-                    <small class="text-red-600" *ngIf="newOffer.get('title').invalid && newOffer.get('title').touched">
-                        Inserire il titolo (min 6 caratteri)
-                    </small>
-                </div>
+  <form class="p-6" [formGroup]="newOffer" (ngSubmit)="onSubmit()">
+    <div class="bg-slate-200 rounded-xl flex flex-col gap-4 px-6 py-4">
+      <div class="grid grid-cols-2 gap-4">
+        <div class="flex flex-col">
+          <label class="w-full"
+            >Titolo<span class="text-red-600">*</span>:</label
+          >
+          <div class="flex flex-col">
+            <small class="text-gray-500"
+              >Inserisci il titolo dell'offerta (min 6 caratteri)</small
+            >
+            <input type="text" formControlName="title" class="input-create" />
+          </div>
 
-                <div class="flex flex-col">
-                    <label class="w-full">Numero di WOM<span class="text-red-600">*</span>:</label>
-                    <div class="flex flex-col">
-                        <small class="text-gray-500">Imposta il numero di WOM necessari per aderire all'offerta</small>
-                        <input type="number" formControlName="cost" class="input-create"/>
-                    </div>
-                    <small class="text-red-600" *ngIf="newOffer.get('cost').invalid && newOffer.get('cost').touched">
-                        Numero di WOM
-                    </small>
-                </div>
-            </div>
-
-            <div class="flex flex-col">
-                <label class="w-full">Descrizione:</label>
-                <textarea
-                        name="description"
-                        rows="2"
-                        formControlName="description"
-                        class="input-create"
-                ></textarea>
-            </div>
-
-            <div *ngIf="isEditMode" class="flex flex-col">
-                <div class="flex justify-start gap-2">
-                    <label class="">Disattivata:</label>
-                    <input type="checkbox" formControlName="deactivated"/>
-                </div>
-                <small class="text-gray-500">Scegli se rendere visibile e attiva l'offerta per gli utenti</small>
-            </div>
+          @if (newOffer.get('title')?.invalid && newOffer.get('title')?.touched)
+          {
+          <small class="text-red-600">
+            Inserire il titolo (min 6 caratteri)
+          </small>
+          }
         </div>
 
-        <div class="bg-white rounded-xl flex flex-col gap-4 mt-6">
-            <div>
-                <app-offer-filters [filters]="isEditMode && data?.offer.filter"
-                                   [isEditing]="isEditMode"
-                                   (filteredEmit)="addFilter($event)"></app-offer-filters>
-            </div>
-            <div class="flex justify-end gap-4">
-                <button type="button" class="text-gray-600" (click)="onCancellation()">Annulla</button>
-                <button *ngIf="!isEditMode" type="submit" class="blue-wom" [disabled]="newOffer.invalid">Crea</button>
-                <button *ngIf="isEditMode" type="submit" class="blue-wom" [disabled]="newOffer.invalid">Modifica
-                </button>
-            </div>
+        <div class="flex flex-col">
+          <label class="w-full"
+            >Numero di WOM<span class="text-red-600">*</span>:</label
+          >
+          <div class="flex flex-col">
+            <small class="text-gray-500"
+              >Imposta il numero di WOM necessari per aderire all'offerta</small
+            >
+            <input type="number" formControlName="cost" class="input-create" />
+          </div>
+          @if (newOffer.get('cost')?.invalid && newOffer.get('cost')?.touched) {
+          <small class="text-red-600"> Numero di WOM </small>
+          }
         </div>
-    </form>
+      </div>
+
+      <div class="flex flex-col">
+        <label class="w-full">Descrizione:</label>
+        <textarea
+          name="description"
+          rows="2"
+          formControlName="description"
+          class="input-create"
+        ></textarea>
+      </div>
+
+      @if (isEditMode) {
+      <div class="flex flex-col">
+        <div class="flex justify-start gap-2">
+          <label class="">Disattivata:</label>
+          <input type="checkbox" formControlName="deactivated" />
+        </div>
+        <small class="text-gray-500"
+          >Scegli se rendere visibile e attiva l'offerta per gli utenti</small
+        >
+      </div>
+      }
+    </div>
+
+    <div class="bg-white rounded-xl flex flex-col gap-4 mt-6">
+      <div>
+        <app-offer-filters
+          [filters]="isEditMode && data?.offer.filter"
+          [isEditing]="isEditMode"
+          (filteredEmit)="addFilter($event)"
+        ></app-offer-filters>
+      </div>
+      <div class="flex justify-end gap-4">
+        <button type="button" class="text-gray-600" (click)="onCancellation()">
+          Annulla
+        </button>
+        @if (!isEditMode) {
+        <button type="submit" class="blue-wom" [disabled]="newOffer.invalid">
+          Crea
+        </button>
+        } @if (isEditMode) {
+        <button type="submit" class="blue-wom" [disabled]="newOffer.invalid">
+          Modifica
+        </button>
+        }
+      </div>
+    </div>
+  </form>
 </div>

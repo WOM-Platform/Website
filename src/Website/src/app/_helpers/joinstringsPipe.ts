@@ -1,15 +1,17 @@
 /*
  *
  */
-import { Pipe, PipeTransform } from '@angular/core';
+import { Pipe, PipeTransform } from "@angular/core";
 
 @Pipe({
-    name: 'joinstrings',
-    standalone: false
+  name: "joinstrings",
+  standalone: false,
 })
-
 export class JoinstringsPipe implements PipeTransform {
-  transform(value) {
-    return value.join(' ');
+  transform(value: string[]): string {
+    if (!value || !Array.isArray(value)) {
+      return "";
+    }
+    return value.join(" ");
   }
 }

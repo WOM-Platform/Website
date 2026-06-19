@@ -1,51 +1,58 @@
 <div class="mt-6">
-    <p class="font-semibold mb-0">POS:</p>
-    <ul class="access-list">
-        <li *ngFor="let pos of posList" class="">
-            <div class="access-item">
-                <div class="access-details">
-                    <div>
-                        <span class="text-slate-600 font-semibold">Name</span>:
-                        {{ pos.name }}
-                    </div>
-                </div>
-                <div class="flex gap-2">
-                    <button class="icon-button-bg hover:bg-slate-300" (click)="onEditPos(pos, 'view')">
-                        <i class="fa-solid fa-eye text-black text-base flex items-center justify-center w-8 h-8"></i>
-                    </button>
-                    <ng-container *ngIf="actionMerchant === 'edit'">
-                        <button class="icon-button-bg hover:bg-blue-200" (click)="onEditPos(pos, 'edit')">
-                            <i class="text-blue-500 fa-solid fa-pen text-base flex items-center justify-center w-8 h-8"></i>
-                        </button>
-                        <button class="icon-button-bg hover:bg-red-100" (click)="onDeletePos(pos)">
-                            <i class="fas fa-trash text-red-500 text-base flex items-center justify-center w-8 h-8 hover:rounded-full"></i>
-                        </button>
-                    </ng-container>
-                </div>
+  <p class="font-semibold mb-0">POS:</p>
+  <ul class="access-list">
+    @for (pos of posList; track pos) {
+      <li class="">
+        <div class="access-item">
+          <div class="access-details">
+            <div>
+              <span class="text-slate-600 font-semibold">Name</span>:
+              {{ pos.name }}
             </div>
-        </li>
-    </ul>
-    <div *ngIf="actionMerchant === 'edit'">
-        <div *ngIf="!createNewPos" class="mt-6">
-            <div class="">
-                <button
-                        *ngIf="!createNewPos"
-                        (click)="onAddPos()"
-                        class="btn-default"
-                >
-                    <mat-icon>add</mat-icon>
-                    Aggiungi POS
-                </button>
-                <button
-                        *ngIf="createNewPos"
-                        (click)="handleCancellationPos()"
-                        class="btn-default"
-                >
-                    <mat-icon>cancel</mat-icon>
-                    Annulla
-                </button>
-            </div>
+          </div>
+          <div class="flex gap-2">
+            <button class="icon-button-bg hover:bg-slate-300" (click)="onEditPos(pos, 'view')">
+              <i class="fa-solid fa-eye text-black text-base flex items-center justify-center w-8 h-8"></i>
+            </button>
+            @if (actionMerchant === 'edit') {
+              <button class="icon-button-bg hover:bg-blue-200" (click)="onEditPos(pos, 'edit')">
+                <i class="text-blue-500 fa-solid fa-pen text-base flex items-center justify-center w-8 h-8"></i>
+              </button>
+              <button class="icon-button-bg hover:bg-red-100" (click)="onDeletePos(pos)">
+                <i class="fas fa-trash text-red-500 text-base flex items-center justify-center w-8 h-8 hover:rounded-full"></i>
+              </button>
+            }
+          </div>
         </div>
+      </li>
+    }
+  </ul>
+  @if (actionMerchant === 'edit') {
+    <div>
+      @if (!createNewPos) {
+        <div class="mt-6">
+          <div class="">
+            @if (!createNewPos) {
+              <button
+                (click)="onAddPos()"
+                class="btn-default"
+                >
+                <mat-icon>add</mat-icon>
+                Aggiungi POS
+              </button>
+            }
+            @if (createNewPos) {
+              <button
+                (click)="handleCancellationPos()"
+                class="btn-default"
+                >
+                <mat-icon>cancel</mat-icon>
+                Annulla
+              </button>
+            }
+          </div>
+        </div>
+      }
     </div>
+  }
 </div>
-      

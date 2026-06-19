@@ -6,6 +6,7 @@ import {
   Input,
   OnInit,
   Output,
+  ChangeDetectionStrategy,
 } from "@angular/core";
 import {
   FormBuilder,
@@ -54,6 +55,7 @@ import { UserService } from "src/app/_services";
   ],
   templateUrl: "./simple-filter.component.html",
   styleUrl: "./simple-filter.component.css",
+  changeDetection: ChangeDetectionStrategy.Eager,
   animations: [
     trigger("fadeSlide", [
       state(
@@ -85,7 +87,7 @@ export class SimpleFilterComponent implements OnInit {
 
   isEditing = true;
 
-  filterForm: FormGroup;
+  filterForm!: FormGroup;
   isFilteringMap: boolean = false;
 
   periodList: string[] = ["daily", "weekly", "monthly", "yearly"];
@@ -150,10 +152,11 @@ export class SimpleFilterComponent implements OnInit {
 
     this.instrumentSearchControl.valueChanges
       .pipe(debounceTime(300), distinctUntilChanged())
-      .subscribe((value: string) => {
-        this.searchParameters = value;
+      .subscribe((value: string | null) => {
+        const searchTerm = value || "";
+        this.searchParameters = searchTerm;
 
-        if (value && value.length >= 2) {
+        if (searchTerm && searchTerm.length >= 2) {
           this.getSourcesList();
         } else {
           this.instrumentList = [];
@@ -246,7 +249,7 @@ export class SimpleFilterComponent implements OnInit {
   isFilterActive(filter: string): boolean {
     switch (filter) {
       case "quantity":
-        return this.filters?.count && this.filters.count > 1;
+        return !!(this.filters?.count && this.filters.count > 1);
 
       case "instrument":
         return this.filters?.sourceId != null;
@@ -255,14 +258,14 @@ export class SimpleFilterComponent implements OnInit {
         return this.filters?.aim != null;
 
       case "date":
-        return (
+        return !!(
           this.filters?.interval &&
           (this.filters.interval.start != null ||
             this.filters.interval.end != null)
         );
 
       case "geography":
-        return (
+        return !!(
           this.filters?.bounds &&
           this.isValidCoords(this.filters.bounds.leftTop) &&
           this.isValidCoords(this.filters.bounds.rightBottom)
@@ -375,7 +378,7 @@ export class SimpleFilterComponent implements OnInit {
     this.filterForm.get("interval.end")?.setValue(date);
   }
 
-  onAimChange(aimChanged) {
+  onAimChange(aimChanged: any) {
     this.filterForm.patchValue({ aim: aimChanged });
 
     this.emitFilterValues();
@@ -383,5 +386,25 @@ export class SimpleFilterComponent implements OnInit {
 
   emitFilterValues() {
     this.filteredEmit.emit(this.filterForm.value);
+  }
+
+  mapFiltered(eventBounds: any) {
+    const boundsGroup = this.filterForm.get("bounds") as FormGroup;
+
+    if (boundsGroup) {
+      boundsGroup.patchValue({
+        leftTop: eventBounds.leftTop,
+        rightBottom: eventBounds.rightBottom,
+      });
+    } else {
+      this.filterForm.addControl(
+        "bounds",
+        this.fb.group({
+          leftTop: [eventBounds.leftTop],
+          rightBottom: [eventBounds.rightBottom],
+        })
+      );
+    }
+    this.cd.detectChanges();
   }
 }

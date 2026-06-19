@@ -1,5 +1,10 @@
-import { Component, Inject, OnInit } from "@angular/core";
-import { NgIf } from "@angular/common";
+import {
+  Component,
+  Inject,
+  OnInit,
+  ChangeDetectionStrategy,
+} from "@angular/core";
+
 import { PaginatorModule } from "primeng/paginator";
 import {
   AbstractControl,
@@ -16,14 +21,15 @@ import { Filter } from "../../../../../_models/filter";
 
 @Component({
   selector: "app-create-offer",
-  imports: [NgIf, PaginatorModule, ReactiveFormsModule, OfferFiltersComponent],
+  imports: [PaginatorModule, ReactiveFormsModule, OfferFiltersComponent],
   standalone: true,
   templateUrl: "./create-edit-offer.component.html",
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: "./create-edit-offer.component.css",
 })
 export class CreateEditOfferComponent implements OnInit {
-  newOffer: FormGroup;
-  isEditMode: boolean;
+  newOffer: FormGroup = new FormGroup({});
+  isEditMode: boolean = false;
 
   constructor(
     private dialogRef: MatDialogRef<CreateEditOfferComponent>,
@@ -54,15 +60,15 @@ export class CreateEditOfferComponent implements OnInit {
         deactivated: [this.data?.offer.deactivated],
         filter: [this.data?.offer.filter || null],
       });
-      this.newOffer.get("cost").disable();
-      this.newOffer.get("filter").disable();
+      this.newOffer.get("cost")?.disable();
+      this.newOffer.get("filter")?.disable();
     }
   }
 
   onSubmit() {
     if (this.newOffer.valid) {
-      this.newOffer.get("cost").enable();
-      this.newOffer.get("filter").enable();
+      this.newOffer.get("cost")?.enable();
+      this.newOffer.get("filter")?.enable();
 
       const formValue = this.newOffer.value;
 

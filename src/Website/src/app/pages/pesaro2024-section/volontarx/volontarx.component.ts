@@ -1,18 +1,20 @@
-import { Component } from "@angular/core";
-import { CommonModule, NgForOf, NgIf } from "@angular/common";
+import { Component, ChangeDetectionStrategy } from "@angular/core";
+import { CommonModule } from "@angular/common";
 import { TranslateModule, TranslateService } from "@ngx-translate/core";
 import { DomSanitizer } from "@angular/platform-browser";
 import { StoreLogosComponent } from "src/app/components/store-logos/store-logos.component";
+import { FaqItem } from "src/app/_models/faq";
 
 @Component({
   selector: "app-volontarx",
   templateUrl: "./volontarx.component.html",
   styleUrl: "./volontarx.component.css",
   imports: [CommonModule, TranslateModule, StoreLogosComponent],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: true,
 })
 export class VolontarxComponent {
-  faqs = [];
+  faqs: FaqItem[] = [];
   translatedTitle = this.translate.instant("PESARO.TOURISTS.TITLE");
 
   constructor(
@@ -68,11 +70,11 @@ export class VolontarxComponent {
     this.translate.get("PESARO.TOURISTS.TITLE").subscribe((title: string) => {
       this.translatedTitle = title;
     });
-
-    // Fetch other translations and set this.faqs accordingly
   }
 
   toggleFaq(index: number) {
-    this.faqs[index].isOpen = !this.faqs[index].isOpen;
+    if (this.faqs[index]) {
+      this.faqs[index].isOpen = !this.faqs[index].isOpen;
+    }
   }
 }

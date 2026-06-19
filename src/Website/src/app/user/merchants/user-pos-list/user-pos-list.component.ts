@@ -1,4 +1,9 @@
-import { Component, Input, OnInit } from "@angular/core";
+import {
+  Component,
+  Input,
+  OnInit,
+  ChangeDetectionStrategy,
+} from "@angular/core";
 import { Pos } from "../../../_models";
 import { PosDialogData } from "../pos-details/pos-details";
 import { first } from "rxjs";
@@ -7,22 +12,23 @@ import { MatDialog } from "@angular/material/dialog";
 import { MerchantService, PosService } from "../../../_services";
 import { TranslateService } from "@ngx-translate/core";
 import { MatSnackBar } from "@angular/material/snack-bar";
-import { NgFor, NgIf } from "@angular/common";
+
 import { MatIcon } from "@angular/material/icon";
 import { ActivatedRoute, Router } from "@angular/router";
 import { PosCreateDialogComponent } from "../pos-create-dialog/pos-create-dialog.component";
 
 @Component({
   selector: "app-user-pos-list",
-  imports: [NgIf, NgFor, MatIcon],
+  imports: [MatIcon],
   standalone: true,
   templateUrl: "./user-pos-list.component.html",
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: "./user-pos-list.component.css",
 })
 export class UserPosListComponent implements OnInit {
-  @Input() posList: Pos[];
-  @Input() actionMerchant: string;
-  @Input() merchantId: string;
+  @Input() posList: Pos[] = [];
+  @Input() actionMerchant: string = "";
+  @Input() merchantId: string = "";
 
   createNewPos: boolean = false;
 
@@ -57,7 +63,7 @@ export class UserPosListComponent implements OnInit {
   onAddPos() {
     const posData = new PosDialogData();
     posData.merchantId = this.merchantId;
-    posData.pos = null;
+    posData.pos = {} as Pos;
     posData.isEdit = false;
 
     const dialogRef = this.matDialog.open(PosCreateDialogComponent, {
@@ -108,11 +114,11 @@ export class UserPosListComponent implements OnInit {
   updatePosList() {
     this.merchantService
       .getMerchantPos(this.merchantId)
-      .subscribe((res) => (this.posList = res["pos"]));
+      .subscribe((res: any) => (this.posList = res["pos"]));
   }
 
   openSnackBar(message = "null"): any {
-    this.snackBar.open(message, null, {
+    this.snackBar.open(message, undefined, {
       duration: 5000,
     });
   }

@@ -5,8 +5,9 @@ import {
   Output,
   OnChanges,
   SimpleChanges,
+  ChangeDetectionStrategy
 } from "@angular/core";
-import { NgIf } from "@angular/common";
+
 import { FormBuilder, FormGroup, ReactiveFormsModule } from "@angular/forms";
 
 @Component({
@@ -14,6 +15,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule } from "@angular/forms";
   standalone: true,
   imports: [ReactiveFormsModule],
   templateUrl: "./date-time-picker.component.html",
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: "./date-time-picker.component.css",
 })
 export class DateTimePickerComponent implements OnChanges {

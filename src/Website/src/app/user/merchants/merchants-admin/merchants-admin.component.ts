@@ -1,4 +1,9 @@
-import { ChangeDetectorRef, Component, OnInit } from "@angular/core";
+import {
+  ChangeDetectorRef,
+  Component,
+  OnInit,
+  ChangeDetectionStrategy,
+} from "@angular/core";
 import { MatIcon } from "@angular/material/icon";
 import {
   DialogCreateMerchant,
@@ -8,7 +13,7 @@ import { DialogType } from "../../../_models/dialogType";
 import { first } from "rxjs/operators";
 import { MatDialog } from "@angular/material/dialog";
 import { AdminTableComponent } from "../../components/admin-table/admin-table.component";
-import { NgIf } from "@angular/common";
+
 import { SharedModule } from "../../../shared/shared.module";
 import { Merchant } from "../../../_models";
 import { MerchantService, UserService } from "../../../_services";
@@ -25,17 +30,18 @@ import { CreateButtonComponent } from "../../components/create-button/create-but
   selector: "app-merchants-admin",
   imports: [
     AdminTableComponent,
-    NgIf,
     SharedModule,
     FiltersComponent,
     CreateButtonComponent,
   ],
   standalone: true,
   templateUrl: "./merchants-admin.component.html",
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: "./merchants-admin.component.css",
 })
 export class MerchantsAdminComponent implements OnInit {
-  merchantsList;
+  merchantsList: Merchant[] = [];
+
   merchantsTableColumns = [
     { field: "name", hideOnMobile: false },
     {
@@ -45,16 +51,16 @@ export class MerchantsAdminComponent implements OnInit {
   ];
 
   currentPage: number = 1;
-  itemsPerPage: string;
-  pageCount: number;
-  totalItems: number;
-  hasNext: boolean;
-  hasPrev: boolean;
+  itemsPerPage: string = "10";
+  pageCount: number = 0;
+  totalItems: number = 0;
+  hasNext: boolean = false;
+  hasPrev: boolean = false;
 
   errorMessage: string = "";
 
   searchParameters: string = "";
-  formApiError: boolean;
+  formApiError: boolean = false;
 
   subscriptions = new Subscription();
 
@@ -99,7 +105,7 @@ export class MerchantsAdminComponent implements OnInit {
       });
   }
 
-  private assignMerchantData(data) {
+  private assignMerchantData(data: any) {
     this.totalItems = data.totalCount;
     this.pageCount = data.pageCount;
     this.itemsPerPage = data.pageSize;
@@ -119,7 +125,7 @@ export class MerchantsAdminComponent implements OnInit {
   onCreateMerchant() {
     const merchantDialogData = new MerchantDialogData();
 
-    merchantDialogData.data = null;
+    merchantDialogData.data = null as any as Merchant;
     merchantDialogData.type = DialogType.create;
     merchantDialogData.isAdmin = true;
 
@@ -179,7 +185,7 @@ export class MerchantsAdminComponent implements OnInit {
             let isMyMerchantToUpdate: boolean = false;
 
             const currentUser = this.storageService.load("currentUser");
-            if (accessList.find((acc) => acc.userId === currentUser.id)) {
+            if (accessList.find((acc: any) => acc.userId === currentUser.id)) {
               isMyMerchantToUpdate = true;
             }
 
@@ -231,7 +237,7 @@ export class MerchantsAdminComponent implements OnInit {
     this.getMerchantsList();
   }
 
-  filterUpdate(filter) {
+  filterUpdate(filter: any): void {
     if (filter) {
       this.storageService.clearCache("merchantsList");
       this.itemsPerPage = filter.itemsPerPage;
@@ -274,9 +280,9 @@ export class MerchantsAdminComponent implements OnInit {
     this.getMerchantsList();
   }
 
-  private mapStatusToEnabled(): boolean | null {
+  private mapStatusToEnabled(): boolean | undefined {
     if (this.statusFilter === "enabledOnly") return true;
     if (this.statusFilter === "disabledOnly") return false;
-    return null;
+    return undefined;
   }
 }

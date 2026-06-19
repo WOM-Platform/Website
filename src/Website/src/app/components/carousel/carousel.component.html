@@ -1,34 +1,37 @@
 <div class="relative w-full mx-auto overflow-hidden">
   <div class="relative w-full h-96 sm:h-[700px] overflow-hidden">
-    <div *ngIf="!isMobile; else bannerMobile">
-      <img
-        *ngFor="let image of images; let i = index"
-        [src]="image.path"
-        alt="Carousel Image"
-        class="absolute inset-0 w-full h-96 sm:h-[700px] object-cover object-center transition-opacity duration-700 ease-in-out"
+    @if (!isMobile) {
+      <div>
+        @for (image of images; track image; let i = $index) {
+          <img
+            [src]="image.path"
+            alt="Carousel Image"
+            class="absolute inset-0 w-full h-96 sm:h-[700px] object-cover object-center transition-opacity duration-700 ease-in-out"
         [ngClass]="{
           'opacity-100 -z-10': i === currentIndex,
           'opacity-0 -z-20': i !== currentIndex
         }"
-      />
-    </div>
-    <ng-template #bannerMobile>
-      <img
-        *ngFor="let image of images; let i = index"
-        [src]="image.mobile"
-        alt="Carousel Image"
-        class="absolute inset-0 w-full h-96 object-cover object-center transition-opacity duration-700 ease-in-out"
+            />
+        }
+      </div>
+    } @else {
+      @for (image of images; track image; let i = $index) {
+        <img
+          [src]="image.mobile"
+          alt="Carousel Image"
+          class="absolute inset-0 w-full h-96 object-cover object-center transition-opacity duration-700 ease-in-out"
         [ngClass]="{
           'opacity-100 -z-10': i === currentIndex,
           'opacity-0 -z-20': i !== currentIndex
         }"
-      />
-    </ng-template>
+          />
+      }
+    }
   </div>
 
   <!-- Dots -->
   <div class="transform flex justify-end mx-20 space-x-2 my-3">
-    <ng-container *ngFor="let img of images; let i = index">
+    @for (img of images; track img; let i = $index) {
       <button
         (click)="currentIndex = i"
         [ngClass]="{
@@ -37,6 +40,6 @@
         }"
         class="w-2 h-2 rounded-full hover:bg-white transition-all"
       ></button>
-    </ng-container>
+    }
   </div>
 </div>

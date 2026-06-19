@@ -1,6 +1,7 @@
-<p-breadcrumb
-  *ngIf="menuItems && menuItems.length > 0"
-  class="text-xs"
-  [home]="home"
-  [model]="menuItems"
-></p-breadcrumb>
+@if (menuItems && menuItems.length > 0) {
+  <p-breadcrumb
+    class="text-xs"
+    [home]="home"
+    [model]="menuItems"
+  ></p-breadcrumb>
+}

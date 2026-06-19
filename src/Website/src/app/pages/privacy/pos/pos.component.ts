@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { TranslateService } from "@ngx-translate/core";
 
 @Component({
     selector: 'app-privacy-pos',
     templateUrl: './pos.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class PrivacyPosComponent {

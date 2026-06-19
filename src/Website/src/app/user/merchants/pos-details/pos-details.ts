@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ChangeDetectionStrategy } from "@angular/core";
 import { Pos, PosRegistration } from "../../../_models";
 import { first } from "rxjs/operators";
 import { UntypedFormGroup } from "@angular/forms";
@@ -7,7 +7,7 @@ import { StorageService } from "../../../_services/storage.service";
 import { MatDialog, MatDialogModule } from "@angular/material/dialog";
 import { decodeBlurHash } from "../../../utils/blurhash-utils";
 import { UploadImageComponent } from "../../../components/upload-image/upload-image.component";
-import { CommonModule, Location } from "@angular/common";
+import { Location } from "@angular/common";
 import { MatButtonModule } from "@angular/material/button";
 import { MatIconModule } from "@angular/material/icon";
 import { TranslateModule } from "@ngx-translate/core";
@@ -20,7 +20,6 @@ import { SnackBarService } from "../../../_services/snack-bar.service";
 @Component({
   selector: "app-pos-details",
   imports: [
-    CommonModule,
     MatDialogModule,
     MatButtonModule,
     MatFormFieldModule,
@@ -31,20 +30,21 @@ import { SnackBarService } from "../../../_services/snack-bar.service";
   ],
   standalone: true,
   templateUrl: "pos-details.html",
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrls: ["pos-details.css"],
 })
 export class PosDetailsComponent implements OnInit {
-  formPos: UntypedFormGroup;
-  formInputError: boolean;
-  formApiError: boolean;
+  formPos: UntypedFormGroup = new UntypedFormGroup({});
+  formInputError: boolean = false;
+  formApiError: boolean = false;
 
-  posId: string;
-  pos: Pos;
-  action: string;
+  posId: string = "";
+  pos: Pos = {} as Pos;
+  action: string = "";
 
-  data;
+  data: PosDialogData = new PosDialogData();
 
-  placeholderSrc: string;
+  placeholderSrc: string = "";
   imageLoaded: boolean = false;
 
   constructor(
@@ -62,14 +62,23 @@ export class PosDetailsComponent implements OnInit {
 
   loadData() {
     this.route.paramMap.subscribe((params) => {
-      this.posId = params.get("posId");
-      this.action = params.get("posAction");
+      this.posId = params.get("posId") ?? "";
+      this.action = params.get("posAction") ?? "";
 
       this.posService.get(this.posId).subscribe({
         next: (pos: Pos) => {
           this.pos = pos;
-          this.placeholderSrc = decodeBlurHash(this.pos.cover.blurHash, 32, 32);
-          this.preloadImage(this.pos.cover.fullSizeUrl);
+
+          if (this.pos.cover) {
+            this.placeholderSrc = decodeBlurHash(
+              this.pos.cover.blurHash,
+              32,
+              32
+            );
+            this.preloadImage(this.pos.cover.fullSizeUrl);
+          } else {
+            this.placeholderSrc = "";
+          }
         },
         error: (err) => {
           console.error("Error fetching data", err);
@@ -186,7 +195,7 @@ export class PosDetailsComponent implements OnInit {
 }
 
 export class PosDialogData {
-  merchantId: string;
-  isEdit: boolean;
-  pos: Pos;
+  merchantId: string = "";
+  isEdit: boolean = false;
+  pos: Pos = {} as Pos;
 }

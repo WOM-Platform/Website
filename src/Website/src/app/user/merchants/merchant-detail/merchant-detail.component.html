@@ -1,4 +1,5 @@
-<div *ngIf="merchant">
+@if (merchant) {
+<div>
   <div class="flex items-center justify-between mt-6 mb-4">
     <button
       (click)="goBack()"
@@ -7,7 +8,6 @@
       <i class="fas fa-arrow-left"></i> Indietro
     </button>
   </div>
-
   <div class="bg-white w-[900px] px-6 py-6 my-6 rounded-lg shadow-sm">
     <!-- Identity -->
     <div class="mb-6">
@@ -19,13 +19,11 @@
         (onChangeElement)="onUpdateMerchant('name', $event, true)"
         class="text-2xl font-semibold text-cyan-700"
       />
-
       <div class="text-sm text-slate-500 bg-slate-50 p-3 rounded-lg mt-3">
         <p><span class="font-semibold">ID:</span> {{ merchant.id }}</p>
         <p><span class="font-semibold">CF:</span> {{ merchant.fiscalCode }}</p>
       </div>
     </div>
-
     <!-- Status / Activation -->
     <div
       class="flex items-center justify-between bg-slate-50 p-3 rounded-lg mb-6"
@@ -37,30 +35,24 @@
         [typeEl]="'string'"
         (onChangeElement)="onUpdateMerchant('activationCode', $event, false)"
       />
-
       <div class="flex items-center gap-2">
         <span class="text-slate-600 font-semibold">Abilitato:</span>
-
-        <label *ngIf="action === 'edit'; else viewIsEnabled" class="switch">
+        @if (action === 'edit') {
+        <label class="switch">
           <input
             type="checkbox"
-            [checked]="merchant.isEnabled"
+            [checked]="merchant.enabled"
             (click)="onCheckboxClick()"
           />
           <span class="slider round"></span>
         </label>
-
-        <ng-template #viewIsEnabled>
-          <span *ngIf="merchant.isEnabled; else notEnable">Attivo</span>
-        </ng-template>
-
-        <ng-template #notEnable>Disattivato</ng-template>
+        } @else { @if (merchant.enabled) {
+        <span>Attivo</span>
+        } @else { Disattivato } }
       </div>
     </div>
-
     <!-- Business Info -->
     <h3 class="text-slate-500 font-semibold mb-3">Dati attività</h3>
-
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
       <app-editable-element
         [keyEl]="'Attività primaria'"
@@ -70,7 +62,6 @@
         [option]="businessList"
         (onChangeElement)="onUpdateMerchant('primaryActivity', $event, true)"
       />
-
       <app-editable-element
         [keyEl]="'Paese'"
         [valueEl]="merchant.country"
@@ -80,10 +71,8 @@
         (onChangeElement)="onUpdateMerchant('country', $event, false)"
       />
     </div>
-
     <!-- Contacts -->
     <h3 class="text-slate-500 font-semibold mb-3">Contatti</h3>
-
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
       <app-editable-element
         [keyEl]="'Indirizzo'"
@@ -91,7 +80,6 @@
         [action]="action"
         (onChangeElement)="onUpdateMerchant('address', $event, false)"
       />
-
       <app-editable-element
         [keyEl]="'CAP'"
         [valueEl]="merchant.zipCode"
@@ -99,7 +87,6 @@
         [pattern]="'^[0-9]{5}$'"
         (onChangeElement)="onUpdateMerchant('zipCode', $event, false)"
       />
-
       <app-editable-element
         [keyEl]="'Telefono'"
         [valueEl]="merchant.phoneNumber"
@@ -121,12 +108,10 @@
         (onChangeElement)="onUpdateMerchant('url', $event, false)"
       />
     </div>
-
     <!-- Access -->
-    <h3 *ngIf="accessList?.length" class="text-slate-500 font-semibold mb-3">
-      Gestori
-    </h3>
-
+    @if (accessList?.length) {
+    <h3 class="text-slate-500 font-semibold mb-3">Gestori</h3>
+    }
     <app-access-list
       [accessList]="accessList"
       [action]="action"
@@ -134,7 +119,6 @@
       (addAccess)="handleAccessList($event)"
       (deleteAccess)="onDeleteAccess($event)"
     />
-
     <!-- POS -->
     <div class="mt-6">
       <app-user-pos-list
@@ -145,3 +129,4 @@
     </div>
   </div>
 </div>
+}

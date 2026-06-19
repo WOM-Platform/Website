@@ -45,12 +45,11 @@
       <div>
         <label class="block text-sm font-medium text-gray-700">Challenge</label>
         <select formControlName="challengeId" class="inputField">
-          <option
-            *ngFor="let challenge of challengeList"
-            [value]="challenge.id"
-          >
+          @for (challenge of challengeList; track challenge) {
+          <option [value]="challenge.id">
             {{ challenge.name.it }}
           </option>
+          }
         </select>
       </div>
     </div>
@@ -100,12 +99,14 @@
       {{ isFiltering ? "Nascondi Filtro" : "Mostra Filtro" }}
     </button>
     <!-- Filter -->
-    <div *ngIf="isFiltering">
+    @if (isFiltering) {
+    <div>
       <app-simple-filter
         (filteredEmit)="updateFilter($event)"
-        (filterToggled)="onFilterToggle($event)"
+        (filterToggled)="toggleFilter()"
       />
     </div>
+    }
     <!-- Submit Button -->
     <button
       type="submit"

@@ -37,15 +37,16 @@
         [center]="center"
         [options]="options"
       >
+        @for (marker of markers; track marker) {
         <map-marker
           #markerElem="mapMarker"
-          *ngFor="let marker of markers"
           [position]="marker.position"
           [title]="marker.title"
-          [icon]="marker.options?.icon"
+          [icon]="marker.options!.icon!"
           (mapClick)="openInfo(markerElem, marker)"
         >
         </map-marker>
+        }
 
         <map-info-window [innerHTML]="infoContent"></map-info-window>
       </google-map>
@@ -55,9 +56,9 @@
         (selectionChange)="onPosSelection($event)"
         class="basis-1/4"
       >
-        <mat-list-option *ngFor="let pos of posList" [value]="pos"
-          >{{ pos.name }}
-        </mat-list-option>
+        @for (pos of posList; track pos) {
+        <mat-list-option [value]="pos">{{ pos.name }} </mat-list-option>
+        }
       </mat-selection-list>
     </div>
   </div>
@@ -75,15 +76,16 @@
         [center]="center"
         [options]="options"
       >
+        @for (marker of markers; track marker) {
         <map-marker
           #markerElem="mapMarker"
-          *ngFor="let marker of markers"
           [position]="marker.position"
           [title]="marker.title"
-          [icon]="marker.options?.icon"
+          [icon]="marker.options!.icon!"
           (mapClick)="openInfo(markerElem, marker)"
         >
         </map-marker>
+        }
 
         <map-info-window [innerHTML]="infoContent"></map-info-window>
       </google-map>
@@ -92,19 +94,19 @@
           [multiple]="false"
           (selectionChange)="onPosSelection($event)"
         >
-          <mat-list-option *ngFor="let pos of posList" [value]="pos"
-            >{{ pos.name }}
-          </mat-list-option>
+          @for (pos of posList; track pos) {
+          <mat-list-option [value]="pos">{{ pos.name }} </mat-list-option>
+          }
         </mat-selection-list>
       </div>
     </div>
   </div>
   <!--
-      <button (click)="zoomIn()">Zoom in</button>
-      <button (click)="zoomOut()">Zoom out</button>
-      <button (click)="logCenter()">Log center</button>
-      <button (click)="addMarker()">Add marker</button>
-      -->
+    <button (click)="zoomIn()">Zoom in</button>
+    <button (click)="zoomOut()">Zoom out</button>
+    <button (click)="logCenter()">Log center</button>
+    <button (click)="addMarker()">Add marker</button>
+    -->
 
   <div class="flex mt-11">
     <div class="basis-full">

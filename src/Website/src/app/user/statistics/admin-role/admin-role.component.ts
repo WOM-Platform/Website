@@ -1,7 +1,13 @@
-import { ChangeDetectorRef, Component, OnDestroy, OnInit } from "@angular/core";
-import { CommonModule, DatePipe } from "@angular/common";
+import {
+  ChangeDetectorRef,
+  Component,
+  OnDestroy,
+  OnInit,
+  ChangeDetectionStrategy,
+} from "@angular/core";
+import { DatePipe } from "@angular/common";
 import { SharedModule } from "../../../shared/shared.module";
-import { Aim, Merchants, UserMe } from "../../../_models";
+import { Aim, Merchants, User, UserMe } from "../../../_models";
 import { filter, Subscription } from "rxjs";
 import { UserService } from "../../../_services";
 
@@ -24,7 +30,6 @@ import { MatDialog } from "@angular/material/dialog";
   imports: [
     SharedModule,
     CsvDownloadComponent,
-    CommonModule,
     StatisticsFiltersComponent,
     MatTooltip,
     GeneratorStatisticsComponentComponent,
@@ -32,13 +37,14 @@ import { MatDialog } from "@angular/material/dialog";
   ],
   standalone: true,
   templateUrl: "./admin-role.component.html",
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: "./admin-role.component.css",
 })
 export class AdminRoleComponent implements OnInit, OnDestroy {
-  currentUser: UserMe;
+  currentUser: UserMe | null = null;
 
-  merchantData: Merchants;
-  merchantSubscription: Subscription;
+  merchantData: Merchants | null = null;
+  merchantSubscription: Subscription = Subscription.EMPTY;
 
   filteredAimList: Aim[] = [];
   showFilterAims = false;
@@ -46,31 +52,20 @@ export class AdminRoleComponent implements OnInit, OnDestroy {
   today = new Date();
   oneMonthAgo: Date;
 
-  filters: CombinedFilters;
-  dateFilters: DateFilter = {
-    startDate: undefined,
-    endDate: undefined,
-  };
-
-  merchantFilters: MerchantFilter = {
-    merchantIds: [],
-    merchantNames: [],
-  };
-
-  sourceFilters: InstrumentFilter = {
-    sourceId: [],
-    sourceNames: [],
-    aimListFilter: [],
+  filters: CombinedFilters = {
+    dateFilters: { startDate: null, endDate: null },
+    merchantFilters: { merchantIds: [], merchantNames: [] },
+    sourceFilters: { sourceId: [], sourceNames: [], aimListFilter: [] },
   };
 
   tooltipActiveFilters = "Non ci sono filtri attivi";
 
   isShowedGenerationFilter: boolean = false;
-  bboxArea;
+  bboxArea: any = null;
   chartCreatedAmountByAim: any;
   totalCreatedAmountByAim: any;
-  totalCreatedAmount: string;
-  totalRedeemedAmount: string;
+  totalCreatedAmount: string = "";
+  totalRedeemedAmount: string = "";
   consumedStats: any;
 
   constructor(
@@ -81,15 +76,16 @@ export class AdminRoleComponent implements OnInit, OnDestroy {
     this.oneMonthAgo = new Date();
     this.oneMonthAgo.setMonth(this.today.getMonth() - 1);
 
-    this.dateFilters.startDate = this.oneMonthAgo;
-    this.dateFilters.endDate = this.today;
+    this.filters.dateFilters = {
+      startDate: this.oneMonthAgo,
+      endDate: this.today,
+    };
 
     this.updateCombinedFilters();
   }
 
   ngOnInit(): any {
     this.currentUser = this.userService.currentUserValue;
-    this.currentUser.role;
   }
 
   ngOnDestroy(): any {
@@ -98,25 +94,25 @@ export class AdminRoleComponent implements OnInit, OnDestroy {
 
   updateCombinedFilters() {
     this.filters = {
-      dateFilters: this.dateFilters,
-      merchantFilters: this.merchantFilters,
-      sourceFilters: this.sourceFilters,
+      dateFilters: this.filters.dateFilters,
+      merchantFilters: this.filters.merchantFilters,
+      sourceFilters: this.filters.sourceFilters,
     };
   }
 
-  onDatesSelected(date) {
-    this.dateFilters = { ...date };
+  onDatesSelected(date: DateFilter) {
+    this.filters.dateFilters = { ...date };
     this.updateCombinedFilters();
     this.cdr.detectChanges();
   }
 
   onSourceSelected(source: InstrumentFilter) {
-    this.sourceFilters = { ...source };
+    this.filters.sourceFilters = { ...source };
     this.updateCombinedFilters();
     this.cdr.detectChanges();
   }
   onMerchantSelected(merchant: MerchantFilter) {
-    this.merchantFilters = { ...merchant };
+    this.filters.merchantFilters = { ...merchant };
     this.updateCombinedFilters();
     this.cdr.detectChanges();
   }
@@ -127,11 +123,11 @@ export class AdminRoleComponent implements OnInit, OnDestroy {
     csvRows.push("Total Created Amount," + this.totalCreatedAmount);
     csvRows.push("Total Redeemed Amount," + this.totalRedeemedAmount);
     csvRows.push("Total Consumed Amount," + this.consumedStats.totalConsumed);
-    csvRows.push(""); // Blank line for separation
+    csvRows.push("");
 
     // totalCreatedAmountByAim
     csvRows.push("Aim Code,Created Amount");
-    this.totalCreatedAmountByAim.forEach((item) => {
+    this.totalCreatedAmountByAim.forEach((item: any) => {
       csvRows.push(`${item.aimCode},${item.amount}`);
     });
     csvRows.push(""); // Blank line for separation
@@ -139,7 +135,7 @@ export class AdminRoleComponent implements OnInit, OnDestroy {
     // chartCreatedAmountByAim
     csvRows.push("Chart Created Amount By Aim");
     csvRows.push("Label,Value");
-    this.chartCreatedAmountByAim.forEach((item) => {
+    this.chartCreatedAmountByAim.forEach((item: any) => {
       csvRows.push(`${item.value},${item.value}`);
     });
     csvRows.push(""); // Blank line for separation
@@ -156,33 +152,42 @@ export class AdminRoleComponent implements OnInit, OnDestroy {
   getActiveFiltersSummary(): string {
     const activeFilters: string[] = [];
 
-    if (this.dateFilters.startDate) {
+    if (this.filters.dateFilters?.startDate) {
       const formattedStartDate = new DatePipe("it-IT").transform(
-        this.dateFilters.startDate,
+        this.filters.dateFilters.startDate,
         "dd/MM/yyyy"
       );
       activeFilters.push(`Data Inizio ${formattedStartDate}`);
     }
-    if (this.dateFilters.endDate) {
+    if (this.filters.dateFilters?.endDate) {
       const formattedEndDate = new DatePipe("it-IT").transform(
-        this.dateFilters.endDate,
+        this.filters.dateFilters.endDate,
         "dd/MM/yyyy"
       );
       activeFilters.push(`Data Fine ${formattedEndDate}`);
     }
-    if (this.merchantFilters.merchantNames.length > 0) {
+    if (
+      this.filters.merchantFilters?.merchantNames &&
+      this.filters.merchantFilters.merchantNames.length > 0
+    ) {
       activeFilters.push(
-        `Merchants: ${this.merchantFilters.merchantNames.join(", ")}`
+        `Merchants: ${this.filters.merchantFilters.merchantNames.join(", ")}`
       );
     }
-    if (this.sourceFilters.sourceNames.length > 0) {
+    if (
+      this.filters.sourceFilters?.sourceNames &&
+      this.filters.sourceFilters.sourceNames.length > 0
+    ) {
       activeFilters.push(
-        `Sources: ${this.sourceFilters.sourceNames.join(", ")}`
+        `Sources: ${this.filters.sourceFilters.sourceNames.join(", ")}`
       );
     }
-    if (this.sourceFilters.aimListFilter.length > 0) {
+    if (
+      this.filters.sourceFilters?.aimListFilter &&
+      this.filters.sourceFilters.aimListFilter.length > 0
+    ) {
       activeFilters.push(
-        `Aims: ${this.sourceFilters.aimListFilter.join(", ")}`
+        `Aims: ${this.filters.sourceFilters.aimListFilter.join(", ")}`
       );
     }
 
@@ -191,13 +196,28 @@ export class AdminRoleComponent implements OnInit, OnDestroy {
 
   hasActiveFilters(): boolean {
     return (
-      !!this.dateFilters.startDate ||
-      !!this.dateFilters.endDate ||
-      this.merchantFilters.merchantIds.length > 0 ||
-      this.merchantFilters.merchantNames.length > 0 ||
-      this.sourceFilters.sourceId.length > 0 ||
-      this.sourceFilters.sourceNames.length > 0 ||
-      this.sourceFilters.aimListFilter.length > 0
+      !!this.filters.dateFilters?.startDate ||
+      !!this.filters.dateFilters?.endDate ||
+      !!(
+        this.filters.merchantFilters?.merchantIds &&
+        this.filters.merchantFilters.merchantIds.length > 0
+      ) ||
+      !!(
+        this.filters.merchantFilters?.merchantNames &&
+        this.filters.merchantFilters.merchantNames.length > 0
+      ) ||
+      !!(
+        this.filters.sourceFilters?.sourceId &&
+        this.filters.sourceFilters.sourceId.length > 0
+      ) ||
+      !!(
+        this.filters.sourceFilters?.sourceNames &&
+        this.filters.sourceFilters.sourceNames.length > 0
+      ) ||
+      !!(
+        this.filters.sourceFilters?.aimListFilter &&
+        this.filters.sourceFilters.aimListFilter.length > 0
+      )
     );
   }
 

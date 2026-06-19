@@ -5,6 +5,7 @@ import {
   OnDestroy,
   OnInit,
   Output,
+  ChangeDetectionStrategy,
 } from "@angular/core";
 import { Subject, Subscription } from "rxjs";
 import { debounceTime, takeUntil } from "rxjs/operators";
@@ -18,6 +19,7 @@ import { SearchComponent } from "../search/search.component";
   imports: [MatIcon, PaginatorModule, ReactiveFormsModule, SearchComponent],
   standalone: true,
   templateUrl: "./filters.component.html",
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: "./filters.component.css",
 })
 export class FiltersComponent implements OnInit, OnDestroy {
@@ -26,28 +28,34 @@ export class FiltersComponent implements OnInit, OnDestroy {
   searchValue = "";
   private destroy$ = new Subject<void>();
 
-  filterForm: FormGroup;
+  filterForm!: FormGroup;
 
   ngOnInit() {
     this.filterForm = new FormGroup({
       itemsPerPage: new FormControl(this.itemsPage),
     });
 
-    this.filterForm.get("itemsPerPage").valueChanges.subscribe(() => {
-      this.filterEmit.emit({
-        search: this.searchValue,
-        itemsPerPage: this.filterForm.get("itemsPerPage").value,
+    this.filterForm
+      .get("itemsPerPage")
+      ?.valueChanges.pipe(takeUntil(this.destroy$))
+      .subscribe((value) => {
+        this.filterEmit.emit({
+          search: this.searchValue,
+          itemsPerPage: value ?? this.itemsPage,
+        });
       });
-    });
   }
 
   onSearch(value: string) {
     this.searchValue = value;
 
     if (this.searchValue.length >= 3 || this.searchValue.length === 0) {
+      const currentItemsPerPage =
+        this.filterForm.get("itemsPerPage")?.value ?? this.itemsPage;
+
       this.filterEmit.emit({
         search: this.searchValue,
-        itemsPerPage: this.filterForm.get("itemsPerPage").value,
+        itemsPerPage: currentItemsPerPage,
       });
     }
   }

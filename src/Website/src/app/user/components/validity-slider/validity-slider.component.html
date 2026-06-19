@@ -20,7 +20,9 @@
 
         <!-- Tick Marks -->
         <div class="flex justify-between text-xs mt-1 px-1 text-gray-600">
-          <span *ngFor="let val of tickValues">{{ val }}</span>
+          @for (val of tickValues; track val) {
+          <span>{{ val }}</span>
+          }
         </div>
 
         <!-- Label Display -->

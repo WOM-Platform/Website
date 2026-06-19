@@ -1,5 +1,12 @@
-import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
-import { NgClass, NgIf } from "@angular/common";
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  ChangeDetectionStrategy,
+} from "@angular/core";
+import { NgClass } from "@angular/common";
 import { FormBuilder, FormGroup } from "@angular/forms";
 
 import { MatSliderModule } from "@angular/material/slider";
@@ -12,7 +19,6 @@ import { Filter } from "../../../../../../_models/filter";
 @Component({
   selector: "app-offer-filters",
   imports: [
-    NgIf,
     MatSliderModule,
     ValiditySliderComponent,
     TranslateModule,
@@ -22,6 +28,7 @@ import { Filter } from "../../../../../../_models/filter";
   ],
   standalone: true,
   templateUrl: "./offer-filters.component.html",
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: "./offer-filters.component.css",
 })
 export class OfferFiltersComponent implements OnInit {
@@ -31,7 +38,7 @@ export class OfferFiltersComponent implements OnInit {
 
   newFilter: boolean = false;
 
-  filterForm: FormGroup;
+  filterForm: FormGroup = new FormGroup({});
   isFilteringMap: boolean = false;
 
   constructor(private fb: FormBuilder) {}

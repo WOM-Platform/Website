@@ -1,5 +1,9 @@
-import { NgIf } from "@angular/common";
-import { Component, Input, OnInit } from "@angular/core";
+import {
+  Component,
+  Input,
+  OnInit,
+  ChangeDetectionStrategy,
+} from "@angular/core";
 import { PdfViewerModule } from "ng2-pdf-viewer";
 import { MatIconButton } from "@angular/material/button";
 import { MatIcon } from "@angular/material/icon";
@@ -12,6 +16,7 @@ import type { PDFDocumentProxy } from "pdfjs-dist/types/src/display/api";
   templateUrl: "./pdf-viewer-container.component.html",
   styleUrls: ["./pdf-viewer-container.component.css"],
   standalone: true,
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [
     PdfViewerModule,
     MatIconButton,
@@ -21,7 +26,7 @@ import type { PDFDocumentProxy } from "pdfjs-dist/types/src/display/api";
   ],
 })
 export class PdfViewerContainerComponent implements OnInit {
-  @Input() source: string;
+  @Input() source: string = "";
   @Input() page: number = 1;
   @Input() totalPages: number = 0;
   @Input() isLoaded: boolean = false;

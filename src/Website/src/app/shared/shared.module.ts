@@ -28,7 +28,6 @@ import { MatMenuModule } from "@angular/material/menu";
 import { MatSelectModule } from "@angular/material/select";
 import { MatSnackBarModule } from "@angular/material/snack-bar";
 import { GoogleMapsModule } from "@angular/google-maps";
-import { NgxChartsModule } from "@swimlane/ngx-charts";
 import { HttpClient } from "@angular/common/http";
 import { AvatarComponent } from "../user/components/avatar/avatar.component";
 import { MatTableModule } from "@angular/material/table";
@@ -36,7 +35,6 @@ import { MatPaginatorModule } from "@angular/material/paginator";
 import { PaginationComponent } from "../user/components/admin-table/pagination/pagination.component";
 import { DialogConfirmCancelComponent } from "../components/dialog-confirm-cancel/dialog-confirm-cancel";
 import { DialogConfirmComponent } from "../components/dialog-confirm/dialog-confirm";
-import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { NgxFileDropModule } from "ngx-file-drop";
 import { BadgeComponent } from "../components/badge/badge.component";
 import { NgxSkeletonLoaderModule } from "ngx-skeleton-loader";
@@ -50,7 +48,6 @@ import { NgxSkeletonLoaderModule } from "ngx-skeleton-loader";
   ],
   imports: [
     BadgeComponent,
-    BrowserAnimationsModule,
     CommonModule,
     FormsModule,
     GoogleMapsModule,
@@ -80,7 +77,6 @@ import { NgxSkeletonLoaderModule } from "ngx-skeleton-loader";
     MatTableModule,
     MatToolbarModule,
     MatTooltipModule,
-    NgxChartsModule,
     NgxSkeletonLoaderModule,
     NgxFileDropModule,
     PdfViewerModule,
@@ -96,7 +92,6 @@ import { NgxSkeletonLoaderModule } from "ngx-skeleton-loader";
   ],
   exports: [
     AvatarComponent,
-    BrowserAnimationsModule,
     DialogConfirmCancelComponent,
     DialogConfirmComponent,
     FormsModule,
@@ -127,7 +122,6 @@ import { NgxSkeletonLoaderModule } from "ngx-skeleton-loader";
     MatTableModule,
     MatToolbarModule,
     MatTooltipModule,
-    NgxChartsModule,
     NgxFileDropModule,
     NgxSkeletonLoaderModule,
     PaginationComponent,

@@ -7,6 +7,7 @@ import {
   Input,
   SimpleChanges,
   OnChanges,
+  ChangeDetectionStrategy,
 } from "@angular/core";
 import * as L from "leaflet";
 import { Observable, Subscriber } from "rxjs";
@@ -16,21 +17,21 @@ import { Observable, Subscriber } from "rxjs";
   templateUrl: "./map.component.html",
   styleUrls: ["./map.component.css"],
   imports: [],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: true,
 })
 export class MapComponent implements AfterViewInit, OnChanges {
   @Input() selectedBounds: any;
   @Input() isEditing: boolean = false;
   @Output() bounds = new EventEmitter<any>();
-  private map;
+
+  private map: L.Map | undefined;
 
   constructor() {}
 
   ngAfterViewInit(): void {
     // First layer map: OpenStreetMap
     this.initOpenStreetMap();
-    // Second layer map: TransactionMap
-    this.initTransactionMap();
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -60,6 +61,8 @@ export class MapComponent implements AfterViewInit, OnChanges {
         this.map.on("dragend", this.onBoundsChanged.bind(this));
         tiles.addTo(this.map);
 
+        this.initTransactionMap();
+
         // Set initial bounds if provided
         if (this.selectedBounds) {
           this.setMapBounds(this.selectedBounds);
@@ -69,8 +72,15 @@ export class MapComponent implements AfterViewInit, OnChanges {
   }
 
   private emitBounds(): void {
+    const currentMap = this.map;
+    if (!currentMap || this.isEditing) {
+      return;
+    }
+
+    const bounds = currentMap.getBounds();
+
     if (!this.isEditing) {
-      const bounds = this.map.getBounds();
+      const bounds = currentMap.getBounds();
       const leftTop: [number, number] = [
         bounds.getNorthWest().lat,
         bounds.getNorthWest().lng,
@@ -87,12 +97,20 @@ export class MapComponent implements AfterViewInit, OnChanges {
     this.emitBounds();
   }
 
-  private setMapBounds(bounds): void {
+  private setMapBounds(bounds: any): void {
+    if (!this.map || !bounds?.leftTop || !bounds?.rightBottom) {
+      return;
+    }
+
     const latLngBounds = L.latLngBounds(bounds.leftTop, bounds.rightBottom);
     this.map.fitBounds(latLngBounds);
   }
 
   private initTransactionMap(): void {
+    if (!this.map) {
+      return;
+    }
+
     const TM_TILES_URL = "URL_OF_SERVER_TILES";
     L.tileLayer(TM_TILES_URL).addTo(this.map);
   }

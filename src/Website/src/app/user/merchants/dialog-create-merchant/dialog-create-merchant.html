@@ -4,11 +4,15 @@
 
 <mat-dialog-content class="space-y-3">
   <!-- Errors -->
-  <mat-error *ngIf="formInputError">
-    {{ inputErrorKey | translate }}
-  </mat-error>
+  @if (formInputError) {
+    <mat-error>
+      {{ inputErrorKey | translate }}
+    </mat-error>
+  }
 
-  <mat-error *ngIf="formApiError"> {{ apiErrorKey | translate }} </mat-error>
+  @if (formApiError) {
+    <mat-error> {{ apiErrorKey | translate }} </mat-error>
+  }
 
   <!-- Form -->
   <div class="bg-slate-50 p-4 rounded-lg">
@@ -31,7 +35,7 @@
     mat-raised-button
     [disabled]="!formMerchant?.valid"
     (click)="onSubmit()"
-  >
+    >
     {{ submitKey | translate }}
   </button>
 </mat-dialog-actions>

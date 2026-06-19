@@ -1,14 +1,14 @@
-import { NgFor, NgIf } from "@angular/common";
-import { Component, Input } from "@angular/core";
+import { Component, Input, ChangeDetectionStrategy } from "@angular/core";
 import { Aim } from "src/app/_models";
 
 @Component({
   selector: "app-aims-list",
-  imports: [NgIf, NgFor],
+  imports: [],
   standalone: true,
   templateUrl: "./aims-list.component.html",
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: "./aims-list.component.css",
 })
 export class AimsListComponent {
-  @Input() aimList: Aim[];
+  @Input() aimList: Aim[] = [];
 }

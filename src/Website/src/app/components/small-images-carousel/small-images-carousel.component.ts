@@ -1,17 +1,19 @@
-import { CommonModule } from "@angular/common";
+
 import {
   Component,
   Input,
   OnInit,
   HostListener,
   AfterViewInit,
+  ChangeDetectionStrategy
 } from "@angular/core";
 
 @Component({
   selector: "app-small-images-carousel",
   standalone: true,
-  imports: [CommonModule],
+  imports: [],
   templateUrl: "./small-images-carousel.component.html",
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: "./small-images-carousel.component.css",
 })
 export class SmallImagesCarouselComponent implements OnInit, AfterViewInit {

@@ -67,7 +67,7 @@ export class PosService {
 
   // get list of offers of a POS and embed offer image
   getOffers(posId: string): Observable<any> {
-    return this.http.get(`${this.localUrlV1}${posId}/offers`, {}).pipe(
+    return this.http.get<any[]>(`${this.localUrlV1}${posId}/offers`).pipe(
       switchMap((offers: any[]) => {
         if (offers.length <= 0) {
           return of([]);
@@ -100,7 +100,7 @@ export class PosService {
   }
 
   // create a new offer
-  createOffer(posId, data): Observable<any> {
+  createOffer(posId: string, data: Offer): Observable<any> {
     return this.http.post(`${this.localUrlV1}${posId}/offers`, data);
   }
 
@@ -120,7 +120,7 @@ export class PosService {
   }
 
   // to delete offer
-  deleteOffer(posId: string, offerId) {
+  deleteOffer(posId: string, offerId: string): Observable<any> {
     return this.http.delete(`${this.localUrlV1}${posId}/offers/${offerId}`);
   }
 

@@ -1,11 +1,9 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ChangeDetectionStrategy } from "@angular/core";
 import { Merchant } from "../../../_models";
 import { StorageService } from "../../../_services/storage.service";
 import { StatsService, UserService } from "../../../_services";
-import { NgFor, NgIf } from "@angular/common";
-import { Instrument } from "../../../_models/instrument";
 
-import { BarChartModule, PieChartModule } from "@swimlane/ngx-charts";
+import { Instrument } from "../../../_models/instrument";
 import { NgxSkeletonLoaderModule } from "ngx-skeleton-loader";
 import { SharedModule } from "../../../shared/shared.module";
 import {
@@ -26,29 +24,24 @@ import { StatisticsFiltersComponent } from "../components/statistics-filters/sta
 
 @Component({
   selector: "app-user-role",
-  imports: [
-    StatisticsFiltersComponent,
-    BarChartModule,
-    NgxSkeletonLoaderModule,
-    PieChartModule,
-    SharedModule,
-  ],
+  imports: [StatisticsFiltersComponent, NgxSkeletonLoaderModule, SharedModule],
   standalone: true,
   templateUrl: "./user-role.component.html",
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: "./user-role.component.css",
 })
 export class UserRoleComponent implements OnInit {
-  currentUser;
-  merchants: Merchant[];
-  sources: Instrument[];
+  currentUser: any = null;
+  merchants: Merchant[] = [];
+  sources: Instrument[] = [];
   isOwnerMerchants: boolean = false;
   isOwnerSources: boolean = false;
 
-  locationParameters;
+  locationParameters: any = null;
 
   dateFilters: DateFilter = {
-    startDate: undefined,
-    endDate: undefined,
+    startDate: null,
+    endDate: null,
   };
   merchantFilters: MerchantFilter = {
     merchantIds: [],
@@ -64,15 +57,16 @@ export class UserRoleComponent implements OnInit {
   isConsumedDataReady: boolean = false;
   isGeneratedDataReady: boolean = false;
 
-  totalCreatedAmount: number;
-  totalRedeemedAmount: number;
+  totalCreatedAmount: number = 0;
+  totalRedeemedAmount: number = 0;
   totalConsumedAmount: number = 0;
   totalConsumedOverTime: ChartDataSwimlane[] = [];
   totalGeneratedOverTime: ChartDataSwimlaneSeries[] = [];
-  totalCreatedAmountByAim: VoucherByAimDTO[];
+
+  totalCreatedAmountByAim: VoucherByAimDTO[] = [];
   rankMerchants: MerchantRankDTO[] = [];
-  offerConsumedVouchers: any;
-  availableVouchers: number;
+  offerConsumedVouchers: any = null;
+  availableVouchers: number = 0;
 
   chartCreatedAmountByAim: ChartDataSwimlane[] = [];
   chartConsumedAmountByAim: ChartDataSwimlane[] = [];
@@ -117,7 +111,7 @@ export class UserRoleComponent implements OnInit {
     if (this.isOwnerSources) this.generationVoucherData();
   }
 
-  onDatesSelected(date) {
+  onDatesSelected(date: DateFilter) {
     this.dateFilters.startDate = date.startDate;
     this.dateFilters.endDate = date.endDate;
     this.loadData();

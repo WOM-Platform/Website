@@ -7,6 +7,7 @@ import {
   OnInit,
   Output,
   SimpleChanges,
+  ChangeDetectionStrategy
 } from "@angular/core";
 import { FormControl, ReactiveFormsModule } from "@angular/forms";
 import { debounceTime, Subject, takeUntil } from "rxjs";
@@ -17,6 +18,7 @@ import { MatIcon } from "@angular/material/icon";
   imports: [ReactiveFormsModule, MatIcon],
   standalone: true,
   templateUrl: "./search.component.html",
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrls: ["./search.component.css"],
 })
 export class SearchComponent implements OnInit, OnDestroy {

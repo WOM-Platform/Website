@@ -9,8 +9,10 @@ import {
   OnInit,
   Output,
   ViewChild,
+  ChangeDetectionStrategy,
 } from "@angular/core";
 import {
+  AbstractControl,
   ReactiveFormsModule,
   UntypedFormBuilder,
   UntypedFormGroup,
@@ -27,7 +29,7 @@ import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatCheckboxModule } from "@angular/material/checkbox";
 import { EditableElementComponent } from "../../../components/editable-element/editable-element.component";
 import { PosService } from "../../../../_services";
-import { NgIf } from "@angular/common";
+
 import { MatTooltipModule } from "@angular/material/tooltip";
 import { SnackBarService } from "../../../../_services/snack-bar.service";
 
@@ -42,29 +44,30 @@ import { SnackBarService } from "../../../../_services/snack-bar.service";
     MatTooltipModule,
     GoogleMapsModule,
     EditableElementComponent,
-    NgIf,
   ],
   standalone: true,
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrls: [
     "./forms-pos.component.css",
     "../../../../_forms/forms.directive.css",
   ],
 })
 export class PosFormComponent implements OnInit, AfterViewInit, OnDestroy {
-  @Input() form: UntypedFormGroup;
-  @Input() pos: Pos;
-  @Input() action: string;
+  @Input() form: UntypedFormGroup = new UntypedFormGroup({});
+  @Input() pos: Pos = {} as Pos;
+  @Input() action: string = "";
   @Output() formChange = new EventEmitter<UntypedFormGroup>();
 
-  @ViewChild(GoogleMap, { static: false }) map: GoogleMap;
-  @ViewChild("mapSearchField") searchField: ElementRef;
+  @ViewChild(GoogleMap, { static: false }) map: GoogleMap = {} as GoogleMap;
+  @ViewChild("mapSearchField") searchField: ElementRef = new ElementRef(null);
 
   unsubscribe = new Subject<void>();
 
-  posLon: string;
-  posLat: string;
-  isActive: boolean;
-  marker: google.maps.Marker;
+  posLon: string = "";
+  posLat: string = "";
+  isActive: boolean = true;
+  marker: google.maps.Marker | null = null;
+
   options: google.maps.MapOptions = {
     center: { lat: 45.788, lng: 12.5 },
     zoom: 5,
@@ -101,19 +104,19 @@ export class PosFormComponent implements OnInit, AfterViewInit, OnDestroy {
     });
     this.form
       .get("name")
-      .valueChanges.subscribe((value) => this.formChange.emit(this.form));
+      ?.valueChanges.subscribe(() => this.formChange.emit(this.form));
     this.form
       .get("latitude")
-      .valueChanges.subscribe((value) => this.formChange.emit(this.form));
+      ?.valueChanges.subscribe(() => this.formChange.emit(this.form));
     this.form
       .get("longitude")
-      .valueChanges.subscribe((value) => this.formChange.emit(this.form));
+      ?.valueChanges.subscribe(() => this.formChange.emit(this.form));
     this.form
       .get("url")
-      .valueChanges.subscribe((value) => this.formChange.emit(this.form));
+      ?.valueChanges.subscribe(() => this.formChange.emit(this.form));
     this.form
       .get("isActive")
-      .valueChanges.subscribe((value) => this.formChange.emit(this.form));
+      ?.valueChanges.subscribe(() => this.formChange.emit(this.form));
 
     if (this.pos) {
       this.form.controls.name.setValue(this.pos.name);
@@ -162,7 +165,7 @@ export class PosFormComponent implements OnInit, AfterViewInit, OnDestroy {
 
     searchBox.addListener("places_changed", () => {
       const places = searchBox.getPlaces();
-      if (places.length === 0) {
+      if (!places || places.length === 0) {
         return;
       }
       if (!google) return;
@@ -201,7 +204,7 @@ export class PosFormComponent implements OnInit, AfterViewInit, OnDestroy {
         map: this.map.googleMap,
         draggable: true,
       });
-      google.maps.event.addListener(this.marker, "dragend", (evt) => {
+      google.maps.event.addListener(this.marker, "dragend", (event: any) => {
         this.markerLocation();
       });
     } else {
@@ -214,7 +217,7 @@ export class PosFormComponent implements OnInit, AfterViewInit, OnDestroy {
     this.unsubscribe.next();
   }
 
-  latLonValidator(control) {
+  latLonValidator(control: AbstractControl) {
     const value = control.value;
     if (value !== 0) {
       return null; // Value is valid
@@ -223,9 +226,11 @@ export class PosFormComponent implements OnInit, AfterViewInit, OnDestroy {
     }
   }
 
-  mapClick(event): any {
+  mapClick(event: google.maps.MapMouseEvent): any {
     const clickedLocation = event.latLng;
-    this.setMarker(clickedLocation);
+    if (clickedLocation) {
+      this.setMarker(clickedLocation);
+    }
   }
 
   setMarker(latLng: google.maps.LatLng): void {
@@ -235,7 +240,7 @@ export class PosFormComponent implements OnInit, AfterViewInit, OnDestroy {
         map: this.map.googleMap,
         draggable: true,
       });
-      google.maps.event.addListener(this.marker, "dragend", (evt) => {
+      google.maps.event.addListener(this.marker, "dragend", (event: any) => {
         this.markerLocation();
       });
     } else {
@@ -245,25 +250,29 @@ export class PosFormComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   markerLocation(): any {
+    if (!this.marker) return;
     const currentLocation = this.marker.getPosition();
-    this.form.controls.latitude.setValue(currentLocation.lat());
-    this.form.controls.longitude.setValue(currentLocation.lng());
+    if (currentLocation) {
+      this.form.controls.latitude.setValue(currentLocation.lat());
+      this.form.controls.longitude.setValue(currentLocation.lng());
 
-    this.posLat = currentLocation.lat().toFixed(5);
-    this.posLon = currentLocation.lng().toFixed(5);
+      this.posLat = currentLocation.lat().toFixed(5);
+      this.posLon = currentLocation.lng().toFixed(5);
+    }
   }
 
-  onIsActiveChanged(event) {
+  onIsActiveChanged(event: Event): void {
     this.pos.isActive = this.isActive;
   }
 
   // toggle is active value and then perform the api call
-  toggleIsActive(event) {
-    const newIsActiveValue = !this.form.get("isActive").value;
-
-    this.updatePosField("isActive", newIsActiveValue);
+  toggleIsActive(event: Event) {
+    const isActiveControl = this.form.get("isActive");
+    if (isActiveControl) {
+      const newIsActiveValue = !isActiveControl.value;
+      this.updatePosField("isActive", newIsActiveValue);
+    }
   }
-
   updatePosField(key: string, value: any, isTableToUpdate: boolean = false) {
     console.log("Value ", value);
     this.form.controls[key].setValue(value);

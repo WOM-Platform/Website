@@ -6,17 +6,19 @@ import {
   QueryList,
   ViewChild,
   ViewChildren,
+  ChangeDetectionStrategy,
 } from "@angular/core";
 import { GoogleMap, MapInfoWindow, MapMarker } from "@angular/google-maps";
 import { MapService } from "../../_services";
 import { PosMap } from "../../_models";
 import {
+  MatListModule,
   MatSelectionList,
   MatSelectionListChange,
 } from "@angular/material/list";
 import { TranslateModule } from "@ngx-translate/core";
 import { StoreLogosComponent } from "src/app/components/store-logos/store-logos.component";
-import { CommonModule } from "@angular/common";
+
 import { PosWithOffers } from "src/app/_models/offer";
 
 @Component({
@@ -24,14 +26,15 @@ import { PosWithOffers } from "src/app/_models/offer";
   templateUrl: "./merchant.component.html",
   styleUrls: ["./merchant.component.css"],
   imports: [
-    CommonModule,
     GoogleMap,
     MapInfoWindow,
     MapMarker,
+    MatListModule,
     TranslateModule,
     MatSelectionList,
     StoreLogosComponent,
   ],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: true,
 })
 export class MerchantComponent implements OnInit, AfterViewInit {
@@ -41,7 +44,7 @@ export class MerchantComponent implements OnInit, AfterViewInit {
   @ViewChildren("markerElem") mapMarkerElem!: QueryList<MapMarker>;
 
   mapLoaded = false;
-  searchBox: google.maps.places.SearchBox;
+  searchBox!: google.maps.places.SearchBox;
   infoContent = "";
   markers: {
     position: google.maps.LatLngLiteral;
@@ -127,13 +130,15 @@ export class MerchantComponent implements OnInit, AfterViewInit {
   }
 
   zoomIn(): void {
-    if (this.zoom < this.options.maxZoom) {
+    const maxZoom = this.options.maxZoom ?? 22;
+    if (this.zoom < maxZoom) {
       this.zoom++;
     }
   }
 
   zoomOut(): void {
-    if (this.zoom > this.options.minZoom) {
+    const minZoom = this.options.minZoom ?? 5;
+    if (this.zoom > minZoom) {
       this.zoom--;
     }
   }
@@ -179,8 +184,9 @@ export class MerchantComponent implements OnInit, AfterViewInit {
   }
 
   boundsChanged(): void {
-    if (this.map === null || this.map.getBounds() === null) {
-      console.log("map not available.");
+    const currentBounds = this.map.getBounds();
+    if (!currentBounds) {
+      console.log("bounds not available.");
       return;
     }
 
@@ -188,7 +194,7 @@ export class MerchantComponent implements OnInit, AfterViewInit {
       this.mapLoaded = true;
     }
 
-    const bounds = this.map.getBounds().toJSON();
+    const bounds = currentBounds.toJSON();
     this.mapService
       .getPosWithOffers(
         bounds.west.toString(),

@@ -1,7 +1,9 @@
-<div *ngIf="aimList && aimList.length > 0" class="mt-10">
+@if (aimList && aimList.length > 0) {
+<div class="mt-10">
   <p class="font-semibold mb-0">Aims:</p>
   <ul class="access-list">
-    <li *ngFor="let aim of aimList" class="">
+    @for (aim of aimList; track aim) {
+    <li class="">
       <div class="access-item">
         <div class="access-details">
           <div>
@@ -10,10 +12,12 @@
           </div>
           <div>
             <span class="text-slate-600 font-semibold">Name</span>:
-            {{ aim.titles["it"] }} | {{ aim.titles["en"] }}
+            {{ aim.titles?.it }} | {{ aim.titles?.en }}
           </div>
         </div>
       </div>
     </li>
+    }
   </ul>
 </div>
+}

@@ -5,6 +5,7 @@ import {
   OnDestroy,
   OnInit,
   Output,
+  ChangeDetectionStrategy,
 } from "@angular/core";
 import {
   FormBuilder,
@@ -16,7 +17,7 @@ import { debounceTime, distinctUntilChanged } from "rxjs/operators";
 import { PaginatorModule } from "primeng/paginator";
 import { Subscription } from "rxjs";
 import { MatIcon } from "@angular/material/icon";
-import { NgClass, NgIf } from "@angular/common";
+import { NgClass } from "@angular/common";
 import { TranslateModule } from "@ngx-translate/core";
 import { UserFormComponent } from "../../user-form/user-form.component";
 import { User } from "../../../../_models";
@@ -28,13 +29,13 @@ import { User } from "../../../../_models";
     PaginatorModule,
     ReactiveFormsModule,
     MatIcon,
-    NgIf,
     NgClass,
     TranslateModule,
     UserFormComponent,
   ],
   standalone: true,
   templateUrl: "./search-source.component.html",
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: "./search-source.component.css",
 })
 export class SearchSourceComponent implements OnInit, OnDestroy {
@@ -43,9 +44,9 @@ export class SearchSourceComponent implements OnInit, OnDestroy {
   @Output() clearFormEvent = new EventEmitter<void>();
   @Output() createSource = new EventEmitter<any>();
 
-  searchForm: FormGroup;
+  searchForm!: FormGroup;
 
-  searchSubscription: Subscription;
+  searchSubscription!: Subscription;
 
   createNewUser = false;
 
@@ -69,10 +70,10 @@ export class SearchSourceComponent implements OnInit, OnDestroy {
   }
 
   search() {
-    const searchCriteria = {};
-    // Extract values from form controls
-    const name = this.searchForm.get("nameSearch").value;
-    const email = this.searchForm.get("emailSearch").value;
+    const searchCriteria: Record<string, any> = {};
+
+    const name = this.searchForm.get("nameSearch")?.value;
+    const email = this.searchForm.get("emailSearch")?.value;
 
     if ((name && name.length >= 3) || (email && email.length >= 3)) {
       if (name) {

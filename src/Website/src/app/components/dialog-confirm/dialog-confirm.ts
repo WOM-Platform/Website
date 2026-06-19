@@ -1,4 +1,4 @@
-import {Component, Inject} from "@angular/core";
+import {Component, Inject, ChangeDetectionStrategy} from "@angular/core";
 import {MAT_DIALOG_DATA} from "@angular/material/dialog";
 
 
@@ -11,6 +11,7 @@ export interface DialogData {
 @Component({
     selector: 'app-dialog-confirm',
     templateUrl: 'dialog-confirm.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class DialogConfirmComponent {

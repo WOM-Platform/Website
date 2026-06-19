@@ -7,14 +7,14 @@ export interface Filter {
 }
 
 export interface CombinedFilters {
-  dateFilters: DateFilter;
-  merchantFilters: MerchantFilter;
-  sourceFilters: InstrumentFilter;
+  dateFilters?: DateFilter;
+  merchantFilters?: MerchantFilter;
+  sourceFilters?: InstrumentFilter;
 }
 
 export interface DateFilter {
-  startDate?: Date;
-  endDate?: Date;
+  startDate: Date | null;
+  endDate: Date | null;
 }
 
 export interface MerchantFilter {

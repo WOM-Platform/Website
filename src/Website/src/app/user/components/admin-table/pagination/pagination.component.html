@@ -1,37 +1,54 @@
-<div class="pagination" *ngIf="totalPagesArray.length > 1">
-    <button *ngIf="!(1 == currentPage)" (click)="changePage(currentPage - 1)" [disabled]="currentPage === 1"
-            class="not-active-pageNumber">Prec
-    </button>
-    <div *ngIf="totalPagesArray <= 10; else manyPages">
-        <div *ngFor="let pageNumber of totalPagesArray">
-            <div *ngIf="currentPage > pageNumber;">
-                <button class="not-active-pageNumber" (click)="changePage(pageNumber)">{{ pageNumber }}</button>
-            </div>
-            <div *ngIf="currentPage === pageNumber">
-                <span class="text-black text-lg">{{ pageNumber }}</span>
-            </div>
-            <div *ngIf="currentPage < pageNumber">
-                <button class="not-active-pageNumber" (click)="changePage(pageNumber)">{{ pageNumber }}</button>
-            </div>
-
-        </div>
+@if (totalPagesArray.length > 1) {
+<div class="pagination">
+  @if (!(1 == currentPage)) {
+  <button
+    (click)="changePage(currentPage - 1)"
+    [disabled]="currentPage === 1"
+    class="not-active-pageNumber"
+  >
+    Prec
+  </button>
+  } @if (pageCount <= 10) {
+  <div>
+    @for (pageNumber of totalPagesArray; track pageNumber) {
+    <div>
+      @if (currentPage > pageNumber) {
+      <div>
+        <button class="not-active-pageNumber" (click)="changePage(pageNumber)">
+          {{ pageNumber }}
+        </button>
+      </div>
+      } @if (currentPage === pageNumber) {
+      <div>
+        <span class="text-black text-lg">{{ pageNumber }}</span>
+      </div>
+      } @if (currentPage < pageNumber) {
+      <div>
+        <button class="not-active-pageNumber" (click)="changePage(pageNumber)">
+          {{ pageNumber }}
+        </button>
+      </div>
+      }
     </div>
-    <ng-template #manyPages>
-        <ng-container *ngFor="let pageNumber of limitedPagesArray">
-            <ng-container *ngIf="pageNumber === '...'">
-                <span class="text-lg">...</span>
-            </ng-container>
-            <ng-container *ngIf="pageNumber !== '...'">
-                <ng-container *ngIf="currentPage !== pageNumber">
-                    <button class="not-active-pageNumber" (click)="changePage(pageNumber)">{{ pageNumber }}</button>
-                </ng-container>
-                <ng-container *ngIf="currentPage === pageNumber">
-                    <span class="text-black text-lg">{{ pageNumber }}</span>
-                </ng-container>
-            </ng-container>
-        </ng-container>
-    </ng-template>
-    <button *ngIf="!(pageCount == currentPage)" (click)="changePage(currentPage + 1)"
-            [disabled]="currentPage === pageCount" class="not-active-pageNumber">Succ
-    </button>
+    }
+  </div>
+  } @else { @for (pageNumber of limitedPagesArray; track $index) { @if
+  (pageNumber === '...') {
+  <span class="text-lg">...</span>
+  } @if (pageNumber !== '...') { @if (currentPage !== pageNumber) {
+  <button class="not-active-pageNumber" (click)="changePage($any(pageNumber))">
+    {{ pageNumber }}
+  </button>
+  } @if (currentPage === pageNumber) {
+  <span class="text-black text-lg">{{ pageNumber }}</span>
+  } } } } @if (!(pageCount == currentPage)) {
+  <button
+    (click)="changePage(currentPage + 1)"
+    [disabled]="currentPage === pageCount"
+    class="not-active-pageNumber"
+  >
+    Succ
+  </button>
+  }
 </div>
+}

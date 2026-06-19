@@ -13,13 +13,11 @@
       [disabled]="isEditing"
     >
       <option value="all" [selected]="selectedAim === ''">Tutti validi</option>
-      <option
-        *ngFor="let aim of aimsList"
-        [value]="aim.code"
-        [selected]="aim.code === selectedAim"
-      >
-        {{ aim.titles.it }}
+      @for (aim of aimsList; track aim) {
+      <option [value]="aim.code" [selected]="aim.code === selectedAim">
+        {{ aim.titles?.it }}
       </option>
+      }
     </select>
   </div>
 </div>

@@ -4,6 +4,7 @@ import {
   HostListener,
   OnInit,
   ViewChild,
+  ChangeDetectionStrategy,
 } from "@angular/core";
 import { Router } from "@angular/router";
 
@@ -21,12 +22,14 @@ import { MatSidenav } from "@angular/material/sidenav";
   selector: "app-nav",
   templateUrl: "./nav.component.html",
   styleUrls: ["./nav.component.css"],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class NavComponent implements OnInit {
-  currentUserLogin: UserMe;
+  currentUserLogin: UserLogin | null = null;
   selectLang = "";
-  TransLang = [];
+
+  TransLang: string[] = [];
   openMenu = false;
   showSubmenu = false;
 
@@ -81,7 +84,7 @@ export class NavComponent implements OnInit {
 
   ngOnInit(): void {
     this.getTransLanguage();
-    this.selectLang = this.translate.getBrowserLang();
+    this.selectLang = this.translate.getBrowserLang() ?? "it";
   }
 
   get isLogged(): boolean {
@@ -89,7 +92,7 @@ export class NavComponent implements OnInit {
   }
 
   logout(): void {
-    const dialogRef = this.dialog.open(LogoutDialogComponent, null);
+    const dialogRef = this.dialog.open(LogoutDialogComponent);
     dialogRef.afterClosed().subscribe(async (result) => {
       if (result) {
         this.userService.logout();
@@ -102,6 +105,7 @@ export class NavComponent implements OnInit {
 @Component({
   selector: "app-nav-logout-dialog",
   templateUrl: "nav-logout-dialog.component.html",
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class LogoutDialogComponent {}

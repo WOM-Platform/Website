@@ -7,6 +7,7 @@ import {
   OnInit,
   Output,
   SimpleChanges,
+  ChangeDetectionStrategy,
 } from "@angular/core";
 import { MatDialog } from "@angular/material/dialog";
 import { UserMe } from "src/app/_models";
@@ -21,36 +22,49 @@ import {
   VoucherByAimDTO,
 } from "src/app/_models/stats";
 import { StatsService } from "src/app/_services";
-import { DialogFilterAimsComponent } from "../../../components/dialog-filter-aims/dialog-filter-aims.component";
 import { SourceService } from "src/app/_services/source.service";
-import { CommonModule } from "@angular/common";
-
-import { PieChartModule } from "@swimlane/ngx-charts";
-import { SharedModule } from "../../../../shared/shared.module";
 import { AnimatedNumberComponent } from "src/app/components/animated-number/animated-number.component";
 import { SnackBarService } from "src/app/_services/snack-bar.service";
 import { FormControl } from "@angular/forms";
 import { EntitySearchComponent } from "../../../components/statistics/entity-search/entity-search.component";
 import { SkeletonLoaderComponent } from "../../../components/skeleton-loader/skeleton-loader.component";
+import { NgClass } from "@angular/common";
+// import { NgxChartsModule, PieChartModule } from "@swimlane/ngx-charts";
 
 @Component({
   selector: "app-generator-statistics-component",
   imports: [
     AnimatedNumberComponent,
-    PieChartModule,
-    SharedModule,
-    CommonModule,
+    NgClass,
+    // NgxChartsModule,
+    // PieChartModule,
     EntitySearchComponent,
     SkeletonLoaderComponent,
   ],
   templateUrl: "./generator-statistics-component.component.html",
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: "./generator-statistics-component.component.css",
 })
 export class GeneratorStatisticsComponentComponent
   implements OnInit, OnChanges
 {
-  @Input() dateFilters: DateFilter;
-  @Input() currentUser: UserMe;
+  @Input() dateFilters: DateFilter = {
+    startDate: null,
+    endDate: null,
+  };
+
+  @Input() currentUser: UserMe = {
+    email: "",
+    id: "",
+    merchants: [],
+    name: "",
+    surname: "",
+    role: "",
+    sources: [],
+    verified: false,
+    token: "",
+  };
+
   @Output() filtersEmit = new EventEmitter<any>();
 
   filters: InstrumentFilter = {
@@ -69,12 +83,14 @@ export class GeneratorStatisticsComponentComponent
 
   generatedDataFetched = [];
 
-  totalCreatedAmount: number;
-  totalEverCreatedAmount: number;
-  totalRedeemedAmount: number;
-  totalEverRedeemedAmount: number;
+  totalCreatedAmount: number = 0;
+  totalEverCreatedAmount: number = 0;
+  totalRedeemedAmount: number = 0;
+  totalEverRedeemedAmount: number = 0;
+
   rankSources: SourceRankDTO[] = [];
-  totalCreatedAmountByAim: VoucherByAimDTO[];
+
+  totalCreatedAmountByAim: VoucherByAimDTO[] = [];
 
   chartCreatedAmountByAim: ChartDataSwimlane[] = [];
   totalGeneratedOverTime: ChartDataSwimlaneSeries[] = [];
@@ -129,11 +145,12 @@ export class GeneratorStatisticsComponentComponent
   }
 
   // On reseize charts
-  onResize(event) {
-    this.view = [event.target.innerWidth / 3, 400];
+  onResize(event: UIEvent) {
+    const windowTarget = event.target as Window;
+    this.view = [windowTarget.innerWidth / 3, 400];
   }
 
-  onDatesSelected(date) {
+  onDatesSelected(date: DateFilter) {
     this.isGeneratedDataReady = false;
 
     this.loadData();
@@ -220,7 +237,7 @@ export class GeneratorStatisticsComponentComponent
     );
   }
 
-  onSelect(event): void {
+  onSelect(event: any): void {
     console.log(event);
   }
 

@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component, ChangeDetectionStrategy } from "@angular/core";
 import { TranslateService } from "@ngx-translate/core";
 import { NetworkService } from "./_services/network.service";
 import { Meta, Title } from "@angular/platform-browser";
@@ -7,10 +7,11 @@ import { Meta, Title } from "@angular/platform-browser";
   selector: "app-root",
   templateUrl: "./app.component.html",
   styleUrls: ["./app.component.css"],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class AppComponent {
-  isOnline: boolean;
+  isOnline: boolean = false;
 
   constructor(
     private networkService: NetworkService,
@@ -41,8 +42,9 @@ export class AppComponent {
       this.isOnline = online;
     });
 
-    if (translate.getBrowserLang()) {
-      translate.use(translate.getBrowserLang());
+    const browserLang = translate.getBrowserLang();
+    if (browserLang) {
+      translate.use(browserLang);
     }
   }
 }

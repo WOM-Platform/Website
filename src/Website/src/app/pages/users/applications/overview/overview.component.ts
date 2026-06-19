@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component, ChangeDetectionStrategy } from "@angular/core";
 import { TranslateModule } from "@ngx-translate/core";
 
 @Component({
@@ -6,6 +6,7 @@ import { TranslateModule } from "@ngx-translate/core";
   templateUrl: "./overview.component.html",
   styleUrls: ["./overview.component.css"],
   standalone: true,
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [TranslateModule],
 })
 export class ApplicationsOverviewComponent {}
