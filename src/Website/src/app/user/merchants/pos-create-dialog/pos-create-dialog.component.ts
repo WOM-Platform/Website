@@ -23,13 +23,14 @@ import { PosService } from "../../../_services";
 import { StorageService } from "../../../_services/storage.service";
 import { first } from "rxjs/operators";
 import { Pos, PosRegistration } from "../../../_models";
-import MapTypeId = google.maps.MapTypeId;
 import { GoogleMap, GoogleMapsModule } from "@angular/google-maps";
 import { Subject } from "rxjs";
 import { TranslateModule } from "@ngx-translate/core";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatCheckboxModule } from "@angular/material/checkbox";
 import { MatTooltipModule } from "@angular/material/tooltip";
+import { GoogleMapsLoaderService } from "src/app/_services/google-maps-loader.service";
+import { environment } from "src/environments/environment";
 
 @Component({
   selector: "app-pos-create-dialog",
@@ -58,7 +59,7 @@ export class PosCreateDialogComponent implements OnInit {
   options: google.maps.MapOptions = {
     center: { lat: 45.788, lng: 12.5 },
     zoom: 5,
-    mapTypeId: MapTypeId.ROADMAP,
+    mapTypeId: "roadmap",
   };
 
   newPos: FormGroup = new FormGroup({});
@@ -78,10 +79,13 @@ export class PosCreateDialogComponent implements OnInit {
     public dialogRef: MatDialogRef<PosCreateDialogComponent>,
     private fb: FormBuilder,
     private posService: PosService,
-    private storageService: StorageService
+    private storageService: StorageService,
+    private mapsLoader: GoogleMapsLoaderService
   ) {}
 
-  ngOnInit() {
+  async ngOnInit() {
+    await this.mapsLoader.load(environment.googleMapsApiKey);
+
     this.newPos = this.fb.group({
       name: ["", [Validators.required, Validators.minLength(4)]],
       isActive: [false],
@@ -199,18 +203,22 @@ export class PosCreateDialogComponent implements OnInit {
   }
 
   setMarker(latLng: google.maps.LatLng): void {
+    if (!window.google?.maps) return;
+
     if (!this.marker) {
       this.marker = new google.maps.Marker({
         position: latLng,
         map: this.map.googleMap,
         draggable: true,
       });
+
       google.maps.event.addListener(this.marker, "dragend", () => {
         this.markerLocation();
       });
     } else {
       this.marker.setPosition(latLng);
     }
+
     this.markerLocation();
   }
 

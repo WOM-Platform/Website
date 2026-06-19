@@ -20,6 +20,8 @@ import { TranslateModule } from "@ngx-translate/core";
 import { StoreLogosComponent } from "src/app/components/store-logos/store-logos.component";
 
 import { PosWithOffers } from "src/app/_models/offer";
+import { GoogleMapsLoaderService } from "src/app/_services/google-maps-loader.service";
+import { environment } from "src/environments/environment";
 
 @Component({
   selector: "app-merchant",
@@ -68,7 +70,10 @@ export class MerchantComponent implements OnInit, AfterViewInit {
     minZoom: 5,
   };
 
-  constructor(private mapService: MapService) {}
+  constructor(
+    private mapService: MapService,
+    private mapsLoader: GoogleMapsLoaderService
+  ) {}
 
   ngOnInit(): void {
     navigator.geolocation.getCurrentPosition(
@@ -86,33 +91,30 @@ export class MerchantComponent implements OnInit, AfterViewInit {
     );
   }
 
-  ngAfterViewInit(): void {
+  async ngAfterViewInit(): Promise<void> {
+    await this.mapsLoader.load(environment.googleMapsApiKey);
+
     this.searchBox = new google.maps.places.SearchBox(
       this.searchField.nativeElement
     );
 
     this.searchBox.addListener("places_changed", () => {
       const places = this.searchBox.getPlaces();
-
-      if (!places || places.length === 0) {
-        return;
-      }
-
-      if (typeof google === "undefined") return;
+      if (!places || places.length === 0) return;
 
       const bounds = new google.maps.LatLngBounds();
+
       places.forEach((place) => {
-        if (!place.geometry || !place.geometry.location) {
-          return;
-        }
+        if (!place.geometry?.location) return;
+
         if (place.geometry.viewport) {
-          // Only geocodes have viewport
           bounds.union(place.geometry.viewport);
         } else {
           bounds.extend(place.geometry.location);
         }
       });
-      this.map.fitBounds(bounds);
+
+      this.map.googleMap?.fitBounds(bounds);
       this.boundsChanged();
     });
 
@@ -120,7 +122,6 @@ export class MerchantComponent implements OnInit, AfterViewInit {
       if (!this.mapLoaded) {
         setTimeout(() => {
           const currentZoom = this.map.googleMap?.getZoom();
-
           if (currentZoom != null) {
             this.map.googleMap?.setZoom(currentZoom - 1);
           }

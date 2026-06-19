@@ -10,4 +10,5 @@ export const environment = {
   noreplyEmail: "noreply@wom.social",
   baseEmail: "info@digit.srl",
   sentryDsn: "#SENTRYDSN#",
+  googleMapsApiKey: "#GOOGLEMAPSAPIKEY#",
 };

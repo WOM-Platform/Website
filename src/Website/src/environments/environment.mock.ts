@@ -7,4 +7,5 @@ export const environment = {
   i18n: "1.0.2",
   noreplyEmail: "noreply@wom.social",
   baseEmail: "info@digit.srl",
+  googleMapsApiKey: "#GOOGLEMAPSAPIKEY#",
 };
