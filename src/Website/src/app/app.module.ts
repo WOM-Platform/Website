@@ -87,6 +87,7 @@ import { CarouselComponent } from "./components/carousel/carousel.component";
 import { SmallImagesCarouselComponent } from "./components/small-images-carousel/small-images-carousel.component";
 import { CookieBannerComponent } from "./components/cookie-banner/cookie-banner.component";
 import { Button } from "primeng/button";
+import { GoogleMapsLoaderService } from "./_services/google-maps-loader.service";
 
 // AoT requires an exported function for factories
 export const createTranslateLoader = (http: HttpClient) =>
@@ -106,6 +107,10 @@ export function translateFactory(translate: TranslateService): any {
       });
     });
   };
+}
+
+export function initMaps(loader: GoogleMapsLoaderService) {
+  return () => loader.load(environment.googleMapsApiKey);
 }
 
 export const isMock = environment.mock;
@@ -207,16 +212,25 @@ const httpInterceptorProviders = environment.mock
   providers: [
     {
       provide: APP_INITIALIZER,
+      useFactory: initMaps,
+      deps: [GoogleMapsLoaderService],
+      multi: true,
+    },
+
+    {
+      provide: APP_INITIALIZER,
       useFactory: translateFactory,
       deps: [TranslateService],
       multi: true,
     },
+
     {
       provide: APP_INITIALIZER,
       useFactory: () => () => {},
       deps: [Sentry.TraceService],
       multi: true,
     },
+
     provideAnimationsAsync(),
     ...httpInterceptorProviders,
     CookieService,

@@ -18,7 +18,6 @@ import {
   UntypedFormGroup,
   Validators,
 } from "@angular/forms";
-import MapTypeId = google.maps.MapTypeId;
 import { GoogleMap, GoogleMapsModule } from "@angular/google-maps";
 import { Pos } from "../../../../_models";
 import { debounceTime, switchMap, takeUntil } from "rxjs/operators";
@@ -32,6 +31,8 @@ import { PosService } from "../../../../_services";
 
 import { MatTooltipModule } from "@angular/material/tooltip";
 import { SnackBarService } from "../../../../_services/snack-bar.service";
+import { GoogleMapsLoaderService } from "src/app/_services/google-maps-loader.service";
+import { environment } from "src/environments/environment";
 
 @Component({
   selector: "app-forms-pos",
@@ -71,7 +72,7 @@ export class PosFormComponent implements OnInit, AfterViewInit, OnDestroy {
   options: google.maps.MapOptions = {
     center: { lat: 45.788, lng: 12.5 },
     zoom: 5,
-    mapTypeId: MapTypeId.ROADMAP,
+    mapTypeId: "roadmap",
   };
 
   constructor(
@@ -79,7 +80,8 @@ export class PosFormComponent implements OnInit, AfterViewInit, OnDestroy {
     private fb: UntypedFormBuilder,
     private posService: PosService,
     private snackBarService: SnackBarService,
-    private storageService: StorageService
+    private storageService: StorageService,
+    private mapsLoader: GoogleMapsLoaderService
   ) {}
 
   ngOnInit(): any {
@@ -158,31 +160,31 @@ export class PosFormComponent implements OnInit, AfterViewInit, OnDestroy {
     }
   }
 
-  ngAfterViewInit() {
+  async ngAfterViewInit() {
+    await this.mapsLoader.load(environment.googleMapsApiKey);
+
     const searchBox = new google.maps.places.SearchBox(
       this.searchField.nativeElement
     );
 
     searchBox.addListener("places_changed", () => {
       const places = searchBox.getPlaces();
-      if (!places || places.length === 0) {
-        return;
-      }
-      if (!google) return;
+      if (!places || places.length === 0) return;
 
       const bounds = new google.maps.LatLngBounds();
+
       places.forEach((place) => {
-        if (!place.geometry || !place.geometry.location) {
-          return;
-        }
+        if (!place.geometry?.location) return;
+
         if (place.geometry.viewport) {
-          // Only geocodes have viewport
           bounds.union(place.geometry.viewport);
         } else {
           bounds.extend(place.geometry.location);
         }
+
         this.setMarker(place.geometry.location);
       });
+
       this.map.fitBounds(bounds);
     });
 
