@@ -66,6 +66,12 @@ export class AimsService {
     }
   }
 
+  fetchAimsForInstrument(aimsEditing: AimEditing): Observable<Aim[]> {
+    return this.getAll().pipe(
+      map((aimList) => this.findMatchingCodes(aimList, aimsEditing.enabled))
+    );
+  }
+
   findMatchingCodes(aimList: Aim[], letters: string[]): Aim[] {
     return aimList.filter((aim) => letters.includes(aim.code));
   }

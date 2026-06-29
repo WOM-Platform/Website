@@ -4,7 +4,7 @@
     <app-create-button
       [label]="'Nuovo Merchant'"
       (clicked)="onCreateMerchant()"
-      />
+    />
     <button class="btn btn-primary" (click)="downloadCsv()">
       <i class="fa fa-download"></i> Scarica Report CSV
     </button>
@@ -14,14 +14,14 @@
   <app-filters
     [itemsPage]="itemsPerPage ? itemsPerPage : '10'"
     (filterEmit)="filterUpdate($event)"
-    />
+  />
   <div class="mt-4 flex justify-end items-center gap-3">
     Stato Merchant:
     <select
       class="btn border rounded px-3 py-2"
       [(ngModel)]="statusFilter"
       (change)="onStatusFilterChange()"
-      >
+    >
       <option value="all">Tutti</option>
       <option value="enabledOnly">Attivi</option>
       <option value="disabledOnly">Disattivati</option>
@@ -30,21 +30,24 @@
 </div>
 
 @if (merchantsList) {
-  <div>
-    <app-admin-table
-      [tableData]="merchantsList"
-      [tableColumns]="merchantsTableColumns"
-      [isActions]="true"
-      [currentPage]="currentPage"
-      [itemsPerPage]="itemsPerPage"
-      [totalItems]="totalItems"
-      [pageCount]="pageCount"
-      [hasNext]="hasNext"
-      [hasPrev]="hasPrev"
-      (viewItem)="onViewMerchant($event)"
-      (deleteItem)="onDeleteMerchant($event)"
-      (editItem)="onEditMerchant($event)"
-      (pageChanged)="onPageChange($event)"
-    ></app-admin-table>
-  </div>
+<div>
+  <app-admin-table
+    [tableData]="merchantsList"
+    [tableColumns]="merchantsTableColumns"
+    [isActions]="true"
+    [currentPage]="currentPage"
+    [itemsPerPage]="itemsPerPage"
+    [totalItems]="totalItems"
+    [pageCount]="pageCount"
+    [hasNext]="hasNext"
+    [hasPrev]="hasPrev"
+    [showViewAction]="true"
+    [showEditAction]="true"
+    [showDeleteAction]="true"
+    (viewItem)="onViewMerchant($event)"
+    (deleteItem)="onDeleteMerchant($event)"
+    (editItem)="onEditMerchant($event)"
+    (pageChanged)="onPageChange($event)"
+  ></app-admin-table>
+</div>
 }

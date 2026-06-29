@@ -10,7 +10,7 @@ import {
 } from "@angular/core";
 import { FormBuilder, FormGroup, Validators, FormArray } from "@angular/forms";
 import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material/dialog";
-import { Subscription, Observable, of } from "rxjs";
+import { Subscription, Observable, of, firstValueFrom } from "rxjs";
 import { Aim, AimEditing } from "../../../_models";
 import { AimsService } from "../../../_services";
 import { switchMap } from "rxjs/operators";
@@ -82,18 +82,6 @@ export class DialogCreateSourceComponent
     }
   }
 
-  fetchAimsForInstrument(aimsEditing: AimEditing): Observable<Aim[]> {
-    return this.aimsService.getAll().pipe(
-      switchMap((aimList) => {
-        const aimsView = this.aimsService.findMatchingCodes(
-          aimList,
-          aimsEditing.enabled
-        );
-        return of(aimsView);
-      })
-    );
-  }
-
   onNoClick(): void {
     this.dialogRef.close();
   }
@@ -107,20 +95,24 @@ export class DialogCreateSourceComponent
     }
   }
 
-  async updateAimsArray(enabledAims: any[]) {
+  async updateAimsArray(enabledAims: string[]) {
     const aimsArray = this.newSource.get("aims")?.get("enabled") as FormArray;
     if (!aimsArray) return;
 
     while (aimsArray.length) {
       aimsArray.removeAt(0);
     }
+
     enabledAims.forEach((aim) => aimsArray.push(this.fb.control(aim)));
 
     try {
-      const aimsView = await this.fetchAimsForInstrument({
-        enabled: enabledAims,
-        enableAll: false,
-      }).toPromise();
+      const aimsView = await firstValueFrom(
+        this.aimsService.fetchAimsForInstrument({
+          enabled: enabledAims,
+          enableAll: false,
+        })
+      );
+
       this.aimList = aimsView || [];
       this.cd.detectChanges();
     } catch (err) {

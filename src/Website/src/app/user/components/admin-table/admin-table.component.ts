@@ -19,6 +19,11 @@ import { SharedModule } from "../../../shared/shared.module";
   styleUrl: "./admin-table.component.css",
 })
 export class AdminTableComponent {
+  @Input() showViewAction = false;
+  @Input() showEditAction = false;
+  @Input() showDeleteAction = false;
+  @Input() showGenerateVoucherAction = false;
+
   @Input() tableData: any[] = [];
   @Input() tableColumns: any[] = [];
   @Input() isActions: boolean = false;
@@ -35,6 +40,7 @@ export class AdminTableComponent {
   @Output() deleteItem: EventEmitter<any> = new EventEmitter<any>();
   @Output() viewItem = new EventEmitter<any>();
   @Output() editItem = new EventEmitter<any>();
+  @Output() generateVoucher = new EventEmitter<any>();
 
   onViewItem(item: any) {
     this.viewItem.emit(item);
@@ -50,5 +56,9 @@ export class AdminTableComponent {
 
   onPageChange(page: number) {
     this.pageChanged.emit(page);
+  }
+
+  onGenerateVoucher(id: any) {
+    this.generateVoucher.emit(id);
   }
 }

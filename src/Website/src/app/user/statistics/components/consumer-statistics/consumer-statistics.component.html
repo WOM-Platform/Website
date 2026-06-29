@@ -106,26 +106,17 @@
     <div style="display: block; width: 100%; max-width: 480px">
       <div>
         <!-- Bar Chart for Consumption over Time -->
-        @if (totalConsumedOverTime && totalConsumedOverTime.length > 0 &&
-        consumedStats.consumedInPeriod > 0) {
+        @if (isConsumedDataReady && consumedStats.consumedInPeriod > 0) {
         <div class="card-stat">
           <p class="font-semibold">Consumo nel tempo</p>
 
-          <!-- <ngx-charts-bar-vertical
-            [view]="view"
-            [scheme]="blueWomScheme"
-            [results]="totalConsumedOverTime"
-            [gradient]="false"
-            [xAxis]="true"
-            [yAxis]="true"
-            [legend]="false"
-            [showXAxisLabel]="true"
-            [showYAxisLabel]="true"
-            [xAxisLabel]="'Data'"
-            [yAxisLabel]="'Quantità'"
-            (select)="onSelect($event)"
-          >
-          </ngx-charts-bar-vertical> -->
+          <div style="display: block; height: 300px">
+            <canvas
+              baseChart
+              [data]="totalConsumedOverTime"
+              [type]="'bar'"
+            ></canvas>
+          </div>
         </div>
         }
       </div>

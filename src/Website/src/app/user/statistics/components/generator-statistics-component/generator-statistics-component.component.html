@@ -60,44 +60,20 @@
     @if (totalCreatedAmount && totalCreatedAmount > 0) {
 
     <p class="mt-6 font-semibold">Generati e riscossi nel tempo</p>
-    <!-- <ngx-charts-bar-vertical-2d
-      [view]="view"
-      [scheme]="blueAndYellowWom"
-      [results]="totalGeneratedOverTime"
-      [gradient]="false"
-      [xAxis]="true"
-      [yAxis]="true"
-      [showXAxisLabel]="true"
-      [showYAxisLabel]="true"
-      [xAxisLabel]="'Data'"
-      [yAxisLabel]="'Quantità'"
-      (select)="onSelect($event)"
-    >
-    </ngx-charts-bar-vertical-2d> -->
+    <div style="display: block">
+      <canvas baseChart [data]="barChartData" [type]="'bar'"></canvas>
+    </div>
     }
   </div>
 
   <!-- Pie Chart by Aim -->
   <div class="card-stat">
-    @if (chartCreatedAmountByAim && chartCreatedAmountByAim.length > 0) {
+    @if (pieChartData) {
 
     <p class="mt-2 font-semibold">Divisi per AIM:</p>
-    <!-- <ngx-charts-pie-chart
-      [view]="pieView"
-      [scheme]="colorscheme"
-      [results]="chartCreatedAmountByAim"
-      [labels]="true"
-      [maxLabelLength]="60"
-    >
-      <ng-template #tooltipTemplate let-model="model">
-        <div class="p-2 bg-slate-800 text-white rounded shadow-md text-xs">
-          <p class="font-semibold">{{ model.name }}</p>
-          <p>
-            Valore: <span class="font-bold">{{ model.value }}</span>
-          </p>
-        </div>
-      </ng-template>
-    </ngx-charts-pie-chart> -->
+    <div style="display: block">
+      <canvas baseChart [data]="pieChartData" [type]="'pie'"></canvas>
+    </div>
     }
   </div>
 </div>
@@ -131,22 +107,18 @@
     </h3>
 
     <ul class="list-disc pl-5 space-y-2 h-[450px] overflow-y-auto">
-      <li
-        class="text-base flex flex-col gap-1"
-        *ngFor="let rank of rankSources"
-      >
+      @for (rank of rankSources; track $index) {
+      <li class="text-base flex flex-col gap-1">
         <!-- Rank Number + Trophy (On New Line) -->
         <div class="flex items-center gap-2">
-          <span *ngIf="rank.rank === 1">
-            1) <i class="fa-solid fa-trophy text-yellow-500"></i>
-          </span>
-          <span *ngIf="rank.rank === 2">
-            2) <i class="fa-solid fa-trophy text-gray-400"></i>
-          </span>
-          <span *ngIf="rank.rank === 3">
-            3) <i class="fa-solid fa-trophy text-amber-600"></i>
-          </span>
-          <span *ngIf="rank.rank > 3">{{ rank.rank }}) </span>
+          @if(rank.rank === 1) {
+          <span> 1) <i class="fa-solid fa-trophy text-yellow-500"></i> </span>
+          } @if(rank.rank === 2) {
+          <span> 2) <i class="fa-solid fa-trophy text-gray-400"></i> </span>
+          } @if(rank.rank === 3) {
+          <span> 3) <i class="fa-solid fa-trophy text-amber-600"></i> </span>
+          } @if (rank.rank > 3) {
+          <span>{{ rank.rank }}) </span>
           <span
             class="text-lg font-semibold"
             [ngClass]="{
@@ -157,6 +129,7 @@
           >
             {{ rank.name }}:
           </span>
+          }
           <div>
             <strong class="text-gray-800">{{
               rank.totalGeneratedAmount
@@ -170,6 +143,7 @@
           </div>
         </div>
       </li>
+      }
     </ul>
   </div>
   }

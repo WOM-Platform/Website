@@ -111,30 +111,22 @@ export class MyInstrumentsCollectionComponent implements OnInit, OnDestroy {
     });
   }
 
-  fetchAimsForInstrument(instrument: InstrumentEditing): Observable<Aim[]> {
-    this.uiInstruments = this.currentUser.sources;
+  fetchAimsForInstrument(instrument: InstrumentEditing) {
     this.subscriptions.push(
-      this.aimsService.getAll().subscribe({
-        next: (aimList: Aim[]) => {
-          if (instrument.aims.enabled) {
-            const matchingAims: Aim[] = this.aimsService.findMatchingCodes(
-              aimList,
-              instrument.aims.enabled
-            );
+      this.aimsService.fetchAimsForInstrument(instrument.aims).subscribe({
+        next: (matchingAims: Aim[]) => {
+          const instrumentUI = this.uiInstruments.find(
+            (ui) => ui.id === instrument.id
+          );
 
-            const instrumentUI = this.uiInstruments.find(
-              (uiInstrument) => uiInstrument.id === instrument.id
-            );
-            if (instrumentUI) {
-              instrumentUI.aims = matchingAims;
-              this.cd.detectChanges();
-            }
+          if (instrumentUI) {
+            instrumentUI.aims = matchingAims;
+            this.cd.detectChanges();
           }
         },
         error: (err) => console.error(err),
       })
     );
-    return of([]); // returning an observable to comply with the method signature
   }
 
   fetchAccessListForInstrument(instrument: InstrumentEditing) {
