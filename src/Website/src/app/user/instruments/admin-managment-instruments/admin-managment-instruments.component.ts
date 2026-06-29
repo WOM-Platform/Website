@@ -16,6 +16,7 @@ import { LoadingService } from "../../../_services/loading.service";
 import { StorageService } from "../../../_services/storage.service";
 import { UserService } from "src/app/_services";
 import { SnackBarService } from "../../../_services/snack-bar.service";
+import { DialogGenerateVouchersComponent } from "../../components/dialog-generate-vouchers/dialog-generate-vouchers.component";
 
 @Component({
   selector: "app-admin-managment-instruments",
@@ -350,5 +351,19 @@ export class AdminManagmentInstrumentsComponent implements OnInit, OnDestroy {
       this.searchParameters = filter.search;
     }
     this.getSourcesList();
+  }
+
+  onGenerateVouchers(instrumentId: string) {
+    const dialogRef = this.matDialog.open(DialogGenerateVouchersComponent, {
+      width: "600px",
+      maxHeight: "90vh",
+      data: instrumentId,
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.snackBarService.openSnackBar("Vouchers created");
+      }
+    });
   }
 }

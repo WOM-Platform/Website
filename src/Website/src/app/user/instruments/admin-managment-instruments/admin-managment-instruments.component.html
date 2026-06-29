@@ -3,29 +3,34 @@
   <app-create-button
     [label]="'Nuovo instrument'"
     (clicked)="onCreateSource()"
-    />
+  />
 </div>
 
 <app-filters
   [itemsPage]="itemsPerPage ? itemsPerPage : '10'"
   (filterEmit)="filterUpdate($event)"
-  />
+/>
 @if (instrumentsList) {
-  <div>
-    <app-admin-table
-      [tableData]="instrumentsList"
-      [tableColumns]="instrumentsTableColumns"
-      [isActions]="true"
-      [currentPage]="currentPage"
-      [itemsPerPage]="itemsPerPage"
-      [totalItems]="totalItems"
-      [pageCount]="pageCount"
-      [hasNext]="hasNext"
-      [hasPrev]="hasPrev"
-      (viewItem)="onViewSource($event)"
-      (deleteItem)="onDeleteSource($event)"
-      (editItem)="onEditSource($event)"
-      (pageChanged)="onPageChange($event)"
-    ></app-admin-table>
-  </div>
+<div>
+  <app-admin-table
+    [tableData]="instrumentsList"
+    [tableColumns]="instrumentsTableColumns"
+    [isActions]="true"
+    [currentPage]="currentPage"
+    [itemsPerPage]="itemsPerPage"
+    [totalItems]="totalItems"
+    [pageCount]="pageCount"
+    [hasNext]="hasNext"
+    [hasPrev]="hasPrev"
+    [showViewAction]="true"
+    [showEditAction]="true"
+    [showDeleteAction]="true"
+    [showGenerateVoucherAction]="true"
+    (viewItem)="onViewSource($event)"
+    (deleteItem)="onDeleteSource($event)"
+    (editItem)="onEditSource($event)"
+    (generateVoucher)="onGenerateVouchers($event)"
+    (pageChanged)="onPageChange($event)"
+  ></app-admin-table>
+</div>
 }

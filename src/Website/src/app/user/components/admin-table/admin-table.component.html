@@ -39,21 +39,29 @@
         } @if (isActions) {
         <td>
           <div class="action-cell">
-            @if (viewItem.observers.length > 0) {
+            @if (showViewAction) {
             <button
               class="icon-button-bg hover:bg-slate-300"
               (click)="onViewItem(item)"
             >
               <mat-icon>visibility</mat-icon>
             </button>
-            } @if (editItem.observers.length > 0) {
+            } @if (showEditAction) {
             <button
               class="icon-button-bg hover:bg-blue-200"
               (click)="onEditItem(item)"
             >
               <mat-icon class="text-blue-500">edit</mat-icon>
             </button>
-            } @if (deleteItem.observers.length > 0) {
+            } @if (showGenerateVoucherAction) {
+
+            <button
+              class="icon-button-bg hover:bg-green-200"
+              (click)="onGenerateVoucher(item.id)"
+            >
+              <mat-icon class="text-green-500">card_giftcard</mat-icon>
+            </button>
+            } @if (showDeleteAction) {
             <button
               class="icon-button-bg hover:bg-red-200"
               (click)="onDeleteItem(item)"

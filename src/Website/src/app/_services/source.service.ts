@@ -6,6 +6,7 @@ import { from, Observable, of, throwError } from "rxjs";
 import { AimEditing } from "../_models";
 import { Instrument, InstrumentEditing } from "../_models/instrument";
 import { StorageService } from "./storage.service";
+import { VoucherRequest } from "../_models/voucher";
 
 @Injectable({
   providedIn: "root",
@@ -78,10 +79,10 @@ export class SourceService {
     );
   }
 
-  getInstrument(idInstrument: string): Observable<Instrument> {
+  getInstrument(idInstrument: string): Observable<InstrumentEditing> {
     const url = `${this.localUrlV1}${idInstrument}/details`;
-    return this.http.get<Instrument>(url).pipe(
-      map((res: Instrument) => res),
+    return this.http.get<InstrumentEditing>(url).pipe(
+      map((res: InstrumentEditing) => res),
       catchError((error) => {
         console.error("Error in getInstrument:", error);
         return throwError(error);
@@ -175,6 +176,20 @@ export class SourceService {
   ): Observable<any> {
     return this.http.delete(
       `${this.localUrlV1}${idInstrument}/access/${userId}`
+    );
+  }
+
+  generateVouchers(
+    idInstrument: string,
+    vouchers: VoucherRequest
+  ): Observable<any> {
+    const url = `${this.localUrlV1}${idInstrument}/vouchers/admin`;
+    return this.http.post(url, vouchers).pipe(
+      map((res) => res),
+      catchError((err) => {
+        console.error("Error generating vouchers", err);
+        return throwError(err);
+      })
     );
   }
 }

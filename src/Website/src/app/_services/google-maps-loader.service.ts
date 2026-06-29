@@ -19,7 +19,7 @@ export class GoogleMapsLoaderService {
     this.scriptLoadingPromise = new Promise((resolve, reject) => {
       const script = document.createElement("script");
 
-      script.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&libraries=geometry,places&language=it&loading=async`;
+      script.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&libraries=places,geometry&language=it`;
       script.async = true;
       script.defer = true;
 

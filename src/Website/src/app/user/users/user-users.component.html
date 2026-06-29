@@ -7,23 +7,26 @@
   <app-filters
     [itemsPage]="itemsPerPage ? itemsPerPage : '10'"
     (filterEmit)="filterUpdate($event)"
-    />
+  />
   @if (userList) {
-    <div>
-      <app-admin-table
-        [tableData]="userList"
-        [tableColumns]="usersTableColumns"
-        [isActions]="true"
-        [currentPage]="currentPage"
-        [itemsPerPage]="itemsPerPage"
-        [totalItems]="totalItems"
-        [pageCount]="pageCount"
-        [hasNext]="hasNext"
-        [hasPrev]="hasPrev"
-        (deleteItem)="onDeleteUser($event)"
-        (editItem)="onEditUser($event)"
-        (pageChanged)="onPageChange($event)"
-      ></app-admin-table>
-    </div>
+  <div>
+    <app-admin-table
+      [tableData]="userList"
+      [tableColumns]="usersTableColumns"
+      [isActions]="true"
+      [currentPage]="currentPage"
+      [itemsPerPage]="itemsPerPage"
+      [totalItems]="totalItems"
+      [pageCount]="pageCount"
+      [hasNext]="hasNext"
+      [hasPrev]="hasPrev"
+      [showViewAction]="true"
+      [showEditAction]="true"
+      [showDeleteAction]="true"
+      (deleteItem)="onDeleteUser($event)"
+      (editItem)="onEditUser($event)"
+      (pageChanged)="onPageChange($event)"
+    ></app-admin-table>
+  </div>
   }
 </div>

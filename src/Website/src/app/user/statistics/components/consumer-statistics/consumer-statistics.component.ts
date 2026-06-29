@@ -15,10 +15,7 @@ import { tap } from "rxjs";
 import { Merchant, UserMe } from "src/app/_models";
 import { MerchantFilter, DateFilter } from "src/app/_models/filter";
 import { LocationParams } from "src/app/_models/LocationParams";
-import {
-  ChartDataSwimlane,
-  ConsumedStatsApiResponse,
-} from "src/app/_models/stats";
+import { ConsumedStatsApiResponse } from "src/app/_models/stats";
 import { StatsService } from "src/app/_services";
 import { AnimatedNumberComponent } from "src/app/components/animated-number/animated-number.component";
 import { EntitySearchComponent } from "src/app/user/components/statistics/entity-search/entity-search.component";
@@ -27,13 +24,14 @@ import { SnackBarService } from "src/app/_services/snack-bar.service";
 import { EntitySearchUserComponent } from "../../../components/statistics/entity-search-user/entity-search-user.component";
 import { animate, style, transition, trigger } from "@angular/animations";
 import { NgxSkeletonLoaderModule } from "ngx-skeleton-loader";
+import { BaseChartDirective, NgChartsModule } from "ng2-charts";
+import { ChartConfiguration } from "chart.js";
 
 @Component({
   selector: "app-consumer-statistics",
   imports: [
     AnimatedNumberComponent,
-    // PieChartModule,
-    // NgxChartsModule,
+    NgChartsModule,
     NgxSkeletonLoaderModule,
     NgClass,
     CommonModule,
@@ -58,6 +56,7 @@ import { NgxSkeletonLoaderModule } from "ngx-skeleton-loader";
       ]),
     ]),
   ],
+  standalone: true,
   templateUrl: "./consumer-statistics.component.html",
   changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: "./consumer-statistics.component.css",
@@ -90,7 +89,30 @@ export class ConsumerStatisticsComponent implements OnInit, OnChanges {
   };
 
   availableVouchers: number = 0;
-  totalConsumedOverTime: ChartDataSwimlane[] = [];
+
+  barChartData = {
+    labels: [] as string[],
+    datasets: [
+      {
+        label: "Generated",
+        data: [] as number[],
+      },
+      {
+        label: "Redeemed",
+        data: [] as number[],
+      },
+    ],
+  };
+  totalConsumedOverTime = {
+    labels: [] as string[],
+    datasets: [
+      {
+        label: "Consumed",
+        data: [] as number[],
+      },
+    ],
+  };
+
   isConsumedDataReady = false;
   offerConsumedVouchers: any;
 
@@ -223,11 +245,17 @@ export class ConsumerStatisticsComponent implements OnInit, OnChanges {
           };
 
           // Get total consumed over time
-          this.totalConsumedOverTime =
-            this.consumedStats.totalConsumedOverTime.map((data) => ({
-              name: data.date,
-              value: data.total,
-            }));
+          const series = data.totalConsumedOverTime ?? [];
+
+          this.totalConsumedOverTime = {
+            labels: series.map((x) => x.date),
+            datasets: [
+              {
+                label: "Consumed",
+                data: series.map((x) => Number(x.total ?? 0)),
+              },
+            ],
+          };
           // All requests are done, now set isConsumedDataReady to true
           this.isConsumedDataReady = true;
           this.cdr.detectChanges();
