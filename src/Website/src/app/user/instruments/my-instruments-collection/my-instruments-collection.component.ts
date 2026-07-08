@@ -1,11 +1,4 @@
 import {
-  trigger,
-  state,
-  style,
-  transition,
-  animate,
-} from "@angular/animations";
-import {
   ChangeDetectorRef,
   Component,
   OnInit,
@@ -23,32 +16,32 @@ import { Observable, of, Subscription } from "rxjs";
   selector: "app-my-instruments-collection",
   templateUrl: "./my-instruments-collection.component.html",
   styleUrls: ["./my-instruments-collection.component.css"],
-  animations: [
-    trigger("slideToggle", [
-      state(
-        "open",
-        style({
-          height: "*",
-          opacity: 1,
-          overflow: "hidden",
-        })
-      ),
-      state(
-        "closed",
-        style({
-          height: "0px",
-          opacity: 0,
-          overflow: "hidden",
-        })
-      ),
-      transition("open <=> closed", [animate("300ms ease-in-out")]),
-    ]),
-    trigger("rotateArrow", [
-      state("open", style({ transform: "rotate(180deg)" })),
-      state("close", style({ transform: "rotate(0deg)" })),
-      transition("open <=> closed", [animate("300ms ease-in-out")]),
-    ]),
-  ],
+  // animations: [
+  //   trigger("slideToggle", [
+  //     state(
+  //       "open",
+  //       style({
+  //         height: "*",
+  //         opacity: 1,
+  //         overflow: "hidden",
+  //       })
+  //     ),
+  //     state(
+  //       "closed",
+  //       style({
+  //         height: "0px",
+  //         opacity: 0,
+  //         overflow: "hidden",
+  //       })
+  //     ),
+  //     transition("open <=> closed", [animate("300ms ease-in-out")]),
+  //   ]),
+  //   trigger("rotateArrow", [
+  //     state("open", style({ transform: "rotate(180deg)" })),
+  //     state("close", style({ transform: "rotate(0deg)" })),
+  //     transition("open <=> closed", [animate("300ms ease-in-out")]),
+  //   ]),
+  // ],
   changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })

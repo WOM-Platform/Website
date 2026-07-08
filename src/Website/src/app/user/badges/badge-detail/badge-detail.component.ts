@@ -1,11 +1,4 @@
 import { Component, OnInit, ChangeDetectionStrategy } from "@angular/core";
-import {
-  animate,
-  state,
-  style,
-  transition,
-  trigger,
-} from "@angular/animations";
 import { ActivatedRoute, Router } from "@angular/router";
 
 import {
@@ -28,29 +21,6 @@ import { SimpleFilterComponent } from "../../components/simple-filter/simple-fil
   templateUrl: "./badge-detail.component.html",
   styleUrl: "./badge-detail.component.css",
   changeDetection: ChangeDetectionStrategy.Eager,
-  animations: [
-    trigger("fadeSlide", [
-      state(
-        "void",
-        style({
-          opacity: 0,
-          transform: "translateY(-10px)",
-        })
-      ),
-      transition(":enter", [
-        animate(
-          "300ms ease-out",
-          style({ opacity: 1, transform: "translateY(0)" })
-        ),
-      ]),
-      transition(":leave", [
-        animate(
-          "200ms ease-in",
-          style({ opacity: 0, transform: "translateY(-10px)" })
-        ),
-      ]),
-    ]),
-  ],
 })
 export class BadgeDetailComponent implements OnInit {
   badge: any;

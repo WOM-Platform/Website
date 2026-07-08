@@ -23,45 +23,38 @@ import { MatDialog } from "@angular/material/dialog";
 import { TranslateService } from "@ngx-translate/core";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { MerchantService, UserService } from "src/app/_services";
-import {
-  animate,
-  state,
-  style,
-  transition,
-  trigger,
-} from "@angular/animations";
 import { Access } from "../../../_models/instrument";
 
 @Component({
   selector: "app-my-merchants-collection",
   templateUrl: "./my-merchants-collection.component.html",
   styleUrl: "./my-merchants-collection.component.css",
-  animations: [
-    trigger("slideToggle", [
-      state(
-        "open",
-        style({
-          height: "*",
-          opacity: 1,
-          overflow: "hidden",
-        })
-      ),
-      state(
-        "closed",
-        style({
-          height: "0px",
-          opacity: 0,
-          overflow: "hidden",
-        })
-      ),
-      transition("open <=> closed", [animate("300ms ease-in-out")]),
-    ]),
-    trigger("rotateArrow", [
-      state("open", style({ transform: "rotate(180deg)" })),
-      state("close", style({ transform: "rotate(0deg)" })),
-      transition("open <=> closed", [animate("300ms ease-in-out")]),
-    ]),
-  ],
+  // animations: [
+  //   trigger("slideToggle", [
+  //     state(
+  //       "open",
+  //       style({
+  //         height: "*",
+  //         opacity: 1,
+  //         overflow: "hidden",
+  //       })
+  //     ),
+  //     state(
+  //       "closed",
+  //       style({
+  //         height: "0px",
+  //         opacity: 0,
+  //         overflow: "hidden",
+  //       })
+  //     ),
+  //     transition("open <=> closed", [animate("300ms ease-in-out")]),
+  //   ]),
+  //   trigger("rotateArrow", [
+  //     state("open", style({ transform: "rotate(180deg)" })),
+  //     state("close", style({ transform: "rotate(0deg)" })),
+  //     transition("open <=> closed", [animate("300ms ease-in-out")]),
+  //   ]),
+  // ],
   changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })

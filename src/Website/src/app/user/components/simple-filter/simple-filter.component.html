@@ -84,7 +84,7 @@
             </div>
             <!-- periodic -->
             @if (filterForm.get('isPeriodic')?.value == true) {
-            <div [@fadeSlide]>
+            <div animate.enter="filter-enter" animate.leave="filter-leave">
               <label class="block text-sm font-medium text-gray-700"
                 >Periodo</label
               >

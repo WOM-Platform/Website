@@ -1,7 +1,57 @@
 .merchant-data {
-    @apply flex justify-between flex-wrap
+  @apply flex justify-between flex-wrap;
 }
 
 .merchant-element {
-    @apply mb-0 w-1/2
+  @apply mb-0 w-1/2;
+}
+
+.merchant-arrow {
+  transition: transform 300ms ease-in-out;
+}
+
+.merchant-arrow.open {
+  transform: rotate(180deg);
+}
+
+.merchant-details {
+  display: grid;
+  grid-template-rows: 1fr;
+}
+
+.merchant-details > * {
+  overflow: hidden;
+  min-height: 0;
+}
+
+.expand {
+  animation: expand 300ms ease-in-out;
+}
+
+.collapse {
+  animation: collapse 300ms ease-in-out;
+}
+
+@keyframes expand {
+  from {
+    opacity: 0;
+    grid-template-rows: 0fr;
+  }
+
+  to {
+    opacity: 1;
+    grid-template-rows: 1fr;
+  }
+}
+
+@keyframes collapse {
+  from {
+    opacity: 1;
+    grid-template-rows: 1fr;
+  }
+
+  to {
+    opacity: 0;
+    grid-template-rows: 0fr;
+  }
 }

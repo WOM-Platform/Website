@@ -8,7 +8,6 @@ import {
 import { Router } from "@angular/router";
 
 import { AppComponent } from "./app.component";
-import { provideAnimationsAsync } from "@angular/platform-browser/animations/async";
 import { providePrimeNG } from "primeng/config";
 
 import { TranslateHttpLoader } from "@ngx-translate/http-loader";
@@ -230,8 +229,6 @@ const httpInterceptorProviders = environment.mock
       deps: [Sentry.TraceService],
       multi: true,
     },
-
-    provideAnimationsAsync(),
     ...httpInterceptorProviders,
     CookieService,
     provideHttpClient(withInterceptorsFromDi()),

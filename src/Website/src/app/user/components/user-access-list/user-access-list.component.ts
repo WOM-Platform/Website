@@ -10,7 +10,6 @@ import {
 } from "@angular/core";
 import { SearchSourceComponent } from "./search-source/search-source.component";
 import { UserService } from "../../../_services";
-import { animate, style, transition, trigger } from "@angular/animations";
 import { Subscription } from "rxjs";
 
 import { MatIcon } from "@angular/material/icon";
@@ -23,19 +22,19 @@ import { Access } from "src/app/_models/instrument";
   imports: [FormsModule, MatIcon, SearchSourceComponent],
   styleUrl: "./user-access-list.component.css",
   changeDetection: ChangeDetectionStrategy.Eager,
-  animations: [
-    trigger("fadeInOut", [
-      transition(":enter", [
-        // :enter is alias to 'void => *'
-        style({ opacity: 0 }),
-        animate("0.2s ease-out", style({ opacity: 1 })),
-      ]),
-      transition(":leave", [
-        // :leave is alias to '* => void'
-        animate("0.2s ease-in", style({ opacity: 0 })),
-      ]),
-    ]),
-  ],
+  // animations: [
+  //   trigger("fadeInOut", [
+  //     transition(":enter", [
+  //       // :enter is alias to 'void => *'
+  //       style({ opacity: 0 }),
+  //       animate("0.2s ease-out", style({ opacity: 1 })),
+  //     ]),
+  //     transition(":leave", [
+  //       // :leave is alias to '* => void'
+  //       animate("0.2s ease-in", style({ opacity: 0 })),
+  //     ]),
+  //   ]),
+  // ],
 })
 export class UserAccessListComponent implements OnDestroy {
   @Input() isRoleAccessRequired: boolean = false;

@@ -7,13 +7,6 @@ import {
 import faqData from "../../../assets/json/faq.json";
 import { CommonModule } from "@angular/common";
 import { TranslateModule, TranslateService } from "@ngx-translate/core";
-import {
-  animate,
-  state,
-  style,
-  transition,
-  trigger,
-} from "@angular/animations";
 
 @Component({
   selector: "app-faq-list",
@@ -22,26 +15,6 @@ import {
   styleUrl: "./faq-list.component.css",
   standalone: true,
   changeDetection: ChangeDetectionStrategy.Eager,
-  animations: [
-    trigger("expandCollapse", [
-      state(
-        "open",
-        style({
-          height: "*",
-          opacity: 1,
-        })
-      ),
-      state(
-        "closed",
-        style({
-          height: "0px",
-          opacity: 0,
-          padding: "0rem",
-        })
-      ),
-      transition("open <=> closed", [animate("300ms ease-in-out")]),
-    ]),
-  ],
 })
 export class FaqListComponent implements OnInit {
   @Input() types: string[] = [];
@@ -60,11 +33,8 @@ export class FaqListComponent implements OnInit {
     });
   }
 
-  toggleFaq(type: number, index: number) {
-    const targetFaqGroup = this.faqs.find((faq) => faq.type === type);
-
-    if (targetFaqGroup && targetFaqGroup.list && targetFaqGroup.list[index]) {
-      targetFaqGroup.list[index].isOpen = !targetFaqGroup.list[index].isOpen;
-    }
+  toggleFaq(typeIndex: number, faqIndex: number) {
+    this.faqs[typeIndex].list[faqIndex].isOpen =
+      !this.faqs[typeIndex].list[faqIndex].isOpen;
   }
 }

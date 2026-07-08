@@ -1,7 +1,35 @@
 .btn-default {
-    @apply border-2 border-black px-4 py-2 rounded-full flex items-center gap-1 bg-white cursor-pointer;
+  @apply border-2 border-black px-4 py-2 rounded-full flex items-center gap-1 bg-white cursor-pointer;
 }
 
 .add-access-container {
-    @apply relative gap-4 p-6 border-2 border-black rounded-lg mt-6;
+  @apply relative gap-4 p-6 border-2 border-black rounded-lg mt-6;
+}
+
+.fade-enter {
+  animation: fade-in 200ms ease-out;
+}
+
+.fade-leave {
+  animation: fade-out 200ms ease-in;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fade-out {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
 }

@@ -207,7 +207,11 @@
     </button>
 
     @if (isOffersShown) {
-    <div class="container mx-auto p-4" @fadeInOut>
+    <div
+      class="container mx-auto p-4"
+      animate.enter="fadeIn"
+      animate.leave="fadeOut"
+    >
       <!-- Table Header -->
       <div
         class="grid grid-cols-5 bg-blue-500 text-white font-bold p-2 rounded-t-lg items-center text-center"
