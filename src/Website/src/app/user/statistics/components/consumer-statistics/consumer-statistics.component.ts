@@ -22,10 +22,8 @@ import { EntitySearchComponent } from "src/app/user/components/statistics/entity
 import { SkeletonLoaderComponent } from "../../../components/skeleton-loader/skeleton-loader.component";
 import { SnackBarService } from "src/app/_services/snack-bar.service";
 import { EntitySearchUserComponent } from "../../../components/statistics/entity-search-user/entity-search-user.component";
-import { animate, style, transition, trigger } from "@angular/animations";
 import { NgxSkeletonLoaderModule } from "ngx-skeleton-loader";
-import { BaseChartDirective, NgChartsModule } from "ng2-charts";
-import { ChartConfiguration } from "chart.js";
+import { NgChartsModule } from "ng2-charts";
 
 @Component({
   selector: "app-consumer-statistics",
@@ -38,23 +36,6 @@ import { ChartConfiguration } from "chart.js";
     EntitySearchComponent,
     SkeletonLoaderComponent,
     EntitySearchUserComponent,
-  ],
-  animations: [
-    trigger("fadeInOut", [
-      transition(":enter", [
-        style({ opacity: 0, transform: "translateY(-10px)" }),
-        animate(
-          "300ms ease-in",
-          style({ opacity: 1, transform: "translateY(0)" })
-        ),
-      ]),
-      transition(":leave", [
-        animate(
-          "200ms ease-out",
-          style({ opacity: 0, transform: "translateY(-10px)" })
-        ),
-      ]),
-    ]),
   ],
   standalone: true,
   templateUrl: "./consumer-statistics.component.html",

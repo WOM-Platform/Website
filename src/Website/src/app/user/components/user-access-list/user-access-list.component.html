@@ -13,21 +13,27 @@
   }
 </div>
 @if (addAccess) {
-  <div class="add-access-container" @fadeInOut>
-    <app-search-source (createSource)="onCreateAccess($event)"
+  <div
+    class="add-access-container"
+    animate.enter="fade-enter"
+    animate.leave="fade-leave"
+  >
+    <app-search-source
+      (createSource)="onCreateAccess($event)"
       (searchSource)="onSearch($event)"
       (clearFormEvent)="clearList()"
-    [isRoleAccessRequired]="isRoleAccessRequired"></app-search-source>
+      [isRoleAccessRequired]="isRoleAccessRequired"
+    ></app-search-source>
     @if (listAccess && listAccess.length > 0) {
-      <div @fadeInOut>
-        <div @fadeInOut>
+      <div animate.enter="fade-enter" animate.leave="fade-leave">
+        <div animate.enter="fade-enter" animate.leave="fade-leave">
           <p class="mb-0 font-semibold">Risultati:</p>
           <ul class="access-list">
             @for (access of listAccess; track trackByAccess($index, access)) {
-              <li class="access-element"
-                (click)="handleSelection(access)">
-                <span class="font-semibold">Nome: </span>{{ access.name }} {{ access.surname }}
-                <span class="font-semibold">Email: </span>{{ access.email }}
+              <li class="access-element" (click)="handleSelection(access)">
+                <span class="font-semibold">Nome: </span>{{ access.name }}
+                {{ access.surname }} <span class="font-semibold">Email: </span
+                >{{ access.email }}
               </li>
             }
           </ul>
@@ -35,39 +41,57 @@
       </div>
     }
     @if (noResults) {
-      <div @fadeInOut class="flex flex-col justify-center items-center gap-4">
-        <img src="assets/images/noResult.png" class="w-52 h-52">
+      <div
+        animate.enter="fade-enter"
+        animate.leave="fade-leave"
+        class="flex flex-col justify-center items-center gap-4"
+      >
+        <img src="assets/images/noResult.png" class="w-52 h-52" />
         <p class="mb-0 access-element font-semibold">Nessun risultato</p>
-        <p class="text-slate-600">Prova ancora utilizzando dei valori più generali</p>
+        <p class="text-slate-600">
+          Prova ancora utilizzando dei valori più generali
+        </p>
       </div>
     }
     <!-- select access role for merchant for searched users-->
     @if (selectedAccess && !createUserAccess) {
-      <div @fadeInOut>
+      <div animate.enter="fade-enter" animate.leave="fade-leave">
         <div class="flex items-center">
-          <div><span
-          class="text-slate-600 font-semibold">Name</span>: {{ selectedAccess.name }} {{ selectedAccess.surname }}
-        </div>
-        <div><span class="text-slate-600 font-semibold">Email</span>: {{ selectedAccess.email }}</div>
-        @if (isRoleAccessRequired) {
-          <div class="px-6">
-            <label>Seleziona ruolo<span class="text-red-600">*</span>:</label>
-            <select [(ngModel)]="userRole" name="role" #role="ngModel" required>
-              <option value="Admin">Admin</option>
-              <option value="User">User</option>
-            </select>
-            @if (role?.invalid && role?.touched) {
-              <div class="text-red-600">Please select a role</div>
-            }
+          <div>
+            <span class="text-slate-600 font-semibold">Name</span>:
+            {{ selectedAccess.name }} {{ selectedAccess.surname }}
           </div>
-        }
+          <div>
+            <span class="text-slate-600 font-semibold">Email</span>:
+            {{ selectedAccess.email }}
+          </div>
+          @if (isRoleAccessRequired) {
+            <div class="px-6">
+              <label>Seleziona ruolo<span class="text-red-600">*</span>:</label>
+              <select
+                [(ngModel)]="userRole"
+                name="role"
+                #role="ngModel"
+                required
+              >
+                <option value="Admin">Admin</option>
+                <option value="User">User</option>
+              </select>
+              @if (role?.invalid && role?.touched) {
+                <div class="text-red-600">Please select a role</div>
+              }
+            </div>
+          }
+        </div>
+        <div class="flex justify-end">
+          <button
+            class="px-2 border-2 border-black rounded-full"
+            (click)="addUserToAccessList(selectedAccess, userRole)"
+          >
+            Inserisci
+          </button>
+        </div>
       </div>
-      <div class="flex justify-end">
-        <button class="px-2 border-2 border-black rounded-full"
-          (click)="addUserToAccessList(selectedAccess, userRole)">Inserisci
-        </button>
-      </div>
-    </div>
-  }
-</div>
+    }
+  </div>
 }

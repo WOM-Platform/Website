@@ -16,13 +16,6 @@ import {
   ReactiveFormsModule,
   Validators,
 } from "@angular/forms";
-import {
-  animate,
-  state,
-  style,
-  transition,
-  trigger,
-} from "@angular/animations";
 import { AimsSelectComponent } from "../aims-select/aims-select.component";
 import { SourceService } from "src/app/_services/source.service";
 import { Instrument } from "src/app/_models/instrument";
@@ -56,29 +49,29 @@ import { UserService } from "src/app/_services";
   templateUrl: "./simple-filter.component.html",
   styleUrl: "./simple-filter.component.css",
   changeDetection: ChangeDetectionStrategy.Eager,
-  animations: [
-    trigger("fadeSlide", [
-      state(
-        "void",
-        style({
-          opacity: 0,
-          transform: "translateY(-10px)",
-        })
-      ),
-      transition(":enter", [
-        animate(
-          "300ms ease-out",
-          style({ opacity: 1, transform: "translateY(0)" })
-        ),
-      ]),
-      transition(":leave", [
-        animate(
-          "200ms ease-in",
-          style({ opacity: 0, transform: "translateY(-10px)" })
-        ),
-      ]),
-    ]),
-  ],
+  // animations: [
+  //   trigger("fadeSlide", [
+  //     state(
+  //       "void",
+  //       style({
+  //         opacity: 0,
+  //         transform: "translateY(-10px)",
+  //       })
+  //     ),
+  //     transition(":enter", [
+  //       animate(
+  //         "300ms ease-out",
+  //         style({ opacity: 1, transform: "translateY(0)" })
+  //       ),
+  //     ]),
+  //     transition(":leave", [
+  //       animate(
+  //         "200ms ease-in",
+  //         style({ opacity: 0, transform: "translateY(-10px)" })
+  //       ),
+  //     ]),
+  //   ]),
+  // ],
 })
 export class SimpleFilterComponent implements OnInit {
   @Input() filters: SimpleFilter | null = null;

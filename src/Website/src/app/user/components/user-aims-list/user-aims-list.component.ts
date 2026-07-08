@@ -1,4 +1,3 @@
-import { animate, style, transition, trigger } from "@angular/animations";
 import {
   Component,
   EventEmitter,
@@ -19,15 +18,6 @@ import { FormsModule } from "@angular/forms";
   styleUrls: ["./user-aims-list.component.css"],
   imports: [FormsModule, MatIconModule],
   changeDetection: ChangeDetectionStrategy.Eager,
-  animations: [
-    trigger("fadeInOut", [
-      transition(":enter", [
-        style({ opacity: 0 }),
-        animate("0.2s ease-out", style({ opacity: 1 })),
-      ]),
-      transition(":leave", [animate("0.2s ease-in", style({ opacity: 0 }))]),
-    ]),
-  ],
 })
 export class UserAimsListComponent implements OnInit, OnChanges {
   @Input() instrumentAims: AimEditing = {

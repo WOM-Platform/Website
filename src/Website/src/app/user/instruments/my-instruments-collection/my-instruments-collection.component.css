@@ -1,0 +1,49 @@
+.arrow {
+  transition: transform 300ms ease-in-out;
+}
+
+.arrow.open {
+  transform: rotate(180deg);
+}
+
+.instrument-content {
+  display: grid;
+  grid-template-rows: 1fr;
+}
+
+.instrument-content > * {
+  overflow: hidden;
+  min-height: 0;
+}
+
+.expand {
+  animation: expand 300ms ease-in-out;
+}
+
+.collapse {
+  animation: collapse 300ms ease-in-out;
+}
+
+@keyframes expand {
+  from {
+    grid-template-rows: 0fr;
+    opacity: 0;
+  }
+
+  to {
+    grid-template-rows: 1fr;
+    opacity: 1;
+  }
+}
+
+@keyframes collapse {
+  from {
+    grid-template-rows: 1fr;
+    opacity: 1;
+  }
+
+  to {
+    grid-template-rows: 0fr;
+    opacity: 0;
+  }
+}

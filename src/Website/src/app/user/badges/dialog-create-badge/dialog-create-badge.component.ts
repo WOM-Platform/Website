@@ -1,12 +1,4 @@
 import {
-  animate,
-  state,
-  style,
-  transition,
-  trigger,
-} from "@angular/animations";
-
-import {
   Component,
   Inject,
   OnInit,
@@ -24,29 +16,6 @@ import { SimpleFilterComponent } from "../../components/simple-filter/simple-fil
   templateUrl: "./dialog-create-badge.component.html",
   styleUrl: "./dialog-create-badge.component.css",
   changeDetection: ChangeDetectionStrategy.Eager,
-  animations: [
-    trigger("fadeSlide", [
-      state(
-        "void",
-        style({
-          opacity: 0,
-          transform: "translateY(-10px)",
-        })
-      ),
-      transition(":enter", [
-        animate(
-          "300ms ease-out",
-          style({ opacity: 1, transform: "translateY(0)" })
-        ),
-      ]),
-      transition(":leave", [
-        animate(
-          "200ms ease-in",
-          style({ opacity: 0, transform: "translateY(-10px)" })
-        ),
-      ]),
-    ]),
-  ],
 })
 export class DialogCreateBadgeComponent implements OnInit {
   isEnabled: boolean = false;
