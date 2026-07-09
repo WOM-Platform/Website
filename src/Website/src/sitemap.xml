@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+    <!-- Home -->
+    <url>
+        <loc>https://wom.social/</loc>
+    </url>
+
+    <!-- Informazioni -->
+    <url>
+        <loc>https://wom.social/about-section/about</loc>
+    </url>
+
+    <url>
+        <loc>https://wom.social/about-section/fano</loc>
+    </url>
+
+    <url>
+        <loc>https://wom.social/about-section/urbino</loc>
+    </url>
+
+    <url>
+        <loc>https://wom.social/challenge</loc>
+    </url>
+
+    <url>
+        <loc>https://wom.social/faq</loc>
+    </url>
+
+    <url>
+        <loc>https://wom.social/instrument</loc>
+    </url>
+
+    <url>
+        <loc>https://wom.social/merchant</loc>
+    </url>
+
+
+    <!-- Applicazioni -->
+    <url>
+        <loc>https://wom.social/applications/overview</loc>
+    </url>
+
+    <url>
+        <loc>https://wom.social/applications/womfit</loc>
+    </url>
+
+    <url>
+        <loc>https://wom.social/applications/libraries</loc>
+    </url>
+
+    <url>
+        <loc>https://wom.social/applications/universities</loc>
+    </url>
+
+    <url>
+        <loc>https://wom.social/applications/aworld</loc>
+    </url>
+
+    <url>
+        <loc>https://wom.social/applications/codymaze</loc>
+    </url>
+
+    <url>
+        <loc>https://wom.social/applications/balance</loc>
+    </url>
+
+
+    <!-- Progetti -->
+    <url>
+        <loc>https://wom.social/projects/rete-delle-reti</loc>
+    </url>
+
+
+    <!-- Pesaro -->
+    <url>
+        <loc>https://wom.social/pesaro</loc>
+    </url>
+
+    <url>
+        <loc>https://wom.social/pesaro/albergatori</loc>
+    </url>
+
+    <url>
+        <loc>https://wom.social/pesaro/esercenti</loc>
+    </url>
+
+    <url>
+        <loc>https://wom.social/pesaro/turisti</loc>
+    </url>
+
+    <url>
+        <loc>https://wom.social/pesaro/cittadini</loc>
+    </url>
+
+
+    <!-- Pesaro 2024 -->
+    <url>
+        <loc>https://wom.social/pesaro2024</loc>
+    </url>
+
+    <url>
+        <loc>https://wom.social/pesaro2024/volontarx</loc>
+    </url>
+
+
+    <!-- Università -->
+    <url>
+        <loc>https://wom.social/uniurb/sharper2024</loc>
+    </url>
+
+
+    <!-- Privacy -->
+    <url>
+        <loc>https://wom.social/privacy/overview</loc>
+    </url>
+
+    <url>
+        <loc>https://wom.social/privacy/website</loc>
+    </url>
+
+    <url>
+        <loc>https://wom.social/privacy/pos</loc>
+    </url>
+
+    <url>
+        <loc>https://wom.social/privacy/pocket</loc>
+    </url>
+
+    <url>
+        <loc>https://wom.social/privacy/instrument</loc>
+    </url>
+
+    <url>
+        <loc>https://wom.social/privacy/womfit</loc>
+    </url>
+
+</urlset>

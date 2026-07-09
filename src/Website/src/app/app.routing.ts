@@ -41,27 +41,43 @@ import { EsercentiComponent } from "./pages/pesaro-section/esercenti/esercenti.c
 import { FaqComponent } from "./pages/faq/faq.component";
 import { ChallengeComponent } from "./pages/challenge/challenge.component";
 
+const DEFAULT_SEO = {
+  image: "https://wom.social/assets/images/logo-og.png",
+  type: "website",
+};
+
 const routes: Routes = [
   {
     path: "",
     children: [
       {
         path: "",
-        redirectTo: "/home",
-        pathMatch: "full",
+        component: HomeComponent,
         data: {
-          breadcrumb: null,
+          seo: {
+            title: "",
+            description: "",
+            canonical: "",
+            ...DEFAULT_SEO,
+          },
         },
       },
       {
         path: "home",
-        component: HomeComponent,
+        redirectTo: "",
+        pathMatch: "full",
       },
       {
         path: "challenge",
         component: ChallengeComponent,
         data: {
           breadcrumb: "BREADCRUMBS.CHALLENGE",
+          seo: {
+            title: "",
+            description: "",
+            canonical: "",
+            ...DEFAULT_SEO,
+          },
         },
       },
       {
@@ -69,6 +85,13 @@ const routes: Routes = [
         component: FaqComponent,
         data: {
           breadcrumb: "BREADCRUMBS.FAQ",
+          seo: {
+            title: "FAQ | WOM Social Frequently Asked Questions",
+            description:
+              "Trova risposte alle domande più frequenti su WOM Social, la piattaforma che connette cittadini, turisti ed esercenti.",
+            canonical: "https://wom.social/faq",
+            ...DEFAULT_SEO,
+          },
         },
       },
       {
@@ -76,6 +99,12 @@ const routes: Routes = [
         component: AboutSectionComponent,
         data: {
           breadcrumb: "BREADCRUMBS.ABOUT.TITLE",
+          seo: {
+            title: "",
+            description: "",
+            canonical: "",
+            ...DEFAULT_SEO,
+          },
         },
         children: [
           {
@@ -89,6 +118,13 @@ const routes: Routes = [
             pathMatch: "full",
             data: {
               breadcrumb: "BREADCRUMBS.ABOUT.ABOUT",
+              seo: {
+                title: "",
+                description:
+                  "Scopri WOM, la piattaforma che premia le azioni positive e connette persone, territori e comunità.",
+                canonical: "https://wom.social/about-section/about",
+                ...DEFAULT_SEO,
+              },
             },
           },
           {
@@ -97,6 +133,12 @@ const routes: Routes = [
             pathMatch: "full",
             data: {
               breadcrumb: "BREADCRUMBS.ABOUT.URBINO",
+              seo: {
+                title: "",
+                description: "",
+                canonical: "",
+                ...DEFAULT_SEO,
+              },
             },
           },
           {
@@ -105,6 +147,12 @@ const routes: Routes = [
             pathMatch: "full",
             data: {
               breadcrumb: "BREADCRUMBS.ABOUT.FANO",
+              seo: {
+                title: "",
+                description: "",
+                canonical: "",
+                ...DEFAULT_SEO,
+              },
             },
           },
         ],
@@ -117,12 +165,14 @@ const routes: Routes = [
             path: "",
             pathMatch: "full",
             component: PesaroComponent,
-          },
-          {
-            path: "albergatori",
-            component: AlbergatoriComponent,
             data: {
-              breadcrumb: "BREADCRUMBS.PESARO.HOTELIERS",
+              breadcrumb: "BREADCRUMBS.PESARO.PESARO",
+              seo: {
+                title: "",
+                description: "",
+                canonical: "",
+                ...DEFAULT_SEO,
+              },
             },
           },
           {
@@ -130,6 +180,25 @@ const routes: Routes = [
             component: AlbergatoriComponent,
             data: {
               breadcrumb: "BREADCRUMBS.PESARO.HOTELIERS",
+              seo: {
+                title: "",
+                description: "",
+                canonical: "",
+                ...DEFAULT_SEO,
+              },
+            },
+          },
+          {
+            path: "albergatori",
+            component: AlbergatoriComponent,
+            data: {
+              breadcrumb: "BREADCRUMBS.PESARO.HOTELIERS",
+              seo: {
+                title: "",
+                description: "",
+                canonical: "",
+                ...DEFAULT_SEO,
+              },
             },
           },
           {
@@ -137,6 +206,12 @@ const routes: Routes = [
             component: EsercentiComponent,
             data: {
               breadcrumb: "BREADCRUMBS.PESARO.MERCHANTS",
+              seo: {
+                title: "",
+                description: "",
+                canonical: "",
+                ...DEFAULT_SEO,
+              },
             },
           },
           {
@@ -144,6 +219,12 @@ const routes: Routes = [
             component: TuristiComponent,
             data: {
               breadcrumb: "BREADCRUMBS.PESARO.TOURISTS",
+              seo: {
+                title: "",
+                description: "",
+                canonical: "",
+                ...DEFAULT_SEO,
+              },
             },
           },
           {
@@ -151,6 +232,12 @@ const routes: Routes = [
             component: CittadiniComponent,
             data: {
               breadcrumb: "BREADCRUMBS.PESARO.CITIZENS",
+              seo: {
+                title: "",
+                description: "",
+                canonical: "",
+                ...DEFAULT_SEO,
+              },
             },
           },
         ],
@@ -171,6 +258,12 @@ const routes: Routes = [
             component: VolontarxComponent,
             data: {
               breadcrumb: "BREADCRUMBS.PESARO2024.VOLUNTEERS",
+              seo: {
+                title: "",
+                description: "",
+                canonical: "",
+                ...DEFAULT_SEO,
+              },
             },
           },
           {
@@ -193,6 +286,12 @@ const routes: Routes = [
             pathMatch: "full",
             data: {
               breadcrumb: "BREADCRUMBS.PROJECTS.RETE-DELLE-RETI",
+              seo: {
+                title: "",
+                description: "",
+                canonical: "",
+                ...DEFAULT_SEO,
+              },
             },
           },
         ],
@@ -208,6 +307,12 @@ const routes: Routes = [
         component: Sharper2024Component,
         data: {
           breadcrumb: "BREADCRUMBS.UNIURB.SHARPER2024",
+          seo: {
+            title: "",
+            description: "",
+            canonical: "",
+            ...DEFAULT_SEO,
+          },
         },
       },
       {
@@ -215,6 +320,12 @@ const routes: Routes = [
         component: UsersComponent,
         data: {
           breadcrumb: "BREADCRUMBS.USERS",
+          seo: {
+            title: "",
+            description: "",
+            canonical: "",
+            ...DEFAULT_SEO,
+          },
         },
       },
       {
@@ -222,6 +333,12 @@ const routes: Routes = [
         component: MerchantComponent,
         data: {
           breadcrumb: "BREADCRUMBS.MERCHANT",
+          seo: {
+            title: "",
+            description: "",
+            canonical: "",
+            ...DEFAULT_SEO,
+          },
         },
       },
       {
@@ -229,6 +346,12 @@ const routes: Routes = [
         component: InstrumentComponent,
         data: {
           breadcrumb: "BREADCRUMBS.INSTRUMENT",
+          seo: {
+            title: "",
+            description: "",
+            canonical: "",
+            ...DEFAULT_SEO,
+          },
         },
       },
       {
@@ -272,6 +395,12 @@ const routes: Routes = [
         component: ApplicationsComponent,
         data: {
           breadcrumb: "BREADCRUMBS.APPLICATIONS.APPLICATIONS",
+          seo: {
+            title: "",
+            description: "",
+            canonical: "",
+            ...DEFAULT_SEO,
+          },
         },
         children: [
           {
@@ -284,6 +413,12 @@ const routes: Routes = [
             component: ApplicationsOverviewComponent,
             data: {
               breadcrumb: "BREADCRUMBS.APPLICATIONS.OVERVIEW",
+              seo: {
+                title: "",
+                description: "",
+                canonical: "",
+                ...DEFAULT_SEO,
+              },
             },
           },
           {
@@ -291,6 +426,12 @@ const routes: Routes = [
             component: ApplicationsWomFitComponent,
             data: {
               breadcrumb: "BREADCRUMBS.APPLICATIONS.WOMFIT",
+              seo: {
+                title: "",
+                description: "",
+                canonical: "",
+                ...DEFAULT_SEO,
+              },
             },
           },
           {
@@ -298,6 +439,12 @@ const routes: Routes = [
             component: ApplicationsLibrariesComponent,
             data: {
               breadcrumb: "BREADCRUMBS.APPLICATIONS.LIBRARIES",
+              seo: {
+                title: "",
+                description: "",
+                canonical: "",
+                ...DEFAULT_SEO,
+              },
             },
           },
           {
@@ -305,6 +452,12 @@ const routes: Routes = [
             component: ApplicationsUniversitiesComponent,
             data: {
               breadcrumb: "BREADCRUMBS.APPLICATIONS.UNIVERSITIES",
+              seo: {
+                title: "",
+                description: "",
+                canonical: "",
+                ...DEFAULT_SEO,
+              },
             },
           },
           {
@@ -312,6 +465,12 @@ const routes: Routes = [
             component: ApplicationsAworldComponent,
             data: {
               breadcrumb: "BREADCRUMBS.APPLICATIONS.AWORLD",
+              seo: {
+                title: "",
+                description: "",
+                canonical: "",
+                ...DEFAULT_SEO,
+              },
             },
           },
           {
@@ -319,6 +478,12 @@ const routes: Routes = [
             component: ApplicationsCodymazeComponent,
             data: {
               breadcrumb: "BREADCRUMBS.APPLICATIONS.CODYMAZE",
+              seo: {
+                title: "",
+                description: "",
+                canonical: "",
+                ...DEFAULT_SEO,
+              },
             },
           },
           {
@@ -326,6 +491,12 @@ const routes: Routes = [
             component: ApplicationsBalanceComponent,
             data: {
               breadcrumb: "BREADCRUMBS.APPLICATIONS.BALANCE",
+              seo: {
+                title: "",
+                description: "",
+                canonical: "",
+                ...DEFAULT_SEO,
+              },
             },
           },
         ],
@@ -335,6 +506,12 @@ const routes: Routes = [
         component: PrivacyComponent,
         data: {
           breadcrumb: "BREADCRUMBS.PRIVACY.PRIVACY",
+          seo: {
+            title: "",
+            description: "",
+            canonical: "",
+            ...DEFAULT_SEO,
+          },
         },
         children: [
           {
@@ -347,6 +524,12 @@ const routes: Routes = [
             component: PrivacyOverviewComponent,
             data: {
               breadcrumb: "BREADCRUMBS.PRIVACY.OVERVIEW",
+              seo: {
+                title: "",
+                description: "",
+                canonical: "",
+                ...DEFAULT_SEO,
+              },
             },
           },
           {
@@ -354,6 +537,12 @@ const routes: Routes = [
             component: PrivacyWebsiteComponent,
             data: {
               breadcrumb: "BREADCRUMBS.PRIVACY.WEBSITE",
+              seo: {
+                title: "",
+                description: "",
+                canonical: "",
+                ...DEFAULT_SEO,
+              },
             },
           },
           {
@@ -361,6 +550,12 @@ const routes: Routes = [
             component: PrivacyPosComponent,
             data: {
               breadcrumb: "BREADCRUMBS.PRIVACY.POS",
+              seo: {
+                title: "",
+                description: "",
+                canonical: "",
+                ...DEFAULT_SEO,
+              },
             },
           },
           {
@@ -368,6 +563,12 @@ const routes: Routes = [
             component: PrivacyPocketComponent,
             data: {
               breadcrumb: "BREADCRUMBS.PRIVACY.POCKET",
+              seo: {
+                title: "",
+                description: "",
+                canonical: "",
+                ...DEFAULT_SEO,
+              },
             },
           },
           {
@@ -375,6 +576,12 @@ const routes: Routes = [
             component: PrivacyInstrumentComponent,
             data: {
               breadcrumb: "BREADCRUMBS.PRIVACY.INSTRUMENT",
+              seo: {
+                title: "",
+                description: "",
+                canonical: "",
+                ...DEFAULT_SEO,
+              },
             },
           },
           {
@@ -382,6 +589,12 @@ const routes: Routes = [
             component: PrivacyWomFitComponent,
             data: {
               breadcrumb: "BREADCRUMBS.PRIVACY.WOMFIT",
+              seo: {
+                title: "",
+                description: "",
+                canonical: "",
+                ...DEFAULT_SEO,
+              },
             },
           },
         ],
