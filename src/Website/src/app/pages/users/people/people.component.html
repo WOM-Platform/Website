@@ -1,0 +1,150 @@
+<div class="mx-6 mt-6 md:mx-20">
+  <h1 class="text-4xl font-bold text-[#009FE3] mb-6 text-center">
+    {{ "USERS.PEOPLE.TITLE" | translate }}
+  </h1>
+
+  <section class="mb-12">
+    <h2 class="">
+      {{ "USERS.PEOPLE.WHO_ARE_PEOPLE.TITLE" | translate }}
+    </h2>
+    <p
+      class="text-gray-600 mb-4"
+      [innerHTML]="'USERS.PEOPLE.WHO_ARE_PEOPLE.DESC_1' | translate"
+    ></p>
+    <p
+      class="text-gray-600"
+      [innerHTML]="'USERS.PEOPLE.WHO_ARE_PEOPLE.DESC_2' | translate"
+    ></p>
+    <p class="text-gray-600">
+      {{ "USERS.PEOPLE.WHO_ARE_PEOPLE.DESC_3" | translate }}
+    </p>
+    <a class="text-[#009FE3] font-semibold">
+      {{ "USERS.PEOPLE.WHO_ARE_PEOPLE.LINK" | translate }}
+    </a>
+  </section>
+
+  <section class="mb-12">
+    <h2 class="">
+      {{ "USERS.PEOPLE.ACTIONS_HOW_TO_EARN_WOM.TITLE" | translate }}
+    </h2>
+    <p
+      class="text-gray-600 mb-4"
+      [innerHTML]="'USERS.PEOPLE.ACTIONS_HOW_TO_EARN_WOM.DESC_1' | translate"
+    ></p>
+    <p
+      class="text-gray-600"
+      [innerHTML]="'USERS.PEOPLE.ACTIONS_HOW_TO_EARN_WOM.DESC_2' | translate"
+    ></p>
+    <p
+      class="text-gray-600"
+      [innerHTML]="'USERS.PEOPLE.ACTIONS_HOW_TO_EARN_WOM.DESC_3' | translate"
+    ></p>
+    <a class="text-[#009FE3] font-semibold">
+      {{ "USERS.PEOPLE.ACTIONS_HOW_TO_EARN_WOM.LINK" | translate }}
+    </a>
+  </section>
+
+  <section class="mb-12">
+    <h2 class="">
+      {{ "USERS.PEOPLE.OFFERS_HOW_TO_USE_WOM.TITLE" | translate }}
+    </h2>
+    <p
+      class="text-gray-600 mb-4"
+      [innerHTML]="'USERS.PEOPLE.OFFERS_HOW_TO_USE_WOM.DESC_1' | translate"
+    ></p>
+    <p
+      class="text-gray-600"
+      [innerHTML]="'USERS.PEOPLE.OFFERS_HOW_TO_USE_WOM.DESC_2' | translate"
+    ></p>
+    <p
+      class="text-gray-600"
+      [innerHTML]="'USERS.PEOPLE.OFFERS_HOW_TO_USE_WOM.DESC_3' | translate"
+    ></p>
+    <p
+      class="text-gray-600"
+      [innerHTML]="'USERS.PEOPLE.OFFERS_HOW_TO_USE_WOM.DESC_4' | translate"
+    ></p>
+    <p class="text-gray-600">
+      {{ "USERS.PEOPLE.OFFERS_HOW_TO_USE_WOM.DESC_5" | translate }}
+    </p>
+  </section>
+</div>
+
+<!-- TO IMPROVE -->
+<div class="desktop-only">
+  <div class="flex flex-row">
+    <!-- MAP -->
+    <google-map
+      class="basis-full xs:basis-3/4"
+      height="500px"
+      width="100%"
+      (mapDragend)="boundsChanged()"
+      (zoomChanged)="boundsChanged()"
+      [zoom]="zoom"
+      [center]="center"
+      [options]="options"
+    >
+      @for (marker of markers; track marker) {
+        <map-marker
+          #markerElem="mapMarker"
+          [position]="marker.position"
+          [title]="marker.title"
+          [icon]="marker.options!.icon!"
+          (mapClick)="openInfo(markerElem, marker)"
+        >
+        </map-marker>
+      }
+
+      <map-info-window [innerHTML]="infoContent"></map-info-window>
+    </google-map>
+
+    <mat-selection-list
+      [multiple]="false"
+      (selectionChange)="onPosSelection($event)"
+      class="basis-1/4"
+    >
+      @for (pos of posList; track pos) {
+        <mat-list-option [value]="pos">{{ pos.name }} </mat-list-option>
+      }
+    </mat-selection-list>
+  </div>
+</div>
+<div class="mobile-only">
+  <div class="flex flex-col">
+    <!-- MAP -->
+
+    <google-map
+      class="basis-full xs:basis-3/4"
+      height="500px"
+      width="100%"
+      (mapDragend)="boundsChanged()"
+      (zoomChanged)="boundsChanged()"
+      [zoom]="zoom"
+      [center]="center"
+      [options]="options"
+    >
+      @for (marker of markers; track marker) {
+        <map-marker
+          #markerElem="mapMarker"
+          [position]="marker.position"
+          [title]="marker.title"
+          [icon]="marker.options!.icon!"
+          (mapClick)="openInfo(markerElem, marker)"
+        >
+        </map-marker>
+      }
+
+      <map-info-window [innerHTML]="infoContent"></map-info-window>
+    </google-map>
+    <div class="">
+      <mat-selection-list
+        [multiple]="false"
+        (selectionChange)="onPosSelection($event)"
+      >
+        @for (pos of posList; track pos) {
+          <mat-list-option [value]="pos">{{ pos.name }} </mat-list-option>
+        }
+      </mat-selection-list>
+    </div>
+  </div>
+</div>

@@ -86,6 +86,13 @@
   @apply px-5;
 }
 
+.animated-number {
+  @apply flex flex-col justify-center h-[100px]  bg-[#E6E6E6];
+}
+
+.animated-number-pulse {
+  @apply h-10 w-28 rounded animate-pulse bg-gray-100;
+}
 .text-square p {
   @apply text-[1.6rem];
 }

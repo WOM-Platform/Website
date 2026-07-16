@@ -7,6 +7,8 @@ import {
   ChangeDetectionStrategy,
 } from "@angular/core";
 import {
+  FormGroup,
+  ReactiveFormsModule,
   UntypedFormBuilder,
   UntypedFormGroup,
   Validators,
@@ -20,6 +22,10 @@ import {
 import { debounceTime, switchMap, takeUntil } from "rxjs/operators";
 import { Subject } from "rxjs";
 import { StorageService } from "../../../../_services/storage.service";
+import { CommonModule } from "@angular/common";
+import { TranslateModule } from "@ngx-translate/core";
+import { MatError, MatFormField, MatHint } from "@angular/material/input";
+import { MatOption } from "@angular/material/core";
 
 @Component({
   selector: "app-form-merchant",
@@ -29,7 +35,16 @@ import { StorageService } from "../../../../_services/storage.service";
     "../../../../_forms/forms.directive.css",
   ],
   changeDetection: ChangeDetectionStrategy.Eager,
-  standalone: false,
+  standalone: true,
+  imports: [
+    CommonModule,
+    TranslateModule,
+    ReactiveFormsModule,
+    MatHint,
+    MatOption,
+    MatFormField,
+    MatError,
+  ],
 })
 export class FormMerchantComponent implements OnInit, OnDestroy {
   countryList: string[] = countryList;

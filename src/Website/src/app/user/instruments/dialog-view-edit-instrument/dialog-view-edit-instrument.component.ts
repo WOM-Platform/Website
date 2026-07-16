@@ -23,13 +23,26 @@ import { DialogConfirmCancelComponent } from "src/app/components/dialog-confirm-
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { switchMap, takeUntil } from "rxjs/operators";
 import { UserMe } from "src/app/_models";
+import { EditableElementComponent } from "../../components/editable-element/editable-element.component";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { AimsListComponent } from "../../components/aims-list/aims-list.component";
+import { UserAimsListComponent } from "../../components/user-aims-list/user-aims-list.component";
+import { AccessListComponent } from "../../components/access-list/access-list.component";
 
 @Component({
   selector: "app-dialog-view-instrument",
   templateUrl: "./dialog-view-edit-instrument.component.html",
   styleUrls: ["./dialog-view-edit-instrument.component.css"],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: false,
+  standalone: true,
+  imports: [
+    EditableElementComponent,
+    ReactiveFormsModule,
+    AimsListComponent,
+    UserAimsListComponent,
+    AccessListComponent,
+    FormsModule,
+  ],
 })
 export class DialogViewEditInstrumentComponent implements OnInit, OnDestroy {
   @Output() updatedField = new EventEmitter<string>();

@@ -1,11 +1,12 @@
 import { Component, OnInit, ChangeDetectionStrategy } from "@angular/core";
 import {
   FormGroup,
+  ReactiveFormsModule,
   UntypedFormBuilder,
   UntypedFormGroup,
   Validators,
 } from "@angular/forms";
-import { ActivatedRoute, Router } from "@angular/router";
+import { ActivatedRoute, Router, RouterLink } from "@angular/router";
 import { UserService, MerchantService, PosService } from "../../_services";
 import {
   Merchant,
@@ -14,15 +15,42 @@ import {
 } from "../../_models";
 import { first } from "rxjs/operators";
 import { LogInErrorDialogComponent } from "./signup-login-error.directive";
-import { TranslateService } from "@ngx-translate/core";
+import { TranslateModule, TranslateService } from "@ngx-translate/core";
 import { MatDialog } from "@angular/material/dialog";
+import { MatCard, MatCardContent } from "@angular/material/card";
+import { MatError, MatInput } from "@angular/material/input";
+import { CommonModule } from "@angular/common";
+import { MatButton } from "@angular/material/button";
+import { MatCheckbox } from "@angular/material/checkbox";
+import { MatDivider } from "@angular/material/divider";
+import { MatFormFieldModule } from "@angular/material/form-field";
+import { MatStepperModule } from "@angular/material/stepper";
+import { UserFormComponent } from "src/app/_forms/user/forms-user.directive";
 
 @Component({
   selector: "app-merchant-signup",
   templateUrl: "./signup.component.html",
   styleUrls: ["./signup.component.css"],
   changeDetection: ChangeDetectionStrategy.Eager,
-  standalone: false,
+  standalone: true,
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+
+    TranslateModule,
+    RouterLink,
+
+    MatCard,
+    MatCardContent,
+    MatError,
+    MatInput,
+    MatCheckbox,
+    MatDivider,
+    MatButton,
+    MatStepperModule,
+    MatFormFieldModule,
+    UserFormComponent,
+  ],
 })
 export class MerchantSignUpComponent implements OnInit {
   formUser!: FormGroup;

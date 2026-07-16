@@ -6,13 +6,15 @@ import {
 } from "@angular/core";
 import { AimsService } from "../../_services";
 import { Aim } from "../../_models";
+import { AdminTableComponent } from "../components/admin-table/admin-table.component";
 
 @Component({
   selector: "app-aims-tab",
   templateUrl: "./user-aims.component.html",
   styleUrl: "./user-aims.component.css",
   changeDetection: ChangeDetectionStrategy.Eager,
-  standalone: false,
+  standalone: true,
+  imports: [AdminTableComponent],
 })
 export class UserAimsComponent implements OnInit {
   aimsTableColumns: any[] = [

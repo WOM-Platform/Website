@@ -21,7 +21,8 @@ import {
   templateUrl: "./progress-spinner.component.html",
   styleUrls: ["./progress-spinner.component.css"],
   changeDetection: ChangeDetectionStrategy.Eager,
-  standalone: false,
+  standalone: true,
+  imports: [MatProgressSpinnerModule],
 })
 export class ProgressSpinnerComponent implements OnInit, DoCheck {
   @Input() color?: ThemePalette;

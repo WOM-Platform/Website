@@ -11,14 +11,22 @@ import { MatSnackBar } from "@angular/material/snack-bar";
 import { ActivatedRoute, Router } from "@angular/router";
 import { StorageService } from "../../_services/storage.service";
 import { Subscription } from "rxjs";
-import { MatTabGroup } from "@angular/material/tabs";
+import { MatTab, MatTabGroup } from "@angular/material/tabs";
+import { MerchantsAdminComponent } from "./merchants-admin/merchants-admin.component";
+import { MyMerchantsCollectionComponent } from "./my-merchants-collection/my-merchants-collection.component";
 
 @Component({
   selector: "app-user-merchant",
   templateUrl: "./user-merchants.component.html",
   styleUrls: ["./user-merchants.component.css"],
   changeDetection: ChangeDetectionStrategy.Eager,
-  standalone: false,
+  standalone: true,
+  imports: [
+    MatTabGroup,
+    MerchantsAdminComponent,
+    MatTab,
+    MyMerchantsCollectionComponent,
+  ],
 })
 export class UserMerchantsComponent implements OnInit, OnDestroy {
   username: string = "";

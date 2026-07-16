@@ -6,24 +6,40 @@ import {
   ViewChild,
   ChangeDetectionStrategy,
 } from "@angular/core";
-import { Router } from "@angular/router";
+import { Router, RouterLink, RouterLinkActive } from "@angular/router";
 
 import { UserLogin, UserMe } from "../../_models";
-import { TranslateService } from "@ngx-translate/core";
+import { TranslateModule, TranslateService } from "@ngx-translate/core";
 import { UserService } from "../../_services";
 
 import { BreakpointObserver, Breakpoints } from "@angular/cdk/layout";
 import { Observable } from "rxjs";
 import { map, shareReplay } from "rxjs/operators";
-import { MatDialog } from "@angular/material/dialog";
-import { MatSidenav } from "@angular/material/sidenav";
+import { MatDialog, MatDialogModule } from "@angular/material/dialog";
+import { MatSidenav, MatSidenavModule } from "@angular/material/sidenav";
+import { CommonModule } from "@angular/common";
+import { FormsModule } from "@angular/forms";
+import { MatButtonModule } from "@angular/material/button";
+import { MatIconModule } from "@angular/material/icon";
+import { MatToolbarModule } from "@angular/material/toolbar";
 
 @Component({
   selector: "app-nav",
   templateUrl: "./nav.component.html",
   styleUrls: ["./nav.component.css"],
+  imports: [
+    CommonModule,
+    FormsModule,
+    RouterLink,
+    RouterLinkActive,
+    TranslateModule,
+    MatSidenavModule,
+    MatToolbarModule,
+    MatButtonModule,
+    MatIconModule,
+  ],
   changeDetection: ChangeDetectionStrategy.Eager,
-  standalone: false,
+  standalone: true,
 })
 export class NavComponent implements OnInit {
   currentUserLogin: UserLogin | null = null;
@@ -106,6 +122,7 @@ export class NavComponent implements OnInit {
   selector: "app-nav-logout-dialog",
   templateUrl: "nav-logout-dialog.component.html",
   changeDetection: ChangeDetectionStrategy.Eager,
-  standalone: false,
+  standalone: true,
+  imports: [TranslateModule, MatDialogModule, MatButtonModule],
 })
 export class LogoutDialogComponent {}

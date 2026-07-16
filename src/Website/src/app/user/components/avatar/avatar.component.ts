@@ -10,7 +10,7 @@ import {
   templateUrl: "./avatar.component.html",
   styleUrls: ["./avatar.component.css"],
   changeDetection: ChangeDetectionStrategy.Eager,
-  standalone: false,
+  standalone: true,
 })
 export class AvatarComponent implements OnInit {
   @Input() fullName: string = "";

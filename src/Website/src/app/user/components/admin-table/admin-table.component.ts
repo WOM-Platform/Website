@@ -8,11 +8,11 @@ import {
 } from "@angular/core";
 import { MatIcon } from "@angular/material/icon";
 import { NgClass, TitleCasePipe } from "@angular/common";
-import { SharedModule } from "../../../shared/shared.module";
+import { PaginationComponent } from "./pagination/pagination.component";
 
 @Component({
   selector: "app-admin-table",
-  imports: [MatIcon, NgClass, SharedModule],
+  imports: [MatIcon, NgClass, PaginationComponent],
   standalone: true,
   templateUrl: "./admin-table.component.html",
   changeDetection: ChangeDetectionStrategy.Eager,

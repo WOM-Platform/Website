@@ -10,13 +10,23 @@ import { LoadingService } from "../_services/loading.service";
 import { UserMe } from "../_models/user";
 import { Instrument } from "../_models/instrument";
 import { UserService } from "../_services/user.service";
+import { AvatarComponent } from "./components/avatar/avatar.component";
+import { RouterLink, RouterLinkActive, RouterOutlet } from "@angular/router";
+import { NgClass } from "@angular/common";
 
 @Component({
   selector: "app-user",
   templateUrl: "./user.component.html",
   styleUrl: "./user.component.css",
   changeDetection: ChangeDetectionStrategy.Eager,
-  standalone: false,
+  standalone: true,
+  imports: [
+    AvatarComponent,
+    RouterLink,
+    RouterLinkActive,
+    NgClass,
+    RouterOutlet,
+  ],
 })
 export class UserComponent implements OnInit, OnDestroy {
   username: string = "";

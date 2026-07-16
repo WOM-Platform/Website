@@ -7,13 +7,15 @@ import html2canvas from "html2canvas";
 import { UserService } from "src/app/_services/user.service";
 import { User, UserMe } from "src/app/_models/user";
 import { Merchants } from "src/app/_models/merchant";
+import { AdminRoleComponent } from "./admin-role/admin-role.component";
 
 @Component({
   selector: "app-user-stats",
   templateUrl: "./user-statistics.component.html",
   styleUrls: ["./user-statistics.component.css"],
   changeDetection: ChangeDetectionStrategy.Eager,
-  standalone: false,
+  standalone: true,
+  imports: [AdminRoleComponent],
 })
 export class UserStatisticsComponent implements OnInit {
   currentUser: UserMe | null = null;

@@ -19,7 +19,7 @@ import { BadgesComponent } from "./badges/badges.component";
 import { BadgeDetailComponent } from "./badges/badge-detail/badge-detail.component";
 import { ChallengeDetailComponent } from "./badges/challenge-detail/challenge-detail.component";
 
-const routes: Routes = [
+export const routes: Routes = [
   {
     path: "user",
     component: UserComponent,
@@ -173,9 +173,3 @@ const routes: Routes = [
     ],
   },
 ];
-
-@NgModule({
-  imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule],
-})
-export class AuthRouting {}

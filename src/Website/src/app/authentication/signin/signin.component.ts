@@ -1,20 +1,38 @@
 import { Component, OnInit, ChangeDetectionStrategy } from "@angular/core";
 import {
+  ReactiveFormsModule,
   UntypedFormBuilder,
   UntypedFormGroup,
   Validators,
 } from "@angular/forms";
-import { ActivatedRoute, Router } from "@angular/router";
+import { ActivatedRoute, Router, RouterLink } from "@angular/router";
 import { first } from "rxjs/operators";
 import { UserService } from "../../_services";
-import { TranslateService } from "@ngx-translate/core";
+import { TranslateModule, TranslateService } from "@ngx-translate/core";
+import { MatCard, MatCardContent } from "@angular/material/card";
+import { MatError, MatFormField, MatInput } from "@angular/material/input";
+import { MatIcon } from "@angular/material/icon";
+import { MatFormFieldModule } from "@angular/material/form-field";
+import { MatButton } from "@angular/material/button";
 
 @Component({
   selector: "app-signin",
   templateUrl: "./signin.component.html",
   styleUrls: ["./signin.component.css"],
   changeDetection: ChangeDetectionStrategy.Eager,
-  standalone: false,
+  standalone: true,
+  imports: [
+    ReactiveFormsModule,
+    RouterLink,
+    TranslateModule,
+    MatCard,
+    MatCardContent,
+    MatFormFieldModule,
+    MatInput,
+    MatError,
+    MatIcon,
+    MatButton,
+  ],
 })
 export class SignInComponent implements OnInit {
   error: string = "";

@@ -1,0 +1,6 @@
+mat-selection-list {
+    max-height: 500px;
+    flex-grow: 1;
+    overflow: scroll;
+    border-bottom: black 1px solid;
+}

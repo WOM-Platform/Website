@@ -23,8 +23,17 @@ $my-theme: mat.m2-define-light-theme(
 @font-face {
   font-family: "HelveticaNeue";
   src: url("assets/fonts/HelveticaNeue/HelveticaNeueLight.otf")
-    format("truetype");
-  font-weight: normal;
+    format("opentype");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "HelveticaNeue";
+  src: url("assets/fonts/HelveticaNeue/HelveticaNeueBold.otf")
+    format("opentype");
+  font-weight: 700;
   font-style: normal;
   font-display: swap;
 }

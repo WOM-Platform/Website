@@ -25,6 +25,10 @@ body {
   /* font-family: "HelveticaNeue", sans-serif !important; */
 }
 
+h2 {
+  @apply text-2xl font-semibold text-[#009FE3] mb-4;
+}
+
 .h2-margin-bottom {
   @apply mb-3;
 }

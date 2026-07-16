@@ -3,22 +3,27 @@
   "FLAG_NO": "No",
   "NAV": {
     "HOME": "Home",
+    "PLATFORM": {
+      "TITLE": "Platform",
+      "ABOUT": "About",
+      "CHALLENGES": "Challenges",
+      "ACTIONS": "Actions"
+    },
     "USERS": {
       "TITLE": "Users",
-      "WHO_ARE": "About",
-      "CHALLENGES": "Challenges",
-      "APPLICATIONS": "How to earn WOM"
+      "PEOPLE": "People",
+      "MERCHANT": "Merchant",
+      "INSTRUMENT": "Instrument"
     },
-    "ABOUT": {
-      "TITLE": "About"
+    "APP": {
+      "TITLE": "App",
+      "WOM_POCKET": "WOM Pocket",
+      "WOM_POS": "WOM POS",
+      "WOM_FIT": "WOM Fit"
     },
-    "PROJECTS": {
-      "RETE-DELLE-RETI": "Rete delle Reti"
-    },
-    "INSTRUMENT": "Instrument",
+    "FAQ": "FAQ",
     "SIGN_IN": "Login",
     "PROFILE": "Profile",
-    "MERCHANT": "Merchant",
     "SIGN_OUT": "Log out",
     "LOGOUT_DIALOG": {
       "TITLE": "Log out",
@@ -358,21 +363,21 @@
     "INFO_WOM": "<span class=\"womWord\">WOM</span> - \"Worth One Minute\" is a general-purpose reward platform based on a voucher exchange system. Many actions and activities performed by individuals have an intrinsic social value, an effect known in economics as a \"positive externality\". WOM aims to recognize all those actions that constitute a socially valuable contribution to a common goal, rewarding the time people dedicate to these activities through the generation of digital social vouchers. WOM vouchers reward every minute of social commitment.",
     "HOW_TO_EARN": "how to earn WOM",
     "SQUARES": {
+      "VALUE": {
+        "TITLE": "value",
+        "DESC": "Many everyday actions generate value that goes beyond personal benefit: they have a positive impact on the community. WOM recognises this social value and turns it into a tangible opportunity, rewarding positive externalities through the issuance of WOM vouchers."
+      },
       "ACTIONS": {
         "TITLE": "actions",
-        "DESC": "By performing socially valuable actions, every user earns WOM. Users can manage their WOM vouchers via an app, \"WOM Pocket\", which they can install on their device. The application allows them to collect, store, and spend their vouchers."
+        "DESC": "Every time you carry out a socially responsible action, you earn WOM. The vouchers are collected and managed via the \"WOM Pocket\" app, which allows you to store, track and use them easily and instantly."
       },
       "OFFERS": {
         "TITLE": "offers",
-        "DESC": "Local shops can offer users services and discounts in exchange for WOM.<br />You can find participating shops in the \"offers\" section of \"WOM Pocket\". <br /><br />If you are a shopkeeper and want to join the WOM project, click the find out more button."
-      },
-      "VALUE": {
-        "TITLE": "value",
-        "DESC": "Many actions have an intrinsic social value.<br />WOM recognizes the impact of these actions and provides a tool to reward these positive externalities through the issuance of WOM."
+        "DESC": "WOM vouchers can be used at shops and businesses taking part in the scheme, which offer discounts, services and exclusive benefits. Check out the \"Offers\" section of WOM Pocket to find all the participating businesses.<br/><br/>If you run a business and would like to join the WOM network, click on the ‘Find out more’ button."
       },
       "CHALLENGES": {
         "TITLE": "challenges",
-        "DESC": "Challenge yourself and collect WOM badges. Access the \"achievements\" section on the \"WOM Pocket\" app and discover the challenges around you."
+        "DESC": "With WOM, you can also put yourself to the test. Go to the \"Achievements\" section in \"WOM Pocket\", take part in the available challenges and collect badges that show your contribution to the community."
       }
     },
     "FOOTER": {

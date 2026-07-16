@@ -13,8 +13,6 @@ import { DialogType } from "../../../_models/dialogType";
 import { first } from "rxjs/operators";
 import { MatDialog } from "@angular/material/dialog";
 import { AdminTableComponent } from "../../components/admin-table/admin-table.component";
-
-import { SharedModule } from "../../../shared/shared.module";
 import { Merchant } from "../../../_models";
 import { MerchantService, UserService } from "../../../_services";
 import { StorageService } from "../../../_services/storage.service";
@@ -25,14 +23,15 @@ import { LoadingService } from "../../../_services/loading.service";
 import { Router } from "@angular/router";
 import { SnackBarService } from "../../../_services/snack-bar.service";
 import { CreateButtonComponent } from "../../components/create-button/create-button.component";
+import { FormsModule } from "@angular/forms";
 
 @Component({
   selector: "app-merchants-admin",
   imports: [
     AdminTableComponent,
-    SharedModule,
     FiltersComponent,
     CreateButtonComponent,
+    FormsModule,
   ],
   standalone: true,
   templateUrl: "./merchants-admin.component.html",

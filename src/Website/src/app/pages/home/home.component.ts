@@ -1,12 +1,28 @@
 import { Component, ChangeDetectionStrategy } from "@angular/core";
-import { Router } from "@angular/router";
+import { Router, RouterLink } from "@angular/router";
+import { TranslateModule } from "@ngx-translate/core";
+import { Stats } from "src/app/_models/stats";
+import { StatsService } from "src/app/_services/stats.service";
+import { AnimatedNumberComponent } from "src/app/components/animated-number/animated-number.component";
+import { BtnFindOutMoreComponent } from "src/app/components/btn-find-out-more/btn-find-out-more.component";
+import { CarouselComponent } from "src/app/components/carousel/carousel.component";
+import { SmallImagesCarouselComponent } from "src/app/components/small-images-carousel/small-images-carousel.component";
+import { StoreLogosComponent } from "src/app/components/store-logos/store-logos.component";
 
 @Component({
   selector: "app-home",
   templateUrl: "./home.component.html",
   styleUrls: ["./home.component.css"],
   changeDetection: ChangeDetectionStrategy.Eager,
-  standalone: false,
+  standalone: true,
+  imports: [
+    AnimatedNumberComponent,
+    BtnFindOutMoreComponent,
+    CarouselComponent,
+    TranslateModule,
+    StoreLogosComponent,
+    RouterLink,
+  ],
 })
 export class HomeComponent {
   slidesList = [
@@ -57,7 +73,20 @@ export class HomeComponent {
     { path: "/assets/images/home/osservare.webp" },
   ];
 
-  constructor(private router: Router) {}
+  stats: Stats = new Stats();
+  isLoading = true;
+
+  constructor(
+    private router: Router,
+    private statsService: StatsService
+  ) {}
+
+  ngOnInit(): void {
+    this.statsService.getStatsList().subscribe((res) => {
+      this.stats = res;
+      this.isLoading = false;
+    });
+  }
 
   async navigate(link: string): Promise<void> {
     await this.router.navigate(["/" + link]);

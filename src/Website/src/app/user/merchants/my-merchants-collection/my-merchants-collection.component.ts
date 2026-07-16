@@ -24,6 +24,10 @@ import { TranslateService } from "@ngx-translate/core";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { MerchantService, UserService } from "src/app/_services";
 import { Access } from "../../../_models/instrument";
+import { EditableElementComponent } from "../../components/editable-element/editable-element.component";
+import { AccessListComponent } from "../../components/access-list/access-list.component";
+import { UserPosListComponent } from "../user-pos-list/user-pos-list.component";
+import { CreateButtonComponent } from "../../components/create-button/create-button.component";
 
 @Component({
   selector: "app-my-merchants-collection",
@@ -56,7 +60,13 @@ import { Access } from "../../../_models/instrument";
   //   ]),
   // ],
   changeDetection: ChangeDetectionStrategy.Eager,
-  standalone: false,
+  standalone: true,
+  imports: [
+    EditableElementComponent,
+    AccessListComponent,
+    UserPosListComponent,
+    CreateButtonComponent,
+  ],
 })
 export class MyMerchantsCollectionComponent implements OnInit {
   currentUser: UserMe = {} as UserMe;

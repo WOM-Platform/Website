@@ -6,13 +6,31 @@ import {
   ChangeDetectionStrategy,
 } from "@angular/core";
 import { MediaMatcher } from "@angular/cdk/layout";
+import { MatButtonModule } from "@angular/material/button";
+import { MatIconModule } from "@angular/material/icon";
+import { MatListModule } from "@angular/material/list";
+import { MatSidenavModule } from "@angular/material/sidenav";
+import { MatToolbarModule } from "@angular/material/toolbar";
+import { RouterOutlet, RouterLink } from "@angular/router";
+import { TranslatePipe } from "@ngx-translate/core";
 
 @Component({
   selector: "app-privacy",
   templateUrl: "./privacy.component.html",
   styleUrls: ["./privacy.component.css"],
+  imports: [
+    RouterOutlet,
+    RouterLink,
+    TranslatePipe,
+
+    MatToolbarModule,
+    MatIconModule,
+    MatSidenavModule,
+    MatListModule,
+    MatButtonModule,
+  ],
   changeDetection: ChangeDetectionStrategy.Eager,
-  standalone: false,
+  standalone: true,
 })
 export class PrivacyComponent implements OnInit, OnDestroy {
   mobileQuery: MediaQueryList = {} as MediaQueryList;

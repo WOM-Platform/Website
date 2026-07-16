@@ -2,13 +2,15 @@ import { Component, OnInit, ChangeDetectionStrategy } from "@angular/core";
 import { BillingService } from "../../_services/billing.service";
 import { StripeCheckoutRequest, StripePrice } from "../../_models/billing";
 import { TranslateService } from "@ngx-translate/core";
+import { CarouselModule } from "primeng/carousel";
 
 @Component({
   selector: "app-billing-checkout",
   templateUrl: "./checkout.component.html",
   styleUrls: ["./checkout.component.css"],
   changeDetection: ChangeDetectionStrategy.Eager,
-  standalone: false,
+  standalone: true,
+  imports: [CarouselModule],
 })
 export class BillingCheckoutComponent implements OnInit {
   products: StripePrice[] = [];

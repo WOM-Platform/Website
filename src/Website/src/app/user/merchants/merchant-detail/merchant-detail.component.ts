@@ -18,13 +18,21 @@ import { DialogConfirmCancelComponent } from "src/app/components/dialog-confirm-
 import { TranslateService } from "@ngx-translate/core";
 import { switchMap, tap } from "rxjs/operators";
 import { SnackBarService } from "../../../_services/snack-bar.service";
+import { EditableElementComponent } from "../../components/editable-element/editable-element.component";
+import { AccessListComponent } from "../../components/access-list/access-list.component";
+import { UserPosListComponent } from "../user-pos-list/user-pos-list.component";
 
 @Component({
   selector: "app-merchant-detail",
   templateUrl: "./merchant-detail.component.html",
   styleUrl: "./merchant-detail.component.css",
   changeDetection: ChangeDetectionStrategy.Eager,
-  standalone: false,
+  standalone: true,
+  imports: [
+    EditableElementComponent,
+    AccessListComponent,
+    UserPosListComponent,
+  ],
 })
 export class MerchantDetailComponent implements OnInit, OnDestroy {
   merchantId: string = "";

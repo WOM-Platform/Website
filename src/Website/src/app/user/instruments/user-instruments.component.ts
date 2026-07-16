@@ -10,15 +10,23 @@ import { ActivatedRoute, Router } from "@angular/router";
 import { UserService } from "../../_services";
 import { StorageService } from "../../_services/storage.service";
 import { Instrument } from "src/app/_models/instrument";
-import { MatTabGroup } from "@angular/material/tabs";
+import { MatTab, MatTabGroup } from "@angular/material/tabs";
 import { UserMe } from "../../_models";
+import { AdminManagmentInstrumentsComponent } from "./admin-managment-instruments/admin-managment-instruments.component";
+import { MyInstrumentsCollectionComponent } from "./my-instruments-collection/my-instruments-collection.component";
 
 @Component({
   selector: "app-user-instrument",
   templateUrl: "./user-instruments.component.html",
   styleUrls: ["./user-instruments.component.css"],
   changeDetection: ChangeDetectionStrategy.Eager,
-  standalone: false,
+  standalone: true,
+  imports: [
+    MatTabGroup,
+    MatTab,
+    AdminManagmentInstrumentsComponent,
+    MyInstrumentsCollectionComponent,
+  ],
 })
 export class UserInstrumentsComponent
   implements OnInit, AfterViewInit, OnDestroy

@@ -11,6 +11,9 @@ import { AimsService, UserService } from "src/app/_services";
 import { SourceService } from "src/app/_services/source.service";
 import { StorageService } from "src/app/_services/storage.service";
 import { Observable, of, Subscription } from "rxjs";
+import { EditableElementComponent } from "../../components/editable-element/editable-element.component";
+import { AimsListComponent } from "../../components/aims-list/aims-list.component";
+import { AccessListComponent } from "../../components/access-list/access-list.component";
 
 @Component({
   selector: "app-my-instruments-collection",
@@ -43,7 +46,8 @@ import { Observable, of, Subscription } from "rxjs";
   //   ]),
   // ],
   changeDetection: ChangeDetectionStrategy.Eager,
-  standalone: false,
+  standalone: true,
+  imports: [EditableElementComponent, AimsListComponent, AccessListComponent],
 })
 export class MyInstrumentsCollectionComponent implements OnInit, OnDestroy {
   username: string = "";
