@@ -6,24 +6,46 @@ import {
   ViewChild,
   ChangeDetectionStrategy,
 } from "@angular/core";
-import { Router } from "@angular/router";
+import { Router, RouterLink } from "@angular/router";
 
 import { UserLogin, UserMe } from "../../_models";
-import { TranslateService } from "@ngx-translate/core";
+import { TranslateModule, TranslateService } from "@ngx-translate/core";
 import { UserService } from "../../_services";
 
 import { BreakpointObserver, Breakpoints } from "@angular/cdk/layout";
 import { Observable } from "rxjs";
 import { map, shareReplay } from "rxjs/operators";
-import { MatDialog } from "@angular/material/dialog";
-import { MatSidenav } from "@angular/material/sidenav";
+import { MatDialog, MatDialogModule } from "@angular/material/dialog";
+import { MatSidenav, MatSidenavModule } from "@angular/material/sidenav";
+import { CommonModule } from "@angular/common";
+import { FormsModule } from "@angular/forms";
+import { MatButtonModule } from "@angular/material/button";
+import { MatIconModule } from "@angular/material/icon";
+import { MatToolbarModule } from "@angular/material/toolbar";
+
+export interface NavItem {
+  label: string;
+  icon?: string;
+  route?: string;
+  children?: NavItem[];
+}
 
 @Component({
   selector: "app-nav",
   templateUrl: "./nav.component.html",
   styleUrls: ["./nav.component.css"],
+  imports: [
+    CommonModule,
+    FormsModule,
+    RouterLink,
+    TranslateModule,
+    MatSidenavModule,
+    MatToolbarModule,
+    MatButtonModule,
+    MatIconModule,
+  ],
   changeDetection: ChangeDetectionStrategy.Eager,
-  standalone: false,
+  standalone: true,
 })
 export class NavComponent implements OnInit {
   currentUserLogin: UserLogin | null = null;
@@ -33,13 +55,70 @@ export class NavComponent implements OnInit {
   openMenu = false;
   showSubmenu = false;
 
-  isAboutOpen = false;
-  isVolunteersOpen = false;
-
   @ViewChild("drawer") drawer!: MatSidenav;
   @ViewChild("sidenavContainer") sidenavContainer!: ElementRef;
 
-  @HostListener("document:click", ["$event"])
+  menu: NavItem[] = [
+    {
+      label: "NAV.PLATFORM.TITLE",
+      icon: "public",
+      children: [
+        {
+          label: "NAV.PLATFORM.ABOUT",
+          route: "platform/about",
+        },
+        {
+          label: "NAV.PLATFORM.CHALLENGES",
+          route: "platform/challenge",
+        },
+        {
+          label: "NAV.PLATFORM.ACTIONS",
+          route: "platform/actions",
+        },
+      ],
+    },
+    {
+      label: "NAV.USERS.TITLE",
+      route: "users",
+      icon: "group",
+      children: [
+        {
+          label: "NAV.USERS.PEOPLE",
+          route: "users/people",
+        },
+        {
+          label: "NAV.USERS.MERCHANT",
+          route: "users/merchant",
+        },
+        {
+          label: "NAV.USERS.INSTRUMENT",
+          route: "users/instrument",
+        },
+      ],
+    },
+    {
+      label: "NAV.APP.TITLE",
+      icon: "apps",
+      children: [
+        {
+          label: "NAV.APP.WOM_POCKET",
+          route: "app/wom-pocket",
+        },
+        {
+          label: "NAV.APP.WOM_POS",
+          route: "app/wom-pos",
+        },
+        {
+          label: "NAV.APP.WOM_FIT",
+          route: "app/wom-fit",
+        },
+      ],
+    },
+    {
+      label: "NAV.FAQ",
+      route: "faq",
+    },
+  ];
   handleClickOutside(event: MouseEvent) {
     const clickedInside = this.sidenavContainer?.nativeElement.contains(
       event.target
@@ -49,6 +128,12 @@ export class NavComponent implements OnInit {
       this.drawer.close();
     }
   }
+  openedMenu: number | null = null;
+
+  toggleMenu(index: number) {
+    this.openedMenu = this.openedMenu === index ? null : index;
+  }
+
   isHandset$: Observable<boolean> = this.breakpointObserver
     .observe(Breakpoints.Handset)
     .pipe(
@@ -106,6 +191,7 @@ export class NavComponent implements OnInit {
   selector: "app-nav-logout-dialog",
   templateUrl: "nav-logout-dialog.component.html",
   changeDetection: ChangeDetectionStrategy.Eager,
-  standalone: false,
+  standalone: true,
+  imports: [TranslateModule, MatDialogModule, MatButtonModule],
 })
 export class LogoutDialogComponent {}

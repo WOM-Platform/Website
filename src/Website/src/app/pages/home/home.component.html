@@ -20,9 +20,7 @@
     <app-store-logos
       [appName]="'WOM POCKET'"
       [appleURL]="'https://apps.apple.com/it/app/wom-pocket/id1466969163'"
-      [googleURL]="
-        'https://play.google.com/store/apps/details?id=social.wom.pocket'
-      "
+      [googleURL]="'https://play.google.com/store/apps/details?id=social.wom.pocket'"
     />
   </div>
   <h3
@@ -40,35 +38,6 @@
 
   <div class="flex flex-col gap-4">
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-      <!-- Azioni -->
-      <div class="square-info">
-        <h3 class="square-title">
-          {{ "HOME.SQUARES.ACTIONS.TITLE" | translate }}
-        </h3>
-        <div class="text-square">
-          <hr class="hr-line w-[48px]" />
-          <p>{{ "HOME.SQUARES.ACTIONS.DESC" | translate }}</p>
-        </div>
-        <div class="mt-auto flex justify-end text-square">
-          <app-btn-find-out-more [ref]="'/users'" />
-        </div>
-      </div>
-      <!-- Offerte -->
-      <div class="square-info">
-        <h3 class="square-title">
-          {{ "HOME.SQUARES.OFFERS.TITLE" | translate }}
-        </h3>
-        <div class="text-square">
-          <hr class="hr-line w-[90px]" />
-          <p [innerHTML]="'HOME.SQUARES.OFFERS.DESC' | translate"></p>
-        </div>
-        <div class="mt-auto flex justify-end text-square">
-          <app-btn-find-out-more [ref]="'/merchant'" />
-        </div>
-      </div>
-    </div>
-
-    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
       <!-- Valore -->
       <div class="square-info">
         <h3 class="square-title">
@@ -79,7 +48,36 @@
           <p [innerHTML]="'HOME.SQUARES.VALUE.DESC' | translate"></p>
         </div>
         <div class="mt-auto flex justify-end text-square">
-          <app-btn-find-out-more [ref]="'/about-section/about'" />
+          <app-btn-find-out-more [ref]="'/platform/about'" />
+        </div>
+      </div>
+      <!-- Azioni -->
+      <div class="square-info">
+        <h3 class="square-title">
+          {{ "HOME.SQUARES.ACTIONS.TITLE" | translate }}
+        </h3>
+        <div class="text-square">
+          <hr class="hr-line w-[48px]" />
+          <p [innerHTML]="'HOME.SQUARES.ACTIONS.DESC' | translate"></p>
+        </div>
+        <div class="mt-auto flex justify-end text-square">
+          <app-btn-find-out-more [ref]="'/platform/actions'" />
+        </div>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      <!-- Offerte -->
+      <div class="square-info">
+        <h3 class="square-title">
+          {{ "HOME.SQUARES.OFFERS.TITLE" | translate }}
+        </h3>
+        <div class="text-square">
+          <hr class="hr-line w-[90px]" />
+          <p [innerHTML]="'HOME.SQUARES.OFFERS.DESC' | translate"></p>
+        </div>
+        <div class="mt-auto flex justify-end text-square">
+          <app-btn-find-out-more [ref]="'/people'" [fragment]="'offers'" />
         </div>
       </div>
       <!-- Sfide -->
@@ -89,7 +87,7 @@
         </h3>
         <div class="text-square">
           <hr class="hr-line w-[70px]" />
-          <p>{{ "HOME.SQUARES.CHALLENGES.DESC" | translate }}</p>
+          <p [innerHTML]="'HOME.SQUARES.CHALLENGES.DESC' | translate"></p>
         </div>
         <div class="mt-auto flex justify-end text-square">
           <app-btn-find-out-more [ref]="'/challenge'" />
@@ -98,39 +96,38 @@
     </div>
   </div>
 
-  <div class="col-span-full relative">
+  <!-- How to earn money -->
+  <!-- <div class="col-span-full relative">
     <h3 class="text-[#1F1F1D] mt-6 mb-3 homeH3">
       {{ "HOME.HOW_TO_EARN" | translate }}
     </h3>
     <app-small-images-carousel [images]="squareList" />
+  </div> -->
+
+  <div class="justify-center flex mt-8">
+    <div class="animated-number rounded-container">
+      <p
+        class="centered rounded-container-header px-2 py-1 m-0"
+        [innerHTML]="'INSTRUMENT.STATS.AVAILABLE' | translate"
+      ></p>
+      <div
+        class="centered bold rounded-container-body px-2 py-1 m-0 flex justify-center"
+      >
+        @if (isLoading) {
+          <div class="animated-number-pulse"></div>
+        } @else {
+          <app-animated-number
+            [finalNumber]="stats!.totalVouchersAvailable"
+            [duration]="1000"
+          >
+          </app-animated-number>
+        }
+      </div>
+    </div>
   </div>
 
-  <!-- Logos Section (Alts only) -->
-  <div
-    class="flex flex-wrap justify-center items-center gap-4 mt-8 relative w-full"
-  >
-    <img
-      src="../../../assets/images/home/WOMPocket.png"
-      alt="WOM Pocket"
-      class="logo-app sm:mr-6"
-    />
-    <div
-      class="hidden md:block w-[2px] h-32 bg-[#CCCCCC] transform rotate-12 origin-center"
-    ></div>
-    <img
-      src="../../../assets/images/home/WOMFit.png"
-      alt="WOM Fit"
-      class="logo-app"
-    />
-    <div
-      class="hidden md:block w-[2px] h-32 bg-[#CCCCCC] transform rotate-12 origin-center"
-    ></div>
-    <img
-      src="../../../assets/images/home/WOMPos.png"
-      alt="WOM POS"
-      class="logo-app"
-    />
-  </div>
+  <!-- Logos Section -->
+  <app-mobile-launcher />
 </div>
 
 <!-- DIGIT section -->
@@ -138,7 +135,7 @@
   href="https://digit.srl/"
   target="_blank"
   rel="noopener noreferrer"
-  class="px-6 md:px-20 py-3 md:py-6 mt-6 bg-[#F2F2F2] relative flex items-center flex-col md:flex-row gap-4 md:gap-12"
+  class="px-6 md:px-20 text-gray-600 hover:no-underline py-3 md:py-6 mt-6 bg-[#F2F2F2] relative flex items-center flex-col md:flex-row gap-4 md:gap-12"
 >
   <img
     class="h-auto max-w-28 md:max-w-full md:max-h-24 w-auto"
@@ -154,7 +151,7 @@
   href="https://ctesquare.it/"
   target="_blank"
   rel="noopener noreferrer"
-  class="px-6 md:px-20 py-3 md:py-6 bg-[#F2F2F2] relative flex items-center flex-col md:flex-row gap-4 md:gap-12"
+  class="px-6 md:px-20 text-gray-600 hover:no-underline py-3 md:py-6 bg-[#F2F2F2] relative flex items-center flex-col md:flex-row gap-4 md:gap-12"
 >
   <p class="font-light">{{ "HOME.FOOTER.CTE_DESC" | translate }}</p>
   <img

@@ -1,0 +1,113 @@
+<div class="container">
+  <h1 class="mb-6 text-center text-4xl font-bold text-[#009FE3]">
+    {{ "USERS.PEOPLE.TITLE" | translate }}
+  </h1>
+
+  <section appScrollAnimation class="mb-12">
+    <h2>
+      {{ "USERS.PEOPLE.WHO_ARE_PEOPLE.TITLE" | translate }}
+    </h2>
+
+    <div class="flex flex-col items-center gap-10 md:flex-row">
+      <img
+        src="/assets/images/applications/WOMPocketSenzaScritta.png"
+        alt="screen app wom pocket"
+        class="h-fit max-w-[150px] md:max-w-[300px]"
+      />
+
+      <div>
+        <p
+          class="mb-4 text-gray-600"
+          [innerHTML]="'USERS.PEOPLE.WHO_ARE_PEOPLE.DESC_1' | translate"
+        ></p>
+
+        <p
+          class="text-gray-600"
+          [innerHTML]="'USERS.PEOPLE.WHO_ARE_PEOPLE.DESC_2' | translate"
+        ></p>
+
+        <p class="text-gray-600">
+          {{ "USERS.PEOPLE.WHO_ARE_PEOPLE.DESC_3" | translate }}
+        </p>
+
+        <a class="font-semibold text-[#009FE3]" routerLink="/app/wom-pocket">
+          {{ "USERS.PEOPLE.WHO_ARE_PEOPLE.LINK" | translate }}
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section appScrollAnimation class="mb-12" id="earn">
+    <div class="flex flex-col items-center gap-10 md:flex-row">
+      <div>
+        <h2>
+          {{ "USERS.PEOPLE.ACTIONS_HOW_TO_EARN_WOM.TITLE" | translate }}
+        </h2>
+        <p
+          class="mb-4 text-gray-600"
+          [innerHTML]="
+            'USERS.PEOPLE.ACTIONS_HOW_TO_EARN_WOM.DESC_1' | translate
+          "
+        ></p>
+
+        <p
+          class="text-gray-600"
+          [innerHTML]="
+            'USERS.PEOPLE.ACTIONS_HOW_TO_EARN_WOM.DESC_2' | translate
+          "
+        ></p>
+
+        <p
+          class="text-gray-600"
+          [innerHTML]="
+            'USERS.PEOPLE.ACTIONS_HOW_TO_EARN_WOM.DESC_3' | translate
+          "
+        ></p>
+
+        <a
+          routerLink="/platform/actions"
+          class="font-semibold text-[#009FE3]"
+          [innerHTML]="'USERS.PEOPLE.ACTIONS_HOW_TO_EARN_WOM.LINK' | translate"
+        ></a>
+      </div>
+
+      <img
+        src="/assets/images/users/people/womPocket-screen.webp"
+        alt="screen app wom pocket"
+        class="h-fit max-w-[150px] md:max-w-[300px]"
+      />
+    </div>
+  </section>
+
+  <section appScrollAnimation class="mb-12" id="use">
+    <h2>
+      {{ "USERS.PEOPLE.OFFERS_HOW_TO_USE_WOM.TITLE" | translate }}
+    </h2>
+
+    <p
+      class="mb-4 text-gray-600"
+      [innerHTML]="'USERS.PEOPLE.OFFERS_HOW_TO_USE_WOM.DESC_1' | translate"
+    ></p>
+
+    <p
+      class="text-gray-600"
+      [innerHTML]="'USERS.PEOPLE.OFFERS_HOW_TO_USE_WOM.DESC_2' | translate"
+    ></p>
+
+    <p
+      class="text-gray-600"
+      [innerHTML]="'USERS.PEOPLE.OFFERS_HOW_TO_USE_WOM.DESC_3' | translate"
+    ></p>
+
+    <p
+      class="text-gray-600"
+      [innerHTML]="'USERS.PEOPLE.OFFERS_HOW_TO_USE_WOM.DESC_4' | translate"
+    ></p>
+
+    <p class="text-gray-600">
+      {{ "USERS.PEOPLE.OFFERS_HOW_TO_USE_WOM.DESC_5" | translate }}
+    </p>
+  </section>
+</div>
+
+<app-people-map-feature></app-people-map-feature>

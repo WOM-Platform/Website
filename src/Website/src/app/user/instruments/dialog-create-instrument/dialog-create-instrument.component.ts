@@ -8,19 +8,36 @@ import {
   AfterViewInit,
   ChangeDetectionStrategy,
 } from "@angular/core";
-import { FormBuilder, FormGroup, Validators, FormArray } from "@angular/forms";
+import {
+  FormBuilder,
+  FormGroup,
+  Validators,
+  FormArray,
+  FormsModule,
+  ReactiveFormsModule,
+} from "@angular/forms";
 import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material/dialog";
-import { Subscription, Observable, of, firstValueFrom } from "rxjs";
-import { Aim, AimEditing } from "../../../_models";
+import { Subscription, firstValueFrom } from "rxjs";
+import { Aim } from "../../../_models";
 import { AimsService } from "../../../_services";
-import { switchMap } from "rxjs/operators";
+import { AimsListComponent } from "../../components/aims-list/aims-list.component";
+import { UserAimsListComponent } from "../../components/user-aims-list/user-aims-list.component";
+import { CommonModule } from "@angular/common";
+import { UserAccessListComponent } from "../../components/user-access-list/user-access-list.component";
 
 @Component({
   selector: "app-dialog-create-instrument",
   templateUrl: "./dialog-create-instrument.component.html",
   styleUrls: ["./dialog-create-instrument.component.css"],
   changeDetection: ChangeDetectionStrategy.Eager,
-  standalone: false,
+  standalone: true,
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    AimsListComponent,
+    UserAimsListComponent,
+    UserAccessListComponent,
+  ],
 })
 export class DialogCreateSourceComponent
   implements OnInit, OnDestroy, AfterViewInit

@@ -3,12 +3,14 @@ import { ActivatedRoute, NavigationEnd, Router } from "@angular/router";
 import { MenuItem } from "primeng/api";
 import { filter } from "rxjs/operators";
 import { TranslateService } from "@ngx-translate/core";
+import { Breadcrumb } from "primeng/breadcrumb";
 
 @Component({
   selector: "app-breadcrumbs",
   templateUrl: "./breadcrumbs.component.html",
   changeDetection: ChangeDetectionStrategy.Eager,
-  standalone: false,
+  standalone: true,
+  imports: [Breadcrumb],
 })
 export class BreadcrumbsComponent implements OnInit {
   static readonly ROUTE_DATA_BREADCRUMB = "breadcrumb";

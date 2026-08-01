@@ -11,6 +11,7 @@ import {
   AbstractControl,
   FormBuilder,
   FormGroup,
+  ReactiveFormsModule,
   UntypedFormBuilder,
   UntypedFormGroup,
   ValidationErrors,
@@ -18,6 +19,12 @@ import {
   Validators,
 } from "@angular/forms";
 import { EventEmitter } from "@angular/core";
+import { MatButton } from "@angular/material/button";
+import { MatDivider } from "@angular/material/divider";
+import { MatFormFieldModule } from "@angular/material/form-field";
+import { MatInput, MatError } from "@angular/material/input";
+import { MatStepperModule } from "@angular/material/stepper";
+import { TranslateModule } from "@ngx-translate/core";
 
 type MerchantType = {
   email: AbstractControl<any, any>;
@@ -32,7 +39,17 @@ type MerchantType = {
   templateUrl: "./forms-user.directive.html",
   styleUrls: ["./forms-user.directive.css", "../forms.directive.css"],
   changeDetection: ChangeDetectionStrategy.Eager,
-  standalone: false,
+  standalone: true,
+  imports: [
+    ReactiveFormsModule,
+    TranslateModule,
+    MatFormFieldModule,
+    MatInput,
+    MatError,
+    MatDivider,
+    MatButton,
+    MatStepperModule,
+  ],
 })
 export class UserFormComponent implements OnInit, OnChanges {
   @Input() form!: FormGroup;

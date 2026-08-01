@@ -15,13 +15,17 @@ import { MatDialog } from "@angular/material/dialog";
 import { CreateEditUserDialogComponent } from "./create-edit-user-dialog/create-edit-user-dialog.component";
 import { DialogConfirmCancelComponent } from "../../components/dialog-confirm-cancel/dialog-confirm-cancel";
 import { finalize } from "rxjs";
+import { FiltersComponent } from "../components/filters/filters.component";
+import { AdminTableComponent } from "../components/admin-table/admin-table.component";
+import { CreateButtonComponent } from "../components/create-button/create-button.component";
 
 @Component({
   selector: "app-users-tab",
   templateUrl: "./user-users.component.html",
   styleUrl: "./user-users.component.css",
   changeDetection: ChangeDetectionStrategy.Eager,
-  standalone: false,
+  standalone: true,
+  imports: [FiltersComponent, AdminTableComponent, CreateButtonComponent],
 })
 export class UserUsersComponent implements OnInit, OnChanges {
   itemsPerPage: string = "10";

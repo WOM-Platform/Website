@@ -1,11 +1,12 @@
 import { Component, ChangeDetectionStrategy } from "@angular/core";
-import { TranslateService } from "@ngx-translate/core";
+import { TranslateModule, TranslateService } from "@ngx-translate/core";
 
 @Component({
   selector: "app-privacy-womfit",
   templateUrl: "./womFit.component.html",
+  imports: [TranslateModule],
   changeDetection: ChangeDetectionStrategy.Eager,
-  standalone: false,
+  standalone: true,
 })
 export class PrivacyWomFitComponent {
   constructor(private translate: TranslateService) {}

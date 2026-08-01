@@ -18,7 +18,8 @@ import { SnackBarService } from "../../_services/snack-bar.service";
   templateUrl: "./user-home.component.html",
   styleUrls: ["./user-home.component.css"],
   changeDetection: ChangeDetectionStrategy.Eager,
-  standalone: false,
+  standalone: true,
+  imports: [],
 })
 export class UserHomeComponent implements OnInit, OnDestroy {
   userData: any;

@@ -6,7 +6,6 @@ import {
   ChangeDetectionStrategy,
 } from "@angular/core";
 import { DatePipe } from "@angular/common";
-import { SharedModule } from "../../../shared/shared.module";
 import { Aim, Merchants, User, UserMe } from "../../../_models";
 import { filter, Subscription } from "rxjs";
 import { UserService } from "../../../_services";
@@ -28,7 +27,6 @@ import { MatDialog } from "@angular/material/dialog";
 @Component({
   selector: "app-admin-role",
   imports: [
-    SharedModule,
     CsvDownloadComponent,
     StatisticsFiltersComponent,
     MatTooltip,

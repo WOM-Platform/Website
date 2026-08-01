@@ -1,22 +1,39 @@
 import { Component, OnInit, ChangeDetectionStrategy } from "@angular/core";
 import { UserMe } from "../../_models";
 import {
+  ReactiveFormsModule,
   UntypedFormBuilder,
   UntypedFormGroup,
   Validators,
 } from "@angular/forms";
 import { UserService } from "../../_services/user.service";
 import { ActivatedRoute, Router } from "@angular/router";
-import { TranslateService } from "@ngx-translate/core";
+import { TranslateModule, TranslateService } from "@ngx-translate/core";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { User } from "@sentry/angular";
+import { MatButton } from "@angular/material/button";
+import { MatCard, MatCardContent, MatCardTitle } from "@angular/material/card";
+import { MatFormFieldModule } from "@angular/material/form-field";
+import { MatInput, MatError, MatHint } from "@angular/material/input";
 
 @Component({
   selector: "app-reset-password",
   templateUrl: "./reset-password.component.html",
   styleUrls: ["./reset-password.component.css"],
   changeDetection: ChangeDetectionStrategy.Eager,
-  standalone: false,
+  standalone: true,
+  imports: [
+    ReactiveFormsModule,
+    TranslateModule,
+    MatCard,
+    MatCardContent,
+    MatCardTitle,
+    MatFormFieldModule,
+    MatInput,
+    MatError,
+    MatHint,
+    MatButton,
+  ],
 })
 export class ResetPasswordComponent implements OnInit {
   user: User | null = null;

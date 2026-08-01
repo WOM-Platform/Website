@@ -5,7 +5,6 @@ import { StatsService, UserService } from "../../../_services";
 
 import { Instrument } from "../../../_models/instrument";
 import { NgxSkeletonLoaderModule } from "ngx-skeleton-loader";
-import { SharedModule } from "../../../shared/shared.module";
 import {
   ChartDataSwimlane,
   ChartDataSwimlaneSeries,
@@ -24,7 +23,7 @@ import { StatisticsFiltersComponent } from "../components/statistics-filters/sta
 
 @Component({
   selector: "app-user-role",
-  imports: [StatisticsFiltersComponent, NgxSkeletonLoaderModule, SharedModule],
+  imports: [StatisticsFiltersComponent, NgxSkeletonLoaderModule],
   standalone: true,
   templateUrl: "./user-role.component.html",
   changeDetection: ChangeDetectionStrategy.Eager,

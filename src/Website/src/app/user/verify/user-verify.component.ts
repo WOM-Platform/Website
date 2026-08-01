@@ -1,15 +1,17 @@
 import { Component, OnInit, ChangeDetectionStrategy } from "@angular/core";
 import { UserService } from "../../_services";
 import { ActivatedRoute, Router } from "@angular/router";
-import { TranslateService } from "@ngx-translate/core";
+import { TranslateModule, TranslateService } from "@ngx-translate/core";
 import { MatSnackBar } from "@angular/material/snack-bar";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 
 @Component({
   selector: "app-user-verify",
   templateUrl: "./user-verify.component.html",
   styleUrls: ["./user-verify.component.css"],
   changeDetection: ChangeDetectionStrategy.Eager,
-  standalone: false,
+  standalone: true,
+  imports: [ReactiveFormsModule, TranslateModule, FormsModule],
 })
 export class UserVerifyComponent implements OnInit {
   workingText: string = "";

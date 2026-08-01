@@ -24,8 +24,16 @@ export class GoogleMapsLoaderService {
       script.defer = true;
 
       script.onload = () => {
-        this.isLoaded = true;
-        resolve();
+        const checkGoogle = () => {
+          if (window.google?.maps) {
+            this.isLoaded = true;
+            resolve();
+          } else {
+            setTimeout(checkGoogle, 50);
+          }
+        };
+
+        checkGoogle();
       };
 
       script.onerror = (err) => {

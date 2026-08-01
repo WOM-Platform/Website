@@ -11,14 +11,29 @@ import { UntypedFormGroup } from "@angular/forms";
 import { MerchantService } from "../../../_services";
 import { DialogType } from "../../../_models/dialogType";
 import { StorageService } from "../../../_services/storage.service";
-import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material/dialog";
+import {
+  MAT_DIALOG_DATA,
+  MatDialogActions,
+  MatDialogContent,
+  MatDialogRef,
+} from "@angular/material/dialog";
+import { MatError } from "@angular/material/input";
+import { FormMerchantComponent } from "./form-merchant/form-merchant.component";
+import { TranslateModule } from "@ngx-translate/core";
 
 @Component({
   selector: "app-form-merchant-dialog",
   templateUrl: "dialog-create-merchant.html",
   styleUrls: ["dialog-create-merchant.css"],
   changeDetection: ChangeDetectionStrategy.Eager,
-  standalone: false,
+  standalone: true,
+  imports: [
+    MatDialogContent,
+    MatError,
+    FormMerchantComponent,
+    MatDialogActions,
+    TranslateModule,
+  ],
 })
 export class DialogCreateMerchant implements OnInit {
   formMerchant!: UntypedFormGroup;

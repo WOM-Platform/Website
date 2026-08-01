@@ -1,0 +1,107 @@
+<div class="container platform-actions">
+  <h1>
+    {{ "PLATFORM.ACTIONS.TITLE" | translate }}
+  </h1>
+
+  <section appScrollAnimation>
+    <h2>
+      {{ "PLATFORM.ACTIONS.HOW_TO_GENERATE.TITLE" | translate }}
+    </h2>
+
+    <p [innerHTML]="'PLATFORM.ACTIONS.HOW_TO_GENERATE.DESC_1' | translate"></p>
+
+    <p [innerHTML]="'PLATFORM.ACTIONS.HOW_TO_GENERATE.DESC_2' | translate"></p>
+
+    <p [innerHTML]="'PLATFORM.ACTIONS.HOW_TO_GENERATE.DESC_3' | translate"></p>
+
+    <p>
+      {{ "PLATFORM.ACTIONS.HOW_TO_GENERATE.DESC_4" | translate }}
+    </p>
+  </section>
+
+  <section appScrollAnimation>
+    <h2>
+      {{ "PLATFORM.ACTIONS.COLLECT_WOM.TITLE" | translate }}
+    </h2>
+
+    <p [innerHTML]="'PLATFORM.ACTIONS.COLLECT_WOM.DESC_1' | translate"></p>
+
+    <p>
+      {{ "PLATFORM.ACTIONS.COLLECT_WOM.DESC_2" | translate }}
+    </p>
+
+    <ul>
+      <li>
+        <span class="material-symbols-outlined">check_circle</span>
+        <span
+          [innerHTML]="'PLATFORM.ACTIONS.COLLECT_WOM.DESC_2_1' | translate"
+        ></span>
+      </li>
+
+      <li>
+        <span class="material-symbols-outlined">check_circle</span>
+        <span
+          [innerHTML]="'PLATFORM.ACTIONS.COLLECT_WOM.DESC_2_2' | translate"
+        ></span>
+      </li>
+
+      <li>
+        <span class="material-symbols-outlined">check_circle</span>
+        <span
+          [innerHTML]="'PLATFORM.ACTIONS.COLLECT_WOM.DESC_2_3' | translate"
+        ></span>
+      </li>
+
+      <li>
+        <span class="material-symbols-outlined">check_circle</span>
+        <span
+          [innerHTML]="'PLATFORM.ACTIONS.COLLECT_WOM.DESC_2_4' | translate"
+        ></span>
+      </li>
+
+      <li>
+        <span class="material-symbols-outlined">check_circle</span>
+        <span
+          [innerHTML]="'PLATFORM.ACTIONS.COLLECT_WOM.DESC_2_5' | translate"
+        ></span>
+      </li>
+    </ul>
+
+    <a
+      class="click-here"
+      routerLink="/app/wom-pocket"
+      [innerHTML]="'PLATFORM.ACTIONS.COLLECT_WOM.DESC_3' | translate"
+    ></a>
+  </section>
+</div>
+
+<div class="carousel-wrapper">
+  <app-small-images-carousel [images]="squareList" />
+</div>
+
+<div class="container platform-actions">
+  <section appScrollAnimation>
+    <h2>
+      {{ "PLATFORM.ACTIONS.HOW_TO_EARN.TITLE" | translate }}
+    </h2>
+
+    <p>{{ "PLATFORM.ACTIONS.HOW_TO_EARN.DESC_1" | translate }}</p>
+
+    <p [innerHTML]="'PLATFORM.ACTIONS.HOW_TO_EARN.DESC_2' | translate"></p>
+
+    <p>{{ "PLATFORM.ACTIONS.HOW_TO_EARN.DESC_3" | translate }}</p>
+
+    <p>{{ "PLATFORM.ACTIONS.HOW_TO_EARN.DESC_4" | translate }}</p>
+  </section>
+
+  <section appScrollAnimation>
+    <h2>
+      {{ "PLATFORM.ACTIONS.ACTION_TO_GENERATE.TITLE" | translate }}
+    </h2>
+    <h2>
+      {{ "PLATFORM.ACTIONS.HOW_TO_EARN.TITLE" | translate }}
+    </h2>
+
+    <app-accordion [items]="actions"></app-accordion>
+  </section>
+</div>

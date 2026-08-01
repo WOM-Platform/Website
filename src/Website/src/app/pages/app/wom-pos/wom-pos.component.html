@@ -1,0 +1,96 @@
+<div class="container wom-pos">
+  <h1 appScrollAnimation>
+    {{ "APP.WOM_POS.TITLE" | translate }}
+  </h1>
+
+  <section appScrollAnimation>
+    <h2>
+      {{
+        "APP.WOM_POS.WOM_POS_TOOL_FOR_MERCHANTS_ACCEPTING_WOM.TITLE" | translate
+      }}
+    </h2>
+
+    <div class="content-row">
+      <div>
+        <p
+          [innerHTML]="
+            'APP.WOM_POS.WOM_POS_TOOL_FOR_MERCHANTS_ACCEPTING_WOM.DESC_1'
+              | translate
+          "
+        ></p>
+
+        <p>
+          {{
+            "APP.WOM_POS.WOM_POS_TOOL_FOR_MERCHANTS_ACCEPTING_WOM.DESC_2"
+              | translate
+          }}
+        </p>
+
+        <p
+          [innerHTML]="
+            'APP.WOM_POS.WOM_POS_TOOL_FOR_MERCHANTS_ACCEPTING_WOM.DESC_3'
+              | translate
+          "
+        ></p>
+      </div>
+
+      <img
+        src="/assets/images/applications/WOMPosSenzaScritta.png"
+        alt="screen app wom pos"
+        class="logo-app"
+      />
+    </div>
+  </section>
+
+  <section appScrollAnimation>
+    <h2>
+      {{
+        "APP.WOM_POS.ENHANCE_YOUR_BUSINESS_THROUGH_THE_WOM_NETWORK.TITLE"
+          | translate
+      }}
+    </h2>
+
+    <p>
+      {{
+        "APP.WOM_POS.ENHANCE_YOUR_BUSINESS_THROUGH_THE_WOM_NETWORK.DESC_1"
+          | translate
+      }}
+    </p>
+
+    <p
+      [innerHTML]="
+        'APP.WOM_POS.ENHANCE_YOUR_BUSINESS_THROUGH_THE_WOM_NETWORK.DESC_2'
+          | translate
+      "
+    ></p>
+
+    <p>
+      {{
+        "APP.WOM_POS.ENHANCE_YOUR_BUSINESS_THROUGH_THE_WOM_NETWORK.DESC_3"
+          | translate
+      }}
+    </p>
+  </section>
+
+  <section appScrollAnimation>
+    <h2>
+      {{ "APP.WOM_POS.DOWNLOAD_WOM_POS.TITLE" | translate }}
+    </h2>
+
+    <p [innerHTML]="'APP.WOM_POS.DOWNLOAD_WOM_POS.DESC_1' | translate"></p>
+
+    <p>
+      {{ "APP.WOM_POS.DOWNLOAD_WOM_POS.DESC_2" | translate }}
+    </p>
+
+    <p class="download-link">
+      {{ "APP.WOM_POS.DOWNLOAD_WOM_POS.LINK" | translate }}
+    </p>
+
+    <app-store-logos
+      [appName]="'WOM POS '"
+      [appleURL]="'https://apps.apple.com/it/app/wom-pos/id1468252634'"
+      [googleURL]="'https://play.google.com/store/apps/details?id=social.wom.pos'"
+    ></app-store-logos>
+  </section>
+</div>

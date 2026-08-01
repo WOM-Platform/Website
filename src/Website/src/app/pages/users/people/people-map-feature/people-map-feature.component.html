@@ -1,0 +1,88 @@
+<section
+  class="people-map-feature"
+  [attr.aria-label]="'USERS.PEOPLE.MAP.FEATURE_ARIA_LABEL' | translate"
+>
+  <div class="map-toolbar">
+    <input
+      #mapSearchField
+      class="map-search-input"
+      type="search"
+      autocomplete="off"
+      [placeholder]="'USERS.PEOPLE.MAP.SEARCH_PLACEHOLDER' | translate"
+      [attr.aria-label]="'USERS.PEOPLE.MAP.SEARCH_ARIA_LABEL' | translate"
+    />
+
+    <div
+      class="map-actions"
+      [attr.aria-label]="'USERS.PEOPLE.MAP.ZOOM_CONTROLS' | translate"
+    >
+      <button
+        type="button"
+        class="map-action-button"
+        [attr.aria-label]="'USERS.PEOPLE.MAP.ZOOM_OUT' | translate"
+        (click)="zoomOut()"
+      >
+        &minus;
+      </button>
+
+      <button
+        type="button"
+        class="map-action-button"
+        [attr.aria-label]="'USERS.PEOPLE.MAP.ZOOM_IN' | translate"
+        (click)="zoomIn()"
+      >
+        +
+      </button>
+    </div>
+  </div>
+
+  <div class="people-map-layout">
+    @if (mapsReady) {
+      <google-map
+        class="people-map"
+        height="500px"
+        width="100%"
+        (mapDragend)="boundsChanged()"
+        (zoomChanged)="boundsChanged()"
+        [zoom]="zoom"
+        [center]="center"
+        [options]="options"
+      >
+        @for (marker of markers; track trackMarker(marker)) {
+          <map-marker
+            #markerElem="mapMarker"
+            [position]="marker.position"
+            [title]="marker.title"
+            [icon]="marker.options.icon!"
+            (mapClick)="openInfo(markerElem, marker)"
+          ></map-marker>
+        }
+
+        <map-info-window [innerHTML]="infoContent"></map-info-window>
+      </google-map>
+    }
+    <aside
+      class="offers-list"
+      [attr.aria-label]="'USERS.PEOPLE.MAP.LIST_ARIA_LABEL' | translate"
+    >
+      @for (pos of posList; track pos) {
+        <button type="button" class="offer-card" (click)="onPosSelection(pos)">
+          <span class="offer-content">
+            <span class="offer-title">
+              {{ pos.name }}
+            </span>
+
+            <span class="offer-meta">
+              {{
+                "USERS.PEOPLE.MAP.OFFERS_AVAILABLE"
+                  | translate: { count: pos.offers?.length || 0 }
+              }}
+            </span>
+          </span>
+
+          <span class="offer-arrow" aria-hidden="true">&rarr;</span>
+        </button>
+      }
+    </aside>
+  </div>
+</section>

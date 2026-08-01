@@ -1,0 +1,247 @@
+import {
+  Component,
+  ElementRef,
+  QueryList,
+  ViewChild,
+  ViewChildren,
+} from "@angular/core";
+import {
+  GoogleMap,
+  MapInfoWindow,
+  MapMarker,
+  MarkerClusterer,
+} from "@angular/google-maps";
+import {
+  MatListModule,
+  MatSelectionList,
+  MatSelectionListChange,
+} from "@angular/material/list";
+import { TranslateModule } from "@ngx-translate/core";
+import { PosWithOffers } from "src/app/_models/offer";
+import { MapService } from "src/app/_services";
+import { GoogleMapsLoaderService } from "src/app/_services/google-maps-loader.service";
+
+import { environment } from "src/environments/environment";
+import { RouterLink } from "@angular/router";
+import { PeopleMapFeatureComponent } from "./people-map-feature/people-map-feature.component";
+import { ScrollAnimationDirective } from "src/app/directives/scroll-animation.directive";
+
+@Component({
+  selector: "app-people",
+  imports: [
+    TranslateModule,
+    ScrollAnimationDirective,
+    MatListModule,
+    TranslateModule,
+    RouterLink,
+    PeopleMapFeatureComponent,
+  ],
+  templateUrl: "./people.component.html",
+  styleUrl: "./people.component.css",
+})
+export class PeopleComponent {
+  @ViewChild(GoogleMap) map!: GoogleMap;
+  @ViewChild(MapInfoWindow) infoWindow!: MapInfoWindow;
+  @ViewChild("mapSearchField") searchField!: ElementRef<HTMLInputElement>;
+  @ViewChildren("markerElem") mapMarkerElem!: QueryList<MapMarker>;
+
+  mapLoaded = false;
+  searchBox!: google.maps.places.SearchBox;
+  infoContent = "";
+  markers: {
+    position: google.maps.LatLngLiteral;
+    title: string;
+    info?: string;
+    options?: google.maps.MarkerOptions;
+  }[] = [];
+  posList: PosWithOffers[] = [];
+  zoom = 12;
+  center: google.maps.LatLngLiteral = {
+    lat: 43.72639929907197,
+    lng: 12.636022293124498,
+  };
+  options: google.maps.MapOptions = {
+    mapTypeId: "hybrid",
+    clickableIcons: true,
+    zoomControl: true,
+    scrollwheel: true,
+    disableDoubleClickZoom: false,
+    maxZoom: 22,
+    minZoom: 5,
+  };
+
+  constructor(
+    private mapService: MapService,
+    private mapsLoader: GoogleMapsLoaderService
+  ) {}
+
+  ngOnInit(): void {
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        this.center = {
+          lat: position.coords.latitude,
+          lng: position.coords.longitude,
+        };
+        this.zoom = 17;
+      },
+      () => {
+        console.error("Position not allowed.");
+        this.zoom = 17;
+      }
+    );
+  }
+
+  async ngAfterViewInit(): Promise<void> {
+    await this.mapsLoader.load(environment.googleMapsApiKey);
+    this.searchBox = new google.maps.places.SearchBox(
+      this.searchField.nativeElement
+    );
+
+    this.searchBox.addListener("places_changed", () => {
+      const places = this.searchBox.getPlaces();
+      if (!places || places.length === 0) return;
+
+      const bounds = new google.maps.LatLngBounds();
+
+      places.forEach((place) => {
+        if (!place.geometry?.location) return;
+
+        if (place.geometry.viewport) {
+          bounds.union(place.geometry.viewport);
+        } else {
+          bounds.extend(place.geometry.location);
+        }
+      });
+
+      this.map.googleMap?.fitBounds(bounds);
+      this.boundsChanged();
+    });
+
+    this.map.googleMap?.addListener("idle", () => {
+      if (!this.mapLoaded) {
+        setTimeout(() => {
+          const currentZoom = this.map.googleMap?.getZoom();
+          if (currentZoom != null) {
+            this.map.googleMap?.setZoom(currentZoom - 1);
+          }
+        }, 1000);
+      }
+    });
+  }
+
+  zoomIn(): void {
+    const maxZoom = this.options.maxZoom ?? 22;
+    if (this.zoom < maxZoom) {
+      this.zoom++;
+    }
+  }
+
+  zoomOut(): void {
+    const minZoom = this.options.minZoom ?? 5;
+    if (this.zoom > minZoom) {
+      this.zoom--;
+    }
+  }
+
+  logCenter(): void {
+    // console.log(JSON.stringify(this.map.getCenter()));
+  }
+
+  addMarker(posData: PosWithOffers): void {
+    const marker = new google.maps.Marker({
+      position: {
+        lat: posData.position.latitude,
+        lng: posData.position.longitude,
+      },
+
+      title: posData.name,
+    });
+
+    this.markers.push({
+      title: posData.name,
+      info: posData.url,
+      position: {
+        lat: posData.position.latitude,
+        lng: posData.position.longitude,
+      },
+      options: {
+        icon: {
+          url: "assets/images/pin-wom.png",
+          scaledSize: new google.maps.Size(30, 50),
+          anchor: new google.maps.Point(15, 50),
+        },
+      },
+    });
+  }
+
+  openInfo(
+    marker: MapMarker,
+    content: {
+      title: string;
+      info?: string;
+    }
+  ): void {
+    this.infoContent = `<b>${content.title}</b>`;
+
+    if (content.info) {
+      this.infoContent +=
+        `<br><br><a href="${content.info}" target="_blank">` +
+        `${content.info}</a>`;
+    }
+
+    this.infoWindow.open(marker);
+  }
+
+  boundsChanged(): void {
+    const currentBounds = this.map.getBounds();
+    if (!currentBounds) {
+      console.log("bounds not available.");
+      return;
+    }
+
+    if (!this.mapLoaded) {
+      this.mapLoaded = true;
+    }
+
+    const bounds = currentBounds.toJSON();
+    this.mapService
+      .getPosWithOffers(
+        bounds.west.toString(),
+        bounds.east.toString(),
+        bounds.south.toString(),
+        bounds.north.toString()
+      )
+      .subscribe((res: PosWithOffers[]) => {
+        this.markers = [];
+
+        if (!res) return;
+
+        this.posList = res;
+
+        for (const pos of res) {
+          this.addMarker(pos);
+        }
+
+        /*
+            const markerClusterer = new MarkerClusterer({
+              map: this.map.googleMap,
+              markers: this.markers
+            });
+            */
+      });
+  }
+
+  onPosSelection(pos: PosWithOffers) {
+    const markerData = this.markers.find((m) => m.title === pos.name);
+
+    const markerElem = this.mapMarkerElem.find(
+      (mm) => mm.getTitle() === pos.name
+    );
+
+    if (!markerData || !markerElem) {
+      return;
+    }
+
+    this.openInfo(markerElem, markerData);
+  }
+}

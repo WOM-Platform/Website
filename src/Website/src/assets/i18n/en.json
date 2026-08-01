@@ -3,22 +3,27 @@
   "FLAG_NO": "No",
   "NAV": {
     "HOME": "Home",
+    "PLATFORM": {
+      "TITLE": "Platform",
+      "ABOUT": "About",
+      "CHALLENGES": "Challenges",
+      "ACTIONS": "Actions"
+    },
     "USERS": {
       "TITLE": "Users",
-      "WHO_ARE": "About",
-      "CHALLENGES": "Challenges",
-      "APPLICATIONS": "How to earn WOM"
+      "PEOPLE": "People",
+      "MERCHANT": "Merchant",
+      "INSTRUMENT": "Instrument"
     },
-    "ABOUT": {
-      "TITLE": "About"
+    "APP": {
+      "TITLE": "App",
+      "WOM_POCKET": "WOM Pocket",
+      "WOM_POS": "WOM POS",
+      "WOM_FIT": "WOM Fit"
     },
-    "PROJECTS": {
-      "RETE-DELLE-RETI": "Rete delle Reti"
-    },
-    "INSTRUMENT": "Instrument",
+    "FAQ": "FAQ",
     "SIGN_IN": "Login",
     "PROFILE": "Profile",
-    "MERCHANT": "Merchant",
     "SIGN_OUT": "Log out",
     "LOGOUT_DIALOG": {
       "TITLE": "Log out",
@@ -358,21 +363,21 @@
     "INFO_WOM": "<span class=\"womWord\">WOM</span> - \"Worth One Minute\" is a general-purpose reward platform based on a voucher exchange system. Many actions and activities performed by individuals have an intrinsic social value, an effect known in economics as a \"positive externality\". WOM aims to recognize all those actions that constitute a socially valuable contribution to a common goal, rewarding the time people dedicate to these activities through the generation of digital social vouchers. WOM vouchers reward every minute of social commitment.",
     "HOW_TO_EARN": "how to earn WOM",
     "SQUARES": {
+      "VALUE": {
+        "TITLE": "value",
+        "DESC": "Many everyday actions generate value that goes beyond personal benefit: they have a positive impact on the community. WOM recognises this social value and turns it into a tangible opportunity, rewarding positive externalities through the issuance of WOM vouchers."
+      },
       "ACTIONS": {
         "TITLE": "actions",
-        "DESC": "By performing socially valuable actions, every user earns WOM. Users can manage their WOM vouchers via an app, \"WOM Pocket\", which they can install on their device. The application allows them to collect, store, and spend their vouchers."
+        "DESC": "Every time you carry out a socially responsible action, you earn WOM. The vouchers are collected and managed via the \"WOM Pocket\" app, which allows you to store, track and use them easily and instantly."
       },
       "OFFERS": {
         "TITLE": "offers",
-        "DESC": "Local shops can offer users services and discounts in exchange for WOM.<br />You can find participating shops in the \"offers\" section of \"WOM Pocket\". <br /><br />If you are a shopkeeper and want to join the WOM project, click the find out more button."
-      },
-      "VALUE": {
-        "TITLE": "value",
-        "DESC": "Many actions have an intrinsic social value.<br />WOM recognizes the impact of these actions and provides a tool to reward these positive externalities through the issuance of WOM."
+        "DESC": "WOM vouchers can be used at shops and businesses taking part in the scheme, which offer discounts, services and exclusive benefits. Check out the \"Offers\" section of WOM Pocket to find all the participating businesses.<br/><br/>If you run a business and would like to join the WOM network, click on the ‘Find out more’ button."
       },
       "CHALLENGES": {
         "TITLE": "challenges",
-        "DESC": "Challenge yourself and collect WOM badges. Access the \"achievements\" section on the \"WOM Pocket\" app and discover the challenges around you."
+        "DESC": "With WOM, you can also put yourself to the test. Go to the \"Achievements\" section in \"WOM Pocket\", take part in the available challenges and collect badges that show your contribution to the community."
       }
     },
     "FOOTER": {
@@ -380,6 +385,393 @@
       "CTE_DESC": "CTE Square, House of Emerging Technologies, aims to support research and experimentation projects with the intent of transferring technological know-how to small and medium-sized enterprises to produce increasingly high-quality services."
     }
   },
+  "PLATFORM": {
+    "ABOUT": {
+      "TITLE": "The Platform",
+      "SECTION_A": {
+        "A": "WOM, short for <strong>Worth One Minute</strong>, is a <strong>social reward platform</strong> that recognizes the value of actions contributing to the <strong>common good</strong>. Through a system of <strong>digital vouchers</strong>, WOM promotes <strong>civic engagement</strong>, recognizes the <strong>social impact</strong> of people's actions, and encourages positive behaviors that benefit communities.",
+        "B": "Many everyday activities generate benefits that extend beyond the individual, creating what economists define as <strong>positive</strong> <strong>externalities</strong>. WOM makes this value visible and measurable by transforming it into <strong>digital social vouchers</strong> that reward the time dedicated to socially valuable actions.",
+        "C": "Through its social reward system, the platform connects citizens, public institutions, associations, universities, businesses, and local merchants, fostering <strong>civic participation</strong>, sustainability, and the development of more active and inclusive communities."
+      },
+      "SECTION_A_2": {
+        "TITLE": "What are WOM?",
+        "A": "WOM are <strong>digital vouchers</strong> that recognize the social value of an action. Each WOM corresponds to one minute of commitment dedicated to an activity recognized as socially valuable and represents a concrete way to <strong>reward positive actions</strong>.",
+        "B": "WOM vouchers do not represent money and have no economic value. They are a testimony of an effort made in support of a shared cause and can be used at participating merchants on the platform, who freely choose to offer products, services, or benefits to WOM holders.",
+        "C": "WOM vouchers are also completely anonymous: the information collected only concerns the social purpose for which they were generated, together with the location and time of their issuance, ensuring the protection of users' privacy."
+      },
+      "SECTION_B": {
+        "TITLE": "The Story of WOM",
+        "A": "WOM was born as a research project developed by <strong>DIGIT</strong>, a spin-off of the University of Urbino Carlo Bo, with the aim of measuring and recognizing the <strong>social impact</strong> of everyday actions through a <strong>social reward platform</strong> dedicated to <strong>civic engagement</strong>.",
+        "B": "Over time, the project has evolved, involving public administrations, universities, associations, businesses, and local communities in initiatives focused on sustainability, sustainable mobility, culture, volunteering, and social innovation. Thanks to this ecosystem, WOM has become a tool to encourage citizen participation and promote behaviors oriented toward the common good.",
+        "C": "In 2025, WOM entered a new phase of its evolution by introducing a renewed visual identity, with a new logo and a redesigned graphic style for the <strong>WOM</strong> <strong>Pocket</strong> app. At the same time, new features were introduced, including the <strong>Achievements</strong> section, which allows users to track their progress, participate in challenges, and collect badges related to the results achieved."
+      },
+      "BUTTONS": {
+        "EARN": "Earn",
+        "USE": "Use"
+      }
+    },
+    "CHALLENGES": {
+      "TITLE": "Challenges",
+      "HOW_IT_WORKS": {
+        "TITLE": "How do they work?",
+        "DESC_1": "WOM Challenges make the experience within <strong>WOM Pocket</strong> more engaging by transforming <strong>civic engagement</strong> and activities that contribute to the <strong>common good</strong> into an interactive journey of achievement and recognition.",
+        "DESC_2": "Joining a challenge is simple: just scan the QR Code associated with it. Once scanned, the challenge is automatically activated in the app, allowing the user to start completing the required objectives.",
+        "DESC_3": "Each challenge offers a dedicated journey that values the user's commitment through a system of <strong>social gamification</strong>. By completing the required activities, users can unlock badges that certify achieved milestones and showcase their contribution to the community.",
+        "DESC_4": "All earned badges, together with those still waiting to be unlocked, can be viewed in the <strong>Achievements</strong> section of <strong>WOM Pocket</strong>, where users can monitor their progress and follow their journey across the platform."
+      },
+      "PUBLIC_AND_PRIVATE": {
+        "TITLE": "Public and Private Challenges",
+        "DESC_1": "Within <strong>WOM Pocket</strong> there are two types of challenges, designed to offer different experiences and encourage <strong>active citizenship</strong>.",
+        "DESC_2": "<strong>Public challenges</strong> are accessible to all users and allow them to earn badges simply by using the app and participating in available initiatives. The badges earned become part of their collection and remain always available in the <strong>Achievements</strong> section.",
+        "DESC_3": "<strong>Private challenges</strong>, on the other hand, are dedicated to specific events, projects, or initiatives and are activated exclusively by scanning a dedicated QR Code. Only by participating in these challenges is it possible to obtain exclusive badges, designed to recognize involvement in specific activities promoted by institutions, associations, businesses, or local communities.",
+        "DESC_4": "Each badge represents recognition of the journey completed and reflects the user's commitment to activities promoted by the WOM community, encouraging positive behaviors and increasingly active participation."
+      },
+      "PUBLIC": {
+        "TITLE": "Universal Badges",
+        "DESC_1": "<strong>Universal badges</strong> can be earned through public challenges, designed for all <strong>WOM Pocket</strong> users. Public challenges allow users to freely participate in initiatives focused on sustainability, culture, mobility, and other <strong>social innovation</strong> projects. Through these challenges, users can earn badges, track their progress, and actively contribute to community life."
+      },
+      "PRIVATE": {
+        "TITLE": "Exclusive Badges",
+        "DESC_1": "<strong>Exclusive badges</strong> can be earned through private challenges. Private challenges are created for specific events, campaigns, or projects promoted by public institutions, associations, universities, or businesses. Access is granted through a dedicated <strong>QR Code</strong> and allows users to participate in exclusive journeys, obtain reserved badges, and contribute to initiatives with high <strong>social impact</strong>."
+      },
+      "BADGES": {
+        "PRIMO_WOM": "First WOM",
+        "UN_ORA_DI_WOM": "One Hour of WOM",
+        "VENTIQUATTRO_ORE_WOM": "Twenty-Four Hours of WOM",
+        "DIECI_MILA_OTTANTA_MINUTI": "10,080 Minutes of These",
+        "PRIMI_PASSI": "First Steps",
+        "SESSANTA_MINUTI_ATTIVITA": "60 Minutes of Activity",
+        "IN_MOVIMENTO": "On the Move",
+        "A_RUOTA_LIBERA": "Freewheeling",
+        "ECCOTI": "Here You Are",
+        "NEL_PUBBLICO": "In Public",
+        "PARTECIPANTE": "Participant",
+        "PROTAGONISTA": "Protagonist"
+      }
+    },
+
+    "ACTIONS": {
+      "TITLE": "Actions",
+      "HOW_TO_GENERATE": {
+        "TITLE": "Actions That Generate WOM",
+        "DESC_1": "Every day we perform actions that can create a positive impact on the community: moving sustainably, participating in events, studying, taking care of our health or contributing to social initiatives.",
+        "DESC_2": "The WOM platform recognizes the social value of these activities and transforms them into <strong>digital social vouchers</strong>, rewarding the time dedicated to actions considered valuable for the common good.",
+        "DESC_3": "The activities recognized by the platform can cover different areas, from sustainability to mobility, from culture to volunteering, up to personal wellbeing and civic participation.",
+        "DESC_4": "Every minute dedicated to an activity approved by the platform can become a WOM: a digital recognition that values people’s contribution and creates a connection between citizens, organizations and local communities."
+      },
+      "COLLECT_WOM": {
+        "TITLE": "Collect Your WOM with WOM Pocket",
+        "DESC_1": "To collect, store and use the vouchers obtained through your actions, you can use <strong>WOM Pocket</strong>, the app dedicated to managing your WOM vouchers.",
+        "DESC_2": "Through the app you can:",
+        "DESC_2_1": "collect digital vouchers generated by your activities;",
+        "DESC_2_2": "monitor your contribution to the community;",
+        "DESC_2_3": "participate in available initiatives;",
+        "DESC_2_4": "discover offers and benefits from participating merchants;",
+        "DESC_2_5": "complete challenges and earn badges.",
+        "DESC_3": "<strong>Download WOM Pocket and transform your everyday actions into social value.</strong>"
+      },
+      "HOW_TO_EARN": {
+        "TITLE": "How to Earn WOM",
+        "DESC_1": "To earn WOM, simply participate in activities and initiatives recognized by the platform.",
+        "DESC_2": "Each action is connected to a <strong>WOM Instrument</strong>, a project, organization or initiative approved by the platform that allows the generation of digital vouchers linked to specific social goals.",
+        "DESC_3": "The number of WOM earned depends on the type of activity performed: every minute recognized by the platform contributes to generating vouchers connected to a specific social purpose.",
+        "DESC_4": "Discover all the activities that allow you to generate WOM."
+      },
+      "ACTION_TO_GENERATE": {
+        "TITLE": "Actions That Generate WOM",
+        "WOM_FIT": {
+          "TITLE": "WOM Fit",
+          "DESC_1": "With <strong>WOM FIT</strong>, you can transform the time dedicated to physical activity into digital WOM vouchers.",
+          "DESC_2": "Walking and cycling become actions recognized by the platform because they contribute to personal wellbeing, health, and <strong>sustainable mobility</strong>.",
+          "DESC_3": "After the first 15 minutes of activity, every additional minute generates WOM dedicated to the health and wellbeing category. Moreover, by choosing to walk or cycle during peak hours, you can contribute to reducing traffic and emissions, earning WOM linked to sustainable mobility.",
+          "DESC_4": "Through WOM FIT, a simple everyday choice such as moving actively becomes a concrete contribution to the community and the environment.",
+          "LINK": "Learn more"
+        },
+        "NETWORKING": {
+          "TITLE": "Networking",
+          "DESC_1": "Relationships between people generate social value.",
+          "DESC_2": "Through <strong>networking</strong> activities, communities and shared experiences, users can create new connections, exchange knowledge and strengthen their sense of belonging.",
+          "DESC_3": "WOM recognizes the value of interactions that promote collaboration and active participation, transforming the time dedicated to building meaningful relationships into a contribution recognized by the platform.",
+          "DESC_4": "Through the “Connections” section of WOM Pocket, you can exchange your contact details with other WOM users, expand your network and create new opportunities for collaboration.",
+          "LINK": "Discover more here"
+        },
+        "GRATITUDE": {
+          "TITLE": "Gratitude",
+          "DESC_1": "Even a simple gesture of gratitude can generate value for the community.",
+          "DESC_2": "Through acts of <strong>appreciation</strong> and sharing, users can promote supportive behaviours and encourage a culture based on mutual help and cooperation.",
+          "DESC_3": "WOM values these actions as expressions of civic participation and social commitment, recognizing the contribution of people who choose to support and encourage other members of the community.",
+          "DESC_4": "Through the WOM Pocket app, you can share up to <strong>60 WOM per day</strong> with another user by accessing the <strong>“Exchange”</strong> section.",
+          "DESC_5": "Sharing WOM does not represent a transfer of money, but a way to recognize and enhance the social contribution of people.",
+          "LINK": "Discover more here"
+        },
+        "UNIURB": {
+          "TITLE": "UniUrb",
+          "DESC_1": "The University of Urbino Carlo Bo recognizes the social value of education and learning through WOM.",
+          "DESC_2": "Students can earn digital WOM vouchers by dedicating time to their university journey and contributing to the growth of knowledge and the academic community.",
+          "DESC_3": "Through this Instrument, education becomes a socially valuable action, encouraging learning, participation, and personal development while creating lasting social impact.",
+          "LINK": "Learn more"
+        },
+        "ADRIABUS": {
+          "TITLE": "Adriabus",
+          "DESC_1": "Adriabus recognizes the value of sustainable mobility and responsible behaviours connected to public transportation.",
+          "DESC_2": "Thanks to the collaboration with the WOM platform, users can earn digital WOM vouchers by using public transport services and contributing to a more conscious and environmentally friendly mobility model.",
+          "DESC_3": "Using public transportation helps reduce traffic and emissions, supporting a more sustainable territory.",
+          "DESC_4": "Earn WOM every time you purchase a travel ticket or subscription online through the Adriabus website or the MooneyGo app.",
+          "LINK": "Discover more"
+        },
+        "EVENTS": {
+          "TITLE": "Event Participation",
+          "DESC_1": "Participating in events, initiatives and community activities means contributing to the life of the territory.",
+          "DESC_2": "Through cultural, social, educational or sustainability-focused events, users can earn WOM thanks to their active participation.",
+          "DESC_3": "WOM collaborates with public institutions, associations, event organizers, universities and local organizations that want to enhance citizen participation and transform their initiatives into opportunities to generate digital social vouchers.",
+          "DESC_4": "Are you organizing an event or a community initiative? Contact us at <a href='mailto:info@wom.social'><strong>info@wom.social</strong></a> to discover how to become a <strong>WOM Instrument</strong>."
+        },
+        "CULTURAL_PLACES": {
+          "TITLE": "Visiting Cultural Places and Heritage Sites",
+          "DESC_1": "Discovering cultural heritage generates knowledge, participation and value for local communities.",
+          "DESC_2": "Visiting museums, historical sites, cultural venues and places of interest allows users to connect with the history and identity of territories, transforming cultural experiences into actions recognized by the WOM platform.",
+          "DESC_3": "WOM promotes cultural participation and heritage valorization by creating new connections between citizens, places and institutions.",
+          "DESC_4": "Are you a museum, cultural organization or do you manage a historical or artistic site? Join the WOM ecosystem and transform cultural visits and activities into opportunities to generate social value.",
+          "DESC_5": "Contact us at <a href='mailto:info@wom.social'><strong>info@wom.social</strong></a> to discover how to become a <strong>WOM Instrument</strong>."
+        },
+        "VOLUNTEERING": {
+          "TITLE": "Volunteering",
+          "DESC_1": "Time dedicated to others is one of the most important forms of social value.",
+          "DESC_2": "Through volunteering activities, users can actively contribute to community wellbeing and receive WOM as recognition of their commitment.",
+          "DESC_3": "WOM values volunteering as an action capable of generating positive social impact, supporting initiatives, associations and organizations that promote solidarity, inclusion and civic participation.",
+          "DESC_4": "Are you an association, a non-profit organization or a group promoting volunteering activities? Transform the time and commitment of your volunteers into a recognized contribution through WOM.",
+          "DESC_5": "Contact us at <a href='mailto:info@wom.social'><strong>info@wom.social</strong></a> to discover how to become a <strong>WOM Instrument</strong>."
+        },
+        "CODYMAZE": {
+          "TITLE": "CodyMaze",
+          "DESC_1": "CodyMaze is an outdoor chessboard made up of 25 interactive squares where students move like robots by following instructions displayed on their smartphones.",
+          "DESC_2": "Each experience is unique, as the maze changes every time a new player begins, creating an engaging way to explore the fundamentals of coding.",
+          "DESC_3": "By combining play, technology, and education, CodyMaze helps students develop logical thinking and problem-solving skills while earning WOM through an innovative social learning experience."
+        },
+        "AWORLD": {
+          "TITLE": "AWorld",
+          "DESC_1": "AWorld is an app that encourages people to adopt a more sustainable lifestyle by turning everyday choices into positive actions for the planet.",
+          "DESC_2": "Thanks to the collaboration between DIGIT and AWorld, users can convert eligible sustainable actions into digital WOM vouchers.",
+          "DESC_3": "Reducing your environmental footprint, making conscious choices, and participating in sustainability initiatives all become recognized actions that generate positive social impact and earn WOM.",
+          "LINK": "Learn more"
+        },
+        "BALANCE": {
+          "TITLE": "Balance",
+          "DESC_1": "Balance – Postural Stability © is an app developed by researchers at the University of Urbino Carlo Bo that measures your postural stability using your smartphone.",
+          "DESC_2": "By performing regular balance assessments, users can monitor their physical well-being while contributing valuable data that supports health-related research.",
+          "DESC_3": "To start collecting WOM, you need to complete two measurements on two different days.",
+          "DESC_4": "With Balance, taking care of your health becomes a socially valuable action, rewarded through digital WOM vouchers that recognize your commitment to personal well-being.",
+          "LINK": "Learn more"
+        }
+      }
+    }
+  },
+  "USERS": {
+    "TITLE": "Users",
+    "ECOSYSTEM": {
+      "TITLE": "The WOM Ecosystem",
+      "DESC_1": "The WOM platform brings together different stakeholders who collaborate to recognize, enhance, and encourage actions that generate a <strong>positive social impact</strong>.",
+      "DESC_2": "Within the WOM ecosystem, each participant plays a specific role: <strong>People</strong> carry out socially valuable actions and receive<strong> digital WOM vouchers</strong> as recognition of their contribution; <strong>Merchants</strong> enhance the value of these vouchers by offering products, services, or benefits to the community; <strong>Instruments</strong> enable WOM generation through initiatives and projects recognized by the platform.",
+      "DESC_3": "Together, these actors create a virtuous cycle in which citizens, organizations, and local businesses collaborate to promote civic <strong>engagement</strong>, support the <strong>common good</strong>, and strengthen the connection between people and their communities."
+    },
+    "THREE_SUBJECTS": {
+      "TITLE": "The Three Stakeholders of the WOM Platform",
+      "DESC_1": "<strong>People</strong>",
+      "DESC_2": "People are the users who participate in the WOM ecosystem by taking part in activities recognized as socially valuable.",
+      "DESC_3": "Through the <strong>WOM Pocket</strong> app, they can collect, store, and use the digital vouchers earned through their commitment and participation.Every action contributes to creating value for the community and is recognized through a social reward system designed to encourage active participation and positive behaviors",
+      "DESC_4": "<strong>Merchant</strong>",
+      "DESC_5": "Merchants are businesses, organizations, and local activities that join the WOM network by offering products, services, or benefits in exchange for WOM vouchers.",
+      "DESC_6": "Through their offers, Merchants help recognize and reward citizens' positive actions while strengthening the relationship between local communities, businesses, and territories.<br/>By joining the WOM ecosystem, Merchants become active participants in a model of community engagement and social innovation.",
+      "DESC_7": "<strong>Instrument</strong>",
+      "DESC_8": "Instruments are the entities that enable WOM generation within the platform. They can be initiatives, projects, public institutions, universities, associations, or organizations recognized by WOM that promote activities capable of creating a positive impact on communities.",
+      "DESC_9": "Through Instruments, socially valuable activities are connected to the platform's social goals and transformed into opportunities for citizens to participate, contribute, and earn digital WOM vouchers.",
+      "DESC_10": "Together, People, Merchants, and Instruments create an ecosystem of social innovation where every positive action can be recognized, valued, and shared."
+    },
+
+    "PEOPLE": {
+      "TITLE": "People",
+      "WHO_ARE_PEOPLE": {
+        "TITLE": "Who Are People?",
+        "DESC_1": "People are all users who choose to become part of the WOM ecosystem, contributing to the common good through their actions and actively participating in community life.",
+        "DESC_2": "Through WOM Pocket, the app for civic engagement that rewards positive actions, every user can collect, store, and redeem the digital vouchers earned by taking part in activities recognized by the platform.",
+        "DESC_3": "The app is free and available for Android and iOS devices. It represents the main access point to the WOM ecosystem, allowing users to manage their vouchers, explore available offers, track their achievements, and monitor completed challenges.",
+        "LINK": "Discover more about WOM Pocket"
+      },
+      "ACTIONS_HOW_TO_EARN_WOM": {
+        "TITLE": "Actions: How to Earn WOM",
+        "DESC_1": "Many everyday actions create value that goes beyond individual benefit. They contribute to the common good and generate a positive social impact within the community.",
+        "DESC_2": "When an activity is recognized by the WOM platform as socially valuable, every minute of commitment generates a digital social voucher. In this way, WOM encourages civic participation by recognizing the time dedicated to sustainability initiatives, volunteering, culture, and other community-focused projects.",
+        "DESC_3": "WOM vouchers can be earned by participating in initiatives, events, projects, or activities approved by the platform. Once generated, they are automatically collected in WOM Pocket, where users can view their balance, track their progress, and follow their journey within the ecosystem.",
+        "LINK": "Discover how to earn WOM"
+      },
+      "OFFERS_HOW_TO_USE_WOM": {
+        "TITLE": "Offers: How to Use WOM",
+        "DESC_1": "Digital WOM vouchers can be used at participating merchants and organizations that choose to offer products, services, discounts, or benefits to WOM holders.",
+        "DESC_2": "All available opportunities can be found in the Offers section of WOM Pocket, where users can discover participating partners and redeem their vouchers according to each merchant's conditions.",
+        "DESC_3": "In this way, WOM creates an ecosystem where positive actions are recognized and rewarded, strengthening the connection between citizens, local businesses, and communities.",
+        "DESC_4": "Through this model of social rewarding, WOM promotes active participation and enhances the social impact generated by individuals and organizations.Are you a business owner interested in offering benefits to WOM holders? Discover how to become a Merchant and join a network that supports civic engagement, local communities, and proximity businesses.",
+        "DESC_5": "Map of Active Merchants with WOM Offers"
+      },
+      "MAP": {
+        "SEARCH_PLACEHOLDER": "Cerca il luogo..."
+      }
+    },
+    "MERCHANT": {
+      "TITLE": "Merchants",
+      "WHO_THEY_ARE_AND_HOW_TO_JOIN": {
+        "TITLE": "Who Are Merchants and How to Join",
+        "DESC_1": "Merchants are businesses, local shops, organizations, and institutions that join the WOM ecosystem by offering products, services, discounts, or benefits in exchange for digital WOM vouchers.",
+        "DESC_2": "Through the WOM platform, Merchants can strengthen their role within the community by supporting positive behaviors and contributing to initiatives related to civic engagement, sustainability, and social impact.",
+        "DESC_3": "Joining the WOM network means becoming part of a social reward system where citizens' positive actions are recognized and transformed into concrete opportunities for local communities.",
+        "DESC_4": "WOM offers do not involve monetary exchanges: vouchers represent the recognition of a socially valuable contribution and can only be redeemed for discounts, services, or free benefits made available by the Merchant.",
+        "DESC_5": "Would you like to join the WOM network?",
+        "DESC_6": "Download the <strong>WOM POS</strong> app on your mobile device and start creating your offers.",
+        "LINK": "LINK"
+      },
+      "WOM_POS_TOOL_FOR_MERCHANTS": {
+        "TITLE": "WOM POS: The Tool for Merchants",
+        "DESC_1": "The main tool for accepting WOM vouchers is <strong>WOM POS (Point of Sale)</strong>, the dedicated application that allows Merchants to manage WOM transactions and verify the validity of received vouchers.",
+        "DESC_2": "The WOM POS app can be downloaded for free from Android and iOS stores and does not include any transaction fees.",
+        "DESC_3": "Merchants who want to increase their visibility within the WOM network and receive periodic reports about the social impact generated through their offers can access additional dedicated services."
+      },
+      "HOW_TO_CREATE_AND_DELETE_OFFERS": {
+        "TITLE": "How to Create and Remove Offers",
+        "DESC_1": "Through <strong>WOM POS</strong>, the app designed for Merchants, businesses can easily create and manage their WOM offers.",
+        "DESC_2": "Offer management is fully customizable: Merchants can create, edit, activate, or remove offers according to their needs and ongoing initiatives.",
+        "DESC_3": "By creating WOM offers, businesses can reward citizens' positive actions while strengthening their connection with the local community and participating in a model of community engagement and social innovation.",
+        "DESC_4": "To discover all available features and learn how to manage your offers, consult the <strong>WOM Offers Management Guide</strong>.",
+        "LINK": "PDF Guide"
+      },
+      "MORE_INFORMATION": {
+        "TITLE": "More Information",
+        "DESC_1": "Would you like to learn more about joining the WOM network, creating dedicated offers for your customers, or enhancing your contribution to the community?",
+        "DESC_2": "Contact us to receive more information about the project and the participation process.",
+        "LINK": "Write to: info@wom.social"
+      }
+    },
+    "INSTRUMENT": {
+      "TITLE": "Instruments",
+      "WHO_ARE_INSTRUMENTS": {
+        "TITLE": "What Are Instruments?",
+        "DESC_1": "Instruments are the entities that generate WOM and enable the platform to recognize and enhance activities with a positive social impact.",
+        "DESC_2": "An Instrument can be an initiative, a project, a public institution, or an organization recognized by the WOM platform. Through their Instrument, these entities allow users to take part in socially valuable activities and receive <strong>digital WOM vouchers</strong> as recognition of their contribution.",
+        "DESC_3": "Each Instrument connects a specific activity to one of the social goals promoted by the platform, known as <strong>aims</strong>. Aims represent the areas that WOM supports, such as <strong>sustainable mobility</strong>, public health, culture, the preservation of cultural heritage, education, and personal development.",
+        "DESC_4": "Through Instruments, institutions, associations, and organizations can transform their initiatives into opportunities for civic engagement, involving citizens and encouraging active participation in the <strong>common good</strong>."
+      },
+      "WHO_CAN_BECOME_AN_INSTRUMENT": {
+        "TITLE": "Who Can Become a WOM Instrument?",
+        "DESC_1": "Any organization that promotes activities or initiatives capable of generating recognized social value can become a <strong>WOM Instrument</strong>.",
+        "DESC_2": "The WOM platform welcomes:",
+        "DESC_3": "public institutions and local administrations;",
+        "DESC_4": "non-profit organizations and third-sector associations;",
+        "DESC_5": "universities and research institutions;",
+        "DESC_6": "foundations and cultural organizations;",
+        "DESC_7": "organizations promoting volunteering activities;",
+        "DESC_8": "entities developing projects focused on sustainability, civic participation, and social innovation.",
+        "DESC_9": "Every new Instrument is evaluated by the WOM platform through an ethical and technical review process to ensure that the proposed activity represents a concrete, measurable, and meaningful contribution to the community.",
+        "DESC_10": "Once approved, an Instrument can generate <strong>digital social vouchers</strong> and reward people who participate in recognized activities."
+      },
+      "ACTIVE_INSTRUMENTS": {
+        "TITLE": "Active Instruments",
+        "DESC_1": "The WOM network includes several Instruments connected to projects and initiatives that promote positive behaviors, community participation, and active citizenship.",
+        "DESC_2": "Through these Instruments, users can earn WOM by taking part in activities related to different areas of social impact, including:",
+        "DESC_3": "environmental sustainability;",
+        "DESC_4": "sustainable mobility;",
+        "DESC_5": "culture and local heritage;",
+        "DESC_6": "volunteering;",
+        "DESC_7": "community participation;",
+        "DESC_8": "collective well-being initiatives.",
+        "DESC_9": "Some of Our Instruments"
+      },
+      "BECOME_A_WOM_INSTRUMENT": {
+        "TITLE": "Become a WOM Instrument",
+        "DESC_1": "Do you have a project or initiative that involves citizens, volunteers, or local communities?",
+        "DESC_2": "Join the WOM ecosystem and transform your activities into tools that recognize and reward social commitment through <strong>digital WOM vouchers</strong>.",
+        "DESC_3": "Contact us to discover how to become a WOM Instrument."
+      }
+    }
+  },
+  "APP": {
+    "WOM_POCKET": {
+      "TITLE": "WOM Pocket",
+      "APP_TO_PARTICIPATE_IN_THE_WOM_ECOSYSTEM": {
+        "TITLE": "The App to Join the WOM Ecosystem",
+        "DESC_1": "<strong>WOM Pocket</strong> is the mobile application that allows users to become part of the WOM ecosystem, collect, manage, and redeem <strong>digital WOM vouchers</strong> earned through actions and activities recognized as socially valuable.",
+        "DESC_2": "Designed as a personal <strong>digital wallet</strong>, WOM Pocket makes it simple and immediate to manage your vouchers, track your journey, and participate in initiatives that promote <strong>civic engagement</strong>, sustainability, and contributions to the <strong>common good</strong>.",
+        "DESC_3": "Through the app, every user can transform their commitment into meaningful recognition: the time dedicated to activities with a <strong>positive social impact</strong> is valued through a <strong>social reward system</strong> that celebrates positive actions."
+      },
+      "WHAT_YOU_CAN_DO_WITH_WOM_POCKET": {
+        "TITLE": "What Can You Do with WOM Pocket?",
+        "DESC_1": "With WOM Pocket, you can:",
+        "DESC_2": "<strong>collect WOM vouchers</strong> earned by participating in activities, events, and initiatives recognized by the platform;",
+        "DESC_3": "<strong>store your WOM</strong> in your personal digital wallet;",
+        "DESC_4": "<strong>check your available voucher balance</strong> and monitor your contribution to the community;",
+        "DESC_5": "<strong>redeem WOM</strong> at participating merchants through the Offers section;",
+        "DESC_6": "<strong>join Challenges</strong> and unlock exclusive badges by completing specific objectives;",
+        "DESC_7": "<strong>exchange contacts</strong> with other WOM users through an integrated contact system;",
+        "DESC_8": "<strong>discover new opportunities</strong> to participate in community initiatives and generate social value."
+      },
+      "AN_APP_TO_ENHANCE_YOUR_CONTRIBUTION": {
+        "TITLE": "An App That Recognizes Your Contribution",
+        "DESC_1": "Every day, people take actions that can create positive value for communities and territories. WOM Pocket makes this value visible, providing tangible recognition of each user's social commitment.",
+        "DESC_2": "WOM vouchers have no monetary value and do not represent currency. They are a recognition of the contribution made toward a shared social goal and become a tool for creating connections between citizens, organizations, and local businesses."
+      },
+      "DOWNLOAD_WOM_POCKET": {
+        "TITLE": "Download WOM Pocket",
+        "DESC_1": "WOM Pocket is free and available for <strong>Android and iOS</strong> devices.",
+        "DESC_2": "Download the app, create your personal space, and start participating in initiatives that strengthen the WOM community.",
+        "LINK": "Download WOM Pocket and discover the value of your contribution.",
+        "DESC_3": "Buttons"
+      }
+    },
+    "WOM_POS": {
+      "TITLE": "WOM POS",
+      "WOM_POS_TOOL_FOR_MERCHANTS_ACCEPTING_WOM": {
+        "TITLE": "The Tool for Merchants Accepting WOM",
+        "DESC_1": "<strong>WOM POS</strong> is the dedicated application for <strong>Merchants</strong> that allows businesses to accept <strong>digital WOM vouchers</strong> and become part of the WOM <strong>social reward ecosystem</strong>.",
+        "DESC_2": "Through WOM POS, Merchants can manage WOM transactions, verify received vouchers, and create new payment instances.",
+        "DESC_3": "With this tool, every business can choose to support and reward positive behaviors by connecting its offers to actions that generate a <strong>positive social impact</strong>."
+      },
+      "ENHANCE_YOUR_BUSINESS_THROUGH_THE_WOM_NETWORK": {
+        "TITLE": "Enhance Your Business Through the WOM Network",
+        "DESC_1": "Joining the WOM network means creating a direct connection between local businesses and communities, helping recognize and reward citizens' positive actions.",
+        "DESC_2": "Through their offers, Merchants can support initiatives related to <strong>civic engagement</strong>, sustainability, and community well-being, while increasing their visibility within a network focused on participation and social innovation.",
+        "DESC_3": "WOM offers do not involve monetary exchanges: vouchers represent the recognition of a socially valuable contribution and can be redeemed for discounts, services, or benefits made available by Merchants."
+      },
+      "DOWNLOAD_WOM_POS": {
+        "TITLE": "Download WOM POS",
+        "DESC_1": "The <strong>WOM POS</strong> app can be downloaded for free from Android and iOS stores and does not include any transaction fees.",
+        "DESC_2": "Merchants who want to increase the visibility of their offers and receive periodic reports on the social impact generated through their activities can access additional dedicated services.",
+        "LINK": "Download WOM POS and bring your business into the WOM ecosystem.",
+        "DESC_3": "Download buttons"
+      }
+    },
+    "WOM_FIT": {
+      "TITLE": "WOM FIT",
+      "TRANSFORM_MOVEMENT_INTO_SOCIAL_VALUE": {
+        "TITLE": "Turn Movement into Social Value",
+        "DESC_1": "<strong>WOM FIT</strong> is a feature of the WOM platform that transforms the time dedicated to physical activity into <strong>digital WOM vouchers</strong>, rewarding actions that contribute to personal well-being and the sustainability of local communities.",
+        "DESC_2": "Walking and cycling become meaningful actions capable of generating a positive social impact: every minute of activity recognized by the platform can become a contribution to the community.",
+        "DESC_3": "Through WOM FIT, everyday movement becomes a way to promote active lifestyles, sustainable mobility, and civic participation."
+      },
+      "HOW_WOM_FIT_WORKS": {
+        "TITLE": "How WOM FIT Works",
+        "DESC_1": "With WOM FIT, you can convert the minutes spent walking or cycling into WOM vouchers.",
+        "DESC_2": "After the first <strong>15 minutes of activity</strong>, every additional minute generates a WOM voucher dedicated to the <strong>health and well-being</strong> category, recognizing an active and conscious lifestyle.",
+        "DESC_3": "By choosing to walk or cycle during <strong>peak traffic hours</strong>, you can also contribute to reducing congestion and emissions, earning WOM connected to <strong>sustainable mobility</strong>.",
+        "DESC_4": "In this way, a simple everyday action like moving around becomes a concrete contribution to your own health and to the environment."
+      },
+      "MOVEMENT_THAT_CREATES_COMMUNITY": {
+        "TITLE": "Movement That Builds Communities",
+        "DESC_1": "WOM FIT is part of the WOM ecosystem dedicated to <strong>civic engagement</strong> and the recognition of positive behaviors.",
+        "DESC_2": "Through the <strong>WOM Pocket</strong> app, you can collect the vouchers generated through your activities, monitor your contribution, and redeem your WOM for discounts, services, and offers available from participating Merchants.",
+        "DESC_3": "Move, contribute to positive change, and discover the value of every minute.",
+        "LINK": "Download WOM FIT and start turning movement into social value.",
+        "DESC_4": "Buttons"
+      }
+    }
+  },
+
   "ABOUT": {
     "TITLE": "The WOM platform",
     "SECTION_A": {
@@ -628,17 +1020,6 @@
       "SECTION_WHERE_TO_USE": "Where can you use your WOM?",
       "SECTION_WHERE_TO_USE_DESCR": "<strong>WOM</strong> have an important symbolic value: <strong>they represent your contribution to Pesaro 2024</strong>.<br/>But in Pesaro you can also use WOM to access the <strong>discounts</strong> and <strong>concessions</strong> that tradesmen, craftsmen and shopkeepers spontaneously offer to those who have them, as a token of appreciation for the contribution made to Pesaro 2024 with their presence and participation. At the Civic Museums and Casa Rossini you can also get <strong>reductions</strong> and <strong>free</strong> admission on the <a target='_' href='https://pesaro2024.it/card/'><strong><u>Pesaro Capital Card</u></strong></a>. The list of offers is presented in the WOM Pocket app in reverse order of distance from your location. You can recognise shops with offers by seeing the WOM platform label displayed in the shop window.<br/><br/>If you are a shopkeeper/craftsman/shopkeeper, check out the <a href='https://wom.social/pesaro2024/esercenti'><u><strong>guide</strong></u></a> and join the project!",
       "SECTION_ENDING_TEXT": "Culture is a collective fact, which feeds on the participation of everyone. WOM recognises and rewards your contribution to the Italian Capital of Culture 2024."
-    }
-  },
-  "USERS": {
-    "TITLE": "Users",
-    "SECTION_A": {
-      "TITLE": "How does it work for users?",
-      "A": "Many actions and activities performed by an individual contribute to a common good and have an intrinsic social value. By performing these socially valuable actions, each user earns WOM.\nUsers can use WOM vouchers to obtain services or goods provided by Merchants.\nEach User can collect all vouchers earned on the app <b>\"WOM Pocket\"</b>."
-    },
-    "SECTION_B": {
-      "TITLE": "Pocket",
-      "A": "Users can manage their WOM vouchers via a <b>\"WOM Pocket\"</b> mobile app. This app allows users <b>to collect their earned WOM vouchers</b>, store them (as if in a virtual \"wallet\") and spend their vouchers.\n\nThe WOM platform has no cost for Volunteers who can download the <b>Pocket</b> app free of charge from the <b>Android and iOS stores</b>."
     }
   },
   "MERCHANT": {

@@ -1,4 +1,3 @@
-
 import { Component, Input, ChangeDetectionStrategy } from "@angular/core";
 import { Router, RouterLink } from "@angular/router";
 import { TranslateModule } from "@ngx-translate/core";
@@ -12,4 +11,5 @@ import { TranslateModule } from "@ngx-translate/core";
 })
 export class BtnFindOutMoreComponent {
   @Input() ref: string = "";
+  @Input() fragment?: string = "";
 }

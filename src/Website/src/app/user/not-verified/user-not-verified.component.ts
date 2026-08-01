@@ -1,7 +1,7 @@
 import { Component, ChangeDetectionStrategy } from "@angular/core";
 import { UserService } from "../../_services";
 import { UserMe } from "../../_models";
-import { TranslateService } from "@ngx-translate/core";
+import { TranslateModule, TranslateService } from "@ngx-translate/core";
 import { Router } from "@angular/router";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { User } from "@sentry/angular";
@@ -11,7 +11,8 @@ import { User } from "@sentry/angular";
   templateUrl: "./user-not-verified.component.html",
   styleUrls: ["./user-not-verified.component.css"],
   changeDetection: ChangeDetectionStrategy.Eager,
-  standalone: false,
+  standalone: true,
+  imports: [TranslateModule],
 })
 export class UserNotVerifiedComponent {
   user: User | null = null;

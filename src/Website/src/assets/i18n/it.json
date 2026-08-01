@@ -3,21 +3,26 @@
   "FLAG_NO": "No",
   "NAV": {
     "HOME": "Home",
+    "PLATFORM": {
+      "TITLE": "Piattaforma",
+      "ABOUT": "Cos'è",
+      "CHALLENGES": "Sfide",
+      "ACTIONS": "Azioni"
+    },
     "USERS": {
       "TITLE": "Utenti",
-      "WHO_ARE": "Chi sono",
-      "CHALLENGES": "Le Sfide",
-      "APPLICATIONS": "Come guadagnare WOM"
+      "PEOPLE": "Persone",
+      "MERCHANT": "Merchant",
+      "INSTRUMENT": "Instrument"
     },
-    "ABOUT": {
-      "TITLE": "Che cos’è"
+    "APP": {
+      "TITLE": "App",
+      "WOM_POCKET": "WOM Pocket",
+      "WOM_POS": "WOM POS",
+      "WOM_FIT": "WOM Fit"
     },
-    "PROJECTS": {
-      "RETE-DELLE-RETI": "Rete delle Reti"
-    },
-    "INSTRUMENT": "Instrument",
+    "FAQ": "FAQ",
     "SIGN_IN": "Login",
-    "MERCHANT": "Merchant",
     "PROFILE": "Profilo",
     "SIGN_OUT": "Disconnetti",
     "LOGOUT_DIALOG": {
@@ -355,24 +360,25 @@
     "HERO_ALT": "sfondo home",
     "VALORIZE_TITLE": "l'app<br />che valorizza<br />il tuo tempo",
     "DOWNLOAD_APP": "scarica l'app",
-    "INFO_WOM": "<span class=\"womWord\">WOM</span> - \"Worth One Minute\" è una piattaforma di ricompensa general-purpose basata su un sistema di scambio di voucher. Molte azioni e attività compiute dagli individui hanno un valore sociale intrinseco, un effetto noto in economia come \"esternalità positiva\". WOM mira a riconoscere tutte quelle azioni che costituiscono un contributo socialmente prezioso per un obiettivo comune, premiando il tempo che le persone dedicano a queste attività attraverso la generazione di voucher sociali digitali. I voucher WOM premiano ogni minuto di impegno sociale.",
+    "INFO_WOM": "<span class=\"womWord\">WOM</span> - \"<strong>Worth One Minute</strong>\" è una <span class=\"font-semibold\">piattaforma di rewarding sociale</span> basata su un sistema di scambio di <strong>punti</strong> che promuove la <strong>cittadinanza attiva</strong> e valorizza <strong>l'impatto sociale</strong> delle azioni quotidiane.<br><br>Molte attività svolte dagli individui generano un beneficio che va oltre il singolo e contribuiscono alla <strong>generazione di valore pubblico</strong>, producendo ciò che, in economia, viene definito un'<strong>esternalità positiva</strong>. WOM riconosce il valore di questi comportamenti virtuosi e li premia attraverso la generazione di <strong>punti sociali</strong>, incentivando la partecipazione a iniziative di <strong>sostenibilità</strong>, di volontariato e di innovazione sociale.<br><br>Ogni WOM corrisponde a un minuto di impegno dedicato a un'attività socialmente preziosa, trasformando il tempo investito nella comunità in un riconoscimento concreto.",
     "HOW_TO_EARN": "come guadagnare WOM",
     "SQUARES": {
+      "VALUE": {
+        "TITLE": "valore",
+        "DESC": "Molte azioni quotidiane generano un valore che va oltre il beneficio personale: hanno un impatto positivo sulla comunità e contribuiscono alla  creazione di <strong>valore pubblico</strong>.<br><br> WOM riconosce il <strong>valore sociale</strong> e lo trasforma in consapevolezza e opportunità concrete, premiando le <strong>esternalità positive</strong> attraverso l'emissione di <strong>punti</strong> che incentivano la <strong>partecipazione civica</strong> e i comportamenti virtuosi."
+      },
       "ACTIONS": {
         "TITLE": "azioni",
-        "DESC": "Compiendo azioni socialmente valide, ogni utente guadagna WOM. Gli Utenti possono gestire i loro voucher WOM tramite un’app, \"WOM Pocket\", che possono installare sul proprio dispositivo. L’applicazione consente di raccogliere i propri voucher, conservarli e spenderli."
+        "DESC": "Ogni volta che compi un'azione contribuisci alla <strong>creazione di valore pubblico</strong> guadagni WOM. Partecipando ad attività riconosciute dalla piattaforma ottieni <strong>punti</strong> che premiano il tuo impegno.<br><br>I punti vengono raccolti e gestiti tramite l'app <strong>WOM Pocket</strong>, l'<strong>app di coesione sociale</strong> che ti permette di conservarli, monitorarli e utilizzarli in modo semplice e immediato, garantendo il tuo anonimato."
       },
       "OFFERS": {
         "TITLE": "offerte",
-        "DESC": "I negozi locali possono offrire agli utenti servizi e sconti in cambio di WOM.<br />Puoi trovare i negozi che aderiscono al progetto nella sezione \"offerte\" di \"WOM Pocket\". <br /><br />Se sei un negoziante e vuoi entrare nel progetto WOM clicca sul pulsante scopri di più"
+        "DESC": "I WOM non hanno controvalore monetario, ma possono essere utilizzati presso i negozi e le attività che scelgono di offrire <strong>sconti</strong>, <strong>servizi</strong> e <strong>vantaggi esclusivi</strong> ai possessori di WOM.<br><br>Consulta la sezione <strong>Offerte</strong> di <strong>WOM Pocket</strong> per scoprire tutti gli esercizi convenzionati e utilizzare i tuoi WOM.<br><br>Se hai un'attività commerciale e desideri entrare a far parte della rete WOM, clicca sul pulsante <strong>scopri di più</strong> e aderisci alla <strong>piattaforma di rewarding</strong> che valorizza il territorio e rafforza il tuo legame con la comunità."
       },
-      "VALUE": {
-        "TITLE": "valore",
-        "DESC": "Molte azioni hanno un valore sociale intrinseco.<br />WOM riconosce l’impatto di queste azioni e fornisce uno strumento per premiare queste esternalità positive mediante l’emissione di WOM."
-      },
+
       "CHALLENGES": {
         "TITLE": "sfide",
-        "DESC": "Sfida te stesso e collezione i badge WOM. Accedi alla sezione \"traguardi\" sull'app \"WOM Pocket\" e scopri le sfide che ti circondano."
+        "DESC": "Con WOM puoi anche metterti alla prova. Accedi alla sezione <strong>Traguardi</strong> di <strong>WOM Pocket</strong>, partecipa alle sfide disponibili e colleziona badge che raccontano il tuo contributo alla comunità.<br><br>Le sfide incentivano la <strong>partecipazione attiva</strong> e la consapevolezza del valore delle proprie azioni.<br><br>La vita quotidiana diventa un <strong>gioco</strong> il cui scopo è contribuire il più possibile alla generazione di valore pubblico."
       }
     },
     "FOOTER": {
@@ -380,80 +386,405 @@
       "CTE_DESC": "CTE Square, Casa delle Tecnologie Emergenti ha lo scopo di supportare progetti di ricerca e sperimentazione con l’intento di trasferire know-how tecnologico verso le piccole e medie imprese per produrre sempre più servizi di qualità."
     }
   },
-  "ABOUT": {
-    "TITLE": "La piattaforma WOM",
-    "SECTION_A": {
-      "A": "WOM sta per <b>Worth One Minute</b>, cioè “Vale un minuto”. È una piattaforma di ricompensa general-purpose basata su un sistema di scambio di voucher che premia l’impatto positivo di azioni e attività svolte da persone che contribuiscono a un bene comune.",
-      "B": "Molte azioni hanno un <b>valore sociale intrinseco</b>, un effetto noto in economia come “esternalità positiva”. WOM riconosce l’impatto di queste azioni e fornisce uno strumento per premiare queste esternalità positive mediante <b>l’emissione di WOM.</b>"
-    },
-    "SECTION_A_2": {
-      "TITLE": "Cosa sono i WOM?",
-      "A": "I WOM sono <b>voucher digitali</b> progettati per riconoscere il valore di azioni che hanno un effetto positivo. Ogni voucher WOM premia <b>un minuto di impegno socialmente prezioso</b> svolto da un individuo.",
-      "B": "I voucher WOM sono <b>anonimi</b>. Gli unici dati che raccolgono sono relativi al loro scopo sociale e dove e quando vengono generati.\nI voucher WOM non hanno <b>controvalore in denaro</b>. Sono la prova di uno sforzo socialmente prezioso che un individuo ha effettuato verso una causa condivisa.",
-      "C": "Il <b>Registry</b> gestisce lo scambio dei voucher e tiene traccia della creazione e del consumo dei WOM.\nLa piattaforma WOM è un <b>sistema centralizzato</b>. Il <b>Registry</b> rappresenta l’autorità che gestisce lo scambio delle chiavi crittografiche (che consentono lo scambio sicuro delle informazioni) e verifica che i voucher siano guadagnati e spesi correttamente.\nIl Registry <b>non memorizza l’identità degli utenti e i loro dati</b>. I voucher WOM sono anonimi e il loro utilizzo non è tracciato."
-    },
-    "SECTION_B": {
-      "TITLE": "Come faccio a guadagnare WOM?",
-      "A": "I voucher WOM si ottengono svolgendo volontariamente un’azione socialmente preziosa. Ogni minuto di sforzo vale un WOM. Per la generazione del WOM, <b>l’attività svolta deve essere ufficialmente riconosciuta dalla piattaforma WOM</b>.",
-      "B": "Per essere riconosciuta, l’attività o l’iniziativa deve essere valutata come socialmente preziosa e quindi approvata dal comitato etico della piattaforma WOM.\n"
-    },
-    "SECTION_C": {
-      "TITLE": "Come utilizzo i miei WOM?",
-      "A": "Imprenditori, negozianti, enti pubblici o qualsiasi altro privato cittadino (generalmente chiamato Merchants) possono liberamente decidere di fornire beni, servizi o sconti ai possessori di voucher WOM. Per fare ciò, creano un <b>\"WOM payment\"</b> che consente loro di scegliere quale tipo di sforzo premiare: i voucher WOM possono essere filtrati per scopo, luogo e tempo. Merci, servizi e sconti possono essere determinati liberamente dal Merchants."
-    },
-    "URBINO": {
-      "TITLE": "WOM per Urbino",
+  "PLATFORM": {
+    "ABOUT": {
+      "TITLE": "La piattaforma",
       "SECTION_A": {
-        "A": "Questa sezione è dedicata a <b>WOM per Urbino</b>, il progetto che da <b>maggio 2022</b> è stato avviato nella città di <b>Urbino</b>.\n<b>WOM per Urbino</b> è la prima forma di sperimentazione del progetto WOM. La scelta di Urbino come <b>prima città ad utilizzare WOM</b> deriva dalla collaborazione di <b>DIGIT srl</b>, <b>Università di Urbino</b> e <b>Città di Urbino</b>, che ha concesso il suo patrocinio.",
-        "B": "Il progetto è stato lanciato dal <b>4 maggio 2022</b> tramite una conferenza stampa (per rivedere la conferenza <a href='https://youtu.be/1kiTku77HO4' target='_blank'>Clicca qui</a>).\nAttualmente i cittadini, gli studenti e i turisti hanno varie possibilità di ottenere <b>WOM</b> e di utilizzarli per ottenere <b>sconti</b> nei negozi convenzionati al progetto.  "
+        "A": "WOM, acronimo di <strong>Worth One Minute</strong> (\"Vale un minuto\"), è una <strong>piattaforma di rewarding sociale</strong> che riconosce il valore delle azioni che generano <strong>valore pubblico</strong>. Attraverso un sistema di <strong>punti</strong>, WOM promuove la <strong>cittadinanza attiva</strong>, valorizza l'<strong>impatto sociale</strong> delle azioni individuali e incentiva comportamenti virtuosi a favore della comunità.",
+        "B": "Molte attività quotidiane producono un impatto che supera l'intenzione di chi le compie, generando quella che, in economia, viene definita un'<strong>esternalità</strong> <strong>positiva</strong>. WOM rende questo valore visibile e misurabile, trasformandolo in <strong>punti</strong> che riconoscono il tempo dedicato alla co-creazione di <strong>valore pubblico</strong>.",
+        "C": "Attraverso il proprio sistema di rewarding, la piattaforma crea un collegamento tra cittadini, enti pubblici, associazioni, università, imprese e attività commerciali, favorendo la <strong>coesione sociale</strong>, la <strong>partecipazione attiva</strong> e lo sviluppo di <strong>comunità più sostenibili e inclusive</strong>."
+      },
+      "SECTION_A_2": {
+        "TITLE": "Cosa sono i WOM?",
+        "A": "I WOM sono <strong>punti</strong> che attestano il valore sociale di un'azione. Ogni WOM corrisponde a un minuto di impegno dedicato a un'attività riconosciuta come socialmente utile e rappresenta un modo concreto per <strong>premiare azioni individuali</strong>  che generano esternalità positiva.",
+        "B": "I WOM non rappresentano denaro né hanno alcun valore economico. Sono la testimonianza di uno sforzo compiuto a favore di una causa condivisa e possono essere utilizzati presso gli esercenti aderenti alla piattaforma, che scelgono liberamente di offrire beni, servizi o agevolazioni ai possessori di WOM.",
+        "C": "I WOM sono inoltre completamente anonimi: le informazioni raccolte riguardano esclusivamente lo scopo sociale per cui sono stati generati, insieme al luogo e al momento della loro emissione, garantendo la tutela della privacy degli utenti."
+      },
+      "SECTION_B": {
+        "TITLE": "La storia di WOM?",
+        "A": "WOM nasce come progetto di ricerca all’Università degli Studi di Urbino Carlo Bo per incentivare la partecipazione attiva dei cittadini ad iniziative di <strong>digital social innovation</strong> partecipativa.  Il primo contesto applicativo è stato <a href=''><em>crowd4roads</em></a>",
+        "B": "Nel tempo, il progetto si è evoluto, coinvolgendo amministrazioni pubbliche, università, associazioni, imprese e comunità locali in iniziative dedicate alla sostenibilità, alla mobilità sostenibile, alla cultura, al volontariato e all'innovazione sociale. Grazie a questo ecosistema, WOM è diventato uno strumento per incentivare la partecipazione dei cittadini e promuovere comportamenti orientati al bene comune.",
+        "C": "Nel 2025 WOM ha inaugurato una nuova fase della propria evoluzione, introducendo una rinnovata identità visiva, con un nuovo logo e una nuova veste grafica per l'app <strong>WOM</strong> <strong>Pocket</strong>. Contestualmente sono state implementate nuove funzionalità, tra cui la sezione <strong>Traguardi</strong>, che consente agli utenti di monitorare il proprio percorso, partecipare alle challenge e collezionare badge legati ai risultati raggiunti."
+      },
+      "BUTTONS": {
+        "EARN": "Guadagna",
+        "USE": "Usa"
       }
     },
-    "FANO": {
-      "TITLE": "WOM per Fano"
+    "CHALLENGES": {
+      "TITLE": "Challenge",
+      "HOW_IT_WORKS": {
+        "TITLE": "Come funzionano?",
+        "DESC_1": "Le Challenge sono sfide che rendono l'esperienza all'interno di <strong>WOM Pocket</strong> ancora più coinvolgente, trasformando la <strong>partecipazione civica</strong> e le attività che creano <strong>valore pubblico</strong> in un percorso interattivo di crescita e riconoscimento.",
+        "DESC_2": "Per partecipare è sufficiente scansionare il QR Code associato a una challenge. Una volta effettuata la scansione, la sfida viene attivata automaticamente nell'app e l'utente può iniziare a completare gli obiettivi previsti.",
+        "DESC_3": "Ogni challenge propone un percorso dedicato che valorizza l'impegno dell'utente attraverso un sistema di <strong>gamification sociale</strong>. Completando le attività richieste è possibile sbloccare badge che certificano i traguardi raggiunti e testimoniano il proprio contributo alla comunità.",
+        "DESC_4": "Tutti i badge ottenuti, insieme a quelli ancora da conquistare, sono consultabili nella sezione <strong>Traguardi</strong> di <strong>WOM Pocket</strong>, dove è possibile monitorare i propri progressi e seguire il percorso svolto all'interno della piattaforma."
+      },
+      "PUBLIC_AND_PRIVATE": {
+        "TITLE": "Challenge pubbliche e private",
+        "DESC_1": "All'interno di <strong>WOM Pocket</strong> sono disponibili due tipologie di challenge, progettate per offrire esperienze diverse e incentivare la <strong>cittadinanza attiva</strong>.",
+        "DESC_2": "Le <strong>challenge pubbliche</strong> sono accessibili a tutti gliutenti e consentono di ottenere badge semplicemente utilizzando l'app epartecipando alle iniziative disponibili. I badge conquistati, chiamati universali, entrano a far parte della propria collezione e rimangono sempre consultabili nellasezione <strong>Traguardi</strong>.",
+        "DESC_3": "Le <strong>challenge private</strong>, invece, sono dedicate a specifici eventi, progetti o iniziative e vengono attivate esclusivamente tramite la scansione di un QR Code dedicato. Solo partecipando a queste challenge è possibile ottenere badge esclusivi, pensati per valorizzare il coinvolgimento in attività particolari promosse da enti, associazioni, aziende o comunità locali.",
+        "DESC_4": "Ogni badge rappresenta un riconoscimento del percorso compiuto e testimonia l'impegno dell'utente nelle attività promosse dalla comunità WOM, incoraggiando comportamenti virtuosi e una partecipazione sempre più attiva."
+      },
+      "PUBLIC": {
+        "TITLE": "Badge Universali",
+        "DESC_1": "I <strong>badge universali</strong> possono essere ottenuti tramite le challenge pubbliche, pensate per tutti gli utenti di <strong>WOM Pocket</strong>. Le challenge pubbliche consentono di partecipare liberamente a iniziative dedicate alla sostenibilità, alla cultura, alla mobilità e ad altri progetti di <strong>innovazione sociale</strong>. Attraverso queste sfide è possibile ottenere badge, monitorare i propri progressi e contribuire concretamente alla vita della comunità."
+      },
+      "PRIVATE": {
+        "TITLE": "Badge Esclusivi",
+        "DESC_1": "I <strong>badge esclusivi</strong> possono essere ottenuti tramite le challenge private, create per eventi, campagne o progetti specifici promossi da enti pubblici, associazioni, università o aziende. L'accesso avviene tramite un <strong>QR Code</strong> dedicato e consente di partecipare a percorsi esclusivi, di ottenere badge riservati e di contribuire a iniziative ad alto <strong>impatto sociale</strong>."
+      },
+      "BADGES": {
+        "PRIMO_WOM": "Primo WOM",
+        "UN_ORA_DI_WOM": "Un'Ora di WOM",
+        "VENTIQUATTRO_ORE_WOM": "Ventiquattro Ore di WOM",
+        "DIECI_MILA_OTTANTA_MINUTI": "10.080 di Questi Minuti",
+        "PRIMI_PASSI": "Primi Passi",
+        "SESSANTA_MINUTI_ATTIVITA": "60 Minuti di Attività",
+        "IN_MOVIMENTO": "In Movimento",
+        "A_RUOTA_LIBERA": "A Ruota Libera",
+        "ECCOTI": "Eccoti",
+        "NEL_PUBBLICO": "Nel Pubblico",
+        "PARTECIPANTE": "Partecipante",
+        "PROTAGONISTA": "Protagonista"
+      }
+    },
+    "ACTIONS": {
+      "TITLE": "Azioni",
+      "HOW_TO_GENERATE": {
+        "TITLE": "Le azioni che generano WOM",
+        "DESC_1": "Ogni giorno compiamo azioni che possono generare un impatto positivo sulla comunità: muoversi in modo sostenibile, partecipare a eventi, studiare, prendersi cura della propria salute o contribuire ad attività sociali.",
+        "DESC_2": "La piattaforma WOM riconosce il valore sociale di queste attività e le trasforma in <strong>punti WOM</strong>, premiando il tempo dedicato ad azioni considerate preziose per il bene comune.",
+        "DESC_3": "Le azioni riconosciute dalla piattaforma possono riguardare diversi ambiti, dalla sostenibilità alla mobilità, dalla cultura al volontariato, fino al benessere personale e alla partecipazione civica.",
+        "DESC_4": "Ogni minuto dedicato a un'attività approvata dalla piattaforma può trasformarsi in un WOM: un riconoscimento digitale che valorizza il contributo delle persone e crea un collegamento tra cittadini, organizzazioni e territorio."
+      },
+      "COLLECT_WOM": {
+        "TITLE": "Raccogli i tuoi WOM con WOM Pocket",
+        "DESC_1": "Per raccogliere, conservare e utilizzare i punti WOM ottenuti attraverso le tue azioni, puoi utilizzare <strong>WOM Pocket</strong>, l'app dedicata alla gestione dei tuoi WOM.",
+        "DESC_2": "Attraverso l'app puoi monitorare il tuo percorso, partecipare alle iniziative disponibili, scoprire le offerte degli esercenti aderenti e utilizzare i voucher raccolti all'interno dell'ecosistema WOM.",
+        "DESC_2_1": "raccogliere i punti generati dalle tue attività;",
+        "DESC_2_2": "monitorare il tuo contributo alla comunità;",
+        "DESC_2_3": "partecipare alle iniziative disponibili;",
+        "DESC_2_4": "scoprire offerte e vantaggi presso gli esercenti aderenti;",
+        "DESC_2_5": "completare challenge e ottenere badge.",
+        "DESC_3": "<strong>Scarica WOM Pocket e inizia a trasformare le tue azioni quotidiane in valore sociale.</strong>"
+      },
+      "HOW_TO_EARN": {
+        "TITLE": "Come guadagnare WOM",
+        "DESC_1": "Per ottenere WOM è sufficiente partecipare ad attività e iniziative riconosciute dalla piattaforma.",
+        "DESC_2": "Ogni azione è collegata a un <strong>Instrument WOM</strong>, ovvero un progetto, un ente o un'iniziativa approvata dalla piattaforma che consente di generare WOM in relazione a specifici obiettivi sociali.",
+        "DESC_3": "Il numero di WOM ottenuti dipende dal tipo di attività svolta: ogni minuto riconosciuto dalla piattaforma contribuisce alla generazione di WOM dedicati a uno specifico ambito sociale.",
+        "DESC_4": "Scopri tutte le attività che ti permettono di generare WOM."
+      },
+      "ACTION_TO_GENERATE": {
+        "TITLE": "Le azioni che generano WOM",
+        "WOM_FIT": {
+          "TITLE": "WOM Fit",
+          "DESC_1": "Con <strong>WOM FIT</strong> puoi trasformare il tempo dedicato al movimento in WOM.",
+          "DESC_2": "Camminare e utilizzare la bicicletta sono azioni riconosciute dalla piattaforma perché contribuiscono al benessere personale, alla salute e alla <strong>mobilità sostenibile.</strong>",
+          "DESC_3": "Dopo i primi 15 minuti di attività, ogni minuto successivo genera WOM dedicati alla categoria salute e benessere. Inoltre, scegliendo di muoverti a piedi o in bicicletta negli orari di punta, puoi contribuire alla riduzione del traffico e delle emissioni, ottenendo WOM legati alla sostenibilità.",
+          "DESC_4": "Attraverso WOM FIT, una scelta quotidiana come muoversi in modo attivo diventa un contributo concreto alla comunità e all'ambiente.",
+          "LINK": "Clicca qui"
+        },
+        "NETWORKING": {
+          "TITLE": "Networking",
+          "DESC_1": "Le relazioni tra persone generano valore sociale.",
+          "DESC_2": "Attraverso attività di <strong>networking</strong>, community ed esperienze di condivisione, gli utenti possono creare nuove connessioni, favorire lo scambio di conoscenze e rafforzare il senso di appartenenza alla comunità.",
+          "DESC_3": "WOM riconosce il valore delle interazioni che promuovono la collaborazione e la partecipazione attiva, trasformando il tempo dedicato alla costruzione di nuove relazioni in un contributo riconosciuto dalla piattaforma.",
+          "DESC_4": "Attraverso la sezione “Connessioni” di WOM Pocket, puoi scambiare il tuo contatto con altri utenti WOM, ampliare la tua rete e creare nuove opportunità di collaborazione.",
+          "LINK": "Scopri di più qui"
+        },
+        "GRATITUDE": {
+          "TITLE": "Gratitudine",
+          "DESC_1": "Anche un gesto di riconoscenza può generare valore per la comunità.",
+          "DESC_2": "Attraverso azioni di <strong>gratitudine</strong> e condivisione, gli utenti possono contribuire a diffondere comportamenti solidali e promuovere una cultura basata sull'aiuto reciproco.",
+          "DESC_3": "WOM valorizza queste azioni come espressione di partecipazione civica e impegno sociale, riconoscendo il contributo delle persone che scelgono di sostenere e incoraggiare gli altri membri della comunità.",
+          "DESC_4": "Attraverso l'app WOM Pocket puoi condividere fino a <strong>60 WOM al giorno</strong> con un altro utente accedendo alla sezione <strong>“Scambio”</strong>.",
+          "DESC_5": "La condivisione WOM non rappresenta un trasferimento di denaro, ma un modo per riconoscere e valorizzare il contributo sociale delle persone.",
+          "LINK": "Scopri di più qui"
+        },
+        "UNIURB": {
+          "TITLE": "UniUrb",
+          "DESC_1": "L'Università degli Studi di Urbino Carlo Bo riconosce il valore sociale dello studio e della formazione attraverso WOM.",
+          "DESC_2": "Gli studenti possono ottenere WOM dedicando tempo al proprio percorso universitario e contribuendo alla crescita della conoscenza e della comunità accademica.",
+          "DESC_3": "Attraverso questo Instrument, lo studio viene riconosciuto come un'attività capace di generare valore sociale, incentivando l'impegno, la partecipazione e la crescita personale.",
+          "LINK": "Clicca qui"
+        },
+        "ADRIABUS": {
+          "TITLE": "Adriabus",
+          "DESC_1": "<strong>Adriabus</strong> riconosce il valore della mobilità sostenibile e dei comportamenti virtuosi legati all'utilizzo del trasporto pubblico.",
+          "DESC_2": "Grazie alla collaborazione con la piattaforma WOM, gli utenti possono ottenere punti WOM utilizzando i servizi di trasporto pubblico e contribuendo a una mobilità più consapevole e rispettosa dell'ambiente.",
+          "DESC_3": "Utilizzare il trasporto pubblico significa ridurre traffico ed emissioni, favorendo un modello di mobilità più sostenibile per il territorio.",
+          "DESC_4": "Guadagna WOM ogni volta che acquisti un titolo di viaggio o un abbonamento online tramite l'app e il sito di Adriabus e di MooneyGo.",
+          "LINK": "Visita il sito di Adriabus"
+        },
+        "EVENTS": {
+          "TITLE": "Partecipazione a eventi",
+          "DESC_1": "Partecipare a eventi, iniziative e attività della comunità significa contribuire alla vita del territorio.",
+          "DESC_2": "Attraverso eventi culturali, sociali, educativi o dedicati alla sostenibilità, gli utenti possono ottenere WOM grazie alla propria partecipazione attiva.",
+          "DESC_3": "WOM collabora con enti pubblici, associazioni, organizzatori di eventi, università e realtà locali che desiderano valorizzare la partecipazione dei cittadini e trasformare le proprie iniziative in opportunità di generare WOM.",
+          "DESC_4": "Organizzi un evento o un'iniziativa per la comunità? Scrivici a <a href='mailto:info@wom.social'><strong>info@wom.social</strong></a> per scoprire come diventare un <strong>Instrument WOM</strong>."
+        },
+        "CULTURAL_PLACES": {
+          "TITLE": "Visita di luoghi e siti culturali",
+          "DESC_1": "La scoperta del patrimonio culturale genera conoscenza, partecipazione e valore per il territorio.",
+          "DESC_2": "Visitare musei, siti storici, luoghi culturali e punti di interesse consente agli utenti di entrare in contatto con la storia e l'identità delle comunità locali, trasformando l'esperienza culturale in un'azione riconosciuta dalla piattaforma WOM.",
+          "DESC_3": "WOM promuove la valorizzazione del patrimonio culturale incentivando la partecipazione dei cittadini e creando nuove connessioni tra persone, territori e istituzioni.",
+          "DESC_4": "Sei un museo, un ente culturale o gestisci un luogo di interesse storico e artistico? Puoi entrare nell'ecosistema WOM e valorizzare le visite e le attività culturali.",
+          "DESC_5": "Scrivici a <a href='mailto:info@wom.social'><strong>info@wom.social</strong></a> per scoprire come diventare un <strong>Instrument WOM</strong>."
+        },
+        "VOLUNTEERING": {
+          "TITLE": "Volontariato",
+          "DESC_1": "Il tempo dedicato agli altri è una delle forme più importanti di valore sociale.",
+          "DESC_2": "Attraverso attività di volontariato, gli utenti possono contribuire concretamente al benessere della comunità e ottenere WOM quale riconoscimento del proprio impegno.",
+          "DESC_3": "WOM valorizza il volontariato come un'azione capace di generare impatto positivo, sostenendo iniziative sociali, associazioni e organizzazioni che promuovono solidarietà, inclusione e partecipazione civica.",
+          "DESC_4": "Sei un'associazione, un ente del terzo settore o un'organizzazione che promuove attività di volontariato? Puoi trasformare il tempo e l'impegno dei tuoi volontari in un'opportunità di riconoscimento attraverso WOM.",
+          "DESC_5": "Scrivici a <a href='mailto:info@wom.social'><strong>info@wom.social</strong></a> per scoprire come diventare un <strong>Instrument WOM</strong>."
+        },
+        "CODYMAZE": {
+          "TITLE": "CodyMaze",
+          "DESC_1": "<strong>CodyMaze</strong> è una scacchiera a cielo aperto composta da 25 blocchi, dove gli studenti si muovono come robot seguendo le istruzioni che compaiono sul proprio smartphone.",
+          "DESC_2": "Il percorso è un vero e proprio labirinto dinamico: cambia a ogni accesso e si adatta al giocatore, offrendo ogni volta una nuova esperienza.",
+          "DESC_3": "Attraverso il gioco, gli studenti possono sperimentare i principi base del <strong>coding</strong> e sviluppare capacità logiche e di problem solving.",
+          "DESC_4": "Partecipando a CodyMaze è possibile ottenere WOM trasformando l'apprendimento, la tecnologia e il gioco in un'esperienza di <strong>innovazione sociale</strong>."
+        },
+        "AWORLD": {
+          "TITLE": "AWorld",
+          "DESC_1": "<strong>AWorld</strong> è un'applicazione dedicata alla promozione di uno stile di vita sostenibile, che aiuta gli utenti a trasformare le proprie scelte quotidiane in azioni positive per il pianeta.",
+          "DESC_2": "Grazie alla collaborazione tra DIGIT srl e AWorld, le azioni sostenibili compiute dagli utenti possono essere convertite in voucher digitali WOM.",
+          "DESC_3": "Ridurre il proprio impatto ambientale, adottare comportamenti più consapevoli e partecipare a iniziative di sostenibilità diventano così azioni riconosciute dalla piattaforma WOM e capaci di generare valore per la comunità.",
+          "LINK": "Clicca qui ??"
+        },
+        "BALANCE": {
+          "TITLE": "Balance",
+          "DESC_1": "<strong>Balance - Postural Stability ©</strong> è un'app sviluppata dai ricercatori dell'Università degli Studi di Urbino Carlo Bo che permette di misurare la propria stabilità posturale attraverso lo smartphone.",
+          "DESC_2": "Effettuando misurazioni periodiche, gli utenti possono monitorare il proprio equilibrio e contribuire alla raccolta di informazioni utili sul benessere e sulla salute.",
+          "DESC_3": "Per iniziare a collezionare WOM è necessario effettuare due misurazioni in due giorni diversi.",
+          "DESC_4": "Attraverso Balance, la cura della propria salute e l'attenzione al benessere personale diventano azioni riconosciute dalla piattaforma e trasformate in voucher digitali WOM.",
+          "LINK": "Clicca qui"
+        }
+      }
     }
+  },
+  "USERS": {
+    "TITLE": "Utenti",
+    "ECOSYSTEM": {
+      "TITLE": "L'ecosistema WOM",
+      "DESC_1": "La piattaforma WOM nasce dall'incontro tra diversi soggetti che collaborano per riconoscere, valorizzare e incentivare le azioni che generano un <strong>impatto sociale positivo</strong>.",
+      "DESC_2": "All'interno dell'ecosistema WOM ogni partecipante ricopre un ruolo specifico: le <strong>Persone</strong> compiono azioni socialmente preziose e ricevono <strong>WOM</strong> come riconoscimento del proprio contributo; i <strong>Merchant</strong> valorizzano questi punti offrendo beni, servizi o agevolazioni alla comunità; gli <strong>Instrument</strong> rendono possibile la generazione di WOM attraverso iniziative e progetti riconosciuti dalla piattaforma.",
+      "DESC_3": "Questo sistema crea un circuito virtuoso in cui cittadini, organizzazioni e attività locali collaborano per promuovere la <strong>cittadinanza attiva</strong> e <strong>le azioni</strong> che generano <strong>valore pubblico</strong>, e per rafforzare il legame tra persone e territorio."
+    },
+    "THREE_SUBJECTS": {
+      "TITLE": "I tre soggetti della piattaforma WOM",
+      "DESC_1": "<strong>Persone</strong>",
+      "DESC_2": "Le Persone sono gli utenti che partecipano all'ecosistema WOM attraverso azioni riconosciute come socialmente utili. Attraverso l'app <strong>WOM Pocket</strong>, possono raccogliere, conservare e utilizzare i punti ottenuti grazie al proprio impegno.",
+      "DESC_3": "Ogni azione contribuisce a generare valore per la comunità e viene riconosciuta attraverso un sistema di <strong>rewarding sociale</strong> che premia la partecipazione attiva.",
+      "DESC_4": "<strong>Merchant</strong>",
+      "DESC_5": "I Merchant sono gli esercenti e le organizzazioni che entrano a far parte della rete WOM, offrendo beni, servizi o agevolazioni in cambio di WOM.",
+      "DESC_6": "Attraverso le proprie offerte, i Merchant contribuiscono a valorizzare la <strong>partecipazione attiva</strong> dei cittadini e a rafforzare il rapporto tra comunità, attività locali e territorio.",
+      "DESC_7": "<strong>Instrument</strong>",
+      "DESC_8": "Gli Instrument sono i soggetti che consentono alla piattaforma di generare WOM. Possono essere iniziative, progetti, enti pubblici, associazioni o organizzazioni riconosciute da WOM che promuovono <strong>attività con un impatto positivo</strong> sulla comunità.",
+      "DESC_9": "Attraverso gli Instrument, le attività socialmente preziose vengono collegate agli obiettivi della piattaforma e trasformate in opportunità di partecipazione per i cittadini.",
+      "DESC_10": "Insieme, Persone, Merchant e Instrument costruiscono un ecosistema di <strong>innovazione sociale</strong> in cui ogni azione positiva può essere riconosciuta, valorizzata e condivisa."
+    },
+
+    "PEOPLE": {
+      "TITLE": "Persone",
+      "WHO_ARE_PEOPLE": {
+        "TITLE": "Chi sono le persone",
+        "DESC_1": "Le persone sono tutti gli utenti che scelgono di entrare a far parte dell'ecosistema WOM, contribuendo con le proprie azioni a <strong>creare valore pubblico</strong> e partecipando attivamente alla vita della comunità.",
+        "DESC_2": "Attraverso <strong>WOM Pocket</strong>, l'<strong>app per la cittadinanza attiva</strong> che premia le azioni socialmente utili, ogni utente può raccogliere, conservare e utilizzare i <strong>punti WOM</strong> ottenuti partecipando ad attività riconosciute dalla piattaforma.",
+        "DESC_3": "L'app è gratuita, disponibile per dispositivi Android e iOS, e rappresenta il punto di accesso a tutte le funzionalità della piattaforma: dalla gestione dei WOM alla consultazione delle offerte, fino al monitoraggio dei propri traguardi e delle challenge completate.",
+        "LINK": "Scopri di più sull'app WOM Pocket"
+      },
+      "ACTIONS_HOW_TO_EARN_WOM": {
+        "TITLE": "Azioni: come guadagnare i WOM",
+        "DESC_1": "Molte azioni quotidiane generano un valore che va oltre il beneficio individuale e contribuiscono alla creazione di <strong>valore pubblico</strong> e a un  un <strong>impatto sociale</strong> positivo sulla comunità.",
+        "DESC_2": "Quando un'attività viene riconosciuta dalla piattaforma WOM come socialmente preziosa, ogni minuto di impegno corrisponde a un <strong>punto WOM</strong>. In questo modo la piattaforma incentiva la <strong>partecipazione civica</strong>, valorizzando il tempo dedicato a iniziative di sostenibilità, volontariato, cultura e ad altri progetti orientati alla comunità.",
+        "DESC_3": "I punti possono essere ottenuti partecipando a iniziative, eventi, progetti o attività approvate dalla piattaforma. Una volta generati, vengono raccolti automaticamente in <strong>WOM Pocket</strong>, dove l'utente può consultarli, monitorare il proprio saldo e seguire il proprio percorso.",
+        "LINK": "Scopri di più su come ottenere WOM"
+      },
+      "OFFERS_HOW_TO_USE_WOM": {
+        "TITLE": "Offerte: come utilizzare i WOM",
+        "DESC_1": "I <strong>punti WOM</strong> possono essere utilizzati presso gli esercenti e le organizzazioni aderenti alla piattaforma, che scelgono liberamente di offrire beni, servizi o agevolazioni ai possessori di WOM.",
+        "DESC_2": "Tutte le opportunità disponibili sono consultabili nella sezione <strong>Offerte</strong> di <strong>WOM Pocket</strong>, dove gli utenti possono scoprire i partner aderenti e utilizzare i propri punti secondo le modalità previste da ciascun merchant.",
+        "DESC_3": "In questo modo WOM crea un ecosistema in cui le <strong>azioni socialmente utili </strong> vengono riconosciute e premiate, rafforzando il legame tra cittadini, attività locali e territorio e promuovendo un modello di <strong>rewarding sociale</strong> basato sulla partecipazione e sulla valorizzazione dell'<strong>impatto sociale</strong>.",
+        "DESC_4": "Sei un esercente e desideri offrire vantaggi ai possessori di WOM? <strong>Scopri come diventare Merchant</strong> e partecipa a una rete che valorizza la cittadinanza attiva e sostiene il commercio di prossimità.",
+        "DESC_5": "Mappa degli esercenti con offerte attive"
+      },
+      "MAP": {
+        "SEARCH_PLACEHOLDER": "Cerca il luogo..."
+      }
+    },
+    "MERCHANT": {
+      "TITLE": "Merchant",
+      "WHO_THEY_ARE_AND_HOW_TO_JOIN": {
+        "TITLE": "Chi sono e come aderire",
+        "DESC_1": "I <strong>Merchant</strong> sono gli esercenti, le attività commerciali, le organizzazioni e gli enti che entrano a far parte dell'ecosistema WOM offrendo beni, servizi o agevolazioni in cambio di <strong>punti WOM</strong>.",
+        "DESC_2": "Attraverso la piattaforma WOM, i Merchant possono valorizzare il proprio ruolo all'interno della comunità, contribuendo alla diffusione di comportamenti virtuosi e sostenendo iniziative di <strong>cittadinanza attiva</strong>, di sostenibilità e di <strong>impatto sociale</strong>.",
+        "DESC_3": "Aderire alla rete WOM significa partecipare a un sistema di <strong>rewarding sociale</strong> in cui le azioni positive dei cittadini vengono riconosciute e trasformate in opportunità concrete per il territorio.",
+        "DESC_4": "Le offerte WOM non prevedono scambi di denaro: i WOM rappresentano il riconoscimento di un impegno socialmente prezioso e possono essere convertiti esclusivamente in sconti, servizi o gratuità messi a disposizione dal Merchant.",
+        "DESC_5": "Vuoi entrare nella rete WOM?",
+        "DESC_6": "Scarica l'app <strong>WOM POS</strong> sul tuo dispositivo mobile e inizia a creare le tue offerte.",
+        "LINK": "Clicca qui"
+      },
+      "WOM_POS_TOOL_FOR_MERCHANTS": {
+        "TITLE": "WOM POS: lo strumento per i Merchant",
+        "DESC_1": "Lo strumento principale per accettare i punti WOM è <strong>WOM POS (Point of Sale)</strong>, l'applicazione dedicata agli esercenti che consente di gestire le transazioni WOM e di verificare la validità dei punti ricevuti.",
+        "DESC_2": "L'app WOM POS può essere scaricata gratuitamente dagli store Android e iOS e non prevede costi di transazione.",
+        "DESC_3": "Per i Merchant che desiderano aumentare la propria visibilità all'interno della rete WOM e ricevere report periodici sul valore sociale generato attraverso le proprie offerte, sono disponibili servizi aggiuntivi dedicati."
+      },
+      "HOW_TO_CREATE_AND_DELETE_OFFERS": {
+        "TITLE": "Come generare ed eliminare le offerte",
+        "DESC_1": "Attraverso <strong>WOM POS</strong>, l'app dedicata ai Merchant, gli esercenti possono creare e gestire le proprie offerte WOM in modo semplice e immediato.",
+        "DESC_2": "La gestione delle offerte è completamente personalizzabile: il Merchant può creare, modificare o eliminare le proprie offerte in base alle proprie esigenze e alle iniziative attive.",
+        "DESC_3": "Per scoprire nel dettaglio tutte le funzionalità disponibili, consulta la <strong>guida alla gestione delle offerte WOM</strong>.",
+        "LINK": "Guida PDF"
+      },
+      "MORE_INFORMATION": {
+        "TITLE": "Maggiori informazioni",
+        "DESC_1": "Vuoi scoprire come entrare nella rete WOM, creare offerte dedicate ai tuoi clienti o valorizzare il tuo contributo alla comunità?",
+        "DESC_2": "Contattaci per ricevere maggiori informazioni sul progetto e sulle modalità di adesione.",
+        "LINK": "Scrivici a info@wom.social"
+      }
+    },
+    "INSTRUMENT": {
+      "TITLE": "Instrument",
+      "WHO_ARE_INSTRUMENTS": {
+        "TITLE": "Chi sono gli Instrument",
+        "DESC_1": "Gli <strong>Instrument</strong> sono i soggetti che generano WOM e attraverso i quali la piattaforma riconosce e valorizza le attività con un <strong>impatto sociale positivo</strong>.",
+        "DESC_2": "Un Instrument può essere un'iniziativa, un progetto, un ente pubblico o un'associazione riconosciuta dalla piattaforma WOM. Attraverso il proprio Instrument, questi soggetti consentono agli utenti di partecipare ad attività socialmente utili e di ottenere <strong>WOM</strong> <strong>WOM</strong> come riconoscimento del loro contributo.",
+        "DESC_3": "Ogni Instrument collega un'attività concreta a uno degli obiettivi sociali promossi dalla piattaforma, chiamati <strong>aim</strong>. Gli aim rappresentano le finalità che WOM intende sostenere, come ad esempio la <strong>mobilità sostenibile</strong>, la salute pubblica, la cultura, la valorizzazione del patrimonio artistico e culturale o lo studio individuale.",
+        "DESC_4": "Attraverso gli Instrument, enti, associazioni, istituzioni e organizzazioni possono trasformare le proprie iniziative in occasioni di partecipazione attiva, coinvolgendo i cittadini e incentivandoli a contribuire alla generazione di <strong>valore pubblico</strong>."
+      },
+      "WHO_CAN_BECOME_AN_INSTRUMENT": {
+        "TITLE": "Chi può diventare Instrument",
+        "DESC_1": "Possono diventare <strong>Instrument WOM</strong> tutti i soggetti che promuovono attività o iniziative in grado di generare un valore sociale riconosciuto.",
+        "DESC_2": "Possono quindi aderire alla piattaforma:",
+        "DESC_3": "enti pubblici e amministrazioni locali;",
+        "DESC_4": "associazioni e organizzazioni del terzo settore;",
+        "DESC_5": "università e istituti di ricerca;",
+        "DESC_6": "fondazioni e realtà culturali;",
+        "DESC_7": "organizzazioni che promuovono attività di volontariato;",
+        "DESC_8": "soggetti che sviluppano progetti dedicati alla sostenibilità, alla partecipazione civica e all'innovazione sociale.",
+        "DESC_9": "Ogni nuovo Instrument viene valutato dalla piattaforma WOM attraverso un processo di revisione etica e tecnica, finalizzato a garantire che l'attività proposta rappresenti un contributo concreto e verificabile alla comunità.",
+        "DESC_10": "Una volta approvato, l'Instrument può generare <strong>WOM</strong> e premiare le persone che partecipano alle attività riconosciute."
+      },
+      "ACTIVE_INSTRUMENTS": {
+        "TITLE": "Gli Instrument attivi",
+        "DESC_1": "La rete WOM comprende diversi Instrument collegati a progetti e iniziative che promuovono comportamenti virtuosi e partecipazione attiva.",
+        "DESC_2": "Attraverso questi strumenti, gli utenti possono ottenere WOM partecipando ad attività dedicate a diversi ambiti di interesse sociale, tra cui:",
+        "DESC_3": "sostenibilità ambientale;",
+        "DESC_4": "mobilità sostenibile;",
+        "DESC_5": "cultura e valorizzazione del territorio;",
+        "DESC_6": "volontariato;",
+        "DESC_7": "partecipazione alla vita della comunità;",
+        "DESC_8": "iniziative per il benessere collettivo.",
+        "DESC_9": "Alcuni dei nostri Instrument:"
+      },
+      "BECOME_A_WOM_INSTRUMENT": {
+        "TITLE": "Diventa un Instrument WOM",
+        "DESC_1": "Hai un progetto o un'iniziativa che coinvolge cittadini, volontari o comunità locali?",
+        "DESC_2": "Puoi entrare nell'ecosistema WOM e trasformare le tue attività in strumenti in grado di riconoscere e premiare l'impegno sociale tramite i <strong>punti WOM</strong>.",
+        "DESC_3": "Contattaci per scoprire come diventare un Instrument WOM."
+      }
+    }
+  },
+  "APP": {
+    "WOM_POCKET": {
+      "TITLE": "WOM Pocket",
+      "APP_TO_PARTICIPATE_IN_THE_WOM_ECOSYSTEM": {
+        "TITLE": "L'app per partecipare all'ecosistema WOM",
+        "DESC_1": "<strong>WOM Pocket</strong> è l'applicazione mobile che permette agli utenti di entrare nell'ecosistema WOM, raccogliere e utilizzare i <strong>punti WOM</strong> ottenuti attraverso azioni e attività riconosciute come socialmente preziose.",
+        "DESC_2": "consente di gestire in modo semplice e immediato i punti WOM, di monitorare il proprio percorso e di partecipare alle iniziative che promuovono la <strong>cittadinanza attiva</strong> e generano valore pubblico.",
+        "DESC_3": "Attraverso l'app, ogni utente può trasformare il proprio impegno in un riconoscimento concreto: il tempo dedicato ad attività con un <strong>impatto sociale positivo</strong> viene valorizzato attraverso un sistema di <strong>rewarding sociale</strong> che premia le buone azioni."
+      },
+      "WHAT_YOU_CAN_DO_WITH_WOM_POCKET": {
+        "TITLE": "Cosa puoi fare con WOM Pocket",
+        "DESC_1": "Con WOM Pocket puoi:",
+        "DESC_2": "<strong>raccogliere i WOM</strong> ottenuti partecipando ad attività, eventi e iniziative riconosciute dalla piattaforma;",
+        "DESC_3": "<strong>conservare i tuoi WOM</strong> all'interno di un wallet digitale personale;",
+        "DESC_4": "<strong>consultare il saldo dei punti disponibili</strong> e monitorare il proprio contributo alla comunità;",
+        "DESC_5": "<strong>utilizzare i WOM</strong> presso gli esercenti aderenti alla rete attraverso la sezione Offerte;",
+        "DESC_6": "<strong>partecipare alle Challenge</strong> e ottenere badge esclusivi completando gli obiettivi proposti;",
+        "DESC_7": "<strong>scambiare contatti</strong> con altre persone che usano WOM, come se fosse una vera e propria rubrica;",
+        "DESC_8": "<strong>scoprire nuove opportunità</strong> per contribuire alla vita della comunità e generare valore sociale."
+      },
+      "AN_APP_TO_ENHANCE_YOUR_CONTRIBUTION": {
+        "TITLE": "Un'app per valorizzare il tuo contributo",
+        "DESC_1": "Ogni giorno compiamo azioni che possono generare un valore positivo per le persone e per il territorio. WOM Pocket rende questo valore visibile, permettendo di raccogliere una testimonianza concreta del proprio impegno sociale.",
+        "DESC_2": "I WOM non hanno valore economico e non rappresentano denaro: sono il riconoscimento di un contributo dedicato a una causa condivisa e diventano uno strumento per creare connessioni tra cittadini, organizzazioni e attività locali."
+      },
+      "DOWNLOAD_WOM_POCKET": {
+        "TITLE": "Scarica WOM Pocket",
+        "DESC_1": "WOM Pocket è gratuita e disponibile per dispositivi <strong>Android e iOS</strong>.",
+        "DESC_2": "Scarica l'app, crea il tuo spazio personale e inizia a partecipare alle iniziative della comunità WOM.",
+        "LINK": "Scarica WOM Pocket e scopri quanto vale il tuo impegno.",
+        "DESC_3": "Pulsanti"
+      }
+    },
+    "WOM_POS": {
+      "TITLE": "WOM POS",
+      "WOM_POS_TOOL_FOR_MERCHANTS_ACCEPTING_WOM": {
+        "TITLE": "Lo strumento per i Merchant che accettano WOM",
+        "DESC_1": "<strong>WOM POS</strong> è l'applicazione dedicata ai <strong>Merchant</strong> che consente di accettare i <strong>punti WOM</strong> e partecipare all'ecosistema di <strong>rewarding sociale</strong> della piattaforma.",
+        "DESC_2": "Attraverso WOM POS, gli esercenti possono gestire le transazioni WOM, verificare i WOM ricevuti e creare nuove istanze di pagamento.",
+        "DESC_3": "In questo modo ogni attività può decidere di incentivare i comportamenti virtuosi e collegare la propria offerta ad azioni con un <strong>impatto sociale</strong>."
+      },
+      "ENHANCE_YOUR_BUSINESS_THROUGH_THE_WOM_NETWORK": {
+        "TITLE": "Valorizza la tua attività attraverso la rete WOM",
+        "DESC_1": "Entrare nella rete WOM significa creare un collegamento diretto tra attività locali e comunità, contribuendo a riconoscere e premiare le azioni positive dei cittadini.",
+        "DESC_2": "Attraverso le proprie offerte, i Merchant possono sostenere iniziative dedicate alla <strong>cittadinanza attiva</strong>, alla sostenibilità e al benessere del territorio, aumentando la propria visibilità all'interno di una rete orientata alla partecipazione e all'innovazione sociale.",
+        "DESC_3": "Le offerte WOM non prevedono scambi di denaro: i WOM rappresentano il riconoscimento di un impegno socialmente prezioso e vengono utilizzati per ottenere sconti, servizi o agevolazioni messe a disposizione dai Merchant."
+      },
+      "DOWNLOAD_WOM_POS": {
+        "TITLE": "Scarica WOM POS",
+        "DESC_1": "L'app <strong>WOM POS</strong> può essere scaricata gratuitamente dagli store Android e iOS e non prevede costi di transazione.",
+        "DESC_2": "I Merchant che desiderano aumentare la visibilità delle proprie offerte e ricevere report periodici sul valore sociale generato attraverso la propria attività possono accedere a servizi aggiuntivi dedicati.",
+        "LINK": "Scarica WOM POS e porta la tua attività nell'ecosistema WOM.",
+        "DESC_3": "Pulsanti"
+      }
+    },
+    "WOM_FIT": {
+      "TITLE": "WOM Fit",
+      "TRANSFORM_MOVEMENT_INTO_SOCIAL_VALUE": {
+        "TITLE": "Trasforma il movimento in valore sociale",
+        "DESC_1": "<strong>WOM FIT</strong> è la funzionalità della piattaforma WOM che permette di trasformare il tempo dedicato al movimento in <strong>punti WOM</strong>, premiando le attività che contribuiscono al benessere personale e alla sostenibilità del territorio.",
+        "DESC_2": "Camminare e andare in bicicletta diventano così azioni capaci di generare un impatto positivo: ogni minuto di attività riconosciuta dalla piattaforma può trasformarsi in un contributo alla comunità."
+      },
+      "HOW_WOM_FIT_WORKS": {
+        "TITLE": "Come funziona WOM FIT",
+        "DESC_1": "Con WOM FIT puoi convertire in WOM i minuti trascorsi camminando o pedalando.",
+        "DESC_2": "Dopo i primi <strong>15 minuti di attività</strong>, ogni minuto successivo genera un WOM dedicato alla categoria <strong>salute e benessere</strong>, valorizzando uno stile di vita attivo e consapevole.",
+        "DESC_3": "Inoltre, scegliendo di muoverti in bicicletta o a piedi negli <strong>orari di punta</strong>, contribuisci a ridurre traffico ed emissioni, generando WOM dedicati alla <strong>mobilità sostenibile</strong>.",
+        "DESC_4": "In questo modo un gesto quotidiano come spostarsi diventa un'azione concreta a favore della propria salute e dell'ambiente."
+      },
+      "MOVEMENT_THAT_CREATES_COMMUNITY": {
+        "TITLE": "Il movimento che crea comunità",
+        "DESC_1": "WOM FIT fa parte dell'ecosistema WOM dedicato alla <strong>cittadinanza attiva</strong> e alla valorizzazione dei comportamenti virtuosi.",
+        "DESC_2": "Attraverso l'app <strong>WOM Pocket</strong>, puoi raccogliere i WOM generati, monitorare il tuo contributo e utilizzarli per accedere a sconti, servizi e offerte disponibili presso gli esercenti aderenti.",
+        "DESC_3": "Muoviti, contribuisci al cambiamento e scopri quanto vale ogni tuo minuto.",
+        "LINK": "Scarica WOM FIT e inizia a trasformare il movimento in valore.",
+        "DESC_4": "Pulsanti"
+      }
+    }
+  },
+
+  "URBINO": {
+    "TITLE": "WOM per Urbino",
+    "SECTION_A": {
+      "A": "Questa sezione è dedicata a <b>WOM per Urbino</b>, il progetto che da <b>maggio 2022</b> è stato avviato nella città di <b>Urbino</b>.\n<b>WOM per Urbino</b> è la prima forma di sperimentazione del progetto WOM. La scelta di Urbino come <b>prima città ad utilizzare WOM</b> deriva dalla collaborazione di <b>DIGIT srl</b>, <b>Università di Urbino</b> e <b>Città di Urbino</b>, che ha concesso il suo patrocinio.",
+      "B": "Il progetto è stato lanciato dal <b>4 maggio 2022</b> tramite una conferenza stampa (per rivedere la conferenza <a href='https://youtu.be/1kiTku77HO4' target='_blank'>Clicca qui</a>).\nAttualmente i cittadini, gli studenti e i turisti hanno varie possibilità di ottenere <b>WOM</b> e di utilizzarli per ottenere <b>sconti</b> nei negozi convenzionati al progetto.  "
+    }
+  },
+  "FANO": {
+    "TITLE": "WOM per Fano"
   },
   "FAQ": {
     "OPEN_PAGE_FAQ": "Apri la pagina con tutte le FAQ"
   },
-  "CHALLENGES": {
-    "TITLE": "<em>Challenge</em> – Accetta la sfida, conquista i badge!",
-    "INTRO": "Le <b class=\"text-[#009FE3]\">Challenge</b> sono sfide speciali pensate per rendere l’esperienza su <b>Pocket</b> ancora più coinvolgente, dinamica e interattiva.",
-    "HOW_IT_WORKS": {
-      "TITLE": "Come funzionano?",
-      "DESC_1": "Partecipare è semplicissimo: ti basta <b>scansionare un QR Code</b> associato a una challenge. Una volta scansionato, la sfida verrà attivata automaticamente all’interno dell’app <b>Pocket</b>, e potrai iniziare a <b>sbloccare badge esclusivi</b>!",
-      "DESC_2": "Ogni challenge ha i suoi obiettivi: più ti impegni, più badge conquisti."
-    },
-    "MISSION_NATALE": {
-      "TITLE": "Partecipa alla <em>Challenge Missione Natale</em> 🎄",
-      "SUBTITLE": "Vivi lo spirito natalizio e sblocca i badge esclusi!",
-      "DESC": "In questa challenge l’obiettivo è semplice: <b>guadagnare WOM durante il periodo natalizio, compiendo delle semplici azioni per vivere la città di Pesaro!</b><br>Questi sono i traguardi:",
-      "LIST": {
-        "SANTA_TITLE": "Unsecret Santa",
-        "SANTA_DESC": "scambia i contatti con almeno 5 amici",
-        "ART_TITLE": "Arte sotto l’Albero",
-        "ART_DESC": "Visita un museo a Pesaro",
-        "WALK_TITLE": "Cammino Addobbato",
-        "WALK_DESC": "Cammina e raccogli 300 WOM sull’app WOMFit",
-        "TRAVEL_TITLE": "Viaggio tra le feste",
-        "TRAVEL_DESC": "Prendi 2 autobus urbani o 1 interurbano",
-        "OPENSTAGE_TITLE": "Anima il Natale con Openstage",
-        "OPENSTAGE_DESC": "Partecipa a 4 spettacoli o prendi parte ad almeno 2 esibizioni",
-        "SPIRIT_TITLE": "Spirito del Natale",
-        "SPIRIT_DESC": "Diventa il Campione del Natale accumulando 1000 WOM durante il periodo natalizio"
-      },
-      "PARTICIPATE": "Per partecipare, scansiona il QR Code qui sotto utilizzando l'app \"WOM Pocket\" o",
-      "CLICK_HERE": "clicca qui",
-      "QR_ALT": "QR Code Sfida di Natale",
-      "FOOTER_NOTE": "Vedrai comparire i 6 badge associati alla challenge di Natale e potrai sbloccarli completando tutte le sfide!"
-    },
-    "TYPES": {
-      "TITLE": "Badge standard vs. badge esclusivi",
-      "INTRO": "Nell’app Pocket esistono due categorie di badge:",
-      "PUBLIC": "<b>Badge pubblici</b>: visibili a tutti, si ottengono semplicemente usando l’app, senza aderire a una challenge.",
-      "PRIVATE": "<b>Badge privati</b>: si sbloccano <em>solo</em> partecipando attivamente a una challenge tramite QR Code.",
-      "FOOTER": "Le challenge sono quindi l’unico modo per ottenere badge esclusivi e dimostrare la tua voglia di giocare, esplorare e connetterti!"
-    }
-  },
+
   "PESARO": {
     "CITIZENS": {
       "TITLE_FOR": "TOOLKIT PER",
@@ -638,17 +969,6 @@
     "RETE-DELLE-RETI": {
       "TITLE": "Rete delle Reti",
       "SUBTITLE": "IN OGNI BIBLIOTECA, IL MEGLIO DELLE BIBLIOTECHE ITALIANE"
-    }
-  },
-  "USERS": {
-    "TITLE": "Utenti",
-    "SECTION_A": {
-      "TITLE": "Come funziona per gli utenti?",
-      "A": "Molte azioni e attività compiute da un individuo contribuiscono a un bene comune e hanno un valore sociale intrinseco. Compiendo queste azioni socialmente preziose, ogni utente guadagna WOM.\nGli Utenti possono utilizzare i voucher WOM per ottenere servizi o beni forniti dai Merchants.\nOgni Utente può collezionare tutti i voucher guadagnati sull’app <b>\"WOM Pocket\"</b>."
-    },
-    "SECTION_B": {
-      "TITLE": "Pocket",
-      "A": "Gli Utenti possono gestire i loro voucher WOM tramite un’app mobile <b>\"WOM Pocket\"</b>. Questa app consente agli utenti di <b>raccogliere i voucher WOM guadagnati</b>, conservarli (come se fossero in un \"portafoglio\" virtuale) e spendere i loro voucher.\n\nLa piattaforma WOM non ha alcun costo per i Volontari che possono scaricare gratuitamente l’app <b>Pocket</b> dagli <b>store Android e iOS</b>."
     }
   },
   "MERCHANT": {

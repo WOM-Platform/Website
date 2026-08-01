@@ -16,7 +16,8 @@ import { MatPaginator } from "@angular/material/paginator";
   templateUrl: "./pagination.component.html",
   styleUrl: "./pagination.component.css",
   changeDetection: ChangeDetectionStrategy.Eager,
-  standalone: false,
+  standalone: true,
+  imports: [],
 })
 export class PaginationComponent implements OnInit, OnChanges {
   @Input() currentPage: number = 1;

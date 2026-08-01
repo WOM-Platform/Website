@@ -17,13 +17,17 @@ import { StorageService } from "../../../_services/storage.service";
 import { UserService } from "src/app/_services";
 import { SnackBarService } from "../../../_services/snack-bar.service";
 import { DialogGenerateVouchersComponent } from "../../components/dialog-generate-vouchers/dialog-generate-vouchers.component";
+import { AdminTableComponent } from "../../components/admin-table/admin-table.component";
+import { FiltersComponent } from "../../components/filters/filters.component";
+import { CreateButtonComponent } from "../../components/create-button/create-button.component";
 
 @Component({
   selector: "app-admin-managment-instruments",
   templateUrl: "./admin-managment-instruments.component.html",
   styleUrl: "./admin-managment-instruments.component.css",
   changeDetection: ChangeDetectionStrategy.Eager,
-  standalone: false,
+  standalone: true,
+  imports: [AdminTableComponent, FiltersComponent, CreateButtonComponent],
 })
 export class AdminManagmentInstrumentsComponent implements OnInit, OnDestroy {
   searchParameters: string = "";

@@ -7,129 +7,52 @@
       [opened]="(isHandset$ | async) === false"
       class="sidenav"
       fixedInViewport
-      >
+    >
       <mat-toolbar>Menu</mat-toolbar>
-      <nav class="flex flex-col p-4 gap-2 text-lg">
-        <a
-          [routerLink]="['/home']"
-          (click)="drawer.toggle()"
-          routerLinkActive="active"
-          class="menu-item-a"
-          >
-          <span class="material-symbols-outlined icon-mb"> home </span>
-          <span>{{ "NAV.HOME" | translate }}</span>
-        </a>
-        <a
-          [routerLink]="['about-section/about']"
-          routerLinkActive="active"
-          class="menu-item-a"
-          >
-          <span class="material-symbols-outlined icon-mb"> info </span>
-          <span>{{ "NAV.ABOUT.TITLE" | translate }}</span>
-        </a>
-
-        <div
-          class="menu-item-accordion"
-          (click)="isVolunteersOpen = !isVolunteersOpen"
-          [ngClass]="{ ' bg-slate-200 rounded-full': isVolunteersOpen }"
-          >
-          <div
-            class="flex items-center gap-2"
-            [ngClass]="{ 'text-blue-600 ': isVolunteersOpen }"
-            >
-            <span
-              class="material-symbols-outlined icon-mb"
-              [ngClass]="{ 'text-blue-600 bg-white ': isVolunteersOpen }"
+      <nav class="flex flex-col gap-2 p-4 uppercase">
+        @for (item of menu; let i = $index; track item.label) {
+          @if (item.children) {
+            <div>
+              <div
+                class="menu-item-accordion"
+                (click)="toggleMenu(i)"
+                [class.open]="openedMenu === i"
               >
-              group
-            </span>
-            <span>{{ "NAV.USERS.TITLE" | translate }}</span>
-          </div>
-          <span
-            class="material-symbols-outlined transition-transform duration-300"
-            [ngClass]="{
-              'rotate-90': isVolunteersOpen,
-              'text-blue-600': isVolunteersOpen
-            }"
-            >
-            chevron_right
-          </span>
-        </div>
-        @if (isVolunteersOpen) {
-          <div
-            class="flex flex-col gap-1 overflow-hidden transition-all duration-300 px-2"
-            >
+                <div class="flex items-center gap-3">
+                  {{ item.label | translate }}
+                </div>
+
+                <span
+                  class="material-symbols-outlined"
+                  [class.rotate-90]="openedMenu === i"
+                >
+                  chevron_right
+                </span>
+              </div>
+
+              @if (openedMenu === i) {
+                <div class="submenu-mobile">
+                  @for (child of item.children; track child.label) {
+                    <a
+                      class="submenu-item"
+                      [routerLink]="child.route"
+                      (click)="drawer.close()"
+                    >
+                      {{ child.label | translate }}
+                    </a>
+                  }
+                </div>
+              }
+            </div>
+          } @else {
             <a
-              [routerLink]="['/users']"
-              (click)="drawer.toggle()"
-              routerLinkActive="active"
               class="menu-item-a"
-              >
-              <span class="material-symbols-outlined icon-mb"> badge </span>
-              <span>{{ "NAV.USERS.WHO_ARE" | translate }}</span>
-            </a>
-            <a
-              [routerLink]="['/challenge']"
-              (click)="drawer.toggle()"
-              routerLinkActive="active"
-              class="menu-item-a"
-              >
-              <span class="material-symbols-outlined icon-mb"> license </span>
-              <span>{{ "NAV.USERS.CHALLENGES" | translate }}</span>
-            </a>
-            <a
-              [routerLink]="['/applications']"
-              (click)="drawer.toggle()"
-              routerLinkActive="active"
-              class="menu-item-a whitespace-normal overflow-hidden"
-              >
-              <span class="material-symbols-outlined icon-mb"> description </span>
-              <span>{{ "NAV.USERS.APPLICATIONS" | translate }}</span>
-            </a>
-          </div>
-        }
-
-        <a
-          [routerLink]="['/merchant']"
-          (click)="drawer.toggle()"
-          routerLinkActive="active"
-          class="menu-item-a"
-          >
-          <span class="material-symbols-outlined icon-mb"> storefront </span>
-          <span>{{ "NAV.MERCHANT" | translate }}</span>
-        </a>
-        <a
-          [routerLink]="['/instrument']"
-          (click)="drawer.toggle()"
-          routerLinkActive="active"
-          class="menu-item-a"
-          >
-          <span class="material-symbols-outlined icon-mb"> timer </span>
-          <span>{{ "NAV.INSTRUMENT" | translate }}</span>
-        </a>
-
-        @if (isLogged) {
-          <a
-            [routerLink]="['/user/home']"
-            (click)="drawer.toggle()"
-            routerLinkActive="active"
-            class="menu-item-a"
+              [routerLink]="item.route"
+              (click)="drawer.close()"
             >
-            <span class="material-symbols-outlined icon-mb"> person </span>
-            <span>{{ "NAV.PROFILE" | translate }}</span>
-          </a>
-        }
-
-        @if (isLogged) {
-          <a
-            (click)="logout()"
-            (click)="drawer.toggle()"
-            [routerLinkActive]="['active']"
-            class="menu-item-a"
-            >
-            <span class="material-symbols-outlined icon-mb"> logout </span>
-            <span>{{ "NAV.SIGN_OUT" | translate }}</span>
-          </a>
+              {{ item.label | translate }}
+            </a>
+          }
         }
       </nav>
     </mat-sidenav>
@@ -141,96 +64,79 @@
       </a>
       <div class="flex flex-row align-items-center">
         <!-- begin menu pc -->
-        <div class="menu-pc flex items-center gap-2 px-2">
-          <button class="menu-item" (click)="navigate('home')">
-            {{ "NAV.HOME" | translate }}
-          </button>
-          <!-- About -->
-          <button (click)="navigate('about-section/about')" class="menu-item">
-            {{ "NAV.ABOUT.TITLE" | translate }}
-          </button>
+        <div class="menu-pc flex items-center gap-2">
+          @for (item of menu; track item.label) {
+            @if (item.children) {
+              <div class="relative group inline-block w-fit">
+                @if (item.route) {
+                  <button class="menu-item" (click)="navigate(item.route!)">
+                    <span>{{ item.label | translate }}</span>
 
-          <!-- users -->
-          <div class="relative group inline-block">
-            <button class="menu-item">
-              <span>{{ "NAV.USERS.TITLE" | translate }}</span>
-              <span
-                class="material-symbols-outlined ransform transition-transform duration-300 group-hover:rotate-180"
-                >
-                keyboard_arrow_down</span
-                >
-              </button>
-              <div class="submenu">
-                <button
-                  (click)="navigate('users')"
-                  class="block w-full text-left px-4 py-2 text-gray-800 hover:bg-gray-100"
-                  >
-                  <span>{{ "NAV.USERS.WHO_ARE" | translate }}</span>
-                </button>
-                <button
-                  (click)="navigate('challenge')"
-                  class="block w-full text-left px-4 py-2 text-gray-800 hover:bg-gray-100"
-                  >
-                  <span>{{ "NAV.USERS.CHALLENGES" | translate }}</span>
-                </button>
-                <button
-                  (click)="navigate('applications')"
-                  class="block w-full text-left px-4 py-2 text-gray-800 hover:bg-gray-100"
-                  >
-                  <span>{{ "NAV.USERS.APPLICATIONS" | translate }}</span>
-                </button>
+                    <span
+                      class="material-symbols-outlined transition-transform duration-300 group-hover:rotate-180"
+                    >
+                      keyboard_arrow_down
+                    </span>
+                  </button>
+                } @else {
+                  <button class="menu-item">
+                    <span>{{ item.label | translate }}</span>
+
+                    <span
+                      class="material-symbols-outlined transition-transform duration-300 group-hover:rotate-180"
+                    >
+                      keyboard_arrow_down
+                    </span>
+                  </button>
+                }
+
+                <div class="submenu">
+                  @for (child of item.children; track child.label) {
+                    <button
+                      class="submenu-item"
+                      (click)="navigate(child.route!)"
+                    >
+                      {{ child.label | translate }}
+                    </button>
+                  }
+                </div>
               </div>
-            </div>
-            <button class="menu-item" (click)="navigate('merchant')">
-              <span>{{ "NAV.MERCHANT" | translate }}</span>
-            </button>
-            <button class="menu-item" (click)="navigate('instrument')">
-              <span>{{ "NAV.INSTRUMENT" | translate }}</span>
-            </button>
-            @if (isLogged) {
-              <button
-                class="menu-item"
-                (click)="navigate('user/home')"
-                >
-                <span>{{ "NAV.PROFILE" | translate }}</span>
+            } @else {
+              <button class="menu-item" (click)="navigate(item.route!)">
+                {{ item.label | translate }}
               </button>
             }
-
-            @if (isLogged) {
-              <button class="menu-item" (click)="logout()">
-                <span>{{ "NAV.SIGN_OUT" | translate }}</span>
-              </button>
-            }
-          </div>
-          <div class="px-2 border-l border-[#A4A4A4]"></div>
-          <!-- end menu pc-->
-          <select
-            class="lang-select"
-            [(ngModel)]="selectLang"
-            (change)="setTransLanguage()"
-            >
-            @for (lang of TransLang; track lang) {
-              <option value="{{ lang }}">
-                {{ lang }}
-              </option>
-            }
-          </select>
-
-          @if (isHandset$ | async) {
-            <button
-              type="button"
-              aria-label="Toggle drawer"
-              mat-icon-button
-              (click)="drawer.toggle()"
-              >
-              <mat-icon style="color: black" aria-label="Side nav toggle icon"
-                >menu
-              </mat-icon>
-            </button>
           }
         </div>
+        <div class="px-2 border-l border-[#A4A4A4]"></div>
+        <!-- end menu pc-->
+        <select
+          class="lang-select"
+          [(ngModel)]="selectLang"
+          (change)="setTransLanguage()"
+        >
+          @for (lang of TransLang; track lang) {
+            <option value="{{ lang }}">
+              {{ lang }}
+            </option>
+          }
+        </select>
+
+        @if (isHandset$ | async) {
+          <button
+            type="button"
+            aria-label="Toggle drawer"
+            mat-icon-button
+            (click)="drawer.toggle()"
+          >
+            <mat-icon style="color: black" aria-label="Side nav toggle icon"
+              >menu
+            </mat-icon>
+          </button>
+        }
       </div>
-      <!-- Add Content Here -->
-      <ng-content></ng-content>
     </div>
+    <!-- Add Content Here -->
+    <ng-content></ng-content>
   </div>
+</div>

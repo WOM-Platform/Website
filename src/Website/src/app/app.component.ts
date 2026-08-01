@@ -1,6 +1,17 @@
 import { Component, ChangeDetectionStrategy } from "@angular/core";
 import { TranslateService } from "@ngx-translate/core";
 import { NetworkService } from "./_services/network.service";
+// import { SeoService } from "./_services/seo.service";
+import {
+  ActivatedRoute,
+  NavigationEnd,
+  Router,
+  RouterOutlet,
+} from "@angular/router";
+import { filter } from "rxjs";
+import { NavComponent } from "./components/nav/nav.component";
+import { FooterComponent } from "./components/footer/footer.component";
+import { CookieBannerComponent } from "./components/cookie-banner/cookie-banner.component";
 import { Meta, Title } from "@angular/platform-browser";
 
 @Component({
@@ -8,7 +19,8 @@ import { Meta, Title } from "@angular/platform-browser";
   templateUrl: "./app.component.html",
   styleUrls: ["./app.component.css"],
   changeDetection: ChangeDetectionStrategy.Eager,
-  standalone: false,
+  standalone: true,
+  imports: [RouterOutlet, NavComponent, FooterComponent, CookieBannerComponent],
 })
 export class AppComponent {
   isOnline: boolean = false;
