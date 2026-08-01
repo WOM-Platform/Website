@@ -1,9 +1,9 @@
-<div class="mx-6 mt-6 md:mx-20">
+<div class="container">
   <h1
     class="text-4xl font-bold text-[#009FE3] mb-6 text-center"
     [innerHTML]="'PLATFORM.CHALLENGES.TITLE' | translate"
   ></h1>
-  <section class="mb-12">
+  <section appScrollAnimation class="mb-12">
     <h2 class="">
       {{ "PLATFORM.CHALLENGES.HOW_IT_WORKS.TITLE" | translate }}
     </h2>
@@ -17,7 +17,7 @@
     ></p>
   </section>
 
-  <section class="mb-12">
+  <section appScrollAnimation class="mb-12">
     <h2 class="">
       {{ "PLATFORM.CHALLENGES.PUBLIC_AND_PRIVATE.TITLE" | translate }}
     </h2>
@@ -39,7 +39,7 @@
     ></p>
   </section>
 
-  <section class="mb-12">
+  <section appScrollAnimation class="mb-12">
     <h2 class="">
       {{ "PLATFORM.CHALLENGES.PUBLIC.TITLE" | translate }}
     </h2>
@@ -47,10 +47,24 @@
       class="text-gray-600 mb-4"
       [innerHTML]="'PLATFORM.CHALLENGES.PUBLIC.DESC_1' | translate"
     ></p>
-    <h2>SLIDESHOW SFIDE PUBBLICHE</h2>
   </section>
+</div>
+<div class="col-span-full relative">
+  <app-small-images-carousel [images]="squareList" />
+</div>
 
-  <section class="mb-12">
+<div class="relative flex justify-center items-center">
+  <h3 class="homeH3 px-20 -bottom-3 sm:-bottom-6 right-0 text-[#009FE3]">
+    SCARICA L'APP
+  </h3>
+  <app-store-logos
+    [appName]="'WOM POCKET'"
+    [appleURL]="'https://apps.apple.com/it/app/wom-pocket/id1466969163'"
+    [googleURL]="'https://play.google.com/store/apps/details?id=social.wom.pocket'"
+  />
+</div>
+<div class="container">
+  <section appScrollAnimation class="mb-12">
     <h2 class="">
       {{ "PLATFORM.CHALLENGES.PRIVATE.TITLE" | translate }}
     </h2>

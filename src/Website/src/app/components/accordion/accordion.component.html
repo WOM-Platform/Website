@@ -1,0 +1,47 @@
+@for (item of items; track item; let i = $index) {
+  <div class="mt-5">
+    <div
+      class="cursor-pointer bg-[#EFEFF1] rounded-xl px-6 py-3 flex justify-between items-center"
+      (click)="toggle(i)"
+    >
+      <h3
+        class="font-semibold mb-0"
+        [ngClass]="{ 'text-[#009FE3]': item.isOpen }"
+      >
+        {{ item.titleKey | translate }}
+      </h3>
+
+      <i
+        class="fas fa-chevron-down duration-300"
+        [ngClass]="{ 'rotate-180': item.isOpen }"
+      >
+      </i>
+    </div>
+
+    @if (item.isOpen) {
+      <div
+        animate.enter="faq-answer-enter"
+        animate.leave="faq-answer-leave"
+        class="overflow-hidden bg-white border-b-2 border-l-2 border-r-2 border-black rounded-b-xl"
+      >
+        <div class="p-5">
+          @for (paragraphKey of item.paragraphsKeys; track paragraphKey) {
+            <p [innerHTML]="paragraphKey | translate"></p>
+          }
+
+          @if (item.routerLink && item.linkLabelKey) {
+            <a class="click-here" [routerLink]="item.routerLink">
+              {{ item.linkLabelKey | translate }}
+            </a>
+          }
+
+          @if (item.href && item.linkLabelKey) {
+            <a class="click-here" target="_blank" [href]="item.href">
+              {{ item.linkLabelKey | translate }}
+            </a>
+          }
+        </div>
+      </div>
+    }
+  </div>
+}

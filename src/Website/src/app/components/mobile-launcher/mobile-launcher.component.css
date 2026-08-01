@@ -1,0 +1,9 @@
+.logo-app {
+  @apply max-w-[250px] h-48 object-contain;
+}
+
+@media only screen and (max-width: 769px) {
+  .logo-app {
+    @apply max-w-[150px] h-auto;
+  }
+}

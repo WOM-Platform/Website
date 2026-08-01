@@ -1,0 +1,144 @@
+:host {
+  display: block;
+}
+
+.people-map-feature {
+  margin: 0 24px 48px;
+}
+
+.map-toolbar {
+  display: flex;
+  gap: 12px;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.map-search-input {
+  width: min(420px, 100%);
+  border: 1px solid #d7dde5;
+  border-radius: 8px;
+  background: #ffffff;
+  color: #1f2937;
+  font: inherit;
+  padding: 10px 12px;
+}
+
+.map-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.map-action-button {
+  display: inline-flex;
+  width: 40px;
+  height: 40px;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #d7dde5;
+  border-radius: 8px;
+  background: #ffffff;
+  color: #1f2937;
+  cursor: pointer;
+  font-size: 22px;
+  line-height: 1;
+}
+
+.people-map-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(280px, 360px);
+  min-height: 500px;
+  border: 1px solid #d7dde5;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.people-map {
+  min-width: 0;
+}
+
+.offers-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  height: 500px;
+  overflow-y: auto;
+  border-left: 1px solid #d7dde5;
+  background: #f8fafc;
+  padding: 16px;
+}
+
+.offer-card {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  background: #ffffff;
+  padding: 16px;
+  color: inherit;
+  cursor: pointer;
+  text-align: left;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.offer-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(15, 23, 42, 0.14);
+}
+
+.offer-content {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+}
+
+.offer-title {
+  overflow: hidden;
+  color: #111827;
+  font-size: 16px;
+  font-weight: 600;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.offer-meta {
+  margin-top: 6px;
+  color: #667085;
+  font-size: 14px;
+}
+
+.offer-arrow {
+  flex: 0 0 auto;
+  color: #667085;
+  font-size: 24px;
+  line-height: 1;
+}
+
+@media (max-width: 767px) {
+  .people-map-feature {
+    margin-inline: 16px;
+  }
+
+  .map-toolbar {
+    flex-direction: column;
+  }
+
+  .map-actions {
+    justify-content: flex-end;
+  }
+
+  .people-map-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .offers-list {
+    height: auto;
+    max-height: 360px;
+    border-top: 1px solid #d7dde5;
+    border-left: 0;
+  }
+}

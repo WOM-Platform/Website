@@ -5,7 +5,12 @@ import {
   ViewChild,
   ViewChildren,
 } from "@angular/core";
-import { GoogleMap, MapInfoWindow, MapMarker } from "@angular/google-maps";
+import {
+  GoogleMap,
+  MapInfoWindow,
+  MapMarker,
+  MarkerClusterer,
+} from "@angular/google-maps";
 import {
   MatListModule,
   MatSelectionList,
@@ -17,17 +22,19 @@ import { MapService } from "src/app/_services";
 import { GoogleMapsLoaderService } from "src/app/_services/google-maps-loader.service";
 
 import { environment } from "src/environments/environment";
+import { RouterLink } from "@angular/router";
+import { PeopleMapFeatureComponent } from "./people-map-feature/people-map-feature.component";
+import { ScrollAnimationDirective } from "src/app/directives/scroll-animation.directive";
 
 @Component({
   selector: "app-people",
   imports: [
     TranslateModule,
-    GoogleMap,
-    MapInfoWindow,
-    MapMarker,
-    MatSelectionList,
+    ScrollAnimationDirective,
     MatListModule,
     TranslateModule,
+    RouterLink,
+    PeopleMapFeatureComponent,
   ],
   templateUrl: "./people.component.html",
   styleUrl: "./people.component.css",
@@ -86,7 +93,6 @@ export class PeopleComponent {
 
   async ngAfterViewInit(): Promise<void> {
     await this.mapsLoader.load(environment.googleMapsApiKey);
-
     this.searchBox = new google.maps.places.SearchBox(
       this.searchField.nativeElement
     );
@@ -142,6 +148,15 @@ export class PeopleComponent {
   }
 
   addMarker(posData: PosWithOffers): void {
+    const marker = new google.maps.Marker({
+      position: {
+        lat: posData.position.latitude,
+        lng: posData.position.longitude,
+      },
+
+      title: posData.name,
+    });
+
     this.markers.push({
       title: posData.name,
       info: posData.url,
@@ -216,9 +231,7 @@ export class PeopleComponent {
       });
   }
 
-  onPosSelection(event: MatSelectionListChange) {
-    const pos: PosWithOffers = event.options[0].value;
-
+  onPosSelection(pos: PosWithOffers) {
     const markerData = this.markers.find((m) => m.title === pos.name);
 
     const markerElem = this.mapMarkerElem.find(

@@ -1,0 +1,65 @@
+.wom-pos {
+  @apply text-gray-600;
+
+  padding-inline: clamp(1rem, 3vw, 2rem);
+}
+
+.wom-pos h1 {
+  @apply text-4xl font-bold text-[#009FE3] text-center;
+
+  margin-bottom: clamp(1.5rem, 3vw, 2rem);
+}
+
+.wom-pos section {
+  margin-bottom: clamp(2rem, 5vw, 3rem);
+}
+
+.wom-pos section:last-of-type {
+  margin-bottom: 0;
+}
+
+.wom-pos h2 {
+  @apply font-semibold text-[#009FE3];
+
+  margin-bottom: clamp(0.75rem, 2vw, 1rem);
+}
+
+.wom-pos p {
+  @apply text-gray-600;
+}
+
+.wom-pos p:not(:last-child) {
+  margin-bottom: clamp(0.75rem, 2vw, 1rem);
+}
+
+.content-row {
+  @apply flex flex-col md:flex-row items-center;
+
+  gap: clamp(1.5rem, 4vw, 2.5rem);
+}
+
+.logo-app {
+  @apply max-w-full h-auto;
+
+  width: clamp(180px, 30vw, 320px);
+}
+
+.download-link {
+  @apply text-gray-500 font-semibold;
+
+  margin-top: clamp(0.5rem, 1vw, 1rem);
+}
+
+@media (max-width: 768px) {
+  .wom-pos {
+    padding-inline: 1rem;
+  }
+
+  .content-row {
+    align-items: flex-start;
+  }
+
+  .logo-app {
+    align-self: center;
+  }
+}

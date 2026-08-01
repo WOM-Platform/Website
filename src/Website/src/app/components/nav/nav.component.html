@@ -9,120 +9,50 @@
       fixedInViewport
     >
       <mat-toolbar>Menu</mat-toolbar>
-      <nav class="flex flex-col p-4 gap-2 text-lg">
-        <a
-          [routerLink]="['about-section/about']"
-          routerLinkActive="active"
-          class="menu-item-a"
-        >
-          <span class="material-symbols-outlined icon-mb"> info </span>
-          <span>{{ "NAV.ABOUT.TITLE" | translate }}</span>
-        </a>
+      <nav class="flex flex-col gap-2 p-4 uppercase">
+        @for (item of menu; let i = $index; track item.label) {
+          @if (item.children) {
+            <div>
+              <div
+                class="menu-item-accordion"
+                (click)="toggleMenu(i)"
+                [class.open]="openedMenu === i"
+              >
+                <div class="flex items-center gap-3">
+                  {{ item.label | translate }}
+                </div>
 
-        <div
-          class="menu-item-accordion"
-          (click)="isVolunteersOpen = !isVolunteersOpen"
-          [ngClass]="{ ' bg-slate-200 rounded-full': isVolunteersOpen }"
-        >
-          <div
-            class="flex items-center gap-2"
-            [ngClass]="{ 'text-blue-600 ': isVolunteersOpen }"
-          >
-            <span
-              class="material-symbols-outlined icon-mb"
-              [ngClass]="{ 'text-blue-600 bg-white ': isVolunteersOpen }"
-            >
-              group
-            </span>
-            <span>{{ "NAV.USERS.TITLE" | translate }}</span>
-          </div>
-          <span
-            class="material-symbols-outlined transition-transform duration-300"
-            [ngClass]="{
-              'rotate-90': isVolunteersOpen,
-              'text-blue-600': isVolunteersOpen,
-            }"
-          >
-            chevron_right
-          </span>
-        </div>
-        @if (isVolunteersOpen) {
-          <div
-            class="flex flex-col gap-1 overflow-hidden transition-all duration-300 px-2"
-          >
+                <span
+                  class="material-symbols-outlined"
+                  [class.rotate-90]="openedMenu === i"
+                >
+                  chevron_right
+                </span>
+              </div>
+
+              @if (openedMenu === i) {
+                <div class="submenu-mobile">
+                  @for (child of item.children; track child.label) {
+                    <a
+                      class="submenu-item"
+                      [routerLink]="child.route"
+                      (click)="drawer.close()"
+                    >
+                      {{ child.label | translate }}
+                    </a>
+                  }
+                </div>
+              }
+            </div>
+          } @else {
             <a
-              [routerLink]="['/users']"
-              (click)="drawer.toggle()"
-              routerLinkActive="active"
               class="menu-item-a"
+              [routerLink]="item.route"
+              (click)="drawer.close()"
             >
-              <span class="material-symbols-outlined icon-mb"> badge </span>
-              <span>{{ "NAV.USERS.WHO_ARE" | translate }}</span>
+              {{ item.label | translate }}
             </a>
-            <a
-              [routerLink]="['/challenge']"
-              (click)="drawer.toggle()"
-              routerLinkActive="active"
-              class="menu-item-a"
-            >
-              <span class="material-symbols-outlined icon-mb"> license </span>
-              <span>{{ "NAV.USERS.CHALLENGES" | translate }}</span>
-            </a>
-            <a
-              [routerLink]="['/applications']"
-              (click)="drawer.toggle()"
-              routerLinkActive="active"
-              class="menu-item-a whitespace-normal overflow-hidden"
-            >
-              <span class="material-symbols-outlined icon-mb">
-                description
-              </span>
-              <span>{{ "NAV.USERS.APPLICATIONS" | translate }}</span>
-            </a>
-          </div>
-        }
-
-        <a
-          [routerLink]="['/merchant']"
-          (click)="drawer.toggle()"
-          routerLinkActive="active"
-          class="menu-item-a"
-        >
-          <span class="material-symbols-outlined icon-mb"> storefront </span>
-          <span>{{ "NAV.MERCHANT" | translate }}</span>
-        </a>
-        <a
-          [routerLink]="['/instrument']"
-          (click)="drawer.toggle()"
-          routerLinkActive="active"
-          class="menu-item-a"
-        >
-          <span class="material-symbols-outlined icon-mb"> timer </span>
-          <span>{{ "NAV.INSTRUMENT" | translate }}</span>
-        </a>
-
-        @if (isLogged) {
-          <a
-            [routerLink]="['/user/home']"
-            (click)="drawer.toggle()"
-            routerLinkActive="active"
-            class="menu-item-a"
-          >
-            <span class="material-symbols-outlined icon-mb"> person </span>
-            <span>{{ "NAV.PROFILE" | translate }}</span>
-          </a>
-        }
-
-        @if (isLogged) {
-          <a
-            (click)="logout()"
-            (click)="drawer.toggle()"
-            [routerLinkActive]="['active']"
-            class="menu-item-a"
-          >
-            <span class="material-symbols-outlined icon-mb"> logout </span>
-            <span>{{ "NAV.SIGN_OUT" | translate }}</span>
-          </a>
+          }
         }
       </nav>
     </mat-sidenav>
@@ -134,95 +64,48 @@
       </a>
       <div class="flex flex-row align-items-center">
         <!-- begin menu pc -->
-        <div class="menu-pc flex items-center gap-2 px-2">
-          <!-- users -->
-          <div class="relative group inline-block">
-            <button class="menu-item">
-              <span>{{ "NAV.PLATFORM.TITLE" | translate }}</span>
-              <span
-                class="material-symbols-outlined ransform transition-transform duration-300 group-hover:rotate-180"
-              >
-                keyboard_arrow_down</span
-              >
-            </button>
-            <div class="submenu">
-              <button
-                (click)="navigate('platform/about')"
-                class="block w-full text-left px-4 py-2 text-gray-800 hover:bg-gray-100"
-              >
-                <span>{{ "NAV.PLATFORM.ABOUT" | translate }}</span>
-              </button>
-              <button
-                (click)="navigate('platform/challenge')"
-                class="block w-full text-left px-4 py-2 text-gray-800 hover:bg-gray-100"
-              >
-                <span>{{ "NAV.PLATFORM.CHALLENGES" | translate }}</span>
-              </button>
-              <button
-                (click)="navigate('platform/actions')"
-                class="block w-full text-left px-4 py-2 text-gray-800 hover:bg-gray-100"
-              >
-                <span>{{ "NAV.PLATFORM.ACTIONS" | translate }}</span>
-              </button>
-            </div>
-          </div>
-          <!-- users -->
-          <div class="relative group inline-block">
-            <button class="menu-item">
-              <span>{{ "NAV.USERS.TITLE" | translate }}</span>
-              <span
-                class="material-symbols-outlined ransform transition-transform duration-300 group-hover:rotate-180"
-              >
-                keyboard_arrow_down</span
-              >
-            </button>
-            <div class="submenu">
-              <button class="menu-item" (click)="navigate('users/people')">
-                <span>{{ "NAV.USERS.PEOPLE" | translate }}</span>
-              </button>
-              <button class="menu-item" (click)="navigate('users/merchant')">
-                <span>{{ "NAV.USERS.MERCHANT" | translate }}</span>
-              </button>
-              <button class="menu-item" (click)="navigate('users/instrument')">
-                <span>{{ "NAV.USERS.INSTRUMENT" | translate }}</span>
-              </button>
-            </div>
-          </div>
-          <!-- app -->
-          <div class="relative group inline-block">
-            <button class="menu-item">
-              <span>{{ "NAV.APP.TITLE" | translate }}</span>
-              <span
-                class="material-symbols-outlined ransform transition-transform duration-300 group-hover:rotate-180"
-              >
-                keyboard_arrow_down</span
-              >
-            </button>
-            <div class="submenu">
-              <button class="menu-item" (click)="navigate('app/wom-pocket')">
-                <span>{{ "NAV.APP.WOM_POCKET" | translate }}</span>
-              </button>
-              <button class="menu-item" (click)="navigate('app/wom-pos')">
-                <span>{{ "NAV.APP.WOM_POS" | translate }}</span>
-              </button>
-              <button class="menu-item" (click)="navigate('app/wom-fit')">
-                <span>{{ "NAV.APP.WOM_FIT" | translate }}</span>
-              </button>
-            </div>
-          </div>
-          <button class="menu-item" (click)="navigate('faq')">
-            <span>{{ "NAV.FAQ" | translate }}</span>
-          </button>
-          @if (isLogged) {
-            <button class="menu-item" (click)="navigate('user/home')">
-              <span>{{ "NAV.PROFILE" | translate }}</span>
-            </button>
-          }
+        <div class="menu-pc flex items-center gap-2">
+          @for (item of menu; track item.label) {
+            @if (item.children) {
+              <div class="relative group inline-block w-fit">
+                @if (item.route) {
+                  <button class="menu-item" (click)="navigate(item.route!)">
+                    <span>{{ item.label | translate }}</span>
 
-          @if (isLogged) {
-            <button class="menu-item" (click)="logout()">
-              <span>{{ "NAV.SIGN_OUT" | translate }}</span>
-            </button>
+                    <span
+                      class="material-symbols-outlined transition-transform duration-300 group-hover:rotate-180"
+                    >
+                      keyboard_arrow_down
+                    </span>
+                  </button>
+                } @else {
+                  <button class="menu-item">
+                    <span>{{ item.label | translate }}</span>
+
+                    <span
+                      class="material-symbols-outlined transition-transform duration-300 group-hover:rotate-180"
+                    >
+                      keyboard_arrow_down
+                    </span>
+                  </button>
+                }
+
+                <div class="submenu">
+                  @for (child of item.children; track child.label) {
+                    <button
+                      class="submenu-item"
+                      (click)="navigate(child.route!)"
+                    >
+                      {{ child.label | translate }}
+                    </button>
+                  }
+                </div>
+              </div>
+            } @else {
+              <button class="menu-item" (click)="navigate(item.route!)">
+                {{ item.label | translate }}
+              </button>
+            }
           }
         </div>
         <div class="px-2 border-l border-[#A4A4A4]"></div>

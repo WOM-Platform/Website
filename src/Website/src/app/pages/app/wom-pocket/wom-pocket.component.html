@@ -1,123 +1,164 @@
-<div class="mx-6 mt-6 md:mx-20">
-  <h1 class="text-4xl font-bold text-[#009FE3] mb-6 text-center">
+<div class="container wom-pocket">
+  <h1 appScrollAnimation>
     {{ "APP.WOM_POCKET.TITLE" | translate }}
   </h1>
 
-  <section class="mb-12">
-    <h2 class="">
+  <section appScrollAnimation>
+    <h2>
       {{
         "APP.WOM_POCKET.APP_TO_PARTICIPATE_IN_THE_WOM_ECOSYSTEM.TITLE"
           | translate
       }}
     </h2>
-    <p
-      class="text-gray-600 mb-4"
-      [innerHTML]="
-        'APP.WOM_POCKET.APP_TO_PARTICIPATE_IN_THE_WOM_ECOSYSTEM.DESC_1'
-          | translate
-      "
-    ></p>
-    <p
-      class="text-gray-600"
-      [innerHTML]="
-        'APP.WOM_POCKET.APP_TO_PARTICIPATE_IN_THE_WOM_ECOSYSTEM.DESC_2'
-          | translate
-      "
-    ></p>
-    <p
-      class="text-gray-600"
-      [innerHTML]="
-        'APP.WOM_POCKET.APP_TO_PARTICIPATE_IN_THE_WOM_ECOSYSTEM.DESC_3'
-          | translate
-      "
-    ></p>
+
+    <div class="content-row">
+      <div>
+        <p
+          [innerHTML]="
+            'APP.WOM_POCKET.APP_TO_PARTICIPATE_IN_THE_WOM_ECOSYSTEM.DESC_1'
+              | translate
+          "
+        ></p>
+
+        <p
+          [innerHTML]="
+            'APP.WOM_POCKET.APP_TO_PARTICIPATE_IN_THE_WOM_ECOSYSTEM.DESC_2'
+              | translate
+          "
+        ></p>
+
+        <p
+          [innerHTML]="
+            'APP.WOM_POCKET.APP_TO_PARTICIPATE_IN_THE_WOM_ECOSYSTEM.DESC_3'
+              | translate
+          "
+        ></p>
+      </div>
+
+      <img
+        src="/assets/images/applications/WOMPocketSenzaScritta.png"
+        alt="screen app wom pocket"
+        class="logo-app"
+      />
+    </div>
   </section>
 
-  <section class="mb-12">
-    <h2 class="">
+  <section appScrollAnimation>
+    <h2>
       {{ "APP.WOM_POCKET.WHAT_YOU_CAN_DO_WITH_WOM_POCKET.TITLE" | translate }}
     </h2>
-    <p class="text-gray-600 mb-4">
+
+    <p>
       {{ "APP.WOM_POCKET.WHAT_YOU_CAN_DO_WITH_WOM_POCKET.DESC_1" | translate }}
     </p>
-    <p
-      class="text-gray-600"
-      [innerHTML]="
-        'APP.WOM_POCKET.WHAT_YOU_CAN_DO_WITH_WOM_POCKET.DESC_2' | translate
-      "
-    ></p>
-    <p
-      class="text-gray-600"
-      [innerHTML]="
-        'APP.WOM_POCKET.WHAT_YOU_CAN_DO_WITH_WOM_POCKET.DESC_3' | translate
-      "
-    ></p>
-    <p
-      class="text-gray-600"
-      [innerHTML]="
-        'APP.WOM_POCKET.WHAT_YOU_CAN_DO_WITH_WOM_POCKET.DESC_4' | translate
-      "
-    ></p>
-    <p
-      class="text-gray-600"
-      [innerHTML]="
-        'APP.WOM_POCKET.WHAT_YOU_CAN_DO_WITH_WOM_POCKET.DESC_5' | translate
-      "
-    ></p>
-    <p
-      class="text-gray-600"
-      [innerHTML]="
-        'APP.WOM_POCKET.WHAT_YOU_CAN_DO_WITH_WOM_POCKET.DESC_6' | translate
-      "
-    ></p>
-    <p
-      class="text-gray-600"
-      [innerHTML]="
-        'APP.WOM_POCKET.WHAT_YOU_CAN_DO_WITH_WOM_POCKET.DESC_7' | translate
-      "
-    ></p>
-    <p
-      class="text-gray-600"
-      [innerHTML]="
-        'APP.WOM_POCKET.WHAT_YOU_CAN_DO_WITH_WOM_POCKET.DESC_8' | translate
-      "
-    ></p>
+
+    <ul>
+      <li>
+        <span class="material-symbols-outlined"> check_circle </span>
+        <span
+          [innerHTML]="
+            'APP.WOM_POCKET.WHAT_YOU_CAN_DO_WITH_WOM_POCKET.DESC_2' | translate
+          "
+        ></span>
+      </li>
+
+      <li>
+        <span class="material-symbols-outlined"> check_circle </span>
+        <span
+          [innerHTML]="
+            'APP.WOM_POCKET.WHAT_YOU_CAN_DO_WITH_WOM_POCKET.DESC_3' | translate
+          "
+        ></span>
+      </li>
+
+      <li>
+        <span class="material-symbols-outlined"> check_circle </span>
+        <span
+          [innerHTML]="
+            'APP.WOM_POCKET.WHAT_YOU_CAN_DO_WITH_WOM_POCKET.DESC_4' | translate
+          "
+        ></span>
+      </li>
+
+      <li>
+        <span class="material-symbols-outlined"> check_circle </span>
+        <span
+          [innerHTML]="
+            'APP.WOM_POCKET.WHAT_YOU_CAN_DO_WITH_WOM_POCKET.DESC_5' | translate
+          "
+        ></span>
+      </li>
+
+      <li>
+        <span class="material-symbols-outlined"> check_circle </span>
+        <span
+          [innerHTML]="
+            'APP.WOM_POCKET.WHAT_YOU_CAN_DO_WITH_WOM_POCKET.DESC_6' | translate
+          "
+        ></span>
+      </li>
+
+      <li>
+        <span class="material-symbols-outlined"> check_circle </span>
+        <span
+          [innerHTML]="
+            'APP.WOM_POCKET.WHAT_YOU_CAN_DO_WITH_WOM_POCKET.DESC_7' | translate
+          "
+        ></span>
+      </li>
+
+      <li>
+        <span class="material-symbols-outlined"> check_circle </span>
+        <span
+          [innerHTML]="
+            'APP.WOM_POCKET.WHAT_YOU_CAN_DO_WITH_WOM_POCKET.DESC_8' | translate
+          "
+        ></span>
+      </li>
+    </ul>
   </section>
 
-  <section class="mb-12">
-    <h2 class="">
+  <section appScrollAnimation>
+    <h2>
       {{
         "APP.WOM_POCKET.AN_APP_TO_ENHANCE_YOUR_CONTRIBUTION.TITLE" | translate
       }}
     </h2>
-    <p class="text-gray-600 mb-4">
+
+    <p>
       {{
         "APP.WOM_POCKET.AN_APP_TO_ENHANCE_YOUR_CONTRIBUTION.DESC_1" | translate
       }}
     </p>
-    <p class="text-gray-600">
+
+    <p>
       {{
         "APP.WOM_POCKET.AN_APP_TO_ENHANCE_YOUR_CONTRIBUTION.DESC_2" | translate
       }}
     </p>
   </section>
 
-  <section class="mb-12">
-    <h2 class="">
+  <section appScrollAnimation>
+    <h2>
       {{ "APP.WOM_POCKET.DOWNLOAD_WOM_POCKET.TITLE" | translate }}
     </h2>
+
     <p
-      class="text-gray-600 mb-4"
       [innerHTML]="'APP.WOM_POCKET.DOWNLOAD_WOM_POCKET.DESC_1' | translate"
     ></p>
-    <p class="text-gray-600">
+
+    <p>
       {{ "APP.WOM_POCKET.DOWNLOAD_WOM_POCKET.DESC_2" | translate }}
     </p>
-    <a class="text-[#009FE3] font-semibold">
+
+    <p class="download-link">
       {{ "APP.WOM_POCKET.DOWNLOAD_WOM_POCKET.LINK" | translate }}
-    </a>
-    <p class="text-gray-600">
-      {{ "APP.WOM_POCKET.DOWNLOAD_WOM_POCKET.DESC_3" | translate }}
     </p>
+
+    <app-store-logos
+      [appName]="'WOM POCKET'"
+      [appleURL]="'https://apps.apple.com/it/app/wom-pocket/id1466969163'"
+      [googleURL]="'https://play.google.com/store/apps/details?id=social.wom.pocket'"
+    />
   </section>
 </div>

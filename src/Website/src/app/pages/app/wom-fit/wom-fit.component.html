@@ -1,69 +1,85 @@
-<div class="mx-6 mt-6 md:mx-20">
-  <h1 class="text-4xl font-bold text-[#009FE3] mb-6 text-center">
+<div class="container wom-fit">
+  <h1 appScrollAnimation>
     {{ "APP.WOM_FIT.TITLE" | translate }}
   </h1>
 
-  <section class="mb-12">
-    <h2 class="">
+  <section appScrollAnimation style="transition-delay: 150ms">
+    <h2>
       {{ "APP.WOM_FIT.TRANSFORM_MOVEMENT_INTO_SOCIAL_VALUE.TITLE" | translate }}
     </h2>
-    <p
-      class="text-gray-600 mb-4"
-      [innerHTML]="
-        'APP.WOM_FIT.TRANSFORM_MOVEMENT_INTO_SOCIAL_VALUE.DESC_1' | translate
-      "
-    ></p>
-    <p class="text-gray-600">
-      {{
-        "APP.WOM_FIT.TRANSFORM_MOVEMENT_INTO_SOCIAL_VALUE.DESC_2" | translate
-      }}
-    </p>
+
+    <div class="content-row">
+      <div>
+        <p
+          [innerHTML]="
+            'APP.WOM_FIT.TRANSFORM_MOVEMENT_INTO_SOCIAL_VALUE.DESC_1'
+              | translate
+          "
+        ></p>
+
+        <p>
+          {{
+            "APP.WOM_FIT.TRANSFORM_MOVEMENT_INTO_SOCIAL_VALUE.DESC_2"
+              | translate
+          }}
+        </p>
+      </div>
+
+      <img
+        src="/assets/images/applications/WOMFitSenzaScritta.png"
+        alt="logo wom fit"
+        class="logo-app"
+      />
+    </div>
   </section>
 
-  <section class="mb-12">
-    <h2 class="">
+  <section appScrollAnimation style="transition-delay: 150ms">
+    <h2>
       {{ "APP.WOM_FIT.HOW_WOM_FIT_WORKS.TITLE" | translate }}
     </h2>
-    <p class="text-gray-600 mb-4">
+
+    <p>
       {{ "APP.WOM_FIT.HOW_WOM_FIT_WORKS.DESC_1" | translate }}
     </p>
-    <p
-      class="text-gray-600"
-      [innerHTML]="'APP.WOM_FIT.HOW_WOM_FIT_WORKS.DESC_2' | translate"
-    ></p>
-    <p
-      class="text-gray-600"
-      [innerHTML]="'APP.WOM_FIT.HOW_WOM_FIT_WORKS.DESC_3' | translate"
-    ></p>
-    <p class="text-gray-600">
+
+    <p [innerHTML]="'APP.WOM_FIT.HOW_WOM_FIT_WORKS.DESC_2' | translate"></p>
+
+    <p [innerHTML]="'APP.WOM_FIT.HOW_WOM_FIT_WORKS.DESC_3' | translate"></p>
+
+    <p>
       {{ "APP.WOM_FIT.HOW_WOM_FIT_WORKS.DESC_4" | translate }}
     </p>
   </section>
 
-  <section class="mb-12">
-    <h2 class="">
+  <section appScrollAnimation style="transition-delay: 450ms">
+    <h2>
       {{ "APP.WOM_FIT.MOVEMENT_THAT_CREATES_COMMUNITY.TITLE" | translate }}
     </h2>
+
     <p
-      class="text-gray-600 mb-4"
       [innerHTML]="
         'APP.WOM_FIT.MOVEMENT_THAT_CREATES_COMMUNITY.DESC_1' | translate
       "
     ></p>
+
     <p
-      class="text-gray-600"
       [innerHTML]="
         'APP.WOM_FIT.MOVEMENT_THAT_CREATES_COMMUNITY.DESC_2' | translate
       "
     ></p>
-    <p class="text-gray-600">
+
+    <p>
       {{ "APP.WOM_FIT.MOVEMENT_THAT_CREATES_COMMUNITY.DESC_3" | translate }}
     </p>
-    <a class="text-[#009FE3] font-semibold">
+
+    <p class="download-link">
       {{ "APP.WOM_FIT.MOVEMENT_THAT_CREATES_COMMUNITY.LINK" | translate }}
-    </a>
-    <p class="text-gray-600">
-      {{ "APP.WOM_FIT.MOVEMENT_THAT_CREATES_COMMUNITY.DESC_4" | translate }}
     </p>
+
+    <app-store-logos
+      [appName]="'WOM FIT'"
+      [appleURL]="'https://apps.apple.com/it/app/wom-step-counter/id1600679595'"
+      [googleURL]="'https://play.google.com/store/apps/details?id=srl.digit.wom_step_counter'"
+    ></app-store-logos>
   </section>
 </div>

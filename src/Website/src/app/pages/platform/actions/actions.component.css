@@ -1,0 +1,99 @@
+.platform-actions {
+  @apply text-gray-600;
+  padding-inline: clamp(1rem, 4vw, 3rem);
+}
+
+.platform-actions section:last-child {
+  margin-bottom: 0;
+}
+
+.platform-actions h1 {
+  @apply text-center font-bold text-[#009FE3];
+  margin-bottom: clamp(1.5rem, 3vw, 2.5rem);
+
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  line-height: 1.1;
+}
+
+/* Sections */
+.platform-actions section {
+  margin-bottom: clamp(2.5rem, 6vw, 4.5rem);
+}
+
+/* Section titles */
+.platform-actions h2 {
+  @apply font-semibold text-[#009FE3];
+
+  margin-bottom: clamp(0.75rem, 2vw, 1.25rem);
+
+  font-size: clamp(1.25rem, 2.5vw, 2rem);
+  line-height: 1.25;
+}
+
+/* Paragraphs */
+.platform-actions p {
+  margin-bottom: clamp(0.75rem, 2vw, 1rem);
+  line-height: clamp(1.5, 1.8vw, 1.75);
+}
+
+/* Remove last paragraph spacing */
+.platform-actions p:last-child {
+  margin-bottom: 0;
+}
+
+/* Lists */
+.platform-actions ul {
+  margin-block: clamp(1rem, 3vw, 1.5rem);
+
+  @apply space-y-3;
+}
+
+.platform-actions li {
+  @apply flex items-start text-gray-600;
+  gap: clamp(0.5rem, 1.5vw, 0.75rem);
+  line-height: 1.6;
+}
+
+.platform-actions li .material-symbols-outlined {
+  @apply text-[#009FE3];
+
+  margin-top: 0.15rem;
+
+  font-size: clamp(1rem, 2vw, 1.35rem);
+  flex-shrink: 0;
+}
+
+/* Carousel wrapper */
+.carousel-wrapper {
+  @apply col-span-full relative;
+
+  margin-bottom: clamp(2rem, 5vw, 3rem);
+}
+
+/* Link */
+.click-here {
+  @apply inline-flex items-center cursor-pointer font-semibold text-[#009FE3] transition-colors hover:text-sky-700 hover:underline;
+
+  gap: clamp(0.4rem, 1vw, 0.75rem);
+
+  font-size: clamp(0.95rem, 1.2vw, 1.125rem);
+}
+
+/* Extra mobile adjustments */
+@media (max-width: 640px) {
+  .platform-actions {
+    padding-inline: 1rem;
+  }
+
+  .platform-actions h1 {
+    font-size: clamp(1.7rem, 7vw, 2rem);
+  }
+
+  .platform-actions h2 {
+    font-size: clamp(1.25rem, 5vw, 1.5rem);
+  }
+
+  .platform-actions li {
+    align-items: flex-start;
+  }
+}

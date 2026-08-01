@@ -16,12 +16,19 @@ import { TranslateModule } from "@ngx-translate/core";
 import { PosWithOffers } from "src/app/_models/offer";
 import { GoogleMapsLoaderService } from "src/app/_services/google-maps-loader.service";
 import { environment } from "src/environments/environment";
+import { RouterLink } from "@angular/router";
+import { ScrollAnimationDirective } from "src/app/directives/scroll-animation.directive";
 
 @Component({
   selector: "app-merchant",
   templateUrl: "./merchant.component.html",
   styleUrls: ["./merchant.component.css"],
-  imports: [MatListModule, TranslateModule],
+  imports: [
+    MatListModule,
+    TranslateModule,
+    RouterLink,
+    ScrollAnimationDirective,
+  ],
   changeDetection: ChangeDetectionStrategy.Eager,
   standalone: true,
 })

@@ -1,3 +1,38 @@
-.no-transition {
-  transition: none !important;
+.logo-track {
+  display: flex;
+  width: max-content;
+  justify-content: center;
+  animation: scroll 45s linear infinite;
+}
+
+.logo-item {
+  width: clamp(100px, 18vw, 250px);
+  height: clamp(110px, 20vw, 230px);
+  margin-right: clamp(0.5rem, 2vw, 2rem);
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo-item img {
+  width: 100%;
+  height: clamp(75px, 15vw, 190px);
+  object-fit: contain;
+}
+/* infinite movement */
+@keyframes scroll {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* optional: pause on hover */
+.logo-track:hover {
+  animation-play-state: paused;
 }

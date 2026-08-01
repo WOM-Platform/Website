@@ -1,66 +1,89 @@
-<div class="mx-6 mt-6 md:mx-20">
+<div class="container">
   <h1 class="text-4xl font-bold text-[#009FE3] mb-6 text-center">
     {{ "USERS.MERCHANT.TITLE" | translate }}
   </h1>
 
-  <section class="mb-12">
+  <section appScrollAnimation class="mb-12">
     <h2 class="">
       {{ "USERS.MERCHANT.WHO_THEY_ARE_AND_HOW_TO_JOIN.TITLE" | translate }}
     </h2>
-    <p
-      class="text-gray-600 mb-4"
-      [innerHTML]="
-        'USERS.MERCHANT.WHO_THEY_ARE_AND_HOW_TO_JOIN.DESC_1' | translate
-      "
-    ></p>
-    <p
-      class="text-gray-600"
-      [innerHTML]="
-        'USERS.MERCHANT.WHO_THEY_ARE_AND_HOW_TO_JOIN.DESC_2' | translate
-      "
-    ></p>
-    <p
-      class="text-gray-600"
-      [innerHTML]="
-        'USERS.MERCHANT.WHO_THEY_ARE_AND_HOW_TO_JOIN.DESC_3' | translate
-      "
-    ></p>
-    <p class="text-gray-600">
-      {{ "USERS.MERCHANT.WHO_THEY_ARE_AND_HOW_TO_JOIN.DESC_4" | translate }}
-    </p>
-    <p class="text-gray-600">
-      {{ "USERS.MERCHANT.WHO_THEY_ARE_AND_HOW_TO_JOIN.DESC_5" | translate }}
-    </p>
-    <p
-      class="text-gray-600"
-      [innerHTML]="
-        'USERS.MERCHANT.WHO_THEY_ARE_AND_HOW_TO_JOIN.DESC_6' | translate
-      "
-    ></p>
-    <a class="text-[#009FE3] font-semibold">
+    <div class="flex flex-col md:flex-row items-center gap-10 mb-8">
+      <div>
+        <p
+          class="text-gray-600 mb-4"
+          [innerHTML]="
+            'USERS.MERCHANT.WHO_THEY_ARE_AND_HOW_TO_JOIN.DESC_1' | translate
+          "
+        ></p>
+        <p
+          class="text-gray-600"
+          [innerHTML]="
+            'USERS.MERCHANT.WHO_THEY_ARE_AND_HOW_TO_JOIN.DESC_2' | translate
+          "
+        ></p>
+        <p
+          class="text-gray-600"
+          [innerHTML]="
+            'USERS.MERCHANT.WHO_THEY_ARE_AND_HOW_TO_JOIN.DESC_3' | translate
+          "
+        ></p>
+        <p class="text-gray-600">
+          {{ "USERS.MERCHANT.WHO_THEY_ARE_AND_HOW_TO_JOIN.DESC_4" | translate }}
+        </p>
+        <p class="text-gray-600">
+          {{ "USERS.MERCHANT.WHO_THEY_ARE_AND_HOW_TO_JOIN.DESC_5" | translate }}
+        </p>
+        <p
+          class="text-gray-600"
+          [innerHTML]="
+            'USERS.MERCHANT.WHO_THEY_ARE_AND_HOW_TO_JOIN.DESC_6' | translate
+          "
+        ></p>
+      </div>
+      <img
+        src="/assets/images/applications/WOMPosSenzaScritta.png"
+        alt="logo wom pos"
+        class="h-fit max-w-[150px] md:max-w-[300px]"
+      />
+    </div>
+    <a
+      class="inline-flex items-center gap-2 rounded-lg bg-[#009FE3] px-5 py-3 font-semibold text-white transition-all duration-200 hover:bg-[#008ac5] hover:shadow-md active:scale-95"
+      routerLink="/app/wom-pos"
+    >
       {{ "USERS.MERCHANT.WHO_THEY_ARE_AND_HOW_TO_JOIN.LINK" | translate }}
     </a>
   </section>
 
-  <section class="mb-12">
+  <section appScrollAnimation class="mb-12">
     <h2 class="">
       {{ "USERS.MERCHANT.WOM_POS_TOOL_FOR_MERCHANTS.TITLE" | translate }}
     </h2>
-    <p
-      class="text-gray-600 mb-4"
-      [innerHTML]="
-        'USERS.MERCHANT.WOM_POS_TOOL_FOR_MERCHANTS.DESC_1' | translate
-      "
-    ></p>
-    <p class="text-gray-600">
-      {{ "USERS.MERCHANT.WOM_POS_TOOL_FOR_MERCHANTS.DESC_2" | translate }}
-    </p>
-    <p class="text-gray-600">
-      {{ "USERS.MERCHANT.WOM_POS_TOOL_FOR_MERCHANTS.DESC_3" | translate }}
-    </p>
+
+    <div class="flex flex-col md:flex-row items-center gap-10">
+      <img
+        src="/assets/images/users/merchant/screen_pos.png"
+        alt="screen app wom pocket"
+        class="h-fit max-w-[150px] md:max-w-[300px]"
+        alt="screen pos"
+      />
+      <div>
+        <p
+          class="text-gray-600 mb-4"
+          [innerHTML]="
+            'USERS.MERCHANT.WOM_POS_TOOL_FOR_MERCHANTS.DESC_1' | translate
+          "
+        ></p>
+        <p class="text-gray-600">
+          {{ "USERS.MERCHANT.WOM_POS_TOOL_FOR_MERCHANTS.DESC_2" | translate }}
+        </p>
+        <p class="text-gray-600">
+          {{ "USERS.MERCHANT.WOM_POS_TOOL_FOR_MERCHANTS.DESC_3" | translate }}
+        </p>
+      </div>
+    </div>
   </section>
 
-  <section class="mb-12">
+  <section appScrollAnimation class="mb-12">
     <h2 class="">
       {{ "USERS.MERCHANT.HOW_TO_CREATE_AND_DELETE_OFFERS.TITLE" | translate }}
     </h2>
@@ -79,12 +102,18 @@
         'USERS.MERCHANT.HOW_TO_CREATE_AND_DELETE_OFFERS.DESC_3' | translate
       "
     ></p>
-    <a class="text-[#009FE3] font-semibold">
+    <a
+      href="assets/pdf/tutorial_merchant.pdf"
+      download
+      class="inline-flex items-center gap-2 rounded-lg bg-[#009FE3] px-5 py-3 font-semibold text-white transition-all duration-200 hover:bg-[#008ac5] hover:text-[#b1b3b4] hover:shadow-md active:scale-95 hover:decoration-none"
+    >
+      <span class="material-symbols-outlined text-xl"> download </span>
+
       {{ "USERS.MERCHANT.HOW_TO_CREATE_AND_DELETE_OFFERS.LINK" | translate }}
     </a>
   </section>
 
-  <section class="mb-12">
+  <section appScrollAnimation class="mb-12">
     <h2 class="">
       {{ "USERS.MERCHANT.MORE_INFORMATION.TITLE" | translate }}
     </h2>
@@ -94,7 +123,12 @@
     <p class="text-gray-600">
       {{ "USERS.MERCHANT.MORE_INFORMATION.DESC_2" | translate }}
     </p>
-    <a class="text-[#009FE3] font-semibold">
+    <a
+      href="mailto:info@wom.social"
+      class="inline-flex items-center gap-2 font-semibold text-[#009FE3] transition-colors hover:text-[#008ac5] hover:underline"
+    >
+      <span class="material-symbols-outlined text-lg"> mail </span>
+
       {{ "USERS.MERCHANT.MORE_INFORMATION.LINK" | translate }}
     </a>
   </section>

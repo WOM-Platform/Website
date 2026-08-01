@@ -126,38 +126,8 @@
     </div>
   </div>
 
-  <!-- Logos Section (Alts only) -->
-  <div
-    class="flex flex-wrap justify-center items-center gap-4 mt-8 relative w-full"
-  >
-    <a [routerLink]="['/app/wom-pocket']">
-      <img
-        src="../../../assets/images/home/WOMPocket.png"
-        alt="WOM Pocket"
-        class="logo-app sm:mr-6"
-      />
-    </a>
-    <div
-      class="hidden md:block w-[2px] h-32 bg-[#CCCCCC] transform rotate-12 origin-center"
-    ></div>
-    <a [routerLink]="['/app/wom-fit']">
-      <img
-        src="../../../assets/images/home/WOMFit.png"
-        alt="WOM Fit"
-        class="logo-app"
-      />
-    </a>
-    <div
-      class="hidden md:block w-[2px] h-32 bg-[#CCCCCC] transform rotate-12 origin-center"
-    ></div>
-    <a [routerLink]="['/app/wom-pos']">
-      <img
-        src="../../../assets/images/home/WOMPos.png"
-        alt="WOM POS"
-        class="logo-app"
-      />
-    </a>
-  </div>
+  <!-- Logos Section -->
+  <app-mobile-launcher />
 </div>
 
 <!-- DIGIT section -->
@@ -165,7 +135,7 @@
   href="https://digit.srl/"
   target="_blank"
   rel="noopener noreferrer"
-  class="px-6 md:px-20 py-3 md:py-6 mt-6 bg-[#F2F2F2] relative flex items-center flex-col md:flex-row gap-4 md:gap-12"
+  class="px-6 md:px-20 text-gray-600 hover:no-underline py-3 md:py-6 mt-6 bg-[#F2F2F2] relative flex items-center flex-col md:flex-row gap-4 md:gap-12"
 >
   <img
     class="h-auto max-w-28 md:max-w-full md:max-h-24 w-auto"
@@ -181,7 +151,7 @@
   href="https://ctesquare.it/"
   target="_blank"
   rel="noopener noreferrer"
-  class="px-6 md:px-20 py-3 md:py-6 bg-[#F2F2F2] relative flex items-center flex-col md:flex-row gap-4 md:gap-12"
+  class="px-6 md:px-20 text-gray-600 hover:no-underline py-3 md:py-6 bg-[#F2F2F2] relative flex items-center flex-col md:flex-row gap-4 md:gap-12"
 >
   <p class="font-light">{{ "HOME.FOOTER.CTE_DESC" | translate }}</p>
   <img

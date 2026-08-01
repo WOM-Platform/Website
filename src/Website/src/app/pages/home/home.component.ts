@@ -1,13 +1,13 @@
 import { Component, ChangeDetectionStrategy } from "@angular/core";
-import { Router, RouterLink } from "@angular/router";
+import { Router } from "@angular/router";
 import { TranslateModule } from "@ngx-translate/core";
 import { Stats } from "src/app/_models/stats";
 import { StatsService } from "src/app/_services/stats.service";
 import { AnimatedNumberComponent } from "src/app/components/animated-number/animated-number.component";
 import { BtnFindOutMoreComponent } from "src/app/components/btn-find-out-more/btn-find-out-more.component";
 import { CarouselComponent } from "src/app/components/carousel/carousel.component";
-import { SmallImagesCarouselComponent } from "src/app/components/small-images-carousel/small-images-carousel.component";
 import { StoreLogosComponent } from "src/app/components/store-logos/store-logos.component";
+import { MobileLauncherComponent } from "src/app/components/mobile-launcher/mobile-launcher.component";
 
 @Component({
   selector: "app-home",
@@ -21,7 +21,7 @@ import { StoreLogosComponent } from "src/app/components/store-logos/store-logos.
     CarouselComponent,
     TranslateModule,
     StoreLogosComponent,
-    RouterLink,
+    MobileLauncherComponent,
   ],
 })
 export class HomeComponent {

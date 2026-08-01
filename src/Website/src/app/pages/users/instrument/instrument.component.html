@@ -1,9 +1,9 @@
-<div class="mx-6 mt-6 md:mx-20">
+<div class="container">
   <h1 class="text-4xl font-bold text-[#009FE3] mb-6 text-center">
     {{ "USERS.INSTRUMENT.TITLE" | translate }}
   </h1>
 
-  <section class="mb-12">
+  <section appScrollAnimation class="mb-12">
     <h2 class="">
       {{ "USERS.INSTRUMENT.WHO_ARE_INSTRUMENTS.TITLE" | translate }}
     </h2>
@@ -25,7 +25,7 @@
     ></p>
   </section>
 
-  <section class="mb-12">
+  <section appScrollAnimation class="mb-12">
     <h2 class="">
       {{ "USERS.INSTRUMENT.WHO_CAN_BECOME_AN_INSTRUMENT.TITLE" | translate }}
     </h2>
@@ -38,24 +38,73 @@
     <p class="text-gray-600">
       {{ "USERS.INSTRUMENT.WHO_CAN_BECOME_AN_INSTRUMENT.DESC_2" | translate }}
     </p>
-    <p class="text-gray-600">
-      {{ "USERS.INSTRUMENT.WHO_CAN_BECOME_AN_INSTRUMENT.DESC_3" | translate }}
-    </p>
-    <p class="text-gray-600">
-      {{ "USERS.INSTRUMENT.WHO_CAN_BECOME_AN_INSTRUMENT.DESC_4" | translate }}
-    </p>
-    <p class="text-gray-600">
-      {{ "USERS.INSTRUMENT.WHO_CAN_BECOME_AN_INSTRUMENT.DESC_5" | translate }}
-    </p>
-    <p class="text-gray-600">
-      {{ "USERS.INSTRUMENT.WHO_CAN_BECOME_AN_INSTRUMENT.DESC_6" | translate }}
-    </p>
-    <p class="text-gray-600">
-      {{ "USERS.INSTRUMENT.WHO_CAN_BECOME_AN_INSTRUMENT.DESC_7" | translate }}
-    </p>
-    <p class="text-gray-600">
-      {{ "USERS.INSTRUMENT.WHO_CAN_BECOME_AN_INSTRUMENT.DESC_8" | translate }}
-    </p>
+    <ul class="space-y-3 mb-4">
+      <li class="flex items-start gap-3 text-gray-600">
+        <span class="material-symbols-outlined mt-0.5 text-[#009FE3] text-xl">
+          check_circle
+        </span>
+        <span>
+          {{
+            "USERS.INSTRUMENT.WHO_CAN_BECOME_AN_INSTRUMENT.DESC_3" | translate
+          }}
+        </span>
+      </li>
+
+      <li class="flex items-start gap-3 text-gray-600">
+        <span class="material-symbols-outlined mt-0.5 text-[#009FE3] text-xl">
+          check_circle
+        </span>
+        <span>
+          {{
+            "USERS.INSTRUMENT.WHO_CAN_BECOME_AN_INSTRUMENT.DESC_4" | translate
+          }}
+        </span>
+      </li>
+
+      <li class="flex items-start gap-3 text-gray-600">
+        <span class="material-symbols-outlined mt-0.5 text-[#009FE3] text-xl">
+          check_circle
+        </span>
+        <span>
+          {{
+            "USERS.INSTRUMENT.WHO_CAN_BECOME_AN_INSTRUMENT.DESC_5" | translate
+          }}
+        </span>
+      </li>
+
+      <li class="flex items-start gap-3 text-gray-600">
+        <span class="material-symbols-outlined mt-0.5 text-[#009FE3] text-xl">
+          check_circle
+        </span>
+        <span>
+          {{
+            "USERS.INSTRUMENT.WHO_CAN_BECOME_AN_INSTRUMENT.DESC_6" | translate
+          }}
+        </span>
+      </li>
+
+      <li class="flex items-start gap-3 text-gray-600">
+        <span class="material-symbols-outlined mt-0.5 text-[#009FE3] text-xl">
+          check_circle
+        </span>
+        <span>
+          {{
+            "USERS.INSTRUMENT.WHO_CAN_BECOME_AN_INSTRUMENT.DESC_7" | translate
+          }}
+        </span>
+      </li>
+
+      <li class="flex items-start gap-3 text-gray-600">
+        <span class="material-symbols-outlined mt-0.5 text-[#009FE3] text-xl">
+          check_circle
+        </span>
+        <span>
+          {{
+            "USERS.INSTRUMENT.WHO_CAN_BECOME_AN_INSTRUMENT.DESC_8" | translate
+          }}
+        </span>
+      </li>
+    </ul>
     <p class="text-gray-600">
       {{ "USERS.INSTRUMENT.WHO_CAN_BECOME_AN_INSTRUMENT.DESC_9" | translate }}
     </p>
@@ -67,7 +116,7 @@
     ></p>
   </section>
 
-  <section class="mb-12">
+  <section appScrollAnimation class="mb-12">
     <h2 class="">
       {{ "USERS.INSTRUMENT.ACTIVE_INSTRUMENTS.TITLE" | translate }}
     </h2>
@@ -77,30 +126,69 @@
     <p class="text-gray-600">
       {{ "USERS.INSTRUMENT.ACTIVE_INSTRUMENTS.DESC_2" | translate }}
     </p>
-    <p class="text-gray-600">
-      {{ "USERS.INSTRUMENT.ACTIVE_INSTRUMENTS.DESC_3" | translate }}
-    </p>
-    <p class="text-gray-600">
-      {{ "USERS.INSTRUMENT.ACTIVE_INSTRUMENTS.DESC_4" | translate }}
-    </p>
-    <p class="text-gray-600">
-      {{ "USERS.INSTRUMENT.ACTIVE_INSTRUMENTS.DESC_5" | translate }}
-    </p>
-    <p class="text-gray-600">
-      {{ "USERS.INSTRUMENT.ACTIVE_INSTRUMENTS.DESC_6" | translate }}
-    </p>
-    <p class="text-gray-600">
-      {{ "USERS.INSTRUMENT.ACTIVE_INSTRUMENTS.DESC_7" | translate }}
-    </p>
-    <p class="text-gray-600">
-      {{ "USERS.INSTRUMENT.ACTIVE_INSTRUMENTS.DESC_8" | translate }}
-    </p>
+    <ul class="space-y-3 mb-4">
+      <li class="flex items-start gap-3 text-gray-600">
+        <span class="material-symbols-outlined mt-0.5 text-[#009FE3] text-xl">
+          check_circle
+        </span>
+        <span>
+          {{ "USERS.INSTRUMENT.ACTIVE_INSTRUMENTS.DESC_3" | translate }}
+        </span>
+      </li>
+
+      <li class="flex items-start gap-3 text-gray-600">
+        <span class="material-symbols-outlined mt-0.5 text-[#009FE3] text-xl">
+          check_circle
+        </span>
+        <span>
+          {{ "USERS.INSTRUMENT.ACTIVE_INSTRUMENTS.DESC_4" | translate }}
+        </span>
+      </li>
+
+      <li class="flex items-start gap-3 text-gray-600">
+        <span class="material-symbols-outlined mt-0.5 text-[#009FE3] text-xl">
+          check_circle
+        </span>
+        <span>
+          {{ "USERS.INSTRUMENT.ACTIVE_INSTRUMENTS.DESC_5" | translate }}
+        </span>
+      </li>
+
+      <li class="flex items-start gap-3 text-gray-600">
+        <span class="material-symbols-outlined mt-0.5 text-[#009FE3] text-xl">
+          check_circle
+        </span>
+        <span>
+          {{ "USERS.INSTRUMENT.ACTIVE_INSTRUMENTS.DESC_6" | translate }}
+        </span>
+      </li>
+
+      <li class="flex items-start gap-3 text-gray-600">
+        <span class="material-symbols-outlined mt-0.5 text-[#009FE3] text-xl">
+          check_circle
+        </span>
+        <span>
+          {{ "USERS.INSTRUMENT.ACTIVE_INSTRUMENTS.DESC_7" | translate }}
+        </span>
+      </li>
+
+      <li class="flex items-start gap-3 text-gray-600">
+        <span class="material-symbols-outlined mt-0.5 text-[#009FE3] text-xl">
+          check_circle
+        </span>
+        <span>
+          {{ "USERS.INSTRUMENT.ACTIVE_INSTRUMENTS.DESC_8" | translate }}
+        </span>
+      </li>
+    </ul>
     <p class="text-gray-600">
       {{ "USERS.INSTRUMENT.ACTIVE_INSTRUMENTS.DESC_9" | translate }}
     </p>
   </section>
-
-  <section class="mb-12">
+</div>
+<app-small-images-carousel [images]="instrumentImages" />
+<div class="container">
+  <section appScrollAnimation class="mb-12">
     <h2 class="">
       {{ "USERS.INSTRUMENT.BECOME_A_WOM_INSTRUMENT.TITLE" | translate }}
     </h2>
@@ -113,8 +201,14 @@
         'USERS.INSTRUMENT.BECOME_A_WOM_INSTRUMENT.DESC_2' | translate
       "
     ></p>
-    <p class="text-gray-600">
+
+    <a
+      href="mailto:info@wom.social"
+      class="inline-flex items-center gap-2 font-semibold text-[#009FE3] transition-colors hover:text-[#008ac5] hover:underline"
+    >
+      <span class="material-symbols-outlined text-lg"> mail </span>
+
       {{ "USERS.INSTRUMENT.BECOME_A_WOM_INSTRUMENT.DESC_3" | translate }}
-    </p>
+    </a>
   </section>
 </div>

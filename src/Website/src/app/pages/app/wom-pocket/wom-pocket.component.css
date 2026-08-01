@@ -1,0 +1,87 @@
+.wom-pocket {
+  @apply text-gray-600;
+}
+
+/* Main title */
+.wom-pocket h1 {
+  @apply text-center font-bold text-[#009FE3];
+  margin-bottom: clamp(1.5rem, 3vw, 2.5rem);
+  line-height: 1.1;
+}
+
+/* Sections */
+.wom-pocket section {
+  margin-bottom: clamp(2rem, 5vw, 3rem);
+}
+
+.wom-pocket section:last-of-type {
+  margin-bottom: 0;
+}
+
+/* Section titles */
+.wom-pocket h2 {
+  @apply font-semibold text-[#009FE3];
+
+  margin-bottom: clamp(1rem, 2vw, 1.5rem);
+  line-height: 1.25;
+}
+
+/* Text */
+.wom-pocket p {
+  @apply text-gray-600;
+  margin-bottom: clamp(0.75rem, 2vw, 1rem);
+}
+
+.wom-pocket p:last-child {
+  margin-bottom: 0;
+}
+
+/* First section image/text layout */
+.content-row {
+  @apply flex flex-col md:flex-row items-center;
+
+  gap: clamp(1.5rem, 4vw, 2.5rem);
+}
+
+/* App image */
+.logo-app {
+  width: clamp(180px, 30vw, 320px);
+  max-width: 100%;
+  height: auto;
+}
+
+/* Lists */
+.wom-pocket ul {
+  @apply space-y-3;
+  margin-top: clamp(1rem, 2vw, 1.5rem);
+}
+
+.wom-pocket li {
+  @apply flex items-start text-gray-600;
+
+  gap: clamp(0.5rem, 1vw, 0.75rem);
+}
+
+.wom-pocket .material-symbols-outlined {
+  @apply text-[#009FE3];
+
+  margin-top: 0.15rem;
+
+  font-size: clamp(1.1rem, 2vw, 1.35rem);
+  flex-shrink: 0;
+}
+
+/* Mobile tuning */
+@media (max-width: 768px) {
+  .wom-pocket h1 {
+    font-size: clamp(1.8rem, 7vw, 2.2rem);
+  }
+
+  .content-row {
+    align-items: flex-start;
+  }
+
+  .logo-app {
+    margin-inline: auto;
+  }
+}

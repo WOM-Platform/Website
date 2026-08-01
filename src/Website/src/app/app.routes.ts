@@ -1,17 +1,4 @@
-import { FanoComponent } from "./pages/about/fano/fano.component";
-import { AboutComponent } from "./pages/platform/about/about.component";
-import { AboutSectionComponent } from "./pages/about/about-section.component";
-import { ApplicationsAworldComponent } from "./pages/users/applications/aworld/aworld.component";
-import { ApplicationsBalanceComponent } from "./pages/users/applications/balance/balance.component";
-import { ApplicationsCodymazeComponent } from "./pages/users/applications/codymaze/codymaze.component";
-import { ApplicationsComponent } from "./pages/users/applications/applications.component";
-import { ApplicationsLibrariesComponent } from "./pages/users/applications/libraries/libraries.component";
-import { ApplicationsOverviewComponent } from "./pages/users/applications/overview/overview.component";
-import { ApplicationsWomFitComponent } from "./pages/users/applications/womfit/womfit.component";
-import { ApplicationsUniversitiesComponent } from "./pages/users/applications/universities/universities.component";
 import { HomeComponent } from "./pages/home";
-import { InstrumentComponent } from "./pages/instrument/instrument.component";
-import { MerchantComponent } from "./pages/merchant/merchant.component";
 import { MerchantSignUpComponent } from "./authentication/signup/signup.component";
 import { PageNotFoundComponent } from "./pageNotFound/page-not-found.component";
 import { PrivacyComponent } from "./pages/privacy/privacy.component";
@@ -25,7 +12,6 @@ import { RequestNewPasswordComponent } from "./authentication/requestNewPassword
 import { ResetPasswordComponent } from "./authentication/reset-password/reset-password.component";
 import { Routes } from "@angular/router";
 import { SignInComponent } from "./authentication/signin/signin.component";
-import { UrbinoComponent } from "./pages/about/urbino/urbino.component";
 import { ReteDelleRetiComponent } from "./pages/projects/rete-delle-reti/rete-delle-reti-component";
 import { Pesaro2024Component } from "./pages/pesaro2024-section/pesaro2024/pesaro2024.component";
 import { Pesaro2024SectionComponent } from "./pages/pesaro2024-section/pesaro2024-section.component";
@@ -91,70 +77,6 @@ export const routes: Routes = [
         ...DEFAULT_SEO,
       },
     },
-  },
-
-  {
-    path: "about-section",
-    component: AboutSectionComponent,
-    data: {
-      breadcrumb: "BREADCRUMBS.ABOUT.TITLE",
-      seo: {
-        title: "",
-        description: "",
-        canonical: "",
-        ...DEFAULT_SEO,
-      },
-    },
-    children: [
-      {
-        path: "",
-        redirectTo: "about",
-        pathMatch: "full",
-      },
-      {
-        path: "about",
-        component: AboutComponent,
-        pathMatch: "full",
-        data: {
-          breadcrumb: "BREADCRUMBS.ABOUT.ABOUT",
-          seo: {
-            title: "",
-            description:
-              "Scopri WOM, la piattaforma che premia le azioni positive e connette persone, territori e comunità.",
-            canonical: "https://wom.social/about-section/about",
-            ...DEFAULT_SEO,
-          },
-        },
-      },
-      {
-        path: "urbino",
-        component: UrbinoComponent,
-        pathMatch: "full",
-        data: {
-          breadcrumb: "BREADCRUMBS.ABOUT.URBINO",
-          seo: {
-            title: "",
-            description: "",
-            canonical: "",
-            ...DEFAULT_SEO,
-          },
-        },
-      },
-      {
-        path: "fano",
-        component: FanoComponent,
-        pathMatch: "full",
-        data: {
-          breadcrumb: "BREADCRUMBS.ABOUT.FANO",
-          seo: {
-            title: "",
-            description: "",
-            canonical: "",
-            ...DEFAULT_SEO,
-          },
-        },
-      },
-    ],
   },
   {
     path: "pesaro",
@@ -364,117 +286,7 @@ export const routes: Routes = [
       },
     ],
   },
-  {
-    path: "applications",
-    component: ApplicationsComponent,
-    data: {
-      breadcrumb: "BREADCRUMBS.APPLICATIONS.APPLICATIONS",
-      seo: {
-        title: "",
-        description: "",
-        canonical: "",
-        ...DEFAULT_SEO,
-      },
-    },
-    children: [
-      {
-        path: "",
-        redirectTo: "overview",
-        pathMatch: "full",
-      },
-      {
-        path: "overview",
-        component: ApplicationsOverviewComponent,
-        data: {
-          breadcrumb: "BREADCRUMBS.APPLICATIONS.OVERVIEW",
-          seo: {
-            title: "",
-            description: "",
-            canonical: "",
-            ...DEFAULT_SEO,
-          },
-        },
-      },
-      {
-        path: "womfit",
-        component: ApplicationsWomFitComponent,
-        data: {
-          breadcrumb: "BREADCRUMBS.APPLICATIONS.WOMFIT",
-          seo: {
-            title: "",
-            description: "",
-            canonical: "",
-            ...DEFAULT_SEO,
-          },
-        },
-      },
-      {
-        path: "libraries",
-        component: ApplicationsLibrariesComponent,
-        data: {
-          breadcrumb: "BREADCRUMBS.APPLICATIONS.LIBRARIES",
-          seo: {
-            title: "",
-            description: "",
-            canonical: "",
-            ...DEFAULT_SEO,
-          },
-        },
-      },
-      {
-        path: "universities",
-        component: ApplicationsUniversitiesComponent,
-        data: {
-          breadcrumb: "BREADCRUMBS.APPLICATIONS.UNIVERSITIES",
-          seo: {
-            title: "",
-            description: "",
-            canonical: "",
-            ...DEFAULT_SEO,
-          },
-        },
-      },
-      {
-        path: "aworld",
-        component: ApplicationsAworldComponent,
-        data: {
-          breadcrumb: "BREADCRUMBS.APPLICATIONS.AWORLD",
-          seo: {
-            title: "",
-            description: "",
-            canonical: "",
-            ...DEFAULT_SEO,
-          },
-        },
-      },
-      {
-        path: "codymaze",
-        component: ApplicationsCodymazeComponent,
-        data: {
-          breadcrumb: "BREADCRUMBS.APPLICATIONS.CODYMAZE",
-          seo: {
-            title: "",
-            description: "",
-            canonical: "",
-            ...DEFAULT_SEO,
-          },
-        },
-      },
-      {
-        path: "balance",
-        component: ApplicationsBalanceComponent,
-        data: {
-          breadcrumb: "BREADCRUMBS.APPLICATIONS.BALANCE",
-          seo: {
-            title: "",
-            description: "",
-            canonical: "",
-            ...DEFAULT_SEO,
-          },
-        },
-      },
-    ],
-  },
+
   {
     path: "privacy",
     component: PrivacyComponent,
@@ -595,6 +407,80 @@ export const routes: Routes = [
     path: "instrument",
     redirectTo: "users/instrument",
     pathMatch: "full",
+  },
+
+  {
+    path: "applications",
+    children: [
+      {
+        path: "",
+        redirectTo: "/platform/actions",
+        pathMatch: "full",
+      },
+      {
+        path: "overview",
+        redirectTo: "/platform/actions",
+        pathMatch: "full",
+      },
+      {
+        path: "womfit",
+        redirectTo: "/platform/actions",
+        pathMatch: "full",
+      },
+      {
+        path: "libraries",
+        redirectTo: "/platform/actions",
+        pathMatch: "full",
+      },
+      {
+        path: "universities",
+        redirectTo: "/platform/actions",
+
+        pathMatch: "full",
+      },
+      {
+        path: "aworld",
+        redirectTo: "/platform/actions",
+
+        pathMatch: "full",
+      },
+      {
+        path: "codymaze",
+        redirectTo: "/platform/actions",
+
+        pathMatch: "full",
+      },
+      {
+        path: "balance",
+        redirectTo: "/platform/actions",
+        pathMatch: "full",
+      },
+    ],
+  },
+  {
+    path: "about-section",
+    children: [
+      {
+        path: "",
+        redirectTo: "/platform/about",
+        pathMatch: "full",
+      },
+      {
+        path: "about",
+        redirectTo: "/platform/about",
+        pathMatch: "full",
+      },
+      {
+        path: "urbino",
+        redirectTo: "/platform/about",
+        pathMatch: "full",
+      },
+      {
+        path: "fano",
+        redirectTo: "/platform/about",
+        pathMatch: "full",
+      },
+    ],
   },
   // End legacy URLs
 

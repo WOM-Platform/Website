@@ -1,6 +1,21 @@
 mat-selection-list {
-    max-height: 500px;
-    flex-grow: 1;
-    overflow: scroll;
-    border-bottom: black 1px solid;
+  max-height: 500px;
+  flex-grow: 1;
+  overflow: scroll;
+  border-bottom: black 1px solid;
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.animate-float {
+  animation: float 4s ease-in-out infinite;
 }

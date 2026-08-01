@@ -1,9 +1,17 @@
 .submenu {
-  @apply text-sm font-montserrat font-light absolute left-0 w-max bg-white border border-gray-200 rounded-md shadow-lg opacity-0 invisible group-hover:visible group-hover:opacity-100 transition-opacity duration-200 z-10 pointer-events-none group-hover:pointer-events-auto;
+  @apply text-sm font-montserrat font-light absolute left-0  min-w-full w-max bg-white border border-gray-200 rounded-md shadow-lg opacity-0 invisible group-hover:visible group-hover:opacity-100 transition-opacity duration-200 z-10 pointer-events-none group-hover:pointer-events-auto;
 }
 
 .menu-item {
-  @apply text-black flex items-center text-sm font-montserrat uppercase font-light hover:bg-[#a0a4da] rounded-3xl px-2 py-1 duration-200;
+  @apply text-black flex items-center text-sm font-montserrat uppercase font-light hover:bg-[#abaed9] rounded-3xl px-2 py-1 duration-200;
+}
+
+.submenu-item {
+  @apply w-full flex items-center text-left
+         px-4 py-2
+         text-black text-sm font-montserrat font-light uppercase
+         hover:bg-[#abaed9]
+         transition-colors duration-200;
 }
 
 .example-spacer {

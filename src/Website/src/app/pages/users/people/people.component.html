@@ -1,150 +1,113 @@
-<div class="mx-6 mt-6 md:mx-20">
-  <h1 class="text-4xl font-bold text-[#009FE3] mb-6 text-center">
+<div class="container">
+  <h1 class="mb-6 text-center text-4xl font-bold text-[#009FE3]">
     {{ "USERS.PEOPLE.TITLE" | translate }}
   </h1>
 
-  <section class="mb-12">
-    <h2 class="">
+  <section appScrollAnimation class="mb-12">
+    <h2>
       {{ "USERS.PEOPLE.WHO_ARE_PEOPLE.TITLE" | translate }}
     </h2>
-    <p
-      class="text-gray-600 mb-4"
-      [innerHTML]="'USERS.PEOPLE.WHO_ARE_PEOPLE.DESC_1' | translate"
-    ></p>
-    <p
-      class="text-gray-600"
-      [innerHTML]="'USERS.PEOPLE.WHO_ARE_PEOPLE.DESC_2' | translate"
-    ></p>
-    <p class="text-gray-600">
-      {{ "USERS.PEOPLE.WHO_ARE_PEOPLE.DESC_3" | translate }}
-    </p>
-    <a class="text-[#009FE3] font-semibold">
-      {{ "USERS.PEOPLE.WHO_ARE_PEOPLE.LINK" | translate }}
-    </a>
+
+    <div class="flex flex-col items-center gap-10 md:flex-row">
+      <img
+        src="/assets/images/applications/WOMPocketSenzaScritta.png"
+        alt="screen app wom pocket"
+        class="h-fit max-w-[150px] md:max-w-[300px]"
+      />
+
+      <div>
+        <p
+          class="mb-4 text-gray-600"
+          [innerHTML]="'USERS.PEOPLE.WHO_ARE_PEOPLE.DESC_1' | translate"
+        ></p>
+
+        <p
+          class="text-gray-600"
+          [innerHTML]="'USERS.PEOPLE.WHO_ARE_PEOPLE.DESC_2' | translate"
+        ></p>
+
+        <p class="text-gray-600">
+          {{ "USERS.PEOPLE.WHO_ARE_PEOPLE.DESC_3" | translate }}
+        </p>
+
+        <a class="font-semibold text-[#009FE3]" routerLink="/app/wom-pocket">
+          {{ "USERS.PEOPLE.WHO_ARE_PEOPLE.LINK" | translate }}
+        </a>
+      </div>
+    </div>
   </section>
 
-  <section class="mb-12">
-    <h2 class="">
-      {{ "USERS.PEOPLE.ACTIONS_HOW_TO_EARN_WOM.TITLE" | translate }}
-    </h2>
-    <p
-      class="text-gray-600 mb-4"
-      [innerHTML]="'USERS.PEOPLE.ACTIONS_HOW_TO_EARN_WOM.DESC_1' | translate"
-    ></p>
-    <p
-      class="text-gray-600"
-      [innerHTML]="'USERS.PEOPLE.ACTIONS_HOW_TO_EARN_WOM.DESC_2' | translate"
-    ></p>
-    <p
-      class="text-gray-600"
-      [innerHTML]="'USERS.PEOPLE.ACTIONS_HOW_TO_EARN_WOM.DESC_3' | translate"
-    ></p>
-    <a class="text-[#009FE3] font-semibold">
-      {{ "USERS.PEOPLE.ACTIONS_HOW_TO_EARN_WOM.LINK" | translate }}
-    </a>
+  <section appScrollAnimation class="mb-12" id="earn">
+    <div class="flex flex-col items-center gap-10 md:flex-row">
+      <div>
+        <h2>
+          {{ "USERS.PEOPLE.ACTIONS_HOW_TO_EARN_WOM.TITLE" | translate }}
+        </h2>
+        <p
+          class="mb-4 text-gray-600"
+          [innerHTML]="
+            'USERS.PEOPLE.ACTIONS_HOW_TO_EARN_WOM.DESC_1' | translate
+          "
+        ></p>
+
+        <p
+          class="text-gray-600"
+          [innerHTML]="
+            'USERS.PEOPLE.ACTIONS_HOW_TO_EARN_WOM.DESC_2' | translate
+          "
+        ></p>
+
+        <p
+          class="text-gray-600"
+          [innerHTML]="
+            'USERS.PEOPLE.ACTIONS_HOW_TO_EARN_WOM.DESC_3' | translate
+          "
+        ></p>
+
+        <a
+          routerLink="/platform/actions"
+          class="font-semibold text-[#009FE3]"
+          [innerHTML]="'USERS.PEOPLE.ACTIONS_HOW_TO_EARN_WOM.LINK' | translate"
+        ></a>
+      </div>
+
+      <img
+        src="/assets/images/users/people/womPocket-screen.webp"
+        alt="screen app wom pocket"
+        class="h-fit max-w-[150px] md:max-w-[300px]"
+      />
+    </div>
   </section>
 
-  <section class="mb-12">
-    <h2 class="">
+  <section appScrollAnimation class="mb-12" id="use">
+    <h2>
       {{ "USERS.PEOPLE.OFFERS_HOW_TO_USE_WOM.TITLE" | translate }}
     </h2>
+
     <p
-      class="text-gray-600 mb-4"
+      class="mb-4 text-gray-600"
       [innerHTML]="'USERS.PEOPLE.OFFERS_HOW_TO_USE_WOM.DESC_1' | translate"
     ></p>
+
     <p
       class="text-gray-600"
       [innerHTML]="'USERS.PEOPLE.OFFERS_HOW_TO_USE_WOM.DESC_2' | translate"
     ></p>
+
     <p
       class="text-gray-600"
       [innerHTML]="'USERS.PEOPLE.OFFERS_HOW_TO_USE_WOM.DESC_3' | translate"
     ></p>
+
     <p
       class="text-gray-600"
       [innerHTML]="'USERS.PEOPLE.OFFERS_HOW_TO_USE_WOM.DESC_4' | translate"
     ></p>
+
     <p class="text-gray-600">
       {{ "USERS.PEOPLE.OFFERS_HOW_TO_USE_WOM.DESC_5" | translate }}
     </p>
   </section>
 </div>
 
-<!-- TO IMPROVE -->
-<div class="desktop-only">
-  <div class="flex flex-row">
-    <!-- MAP -->
-    <google-map
-      class="basis-full xs:basis-3/4"
-      height="500px"
-      width="100%"
-      (mapDragend)="boundsChanged()"
-      (zoomChanged)="boundsChanged()"
-      [zoom]="zoom"
-      [center]="center"
-      [options]="options"
-    >
-      @for (marker of markers; track marker) {
-        <map-marker
-          #markerElem="mapMarker"
-          [position]="marker.position"
-          [title]="marker.title"
-          [icon]="marker.options!.icon!"
-          (mapClick)="openInfo(markerElem, marker)"
-        >
-        </map-marker>
-      }
-
-      <map-info-window [innerHTML]="infoContent"></map-info-window>
-    </google-map>
-
-    <mat-selection-list
-      [multiple]="false"
-      (selectionChange)="onPosSelection($event)"
-      class="basis-1/4"
-    >
-      @for (pos of posList; track pos) {
-        <mat-list-option [value]="pos">{{ pos.name }} </mat-list-option>
-      }
-    </mat-selection-list>
-  </div>
-</div>
-<div class="mobile-only">
-  <div class="flex flex-col">
-    <!-- MAP -->
-
-    <google-map
-      class="basis-full xs:basis-3/4"
-      height="500px"
-      width="100%"
-      (mapDragend)="boundsChanged()"
-      (zoomChanged)="boundsChanged()"
-      [zoom]="zoom"
-      [center]="center"
-      [options]="options"
-    >
-      @for (marker of markers; track marker) {
-        <map-marker
-          #markerElem="mapMarker"
-          [position]="marker.position"
-          [title]="marker.title"
-          [icon]="marker.options!.icon!"
-          (mapClick)="openInfo(markerElem, marker)"
-        >
-        </map-marker>
-      }
-
-      <map-info-window [innerHTML]="infoContent"></map-info-window>
-    </google-map>
-    <div class="">
-      <mat-selection-list
-        [multiple]="false"
-        (selectionChange)="onPosSelection($event)"
-      >
-        @for (pos of posList; track pos) {
-          <mat-list-option [value]="pos">{{ pos.name }} </mat-list-option>
-        }
-      </mat-selection-list>
-    </div>
-  </div>
-</div>
+<app-people-map-feature></app-people-map-feature>
