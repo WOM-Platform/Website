@@ -9,6 +9,8 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "sitemap": "tsx scripts/generate-sitemap.ts",
+    "build:prod": "ng build && npm run sitemap",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
@@ -61,6 +63,7 @@
     "primeng": "^21.1.9",
     "qs": "^6.15.2",
     "rxjs": "^7.8.1",
+    "sitemap": "^9.0.1",
     "tailwindcss": "^3.4.17",
     "tar": "^7.5.15",
     "tar-fs": "^3.1.2",
@@ -85,6 +88,7 @@
     "postcss": "^8.5.1",
     "prettier": "^3.9.4",
     "ts-node": "^10.9.2",
+    "tsx": "^4.23.5",
     "typescript": "^5.9.2"
   },
   "overrides": {

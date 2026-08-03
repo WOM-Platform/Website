@@ -36,7 +36,12 @@
           }
 
           @if (item.href && item.linkLabelKey) {
-            <a class="click-here" target="_blank" [href]="item.href">
+            <a
+              class="click-here"
+              target="_blank"
+              rel="noopener noreferrer"
+              [href]="item.href"
+            >
               {{ item.linkLabelKey | translate }}
             </a>
           }

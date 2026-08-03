@@ -1,18 +1,13 @@
-import { Component, ChangeDetectionStrategy } from "@angular/core";
+import { Component, ChangeDetectionStrategy, inject } from "@angular/core";
 import { TranslateService } from "@ngx-translate/core";
 import { NetworkService } from "./_services/network.service";
-// import { SeoService } from "./_services/seo.service";
-import {
-  ActivatedRoute,
-  NavigationEnd,
-  Router,
-  RouterOutlet,
-} from "@angular/router";
+import { NavigationEnd, Router, RouterOutlet } from "@angular/router";
 import { filter } from "rxjs";
+
 import { NavComponent } from "./components/nav/nav.component";
 import { FooterComponent } from "./components/footer/footer.component";
 import { CookieBannerComponent } from "./components/cookie-banner/cookie-banner.component";
-import { Meta, Title } from "@angular/platform-browser";
+import { SeoService } from "./_services/seo.service";
 
 @Component({
   selector: "app-root",
@@ -23,40 +18,35 @@ import { Meta, Title } from "@angular/platform-browser";
   imports: [RouterOutlet, NavComponent, FooterComponent, CookieBannerComponent],
 })
 export class AppComponent {
-  isOnline: boolean = false;
+  isOnline = false;
+
+  private seoService = inject(SeoService);
+  private router = inject(Router);
 
   constructor(
     private networkService: NetworkService,
-    translate: TranslateService,
-    private meta: Meta,
-    private title: Title
+    private translate: TranslateService
   ) {
-    this.title.setTitle("WOM");
-    this.meta.addTags([
-      { property: "og:title", content: "WOM" },
-      {
-        property: "og:description",
-        content:
-          "Compiendo azioni socialmente valide, ogni utente guadagna WOM",
-      },
-      {
-        property: "og:image",
-        content: "https://wom.social/assets/images/logo-og.png",
-      },
-      { property: "og:url", content: "https://wom.social/home" },
-      { property: "og:type", content: "website" },
-    ]);
+    this.router.events
+      .pipe(filter((event) => event instanceof NavigationEnd))
+      .subscribe((event: NavigationEnd) => {
+        const path = event.urlAfterRedirects.split("?")[0];
 
-    translate.addLangs(["en", "it"]);
-    translate.setDefaultLang("it");
+        this.seoService.updateSeo(path);
+      });
 
-    networkService.isOnline.subscribe((online) => {
+    this.translate.addLangs(["en", "it"]);
+
+    this.translate.setDefaultLang("it");
+
+    const browserLang = this.translate.getBrowserLang();
+
+    if (browserLang) {
+      this.translate.use(browserLang);
+    }
+
+    this.networkService.isOnline.subscribe((online) => {
       this.isOnline = online;
     });
-
-    const browserLang = translate.getBrowserLang();
-    if (browserLang) {
-      translate.use(browserLang);
-    }
   }
 }
