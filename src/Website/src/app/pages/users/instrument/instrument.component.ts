@@ -34,7 +34,7 @@ export class InstrumentComponent implements OnInit {
       path: "assets/images/users/instrument/aworld-logo.webp",
     },
     {
-      url: `https://wom.social/app/womfit`,
+      url: `https://wom.social/app/wom-fit`,
       path: "assets/images/applications/WOMFitSenzaScritta.png",
     },
     {

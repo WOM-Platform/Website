@@ -1,4 +1,3 @@
-// platform.routes.ts
 import { Routes } from "@angular/router";
 import { UsersComponent } from "./users.component";
 import { PeopleComponent } from "./people/people.component";

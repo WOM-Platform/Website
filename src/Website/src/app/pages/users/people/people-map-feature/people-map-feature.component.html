@@ -73,10 +73,8 @@
             </span>
 
             <span class="offer-meta">
-              {{
-                "USERS.PEOPLE.MAP.OFFERS_AVAILABLE"
-                  | translate: { count: pos.offers?.length || 0 }
-              }}
+              {{ "USERS.PEOPLE.MAP.OFFERS_AVAILABLE" | translate }}{{ " "
+              }}{{ pos.offers?.length || 0 }}
             </span>
           </span>
 

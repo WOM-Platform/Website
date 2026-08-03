@@ -8,17 +8,23 @@ import {
   ViewChildren,
 } from "@angular/core";
 import { GoogleMap, MapInfoWindow, MapMarker } from "@angular/google-maps";
-import { TranslateModule } from "@ngx-translate/core";
+import { TranslateModule, TranslateService } from "@ngx-translate/core";
 
 import { PosWithOffers } from "src/app/_models/offer";
 import { MapService } from "src/app/_services";
 import { GoogleMapsLoaderService } from "src/app/_services/google-maps-loader.service";
 import { environment } from "src/environments/environment";
 
+interface PeopleMarkerOffer {
+  title: string;
+  cost: number;
+}
+
 interface PeopleMarkerViewModel {
   position: google.maps.LatLngLiteral;
   title: string;
   info?: string;
+  offers: PeopleMarkerOffer[];
   options: google.maps.MarkerOptions;
 }
 
@@ -60,7 +66,8 @@ export class PeopleMapFeatureComponent implements OnInit, AfterViewInit {
 
   constructor(
     private readonly mapService: MapService,
-    private readonly mapsLoader: GoogleMapsLoaderService
+    private readonly mapsLoader: GoogleMapsLoaderService,
+    private translate: TranslateService
   ) {}
 
   ngOnInit(): void {
@@ -107,13 +114,46 @@ export class PeopleMapFeatureComponent implements OnInit, AfterViewInit {
   }
 
   protected openInfo(marker: MapMarker, content: PeopleMarkerViewModel): void {
-    this.infoContent = `<b>${content.title}</b>`;
+    const offersLabel = this.translate.instant(
+      "USERS.PEOPLE.MAP.OFFERS_AVAILABLE"
+    );
+
+    this.infoContent = `
+      <div style="min-width:250px">
+        <h2 style="margin:0 0 12px;font-size:20px;font-weight:600;">
+          ${content.title}
+        </h2>
+    `;
+
+    if (content.offers.length) {
+      this.infoContent += `
+        <strong font-size:10px;>${offersLabel}</strong>
+        <ul style="padding-left:18px;margin:8px 0;">
+          ${content.offers
+            .map(
+              (offer) => `
+                <li style="font-size:8px;">
+                  ${offer.title}
+                  <strong>(${offer.cost} WOM)</strong>
+                </li>
+              `
+            )
+            .join("")}
+        </ul>
+      `;
+    }
 
     if (content.info) {
-      this.infoContent +=
-        `<br><br><a href="${content.info}" target="_blank" rel="noopener">` +
-        `${content.info}</a>`;
+      this.infoContent += `
+        <p style="margin-top:12px">
+          <a href="${content.info}" target="_blank" rel="noopener">
+            More information
+          </a>
+        </p>
+      `;
     }
+
+    this.infoContent += `</div>`;
 
     this.infoWindow?.open(marker);
   }
@@ -221,6 +261,11 @@ export class PeopleMapFeatureComponent implements OnInit, AfterViewInit {
         lat: posData.position.latitude,
         lng: posData.position.longitude,
       },
+      offers:
+        posData.offers?.map((offer) => ({
+          title: offer.title,
+          cost: offer.cost,
+        })) ?? [],
       options: {
         icon: {
           url: "assets/images/pin-wom.png",
