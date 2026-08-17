@@ -16,4 +16,4 @@ SEO_PAGES.filter((page) => page.sitemap).forEach((page) => {
 
 sitemap.end();
 
-sitemap.pipe(createWriteStream("./dist/src/browser/sitemap.xml"));
+sitemap.pipe(createWriteStream("./dist/browser/sitemap.xml"));

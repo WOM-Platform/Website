@@ -29,6 +29,7 @@ RUN ./process_apikeys.sh
 # Build
 ENV NODE_OPTIONS=--openssl-legacy-provider
 RUN ng build --output-path=/app/dist --configuration=production
+RUN npm run sitemap
 
 # DISTRIBUTE step
 FROM nginx:1.27-alpine
