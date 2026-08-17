@@ -14,13 +14,13 @@
           "builder": "@angular-devkit/build-angular:application",
           "options": {
             "outputPath": {
-              "base": "dist/src"
+              "base": "dist"
             },
             "index": "src/index.html",
             "polyfills": ["src/polyfills.ts"],
             "tsConfig": "tsconfig.app.json",
             "aot": true,
-            "assets": ["src/assets", "src/favicon.ico"],
+            "assets": ["src/assets", "src/favicon.ico", "src/robots.txt"],
             "styles": [
               "node_modules/leaflet/dist/leaflet.css",
               "node_modules/leaflet-search/dist/leaflet-search.src.css",

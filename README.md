@@ -1,2 +1,0 @@
-# WOM website
-
